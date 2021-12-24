@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import HeaderMenu from '~/components/HeaderMenu.vue';
+import HeaderMenu from '~/components/Header/HeaderMenu.vue';
 
 export default {
 	name: 'DefaultLayout',
