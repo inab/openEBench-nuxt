@@ -1,18 +1,23 @@
 const menuEntries = [
 	{
-		icon: 'mdi-apps',
 		title: 'Benchmarking',
-		to: '/',
+		to: '/scientificBenchmarking',
 	},
 	{
-		icon: 'mdi-chart-bubble',
-		title: 'Tools & Stats',
-		to: '/',
+		title: 'Tools',
+		to: '/toolsMonitoring',
 	},
 	{
-		icon: 'mdi-chart-bubble',
+		title: 'Stats',
+		to: '/toolsStatistics',
+	},
+	{
+		title: 'Observatory',
+		to: '/toolsObservatory',
+	},
+	{
 		title: 'About',
-		to: '/',
+		to: '/about',
 	},
 ];
 

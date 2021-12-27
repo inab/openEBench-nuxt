@@ -79,5 +79,10 @@
 	"editor.suggest.localityBonus": true,
 
 	"todohighlight.keywords": ["TODO", "FIX", "REFACTOR"],
-	"typescript.tsdk": "node_modules\\typescript\\lib"
+	"typescript.tsdk": "node_modules\\typescript\\lib",
+	"workbench.colorCustomizations": {
+		"activityBar.background": "#4F1F12",
+		"titleBar.activeBackground": "#6F2B19",
+		"titleBar.activeForeground": "#FDF9F8"
+	}
 }
