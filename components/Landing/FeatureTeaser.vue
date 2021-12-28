@@ -7,10 +7,10 @@
 				<v-avatar color="primary" size="62" class="mb-10">
 					<v-icon large dark>mdi-chart-bar</v-icon>
 				</v-avatar>
-				<h2 class="text-h6">Benchmarking</h2>
+				<h2 class="text-h6">Benchmarking Results</h2>
 				<p class="body-1">
-					Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore
-					consectetur.
+					Explore benchmarks of the scientific performance of bioinformatics
+					methods
 				</p>
 				<v-btn text color="primary" to="/scientificBenchmarking">
 					Learn More
@@ -20,21 +20,21 @@
 				<v-avatar color="primary" size="62" class="mb-10">
 					<v-icon large dark>mdi-clipboard-list-outline</v-icon>
 				</v-avatar>
-				<h2 class="text-h6">Tool Metrics</h2>
+				<h2 class="text-h6">Tools & Metrics</h2>
 				<p class="body-1">
-					Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore
-					consectetur.
+					Individually browse metrics of bioinformatics tools, server and
+					workflows
 				</p>
 				<v-btn text color="primary" to="/toolsMonitoring"> Learn More </v-btn>
 			</v-col>
 			<v-col align="center" md="4">
 				<v-avatar color="primary" size="62" class="mb-10">
-					<v-icon large dark>mdi-binoculars</v-icon>
+					<v-icon large dark>mdi-telescope</v-icon>
 				</v-avatar>
-				<h2 class="text-h6">Tool Observatory</h2>
+				<h2 class="text-h6">Software Observatory</h2>
 				<p class="body-1">
-					Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore
-					consectetur.
+					Quantitative monitoring of the technical quality of software in Life
+					Sciences
 				</p>
 				<v-btn text color="primary" to="/toolsObservatory"> Learn More </v-btn>
 			</v-col>

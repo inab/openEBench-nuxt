@@ -6,7 +6,7 @@
 					<h1 class="text-h4 mb-4">Welcome to OpenEBench</h1>
 					<h2 class="text-subtitle-1 mb-5">
 						The ELIXIR Technical Monitoring gateway to benchmarking communities,
-						tools monitoring, and quality metrics.
+						tools monitoring, and quality metrics in Life Sciences.
 					</h2>
 					<v-row class="mt-10" align="end">
 						<v-col align="center">
@@ -28,15 +28,15 @@
 							</v-btn>
 						</v-col>
 						<v-col align="center">
-							<v-avatar color="secondary" size="62" class="mb-10">
-								<v-icon large dark>mdi-binoculars</v-icon>
+							<v-avatar color="accent" size="62" class="mb-10">
+								<v-icon large dark>mdi-telescope</v-icon>
 							</v-avatar>
 							<p>
 								As a Developer I want to learn how to develop sustainable
 								research tools
 							</p>
 							<v-btn
-								color="secondary"
+								color="accent"
 								class="mt-10"
 								large
 								block
@@ -124,6 +124,8 @@
 			</v-container>
 		</v-parallax>
 		<news-cards />
+		<logo-slider />
+		<Footer class="mt-15" />
 	</fragment>
 </template>
 
@@ -131,10 +133,12 @@
 import FeatureTeaser from '~/components/Landing/FeatureTeaser';
 import AnimatedNumber from '~/components/Landing/AnimatedNumber';
 import NewsCards from '~/components/Landing/NewsCards';
+import LogoSlider from '~/components/Landing/LogoSlider';
+import Footer from '~/components/TheFooter';
 
 export default {
 	name: 'IndexPage',
-	components: { FeatureTeaser, AnimatedNumber, NewsCards },
+	components: { FeatureTeaser, AnimatedNumber, NewsCards, LogoSlider, Footer },
 	data() {
 		return {
 			communityCount: 8,
