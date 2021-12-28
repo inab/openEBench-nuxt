@@ -15,10 +15,6 @@ const menuEntries = [
 		title: 'Observatory',
 		to: '/toolsObservatory',
 	},
-	{
-		title: 'About',
-		to: '/about',
-	},
 ];
 
 export default menuEntries;

@@ -2,12 +2,11 @@
 	<v-app>
 		<main-header />
 		<v-main>
-			<v-container>
-				<Nuxt />
-			</v-container>
+			<Nuxt />
 		</v-main>
-		<v-footer :absolute="!fixed" app>
-			<span>&copy; {{ new Date().getFullYear() }}</span>
+		<v-footer class="justify-center" app>
+			Made with <v-icon color="red">mdi-heart</v-icon>
+			in Barcelona.
 		</v-footer>
 	</v-app>
 </template>

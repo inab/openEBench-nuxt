@@ -23,6 +23,16 @@
 						<v-list-item-title v-text="item.title" />
 					</v-list-item-content>
 				</v-list-item>
+				<v-list-item
+					v-for="(item, index) in subMenuEntries"
+					:key="`sub` + index"
+					:to="item.to"
+					:href="item.href"
+					:target="item.external ? '_blank' : false"
+				>
+					<v-list-item-title>{{ item.title }}</v-list-item-title>
+					<v-icon v-if="item.external" right>mdi-open-in-new</v-icon>
+				</v-list-item>
 			</v-list>
 		</v-navigation-drawer>
 		<v-app-bar fixed app>
@@ -52,6 +62,26 @@
 					{{ item.title }}
 				</v-btn>
 			</div>
+			<v-menu v-if="$vuetify.breakpoint.mdAndUp" left offset-y>
+				<template #activator="{ on, attrs }">
+					<v-btn v-bind="attrs" text v-on="on">
+						<v-icon>mdi-chevron-down</v-icon>
+						More
+					</v-btn>
+				</template>
+				<v-list>
+					<v-list-item
+						v-for="(item, index) in subMenuEntries"
+						:key="`sub` + index"
+						:to="item.to"
+						:href="item.href"
+						:target="item.external ? '_blank' : false"
+					>
+						<v-list-item-title>{{ item.title }}</v-list-item-title>
+						<v-icon v-if="item.external" right>mdi-open-in-new</v-icon>
+					</v-list-item>
+				</v-list>
+			</v-menu>
 			<v-spacer v-if="$vuetify.breakpoint.mdAndUp" />
 			<v-btn
 				v-if="$vuetify.breakpoint.mdAndUp"
@@ -72,6 +102,7 @@
 
 <script>
 import menuEntries from './menuEntries';
+import subMenuEntries from './subMenuEntries';
 
 export default {
 	name: 'HeaderMenu',
@@ -80,6 +111,7 @@ export default {
 			openNavMobile: null,
 			fixed: false,
 			menuEntries,
+			subMenuEntries,
 			vreHref: 'http://' + window.location.hostname + '/vre/home',
 		};
 	},
