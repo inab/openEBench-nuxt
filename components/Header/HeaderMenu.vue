@@ -7,11 +7,6 @@
 			app
 		>
 			<v-list>
-				<v-list-item to="/" exact>
-					<v-list-item-content>
-						<v-list-item-title>Login</v-list-item-title>
-					</v-list-item-content>
-				</v-list-item>
 				<v-list-item
 					v-for="(item, i) in menuEntries"
 					:key="i"
