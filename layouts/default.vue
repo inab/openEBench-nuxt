@@ -19,9 +19,10 @@ export default {
 	components: {
 		'main-header': HeaderMenu,
 	},
-	data() {
+	head() {
 		return {
-			title: 'Vuetify.js',
+			title:
+				'OpenEBench - The ELIXIR gateway to benchmarking communities, software monitoring, and quality metrics',
 		};
 	},
 };
