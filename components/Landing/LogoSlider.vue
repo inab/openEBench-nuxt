@@ -1,5 +1,5 @@
 <template>
-	<v-container class="mt-15">
+	<v-container>
 		<h2 class="text-h4">Our partners</h2>
 		<v-slide-group class="pa-4" show-arrows>
 			<v-slide-item

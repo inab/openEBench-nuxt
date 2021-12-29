@@ -1,5 +1,5 @@
 <template>
-	<v-content tag="footer" class="footer primary white--text">
+	<v-main tag="footer" class="footer primary white--text">
 		<v-row>
 			<v-col class="pa-4" md="3" cols="12" align="center">
 				<v-img :src="logo" alt="logo" max-width="150" contain />
@@ -75,7 +75,7 @@
 				</v-row>
 			</v-col>
 		</v-row>
-	</v-content>
+	</v-main>
 </template>
 
 <script>

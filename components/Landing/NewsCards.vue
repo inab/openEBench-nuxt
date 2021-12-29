@@ -1,5 +1,5 @@
 <template>
-	<v-container class="mt-10">
+	<v-container>
 		<h2 class="text-h4 mb-10">What's new?</h2>
 
 		<v-row>
