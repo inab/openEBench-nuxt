@@ -13,12 +13,20 @@
 					</h3>
 				</v-col>
 				<v-col cols="12" sm="8">
-					<v-text-field
-						label="Search for Tools"
-						outlined
-						clearable
-						dark
-					></v-text-field>
+					<v-row align="center">
+						<v-text-field
+							v-model="input"
+							label="Search for Tools"
+							outlined
+							clearable
+							dark
+							hide-details=""
+							@keyup.enter="handleSubmit"
+						></v-text-field>
+						<v-btn x-large outlined dark class="ml-2" @click="handleSubmit">
+							Go
+						</v-btn>
+					</v-row>
 				</v-col>
 			</v-row>
 		</v-container>
@@ -32,6 +40,15 @@ export default {
 	name: 'HeroSearchbar',
 	data: () => ({
 		gradient,
+		input: '',
 	}),
+	methods: {
+		handleSubmit() {
+			this.$router.push({
+				path: 'tools',
+				query: { search: this.input },
+			});
+		},
+	},
 };
 </script>

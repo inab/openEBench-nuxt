@@ -3,19 +3,19 @@
 const menuEntries = [
 	{
 		title: 'Benchmarking',
-		to: '/scientificBenchmarking',
+		to: '/communities',
 	},
 	{
 		title: 'Tools',
-		to: '/toolsMonitoring',
+		to: '/tools',
 	},
 	{
 		title: 'Stats',
-		to: '/toolsStatistics',
+		to: '/statistics',
 	},
 	{
 		title: 'Observatory',
-		to: '/toolsObservatory',
+		to: '/observatory',
 	},
 ];
 
