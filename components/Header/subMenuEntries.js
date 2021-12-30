@@ -1,11 +1,9 @@
+// Displayed in Header and Footer
+
 const subMenuEntries = [
 	{
 		title: 'About',
 		to: '/about',
-	},
-	{
-		title: 'Team',
-		to: '/team',
 	},
 	{
 		title: 'TechDoc',

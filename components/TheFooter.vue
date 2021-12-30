@@ -14,15 +14,19 @@
 					>
 						<v-expansion-panel-header>
 							<h6 class="title mb-4">
-								{{ footer.title }}
+								{{ footer.headline }}
 							</h6>
 						</v-expansion-panel-header>
 						<v-expansion-panel-content>
 							<ul>
-								<li v-for="(item, index) in footer.description" :key="index">
-									<nuxt-link :to="footer.link[index]">
-										{{ item }}
+								<li v-for="(link, index) in footer.links" :key="index">
+									<nuxt-link v-if="link.to" :to="link.to">
+										{{ link.title }}
 									</nuxt-link>
+									<a v-if="link.href" :href="link.href" target="_blank">
+										{{ link.title }}
+									</a>
+									<v-icon v-if="link.href" small right>mdi-open-in-new</v-icon>
 								</li>
 							</ul>
 						</v-expansion-panel-content>
@@ -35,13 +39,30 @@
 						class="pa-4 site-map-item"
 					>
 						<h6 class="title mb-4">
-							{{ footer.title }}
+							{{ footer.headline }}
 						</h6>
 						<ul>
-							<li v-for="(item, index) in footer.description" :key="index">
-								<nuxt-link dark class="white--text" :to="footer.link[index]">
-									{{ item }}
+							<li v-for="(link, index) in footer.links" :key="index">
+								<nuxt-link
+									v-if="link.to"
+									dark
+									class="white--text"
+									:to="link.to"
+								>
+									{{ link.title }}
 								</nuxt-link>
+								<a
+									v-if="link.href"
+									:href="link.href"
+									target="_blank"
+									dark
+									class="white--text"
+								>
+									{{ link.title }}
+								</a>
+								<v-icon v-if="link.href" small right dark
+									>mdi-open-in-new</v-icon
+								>
 							</li>
 						</ul>
 					</v-col>
@@ -81,6 +102,9 @@
 <script>
 import logo from '~/static/images/opeb_logo_white_minimal.png';
 import euFlag from '~/static/images/eu.svg';
+import menuEntries from '~/components/Header/menuEntries';
+import subMenuEntries from '~/components/Header/subMenuEntries';
+
 export default {
 	data: () => ({
 		logo,
@@ -88,29 +112,19 @@ export default {
 		lang: 'en',
 		footers: [
 			{
-				title: 'Company',
-				description: ['Team', 'History', 'Contact us', 'Locations'],
-				link: ['#team', '#history', '#contact-us', '#locations'],
+				headline: 'OpenEBench',
+				links: menuEntries,
 			},
 			{
-				title: 'Resources',
-				description: [
-					'Resource',
-					'Resource name',
-					'Another resource',
-					'Final resource',
-				],
-				link: [
-					'#resource',
-					'#resource-name',
-					'#another-resource',
-					'#final-resource',
-				],
+				headline: 'Project',
+				links: subMenuEntries,
 			},
 			{
-				title: 'Legal',
-				description: ['Privacy policy', 'Terms of use'],
-				link: ['#privacy-policy', '#terms-of-use'],
+				headline: 'Legal',
+				links: [
+					{ title: 'Privacy Policy', to: '#privacy-policy' },
+					{ title: 'Terms of Use', to: '#terms-of-use' },
+				],
 			},
 		],
 	}),

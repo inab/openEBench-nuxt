@@ -1,3 +1,5 @@
+// Displayed in Header and Footer
+
 const menuEntries = [
 	{
 		title: 'Benchmarking',

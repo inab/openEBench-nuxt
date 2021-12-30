@@ -6,7 +6,6 @@
 		<hero-numbers class="mt-16" />
 		<news-cards class="mt-16" />
 		<logo-slider class="mt-16" />
-		<Footer class="mt-16" />
 	</fragment>
 </template>
 
@@ -14,7 +13,6 @@
 import FeatureTeaser from '~/components/Landing/FeatureTeaser';
 import NewsCards from '~/components/Landing/NewsCards';
 import LogoSlider from '~/components/Landing/LogoSlider';
-import Footer from '~/components/TheFooter';
 import WelcomeSection from '~/components/Landing/WelcomeSection';
 import HeroSearchbar from '~/components/Landing/HeroSearchbar';
 import HeroNumbers from '~/components/Landing/HeroNumbers';
@@ -25,7 +23,6 @@ export default {
 		FeatureTeaser,
 		NewsCards,
 		LogoSlider,
-		Footer,
 		WelcomeSection,
 		HeroSearchbar,
 		HeroNumbers,

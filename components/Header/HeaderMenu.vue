@@ -26,7 +26,7 @@
 					:target="item.external ? '_blank' : false"
 				>
 					<v-list-item-title>{{ item.title }}</v-list-item-title>
-					<v-icon v-if="item.external" right>mdi-open-in-new</v-icon>
+					<v-icon v-if="item.external" right small>mdi-open-in-new</v-icon>
 				</v-list-item>
 			</v-list>
 		</v-navigation-drawer>
@@ -73,7 +73,7 @@
 						:target="item.external ? '_blank' : false"
 					>
 						<v-list-item-title>{{ item.title }}</v-list-item-title>
-						<v-icon v-if="item.external" right>mdi-open-in-new</v-icon>
+						<v-icon v-if="item.external" right small>mdi-open-in-new</v-icon>
 					</v-list-item>
 				</v-list>
 			</v-menu>
