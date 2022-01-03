@@ -1,6 +1,18 @@
 import colors from 'vuetify/es5/util/colors';
 
+const routerBase =
+	process.env.DEPLOY_ENV === 'GH_PAGES'
+		? {
+				router: {
+					base: '/openEBench-nuxt/',
+				},
+		  }
+		: {};
+
 export default {
+	// routerBase object for github pages deploy
+	...routerBase,
+
 	// Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
 	ssr: false,
 
