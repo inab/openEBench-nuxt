@@ -14,7 +14,7 @@ export default {
 	layout: 'embedIframe',
 	data() {
 		return {
-			hostName: 'http://' + window.location.hostname + ':4200',
+			hostName: this.$config.OEB_LEGACY_ANGULAR_URI,
 			query: this.$route.query.search ? this.$route.query.search : '',
 		};
 	},

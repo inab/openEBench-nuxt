@@ -78,6 +78,14 @@ export default {
 		},
 	},
 
+	publicRuntimeConfig: {
+		OEB_LEGACY_ANGULAR_URI:
+			process.env.OEB_LEGACY_ANGULAR_URI || 'https://dev2-openebench.bsc.es/',
+		VRE_URI:
+			process.env.OEB_LEGACY_ANGULAR_URI ||
+			'https://dev-openebench.bsc.es/vre/home/',
+	},
+
 	// Build Configuration: https://go.nuxtjs.dev/config-build
 	build: {},
 };

@@ -107,7 +107,7 @@ export default {
 			fixed: false,
 			menuEntries,
 			subMenuEntries,
-			vreHref: 'http://' + window.location.hostname + '/vre/home',
+			vreHref: this.$config.VRE_URI,
 		};
 	},
 	methods: {
