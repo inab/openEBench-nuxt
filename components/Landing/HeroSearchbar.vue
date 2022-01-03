@@ -29,7 +29,7 @@
 					</v-row>
 				</v-col>
 			</v-row>
-			<a href="#feature-teaser" class="scroll-down" />
+			<span class="scroll-down" @click="$vuetify.goTo('#feature-teaser')" />
 		</v-container>
 	</v-parallax>
 </template>
