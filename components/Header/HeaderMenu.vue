@@ -23,7 +23,7 @@
 					:key="`sub` + index"
 					:to="item.to"
 					:href="item.href"
-					:target="item.external ? '_blank' : false"
+					:target="item.external ? '_blank' : ''"
 				>
 					<v-list-item-title>{{ item.title }}</v-list-item-title>
 					<v-icon v-if="item.external" right small>mdi-open-in-new</v-icon>
@@ -70,7 +70,7 @@
 						:key="`sub` + index"
 						:to="item.to"
 						:href="item.href"
-						:target="item.external ? '_blank' : false"
+						:target="item.external ? '_blank' : ''"
 					>
 						<v-list-item-title>{{ item.title }}</v-list-item-title>
 						<v-icon v-if="item.external" right small>mdi-open-in-new</v-icon>

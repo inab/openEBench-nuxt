@@ -2,10 +2,10 @@
 	<fragment>
 		<welcome-section class="mt-13" />
 		<hero-searchbar class="mt-16" />
-		<feature-teaser class="mt-16" />
+		<feature-teaser id="feature-teaser" class="landing-mt-24" />
 		<hero-numbers class="mt-16" />
-		<news-cards class="mt-16" />
-		<logo-slider class="mt-16" />
+		<news-cards class="landing-mt-24" />
+		<logo-slider class="landing-mt-24" />
 	</fragment>
 </template>
 
@@ -29,3 +29,9 @@ export default {
 	},
 };
 </script>
+
+<style lang="scss" scoped>
+.landing-mt-24 {
+	margin-top: 98px !important;
+}
+</style>

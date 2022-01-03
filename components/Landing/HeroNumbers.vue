@@ -1,5 +1,5 @@
 <template>
-	<v-parallax height="150" :src="material2">
+	<v-parallax height="170" :src="material2">
 		<v-container>
 			<v-row align="center" justify="center" class="root">
 				<v-col align="center" md="4">
