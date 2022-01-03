@@ -49,20 +49,8 @@ jobs:
       - name: Github Pages Build
         run: npm run generate:gh-pages
 
-      - run:
-          name: Install and configure dependencies
-          command: |
-            npm install gh-pages --save-dev
-            git config user.email "dominik.br@posteo.net"
-            git config user.name "dominikbruechner"
-
-      - run:
-          name: Deploy docs to gh-pages branch
-          command: './node_modules/.bin/gh-pages --dotfiles --message "[skip ci] Updates" -d dist'
-
-      - store_artifacts:
-          path: test-results.xml
-          prefix: tests
-
-      - store_test_results:
-          path: test-results.xml
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
