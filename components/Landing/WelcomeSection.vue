@@ -1,7 +1,7 @@
 <template>
 	<v-container>
 		<v-row column align="end">
-			<v-col align="left" xs="12" sm="8" offset-sm="2" offset-md="0" md="7">
+			<v-col align="left" sm="12" offset-md="0" md="7">
 				<h1 class="text-h3 mb-4 primary--text">Welcome to OpenEBench</h1>
 				<h2 class="text-subtitle-1 mb-5">
 					The ELIXIR gateway to benchmarking communities, software monitoring,

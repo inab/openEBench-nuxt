@@ -3,7 +3,7 @@
 		<h2 class="text-h4 mb-15">What does OpenEBench offer?</h2>
 
 		<v-row>
-			<v-col align="center" md="4">
+			<v-col align="center" cols="12" md="4">
 				<v-avatar color="primary" size="62" class="mb-10">
 					<v-icon large dark>mdi-chart-bar</v-icon>
 				</v-avatar>
@@ -16,7 +16,7 @@
 					Learn More
 				</v-btn>
 			</v-col>
-			<v-col align="center" md="4">
+			<v-col align="center" cols="12" md="4">
 				<v-avatar color="primary" size="62" class="mb-10">
 					<v-icon large dark>mdi-clipboard-list-outline</v-icon>
 				</v-avatar>
@@ -27,7 +27,7 @@
 				</p>
 				<v-btn text color="primary" to="/toolsMonitoring"> Learn More </v-btn>
 			</v-col>
-			<v-col align="center" md="4">
+			<v-col align="center" cols="12" md="4">
 				<v-avatar color="primary" size="62" class="mb-10">
 					<v-icon large dark>mdi-telescope</v-icon>
 				</v-avatar>
