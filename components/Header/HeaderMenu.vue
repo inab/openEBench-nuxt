@@ -38,7 +38,7 @@
 			>
 				<v-icon>mdi-menu</v-icon>
 			</v-btn>
-			<a href="/">
+			<nuxt-link to="/">
 				<v-img
 					class="mx-2"
 					:src="require('~/static/images/opeb_logo.gif')"
@@ -46,7 +46,7 @@
 					max-width="80"
 					contain
 				/>
-			</a>
+			</nuxt-link>
 			<div v-if="$vuetify.breakpoint.mdAndUp" class="ml-16">
 				<v-btn
 					v-for="(item, index) in menuEntries"
