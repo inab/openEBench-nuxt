@@ -44,6 +44,7 @@ export default {
 		// https://go.nuxtjs.dev/vuetify
 		'@nuxtjs/vuetify',
 		'@nuxtjs/pwa',
+		'@nuxtjs/dotenv',
 	],
 
 	// Modules: https://go.nuxtjs.dev/config-modules
@@ -81,9 +82,7 @@ export default {
 	publicRuntimeConfig: {
 		OEB_LEGACY_ANGULAR_URI:
 			process.env.OEB_LEGACY_ANGULAR_URI || 'https://dev2-openebench.bsc.es/',
-		VRE_URI:
-			process.env.OEB_LEGACY_ANGULAR_URI ||
-			'https://dev-openebench.bsc.es/vre/home/',
+		VRE_URI: process.env.VRE_URI || 'https://dev-openebench.bsc.es/vre/home/',
 	},
 
 	// Build Configuration: https://go.nuxtjs.dev/config-build
