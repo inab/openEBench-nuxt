@@ -12,9 +12,7 @@
 					Explore benchmarks of the scientific performance of bioinformatics
 					methods
 				</p>
-				<v-btn text color="primary" to="/scientificBenchmarking">
-					Learn More
-				</v-btn>
+				<v-btn text color="primary" to="/communities"> Learn More </v-btn>
 			</v-col>
 			<v-col align="center" cols="12" md="4">
 				<v-avatar color="primary" size="62" class="mb-10">
@@ -25,7 +23,7 @@
 					Individually browse metrics of bioinformatics tools, server and
 					workflows
 				</p>
-				<v-btn text color="primary" to="/toolsMonitoring"> Learn More </v-btn>
+				<v-btn text color="primary" to="/tools"> Learn More </v-btn>
 			</v-col>
 			<v-col align="center" cols="12" md="4">
 				<v-avatar color="primary" size="62" class="mb-10">
@@ -36,7 +34,7 @@
 					Quantitative monitoring of the technical quality of software in Life
 					Sciences
 				</p>
-				<v-btn text color="primary" to="/toolsObservatory"> Learn More </v-btn>
+				<v-btn text color="primary" to="/observatory"> Learn More </v-btn>
 			</v-col>
 		</v-row>
 	</v-container>
