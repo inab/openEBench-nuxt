@@ -1,7 +1,7 @@
 <template>
 	<fragment>
 		<welcome-section class="mt-13" />
-		<hero-searchbar class="mt-16" />
+		<hero-searchbar class="mt-10" />
 		<feature-teaser id="feature-teaser" class="landing-mt-24" />
 		<hero-numbers class="mt-16" />
 		<news-cards class="landing-mt-24" />
