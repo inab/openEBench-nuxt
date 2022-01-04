@@ -1,5 +1,8 @@
 <template>
-	<span v-observe-visibility="visibilityChanged">{{ displayValue }}</span>
+	<v-progress-circular v-if="value == 0" indeterminate></v-progress-circular>
+	<span v-else v-observe-visibility="visibilityChanged">{{
+		displayValue
+	}}</span>
 </template>
 
 <script>

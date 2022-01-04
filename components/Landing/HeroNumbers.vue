@@ -18,7 +18,7 @@
 						<span class="icon ion-ios-lightbulb-outline" />
 						<div class="text">
 							<h4 class="text-h3">
-								<animated-number :value="toolCount" />
+								<animated-number :value="toolsCount" />
 							</h4>
 							<h6 class="title">Tools</h6>
 						</div>
@@ -49,12 +49,23 @@ export default {
 	components: {
 		AnimatedNumber,
 	},
+	props: {
+		communityCount: {
+			type: Number,
+			required: true,
+		},
+		toolsCount: {
+			type: Number,
+			required: true,
+		},
+		resourcesCount: {
+			type: Number,
+			required: true,
+		},
+	},
 	data() {
 		return {
 			material2,
-			communityCount: 8,
-			toolCount: 21236,
-			resourcesCount: 41184,
 		};
 	},
 };

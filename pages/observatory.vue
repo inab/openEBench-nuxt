@@ -8,9 +8,7 @@ export default {
 	layout: 'embedIframeFullWidth',
 	data() {
 		return {
-			URI: this.$config.OBSERVATORY_URI
-				? this.$config.OBSERVATORY_URI
-				: 'https://observatory.openebench.bsc.es',
+			URI: this.$config.OBSERVATORY_URI,
 		};
 	},
 };
