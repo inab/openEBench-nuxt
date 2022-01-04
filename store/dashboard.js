@@ -34,7 +34,7 @@ export const getters = {
 
 export const mutations = {
 	setResourcesCount(state, payload) {
-		state.resourcesCount = payload.all.operational;
+		state.resourcesCount = payload.all.total;
 	},
 	setToolsCount(state, payload) {
 		const matches = payload.headers['content-range'].match(
