@@ -7,7 +7,7 @@
 						Browse Tools and Metrics
 					</h2>
 					<h3 class="text-subtitle-2 hidden-sm-and-down">
-						Essential scientific information, github statistics, and metrics
+						Essential scientific information, GitHub statistics, and metrics
 						about individual tools, databases and services for bioinformatics
 						and the life sciences.
 					</h3>

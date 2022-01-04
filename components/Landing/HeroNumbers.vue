@@ -1,8 +1,8 @@
 <template>
-	<v-parallax height="170" :src="material2">
+	<v-parallax :height="containerHeight" :src="material2">
 		<v-container>
 			<v-row align="center" justify="center" class="root">
-				<v-col align="center" md="4">
+				<v-col align="center" cols="12" sm="4">
 					<div class="counter-item">
 						<span class="icon ion-leaf" />
 						<div class="text">
@@ -13,7 +13,7 @@
 						</div>
 					</div>
 				</v-col>
-				<v-col align="center" md="4">
+				<v-col align="center" cols="12" sm="4">
 					<div class="counter-item">
 						<span class="icon ion-ios-lightbulb-outline" />
 						<div class="text">
@@ -24,7 +24,7 @@
 						</div>
 					</div>
 				</v-col>
-				<v-col align="center" md="4">
+				<v-col align="center" cols="12" sm="4">
 					<div class="counter-item">
 						<span class="icon ion-ios-world-outline" />
 						<div class="text">
@@ -67,6 +67,11 @@ export default {
 		return {
 			material2,
 		};
+	},
+	computed: {
+		containerHeight() {
+			return this.$vuetify.breakpoint.xs ? 350 : 170;
+		},
 	},
 };
 </script>
