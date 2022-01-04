@@ -49,7 +49,7 @@ jobs:
       - name: Github Pages Build
         run: npm run generate:gh-pages
         env:
-          API_URL: ${{ secrets.API_URL }}
+          REST_API_URL: ${{ secrets.REST_API_URL }}
           SCIENTIFIC_SERVICE_URL: ${{ secrets.SCIENTIFIC_SERVICE_URL }}
           OEB_LEGACY_ANGULAR_URI: ${{ secrets.OEB_LEGACY_ANGULAR_URI }}
           VRE_URI: ${{ secrets.VRE_URI }}

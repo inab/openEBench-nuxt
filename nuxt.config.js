@@ -103,7 +103,8 @@ export default {
 			'https://openebench.bsc.es/api/scientific',
 		axios: {
 			// See https://github.com/nuxt-community/axios-module#options
-			baseURL: process.env.API_URL || 'https://openebench.bsc.es/monitor/rest/',
+			baseURL:
+				process.env.REST_API_URL || 'https://openebench.bsc.es/monitor/rest/',
 		},
 	},
 
