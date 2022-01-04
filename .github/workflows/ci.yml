@@ -48,6 +48,12 @@ jobs:
 
       - name: Github Pages Build
         run: npm run generate:gh-pages
+        env:
+          API_URL: ${{ secrets.API_URL }}
+          SCIENTIFIC_SERVICE_URL: ${{ secrets.SCIENTIFIC_SERVICE_URL }}
+          OEB_LEGACY_ANGULAR_URI: ${{ secrets.OEB_LEGACY_ANGULAR_URI }}
+          VRE_URI: ${{ secrets.VRE_URI }}
+          OBSERVATORY_URI: ${{ secrets.OBSERVATORY_URI }}
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3

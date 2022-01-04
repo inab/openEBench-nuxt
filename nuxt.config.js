@@ -95,15 +95,15 @@ export default {
 	publicRuntimeConfig: {
 		OEB_LEGACY_ANGULAR_URI:
 			process.env.OEB_LEGACY_ANGULAR_URI || 'https://dev2-openebench.bsc.es/',
-		VRE_URI: process.env.VRE_URI || 'https://dev-openebench.bsc.es/vre/home/',
+		VRE_URI: process.env.VRE_URI || 'https://openebench.bsc.es/vre/home/',
 		OBSERVATORY_URI:
 			process.env.OBSERVATORY_URI || 'https://observatory.openebench.bsc.es',
 		SCIENTIFIC_SERVICE_URL:
 			process.env.SCIENTIFIC_SERVICE_URL ||
-			'https://dev-openebench.bsc.es/api/scientific/graphql',
+			'https://openebench.bsc.es/api/scientific',
 		axios: {
 			// See https://github.com/nuxt-community/axios-module#options
-			baseURL: process.env.API_URL,
+			baseURL: process.env.API_URL || 'https://openebench.bsc.es/monitor/rest/',
 		},
 	},
 
