@@ -17,7 +17,11 @@ export const actions = {
 		commit('setResourcesCount', data);
 	},
 	async getToolsCount({ commit }) {
-		const response = await this.$axios.head('/aggregate');
+		const response = await this.$axios.head('/aggregate', {
+			params: {
+				limit: 1,
+			},
+		});
 		commit('setToolsCount', response);
 	},
 };
