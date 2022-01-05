@@ -1,0 +1,9 @@
+comment:
+  layout: files
+  require_changes: true
+coverage:
+  status:
+    project:
+      default:
+        threshold: 1%
+    patch: off
