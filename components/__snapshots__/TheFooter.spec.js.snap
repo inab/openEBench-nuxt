@@ -1,0 +1,108 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TheFooter should match snapshot 1`] = `
+"<footer class=\\"v-main footer primary white--text\\" style=\\"padding: 0px 0px 0px 0px;\\">
+  <div class=\\"v-main__wrap\\">
+    <div class=\\"row\\">
+      <div align=\\"center\\" class=\\"pa-4 col-md-3 col-12\\">
+        <div aria-label=\\"logo\\" role=\\"img\\" class=\\"v-image v-responsive theme--light\\" style=\\"max-width: 150px;\\">
+          <div class=\\"v-responsive__content\\"></div>
+        </div>
+        <p class=\\"body-2\\">©&nbsp; BSC-CNS 2021</p>
+      </div>
+      <div class=\\"pa-4 col-md-6 col-12\\">
+        <!---->
+        <div class=\\"row justify-space-around\\">
+          <div class=\\"pa-4 site-map-item col\\">
+            <h6 class=\\"title mb-4\\">
+              OpenEBench
+            </h6>
+            <ul>
+              <li><a dark=\\"\\" class=\\"white--text\\">
+                  Benchmarking
+                </a>
+                <!---->
+                <!---->
+              </li>
+              <li><a dark=\\"\\" class=\\"white--text\\">
+                  Tools
+                </a>
+                <!---->
+                <!---->
+              </li>
+              <li><a dark=\\"\\" class=\\"white--text\\">
+                  Stats
+                </a>
+                <!---->
+                <!---->
+              </li>
+              <li><a dark=\\"\\" class=\\"white--text\\">
+                  Observatory
+                </a>
+                <!---->
+                <!---->
+              </li>
+            </ul>
+          </div>
+          <div class=\\"pa-4 site-map-item col\\">
+            <h6 class=\\"title mb-4\\">
+              Project
+            </h6>
+            <ul>
+              <li><a dark=\\"\\" class=\\"white--text\\">
+                  About
+                </a>
+                <!---->
+                <!---->
+              </li>
+              <li>
+                <!----> <a href=\\"https://openebench.bsc.es/docs/\\" target=\\"_blank\\" dark=\\"\\" class=\\"white--text\\">
+                  TechDoc
+                </a> <i aria-hidden=\\"true\\" class=\\"v-icon notranslate v-icon--right mdi mdi-open-in-new theme--dark\\" style=\\"font-size: 16px;\\"></i></li>
+              <li>
+                <!----> <a href=\\"https://openebench.readthedocs.io/en/latest/\\" target=\\"_blank\\" dark=\\"\\" class=\\"white--text\\">
+                  Read the Docs
+                </a> <i aria-hidden=\\"true\\" class=\\"v-icon notranslate v-icon--right mdi mdi-open-in-new theme--dark\\" style=\\"font-size: 16px;\\"></i></li>
+            </ul>
+          </div>
+          <div class=\\"pa-4 site-map-item col\\">
+            <h6 class=\\"title mb-4\\">
+              Legal
+            </h6>
+            <ul>
+              <li><a dark=\\"\\" class=\\"white--text\\">
+                  Privacy Policy
+                </a>
+                <!---->
+                <!---->
+              </li>
+              <li><a dark=\\"\\" class=\\"white--text\\">
+                  Terms of Use
+                </a>
+                <!---->
+                <!---->
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class=\\"pa-4 col-md-3 col-12\\">
+        <div class=\\"socmed\\"><button type=\\"button\\" class=\\"button v-btn v-btn--icon v-btn--round v-btn--text theme--dark v-size--default\\"><span class=\\"v-btn__content\\"><i aria-hidden=\\"true\\" class=\\"v-icon notranslate mdi mdi-facebook theme--dark\\"></i></span></button> <button type=\\"button\\" class=\\"button v-btn v-btn--icon v-btn--round v-btn--text theme--dark v-size--default\\"><span class=\\"v-btn__content\\"><i aria-hidden=\\"true\\" class=\\"v-icon notranslate mdi mdi-twitter theme--dark\\"></i></span></button> <button type=\\"button\\" class=\\"button v-btn v-btn--icon v-btn--round v-btn--text theme--dark v-size--default\\"><span class=\\"v-btn__content\\"><i aria-hidden=\\"true\\" class=\\"v-icon notranslate mdi mdi-instagram theme--dark\\"></i></span></button> <button type=\\"button\\" class=\\"button v-btn v-btn--icon v-btn--round v-btn--text theme--dark v-size--default\\"><span class=\\"v-btn__content\\"><i aria-hidden=\\"true\\" class=\\"v-icon notranslate mdi mdi-linkedin theme--dark\\"></i></span></button></div>
+        <div class=\\"row mt-5 no-gutters\\">
+          <div align=\\"left\\" class=\\"col col-9\\">
+            <p class=\\"text-sm-body-2\\">
+              This project receives funding from the @EU_H2020 Research &amp;
+              Innovation programme.
+            </p>
+          </div>
+          <div align=\\"center\\" class=\\"col col-3\\">
+            <div aria-label=\\"logo\\" role=\\"img\\" class=\\"v-image v-responsive theme--light\\" style=\\"max-width: 50px;\\">
+              <div class=\\"v-responsive__content\\"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>"
+`;

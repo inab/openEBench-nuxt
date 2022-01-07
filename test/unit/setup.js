@@ -16,7 +16,10 @@ global.createComponentMocks = (vuetify) => {
 	const localVue = vueTestUtils.createLocalVue();
 	const returnOptions = { localVue };
 
-	returnOptions.stubs = ['router-link', 'router-view'];
+	returnOptions.stubs = {
+		RouterLink: vueTestUtils.RouterLinkStub,
+		NuxtLink: vueTestUtils.RouterLinkStub,
+	};
 
 	if (vuetify) {
 		Vue.use(Vuetify);
