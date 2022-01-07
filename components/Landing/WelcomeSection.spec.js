@@ -1,34 +1,25 @@
-import Vuetify from 'vuetify';
-
-import { createLocalVue, mount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import WelcomeSection from './WelcomeSection.vue';
 
-const factory = (vuetify, localVue) => {
+const factory = () => {
 	return mount(WelcomeSection, {
-		localVue,
-		vuetify,
+		...createComponentMocks({
+			vuetify: true,
+		}),
 		mocks: {
 			$vuetify: { breakpoint: {} },
 		},
-		stubs: ['router-link', 'router-view'],
 	});
 };
 
 describe('WelcomeSection', () => {
-	const localVue = createLocalVue();
-	let vuetify;
-
-	beforeEach(() => {
-		vuetify = new Vuetify();
-	});
-
 	it('is instantiated', () => {
-		const wrapper = factory(vuetify, localVue);
+		const wrapper = factory();
 		expect(wrapper).toBeTruthy();
 	});
 
 	it('contains illustration image on large devices and hides it on small devices', async () => {
-		const wrapper = factory(vuetify, localVue);
+		const wrapper = factory();
 
 		wrapper.vm.$vuetify.breakpoint.mdAndUp = true;
 		await wrapper.vm.$nextTick();
