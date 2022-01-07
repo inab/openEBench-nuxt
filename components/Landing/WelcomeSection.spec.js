@@ -1,8 +1,12 @@
-import { shallowMount } from '@vue/test-utils';
+import Vuetify from 'vuetify';
+
+import { createLocalVue, shallowMount } from '@vue/test-utils';
 import WelcomeSection from './WelcomeSection.vue';
 
-const factory = () => {
+const factory = (vuetify, localVue) => {
 	return shallowMount(WelcomeSection, {
+		localVue,
+		vuetify,
 		mocks: {
 			$vuetify: { breakpoint: {} },
 		},
@@ -10,8 +14,15 @@ const factory = () => {
 };
 
 describe('WelcomeSection', () => {
-	it('mounts properly', () => {
-		const wrapper = factory();
-		expect(wrapper.isVueInstance()).toBeTruthy();
+	const localVue = createLocalVue();
+	let vuetify;
+
+	beforeEach(() => {
+		vuetify = new Vuetify();
+	});
+
+	it('is instiated', () => {
+		const wrapper = factory(vuetify, localVue);
+		expect(wrapper).toBeTruthy();
 	});
 });
