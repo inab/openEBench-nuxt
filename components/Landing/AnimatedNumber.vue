@@ -7,10 +7,14 @@
 
 <script>
 import gsap from 'gsap';
+import { ObserveVisibility } from 'vue-observe-visibility';
 
 export default {
 	name: 'App',
 	components: {},
+	directives: {
+		ObserveVisibility,
+	},
 	props: { value: { type: Number, default: 0 } },
 	data() {
 		return {

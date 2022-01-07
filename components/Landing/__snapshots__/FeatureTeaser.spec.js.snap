@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FeatureTeaser should match snapshot 1`] = `
+"<div class=\\"container\\">
+  <h2 class=\\"text-h4 mb-15\\">What does OpenEBench offer?</h2>
+  <div class=\\"row\\">
+    <div align=\\"center\\" class=\\"col-md-4 col-12\\">
+      <div class=\\"v-avatar mb-10 primary\\" style=\\"height: 62px; min-width: 62px; width: 62px;\\"><i aria-hidden=\\"true\\" class=\\"v-icon notranslate mdi mdi-chart-bar theme--dark\\" style=\\"font-size: 36px;\\"></i></div>
+      <h2 class=\\"text-h6\\">Benchmarking Results</h2>
+      <p class=\\"body-1\\">
+        Explore benchmarks of the scientific performance of bioinformatics
+        methods
+      </p>
+      <router-link-stub class=\\"v-btn v-btn--router v-btn--text theme--light v-size--default primary--text\\"><span class=\\"v-btn__content\\"> Learn More </span></router-link-stub>
+    </div>
+    <div align=\\"center\\" class=\\"col-md-4 col-12\\">
+      <div class=\\"v-avatar mb-10 primary\\" style=\\"height: 62px; min-width: 62px; width: 62px;\\"><i aria-hidden=\\"true\\" class=\\"v-icon notranslate mdi mdi-clipboard-list-outline theme--dark\\" style=\\"font-size: 36px;\\"></i></div>
+      <h2 class=\\"text-h6\\">Tools &amp; Metrics</h2>
+      <p class=\\"body-1\\">
+        Individually browse metrics of bioinformatics tools, server and
+        workflows
+      </p>
+      <router-link-stub class=\\"v-btn v-btn--router v-btn--text theme--light v-size--default primary--text\\"><span class=\\"v-btn__content\\"> Learn More </span></router-link-stub>
+    </div>
+    <div align=\\"center\\" class=\\"col-md-4 col-12\\">
+      <div class=\\"v-avatar mb-10 primary\\" style=\\"height: 62px; min-width: 62px; width: 62px;\\"><i aria-hidden=\\"true\\" class=\\"v-icon notranslate mdi mdi-telescope theme--dark\\" style=\\"font-size: 36px;\\"></i></div>
+      <h2 class=\\"text-h6\\">Software Observatory</h2>
+      <p class=\\"body-1\\">
+        Quantitative monitoring of the technical quality of software in Life
+        Sciences
+      </p>
+      <router-link-stub class=\\"v-btn v-btn--router v-btn--text theme--light v-size--default primary--text\\"><span class=\\"v-btn__content\\"> Learn More </span></router-link-stub>
+    </div>
+  </div>
+</div>"
+`;

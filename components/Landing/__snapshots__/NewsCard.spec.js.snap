@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NewsCard should match snapshot 1`] = `
+"<div class=\\"mx-auto v-card v-sheet theme--light\\" style=\\"max-width: 400px;\\">
+  <div class=\\"v-image v-responsive white--text theme--light\\" style=\\"height: 200px;\\">
+    <transition-stub name=\\"fade-transition\\" mode=\\"in-out\\">
+      <div class=\\"v-image__image v-image__image--preload v-image__image--cover\\" style=\\"background-position: center center;\\"></div>
+    </transition-stub>
+    <div class=\\"v-responsive__content\\"></div>
+  </div>
+  <div class=\\"v-card__title\\">
+    News Title
+  </div>
+  <div class=\\"v-card__text text-left\\"><span class=\\"text--primary\\">
+			News Description
+		</span></div>
+  <div class=\\"v-card__actions\\"><button type=\\"button\\" class=\\"v-btn v-btn--text theme--light v-size--default primary--text\\"><span class=\\"v-btn__content\\"> Read more </span></button></div>
+</div>"
+`;

@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AnimatedNumber should show the number if value > 0 1`] = `"<span>0</span>"`;

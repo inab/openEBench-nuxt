@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NewsCards should match snapshot 1`] = `
+"<div class=\\"container\\">
+  <h2 class=\\"text-h4 mb-10\\">What's new?</h2>
+  <div class=\\"row\\">
+    <div align=\\"center\\" class=\\"col-sm-12 col-md-3 col\\">
+      <div class=\\"mx-auto v-card v-sheet theme--light\\" style=\\"max-width: 400px;\\">
+        <div class=\\"v-image v-responsive white--text theme--light\\" style=\\"height: 200px;\\">
+          <transition-stub name=\\"fade-transition\\" mode=\\"in-out\\">
+            <div class=\\"v-image__image v-image__image--preload v-image__image--cover\\" style=\\"background-position: center center;\\"></div>
+          </transition-stub>
+          <div class=\\"v-responsive__content\\"></div>
+        </div>
+        <div class=\\"v-card__title\\">
+          Heading
+        </div>
+        <div class=\\"v-card__text text-left\\"><span class=\\"text--primary\\">
+			This is a media card. You can use this section to describe the content.
+		</span></div>
+        <div class=\\"v-card__actions\\"><button type=\\"button\\" class=\\"v-btn v-btn--text theme--light v-size--default primary--text\\"><span class=\\"v-btn__content\\"> Read more </span></button></div>
+      </div>
+    </div>
+    <div align=\\"center\\" class=\\"col-sm-12 col-md-3 col\\">
+      <div class=\\"mx-auto v-card v-sheet theme--light\\" style=\\"max-width: 400px;\\">
+        <div class=\\"v-image v-responsive white--text theme--light\\" style=\\"height: 200px;\\">
+          <transition-stub name=\\"fade-transition\\" mode=\\"in-out\\">
+            <div class=\\"v-image__image v-image__image--preload v-image__image--cover\\" style=\\"background-position: center center;\\"></div>
+          </transition-stub>
+          <div class=\\"v-responsive__content\\"></div>
+        </div>
+        <div class=\\"v-card__title\\">
+          Heading
+        </div>
+        <div class=\\"v-card__text text-left\\"><span class=\\"text--primary\\">
+			This is a media card. You can use this section to describe the content.
+		</span></div>
+        <div class=\\"v-card__actions\\"><button type=\\"button\\" class=\\"v-btn v-btn--text theme--light v-size--default primary--text\\"><span class=\\"v-btn__content\\"> Read more </span></button></div>
+      </div>
+    </div>
+    <div align=\\"center\\" class=\\"col-sm-12 col-md-3 col\\">
+      <div class=\\"mx-auto v-card v-sheet theme--light\\" style=\\"max-width: 400px;\\">
+        <div class=\\"v-image v-responsive white--text theme--light\\" style=\\"height: 200px;\\">
+          <transition-stub name=\\"fade-transition\\" mode=\\"in-out\\">
+            <div class=\\"v-image__image v-image__image--preload v-image__image--cover\\" style=\\"background-position: center center;\\"></div>
+          </transition-stub>
+          <div class=\\"v-responsive__content\\"></div>
+        </div>
+        <div class=\\"v-card__title\\">
+          Heading
+        </div>
+        <div class=\\"v-card__text text-left\\"><span class=\\"text--primary\\">
+			This is a media card. You can use this section to describe the content.
+		</span></div>
+        <div class=\\"v-card__actions\\"><button type=\\"button\\" class=\\"v-btn v-btn--text theme--light v-size--default primary--text\\"><span class=\\"v-btn__content\\"> Read more </span></button></div>
+      </div>
+    </div>
+    <div align=\\"center\\" class=\\"col-sm-12 col-md-3 col\\">
+      <div class=\\"mx-auto v-card v-sheet theme--light\\" style=\\"max-width: 400px;\\">
+        <div class=\\"v-image v-responsive white--text theme--light\\" style=\\"height: 200px;\\">
+          <transition-stub name=\\"fade-transition\\" mode=\\"in-out\\">
+            <div class=\\"v-image__image v-image__image--preload v-image__image--cover\\" style=\\"background-position: center center;\\"></div>
+          </transition-stub>
+          <div class=\\"v-responsive__content\\"></div>
+        </div>
+        <div class=\\"v-card__title\\">
+          Heading
+        </div>
+        <div class=\\"v-card__text text-left\\"><span class=\\"text--primary\\">
+			This is a media card. You can use this section to describe the content.
+		</span></div>
+        <div class=\\"v-card__actions\\"><button type=\\"button\\" class=\\"v-btn v-btn--text theme--light v-size--default primary--text\\"><span class=\\"v-btn__content\\"> Read more </span></button></div>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
