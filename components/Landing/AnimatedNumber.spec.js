@@ -3,9 +3,7 @@ import AnimatedNumber from './AnimatedNumber.vue';
 
 const factory = (propsData) => {
 	return mount(AnimatedNumber, {
-		...createComponentMocks({
-			vuetify: true,
-		}),
+		...createComponentMocks({}),
 		mocks: {
 			$vuetify: { breakpoint: {} },
 		},

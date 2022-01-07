@@ -3,9 +3,7 @@ import FeatureTeaser from './FeatureTeaser.vue';
 
 const factory = () => {
 	return mount(FeatureTeaser, {
-		...createComponentMocks({
-			vuetify: true,
-		}),
+		...createComponentMocks({}),
 		mocks: {
 			$vuetify: { breakpoint: {} },
 		},

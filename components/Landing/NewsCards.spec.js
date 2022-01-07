@@ -3,9 +3,7 @@ import NewsCards from './NewsCards.vue';
 
 const factory = () => {
 	return mount(NewsCards, {
-		...createComponentMocks({
-			vuetify: true,
-		}),
+		...createComponentMocks({}),
 		mocks: {
 			$vuetify: { breakpoint: {} },
 		},

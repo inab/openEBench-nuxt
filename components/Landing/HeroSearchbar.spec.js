@@ -3,9 +3,7 @@ import HeroSearchbar from './HeroSearchbar.vue';
 
 const factory = () => {
 	return mount(HeroSearchbar, {
-		...createComponentMocks({
-			vuetify: true,
-		}),
+		...createComponentMocks({}),
 		mocks: {
 			$router: { push: jest.fn() },
 		},

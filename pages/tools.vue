@@ -1,6 +1,6 @@
 <template>
 	<iframe
-		:src="hostName + `/tool?search=` + query"
+		:src="hostName + `tool?search=` + query"
 		width="100%"
 		height="100%"
 		frameborder="0"

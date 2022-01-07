@@ -3,9 +3,7 @@ import WelcomeSection from './WelcomeSection.vue';
 
 const factory = () => {
 	return mount(WelcomeSection, {
-		...createComponentMocks({
-			vuetify: true,
-		}),
+		...createComponentMocks({}),
 		mocks: {
 			$vuetify: { breakpoint: {} },
 		},

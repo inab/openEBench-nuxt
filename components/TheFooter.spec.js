@@ -3,9 +3,7 @@ import TheFooter from './TheFooter.vue';
 
 const factory = () => {
 	return mount(TheFooter, {
-		...createComponentMocks({
-			vuetify: true,
-		}),
+		...createComponentMocks({}),
 		mocks: {
 			$vuetify: { breakpoint: {} },
 		},

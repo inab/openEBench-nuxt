@@ -3,9 +3,7 @@ import TwitterCard from './TwitterCard.vue';
 
 const factory = () => {
 	return mount(TwitterCard, {
-		...createComponentMocks({
-			vuetify: true,
-		}),
+		...createComponentMocks({}),
 		mocks: {
 			$vuetify: { breakpoint: {} },
 		},

@@ -3,9 +3,7 @@ import LogoSlider from './LogoSlider.vue';
 
 const factory = () => {
 	return mount(LogoSlider, {
-		...createComponentMocks({
-			vuetify: true,
-		}),
+		...createComponentMocks({}),
 		mocks: {
 			$vuetify: { breakpoint: {} },
 		},

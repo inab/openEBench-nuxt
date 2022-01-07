@@ -3,9 +3,7 @@ import HeroNumbers from './HeroNumbers.vue';
 
 const factory = (propsData) => {
 	return mount(HeroNumbers, {
-		...createComponentMocks({
-			vuetify: true,
-		}),
+		...createComponentMocks({}),
 		mocks: {
 			$vuetify: { breakpoint: {} },
 		},
