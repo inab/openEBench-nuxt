@@ -14,12 +14,23 @@ const factory = (propsData) => {
 };
 
 const propsData = {
-	toolsCount: '10',
-	communityCount: '5',
-	resourcesCount: '20',
+	toolsCount: 10,
+	communityCount: 5,
+	resourcesCount: 20,
 };
 
 describe('HeroNumbers', () => {
+	beforeEach(() => {
+		// IntersectionObserver isn't available in test environment
+		const mockIntersectionObserver = jest.fn();
+		mockIntersectionObserver.mockReturnValue({
+			observe: () => null,
+			unobserve: () => null,
+			disconnect: () => null,
+		});
+		window.IntersectionObserver = mockIntersectionObserver;
+	});
+
 	it('is instantiated', () => {
 		const wrapper = factory(propsData);
 		expect(wrapper).toBeTruthy();
