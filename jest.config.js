@@ -10,7 +10,7 @@ module.exports = {
 		'^.+\\.ts$': 'ts-jest',
 		'^.+\\.js$': 'babel-jest',
 		'.*\\.(vue)$': 'vue-jest',
-		'.+\\.(css|scss|png|jpg|svg)$': 'jest-transform-stub',
+		'.+\\.(css|scss|png|jpg|svg|gif)$': 'jest-transform-stub',
 	},
 	collectCoverage: true,
 	collectCoverageFrom: [

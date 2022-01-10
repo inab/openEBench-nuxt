@@ -34,6 +34,7 @@
 			<v-btn
 				v-if="$vuetify.breakpoint.smAndDown"
 				icon
+				data-testid="btn-toggle-menu"
 				@click.stop="handleToggleOpen"
 			>
 				<v-icon>mdi-menu</v-icon>
@@ -41,7 +42,7 @@
 			<nuxt-link to="/">
 				<v-img
 					class="mx-2"
-					:src="require('~/static/images/opeb_logo.gif')"
+					:src="opebLogo"
 					max-height="80"
 					max-width="80"
 					contain
@@ -98,6 +99,7 @@
 <script>
 import menuEntries from './menuEntries';
 import subMenuEntries from './subMenuEntries';
+import opebLogo from '~/static/images/opeb_logo.gif';
 
 export default {
 	name: 'HeaderMenu',
@@ -108,6 +110,7 @@ export default {
 			menuEntries,
 			subMenuEntries,
 			vreHref: this.$config.VRE_URI,
+			opebLogo,
 		};
 	},
 	methods: {
