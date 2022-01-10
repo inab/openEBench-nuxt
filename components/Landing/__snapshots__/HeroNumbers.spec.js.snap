@@ -1,37 +1,40 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`HeroNumbers should match snapshot 1`] = `
-"<div class=\\"v-parallax\\" style=\\"height: 170px;\\">
-  <div class=\\"v-parallax__image-container\\"><img src=\\"\\" alt=\\"\\" class=\\"v-parallax__image\\" style=\\"display: block; opacity: 0; transform: translate(-50%, 0px);\\"></div>
-  <div class=\\"v-parallax__content\\">
-    <div class=\\"container\\">
-      <div class=\\"row root align-center justify-center\\">
-        <div align=\\"center\\" class=\\"col-sm-4 col-12\\">
-          <div class=\\"counter-item\\"><span class=\\"icon ion-leaf\\"></span>
-            <div class=\\"text\\">
-              <h4 class=\\"text-h3\\"><span>0</span></h4>
-              <h6 class=\\"title\\">Communities</h6>
-            </div>
+"<v-parallax-stub height=\\"170\\" alt=\\"\\" src=\\"\\">
+  <v-container-stub tag=\\"div\\">
+    <v-row-stub tag=\\"div\\" align=\\"center\\" justify=\\"center\\" class=\\"root\\">
+      <v-col-stub cols=\\"12\\" sm=\\"4\\" tag=\\"div\\" align=\\"center\\">
+        <div class=\\"counter-item\\"><span class=\\"icon ion-leaf\\"></span>
+          <div class=\\"text\\">
+            <h4 class=\\"text-h3\\">
+              <animated-number-stub value=\\"5\\"></animated-number-stub>
+            </h4>
+            <h6 class=\\"title\\">Communities</h6>
           </div>
         </div>
-        <div align=\\"center\\" class=\\"col-sm-4 col-12\\">
-          <div class=\\"counter-item\\"><span class=\\"icon ion-ios-lightbulb-outline\\"></span>
-            <div class=\\"text\\">
-              <h4 class=\\"text-h3\\"><span>0</span></h4>
-              <h6 class=\\"title\\">Tools</h6>
-            </div>
+      </v-col-stub>
+      <v-col-stub cols=\\"12\\" sm=\\"4\\" tag=\\"div\\" align=\\"center\\">
+        <div class=\\"counter-item\\"><span class=\\"icon ion-ios-lightbulb-outline\\"></span>
+          <div class=\\"text\\">
+            <h4 class=\\"text-h3\\">
+              <animated-number-stub value=\\"10\\"></animated-number-stub>
+            </h4>
+            <h6 class=\\"title\\">Tools</h6>
           </div>
         </div>
-        <div align=\\"center\\" class=\\"col-sm-4 col-12\\">
-          <div class=\\"counter-item\\"><span class=\\"icon ion-ios-world-outline\\"></span>
-            <div class=\\"text\\">
-              <h4 class=\\"text-h3 font-weight-normal\\"><span>0</span></h4>
-              <h6 class=\\"title\\">Resources</h6>
-            </div>
+      </v-col-stub>
+      <v-col-stub cols=\\"12\\" sm=\\"4\\" tag=\\"div\\" align=\\"center\\">
+        <div class=\\"counter-item\\"><span class=\\"icon ion-ios-world-outline\\"></span>
+          <div class=\\"text\\">
+            <h4 class=\\"text-h3 font-weight-normal\\">
+              <animated-number-stub value=\\"20\\"></animated-number-stub>
+            </h4>
+            <h6 class=\\"title\\">Resources</h6>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-</div>"
+      </v-col-stub>
+    </v-row-stub>
+  </v-container-stub>
+</v-parallax-stub>"
 `;

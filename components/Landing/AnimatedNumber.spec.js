@@ -12,17 +12,6 @@ const factory = (propsData) => {
 };
 
 describe('AnimatedNumber', () => {
-	beforeEach(() => {
-		// IntersectionObserver isn't available in test environment
-		const mockIntersectionObserver = jest.fn();
-		mockIntersectionObserver.mockReturnValue({
-			observe: () => null,
-			unobserve: () => null,
-			disconnect: () => null,
-		});
-		window.IntersectionObserver = mockIntersectionObserver;
-	});
-
 	it('is instantiated', () => {
 		const wrapper = factory({
 			value: 0,

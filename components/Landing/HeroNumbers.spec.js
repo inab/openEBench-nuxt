@@ -1,8 +1,8 @@
-import { mount } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 import HeroNumbers from './HeroNumbers.vue';
 
 const factory = (propsData) => {
-	return mount(HeroNumbers, {
+	return shallowMount(HeroNumbers, {
 		...createComponentMocks({}),
 		mocks: {
 			$vuetify: { breakpoint: {} },
@@ -18,17 +18,6 @@ const propsData = {
 };
 
 describe('HeroNumbers', () => {
-	beforeEach(() => {
-		// IntersectionObserver isn't available in test environment
-		const mockIntersectionObserver = jest.fn();
-		mockIntersectionObserver.mockReturnValue({
-			observe: () => null,
-			unobserve: () => null,
-			disconnect: () => null,
-		});
-		window.IntersectionObserver = mockIntersectionObserver;
-	});
-
 	it('is instantiated', () => {
 		const wrapper = factory(propsData);
 		expect(wrapper).toBeTruthy();
