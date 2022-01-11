@@ -39,11 +39,7 @@ export default {
 	css: ['~/assets/main'],
 
 	// Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-	plugins: [
-		'~/plugins/vue-fragment-config',
-		'~/plugins/vue-observe-visibility',
-		'~/plugins/graphql',
-	],
+	plugins: ['~/plugins/vue-fragment-config', '~/plugins/graphql'],
 
 	// Auto import components: https://go.nuxtjs.dev/config-components
 	components: true,

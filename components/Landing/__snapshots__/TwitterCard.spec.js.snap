@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TwitterCard should match snapshot 1`] = `
+"<div class=\\"mx-auto v-card v-sheet theme--dark\\" style=\\"max-width: 400px; background-color: rgb(38, 198, 218); border-color: #26c6da;\\">
+  <div class=\\"v-card__title\\"><i aria-hidden=\\"true\\" class=\\"v-icon notranslate v-icon--left mdi mdi-twitter theme--dark\\" style=\\"font-size: 36px;\\"></i> <span class=\\"text-h6 font-weight-light\\">Twitter</span></div>
+  <div class=\\"v-card__text text-h6 font-weight-bold\\">
+    \\"Turns out semicolon-less style is easier and safer in TS because most
+    gotcha edge cases are type invalid as well.\\"
+  </div>
+  <div class=\\"v-card__actions\\">
+    <div tabindex=\\"-1\\" class=\\"grow v-list-item theme--dark\\">
+      <div class=\\"v-avatar v-list-item__avatar grey darken-3\\" style=\\"height: 40px; min-width: 40px; width: 40px;\\">
+        <div aria-label=\\"\\" class=\\"v-image v-responsive elevation-6 theme--dark\\">
+          <transition-stub name=\\"fade-transition\\" mode=\\"in-out\\">
+            <div class=\\"v-image__image v-image__image--preload v-image__image--cover\\" style=\\"background-position: center center;\\"></div>
+          </transition-stub>
+          <div class=\\"v-responsive__content\\"></div>
+        </div>
+      </div>
+      <div class=\\"v-list-item__content\\">
+        <div class=\\"v-list-item__title\\">Evan You</div>
+      </div>
+      <div class=\\"row align-center justify-end\\"><i aria-hidden=\\"true\\" class=\\"v-icon notranslate mr-1 mdi mdi-heart theme--dark\\"></i> <span class=\\"subheading mr-2\\">256</span> <span class=\\"mr-1\\">·</span> <i aria-hidden=\\"true\\" class=\\"v-icon notranslate mr-1 mdi mdi-share-variant theme--dark\\"></i> <span class=\\"subheading\\">45</span></div>
+    </div>
+  </div>
+</div>"
+`;

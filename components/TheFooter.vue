@@ -19,7 +19,7 @@
 						</v-expansion-panel-header>
 						<v-expansion-panel-content>
 							<ul>
-								<li v-for="(link, index) in footer.links" :key="index">
+								<li v-for="(link, n) in footer.links" :key="n">
 									<nuxt-link v-if="link.to" :to="link.to">
 										{{ link.title }}
 									</nuxt-link>
@@ -42,7 +42,7 @@
 							{{ footer.headline }}
 						</h6>
 						<ul>
-							<li v-for="(link, index) in footer.links" :key="index">
+							<li v-for="(link, m) in footer.links" :key="m">
 								<nuxt-link
 									v-if="link.to"
 									dark

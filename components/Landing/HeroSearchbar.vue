@@ -21,9 +21,17 @@
 							clearable
 							dark
 							hide-details=""
+							data-testid="input-field"
 							@keyup.enter="handleSubmit"
 						></v-text-field>
-						<v-btn x-large outlined dark class="ml-2" @click="handleSubmit">
+						<v-btn
+							x-large
+							outlined
+							dark
+							class="ml-2"
+							data-testid="submit-button"
+							@click="handleSubmit"
+						>
 							Go
 						</v-btn>
 					</v-row>

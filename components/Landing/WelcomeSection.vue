@@ -35,16 +35,19 @@
 				</v-row>
 			</v-col>
 			<v-col v-if="$vuetify.breakpoint.mdAndUp" md="5">
-				<v-img
-					:src="require('~/static/images/illustrations/chart-person.png')"
-					contain
-					max-height="350"
-				/>
+				<v-img :src="illustration" contain max-height="350" />
 			</v-col>
 		</v-row>
 	</v-container>
 </template>
 
 <script>
-export default { name: 'WelcomeSection' };
+export default {
+	name: 'WelcomeSection',
+	data() {
+		return {
+			illustration: require('~/static/images/illustrations/chart-person.png'),
+		};
+	},
+};
 </script>

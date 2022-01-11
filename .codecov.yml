@@ -1,6 +1,6 @@
 comment:
-  layout: files
-  require_changes: true
+  layout: 'reach, diff, flags, files'
+  require_changes: false
 coverage:
   status:
     project:

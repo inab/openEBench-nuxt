@@ -1,4 +1,5 @@
 module.exports = {
+	setupFiles: ['<rootDir>/test/unit/setup'],
 	moduleNameMapper: {
 		'^@/(.*)$': '<rootDir>/$1',
 		'^~/(.*)$': '<rootDir>/$1',
@@ -9,6 +10,7 @@ module.exports = {
 		'^.+\\.ts$': 'ts-jest',
 		'^.+\\.js$': 'babel-jest',
 		'.*\\.(vue)$': 'vue-jest',
+		'.+\\.(css|scss|png|jpg|svg|gif)$': 'jest-transform-stub',
 	},
 	collectCoverage: true,
 	collectCoverageFrom: [
