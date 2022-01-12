@@ -1,5 +1,7 @@
 # openEBench-nuxt
 
+Make sure **npm** version is at least 8.x.x
+
 ## Build Setup
 
 ```bash
