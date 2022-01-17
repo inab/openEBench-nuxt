@@ -21,6 +21,21 @@ describe('TheFooter', () => {
 		expect(wrapper.html()).toMatchSnapshot();
 	});
 
+	it('should show the cookie hint, and hide on button click', async () => {
+		const wrapper = factory();
+		let cookieBanner = wrapper.find('.Cookie');
+		expect(cookieBanner.exists()).toBe(true);
+
+		const cookieAcceptButton = wrapper.find('.Cookie__button');
+		expect(cookieAcceptButton.exists()).toBe(true);
+
+		cookieAcceptButton.trigger('click');
+		await wrapper.vm.$nextTick();
+
+		cookieBanner = wrapper.find('.Cookie');
+		expect(cookieBanner.exists()).toBe(false);
+	});
+
 	it('should have computed prop isMobile true on small devices', async () => {
 		const wrapper = factory();
 
