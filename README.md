@@ -21,6 +21,20 @@ $ npm run generate
 
 For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
 
+## Storybook
+
+Storybook is an open source tool for building UI components and pages in isolation. It streamlines UI development, testing, and documentation.
+
+```bash
+# run storybook
+$ npm run storybook
+
+# build for production and launch server
+$ npm run build-storybook
+
+$ npx http-server ./path/to/build
+```
+
 ## Special Directories
 
 You can create the following extra directories, some of which have special behaviors. Only `pages` is required; you can delete them if you don't want to use their functionality.
