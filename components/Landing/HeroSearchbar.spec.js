@@ -24,10 +24,10 @@ describe('HeroSearchbar', () => {
 	it('should push router to tools page on button click', () => {
 		const wrapper = factory();
 
-		const submitBtn = wrapper.find('[data-testid="submit-button"]');
+		const submitBtn = wrapper.find('button');
 		expect(submitBtn.exists()).toBe(true);
+		submitBtn.trigger('click');
 
-		submitBtn.vm.$emit('click');
 		expect(wrapper.vm.$router.push).toHaveBeenCalledWith({
 			path: 'tools',
 			query: { search: '' },
@@ -51,14 +51,14 @@ describe('HeroSearchbar', () => {
 	it('should push router to tools with query on button click', () => {
 		const wrapper = factory();
 
-		const submitBtn = wrapper.find('[data-testid="submit-button"]');
-		expect(submitBtn.exists()).toBe(true);
-
 		const searchInput = wrapper.find('[data-testid="input-field"]');
 		expect(searchInput.exists()).toBe(true);
 		searchInput.setValue('Random Tool Name');
 
-		submitBtn.vm.$emit('click');
+		const submitBtn = wrapper.find('button');
+		expect(submitBtn.exists()).toBe(true);
+
+		submitBtn.trigger('click');
 
 		expect(wrapper.vm.$router.push).toHaveBeenCalledWith({
 			path: 'tools',

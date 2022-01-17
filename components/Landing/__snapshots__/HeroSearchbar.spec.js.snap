@@ -7,7 +7,7 @@ exports[`HeroSearchbar should match snapshot 1`] = `
     <div class=\\"container\\">
       <div class=\\"row align-center justify-center\\">
         <div class=\\"text-center col col-12\\">
-          <h2 class=\\"text-h4 font-weight-thin mb-3\\">
+          <h2 class=\\"text-h4 font-weight-light mb-3\\">
             Browse Tools and Metrics
           </h2>
           <h3 class=\\"text-subtitle-2 hidden-sm-and-down\\">
@@ -18,21 +18,19 @@ exports[`HeroSearchbar should match snapshot 1`] = `
         </div>
         <div class=\\"col-sm-10 col-12\\">
           <div class=\\"row mb-10 align-center\\">
-            <div class=\\"v-input v-input--hide-details theme--dark v-text-field v-text-field--enclosed v-text-field--outlined\\">
+            <div class=\\"v-input v-input--hide-details theme--light v-text-field v-text-field--single-line v-text-field--solo v-text-field--enclosed\\">
               <div class=\\"v-input__control\\">
                 <div class=\\"v-input__slot\\">
-                  <fieldset aria-hidden=\\"true\\">
-                    <legend style=\\"width: 0px;\\"><span class=\\"notranslate\\">​</span></legend>
-                  </fieldset>
-                  <div class=\\"v-text-field__slot\\"><label for=\\"input-8\\" class=\\"v-label theme--dark\\" style=\\"left: 0px; position: absolute;\\">Search for Tools</label><input data-testid=\\"input-field\\" id=\\"input-8\\" type=\\"text\\"></div>
+                  <div class=\\"v-input__prepend-inner\\">
+                    <div class=\\"v-input__icon v-input__icon--prepend-inner\\"><button type=\\"button\\" aria-label=\\"prepend icon\\" class=\\"v-icon notranslate v-icon--link mdi mdi-magnify theme--light\\"></button></div>
+                  </div>
+                  <div class=\\"v-text-field__slot\\"><label for=\\"input-8\\" class=\\"v-label theme--light\\" style=\\"left: 0px; position: absolute;\\">Search for Tools</label><input data-testid=\\"input-field\\" id=\\"input-8\\" type=\\"text\\"></div>
                   <div class=\\"v-input__append-inner\\">
                     <div></div>
                   </div>
                 </div>
               </div>
-            </div> <button type=\\"button\\" class=\\"ml-2 v-btn v-btn--outlined theme--dark v-size--x-large\\" data-testid=\\"submit-button\\"><span class=\\"v-btn__content\\">
-						Go
-					</span></button>
+            </div>
           </div>
         </div>
       </div> <a aria-label=\\"Scroll to feature overview\\" class=\\"scroll-down\\"></a>
