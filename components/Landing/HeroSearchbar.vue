@@ -3,7 +3,7 @@
 		<v-container>
 			<v-row align="center" justify="center">
 				<v-col class="text-center" cols="12">
-					<h2 class="text-h4 font-weight-thin mb-3">
+					<h2 class="text-h4 font-weight-light mb-3">
 						Browse Tools and Metrics
 					</h2>
 					<h3 class="text-subtitle-2 hidden-sm-and-down">
@@ -16,24 +16,15 @@
 					<v-row align="center" class="mb-10">
 						<v-text-field
 							v-model="input"
+							:prepend-inner-icon="'mdi-magnify'"
 							label="Search for Tools"
-							outlined
+							solo
 							clearable
-							dark
-							hide-details=""
+							hide-details
 							data-testid="input-field"
 							@keyup.enter="handleSubmit"
+							@click:prepend-inner="handleSubmit"
 						></v-text-field>
-						<v-btn
-							x-large
-							outlined
-							dark
-							class="ml-2"
-							data-testid="submit-button"
-							@click="handleSubmit"
-						>
-							Go
-						</v-btn>
 					</v-row>
 				</v-col>
 			</v-row>
