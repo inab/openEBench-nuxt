@@ -4,9 +4,10 @@ import FeatureTeaser from '~/components/Landing/FeatureTeaser';
 import HeroNumbers from '~/components/Landing/HeroNumbers';
 import NewsCards from '~/components/Landing/NewsCards';
 import LogoSlider from '~/components/Landing/LogoSlider';
+import TwitterCard from '~/components/Landing/TwitterCard';
 
 export default {
-	title: 'Landing Page/Parts',
+	title: 'Landing Page/Molecules',
 };
 
 export const Welcome = () => ({
@@ -45,4 +46,9 @@ export const News = () => ({
 export const Logos = () => ({
 	components: { LogoSlider },
 	template: '<logo-slider />',
+});
+
+export const TwitterNewsCard = () => ({
+	components: { TwitterCard },
+	template: '<twitter-card />',
 });

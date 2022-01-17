@@ -103,13 +103,18 @@ import opebLogo from '~/static/images/opeb_logo.gif';
 
 export default {
 	name: 'HeaderMenu',
+	props: {
+		vreHref: {
+			type: String,
+			required: true,
+		},
+	},
 	data() {
 		return {
 			openNavMobile: null,
 			fixed: false,
 			menuEntries,
 			subMenuEntries,
-			vreHref: this.$config.VRE_URI,
 			opebLogo,
 		};
 	},

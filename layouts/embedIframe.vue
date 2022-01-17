@@ -1,6 +1,6 @@
 <template>
 	<v-app>
-		<main-header />
+		<main-header :vre-href="$config.VRE_URI" />
 		<v-main>
 			<v-container class="v-container-custom">
 				<Nuxt />
