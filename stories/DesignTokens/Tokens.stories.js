@@ -2,7 +2,7 @@ import opebLogo from '~/static/images/opeb_logo.gif';
 import opebLogoWhite from '~/static/images/opeb_logo_white_minimal.png';
 
 export default {
-	title: 'Design System/Atoms',
+	title: 'Atoms/Design Tokens',
 };
 
 export const Typography = () => ({

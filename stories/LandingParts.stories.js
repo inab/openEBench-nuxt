@@ -7,7 +7,7 @@ import LogoSlider from '~/components/Landing/LogoSlider';
 import TwitterCard from '~/components/Landing/TwitterCard';
 
 export default {
-	title: 'Landing Page/Molecules',
+	title: 'Molecules/Landing Page',
 };
 
 export const Welcome = () => ({
