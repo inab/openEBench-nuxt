@@ -3,7 +3,7 @@
 		<main-header :vre-href="$config.VRE_URI" />
 		<v-main>
 			<Nuxt />
-			<Footer class="mt-16" />
+			<Footer />
 		</v-main>
 		<v-footer class="justify-center" app>
 			Made with <v-icon color="red">mdi-heart</v-icon>
