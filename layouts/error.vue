@@ -11,9 +11,9 @@
 								</h1>
 								<h2 class="text-h5 mt-5 font-weight-black">Whoops!</h2>
 								<p v-if="error.statusCode === 404" class="mt-3">
-									Sorry to say, but it looks like this page does not exist.
+									{{ pageNotFound }}
 								</p>
-								<p v-else>
+								<p v-else class="mt-3">
 									{{ otherError }}
 								</p>
 								<v-btn class="mt-5" color="primary" to="/">
@@ -53,6 +53,7 @@ export default {
 		return {
 			errorSvg,
 			otherError: 'An error occurred',
+			pageNotFound: 'Sorry to say, but it looks like this page does not exist.',
 		};
 	},
 	head() {
