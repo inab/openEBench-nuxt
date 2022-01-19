@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ErrorPage should match snapshot 1`] = `
+"<v-app-stub id=\\"app\\" class=\\"grey lighten-5\\">
+  <v-main-stub tag=\\"main\\">
+    <v-container-stub tag=\\"div\\">
+      <v-card-stub loaderheight=\\"4\\" tag=\\"div\\" elevation=\\"5\\" class=\\"rounded-xl\\">
+        <v-row-stub tag=\\"div\\" align=\\"center\\">
+          <v-col-stub cols=\\"4\\" offset=\\"1\\" alignself=\\"center\\" tag=\\"div\\" align=\\"left\\">
+            <div>
+              <h1 class=\\"text-h2 font-weight-black\\">
+                404
+              </h1>
+              <h2 class=\\"text-h5 mt-5 font-weight-black\\">Whoops!</h2>
+              <p class=\\"mt-3\\">
+                Sorry to say, but it looks like this page does not exist.
+              </p>
+              <v-btn-stub color=\\"primary\\" tag=\\"button\\" activeclass=\\"\\" to=\\"/\\" type=\\"button\\" class=\\"mt-5\\">
+                Go back home
+              </v-btn-stub>
+            </div>
+          </v-col-stub>
+          <v-col-stub cols=\\"7\\" tag=\\"div\\">
+            <v-img-stub maxheight=\\"800\\" maxwidth=\\"800\\" alt=\\"sad human\\" contain=\\"true\\" options=\\"[object Object]\\" position=\\"center center\\" src=\\"\\" transition=\\"fade-transition\\"></v-img-stub>
+          </v-col-stub>
+        </v-row-stub>
+      </v-card-stub>
+    </v-container-stub>
+  </v-main-stub>
+</v-app-stub>"
+`;

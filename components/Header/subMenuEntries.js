@@ -6,12 +6,12 @@ const subMenuEntries = [
 		to: '/about',
 	},
 	{
-		title: 'TechDoc',
+		title: 'Github Docs',
 		href: 'https://openebench.bsc.es/docs/',
 		external: true,
 	},
 	{
-		title: 'Read the Docs',
+		title: 'Project Docs',
 		href: 'https://openebench.readthedocs.io/en/latest/',
 		external: true,
 	},
