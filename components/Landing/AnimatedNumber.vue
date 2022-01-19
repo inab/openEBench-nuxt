@@ -11,7 +11,6 @@ import { ObserveVisibility } from 'vue-observe-visibility';
 
 export default {
 	name: 'App',
-	components: {},
 	directives: {
 		ObserveVisibility,
 	},
