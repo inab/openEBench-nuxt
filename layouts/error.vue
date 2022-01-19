@@ -2,7 +2,7 @@
 	<v-app class="grey lighten-5">
 		<v-main>
 			<v-container>
-				<v-card class="mt-5 rounded-xl" :elevation="5">
+				<v-card class="rounded-xl" :elevation="5">
 					<v-row align="center">
 						<v-col align-self="center" align="left" cols="4" offset="1">
 							<div>

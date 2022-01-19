@@ -4,7 +4,7 @@ exports[`ErrorPage should match snapshot 1`] = `
 "<v-app-stub id=\\"app\\" class=\\"grey lighten-5\\">
   <v-main-stub tag=\\"main\\">
     <v-container-stub tag=\\"div\\">
-      <v-card-stub loaderheight=\\"4\\" tag=\\"div\\" elevation=\\"5\\" class=\\"mt-5 rounded-xl\\">
+      <v-card-stub loaderheight=\\"4\\" tag=\\"div\\" elevation=\\"5\\" class=\\"rounded-xl\\">
         <v-row-stub tag=\\"div\\" align=\\"center\\">
           <v-col-stub cols=\\"4\\" offset=\\"1\\" alignself=\\"center\\" tag=\\"div\\" align=\\"left\\">
             <div>
