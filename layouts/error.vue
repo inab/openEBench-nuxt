@@ -2,28 +2,20 @@
 	<v-app class="grey lighten-5">
 		<v-main>
 			<v-container>
-				<v-card class="mt-10 rounded-xl" :elevation="5">
+				<v-card class="mt-5 rounded-xl" :elevation="5">
 					<v-row align="center">
 						<v-col align-self="center" align="left" cols="4" offset="1">
 							<div>
-								<h1
-									v-if="error.statusCode === 404"
-									class="text-h2 font-weight-black"
-								>
-									404
+								<h1 class="text-h2 font-weight-black">
+									{{ error.statusCode }}
 								</h1>
-								<h2
-									v-if="error.statusCode === 404"
-									class="text-h5 mt-5 font-weight-black"
-								>
-									Whoops!
-								</h2>
+								<h2 class="text-h5 mt-5 font-weight-black">Whoops!</h2>
 								<p v-if="error.statusCode === 404" class="mt-3">
 									Sorry to say, but it looks like this page does not exist.
 								</p>
-								<h1 v-else>
+								<p v-else>
 									{{ otherError }}
-								</h1>
+								</p>
 								<v-btn class="mt-5" color="primary" to="/">
 									Go back home
 								</v-btn>
