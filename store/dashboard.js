@@ -21,8 +21,15 @@ export default {
 
 			commit('setCommunitiesCount', response.data);
 		},
-		async getResourcesCount({ commit }) {
-			const data = await this.$axios.$get('/statistics');
+		getResourcesCount({ commit }) {
+			// hard coded observatory data, until the API is ready
+			const data = {
+				biotools: 22799,
+				bioconda: 8564,
+				galaxy: 4919,
+				bioconductor: 2041,
+				total: 35784,
+			};
 			commit('setResourcesCount', data);
 		},
 		async getToolsCount({ commit }) {
@@ -37,7 +44,7 @@ export default {
 
 	mutations: {
 		setResourcesCount(state, payload) {
-			state.resourcesCount = payload.all.total;
+			state.resourcesCount = payload.total;
 		},
 		setToolsCount(state, payload) {
 			const matches = payload.headers['content-range'].match(
