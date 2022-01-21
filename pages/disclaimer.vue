@@ -25,7 +25,6 @@
 				email to: <a href="mailto:dpo@bsc.es">dpo@bsc.es</a>
 			</p>
 		</div>
-		<v-spacer />
 	</v-container>
 </template>
 
