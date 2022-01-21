@@ -84,13 +84,7 @@ exports[`TheFooter should match snapshot 1`] = `
             </h6>
             <ul>
               <li><a dark=\\"\\" class=\\"white--text\\">
-                  Privacy Policy
-                </a>
-                <!---->
-                <!---->
-              </li>
-              <li><a dark=\\"\\" class=\\"white--text\\">
-                  Terms of Use
+                  Disclaimer
                 </a>
                 <!---->
                 <!---->
