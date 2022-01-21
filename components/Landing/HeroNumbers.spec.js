@@ -33,7 +33,7 @@ describe('HeroNumbers', () => {
 
 		wrapper.vm.$vuetify.breakpoint.xs = true;
 		await wrapper.vm.$nextTick();
-		expect(wrapper.vm.containerHeight).toBe(350);
+		expect(wrapper.vm.containerHeight).toBe(450);
 	});
 
 	it('should have a container height of 170 on bigger devices', async () => {
