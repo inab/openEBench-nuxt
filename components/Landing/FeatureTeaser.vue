@@ -45,7 +45,7 @@
 					Community spaces for projects to collaborate on software in Life
 					Sciences
 				</p>
-				<v-btn text color="primary" to="/observatory"> Learn More </v-btn>
+				<v-btn text color="primary" to="/"> Learn More </v-btn>
 			</v-col>
 		</v-row>
 	</v-container>
