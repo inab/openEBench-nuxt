@@ -81,7 +81,7 @@ export default {
 	},
 	computed: {
 		containerHeight() {
-			return this.$vuetify.breakpoint.xs ? 350 : 170;
+			return this.$vuetify.breakpoint.xs ? 450 : 170;
 		},
 	},
 };
