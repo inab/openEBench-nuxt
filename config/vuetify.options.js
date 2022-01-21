@@ -1,7 +1,3 @@
-import ProjectsIcon from '~/components/Icons/projectsIcon';
-import BenchmarkIcon from '~/components/Icons/benchmarkIcon';
-import ObservatoryIcon from '~/components/Icons/observatoryIcon';
-
 let darkMode = false;
 if (typeof Storage !== 'undefined') {
 	// eslint-disable-line
@@ -38,13 +34,13 @@ export default {
 	icons: {
 		values: {
 			projects: {
-				component: ProjectsIcon,
+				component: require('~/static/icons/projects.svg?inline'),
 			},
 			benchmark: {
-				component: BenchmarkIcon,
+				component: require('~/static/icons/benchmark.svg?inline'),
 			},
 			observatory: {
-				component: ObservatoryIcon,
+				component: require('~/static/icons/observatory.svg?inline'),
 			},
 		},
 	},
