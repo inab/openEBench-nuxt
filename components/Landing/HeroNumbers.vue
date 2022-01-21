@@ -2,7 +2,7 @@
 	<v-parallax :height="containerHeight" :src="material2">
 		<v-container>
 			<v-row align="center" justify="center" class="root">
-				<v-col align="center" cols="12" sm="3">
+				<v-col align="center" cols="12" sm="4">
 					<div class="counter-item">
 						<span class="icon ion-leaf" />
 						<div class="text">
@@ -13,7 +13,7 @@
 						</div>
 					</div>
 				</v-col>
-				<v-col align="center" cols="12" sm="3">
+				<v-col align="center" cols="12" sm="4">
 					<div class="counter-item">
 						<span class="icon ion-ios-lightbulb-outline" />
 						<div class="text">
@@ -24,7 +24,7 @@
 						</div>
 					</div>
 				</v-col>
-				<v-col align="center" cols="12" sm="3">
+				<v-col align="center" cols="12" sm="4">
 					<div class="counter-item">
 						<span class="icon ion-ios-world-outline" />
 						<div class="text">
@@ -32,17 +32,6 @@
 								<animated-number :value="resourcesCount" />
 							</h4>
 							<h6 class="title">Resources</h6>
-						</div>
-					</div>
-				</v-col>
-				<v-col align="center" cols="12" sm="3">
-					<div class="counter-item">
-						<span class="icon ion-ios-world-outline" />
-						<div class="text">
-							<h4 class="text-h3 font-weight-normal">
-								<animated-number :value="1" />
-							</h4>
-							<h6 class="title">Projects</h6>
 						</div>
 					</div>
 				</v-col>
