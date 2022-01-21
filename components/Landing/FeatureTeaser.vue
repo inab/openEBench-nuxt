@@ -5,9 +5,9 @@
 		<v-row>
 			<v-col align="center" cols="12" md="4">
 				<v-avatar color="primary" size="62" class="mb-10">
-					<v-icon large dark>mdi-chart-bar</v-icon>
+					<v-icon dark>$vuetify.icons.values.benchmark</v-icon>
 				</v-avatar>
-				<h2 class="text-h6">Benchmarking Results</h2>
+				<h2 class="text-h6">Benchmarks</h2>
 				<p class="body-1">
 					Explore benchmarks of the scientific performance of bioinformatics
 					methods
@@ -27,9 +27,9 @@
 			</v-col>
 			<v-col align="center" cols="12" md="4">
 				<v-avatar color="primary" size="62" class="mb-10">
-					<v-icon large dark>mdi-telescope</v-icon>
+					<v-icon dark>$vuetify.icons.values.observatory</v-icon>
 				</v-avatar>
-				<h2 class="text-h6">Software Observatory</h2>
+				<h2 class="text-h6">Tools Observatory</h2>
 				<p class="body-1">
 					Quantitative monitoring of the technical quality of software in Life
 					Sciences

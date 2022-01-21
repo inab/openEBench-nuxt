@@ -31,4 +31,17 @@ export default {
 			customProperties: true,
 		},
 	},
+	icons: {
+		values: {
+			projects: {
+				component: require('~/static/icons/projects.svg?inline'),
+			},
+			benchmark: {
+				component: require('~/static/icons/benchmark.svg?inline'),
+			},
+			observatory: {
+				component: require('~/static/icons/observatory.svg?inline'),
+			},
+		},
+	},
 };

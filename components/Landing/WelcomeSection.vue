@@ -10,7 +10,7 @@
 				<v-row class="mt-10" align="end">
 					<v-col align="center">
 						<v-avatar color="primary" size="62" class="mb-10">
-							<v-icon large dark>mdi-chart-bar</v-icon>
+							<v-icon dark>$vuetify.icons.values.benchmark</v-icon>
 						</v-avatar>
 						<p>
 							As a Researcher I want to search for benchmarking communities and
@@ -22,7 +22,7 @@
 					</v-col>
 					<v-col align="center">
 						<v-avatar color="accent" size="62" class="mb-10">
-							<v-icon large dark>mdi-telescope</v-icon>
+							<v-icon dark>$vuetify.icons.values.observatory</v-icon>
 						</v-avatar>
 						<p>
 							As a Developer I want to learn how to develop sustainable research
