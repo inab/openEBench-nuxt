@@ -1,0 +1,21 @@
+#stage 1
+FROM node:14 as node
+WORKDIR /app
+#define env vars
+ARG OEB_LEGACY_ANGULAR_URI=https://dev-openebench.bsc.es/
+ARG VRE_URI=https://dev-openebench.bsc.es/vre/home/
+ARG OBSERVATORY_URI=https://observatory.openebench.bsc.es
+ARG REST_API_URL=https://dev-openebench.bsc.es/monitor/rest/
+ARG SCIENTIFIC_SERVICE_URL=https://dev-openebench.bsc.es/api/scientific
+ENV OEB_LEGACY_ANGULAR_URI $OEB_LEGACY_ANGULAR_URI
+ENV VRE_URI $VRE_URI
+ENV OBSERVATORY_URI $OBSERVATORY_URI
+ENV REST_API_URL $REST_API_URL
+ENV SCIENTIFIC_SERVICE_URL $SCIENTIFIC_SERVICE_URL
+COPY . .
+RUN npm install
+RUN npm run build
+RUN npm run generate
+#stage 2
+FROM nginx:alpine
+COPY --from=node /app/dist /usr/share/nginx/html
