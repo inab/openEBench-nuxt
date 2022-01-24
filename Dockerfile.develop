@@ -2,11 +2,11 @@
 FROM node:14 as node
 WORKDIR /app
 #define env vars
-ENV OEB_LEGACY_ANGULAR_URI=https://dev-openebench.bsc.es/
-ENV VRE_URI=https://dev-openebench.bsc.es/vre/home/
-ENV OBSERVATORY_URI=https://observatory.openebench.bsc.es
-ENV REST_API_URL=https://dev-openebench.bsc.es/monitor/rest/
-ENV SCIENTIFIC_SERVICE_URL=https://dev-openebench.bsc.es/api/scientific
+ARG OEB_LEGACY_ANGULAR_URI=https://dev-openebench.bsc.es/
+ARG VRE_URI=https://dev-openebench.bsc.es/vre/home/
+ARG OBSERVATORY_URI=https://observatory.openebench.bsc.es
+ARG REST_API_URL=https://dev-openebench.bsc.es/monitor/rest/
+ARG SCIENTIFIC_SERVICE_URL=https://dev-openebench.bsc.es/api/scientific
 COPY . .
 RUN npm install
 RUN npm run build
