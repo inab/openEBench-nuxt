@@ -2,7 +2,7 @@ name: Docker Image CI develop
 
 on:
   push:
-    branches: [develop]
+    branches: [develop-2]
 
 jobs:
   build:
@@ -21,6 +21,6 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./Dockerfile.develop
+          file: ./Dockerfile.develop2
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USER_NAME }}/openebench-nuxt-dev:latest
+          tags: ${{ secrets.DOCKER_HUB_USER_NAME }}/openebench-nuxt-dev2:latest
