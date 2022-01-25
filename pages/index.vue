@@ -10,7 +10,7 @@
 			class="mt-16"
 		/>
 		<news-cards class="landing-mt-24" />
-		<logo-slider class="landing-mt-24 mb-16" />
+		<logo-slider class="landing-mt-24" />
 	</div>
 </template>
 

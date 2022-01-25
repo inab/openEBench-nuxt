@@ -128,7 +128,11 @@ export default {
 			},
 			{
 				headline: 'Legal',
-				links: [{ title: 'Disclaimer', to: '/disclaimer' }],
+				links: [
+					{ title: 'Legal Notice', to: '/legal-notice' },
+					{ title: 'Disclaimer', to: '/disclaimer' },
+					{ title: 'Cookies Policy', to: '/cookies-policy' },
+				],
 			},
 		],
 	}),
