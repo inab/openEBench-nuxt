@@ -31,5 +31,6 @@
 <script>
 export default {
 	name: 'DisclaimerPage',
+	layout: 'default',
 };
 </script>

@@ -1,5 +1,5 @@
 <template>
-	<fragment>
+	<div>
 		<welcome-section class="mt-13" />
 		<hero-searchbar class="mt-10" />
 		<feature-teaser id="feature-teaser" class="landing-mt-24" />
@@ -11,7 +11,7 @@
 		/>
 		<news-cards class="landing-mt-24" />
 		<logo-slider class="landing-mt-24 mb-16" />
-	</fragment>
+	</div>
 </template>
 
 <script>
