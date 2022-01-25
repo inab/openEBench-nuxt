@@ -75,17 +75,15 @@
 			</v-col>
 			<v-col md="3" cols="12" class="pa-4">
 				<div class="socmed">
-					<v-btn text icon dark class="button">
-						<v-icon>mdi-facebook</v-icon>
-					</v-btn>
-					<v-btn text icon dark class="button">
+					<v-btn
+						text
+						icon
+						dark
+						class="button"
+						href="https://twitter.com/openebench"
+						target="_blank"
+					>
 						<v-icon>mdi-twitter</v-icon>
-					</v-btn>
-					<v-btn text icon dark class="button">
-						<v-icon>mdi-instagram</v-icon>
-					</v-btn>
-					<v-btn text icon dark class="button">
-						<v-icon>mdi-linkedin</v-icon>
 					</v-btn>
 				</div>
 				<v-row no-gutters class="mt-5">
