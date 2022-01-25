@@ -74,7 +74,14 @@ export default {
 	methods: {
 		visibilityChanged(isVisible) {
 			// workaround for a bug https://github.com/vuetifyjs/vuetify/issues/14195
-			if (isVisible) this.$refs.slideGroup.setWidths();
+			if (isVisible) {
+				setTimeout(
+					function () {
+						this.$refs.slideGroup.setWidths();
+					}.bind(this),
+					500
+				);
+			}
 		},
 	},
 };
