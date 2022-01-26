@@ -1,10 +1,15 @@
 <template>
 	<v-container>
 		<h2 class="text-h4">Our partners</h2>
-		<v-slide-group class="pa-4" show-arrows="always">
+		<v-slide-group
+			ref="slideGroup"
+			v-observe-visibility="visibilityChanged"
+			class="pa-4"
+			show-arrows="always"
+		>
 			<v-slide-item
 				v-for="(image, index) in images"
-				:key="`logoslider` + index"
+				:key="`logoslider_` + index"
 				disabled
 			>
 				<a :href="image.href" target="_blank">
@@ -23,8 +28,13 @@
 </template>
 
 <script>
+import { ObserveVisibility } from 'vue-observe-visibility';
+
 export default {
 	name: 'LogoSlider',
+	directives: {
+		ObserveVisibility,
+	},
 	data() {
 		return {
 			images: [
@@ -60,6 +70,19 @@ export default {
 				},
 			],
 		};
+	},
+	methods: {
+		visibilityChanged(isVisible) {
+			// workaround for a bug https://github.com/vuetifyjs/vuetify/issues/14195
+			if (isVisible) {
+				setTimeout(
+					function () {
+						this.$refs.slideGroup.setWidths();
+					}.bind(this),
+					500
+				);
+			}
+		},
 	},
 };
 </script>
