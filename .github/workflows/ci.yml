@@ -51,6 +51,7 @@ jobs:
 
   gh-pages-deploy:
     runs-on: ${{ matrix.os }}
+    needs: [ci]
 
     strategy:
       matrix:
