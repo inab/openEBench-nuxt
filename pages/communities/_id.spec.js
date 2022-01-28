@@ -1,13 +1,17 @@
 import { mount } from '@vue/test-utils';
-import Communities from './_id.vue';
+import Community from './_id.vue';
 
 const factory = () => {
-	return mount(Communities, {
+	return mount(Community, {
 		...createComponentMocks({}),
+		mocks: {
+			$route: { params: { id: 'TESTID' } },
+			$config: { OEB_LEGACY_ANGULAR_URI: 'https://jest-openebench.bsc.es/' },
+		},
 	});
 };
 
-describe('Communities', () => {
+describe('Community', () => {
 	it('is instantiated', () => {
 		const wrapper = factory();
 		expect(wrapper).toBeTruthy();
@@ -17,7 +21,7 @@ describe('Communities', () => {
 		const wrapper = factory();
 		expect(wrapper.vm.hostName).toBe('https://jest-openebench.bsc.es/');
 		expect(wrapper.find('iframe').attributes('src')).toBe(
-			'https://jest-openebench.bsc.es/scientific'
+			'https://jest-openebench.bsc.es/scientific/TESTID'
 		);
 	});
 });
