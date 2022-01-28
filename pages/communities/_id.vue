@@ -1,6 +1,6 @@
 <template>
 	<iframe
-		:src="hostName + `scientific`"
+		:src="hostName + `scientific/` + $route.params.id"
 		width="100%"
 		height="100%"
 		frameborder="0"
