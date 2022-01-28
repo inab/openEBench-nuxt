@@ -1,7 +1,23 @@
 <template>
 	<v-container>
 		<h1 class="text-h4 mt-13 mb-5">Communities</h1>
-		<v-row>
+		<v-row v-if="$store.state.communities.loading">
+			<v-col
+				v-for="(c, i) in [1, 2, 3, 4, 5, 6, 7, 8]"
+				:key="i"
+				cols="12"
+				sm="4"
+				md="3"
+			>
+				<v-skeleton-loader
+					class="mx-auto"
+					max-width="300"
+					type="card, list-item-two-line, actions"
+					elevation="2"
+				></v-skeleton-loader>
+			</v-col>
+		</v-row>
+		<v-row v-else>
 			<v-col
 				v-for="(community, index) in communities"
 				:key="index"

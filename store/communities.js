@@ -2,11 +2,14 @@ export default {
 	state: () => {
 		return {
 			list: [],
+			loading: false,
 		};
 	},
 
 	actions: {
 		async getCommunities({ commit }) {
+			commit('setLoading', true);
+
 			const response = await this.$graphql.$post('/graphql', {
 				query: `
 				{
@@ -27,6 +30,7 @@ export default {
 			});
 
 			commit('setCommunities', response.data);
+			commit('setLoading', false);
 		},
 	},
 
@@ -40,6 +44,9 @@ export default {
 				});
 				return community;
 			});
+		},
+		setLoading(state, loading) {
+			state.loading = loading;
 		},
 	},
 
