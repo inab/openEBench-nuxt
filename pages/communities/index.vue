@@ -10,10 +10,10 @@
 				md="3"
 			>
 				<community-card
-					:id="community._id"
-					:name="community.acronym"
-					:desc="community.name"
-					:img="community.logo"
+					:_id="community._id"
+					:acronym="community.acronym"
+					:name="community.name"
+					:logo="community.logo"
 					:links="community.links"
 					class="fill-height"
 				/>

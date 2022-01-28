@@ -1,12 +1,14 @@
 <template>
 	<v-card class="d-flex flex-column">
-		<v-img :src="img" contain max-height="120" height="120" />
+		<div class="pa-5">
+			<v-img :src="logo" contain max-height="100" height="100" />
+		</div>
 		<v-card-title class="justify-center text-truncate inline-flex">
-			{{ name }}
+			{{ acronym }}
 		</v-card-title>
 		<v-card-subtitle class="text-left">
 			<span class="caption text--muted">
-				{{ desc }}
+				{{ name }}
 			</span>
 		</v-card-subtitle>
 		<v-card-actions class="mt-auto">
@@ -39,7 +41,12 @@
 <script>
 export default {
 	props: {
-		id: {
+		// eslint-disable-next-line vue/prop-name-casing
+		_id: {
+			type: String,
+			required: true,
+		},
+		acronym: {
 			type: String,
 			required: true,
 		},
@@ -47,11 +54,7 @@ export default {
 			type: String,
 			required: true,
 		},
-		desc: {
-			type: String,
-			required: true,
-		},
-		img: {
+		logo: {
 			type: String,
 			required: true,
 		},
@@ -65,7 +68,7 @@ export default {
 			return this.links.filter((link) => link.comment !== '@logo');
 		},
 		to() {
-			return 'communities/' + this.id;
+			return 'communities/' + this._id;
 		},
 	},
 };
