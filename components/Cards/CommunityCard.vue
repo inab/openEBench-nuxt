@@ -11,8 +11,13 @@
 				{{ name }}
 			</span>
 		</v-card-subtitle>
-		<v-card-actions class="mt-auto">
-			<v-btn text color="primary" :to="to"> Open Community </v-btn>
+		<v-card-text align="bottom" class="mt-auto">
+			<v-chip small :color="statusChipColor" :text-color="statusChipTextColor">
+				{{ status }}
+			</v-chip>
+		</v-card-text>
+		<v-card-actions>
+			<v-btn text color="primary" :to="to"> Open </v-btn>
 			<v-spacer />
 			<v-menu bottom left>
 				<template #activator="{ on, attrs }">
@@ -62,6 +67,10 @@ export default {
 			type: Array,
 			required: true,
 		},
+		status: {
+			type: String,
+			required: true,
+		},
 	},
 	computed: {
 		linksFiltered() {
@@ -69,6 +78,22 @@ export default {
 		},
 		to() {
 			return 'communities/' + this._id;
+		},
+		statusChipColor() {
+			switch (this.status) {
+				case 'active':
+					return 'success';
+				default:
+					return '';
+			}
+		},
+		statusChipTextColor() {
+			switch (this.status) {
+				case 'active':
+					return 'white';
+				default:
+					return '';
+			}
 		},
 	},
 };

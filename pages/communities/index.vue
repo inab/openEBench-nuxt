@@ -31,6 +31,7 @@
 					:name="community.name"
 					:logo="community.logo"
 					:links="community.links"
+					:status="community.status"
 					class="fill-height"
 				/>
 			</v-col>
