@@ -7,7 +7,7 @@
 					The ELIXIR gateway to benchmarking communities, software monitoring,
 					and quality metrics for life sciences tools and workflows.
 				</h2>
-				<v-row class="mt-10" align="end">
+				<v-row class="mt-0 mt-lg-5" align="end">
 					<v-col align="center">
 						<v-avatar color="primary" size="62" class="mb-10">
 							<v-icon dark>$vuetify.icons.values.benchmark</v-icon>
@@ -20,7 +20,7 @@
 							Scientific Benchmarking
 						</v-btn>
 					</v-col>
-					<v-col align="center">
+					<v-col align="center" class="mt-10 mt-sm-0">
 						<v-avatar color="accent" size="62" class="mb-10">
 							<v-icon dark>$vuetify.icons.values.observatory</v-icon>
 						</v-avatar>
