@@ -48,7 +48,7 @@
 		"@nuxtjs/eslint-module": "^3.0.2",
 		"@nuxtjs/pwa": "^3.3.5",
 		"@nuxtjs/stylelint-module": "^4.1.0",
-		"@nuxtjs/svg": "^0.3.0",
+		"@nuxtjs/svg": "^0.4.0",
 		"@nuxtjs/vuetify": "^1.12.3",
 		"@socheatsok78/storybook-addon-vuetify": "^0.1.9",
 		"@storybook/addon-actions": "^6.4.14",
