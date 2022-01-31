@@ -2,7 +2,7 @@
 FROM node:14 as node
 WORKDIR /app
 #define env vars
-ARG OEB_LEGACY_ANGULAR_URI=https://dev-openebench.bsc.es/
+ARG OEB_LEGACY_ANGULAR_URI=https://legacy.dev2-openebench.bsc.es/
 ARG VRE_URI=https://dev-openebench.bsc.es/vre/home/
 ARG OBSERVATORY_URI=https://observatory.openebench.bsc.es
 ARG REST_API_URL=https://dev-openebench.bsc.es/monitor/rest/
