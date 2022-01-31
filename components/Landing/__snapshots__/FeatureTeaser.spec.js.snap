@@ -12,7 +12,7 @@ exports[`FeatureTeaser should match snapshot 1`] = `
         methods
       </p> <a class=\\"v-btn v-btn--router v-btn--text theme--light v-size--default primary--text\\"><span class=\\"v-btn__content\\"> Learn More </span></a>
     </div>
-    <div align=\\"center\\" class=\\"col-md-4 col-12\\">
+    <div align=\\"center\\" class=\\"mt-10 mt-md-0 col-md-4 col-12\\">
       <div class=\\"v-avatar mb-10 primary\\" style=\\"height: 62px; min-width: 62px; width: 62px;\\"><i aria-hidden=\\"true\\" class=\\"v-icon notranslate mdi mdi-clipboard-list-outline theme--dark\\" style=\\"font-size: 36px;\\"></i></div>
       <h2 class=\\"text-h6\\">Tools &amp; Metrics</h2>
       <p class=\\"body-1\\">
@@ -20,7 +20,7 @@ exports[`FeatureTeaser should match snapshot 1`] = `
         workflows
       </p> <a class=\\"v-btn v-btn--router v-btn--text theme--light v-size--default primary--text\\"><span class=\\"v-btn__content\\"> Learn More </span></a>
     </div>
-    <div align=\\"center\\" class=\\"col-md-4 col-12\\">
+    <div align=\\"center\\" class=\\"mt-10 mt-md-0 col-md-4 col-12\\">
       <div class=\\"v-avatar mb-10 primary\\" style=\\"height: 62px; min-width: 62px; width: 62px;\\"><i aria-hidden=\\"true\\" class=\\"v-icon notranslate material-icons theme--dark\\">$vuetify.icons.values.observatory</i></div>
       <h2 class=\\"text-h6\\">Tools Observatory</h2>
       <p class=\\"body-1\\">

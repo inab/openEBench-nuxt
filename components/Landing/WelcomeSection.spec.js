@@ -16,6 +16,11 @@ describe('WelcomeSection', () => {
 		expect(wrapper).toBeTruthy();
 	});
 
+	it('should match snapshot', () => {
+		const wrapper = factory();
+		expect(wrapper.html()).toMatchSnapshot();
+	});
+
 	it('contains illustration image on large devices and hides it on small devices', async () => {
 		const wrapper = factory();
 
