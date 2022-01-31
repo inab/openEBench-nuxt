@@ -42,6 +42,7 @@ export default {
 						community.logo = link.uri;
 					}
 				});
+				if (community.status === 'abandoned') community.status = 'inactive';
 				return community;
 			});
 		},
