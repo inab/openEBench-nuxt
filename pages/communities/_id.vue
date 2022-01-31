@@ -11,7 +11,7 @@
 <script>
 export default {
 	name: 'ScientificBenchmarkingPage',
-	layout: 'embedIframe',
+	layout: 'embedIframeFullWidth',
 	data() {
 		return {
 			hostName: this.$config.OEB_LEGACY_ANGULAR_URI,
