@@ -39,9 +39,9 @@ export default {
 		return {
 			images: [
 				{
-					title: 'Elixir AAI',
+					title: 'Elixir',
 					href: 'https://elixir-europe.org/',
-					src: require('~/static/images/partners/elixir-aai.png'),
+					src: require('~/static/images/partners/elixir.png'),
 				},
 				{
 					title: 'Eucan Image',
