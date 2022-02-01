@@ -7,6 +7,7 @@ const factory = () => {
 		mocks: {
 			$vuetify: { breakpoint: {} },
 		},
+		propsData: { img: 'someimage' },
 	});
 };
 
