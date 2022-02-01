@@ -1,14 +1,26 @@
-import Community from '~/components/Cards/CommunityCard';
+import CommunityCard from '~/components/Cards/CommunityCard';
 import MockCommunity from '~/test/unit/mockData/Community';
 
 export default {
 	title: 'Molecules/Communities/CommunityCard',
 };
 
-export const CommunityCard = (_args, { argTypes }) => ({
-	components: { Community },
+export const CommunityCards = (_args, { argTypes }) => ({
+	components: { CommunityCard },
 	props: Object.keys(argTypes),
-	template: '<community v-bind="$props"/>',
+	template: `
+	<v-row>
+		<v-col cols=4>
+			<community-card v-bind="$props"/>
+		</v-col>
+		<v-col cols=4>
+			<community-card v-bind="$props"/>
+		</v-col>
+		<v-col cols=4>
+			<community-card v-bind="$props"/>
+		</v-col>
+	</v-row>
+	`,
 });
 
-CommunityCard.args = MockCommunity;
+CommunityCards.args = MockCommunity;

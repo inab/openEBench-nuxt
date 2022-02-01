@@ -17,7 +17,7 @@
 			</v-chip>
 		</v-card-text>
 		<v-card-actions>
-			<v-btn text color="primary" :to="to"> Open </v-btn>
+			<v-btn text color="primary" :to="to"> Open Community </v-btn>
 			<v-spacer />
 			<v-menu bottom left>
 				<template #activator="{ on, attrs }">
