@@ -12,7 +12,7 @@
 			</span>
 		</v-card-subtitle>
 		<v-card-text align="bottom" class="mt-auto">
-			<v-chip small :color="statusChipColor" :text-color="statusChipTextColor">
+			<v-chip small>
 				{{ status }}
 			</v-chip>
 		</v-card-text>
@@ -78,22 +78,6 @@ export default {
 		},
 		to() {
 			return 'communities/' + this._id;
-		},
-		statusChipColor() {
-			switch (this.status) {
-				case 'active':
-					return 'success';
-				default:
-					return '';
-			}
-		},
-		statusChipTextColor() {
-			switch (this.status) {
-				case 'active':
-					return 'white';
-				default:
-					return '';
-			}
 		},
 	},
 };
