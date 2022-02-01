@@ -1,11 +1,9 @@
 <template>
 	<div>
 		<v-row>
-			<v-col cols="auto">
+			<v-col class="d-flex" cols="auto">
 				<slot name="header" />
-			</v-col>
-			<v-col align="right">
-				<v-btn color="accent" icon @click="expand = !expand">
+				<v-btn class="ml-2" color="primary" icon @click="expand = !expand">
 					<v-icon>{{
 						expand
 							? 'mdi-chevron-up-circle-outline'
