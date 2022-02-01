@@ -67,6 +67,7 @@
 import { mapGetters } from 'vuex';
 import CommunityCard from '~/components/Cards/CommunityCard';
 import InfoSlider from '~/components/Molecules/InfoSlider';
+
 export default {
 	name: 'CommunitiesPage',
 	components: {
