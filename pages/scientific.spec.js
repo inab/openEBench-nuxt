@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import Communities from './communities.vue';
+import Communities from './scientific.vue';
 
 const factory = () => {
 	return mount(Communities, {
