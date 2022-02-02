@@ -9,7 +9,7 @@
 			{{ acronym }}
 		</v-card-title>
 		<v-card-subtitle class="text-left">
-			<span class="caption text--muted">
+			<span class="text--muted">
 				{{ name }}
 			</span>
 		</v-card-subtitle>
