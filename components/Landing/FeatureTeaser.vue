@@ -23,7 +23,7 @@
 					Individually browse metrics of bioinformatics tools, server and
 					workflows
 				</p>
-				<v-btn text color="primary" to="/tools"> Learn More </v-btn>
+				<v-btn text color="primary" to="/tool"> Learn More </v-btn>
 			</v-col>
 			<v-col align="center" cols="12" md="4" class="mt-10 mt-md-0">
 				<v-avatar color="primary" size="62" class="mb-10">

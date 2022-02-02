@@ -7,7 +7,7 @@ const menuEntries = [
 	},
 	{
 		title: 'Tools',
-		to: '/tools',
+		to: '/tool',
 	},
 	{
 		title: 'Stats',
