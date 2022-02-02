@@ -17,7 +17,7 @@
 
 <script>
 export default {
-	name: 'ScientificBenchmarkingPage',
+	name: 'CommunityParticipantPage',
 	layout: 'embedIframeFullWidth',
 	data() {
 		return {
