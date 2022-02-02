@@ -79,7 +79,7 @@ export default {
 			return this.links.filter((link) => link.comment !== '@logo');
 		},
 		to() {
-			return 'communities/' + this._id;
+			return '/scientific/' + this._id;
 		},
 	},
 };
