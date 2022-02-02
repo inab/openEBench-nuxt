@@ -90,7 +90,8 @@ export default {
 
 	publicRuntimeConfig: {
 		OEB_LEGACY_ANGULAR_URI:
-			process.env.OEB_LEGACY_ANGULAR_URI || 'https://dev-openebench.bsc.es/',
+			process.env.OEB_LEGACY_ANGULAR_URI ||
+			'https://legacy.dev-openebench.bsc.es/',
 		VRE_URI: process.env.VRE_URI || 'https://dev-openebench.bsc.es/vre/home/',
 		OBSERVATORY_URI:
 			process.env.OBSERVATORY_URI || 'https://observatory.openebench.bsc.es',
