@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import Tools from './tools.vue';
+import Tools from './index.vue';
 
 const factory = (query) => {
 	return mount(Tools, {
@@ -11,7 +11,7 @@ const emptyQueryMock = { query: { search: '' } };
 const queryString = 'search_query';
 const queryMock = { query: { search: queryString } };
 
-describe('Tools', () => {
+describe('Tools Index', () => {
 	it('is instantiated', () => {
 		const wrapper = factory(emptyQueryMock);
 		expect(wrapper).toBeTruthy();
