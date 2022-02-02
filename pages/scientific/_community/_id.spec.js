@@ -5,13 +5,13 @@ const factory = () => {
 	return mount(Community, {
 		...createComponentMocks({}),
 		mocks: {
-			$route: { params: { id: 'TESTID' } },
+			$route: { params: { community: 'TESTCOMMUNITY', id: 'TESTID' } },
 			$config: { OEB_LEGACY_ANGULAR_URI: 'https://jest-openebench.bsc.es/' },
 		},
 	});
 };
 
-describe('Community', () => {
+describe('Community Participant', () => {
 	it('is instantiated', () => {
 		const wrapper = factory();
 		expect(wrapper).toBeTruthy();
@@ -21,7 +21,7 @@ describe('Community', () => {
 		const wrapper = factory();
 		expect(wrapper.vm.hostName).toBe('https://jest-openebench.bsc.es/');
 		expect(wrapper.find('iframe').attributes('src')).toBe(
-			'https://jest-openebench.bsc.es/scientific/TESTID'
+			'https://jest-openebench.bsc.es/scientific/TESTCOMMUNITY/TESTID'
 		);
 	});
 });
