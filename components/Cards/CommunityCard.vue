@@ -1,7 +1,9 @@
 <template>
 	<v-card class="d-flex flex-column">
 		<div class="pa-5">
-			<v-img :src="logo" contain max-height="100" height="100" />
+			<nuxt-link :to="to">
+				<v-img :src="logo" contain max-height="100" height="100" />
+			</nuxt-link>
 		</div>
 		<v-card-title class="justify-center text-truncate inline-flex">
 			{{ acronym }}
