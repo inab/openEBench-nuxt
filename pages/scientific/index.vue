@@ -69,7 +69,7 @@ import CommunityCard from '~/components/Cards/CommunityCard';
 import InfoSlider from '~/components/Molecules/InfoSlider';
 
 export default {
-	name: 'CommunitiesPage',
+	name: 'CommunitiesIndexPage',
 	components: {
 		CommunityCard,
 		InfoSlider,
