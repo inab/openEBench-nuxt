@@ -16,7 +16,7 @@
 							As a Researcher I want to search for benchmarking communities and
 							results
 						</p>
-						<v-btn color="primary" class="mt-10" large block to="communities">
+						<v-btn color="primary" class="mt-10" large block to="/scientific">
 							Scientific Benchmarking
 						</v-btn>
 					</v-col>
@@ -28,7 +28,7 @@
 							As a Developer I want to learn how to develop sustainable research
 							tools
 						</p>
-						<v-btn color="accent" class="mt-10" large block to="observatory">
+						<v-btn color="accent" class="mt-10" large block to="/observatory">
 							Tools Observatory
 						</v-btn>
 					</v-col>

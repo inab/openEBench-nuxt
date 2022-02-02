@@ -1,8 +1,8 @@
 import { mount } from '@vue/test-utils';
-import Community from './_id.vue';
+import Tool from './_id.vue';
 
 const factory = () => {
-	return mount(Community, {
+	return mount(Tool, {
 		...createComponentMocks({}),
 		mocks: {
 			$route: { params: { id: 'TESTID' } },
@@ -11,7 +11,7 @@ const factory = () => {
 	});
 };
 
-describe('Community', () => {
+describe('Tool', () => {
 	it('is instantiated', () => {
 		const wrapper = factory();
 		expect(wrapper).toBeTruthy();
@@ -21,7 +21,7 @@ describe('Community', () => {
 		const wrapper = factory();
 		expect(wrapper.vm.hostName).toBe('https://jest-openebench.bsc.es/');
 		expect(wrapper.find('iframe').attributes('src')).toBe(
-			'https://jest-openebench.bsc.es/scientific/TESTID'
+			'https://jest-openebench.bsc.es/tool/TESTID'
 		);
 	});
 });
