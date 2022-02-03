@@ -10,6 +10,8 @@
 </template>
 
 <script>
+import debounce from 'lodash.debounce';
+
 // eslint-disable-next-line camelcase
 import { run_summary_table } from '@inb/oeb-classification-table';
 
@@ -24,14 +26,24 @@ export default {
 			required: false,
 			default: () => [],
 		},
+		debounce: {
+			type: Number,
+			required: false,
+			default: 1000,
+		},
 	},
 	watch: {
 		filterArray() {
-			// look into debounce
-			this.$nextTick(() => {
-				this.loadTable();
-			});
+			this.debouncedFilterArrayWatch();
 		},
+	},
+	created() {
+		this.debouncedFilterArrayWatch = debounce(() => {
+			this.loadTable();
+		}, this.debounce);
+	},
+	beforeDestroy() {
+		this.debouncedFilterArrayWatch.cancel();
 	},
 	mounted() {
 		this.loadTable();
@@ -40,10 +52,7 @@ export default {
 		loadTable() {
 			try {
 				run_summary_table(this.filterArray, this.id);
-			} catch (error) {
-				// eslint-disable-next-line no-console
-				console.error(error);
-			}
+			} catch (error) {}
 		},
 	},
 };
