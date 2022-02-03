@@ -3,9 +3,9 @@
 		:id="id"
 		class="oeb-table caption"
 		:data-benchmarkingevent="id"
-		data-mode="dev-openebench"
-		data-api-url="https://dev-openebench.bsc.es/api/scientific/graphql"
-		data-bench-event-api-url="https://dev-openebench.bsc.es/rest/bench_event_api"
+		:data-mode="dataMode"
+		:data-api-url="apiUrl"
+		:data-bench-event-api-url="benchEventApiUrl"
 	/>
 </template>
 
@@ -31,6 +31,17 @@ export default {
 			required: false,
 			default: 1000,
 		},
+	},
+	data() {
+		return {
+			apiUrl: this.$config
+				? this.$config.SCIENTIFIC_SERVICE_URL + '/graphql'
+				: 'https://dev-openebench.bsc.es/api/scientific/graphql',
+			benchEventApiUrl: this.$config
+				? this.$config.BENCH_EVENT_API_URL
+				: 'https://dev-openebench.bsc.es/rest/bench_event_api',
+			dataMode: this.$config ? this.$config.ENVIRONMENT : 'dev-openebench',
+		};
 	},
 	watch: {
 		filterArray() {
