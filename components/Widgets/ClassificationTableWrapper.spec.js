@@ -2,8 +2,6 @@ import { mount } from '@vue/test-utils';
 import ClassificationTableWrapper from './ClassificationTableWrapper.vue';
 
 jest.mock('@inb/oeb-classification-table');
-
-// eslint-disable-next-line import/first
 // eslint-disable-next-line
 import { run_summary_table } from '@inb/oeb-classification-table';
 
