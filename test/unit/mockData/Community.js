@@ -5,6 +5,8 @@ export default {
 	description:
 		"TransBioNet's working group #1 (WG1) focuses in Standards and Benchmarking of different relevant aspects for translational bioinformatics. In this context, there is a concerted effort on benchmarking structural variants, especially, on copy number variations (CNVs)",
 	status: 'active',
+	benchmarkingEvents: [{ _id: 'OEBE0050000000' }],
+	referenceTools: [],
 	links: [
 		{
 			uri: 'https://inb-elixir.es/transbionet',
