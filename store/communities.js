@@ -24,6 +24,9 @@ export default {
 							comment
 							label
 						}
+						benchmarkingEvents {
+							_id
+						}
 					}
 				  }
 				`,

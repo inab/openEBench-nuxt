@@ -56,6 +56,8 @@
 					:logo="community.logo"
 					:links="community.links"
 					:status="community.status"
+					:benchmarking-events="community.benchmarkingEvents"
+					:reference-tools="[]"
 					class="fill-height"
 				/>
 			</v-col>

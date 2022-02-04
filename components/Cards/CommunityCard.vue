@@ -14,6 +14,26 @@
 			</span>
 		</v-card-subtitle>
 		<v-card-text align="bottom" class="mt-auto">
+			<v-chip
+				v-if="benchmarkingEvents.length > 0"
+				small
+				color="primary"
+				text-color="white"
+			>
+				<v-icon small class="mr-1">mdi-calendar-star</v-icon>
+				{{ benchmarkingEvents.length }}
+				{{ 'Events' | pluralize(benchmarkingEvents.length) }}
+			</v-chip>
+			<v-chip
+				v-if="referenceTools.length > 0"
+				small
+				color="primary"
+				text-color="white"
+			>
+				<v-icon small class="mr-1">mdi-tire</v-icon>
+				{{ referenceTools.length }}
+				{{ 'Tools' | pluralize(referenceTools.length) }}
+			</v-chip>
 			<v-chip small>
 				{{ status }}
 			</v-chip>
@@ -71,6 +91,14 @@ export default {
 		},
 		status: {
 			type: String,
+			required: true,
+		},
+		benchmarkingEvents: {
+			type: Array,
+			required: true,
+		},
+		referenceTools: {
+			type: Array,
 			required: true,
 		},
 	},

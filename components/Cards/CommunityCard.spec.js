@@ -17,4 +17,9 @@ describe('CommunityCard', () => {
 		const wrapper = factory(MockCommunity);
 		expect(wrapper).toBeTruthy();
 	});
+
+	it('should match snapshot', () => {
+		const wrapper = factory(MockCommunity);
+		expect(wrapper.html()).toMatchSnapshot();
+	});
 });
