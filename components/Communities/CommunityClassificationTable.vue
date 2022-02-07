@@ -18,7 +18,7 @@
 			:search="search"
 			item-key="_id"
 			show-select
-			:loading="$store.state.communities.loading"
+			:loading="$store.state.communities.loading.events"
 			class="mt-5"
 		>
 			<template #top>
@@ -46,12 +46,19 @@ export default {
 	components: { ClassificationTable },
 	props: {
 		event: { type: Object, required: true },
-		headers: { type: Array, required: true },
 	},
 	data() {
 		return {
 			search: '',
 			selected: [],
+			headers: [
+				{
+					text: 'Acronym',
+					align: 'start',
+					value: 'acronym',
+				},
+				{ text: 'Name', value: 'name' },
+			],
 		};
 	},
 	computed: {
