@@ -9,7 +9,9 @@
 							<h4 class="text-h3">
 								<animated-number :value="communityCount" />
 							</h4>
-							<h6 class="title">Communities</h6>
+							<h6 class="title">
+								{{ 'Community' | pluralize(communityCount) }}
+							</h6>
 						</div>
 					</div>
 				</v-col>
@@ -20,7 +22,9 @@
 							<h4 class="text-h3">
 								<animated-number :value="toolsCount" />
 							</h4>
-							<h6 class="title">Tools</h6>
+							<h6 class="title">
+								{{ 'Tool' | pluralize(toolsCount) }}
+							</h6>
 						</div>
 					</div>
 				</v-col>
@@ -31,7 +35,9 @@
 							<h4 class="text-h3 font-weight-normal">
 								<animated-number :value="resourcesCount" />
 							</h4>
-							<h6 class="title">Resources</h6>
+							<h6 class="title">
+								{{ 'Resource' | pluralize(resourcesCount) }}
+							</h6>
 						</div>
 					</div>
 				</v-col>
@@ -42,7 +48,7 @@
 							<h4 class="text-h3 font-weight-normal">
 								<animated-number :value="1" />
 							</h4>
-							<h6 class="title">Projects</h6>
+							<h6 class="title">{{ 'Project Space' | pluralize(1) }}</h6>
 						</div>
 					</div>
 				</v-col>

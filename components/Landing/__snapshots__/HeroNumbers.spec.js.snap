@@ -10,7 +10,9 @@ exports[`HeroNumbers should match snapshot 1`] = `
             <h4 class=\\"text-h3\\">
               <animated-number-stub value=\\"5\\"></animated-number-stub>
             </h4>
-            <h6 class=\\"title\\">Communities</h6>
+            <h6 class=\\"title\\">
+              Community
+            </h6>
           </div>
         </div>
       </v-col-stub>
@@ -20,7 +22,9 @@ exports[`HeroNumbers should match snapshot 1`] = `
             <h4 class=\\"text-h3\\">
               <animated-number-stub value=\\"10\\"></animated-number-stub>
             </h4>
-            <h6 class=\\"title\\">Tools</h6>
+            <h6 class=\\"title\\">
+              Tool
+            </h6>
           </div>
         </div>
       </v-col-stub>
@@ -30,7 +34,9 @@ exports[`HeroNumbers should match snapshot 1`] = `
             <h4 class=\\"text-h3 font-weight-normal\\">
               <animated-number-stub value=\\"20\\"></animated-number-stub>
             </h4>
-            <h6 class=\\"title\\">Resources</h6>
+            <h6 class=\\"title\\">
+              Resource
+            </h6>
           </div>
         </div>
       </v-col-stub>
@@ -40,7 +46,7 @@ exports[`HeroNumbers should match snapshot 1`] = `
             <h4 class=\\"text-h3 font-weight-normal\\">
               <animated-number-stub value=\\"1\\"></animated-number-stub>
             </h4>
-            <h6 class=\\"title\\">Projects</h6>
+            <h6 class=\\"title\\">Project Space</h6>
           </div>
         </div>
       </v-col-stub>
