@@ -6,6 +6,10 @@
 				<Nuxt />
 			</v-container>
 		</v-main>
+		<v-footer class="justify-center" app>
+			Made with <v-icon color="red">mdi-heart</v-icon>
+			in Barcelona.
+		</v-footer>
 	</v-app>
 </template>
 

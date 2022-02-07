@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WelcomeSection should match snapshot 1`] = `
+"<div class=\\"container\\">
+  <div column=\\"\\" class=\\"row align-end\\">
+    <div align=\\"left\\" class=\\"col-sm-12 col-md-7 offset-md-0 col\\">
+      <h1 class=\\"text-h3 mb-4 primary--text\\">Welcome to OpenEBench</h1>
+      <h2 class=\\"text-subtitle-1 mb-5\\">
+        The ELIXIR gateway to benchmarking communities, software monitoring,
+        and quality metrics for life sciences tools and workflows.
+      </h2>
+      <div class=\\"row mt-0 mt-lg-5 align-end\\">
+        <div align=\\"center\\" class=\\"col\\">
+          <div class=\\"v-avatar mb-10 primary\\" style=\\"height: 62px; min-width: 62px; width: 62px;\\"><i aria-hidden=\\"true\\" class=\\"v-icon notranslate material-icons theme--dark\\">$vuetify.icons.values.benchmark</i></div>
+          <p>
+            As a Researcher I want to search for benchmarking communities and
+            results
+          </p> <a class=\\"mt-10 v-btn v-btn--block v-btn--is-elevated v-btn--has-bg v-btn--router theme--light v-size--large primary\\"><span class=\\"v-btn__content\\">
+						Scientific Benchmarking
+					</span></a>
+        </div>
+        <div align=\\"center\\" class=\\"mt-10 mt-sm-0 col\\">
+          <div class=\\"v-avatar mb-10 accent\\" style=\\"height: 62px; min-width: 62px; width: 62px;\\"><i aria-hidden=\\"true\\" class=\\"v-icon notranslate material-icons theme--dark\\">$vuetify.icons.values.observatory</i></div>
+          <p>
+            As a Developer I want to learn how to develop sustainable research
+            tools
+          </p> <a class=\\"mt-10 v-btn v-btn--block v-btn--is-elevated v-btn--has-bg v-btn--router theme--light v-size--large accent\\"><span class=\\"v-btn__content\\">
+						Tools Observatory
+					</span></a>
+        </div>
+      </div>
+    </div>
+    <div class=\\"col-md-5 col\\">
+      <div class=\\"v-image v-responsive theme--light\\" style=\\"max-height: 350px;\\">
+        <div class=\\"v-responsive__content\\"></div>
+      </div>
+    </div>
+  </div>
+</div>"
+`;

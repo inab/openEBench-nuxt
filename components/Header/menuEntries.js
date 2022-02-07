@@ -3,11 +3,11 @@
 const menuEntries = [
 	{
 		title: 'Benchmarking',
-		to: '/communities',
+		to: '/scientific',
 	},
 	{
 		title: 'Tools',
-		to: '/tools',
+		to: '/tool',
 	},
 	{
 		title: 'Stats',

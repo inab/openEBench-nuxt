@@ -1,5 +1,5 @@
 <template>
-	<fragment>
+	<div>
 		<welcome-section class="mt-13" />
 		<hero-searchbar class="mt-10" />
 		<feature-teaser id="feature-teaser" class="landing-mt-24" />
@@ -9,15 +9,13 @@
 			:resources-count="resourcesCount"
 			class="mt-16"
 		/>
-		<news-cards class="landing-mt-24" />
-		<logo-slider class="landing-mt-24 mb-16" />
-	</fragment>
+		<logo-slider class="landing-mt-24" />
+	</div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
 import FeatureTeaser from '~/components/Landing/FeatureTeaser';
-import NewsCards from '~/components/Landing/NewsCards';
 import LogoSlider from '~/components/Landing/LogoSlider';
 import WelcomeSection from '~/components/Landing/WelcomeSection';
 import HeroSearchbar from '~/components/Landing/HeroSearchbar';
@@ -27,7 +25,6 @@ export default {
 	name: 'IndexPage',
 	components: {
 		FeatureTeaser,
-		NewsCards,
 		LogoSlider,
 		WelcomeSection,
 		HeroSearchbar,

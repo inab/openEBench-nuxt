@@ -1,16 +1,17 @@
 <template>
 	<iframe
-		:src="hostName + `scientific`"
+		:src="hostName + `tool/` + $route.params.id"
 		width="100%"
 		height="100%"
 		frameborder="0"
+		class="mt-5"
 	>
 	</iframe>
 </template>
 
 <script>
 export default {
-	name: 'ScientificBenchmarkingPage',
+	name: 'ToolsMonitoringIdPage',
 	layout: 'embedIframe',
 	data() {
 		return {

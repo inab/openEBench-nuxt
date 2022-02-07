@@ -1,0 +1,31 @@
+services:
+  oeb-nuxt-prod:
+    image: dbruechner/openebench-nuxt-prod
+    restart: always
+    ports:
+      - 4000:80
+  oeb-nuxt-dev:
+    image: dbruechner/openebench-nuxt-dev
+    restart: always
+    ports:
+      - 4001:80
+  oeb-nuxt-dev2:
+    image: dbruechner/openebench-nuxt-dev2
+    restart: always
+    ports:
+      - 4002:80
+  oeb-legacy-prod:
+    image: dbruechner/openebench-frontend-prod
+    restart: always
+    ports:
+      - 4200:80
+  oeb-legacy-dev:
+    image: dbruechner/openebench-frontend-dev
+    restart: always
+    ports:
+      - 4201:80
+  oeb-legacy-dev2:
+    image: dbruechner/openebench-frontend-dev-2
+    restart: always
+    ports:
+      - 4202:80

@@ -4,6 +4,10 @@
 		<v-main>
 			<Nuxt />
 		</v-main>
+		<v-footer class="justify-center" app>
+			Made with <v-icon color="red">mdi-heart</v-icon>
+			in Barcelona.
+		</v-footer>
 	</v-app>
 </template>
 
@@ -11,7 +15,7 @@
 import HeaderMenu from '~/components/Header/HeaderMenu.vue';
 
 export default {
-	name: 'EmbedIframe',
+	name: 'EmbedIframeFullWidth',
 	components: {
 		'main-header': HeaderMenu,
 	},

@@ -29,7 +29,7 @@ describe('HeroSearchbar', () => {
 		submitBtn.trigger('click');
 
 		expect(wrapper.vm.$router.push).toHaveBeenCalledWith({
-			path: 'tools',
+			path: '/tool',
 			query: { search: '' },
 		});
 	});
@@ -43,7 +43,7 @@ describe('HeroSearchbar', () => {
 		await searchInput.trigger('keyup.enter');
 
 		expect(wrapper.vm.$router.push).toHaveBeenCalledWith({
-			path: 'tools',
+			path: '/tool',
 			query: { search: '' },
 		});
 	});
@@ -61,7 +61,7 @@ describe('HeroSearchbar', () => {
 		submitBtn.trigger('click');
 
 		expect(wrapper.vm.$router.push).toHaveBeenCalledWith({
-			path: 'tools',
+			path: '/tool',
 			query: { search: 'Random Tool Name' },
 		});
 	});
