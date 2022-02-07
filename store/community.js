@@ -1,6 +1,7 @@
 export default {
 	state: () => {
 		return {
+			community: {},
 			events: [],
 			datasets: [],
 			tools: [],
@@ -8,11 +9,38 @@ export default {
 				events: false,
 				tools: false,
 				datasets: false,
+				community: false,
 			},
 		};
 	},
 
 	actions: {
+		async getCommunity({ commit }, params) {
+			commit('setLoading', { community: true });
+			const response = await this.$graphql.$post('/graphql', {
+				query: `
+					query getCommunities($community_id: String!) {
+						getCommunities(communityFilters: {id: $community_id}) {
+						name
+						acronym
+						description
+						status
+						links {
+							uri
+							comment
+							__typename
+						}
+						__typename
+						}
+					}
+				`,
+				variables: {
+					community_id: params.id,
+				},
+			});
+			commit('setCommunity', response.data);
+			commit('setLoading', { community: false });
+		},
 		async getBenchmarkingEvents({ commit }, params) {
 			commit('setLoading', { events: true });
 			const response = await this.$graphql.$post('/graphql', {
@@ -92,6 +120,9 @@ export default {
 	},
 
 	mutations: {
+		setCommunity(state, payload) {
+			state.community = payload.getCommunities[0];
+		},
 		setEvents(state, payload) {
 			state.events = payload.getBenchmarkingEvents;
 		},
@@ -107,6 +138,7 @@ export default {
 	},
 
 	getters: {
+		community: (state) => state.community,
 		events: (state) => state.events,
 		datasets: (state) => state.datasets,
 		tools: (state) => state.tools,

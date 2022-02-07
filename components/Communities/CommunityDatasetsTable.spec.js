@@ -1,8 +1,8 @@
 import { shallowMount } from '@vue/test-utils';
-import CommunityToolsTable from './CommunityToolsTable.vue';
+import CommunityDatasetsTable from './CommunityDatasetsTable.vue';
 
 const factory = () => {
-	return shallowMount(CommunityToolsTable, {
+	return shallowMount(CommunityDatasetsTable, {
 		...createComponentMocks({}),
 		mocks: {
 			$vuetify: { breakpoint: {} },
@@ -11,7 +11,7 @@ const factory = () => {
 	});
 };
 
-describe('CommunityToolsTable', () => {
+describe('CommunityDatasetsTable', () => {
 	it('is instantiated', () => {
 		const wrapper = factory();
 		expect(wrapper).toBeTruthy();

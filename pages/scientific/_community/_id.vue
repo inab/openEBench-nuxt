@@ -1,5 +1,5 @@
 <template>
-	<fragment>
+	<div>
 		<nuxt-link to="./">Go Back</nuxt-link>
 		<iframe
 			:src="
@@ -15,7 +15,7 @@
 			class="mt-5"
 		>
 		</iframe>
-	</fragment>
+	</div>
 </template>
 
 <script>
