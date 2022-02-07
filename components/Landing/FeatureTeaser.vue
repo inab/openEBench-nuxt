@@ -1,7 +1,6 @@
 <template>
 	<v-container>
-		<h2 class="text-h4 mb-15">What does OpenEBench offer?</h2>
-
+		<h2 class="text-h4 mb-15">Learn more about OpenEBench</h2>
 		<v-row>
 			<v-col align="center" cols="12" md="3" class="mt-10 mt-md-0">
 				<v-avatar color="primary" size="62" class="mb-10">
