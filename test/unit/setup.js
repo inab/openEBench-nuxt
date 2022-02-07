@@ -39,6 +39,8 @@ global.createComponentMocks = ({ mocks, store }) => {
 	const localVue = vueTestUtils.createLocalVue();
 	const returnOptions = { localVue };
 
+	localVue.filter('pluralize', (data) => data);
+
 	if (store) {
 		localVue.use(Vuex);
 		const storeModules = store || {};
