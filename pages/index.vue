@@ -2,6 +2,7 @@
 	<div>
 		<welcome-section class="mt-13" />
 		<hero-searchbar class="mt-10" />
+		<key-features class="landing-mt-24" />
 		<feature-teaser id="feature-teaser" class="landing-mt-24" />
 		<hero-numbers
 			:community-count="communitiesCount"
@@ -20,6 +21,7 @@ import LogoSlider from '~/components/Landing/LogoSlider';
 import WelcomeSection from '~/components/Landing/WelcomeSection';
 import HeroSearchbar from '~/components/Landing/HeroSearchbar';
 import HeroNumbers from '~/components/Landing/HeroNumbers';
+import KeyFeatures from '~/components/Landing/KeyFeatures';
 
 export default {
 	name: 'IndexPage',
@@ -29,6 +31,7 @@ export default {
 		WelcomeSection,
 		HeroSearchbar,
 		HeroNumbers,
+		KeyFeatures,
 	},
 	computed: {
 		...mapGetters('dashboard', {

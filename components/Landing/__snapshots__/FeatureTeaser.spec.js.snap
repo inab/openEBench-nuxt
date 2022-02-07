@@ -2,7 +2,7 @@
 
 exports[`FeatureTeaser should match snapshot 1`] = `
 "<div class=\\"container\\">
-  <h2 class=\\"text-h4 mb-15\\">What does OpenEBench offer?</h2>
+  <h2 class=\\"text-h4 mb-15\\">Learn more about OpenEBench</h2>
   <div class=\\"row\\">
     <div align=\\"center\\" class=\\"col-md-4 col-12\\">
       <div>
