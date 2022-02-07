@@ -9,7 +9,6 @@ export default {
 	actions: {
 		async getBenchmarkingEvents({ commit }, params) {
 			commit('setLoading', true);
-			console.log(params.id);
 			const response = await this.$graphql.$post('/graphql', {
 				query: `
 					query getBenchmarkingEvents($community_id: String!) {
@@ -24,6 +23,7 @@ export default {
 						challenges {
 							_id
 							name
+							acronym
 							url
 							__typename
 						}
@@ -35,8 +35,6 @@ export default {
 					community_id: params.id,
 				},
 			});
-			console.log(response);
-
 			commit('setEvents', response.data);
 			commit('setLoading', false);
 		},

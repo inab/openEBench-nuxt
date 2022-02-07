@@ -1,18 +1,21 @@
 <template>
-	<iframe
-		:src="
-			hostName +
-			`scientific/` +
-			$route.params.community +
-			`/` +
-			$route.params.id
-		"
-		width="100%"
-		height="100%"
-		frameborder="0"
-		class="mt-5"
-	>
-	</iframe>
+	<fragment>
+		<nuxt-link to="./">Go Back</nuxt-link>
+		<iframe
+			:src="
+				hostName +
+				`scientific/` +
+				$route.params.community +
+				`/` +
+				$route.params.id
+			"
+			width="100%"
+			height="100%"
+			frameborder="0"
+			class="mt-5"
+		>
+		</iframe>
+	</fragment>
 </template>
 
 <script>
