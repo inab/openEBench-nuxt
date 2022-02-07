@@ -9,6 +9,7 @@ const factory = () => {
 			},
 		}),
 		stubs: ['fragment', 'nuxt-link', 'router-link'],
+		propsData: { vreHref: 'somehref' },
 	});
 };
 
