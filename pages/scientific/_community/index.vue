@@ -49,7 +49,7 @@
 					type="table"
 				></v-skeleton-loader>
 
-				<v-expansion-panels v-else accordion mandatory>
+				<v-expansion-panels v-else accordion mandatory class="mt-1">
 					<v-expansion-panel v-for="(event, index) in events" :key="index">
 						<v-expansion-panel-header>
 							<v-row no-gutters>
