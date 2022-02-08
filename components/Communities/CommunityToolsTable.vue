@@ -8,7 +8,6 @@
 			:search="search"
 			item-key="_id"
 			:loading="$store.state.communities.loading.tools"
-			class="mt-5"
 		>
 			<template #top>
 				<v-text-field

@@ -21,6 +21,7 @@ export default {
 				query: `
 					query getCommunities($community_id: String!) {
 						getCommunities(communityFilters: {id: $community_id}) {
+						_id
 						name
 						acronym
 						description
@@ -121,7 +122,14 @@ export default {
 
 	mutations: {
 		setCommunity(state, payload) {
-			state.community = payload.getCommunities[0];
+			state.community = payload.getCommunities.map((community) => {
+				community.links.forEach((link) => {
+					if (link.comment === '@logo') {
+						community.logo = link.uri;
+					}
+				});
+				return community;
+			})[0];
 		},
 		setEvents(state, payload) {
 			state.events = payload.getBenchmarkingEvents;

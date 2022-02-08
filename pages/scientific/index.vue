@@ -79,7 +79,6 @@ export default {
 	data() {
 		return {
 			illustration: require('~/static/images/illustrations/lab_community.png'),
-			expand: true,
 		};
 	},
 	computed: {
@@ -88,7 +87,8 @@ export default {
 		}),
 	},
 	mounted() {
-		this.$store.dispatch('communities/getCommunities');
+		if (this.$store.state.communities.list.length === 0)
+			this.$store.dispatch('communities/getCommunities');
 	},
 };
 </script>
