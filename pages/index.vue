@@ -2,13 +2,14 @@
 	<div>
 		<welcome-section class="mt-13" />
 		<hero-searchbar class="mt-10" />
-		<key-features class="landing-mt-24" />
-		<feature-teaser id="feature-teaser" class="landing-mt-24" />
+		<key-features class="landing-mt-24 mb-16" />
+		<section class="grey lighten-5">
+			<feature-teaser id="feature-teaser" class="pt-16 pb-16" />
+		</section>
 		<hero-numbers
 			:community-count="communitiesCount"
 			:tools-count="toolsCount"
 			:resources-count="resourcesCount"
-			class="mt-16"
 		/>
 		<logo-slider class="landing-mt-24" />
 	</div>
