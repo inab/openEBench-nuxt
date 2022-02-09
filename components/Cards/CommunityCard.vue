@@ -17,8 +17,8 @@
 			<v-chip
 				v-if="benchmarkingEvents.length > 0"
 				small
-				color="primary"
-				text-color="white"
+				color="primary lighten-5"
+				text-color="black"
 			>
 				<v-icon small class="mr-1">mdi-calendar-star</v-icon>
 				{{ benchmarkingEvents.length }}
@@ -27,8 +27,8 @@
 			<v-chip
 				v-if="referenceTools.length > 0"
 				small
-				color="primary"
-				text-color="white"
+				color="primary lighten-5"
+				text-color="black"
 			>
 				<v-icon small class="mr-1">mdi-tire</v-icon>
 				{{ referenceTools.length }}
