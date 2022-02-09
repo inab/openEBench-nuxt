@@ -15,7 +15,7 @@
 import HeaderMenu from '~/components/Header/HeaderMenu.vue';
 
 export default {
-	name: 'EmbedIframe',
+	name: 'EmbedIframeFullWidth',
 	components: {
 		'main-header': HeaderMenu,
 	},

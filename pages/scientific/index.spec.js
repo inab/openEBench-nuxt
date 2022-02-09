@@ -1,23 +1,40 @@
-import { mount } from '@vue/test-utils';
-import Communities from './index.vue';
+import { shallowMount } from '@vue/test-utils';
+import Index from './index.vue';
 
-const factory = () => {
-	return mount(Communities, {
-		...createComponentMocks({}),
+const factory = (mockStore) => {
+	return shallowMount(Index, {
+		...createComponentMocks({ store: mockStore }),
 	});
 };
 
-describe('Communities', () => {
+describe('Index.vue', () => {
+	afterEach(() => {
+		jest.clearAllMocks();
+	});
+
+	const mockStore = {
+		communities: {
+			getters: {
+				communitiesList: () => {
+					return [];
+				},
+			},
+			actions: {
+				getCommunities: jest.fn(),
+			},
+			state: () => {
+				return { loading: false };
+			},
+		},
+	};
+
 	it('is instantiated', () => {
-		const wrapper = factory();
+		const wrapper = factory(mockStore);
 		expect(wrapper).toBeTruthy();
 	});
 
-	it('sets the iframe url according to env variable', () => {
-		const wrapper = factory();
-		expect(wrapper.vm.hostName).toBe('https://jest-openebench.bsc.es/');
-		expect(wrapper.find('iframe').attributes('src')).toBe(
-			'https://jest-openebench.bsc.es/scientific'
-		);
+	it('should call store actions', () => {
+		factory(mockStore);
+		expect(mockStore.communities.actions.getCommunities).toHaveBeenCalled();
 	});
 });

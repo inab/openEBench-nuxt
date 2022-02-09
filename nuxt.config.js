@@ -39,7 +39,11 @@ export default {
 	css: ['~/assets/main'],
 
 	// Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-	plugins: ['~/plugins/vue-fragment-config', '~/plugins/graphql'],
+	plugins: [
+		'~/plugins/vue-fragment-config',
+		'~/plugins/graphql',
+		'~/plugins/pluralize',
+	],
 
 	// Auto import components: https://go.nuxtjs.dev/config-components
 	components: true,
@@ -89,6 +93,7 @@ export default {
 	},
 
 	publicRuntimeConfig: {
+		ENVIRONMENT: process.env.ENVIRONMENT || 'dev-openebench',
 		OEB_LEGACY_ANGULAR_URI:
 			process.env.OEB_LEGACY_ANGULAR_URI ||
 			'https://legacy.dev-openebench.bsc.es/',
@@ -98,6 +103,9 @@ export default {
 		SCIENTIFIC_SERVICE_URL:
 			process.env.SCIENTIFIC_SERVICE_URL ||
 			'https://dev-openebench.bsc.es/api/scientific',
+		BENCH_EVENT_API_URL:
+			process.env.BENCH_EVENT_API_URL ||
+			'https://dev-openebench.bsc.es/rest/bench_event_api',
 		axios: {
 			// See https://github.com/nuxt-community/axios-module#options
 			baseURL:
