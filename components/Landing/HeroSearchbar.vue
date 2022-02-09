@@ -49,7 +49,7 @@ export default {
 	methods: {
 		handleSubmit() {
 			this.$router.push({
-				path: 'tools',
+				path: '/tool',
 				query: { search: this.input },
 			});
 		},
