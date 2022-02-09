@@ -34,7 +34,7 @@
 				{{ referenceTools.length }}
 				{{ 'Tools' | pluralize(referenceTools.length) }}
 			</v-chip>
-			<v-chip small>
+			<v-chip small :color="statusChipColor" :text-color="statusChipTextColor">
 				{{ status }}
 			</v-chip>
 		</v-card-text>
@@ -108,6 +108,22 @@ export default {
 		},
 		to() {
 			return '/scientific/' + this._id;
+		},
+		statusChipColor() {
+			switch (this.status) {
+				case 'active':
+					return 'light-green lighten-4';
+				default:
+					return '';
+			}
+		},
+		statusChipTextColor() {
+			switch (this.status) {
+				case 'active':
+					return 'black';
+				default:
+					return '';
+			}
 		},
 	},
 };
