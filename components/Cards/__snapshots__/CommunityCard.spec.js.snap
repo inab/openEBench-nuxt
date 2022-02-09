@@ -12,13 +12,13 @@ exports[`CommunityCard should match snapshot 1`] = `
 			Translational Bioinformatics Network - CNVs Benchmarking Group
 		</span></v-card-subtitle-stub>
   <v-card-text-stub tag=\\"div\\" align=\\"bottom\\" class=\\"mt-auto\\">
-    <v-chip-stub color=\\"primary\\" small=\\"true\\" activeclass=\\"\\" tag=\\"span\\" active=\\"true\\" closeicon=\\"$delete\\" closelabel=\\"$vuetify.close\\" filtericon=\\"$complete\\" textcolor=\\"white\\">
+    <v-chip-stub color=\\"primary lighten-5\\" small=\\"true\\" activeclass=\\"\\" tag=\\"span\\" active=\\"true\\" closeicon=\\"$delete\\" closelabel=\\"$vuetify.close\\" filtericon=\\"$complete\\" textcolor=\\"black\\">
       <v-icon-stub small=\\"\\" class=\\"mr-1\\">mdi-calendar-star</v-icon-stub>
       1
       Events
     </v-chip-stub>
     <!---->
-    <v-chip-stub small=\\"true\\" activeclass=\\"\\" tag=\\"span\\" active=\\"true\\" closeicon=\\"$delete\\" closelabel=\\"$vuetify.close\\" filtericon=\\"$complete\\">
+    <v-chip-stub color=\\"light-green lighten-4\\" small=\\"true\\" activeclass=\\"\\" tag=\\"span\\" active=\\"true\\" closeicon=\\"$delete\\" closelabel=\\"$vuetify.close\\" filtericon=\\"$complete\\" textcolor=\\"black\\">
       active
     </v-chip-stub>
   </v-card-text-stub>
