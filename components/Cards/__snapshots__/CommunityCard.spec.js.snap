@@ -61,7 +61,7 @@ exports[`CommunityCard should match snapshot for incubating community 1`] = `
       Events
     </v-chip-stub>
     <!---->
-    <v-chip-stub color=\\"\\" small=\\"true\\" activeclass=\\"\\" tag=\\"span\\" active=\\"true\\" closeicon=\\"$delete\\" closelabel=\\"$vuetify.close\\" filtericon=\\"$complete\\" textcolor=\\"\\">
+    <v-chip-stub color=\\"cyan lighten-4\\" small=\\"true\\" activeclass=\\"\\" tag=\\"span\\" active=\\"true\\" closeicon=\\"$delete\\" closelabel=\\"$vuetify.close\\" filtericon=\\"$complete\\" textcolor=\\"black\\">
       incubating
     </v-chip-stub>
   </v-card-text-stub>

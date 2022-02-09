@@ -113,6 +113,8 @@ export default {
 			switch (this.status) {
 				case 'active':
 					return 'light-green lighten-4';
+				case 'incubating':
+					return 'cyan lighten-4';
 				default:
 					return '';
 			}
@@ -120,6 +122,8 @@ export default {
 		statusChipTextColor() {
 			switch (this.status) {
 				case 'active':
+					return 'black';
+				case 'incubating':
 					return 'black';
 				default:
 					return '';
