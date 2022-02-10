@@ -8,7 +8,7 @@
 			show-arrows="always"
 		>
 			<v-slide-item
-				v-for="(image, index) in images"
+				v-for="(image, index) in shuffledImages"
 				:key="`logoslider_` + index"
 				disabled
 			>
@@ -70,6 +70,12 @@ export default {
 				},
 			],
 		};
+	},
+	computed: {
+		shuffledImages() {
+			// eslint-disable-next-line vue/no-side-effects-in-computed-properties
+			return this.images.sort(() => Math.random() - 0.5);
+		},
 	},
 	methods: {
 		visibilityChanged(isVisible) {

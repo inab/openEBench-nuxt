@@ -15,9 +15,4 @@ describe('LogoSlider', () => {
 		const wrapper = factory();
 		expect(wrapper).toBeTruthy();
 	});
-
-	it('should match snapshot', () => {
-		const wrapper = factory();
-		expect(wrapper.html()).toMatchSnapshot();
-	});
 });

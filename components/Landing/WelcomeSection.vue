@@ -46,7 +46,7 @@ export default {
 	name: 'WelcomeSection',
 	data() {
 		return {
-			illustration: require('~/static/images/illustrations/chart-person.png'),
+			illustration: require('~/static/images/illustrations/chart-person.svg'),
 		};
 	},
 };
