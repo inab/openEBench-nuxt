@@ -18,7 +18,7 @@ export default {
 			hostName: this.$config.OEB_LEGACY_ANGULAR_URI,
 			breadcrumbs: [
 				{
-					text: 'Dashboard',
+					text: 'Home',
 					disabled: false,
 					exact: true,
 					to: '/',

@@ -2,10 +2,9 @@
 	<v-app>
 		<main-header :vre-href="$config.VRE_URI" />
 		<v-main>
+			<breadcrumbs-bar v-if="breadcrumbs.length > 0" :items="breadcrumbs" />
 			<v-container class="v-container-custom">
-				<breadcrumbs-bar v-if="breadcrumbs.length > 0" :items="breadcrumbs" />
 				<Nuxt @emitBreadcrumbs="handleBreadcrumbs" />
-				<Nuxt />
 			</v-container>
 		</v-main>
 		<v-footer class="justify-center" app>
