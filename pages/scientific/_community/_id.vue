@@ -1,6 +1,5 @@
 <template>
 	<div class="fill-height">
-		<nuxt-link to="./">Go Back</nuxt-link>
 		<iframe
 			:src="
 				hostName +
