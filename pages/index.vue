@@ -2,7 +2,7 @@
 	<div>
 		<welcome-section class="mt-13" />
 		<hero-searchbar class="mt-10" />
-		<key-features class="landing-mt-24 mb-16" />
+		<key-features id="key-features" class="landing-mt-24 mb-16" />
 		<section class="grey lighten-5">
 			<feature-teaser id="feature-teaser" class="pt-16 pb-16" />
 		</section>

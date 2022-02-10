@@ -31,7 +31,7 @@
 			<a
 				class="scroll-down"
 				aria-label="Scroll to feature overview"
-				@click="$vuetify.goTo('#feature-teaser')"
+				@click="$vuetify.goTo('#key-features')"
 			/>
 		</v-container>
 	</v-parallax>
