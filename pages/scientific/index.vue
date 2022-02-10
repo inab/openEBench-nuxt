@@ -1,6 +1,6 @@
 <template>
 	<v-container fluid>
-		<v-container>
+		<v-container class="pt-0">
 			<h1 class="text-h4 mt-13 mb-5 hidden-md-and-up">
 				Benchmarking Communities
 			</h1>
