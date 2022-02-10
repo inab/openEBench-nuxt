@@ -14,7 +14,22 @@ export default {
 	data() {
 		return {
 			hostName: this.$config.OEB_LEGACY_ANGULAR_URI,
+			breadcrumbs: [
+				{
+					text: 'Home',
+					disabled: false,
+					exact: true,
+					to: '/',
+				},
+				{
+					text: 'About',
+					disabled: true,
+				},
+			],
 		};
+	},
+	mounted() {
+		this.$parent.$emit('emitBreadcrumbs', this.breadcrumbs);
 	},
 };
 </script>

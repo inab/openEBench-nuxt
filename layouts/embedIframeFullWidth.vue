@@ -2,7 +2,8 @@
 	<v-app>
 		<main-header :vre-href="$config.VRE_URI" />
 		<v-main>
-			<Nuxt />
+			<breadcrumbs-bar v-if="breadcrumbs.length > 0" :items="breadcrumbs" />
+			<Nuxt @emitBreadcrumbs="handleBreadcrumbs" />
 		</v-main>
 		<v-footer class="justify-center" app>
 			Made with <v-icon color="red">mdi-heart</v-icon>
@@ -13,17 +14,34 @@
 
 <script>
 import HeaderMenu from '~/components/Header/HeaderMenu.vue';
+import BreadcrumbsBar from '~/components/Molecules/BreadcrumbsBar';
 
 export default {
 	name: 'EmbedIframeFullWidth',
 	components: {
 		'main-header': HeaderMenu,
+		BreadcrumbsBar,
+	},
+	data() {
+		return {
+			breadcrumbs: [],
+		};
 	},
 	head() {
 		return {
 			title:
 				'OpenEBench - The ELIXIR gateway to benchmarking communities, software monitoring, and quality metrics',
 		};
+	},
+	watch: {
+		$route() {
+			this.breadcrumbs = [];
+		},
+	},
+	methods: {
+		handleBreadcrumbs(value) {
+			this.breadcrumbs = value;
+		},
 	},
 };
 </script>
