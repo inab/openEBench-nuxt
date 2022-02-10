@@ -16,7 +16,22 @@ export default {
 		return {
 			hostName: this.$config.OEB_LEGACY_ANGULAR_URI,
 			query: this.$route.query.search ? this.$route.query.search : '',
+			breadcrumbs: [
+				{
+					text: 'Home',
+					disabled: false,
+					exact: true,
+					to: '/',
+				},
+				{
+					text: 'Tools',
+					disabled: true,
+				},
+			],
 		};
+	},
+	mounted() {
+		this.$parent.$emit('emitBreadcrumbs', this.breadcrumbs);
 	},
 };
 </script>
