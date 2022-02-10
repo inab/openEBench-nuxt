@@ -2,8 +2,9 @@
 	<v-app>
 		<main-header :vre-href="$config.VRE_URI" />
 		<v-main>
+			<breadcrumbs-bar v-if="breadcrumbs.length > 0" :items="breadcrumbs" />
 			<v-container class="v-container-custom">
-				<Nuxt />
+				<Nuxt @emitBreadcrumbs="handleBreadcrumbs" />
 			</v-container>
 		</v-main>
 		<v-footer class="justify-center" app>
@@ -15,17 +16,34 @@
 
 <script>
 import HeaderMenu from '~/components/Header/HeaderMenu.vue';
+import BreadcrumbsBar from '~/components/Molecules/BreadcrumbsBar';
 
 export default {
 	name: 'EmbedIframe',
 	components: {
 		'main-header': HeaderMenu,
+		BreadcrumbsBar,
+	},
+	data() {
+		return {
+			breadcrumbs: [],
+		};
 	},
 	head() {
 		return {
 			title:
 				'OpenEBench - The ELIXIR gateway to benchmarking communities, software monitoring, and quality metrics',
 		};
+	},
+	watch: {
+		$route() {
+			this.breadcrumbs = [];
+		},
+	},
+	methods: {
+		handleBreadcrumbs(value) {
+			this.breadcrumbs = value;
+		},
 	},
 };
 </script>
