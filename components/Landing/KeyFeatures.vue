@@ -21,7 +21,7 @@
 				</div>
 				<div class="text-h5 d-flex align-center mt-10">
 					<v-icon color="accent" class="mr-3" x-large>mdi-check-circle</v-icon
-					>Project Spaces
+					>Quantitative Tools Monitoring
 				</div>
 			</v-col>
 		</v-row>
