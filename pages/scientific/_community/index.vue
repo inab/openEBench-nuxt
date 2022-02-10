@@ -3,11 +3,11 @@
 		<v-container>
 			<v-skeleton-loader
 				v-if="$store.state.community.loading.community"
-				class="mb-5 mt-10"
+				class="mb-5"
 				type="heading, list-item-three-line"
 			/>
 			<div v-else>
-				<h1 class="text-h4 mb-5 mt-10 d-flex">
+				<h1 class="text-h4 mb-5 d-flex">
 					{{ community.acronym }} - {{ community.name }}
 					<v-btn class="ml-2" color="primary" icon @click="expand = !expand">
 						<v-icon>{{
@@ -110,6 +110,25 @@ export default {
 		return {
 			illustration: require('~/static/images/illustrations/lab_community.png'),
 			expand: true,
+			breadcrumbs: [
+				{
+					text: 'Dashboard',
+					disabled: false,
+					exact: true,
+					to: '/',
+				},
+				{
+					text: 'Benchmarking Communities',
+					disabled: false,
+					exact: true,
+					to: '/scientific',
+				},
+				{
+					text: this.$route.params.community,
+					disabled: true,
+					to: this.$route.params.community,
+				},
+			],
 		};
 	},
 	computed: {
@@ -124,6 +143,8 @@ export default {
 		},
 	},
 	mounted() {
+		this.$parent.$emit('emitBreadcrumbs', this.breadcrumbs);
+
 		if (
 			this.$store.state.community.community._id !== this.$route.params.community
 		) {
