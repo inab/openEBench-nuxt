@@ -1,7 +1,5 @@
 <template>
 	<v-container fluid>
-		<breadcrumbs-bar :items="breadcrumbs" />
-
 		<v-container>
 			<h1 class="text-h4 mt-13 mb-5 hidden-md-and-up">
 				Benchmarking Communities
@@ -73,14 +71,12 @@
 import { mapGetters } from 'vuex';
 import CommunityCard from '~/components/Cards/CommunityCard';
 import InfoSlider from '~/components/Molecules/InfoSlider';
-import BreadcrumbsBar from '~/components/Molecules/BreadcrumbsBar';
 
 export default {
 	name: 'CommunitiesIndexPage',
 	components: {
 		CommunityCard,
 		InfoSlider,
-		BreadcrumbsBar,
 	},
 	data() {
 		return {
@@ -88,7 +84,7 @@ export default {
 			expand: true,
 			breadcrumbs: [
 				{
-					text: 'Dashboard',
+					text: 'Home',
 					disabled: false,
 					exact: true,
 					to: '/',
@@ -106,6 +102,7 @@ export default {
 		}),
 	},
 	mounted() {
+		this.$parent.$emit('emitBreadcrumbs', this.breadcrumbs);
 		this.$store.dispatch('communities/getCommunities');
 	},
 };

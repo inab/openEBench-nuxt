@@ -1,24 +1,17 @@
 <template>
 	<v-container fluid class="fill-height fill-width">
-		<breadcrumbs-bar :items="breadcrumbs" />
 		<iframe
 			:src="hostName + `scientific/` + $route.params.community"
 			width="100%"
 			height="100%"
 			frameborder="0"
-			class="mt-5"
 		/>
 	</v-container>
 </template>
 
 <script>
-import BreadcrumbsBar from '~/components/Molecules/BreadcrumbsBar';
-
 export default {
 	name: 'CommunityPage',
-	components: {
-		BreadcrumbsBar,
-	},
 	layout: 'embedIframeFullWidth',
 	data() {
 		return {
@@ -43,6 +36,9 @@ export default {
 				},
 			],
 		};
+	},
+	mounted() {
+		this.$parent.$emit('emitBreadcrumbs', this.breadcrumbs);
 	},
 };
 </script>
