@@ -29,7 +29,26 @@
 				</v-expand-transition>
 			</div>
 		</v-container>
-		<v-tabs :vertical="vertical" class="mt-10">
+		<h2 v-if="currentEvent" class="text-h6 d-flex mt-10 mb-5">
+			<span>{{ currentEvent.name }}</span>
+			<v-btn class="ml-2" color="primary" icon>
+				<v-menu>
+					<template #activator="{ on, attrs }">
+						<v-btn icon color="primary" v-bind="attrs" v-on="on">
+							<v-icon>mdi-chevron-down</v-icon>
+						</v-btn>
+					</template>
+					<v-list>
+						<v-list-item v-for="(event, index) in events" :key="index" link>
+							<v-list-item-title @click="handleEventSelection(event)">{{
+								event.name
+							}}</v-list-item-title>
+						</v-list-item>
+					</v-list>
+				</v-menu>
+			</v-btn>
+		</h2>
+		<v-tabs :vertical="vertical">
 			<v-tab class="justify-start">
 				<v-icon left> mdi-view-dashboard </v-icon>
 				Results
@@ -44,25 +63,6 @@
 			</v-tab>
 
 			<v-tab-item class="ma-5 mt-5 mt-md-0" :transition="false">
-				<h2 v-if="currentEvent" class="text-h6 mb-5 d-flex">
-					<span>{{ currentEvent.name }}</span>
-					<v-btn class="ml-2" color="primary" icon>
-						<v-menu>
-							<template #activator="{ on, attrs }">
-								<v-btn icon color="primary" v-bind="attrs" v-on="on">
-									<v-icon>mdi-chevron-down</v-icon>
-								</v-btn>
-							</template>
-							<v-list>
-								<v-list-item v-for="(event, index) in events" :key="index" link>
-									<v-list-item-title @click="handleEventSelection(event)">{{
-										event.name
-									}}</v-list-item-title>
-								</v-list-item>
-							</v-list>
-						</v-menu>
-					</v-btn>
-				</h2>
 				<v-skeleton-loader
 					v-if="$store.state.community.loading.events"
 					type="table"
@@ -85,7 +85,7 @@
 					/>
 				</v-card>
 			</v-tab-item>
-			<v-tab-item class="ma-5 mt-0" :transition="false">
+			<v-tab-item class="ma-5 mt-5 mt-md-0" :transition="false">
 				<v-card outlined>
 					<v-skeleton-loader
 						v-if="$store.state.community.loading.datasets"
@@ -94,7 +94,7 @@
 					<community-datasets-table v-else :datasets="datasets" />
 				</v-card>
 			</v-tab-item>
-			<v-tab-item class="ma-5 mt-0" :transition="false">
+			<v-tab-item class="ma-5 mt-5 mt-md-0" :transition="false">
 				<v-card outlined>
 					<v-skeleton-loader
 						v-if="$store.state.community.loading.tools"
