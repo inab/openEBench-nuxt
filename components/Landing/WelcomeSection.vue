@@ -12,7 +12,7 @@
 						<v-avatar color="primary" size="62" class="mb-10">
 							<v-icon dark>$vuetify.icons.values.benchmark</v-icon>
 						</v-avatar>
-						<p>
+						<p class="body-1">
 							As a Researcher I want to search for benchmarking communities and
 							results
 						</p>
@@ -24,7 +24,7 @@
 						<v-avatar color="accent" size="62" class="mb-10">
 							<v-icon dark>$vuetify.icons.values.observatory</v-icon>
 						</v-avatar>
-						<p>
+						<p class="body-1">
 							As a Developer I want to learn how to develop sustainable research
 							tools
 						</p>
