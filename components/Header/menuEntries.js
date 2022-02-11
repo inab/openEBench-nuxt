@@ -3,7 +3,7 @@
 const menuEntries = [
 	{
 		title: 'Benchmarking',
-		to: '/scientific',
+		to: '/benchmarking',
 	},
 	{
 		title: 'Tools',

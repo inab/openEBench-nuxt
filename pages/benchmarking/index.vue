@@ -91,7 +91,7 @@ export default {
 				},
 				{
 					text: 'Benchmarking Communities',
-					to: '/scientific',
+					to: '/benchmarking',
 				},
 			],
 		};
