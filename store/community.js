@@ -1,8 +1,10 @@
 export default {
+	namespaced: true,
 	state: () => {
 		return {
 			community: {},
 			events: [],
+			currentEvent: null,
 			datasets: [],
 			tools: [],
 			loading: {
@@ -70,6 +72,7 @@ export default {
 					community_id: params.id,
 				},
 			});
+			commit('setCurrentEvent', response.data.getBenchmarkingEvents[0]);
 			commit('setEvents', response.data);
 			commit('setLoading', { events: false });
 		},
@@ -134,6 +137,9 @@ export default {
 		setEvents(state, payload) {
 			state.events = payload.getBenchmarkingEvents;
 		},
+		setCurrentEvent(state, currentEvent) {
+			state.currentEvent = currentEvent;
+		},
 		setDatasets(state, payload) {
 			state.datasets = payload.getDatasets;
 		},
@@ -148,6 +154,7 @@ export default {
 	getters: {
 		community: (state) => state.community,
 		events: (state) => state.events,
+		currentEvent: (state) => state.currentEvent,
 		datasets: (state) => state.datasets,
 		tools: (state) => state.tools,
 	},

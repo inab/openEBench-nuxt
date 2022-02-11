@@ -44,35 +44,49 @@
 			</v-tab>
 
 			<v-tab-item class="ma-5 mt-5 mt-md-0" :transition="false">
+				<h2 v-if="currentEvent" class="text-h6 mb-5 d-flex">
+					<span>{{ currentEvent.name }}</span>
+					<v-btn class="ml-2" color="primary" icon>
+						<v-menu>
+							<template #activator="{ on, attrs }">
+								<v-btn icon color="primary" v-bind="attrs" v-on="on">
+									<v-icon>mdi-chevron-down</v-icon>
+								</v-btn>
+							</template>
+							<v-list>
+								<v-list-item v-for="(event, index) in events" :key="index" link>
+									<v-list-item-title @click="handleEventSelection(event)">{{
+										event.name
+									}}</v-list-item-title>
+								</v-list-item>
+							</v-list>
+						</v-menu>
+					</v-btn>
+				</h2>
 				<v-skeleton-loader
 					v-if="$store.state.community.loading.events"
 					type="table"
 				></v-skeleton-loader>
 
-				<v-expansion-panels v-else accordion mandatory class="mt-1">
-					<v-expansion-panel v-for="(event, index) in events" :key="index">
-						<v-expansion-panel-header>
-							<v-row no-gutters>
-								<v-col cols="8">
-									{{ event.name }}
-								</v-col>
-								<v-col cols="4" class="text--secondary">
-									{{ event.challenges.length }}
-									{{ 'Challenges' | pluralize(event.challenges.length) }}
-								</v-col>
-							</v-row>
-						</v-expansion-panel-header>
-						<v-expansion-panel-content>
-							<community-classification-table
-								:key="index + '_table'"
-								:event="event"
-							/>
-						</v-expansion-panel-content>
-					</v-expansion-panel>
-				</v-expansion-panels>
+				<v-card v-else-if="currentEvent" outlined class="mt-1 pa-5">
+					<v-row no-gutters>
+						<v-col cols="8">
+							{{ currentEvent.name }}
+						</v-col>
+						<v-col cols="4" class="text--secondary">
+							{{ currentEvent.challenges.length }}
+							{{ 'Challenges' | pluralize(currentEvent.challenges.length) }}
+						</v-col>
+					</v-row>
+					<community-classification-table
+						:key="currentEvent._id + '_table'"
+						class="mt-5"
+						:event="currentEvent"
+					/>
+				</v-card>
 			</v-tab-item>
 			<v-tab-item class="ma-5 mt-0" :transition="false">
-				<v-card>
+				<v-card outlined>
 					<v-skeleton-loader
 						v-if="$store.state.community.loading.datasets"
 						type="table"
@@ -81,7 +95,7 @@
 				</v-card>
 			</v-tab-item>
 			<v-tab-item class="ma-5 mt-0" :transition="false">
-				<v-card>
+				<v-card outlined>
 					<v-skeleton-loader
 						v-if="$store.state.community.loading.tools"
 						type="table"
@@ -134,6 +148,7 @@ export default {
 	computed: {
 		...mapGetters('community', {
 			events: 'events',
+			currentEvent: 'currentEvent',
 			datasets: 'datasets',
 			tools: 'tools',
 			community: 'community',
@@ -148,6 +163,8 @@ export default {
 		if (
 			this.$store.state.community.community._id !== this.$route.params.community
 		) {
+			this.$store.commit('community/setCurrentEvent', null);
+
 			this.$store.dispatch('community/getCommunity', {
 				id: this.$route.params.community,
 			});
@@ -161,6 +178,11 @@ export default {
 				id: this.$route.params.community,
 			});
 		}
+	},
+	methods: {
+		handleEventSelection(event) {
+			this.$store.commit('community/setCurrentEvent', event);
+		},
 	},
 };
 </script>
