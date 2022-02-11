@@ -12,7 +12,7 @@ exports[`WelcomeSection should match snapshot 1`] = `
       <div class=\\"row mt-0 mt-lg-5 align-end\\">
         <div align=\\"center\\" class=\\"col\\">
           <div class=\\"v-avatar mb-10 primary\\" style=\\"height: 62px; min-width: 62px; width: 62px;\\"><i aria-hidden=\\"true\\" class=\\"v-icon notranslate material-icons theme--dark\\">$vuetify.icons.values.benchmark</i></div>
-          <p>
+          <p class=\\"body-1\\">
             As a Researcher I want to search for benchmarking communities and
             results
           </p> <a class=\\"mt-10 v-btn v-btn--block v-btn--is-elevated v-btn--has-bg v-btn--router theme--light v-size--large primary\\"><span class=\\"v-btn__content\\">
@@ -21,7 +21,7 @@ exports[`WelcomeSection should match snapshot 1`] = `
         </div>
         <div align=\\"center\\" class=\\"mt-10 mt-sm-0 col\\">
           <div class=\\"v-avatar mb-10 accent\\" style=\\"height: 62px; min-width: 62px; width: 62px;\\"><i aria-hidden=\\"true\\" class=\\"v-icon notranslate material-icons theme--dark\\">$vuetify.icons.values.observatory</i></div>
-          <p>
+          <p class=\\"body-1\\">
             As a Developer I want to learn how to develop sustainable research
             tools
           </p> <a class=\\"mt-10 v-btn v-btn--block v-btn--is-elevated v-btn--has-bg v-btn--router theme--light v-size--large accent\\"><span class=\\"v-btn__content\\">

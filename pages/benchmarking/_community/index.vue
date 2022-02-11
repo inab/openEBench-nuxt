@@ -27,7 +27,7 @@ export default {
 					text: 'Benchmarking Communities',
 					disabled: false,
 					exact: true,
-					to: '/scientific',
+					to: '/benchmarking',
 				},
 				{
 					text: this.$route.params.community,

@@ -23,7 +23,7 @@ BreadcrumbsBarComponent.args = {
 			text: 'Benchmarking Communities',
 			disabled: false,
 			exact: true,
-			to: '/scientific',
+			to: '/benchmarking',
 		},
 		{
 			text: 'A Community',
