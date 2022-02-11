@@ -7,9 +7,9 @@
 				type="heading, list-item-three-line"
 			/>
 			<div v-else>
-				<h1 class="text-h4 mb-5 d-flex">
+				<h1 class="text-h4 mb-5 d-flex headline" @click="expand = !expand">
 					{{ community.acronym }} - {{ community.name }}
-					<v-btn class="ml-2" color="primary" icon @click="expand = !expand">
+					<v-btn class="ml-2" color="primary" icon>
 						<v-icon>{{
 							expand
 								? 'mdi-chevron-up-circle-outline'
@@ -168,5 +168,9 @@ export default {
 <style lang="scss">
 .v-tab {
 	text-transform: none !important;
+}
+
+.headline {
+	cursor: pointer;
 }
 </style>
