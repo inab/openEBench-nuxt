@@ -25,7 +25,7 @@
 						<v-col align="center" cols="2">
 							<v-img :src="community.logo" contain max-width="500" />
 						</v-col>
-						<v-col class="text-body-2" cols="10">
+						<v-col class="text-body-2 text--secondary" cols="10">
 							{{ community.description }}
 						</v-col>
 					</v-row>
@@ -174,10 +174,11 @@ export default {
 			}
 		},
 		currentEvent() {
-			this.$router.push({
-				path: this.$route.path,
-				query: { event: this.currentEvent._id },
-			});
+			if (this.currentEvent)
+				this.$router.push({
+					path: this.$route.path,
+					query: { event: this.currentEvent._id },
+				});
 		},
 	},
 	mounted() {
