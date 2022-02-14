@@ -7,7 +7,10 @@
 				type="heading, list-item-three-line"
 			/>
 			<div v-else>
-				<h1 class="text-h4 mb-5 d-flex headline" @click="expand = !expand">
+				<h1
+					class="text-h4 mb-5 d-flex text--clickable"
+					@click="expand = !expand"
+				>
 					{{ community.acronym }} - {{ community.name }}
 					<v-btn class="ml-2" color="primary" icon>
 						<v-icon>{{
@@ -29,26 +32,7 @@
 				</v-expand-transition>
 			</div>
 		</v-container>
-		<h2 v-if="currentEvent" class="text-h6 d-flex mt-10 mb-5">
-			<span>{{ currentEvent.name }}</span>
-			<v-btn class="ml-2" color="primary" icon>
-				<v-menu>
-					<template #activator="{ on, attrs }">
-						<v-btn icon color="primary" v-bind="attrs" v-on="on">
-							<v-icon>mdi-chevron-down</v-icon>
-						</v-btn>
-					</template>
-					<v-list>
-						<v-list-item v-for="(event, index) in events" :key="index" link>
-							<v-list-item-title @click="handleEventSelection(event)">{{
-								event.name
-							}}</v-list-item-title>
-						</v-list-item>
-					</v-list>
-				</v-menu>
-			</v-btn>
-		</h2>
-		<v-tabs :vertical="vertical">
+		<v-tabs :vertical="vertical" class="mt-10">
 			<v-tab class="justify-start">
 				<v-icon left> mdi-view-dashboard </v-icon>
 				Results
@@ -68,10 +52,33 @@
 					type="table"
 				></v-skeleton-loader>
 
-				<v-card v-else-if="currentEvent" outlined class="mt-1 pa-5">
-					<v-row no-gutters>
+				<v-card v-else-if="currentEvent" outlined class="pa-5">
+					<v-row no-gutters align="center">
 						<v-col cols="8">
-							{{ currentEvent.name }}
+							<h2 v-if="currentEvent" class="text-h6">
+								<v-menu auto>
+									<template #activator="{ on, attrs }">
+										<span class="text--clickable" v-bind="attrs" v-on="on">{{
+											currentEvent.name
+										}}</span>
+										<v-btn icon color="primary" v-bind="attrs" v-on="on">
+											<v-icon>mdi-chevron-down</v-icon>
+										</v-btn>
+									</template>
+									<v-list>
+										<v-list-item
+											v-for="(event, index) in events"
+											:key="index"
+											link
+											dense
+										>
+											<v-list-item-title @click="handleEventSelection(event)">{{
+												event.name
+											}}</v-list-item-title>
+										</v-list-item>
+									</v-list>
+								</v-menu>
+							</h2>
 						</v-col>
 						<v-col cols="4" class="text--secondary">
 							{{ currentEvent.challenges.length }}
@@ -192,7 +199,7 @@ export default {
 	text-transform: none !important;
 }
 
-.headline {
+.text--clickable {
 	cursor: pointer;
 }
 </style>

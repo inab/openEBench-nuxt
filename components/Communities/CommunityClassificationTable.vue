@@ -1,6 +1,7 @@
 <template>
 	<div>
 		<h2 class="text-h5 mb-5">Classification Table</h2>
+		<p class="caption">{{ event.name }}</p>
 		<classification-table
 			:id="event._id"
 			:key="event._id"
