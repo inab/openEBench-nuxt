@@ -58,9 +58,12 @@
 							<h2 v-if="currentEvent" class="text-h6">
 								<v-menu auto>
 									<template #activator="{ on, attrs }">
-										<span class="text--clickable" v-bind="attrs" v-on="on">{{
-											currentEvent.name
-										}}</span>
+										<span
+											class="text--clickable primary--text"
+											v-bind="attrs"
+											v-on="on"
+											>{{ currentEvent.name }}</span
+										>
 										<v-btn icon color="primary" v-bind="attrs" v-on="on">
 											<v-icon>mdi-chevron-down</v-icon>
 										</v-btn>
