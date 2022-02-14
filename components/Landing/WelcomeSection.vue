@@ -12,11 +12,11 @@
 						<v-avatar color="primary" size="62" class="mb-10">
 							<v-icon dark>$vuetify.icons.values.benchmark</v-icon>
 						</v-avatar>
-						<p>
+						<p class="body-1">
 							As a Researcher I want to search for benchmarking communities and
 							results
 						</p>
-						<v-btn color="primary" class="mt-10" large block to="/scientific">
+						<v-btn color="primary" class="mt-10" large block to="/benchmarking">
 							Scientific Benchmarking
 						</v-btn>
 					</v-col>
@@ -24,7 +24,7 @@
 						<v-avatar color="accent" size="62" class="mb-10">
 							<v-icon dark>$vuetify.icons.values.observatory</v-icon>
 						</v-avatar>
-						<p>
+						<p class="body-1">
 							As a Developer I want to learn how to develop sustainable research
 							tools
 						</p>
@@ -46,7 +46,7 @@ export default {
 	name: 'WelcomeSection',
 	data() {
 		return {
-			illustration: require('~/static/images/illustrations/chart-person.png'),
+			illustration: require('~/static/images/illustrations/chart-person.svg'),
 		};
 	},
 };

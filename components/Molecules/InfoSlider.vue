@@ -1,9 +1,9 @@
 <template>
 	<div>
 		<v-row>
-			<v-col class="d-flex" cols="auto">
-				<slot name="header" />
-				<v-btn class="ml-2" color="primary" icon @click="expand = !expand">
+			<v-col class="d-flex headline" cols="auto" @click="expand = !expand">
+				<slot name="header" icon />
+				<v-btn class="ml-2" color="primary" icon>
 					<v-icon>{{
 						expand
 							? 'mdi-chevron-up-circle-outline'
@@ -41,4 +41,8 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.headline {
+	cursor: pointer;
+}
+</style>
