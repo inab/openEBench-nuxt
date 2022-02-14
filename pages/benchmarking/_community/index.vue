@@ -52,7 +52,7 @@
 					type="table"
 				></v-skeleton-loader>
 
-				<v-card v-else-if="currentEvent" outlined class="pa-5">
+				<v-card v-else-if="currentEvent" outlined class="pa-5" elevation="2">
 					<v-row no-gutters align="center">
 						<v-col cols="8">
 							<h2 v-if="currentEvent" class="text-h6">
@@ -96,7 +96,7 @@
 				</v-card>
 			</v-tab-item>
 			<v-tab-item class="ma-5 mt-5 mt-md-0" :transition="false">
-				<v-card outlined>
+				<v-card outlined elevation="2">
 					<v-skeleton-loader
 						v-if="$store.state.community.loading.datasets"
 						type="table"
@@ -105,7 +105,7 @@
 				</v-card>
 			</v-tab-item>
 			<v-tab-item class="ma-5 mt-5 mt-md-0" :transition="false">
-				<v-card outlined>
+				<v-card outlined elevation="2">
 					<v-skeleton-loader
 						v-if="$store.state.community.loading.tools"
 						type="table"
