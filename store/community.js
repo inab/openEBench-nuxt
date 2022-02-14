@@ -154,6 +154,9 @@ export default {
 	getters: {
 		community: (state) => state.community,
 		events: (state) => state.events,
+		getEventById: (state) => (id) => {
+			return state.events.find((event) => event._id === id);
+		},
 		currentEvent: (state) => state.currentEvent,
 		datasets: (state) => state.datasets,
 		tools: (state) => state.tools,

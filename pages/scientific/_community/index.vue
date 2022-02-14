@@ -164,6 +164,22 @@ export default {
 			return this.$vuetify.breakpoint.mdAndUp;
 		},
 	},
+	watch: {
+		events() {
+			if (this.$route.query.event) {
+				const event = this.$store.getters['community/getEventById'](
+					this.$route.query.event
+				);
+				if (event) this.$store.commit('community/setCurrentEvent', event);
+			}
+		},
+		currentEvent() {
+			this.$router.push({
+				path: this.$route.path,
+				query: { event: this.currentEvent._id },
+			});
+		},
+	},
 	mounted() {
 		this.$parent.$emit('emitBreadcrumbs', this.breadcrumbs);
 
