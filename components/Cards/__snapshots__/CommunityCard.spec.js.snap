@@ -23,7 +23,7 @@ exports[`CommunityCard should match snapshot for active community 1`] = `
     </v-chip-stub>
   </v-card-text-stub>
   <v-card-actions-stub tag=\\"div\\">
-    <v-btn-stub color=\\"primary\\" tag=\\"button\\" activeclass=\\"\\" to=\\"/scientific/OEBC005\\" text=\\"true\\" type=\\"button\\"> Open Community </v-btn-stub>
+    <v-btn-stub color=\\"primary\\" tag=\\"button\\" activeclass=\\"\\" to=\\"/benchmarking/OEBC005\\" text=\\"true\\" type=\\"button\\"> Open Community </v-btn-stub>
     <v-spacer-stub tag=\\"div\\"></v-spacer-stub>
     <v-menu-stub opendelay=\\"0\\" closedelay=\\"0\\" bottom=\\"true\\" left=\\"true\\" openonclick=\\"true\\" contentclass=\\"\\" maxwidth=\\"auto\\" nudgebottom=\\"0\\" nudgeleft=\\"0\\" nudgeright=\\"0\\" nudgetop=\\"0\\" nudgewidth=\\"0\\" closeonclick=\\"true\\" closeoncontentclick=\\"true\\" maxheight=\\"auto\\" origin=\\"top left\\" transition=\\"v-menu-transition\\">
       <v-list-stub tag=\\"div\\">
@@ -66,7 +66,7 @@ exports[`CommunityCard should match snapshot for incubating community 1`] = `
     </v-chip-stub>
   </v-card-text-stub>
   <v-card-actions-stub tag=\\"div\\">
-    <v-btn-stub color=\\"primary\\" tag=\\"button\\" activeclass=\\"\\" to=\\"/scientific/OEBC005\\" text=\\"true\\" type=\\"button\\"> Open Community </v-btn-stub>
+    <v-btn-stub color=\\"primary\\" tag=\\"button\\" activeclass=\\"\\" to=\\"/benchmarking/OEBC005\\" text=\\"true\\" type=\\"button\\"> Open Community </v-btn-stub>
     <v-spacer-stub tag=\\"div\\"></v-spacer-stub>
     <v-menu-stub opendelay=\\"0\\" closedelay=\\"0\\" bottom=\\"true\\" left=\\"true\\" openonclick=\\"true\\" contentclass=\\"\\" maxwidth=\\"auto\\" nudgebottom=\\"0\\" nudgeleft=\\"0\\" nudgeright=\\"0\\" nudgetop=\\"0\\" nudgewidth=\\"0\\" closeonclick=\\"true\\" closeoncontentclick=\\"true\\" maxheight=\\"auto\\" origin=\\"top left\\" transition=\\"v-menu-transition\\">
       <v-list-stub tag=\\"div\\">
