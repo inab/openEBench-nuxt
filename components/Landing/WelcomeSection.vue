@@ -16,7 +16,7 @@
 							As a Researcher I want to search for benchmarking communities and
 							results
 						</p>
-						<v-btn color="primary" class="mt-10" large block to="/scientific">
+						<v-btn color="primary" class="mt-10" large block to="/benchmarking">
 							Scientific Benchmarking
 						</v-btn>
 					</v-col>

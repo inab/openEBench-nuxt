@@ -3,7 +3,7 @@
 		<h2 class="text-h4 mb-15">Learn more about OpenEBench</h2>
 		<v-row>
 			<v-col align="center" cols="12" md="4">
-				<feature-card to="scientific">
+				<feature-card to="benchmarking">
 					<template #icon>
 						<v-icon dark>$vuetify.icons.values.benchmark</v-icon>
 					</template>
