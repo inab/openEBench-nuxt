@@ -7,7 +7,10 @@
 				type="heading, list-item-three-line"
 			/>
 			<div v-else>
-				<h1 class="text-h4 mb-5 d-flex headline" @click="expand = !expand">
+				<h1
+					class="text-h4 mb-5 d-flex text--clickable"
+					@click="expand = !expand"
+				>
 					{{ community.acronym }} - {{ community.name }}
 					<v-btn class="ml-2" color="primary" icon>
 						<v-icon>{{
@@ -22,7 +25,7 @@
 						<v-col align="center" cols="2">
 							<v-img :src="community.logo" contain max-width="500" />
 						</v-col>
-						<v-col class="text-body-2" cols="10">
+						<v-col class="text-body-2 text--secondary" cols="10">
 							{{ community.description }}
 						</v-col>
 					</v-row>
@@ -49,30 +52,48 @@
 					type="table"
 				></v-skeleton-loader>
 
-				<v-expansion-panels v-else accordion mandatory class="mt-1">
-					<v-expansion-panel v-for="(event, index) in events" :key="index">
-						<v-expansion-panel-header>
-							<v-row no-gutters>
-								<v-col cols="8">
-									{{ event.name }}
-								</v-col>
-								<v-col cols="4" class="text--secondary">
-									{{ event.challenges.length }}
-									{{ 'Challenges' | pluralize(event.challenges.length) }}
-								</v-col>
-							</v-row>
-						</v-expansion-panel-header>
-						<v-expansion-panel-content>
-							<community-classification-table
-								:key="index + '_table'"
-								:event="event"
-							/>
-						</v-expansion-panel-content>
-					</v-expansion-panel>
-				</v-expansion-panels>
+				<v-card v-else-if="currentEvent" outlined class="pa-5">
+					<v-row no-gutters align="center">
+						<v-col cols="8">
+							<h2 v-if="currentEvent" class="text-h6">
+								<v-menu auto>
+									<template #activator="{ on, attrs }">
+										<span class="text--clickable" v-bind="attrs" v-on="on">{{
+											currentEvent.name
+										}}</span>
+										<v-btn icon color="primary" v-bind="attrs" v-on="on">
+											<v-icon>mdi-chevron-down</v-icon>
+										</v-btn>
+									</template>
+									<v-list>
+										<v-list-item
+											v-for="(event, index) in events"
+											:key="index"
+											link
+											dense
+										>
+											<v-list-item-title @click="handleEventSelection(event)">{{
+												event.name
+											}}</v-list-item-title>
+										</v-list-item>
+									</v-list>
+								</v-menu>
+							</h2>
+						</v-col>
+						<v-col cols="4" class="text--secondary">
+							{{ currentEvent.challenges.length }}
+							{{ 'Challenges' | pluralize(currentEvent.challenges.length) }}
+						</v-col>
+					</v-row>
+					<community-classification-table
+						:key="currentEvent._id + '_table'"
+						class="mt-5"
+						:event="currentEvent"
+					/>
+				</v-card>
 			</v-tab-item>
-			<v-tab-item class="ma-5 mt-0" :transition="false">
-				<v-card>
+			<v-tab-item class="ma-5 mt-5 mt-md-0" :transition="false">
+				<v-card outlined>
 					<v-skeleton-loader
 						v-if="$store.state.community.loading.datasets"
 						type="table"
@@ -80,8 +101,8 @@
 					<community-datasets-table v-else :datasets="datasets" />
 				</v-card>
 			</v-tab-item>
-			<v-tab-item class="ma-5 mt-0" :transition="false">
-				<v-card>
+			<v-tab-item class="ma-5 mt-5 mt-md-0" :transition="false">
+				<v-card outlined>
 					<v-skeleton-loader
 						v-if="$store.state.community.loading.tools"
 						type="table"
@@ -134,6 +155,7 @@ export default {
 	computed: {
 		...mapGetters('community', {
 			events: 'events',
+			currentEvent: 'currentEvent',
 			datasets: 'datasets',
 			tools: 'tools',
 			community: 'community',
@@ -142,12 +164,31 @@ export default {
 			return this.$vuetify.breakpoint.mdAndUp;
 		},
 	},
+	watch: {
+		events() {
+			if (this.$route.query.event) {
+				const event = this.$store.getters['community/getEventById'](
+					this.$route.query.event
+				);
+				if (event) this.$store.commit('community/setCurrentEvent', event);
+			}
+		},
+		currentEvent() {
+			if (this.currentEvent)
+				this.$router.push({
+					path: this.$route.path,
+					query: { event: this.currentEvent._id },
+				});
+		},
+	},
 	mounted() {
 		this.$parent.$emit('emitBreadcrumbs', this.breadcrumbs);
 
 		if (
 			this.$store.state.community.community._id !== this.$route.params.community
 		) {
+			this.$store.commit('community/setCurrentEvent', null);
+
 			this.$store.dispatch('community/getCommunity', {
 				id: this.$route.params.community,
 			});
@@ -162,6 +203,11 @@ export default {
 			});
 		}
 	},
+	methods: {
+		handleEventSelection(event) {
+			this.$store.commit('community/setCurrentEvent', event);
+		},
+	},
 };
 </script>
 
@@ -170,7 +216,7 @@ export default {
 	text-transform: none !important;
 }
 
-.headline {
+.text--clickable {
 	cursor: pointer;
 }
 </style>
