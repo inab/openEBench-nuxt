@@ -6,11 +6,8 @@
 				class="mb-5"
 				type="heading, list-item-three-line"
 			/>
-			<div v-else>
-				<h1
-					class="text-h4 mb-5 d-flex text--clickable"
-					@click="expand = !expand"
-				>
+			<div v-else class="text--clickable" @click="expand = !expand">
+				<h1 class="text-h4 mb-5 d-flex">
 					{{ community.acronym }} - {{ community.name }}
 					<v-btn class="ml-2" color="primary" icon>
 						<v-icon>{{
