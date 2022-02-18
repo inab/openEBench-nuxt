@@ -1,57 +1,64 @@
 <template>
 	<v-container>
-		<h2 class="text-h4 mb-15">Learn more about OpenEBench</h2>
+		<h2 class="text-h4 mb-15">What can you do in OpenEBench?</h2>
 		<v-row>
-			<v-col align="center" cols="12" md="3" class="mt-10 mt-md-0">
-				<v-avatar color="primary" size="62" class="mb-10">
-					<v-icon dark>$vuetify.icons.values.benchmark</v-icon>
-				</v-avatar>
-				<h2 class="text-h6">Benchmarks</h2>
-				<p class="body-1">
-					Explore benchmarks of the scientific performance of bioinformatics
-					methods
-				</p>
-				<v-btn text color="primary" to="/benchmarking"> Learn More </v-btn>
+			<v-col align="center" cols="12" md="3">
+				<feature-card to="benchmarking">
+					<template #icon>
+						<v-icon dark>$vuetify.icons.values.benchmark</v-icon>
+					</template>
+					<template #title> Benchmarks </template>
+					<template #description
+						>Explore benchmarks of the scientific performance of bioinformatics
+						methods</template
+					>
+				</feature-card>
 			</v-col>
 			<v-col align="center" cols="12" md="3" class="mt-10 mt-md-0">
-				<v-avatar color="primary" size="62" class="mb-10">
-					<v-icon large dark>mdi-clipboard-list-outline</v-icon>
-				</v-avatar>
-				<h2 class="text-h6">Tools & Metrics</h2>
-				<p class="body-1">
-					Individually browse metrics of bioinformatics tools, server and
-					workflows
-				</p>
-				<v-btn text color="primary" to="/tool"> Learn More </v-btn>
+				<feature-card to="tool">
+					<template #icon>
+						<v-icon large dark>mdi-clipboard-list-outline</v-icon>
+					</template>
+					<template #title> Tools & Metrics </template>
+					<template #description
+						>Individually browse metrics of bioinformatics tools, server and
+						workflows</template
+					>
+				</feature-card>
 			</v-col>
 			<v-col align="center" cols="12" md="3" class="mt-10 mt-md-0">
-				<v-avatar color="primary" size="62" class="mb-10">
-					<v-icon dark>$vuetify.icons.values.observatory</v-icon>
-				</v-avatar>
-				<h2 class="text-h6">Software Observatory</h2>
-				<p class="body-1">
-					Quantitative monitoring of the technical quality of software in Life
-					Sciences
-				</p>
-				<v-btn text color="primary" to="/observatory"> Learn More </v-btn>
+				<feature-card to="observatory">
+					<template #icon>
+						<v-icon dark>$vuetify.icons.values.observatory</v-icon>
+					</template>
+					<template #title> Tools Observatory </template>
+					<template #description>
+						Quantitative monitoring of the technical quality of software in Life
+						Sciences</template
+					>
+				</feature-card>
 			</v-col>
 			<v-col align="center" cols="12" md="3" class="mt-10 mt-md-0">
-				<v-avatar color="primary" size="62" class="mb-10">
-					<v-icon dark>$vuetify.icons.values.projects</v-icon>
-				</v-avatar>
-				<h2 class="text-h6">Project Spaces</h2>
-				<p class="body-1">
-					Community spaces for projects to collaborate on software in Life
-					Sciences
-				</p>
-				<v-btn text color="primary" to="/"> Learn More </v-btn>
+				<feature-card to="/">
+					<template #icon>
+						<v-icon dark>$vuetify.icons.values.projects</v-icon>
+					</template>
+					<template #title> Project Spaces </template>
+					<template #description>
+						Community spaces for projects to collaborate on software in Life
+						Sciences</template
+					>
+				</feature-card>
 			</v-col>
 		</v-row>
 	</v-container>
 </template>
 
 <script>
+import FeatureCard from '~/components/Cards/FeatureCard';
+
 export default {
 	name: 'FeatureTeaser',
+	components: { FeatureCard },
 };
 </script>
