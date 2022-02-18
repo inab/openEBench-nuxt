@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`KeyFeatures should match snapshot 1`] = `
+"<div class=\\"container\\">
+  <h2 class=\\"text-h4 mb-15\\">What does OpenEBench offer?</h2>
+  <div column=\\"\\" class=\\"row\\">
+    <div class=\\"col-md-6 col\\">
+      <div class=\\"v-image v-responsive theme--light\\" style=\\"max-height: 350px;\\">
+        <div class=\\"v-responsive__content\\"></div>
+      </div>
+    </div>
+    <div class=\\"d-flex flex-column justify-center col-sm-12 col-md-6 offset-md-0 col\\">
+      <div class=\\"text-h5 d-flex align-center\\"><i aria-hidden=\\"true\\" class=\\"v-icon notranslate mr-3 mdi mdi-check-circle theme--light accent--text\\" style=\\"font-size: 40px;\\"></i>
+        Supporting community-driven benchmarking
+      </div>
+      <div class=\\"text-h5 d-flex align-center mt-10\\"><i aria-hidden=\\"true\\" class=\\"v-icon notranslate mr-3 mdi mdi-check-circle theme--light accent--text\\" style=\\"font-size: 40px;\\"></i>Monitoring software quality for life sciences
+      </div>
+      <div class=\\"text-h5 d-flex align-center mt-10\\"><i aria-hidden=\\"true\\" class=\\"v-icon notranslate mr-3 mdi mdi-check-circle theme--light accent--text\\" style=\\"font-size: 40px;\\"></i>Contributing towards the best practices of research software
+        development
+      </div>
+    </div>
+  </div>
+</div>"
+`;
