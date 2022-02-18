@@ -167,10 +167,7 @@ export default {
 	watch: {
 		events() {
 			if (this.$route.query.event) {
-				const event = this.$store.getters['community/getEventById'](
-					this.$route.query.event
-				);
-				if (event) this.$store.commit('community/setCurrentEvent', event);
+				this.setCurrentEvent(this.$route.query.event);
 			}
 		},
 		currentEvent() {
@@ -201,11 +198,17 @@ export default {
 			this.$store.dispatch('community/getTools', {
 				id: this.$route.params.community,
 			});
+		} else if (this.$route.query.event) {
+			this.setCurrentEvent(this.$route.query.event);
 		}
 	},
 	methods: {
 		handleEventSelection(event) {
 			this.$store.commit('community/setCurrentEvent', event);
+		},
+		setCurrentEvent(eventId) {
+			const event = this.$store.getters['community/getEventById'](eventId);
+			if (event) this.$store.commit('community/setCurrentEvent', event);
 		},
 	},
 };
