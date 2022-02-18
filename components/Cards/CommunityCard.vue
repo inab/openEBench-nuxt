@@ -19,6 +19,7 @@
 				small
 				color="primary lighten-5"
 				text-color="black"
+				:to="to + '/events'"
 			>
 				<v-icon small class="mr-1">mdi-calendar-star</v-icon>
 				{{ benchmarkingEvents.length }}
