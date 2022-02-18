@@ -13,15 +13,16 @@
 			>
 				<div class="text-h5 d-flex align-center">
 					<v-icon color="accent" class="mr-3" x-large>mdi-check-circle</v-icon>
-					Benchmarking Communities
+					Supporting community-driven benchmarking
 				</div>
 				<div class="text-h5 d-flex align-center mt-10">
 					<v-icon color="accent" class="mr-3" x-large>mdi-check-circle</v-icon
-					>Bio Tool Repository & Statistics
+					>Monitoring software quality for life sciences
 				</div>
 				<div class="text-h5 d-flex align-center mt-10">
 					<v-icon color="accent" class="mr-3" x-large>mdi-check-circle</v-icon
-					>Quantitative Tools Monitoring
+					>Contributing towards the best practices of research software
+					development
 				</div>
 			</v-col>
 		</v-row>

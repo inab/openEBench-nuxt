@@ -1,6 +1,6 @@
 <template>
 	<v-container>
-		<h2 class="text-h4 mb-15">Learn more about OpenEBench</h2>
+		<h2 class="text-h4 mb-15">What can you do in OpenEBench?</h2>
 		<v-row>
 			<v-col align="center" cols="12" md="4">
 				<feature-card to="benchmarking">
