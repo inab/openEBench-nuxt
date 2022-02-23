@@ -19,7 +19,7 @@
 			:search="search"
 			item-key="_id"
 			show-select
-			:loading="$store.state.communities.loading.events"
+			:loading="$store.state.community.loading.events"
 			class="mt-5"
 		>
 			<template #top>
@@ -72,5 +72,3 @@ export default {
 	},
 };
 </script>
-
-<style lang="scss" scoped></style>
