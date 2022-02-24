@@ -7,7 +7,7 @@
 			:items-per-page="15"
 			:search="search"
 			item-key="_id"
-			:loading="$store.state.communities.loading.tools"
+			:loading="$store.state.community.loading.tools"
 		>
 			<template #top>
 				<v-text-field
@@ -56,5 +56,3 @@ export default {
 	},
 };
 </script>
-
-<style lang="scss" scoped></style>

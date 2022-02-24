@@ -204,11 +204,11 @@ export default {
 	},
 	methods: {
 		handleEventSelection(event) {
-			this.$store.commit('community/setCurrentEvent', event);
+			this.$store.dispatch('community/setCurrentEvent', event);
 		},
 		setCurrentEvent(eventId) {
 			const event = this.$store.getters['community/getEventById'](eventId);
-			if (event) this.$store.commit('community/setCurrentEvent', event);
+			if (event) this.$store.dispatch('community/setCurrentEvent', event);
 		},
 	},
 };

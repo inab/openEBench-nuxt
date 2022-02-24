@@ -1,19 +1,23 @@
 import { shallowMount } from '@vue/test-utils';
-import Community from './index.vue';
+import CommunityPage from './index.vue';
 import MockCommunity from '~/test/unit/mockData/Community';
 import MockEvent from '~/test/unit/mockData/Event';
 import MockEvents from '~/test/unit/mockData/Events';
 
-const factory = (mockStore) => {
-	return shallowMount(Community, {
+const factory = (mockStore, route) => {
+	return shallowMount(CommunityPage, {
 		...createComponentMocks({ store: mockStore }),
 		mocks: {
-			$route: { params: { id: 'TESTID' } },
+			$route: route,
 		},
 	});
 };
 
-describe('Community', () => {
+describe('CommunityPage', () => {
+	afterEach(() => {
+		jest.clearAllMocks();
+	});
+
 	const mockStore = {
 		community: {
 			getters: {
@@ -33,7 +37,7 @@ describe('Community', () => {
 					return MockCommunity;
 				},
 				getEventById: () => {
-					return MockEvent;
+					return () => MockEvent;
 				},
 			},
 			actions: {
@@ -65,15 +69,84 @@ describe('Community', () => {
 		},
 	};
 
+	const routeWithEventQuery = {
+		params: { community: 'OEBC005' },
+		query: { event: 'testEventID' },
+	};
+
+	const routeWithEventQueryDifferentCommmunityId = {
+		params: { community: 'someCommunityID' },
+		query: { event: 'testEventID' },
+	};
+
+	const routeWithOutEventQuery = {
+		params: { community: 'OEBC005' },
+		query: {},
+	};
+
 	it('is instantiated', () => {
-		const wrapper = factory(mockStore);
+		const wrapper = factory(mockStore, routeWithOutEventQuery);
 		expect(wrapper).toBeTruthy();
 	});
 
-	it('calls setCurrentEvent if url param with event id is set', () => {
-		const wrapper = factory(mockStore);
+	it('calls store actions if community id URL param is not equal community in store', () => {
+		const wrapper = factory(
+			mockStore,
+			routeWithEventQueryDifferentCommmunityId
+		);
 		expect(wrapper).toBeTruthy();
 
-		expect(mockStore.communities.actions.setCurrentEvent).toHaveBeenCalled();
+		expect(wrapper.vm.$route.query.event).toBe('testEventID');
+		expect(wrapper.vm.$route.params.community).toBe('someCommunityID');
+		expect(mockStore.community.actions.getCommunity).toHaveBeenCalled();
+		expect(
+			mockStore.community.actions.getBenchmarkingEvents
+		).toHaveBeenCalled();
+		expect(mockStore.community.actions.getDatasets).toHaveBeenCalled();
+		expect(mockStore.community.actions.getTools).toHaveBeenCalled();
+		expect(mockStore.community.actions.setCurrentEvent).not.toHaveBeenCalled();
+	});
+
+	it('calls setCurrentEvent, and no other store actions with event ID if url param with event id is set and community is already in store', () => {
+		const wrapper = factory(mockStore, routeWithEventQuery);
+		expect(wrapper).toBeTruthy();
+
+		expect(wrapper.vm.$route.query.event).toBe('testEventID');
+		expect(wrapper.vm.$route.params.community).toBe('OEBC005');
+		expect(mockStore.community.actions.setCurrentEvent).toHaveBeenCalled();
+		expect(mockStore.community.actions.getCommunity).not.toHaveBeenCalled();
+		expect(
+			mockStore.community.actions.getBenchmarkingEvents
+		).not.toHaveBeenCalled();
+		expect(mockStore.community.actions.getDatasets).not.toHaveBeenCalled();
+		expect(mockStore.community.actions.getTools).not.toHaveBeenCalled();
+	});
+
+	it('does not call store actions if no url param with event id and community is already in store', () => {
+		const wrapper = factory(mockStore, routeWithOutEventQuery);
+		expect(wrapper).toBeTruthy();
+
+		expect(wrapper.vm.$route.query.event).toBe(undefined);
+		expect(wrapper.vm.$route.params.community).toBe('OEBC005');
+		expect(mockStore.community.actions.setCurrentEvent).not.toHaveBeenCalled();
+		expect(mockStore.community.actions.getCommunity).not.toHaveBeenCalled();
+		expect(
+			mockStore.community.actions.getBenchmarkingEvents
+		).not.toHaveBeenCalled();
+		expect(mockStore.community.actions.getDatasets).not.toHaveBeenCalled();
+		expect(mockStore.community.actions.getTools).not.toHaveBeenCalled();
+	});
+
+	it('triggers store action setCurrentEvent when handleEventSelection is called', () => {
+		const wrapper = factory(mockStore, routeWithOutEventQuery);
+		expect(wrapper).toBeTruthy();
+
+		expect(wrapper.vm.$route.query.event).toBe(undefined);
+		expect(wrapper.vm.$route.params.community).toBe('OEBC005');
+		expect(mockStore.community.actions.setCurrentEvent).not.toHaveBeenCalled();
+
+		wrapper.vm.handleEventSelection();
+
+		expect(mockStore.community.actions.setCurrentEvent).toHaveBeenCalled();
 	});
 });
