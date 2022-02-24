@@ -1,14 +1,12 @@
 import { shallowMount } from '@vue/test-utils';
 import CommunityClassificationTable from './CommunityClassificationTable.vue';
-import MockEvent from '~/test/unit/mockData/Event';
+import mockEvent from '~/test/unit/mockData/Event';
+import mockEvents from '~/test/unit/mockData/Events';
 
-const factory = (mockStore) => {
+const factory = (mockEvent, mockStore) => {
 	return shallowMount(CommunityClassificationTable, {
 		...createComponentMocks({ store: mockStore }),
-		mocks: {
-			$vuetify: { breakpoint: {} },
-		},
-		propsData: { event: MockEvent },
+		propsData: { event: mockEvent },
 	});
 };
 
@@ -28,7 +26,14 @@ describe('CommunityClassificationTable', () => {
 		},
 	};
 	it('is instantiated', () => {
-		const wrapper = factory(MockEvent, mockStore);
+		const wrapper = factory(mockEvent, mockStore);
 		expect(wrapper).toBeTruthy();
+	});
+	it('maps selected objects IDs to a plain string array with IDs', () => {
+		const localThis = { selected: mockEvents };
+
+		expect(
+			CommunityClassificationTable.computed.selectedIds.call(localThis)
+		).toStrictEqual(['OEBE0020000000', 'OEBE0020000002', 'OEBE0020000001']);
 	});
 });
