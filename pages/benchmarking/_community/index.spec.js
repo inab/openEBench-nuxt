@@ -9,6 +9,7 @@ const factory = (mockStore, route) => {
 		...createComponentMocks({ store: mockStore }),
 		mocks: {
 			$route: route,
+			$router: [],
 		},
 	});
 };
@@ -148,5 +149,31 @@ describe('CommunityPage', () => {
 		wrapper.vm.handleEventSelection();
 
 		expect(mockStore.community.actions.setCurrentEvent).toHaveBeenCalled();
+	});
+
+	it('triggers url update in route object when current event watcher is called', () => {
+		const wrapper = factory(mockStore, routeWithOutEventQuery);
+		expect(wrapper).toBeTruthy();
+
+		expect(wrapper.vm.$route.query.event).toBe(undefined);
+
+		expect(wrapper.vm.$router).toEqual([]);
+		wrapper.vm.$options.watch.currentEvent.call(wrapper.vm);
+		expect(wrapper.vm.$router[0].query.event).toBe('OEBE0020000000');
+	});
+
+	it('dispatches setCurrentEvent action when events watcher is called', () => {
+		const wrapper = factory(mockStore, routeWithEventQuery);
+		expect(wrapper).toBeTruthy();
+
+		expect(wrapper.vm.$route.query.event).toBe('testEventID');
+
+		expect(mockStore.community.actions.setCurrentEvent).toHaveBeenCalledTimes(
+			1
+		);
+		wrapper.vm.$options.watch.events.call(wrapper.vm);
+		expect(mockStore.community.actions.setCurrentEvent).toHaveBeenCalledTimes(
+			2
+		);
 	});
 });
