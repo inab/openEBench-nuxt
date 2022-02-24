@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuetify from 'vuetify';
+import VueRouter from 'vue-router';
 import Vuex from 'vuex';
 import * as vueTestUtils from '@vue/test-utils';
 
@@ -32,7 +33,7 @@ global.IntersectionObserver = class IntersectionObserver {
 };
 
 // A helper for creating Vue component mocks
-global.createComponentMocks = ({ mocks, store }) => {
+global.createComponentMocks = ({ mocks, store, router }) => {
 	// Use a local version of Vue, to avoid polluting the global
 	// Vue and thereby affecting other tests.
 	// https://vue-test-utils.vuejs.org/api/#createlocalvue
@@ -60,6 +61,13 @@ global.createComponentMocks = ({ mocks, store }) => {
 				})
 				.reduce((moduleA, moduleB) => Object.assign({}, moduleA, moduleB), {}),
 		});
+
+		returnOptions.store.commit = jest.fn();
+	}
+
+	if (router) {
+		localVue.use(VueRouter);
+		returnOptions.router = new VueRouter();
 	}
 
 	returnOptions.stubs = {

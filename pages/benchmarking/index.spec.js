@@ -23,7 +23,7 @@ describe('Index.vue', () => {
 				getCommunities: jest.fn(),
 			},
 			state: () => {
-				return { loading: false };
+				return { loading: false, list: [] };
 			},
 		},
 	};
