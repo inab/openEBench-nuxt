@@ -61,6 +61,8 @@ global.createComponentMocks = ({ mocks, store, router }) => {
 				})
 				.reduce((moduleA, moduleB) => Object.assign({}, moduleA, moduleB), {}),
 		});
+
+		returnOptions.store.commit = jest.fn();
 	}
 
 	if (router) {

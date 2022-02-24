@@ -114,7 +114,10 @@ describe('CommunityPage', () => {
 
 		expect(wrapper.vm.$route.query.event).toBe('testEventID');
 		expect(wrapper.vm.$route.params.community).toBe('OEBC005');
-		expect(mockStore.community.actions.setCurrentEvent).toHaveBeenCalled();
+		expect(wrapper.vm.$store.commit).toHaveBeenCalledWith(
+			'community/setCurrentEvent',
+			MockEvent
+		);
 		expect(mockStore.community.actions.getCommunity).not.toHaveBeenCalled();
 		expect(
 			mockStore.community.actions.getBenchmarkingEvents
@@ -144,11 +147,13 @@ describe('CommunityPage', () => {
 
 		expect(wrapper.vm.$route.query.event).toBe(undefined);
 		expect(wrapper.vm.$route.params.community).toBe('OEBC005');
-		expect(mockStore.community.actions.setCurrentEvent).not.toHaveBeenCalled();
+		expect(wrapper.vm.$store.commit).not.toHaveBeenCalled();
+		wrapper.vm.handleEventSelection(MockEvent);
 
-		wrapper.vm.handleEventSelection();
-
-		expect(mockStore.community.actions.setCurrentEvent).toHaveBeenCalled();
+		expect(wrapper.vm.$store.commit).toHaveBeenCalledWith(
+			'community/setCurrentEvent',
+			MockEvent
+		);
 	});
 
 	it('triggers url update in route object when current event watcher is called', () => {
@@ -168,12 +173,15 @@ describe('CommunityPage', () => {
 
 		expect(wrapper.vm.$route.query.event).toBe('testEventID');
 
-		expect(mockStore.community.actions.setCurrentEvent).toHaveBeenCalledTimes(
-			1
+		expect(wrapper.vm.$store.commit).toHaveBeenCalledWith(
+			'community/setCurrentEvent',
+			MockEvent
 		);
+		wrapper.vm.$store.commit.mockClear();
 		wrapper.vm.$options.watch.events.call(wrapper.vm);
-		expect(mockStore.community.actions.setCurrentEvent).toHaveBeenCalledTimes(
-			2
+		expect(wrapper.vm.$store.commit).toHaveBeenCalledWith(
+			'community/setCurrentEvent',
+			MockEvent
 		);
 	});
 });
