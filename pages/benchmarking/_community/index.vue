@@ -131,7 +131,21 @@ export default {
 		return {
 			illustration: require('~/static/images/illustrations/lab_community.png'),
 			expand: true,
-			breadcrumbs: [
+		};
+	},
+	computed: {
+		...mapGetters('community', {
+			events: 'events',
+			currentEvent: 'currentEvent',
+			datasets: 'datasets',
+			tools: 'tools',
+			community: 'community',
+		}),
+		vertical() {
+			return this.$vuetify.breakpoint.mdAndUp;
+		},
+		breadcrumbs() {
+			return [
 				{
 					text: 'Home',
 					disabled: false,
@@ -145,23 +159,16 @@ export default {
 					to: '/benchmarking',
 				},
 				{
-					text: this.$route.params.community,
-					disabled: true,
-					to: this.$route.params.community,
+					text: this.community ? this.community.name : '',
+					disabled: false,
+					exact: true,
+					to: this.$route.params.community + '/events',
 				},
-			],
-		};
-	},
-	computed: {
-		...mapGetters('community', {
-			events: 'events',
-			currentEvent: 'currentEvent',
-			datasets: 'datasets',
-			tools: 'tools',
-			community: 'community',
-		}),
-		vertical() {
-			return this.$vuetify.breakpoint.mdAndUp;
+				{
+					text: this.currentEvent ? this.currentEvent.name : '',
+					disabled: true,
+				},
+			];
 		},
 	},
 	watch: {
@@ -176,6 +183,9 @@ export default {
 					path: this.$route.path,
 					query: { event: this.currentEvent._id },
 				});
+		},
+		breadcrumbs() {
+			this.$parent.$emit('emitBreadcrumbs', this.breadcrumbs);
 		},
 	},
 	mounted() {

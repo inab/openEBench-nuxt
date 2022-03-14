@@ -27,7 +27,15 @@ export default {
 		return {
 			illustration: require('~/static/images/illustrations/lab_community.png'),
 			expand: true,
-			breadcrumbs: [
+		};
+	},
+	computed: {
+		...mapGetters('community', {
+			events: 'events',
+			community: 'community',
+		}),
+		breadcrumbs() {
+			return [
 				{
 					text: 'Home',
 					disabled: false,
@@ -41,26 +49,18 @@ export default {
 					to: '/benchmarking',
 				},
 				{
-					text: this.$route.params.community,
-					disabled: false,
-					exact: true,
-					to: './',
-				},
-				{
-					text: 'Events',
+					text: this.community ? this.community.name : '',
 					disabled: true,
 					to: this.$route.params.community + '/events',
 				},
-			],
-		};
+			];
+		},
 	},
-	computed: {
-		...mapGetters('community', {
-			events: 'events',
-			community: 'community',
-		}),
+	watch: {
+		breadcrumbs() {
+			this.$parent.$emit('emitBreadcrumbs', this.breadcrumbs);
+		},
 	},
-	watch: {},
 	mounted() {
 		this.$parent.$emit('emitBreadcrumbs', this.breadcrumbs);
 
