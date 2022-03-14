@@ -133,7 +133,7 @@ export default {
 			expand: true,
 			breadcrumbs: [
 				{
-					text: 'Dashboard',
+					text: 'Home',
 					disabled: false,
 					exact: true,
 					to: '/',
