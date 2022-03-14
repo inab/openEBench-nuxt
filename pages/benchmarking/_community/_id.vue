@@ -39,6 +39,12 @@ export default {
 					text: this.$route.params.community,
 					disabled: false,
 					exact: true,
+					to: 'events',
+				},
+				{
+					text: 'Last Event',
+					disabled: false,
+					exact: true,
 					to: './',
 				},
 				{

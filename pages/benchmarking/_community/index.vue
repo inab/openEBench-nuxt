@@ -162,7 +162,7 @@ export default {
 					text: this.community ? this.community.name : '',
 					disabled: false,
 					exact: true,
-					to: this.$route.params.community + '/events',
+					to: '/benchmarking/' + this.$route.params.community + '/events',
 				},
 				{
 					text: this.currentEvent ? this.currentEvent.name : '',
