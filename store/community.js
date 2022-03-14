@@ -72,7 +72,6 @@ export default {
 					community_id: params.id,
 				},
 			});
-			commit('setCurrentEvent', response.data.getBenchmarkingEvents[0]);
 			commit('setEvents', response.data);
 			commit('setLoading', { events: false });
 		},
@@ -135,7 +134,16 @@ export default {
 			})[0];
 		},
 		setEvents(state, payload) {
-			state.events = payload.getBenchmarkingEvents;
+			state.events = payload.getBenchmarkingEvents.sort((a, b) => {
+				if (a._id < b._id) {
+					return 1;
+				}
+				if (a._id > b._id) {
+					return -1;
+				}
+				return 0;
+			});
+			this.commit('community/setCurrentEvent', state.events[0]);
 		},
 		setCurrentEvent(state, currentEvent) {
 			state.currentEvent = currentEvent;
