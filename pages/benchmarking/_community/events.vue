@@ -1,6 +1,33 @@
 <template>
 	<v-container>
-		<h1 class="text-h4">Events</h1>
+		<v-skeleton-loader
+			v-if="$store.state.community.loading.community"
+			class="mb-5"
+			type="heading, list-item-three-line"
+		/>
+		<div v-else class="text--clickable" @click="expand = !expand">
+			<h1 class="text-h4 mb-5 d-flex">
+				{{ community.acronym }} - {{ community.name }}
+				<v-btn class="ml-2" color="primary" icon>
+					<v-icon>{{
+						expand
+							? 'mdi-chevron-up-circle-outline'
+							: 'mdi-chevron-down-circle-outline'
+					}}</v-icon>
+				</v-btn>
+			</h1>
+			<v-expand-transition>
+				<v-row v-show="expand" align="center">
+					<v-col align="center" cols="2">
+						<v-img :src="community.logo" contain max-width="500" />
+					</v-col>
+					<v-col class="text-body-2 text--secondary" cols="10">
+						{{ community.description }}
+					</v-col>
+				</v-row>
+			</v-expand-transition>
+		</div>
+		<h2 class="text-h5 mt-10">Please choose an event:</h2>
 		<div v-if="$store.state.community.loading.events">
 			<v-skeleton-loader
 				v-for="index in 10"
