@@ -59,7 +59,7 @@
 											class="text--clickable primary--text"
 											v-bind="attrs"
 											v-on="on"
-											>{{ currentEvent.name }}</span
+											>Event - {{ currentEvent.name }}</span
 										>
 										<v-btn icon color="primary" v-bind="attrs" v-on="on">
 											<v-icon>mdi-chevron-down</v-icon>
@@ -224,7 +224,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .v-tab {
 	text-transform: none !important;
 }

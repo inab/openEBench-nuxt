@@ -1,14 +1,29 @@
 <template>
 	<div>
-		<h2 class="text-h5 mb-5">Classification Table</h2>
-		<p class="caption">{{ event.name }}</p>
+		<p class="text-body-2 text--secondary d-flex align-center">
+			<v-icon small class="mr-1">mdi-information-outline</v-icon>
+			An Event corresponds to a benchmarking experiment which is held within a
+			certain time-frame, usually including a set of Benchmarking Event
+			Challenges.
+		</p>
 		<classification-table
 			:id="event._id"
 			:key="event._id"
 			:filter-array="selectedIds"
+			class="mt-5"
 		/>
 
 		<h2 class="text-h5 mt-10 mb-5">Challenges</h2>
+		<p class="text-body-2 text--secondary d-flex align-center">
+			<v-icon small class="mr-1">mdi-information-outline</v-icon>
+			Challenges are a set of tests which the community uses to benchmark
+			participating tools
+		</p>
+		<p class="text-body-2 text--secondary d-flex align-center">
+			<v-icon small class="mr-1">mdi-information-outline</v-icon>
+			To filter the table results, please select single challenges below, the
+			table will automatically update.
+		</p>
 		<v-data-table
 			:key="event._id + '_challenges'"
 			v-model="selected"
