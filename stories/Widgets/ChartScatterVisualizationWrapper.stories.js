@@ -4,7 +4,12 @@ export default {
 	title: 'Widgets/ChartScatterVisualizerWrapper',
 };
 
-export const ChartScatterVisualizer = (_args) => ({
+export const ChartScatterVisualizer = (_args, { argTypes }) => ({
 	components: { ChartScatterVisualizerWrapper },
-	template: `<chart-scatter-visualizer-wrapper id='OEBD00100000O80'/>`,
+	props: Object.keys(argTypes),
+	template: `<chart-scatter-visualizer-wrapper id='OEBD00200001HD' v-bind="$props"/>`,
 });
+
+ChartScatterVisualizer.args = {
+	id: 'OEBD00200001HD',
+};

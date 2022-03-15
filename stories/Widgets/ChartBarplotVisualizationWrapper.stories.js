@@ -4,7 +4,12 @@ export default {
 	title: 'Widgets/ChartBarplotVisualizerWrapper',
 };
 
-export const ChartBarplotVisualizer = (_args) => ({
+export const ChartBarplotVisualizer = (_args, { argTypes }) => ({
 	components: { ChartBarplotVisualizerWrapper },
-	template: `<chart-barplot-visualizer-wrapper id='OEBD003000002S'/>`,
+	props: Object.keys(argTypes),
+	template: `<chart-barplot-visualizer-wrapper id='OEBD003000002S' v-bind="$props"/>`,
 });
+
+ChartBarplotVisualizer.args = {
+	id: 'OEBD00200001HD',
+};
