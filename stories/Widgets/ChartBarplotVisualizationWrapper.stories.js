@@ -7,9 +7,14 @@ export default {
 export const ChartBarplotVisualizer = (_args, { argTypes }) => ({
 	components: { ChartBarplotVisualizerWrapper },
 	props: Object.keys(argTypes),
-	template: `<chart-barplot-visualizer-wrapper id='OEBD003000002S' v-bind="$props"/>`,
+	template: `
+	<div>
+		<p>Info: Reload page after changing the ID below.</p>
+		<chart-barplot-visualizer-wrapper v-bind="$props"/>
+	</div>
+	`,
 });
 
 ChartBarplotVisualizer.args = {
-	id: 'OEBD00200001HD',
+	id: 'OEBD003000002S',
 };
