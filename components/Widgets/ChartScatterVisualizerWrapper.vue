@@ -33,7 +33,9 @@ export default {
 		loadVisualization() {
 			try {
 				load_scatter_visualization();
-			} catch (error) {}
+			} catch (error) {
+				console.error(error);
+			}
 		},
 	},
 };

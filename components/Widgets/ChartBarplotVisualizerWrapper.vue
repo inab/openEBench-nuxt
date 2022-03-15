@@ -27,7 +27,9 @@ export default {
 		loadVisualization() {
 			try {
 				load_bars_visualization();
-			} catch (error) {}
+			} catch (error) {
+				console.error(error);
+			}
 		},
 	},
 };
