@@ -1,8 +1,8 @@
 import { mount } from '@vue/test-utils';
-import LogoSlider from './LogoSlider.vue';
+import KeyFeatures from './KeyFeatures.vue';
 
 const factory = () => {
-	return mount(LogoSlider, {
+	return mount(KeyFeatures, {
 		...createComponentMocks({}),
 		mocks: {
 			$vuetify: { breakpoint: {} },
@@ -10,9 +10,14 @@ const factory = () => {
 	});
 };
 
-describe('LogoSlider', () => {
+describe('KeyFeatures', () => {
 	it('is instantiated', () => {
 		const wrapper = factory();
 		expect(wrapper).toBeTruthy();
+	});
+
+	it('should match snapshot', () => {
+		const wrapper = factory();
+		expect(wrapper.html()).toMatchSnapshot();
 	});
 });

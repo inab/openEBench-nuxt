@@ -17,8 +17,8 @@
 			<v-chip
 				v-if="benchmarkingEvents.length > 0"
 				small
-				color="primary"
-				text-color="white"
+				color="primary lighten-5"
+				text-color="black"
 			>
 				<v-icon small class="mr-1">mdi-calendar-star</v-icon>
 				{{ benchmarkingEvents.length }}
@@ -27,14 +27,14 @@
 			<v-chip
 				v-if="referenceTools.length > 0"
 				small
-				color="primary"
-				text-color="white"
+				color="primary lighten-5"
+				text-color="black"
 			>
 				<v-icon small class="mr-1">mdi-tire</v-icon>
 				{{ referenceTools.length }}
 				{{ 'Tools' | pluralize(referenceTools.length) }}
 			</v-chip>
-			<v-chip small>
+			<v-chip small :color="statusChipColor" :text-color="statusChipTextColor">
 				{{ status }}
 			</v-chip>
 		</v-card-text>
@@ -107,7 +107,27 @@ export default {
 			return this.links.filter((link) => link.comment !== '@logo');
 		},
 		to() {
-			return '/scientific/' + this._id;
+			return '/benchmarking/' + this._id;
+		},
+		statusChipColor() {
+			switch (this.status) {
+				case 'active':
+					return 'light-green lighten-4';
+				case 'incubating':
+					return 'cyan lighten-4';
+				default:
+					return '';
+			}
+		},
+		statusChipTextColor() {
+			switch (this.status) {
+				case 'active':
+					return 'black';
+				case 'incubating':
+					return 'black';
+				default:
+					return '';
+			}
 		},
 	},
 };

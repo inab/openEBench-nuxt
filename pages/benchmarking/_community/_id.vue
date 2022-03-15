@@ -1,6 +1,12 @@
 <template>
 	<iframe
-		:src="hostName + `tool/` + $route.params.id"
+		:src="
+			hostName +
+			`scientific/` +
+			$route.params.community +
+			`/` +
+			$route.params.id
+		"
 		width="100%"
 		height="100%"
 		frameborder="0"
@@ -11,8 +17,8 @@
 
 <script>
 export default {
-	name: 'ToolsMonitoringIdPage',
-	layout: 'embedIframe',
+	name: 'CommunityParticipantPage',
+	layout: 'embedIframeFullWidth',
 	data() {
 		return {
 			hostName: this.$config.OEB_LEGACY_ANGULAR_URI,
@@ -24,10 +30,16 @@ export default {
 					to: '/',
 				},
 				{
-					text: 'Tools',
+					text: 'Benchmarking Communities',
 					disabled: false,
 					exact: true,
-					to: '/tool',
+					to: '/benchmarking',
+				},
+				{
+					text: this.$route.params.community,
+					disabled: false,
+					exact: true,
+					to: './',
 				},
 				{
 					text: this.$route.params.id,

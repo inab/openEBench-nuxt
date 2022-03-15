@@ -1,16 +1,17 @@
-import { mount } from '@vue/test-utils';
-import LogoSlider from './LogoSlider.vue';
+import { shallowMount } from '@vue/test-utils';
+import BreadcrumbsBar from './BreadcrumbsBar.vue';
 
 const factory = () => {
-	return mount(LogoSlider, {
+	return shallowMount(BreadcrumbsBar, {
 		...createComponentMocks({}),
 		mocks: {
 			$vuetify: { breakpoint: {} },
 		},
+		propsData: {},
 	});
 };
 
-describe('LogoSlider', () => {
+describe('BreadcrumbsBar', () => {
 	it('is instantiated', () => {
 		const wrapper = factory();
 		expect(wrapper).toBeTruthy();
