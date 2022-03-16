@@ -1,9 +1,9 @@
 import { shallowMount } from '@vue/test-utils';
 import ChartBarplotVisualizerWrapper from './ChartBarplotVisualizerWrapper.vue';
 
-jest.mock('@inb/oeb-chart-Barplot');
+jest.mock('@inb/oeb-chart-barplot');
 // eslint-disable-next-line
-import { load_bars_visualization } from '@inb/oeb-chart-Barplot';
+import { load_bars_visualization } from '@inb/oeb-chart-barplot';
 
 const factory = () => {
 	return shallowMount(ChartBarplotVisualizerWrapper, {
