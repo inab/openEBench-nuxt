@@ -1,7 +1,7 @@
 import { shallowMount } from '@vue/test-utils';
 import ChartScatterVisualizerWrapper from './ChartScatterVisualizerWrapper.vue';
 
-jest.mock('@inb/oeb-classification-table');
+jest.mock('@inb/oeb-chart-scatter');
 // eslint-disable-next-line
 import { load_scatter_visualization } from '@inb/oeb-chart-scatter';
 
@@ -27,5 +27,11 @@ describe('ChartScatterVisualizerWrapper', () => {
 	it('should match snapshot', () => {
 		const wrapper = factory();
 		expect(wrapper.html()).toMatchSnapshot();
+	});
+
+	it('is calls load_scatter_visualization after mount', () => {
+		const wrapper = factory();
+		expect(wrapper).toBeTruthy();
+		expect(load_scatter_visualization).toHaveBeenCalled();
 	});
 });
