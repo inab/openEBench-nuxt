@@ -1,6 +1,12 @@
 <template>
 	<v-container fluid>
-		<v-tabs class="mb-10">
+		<v-tabs
+			v-model="tab"
+			class="mb-10"
+			show-arrows
+			next-icon="mdi-arrow-right-bold-box-outline"
+			prev-icon="mdi-arrow-left-bold-box-outline"
+		>
 			<v-tab v-for="(item, index) in datasets" :key="index">
 				{{
 					item.datalink.inline_data.visualization.type == '2D-plot'
@@ -11,14 +17,24 @@
 				}}
 			</v-tab>
 			<v-tab-item v-for="(item, index) in datasets" :key="index">
-				<div v-if="item.datalink.inline_data.visualization.type == '2D-plot'">
-					<chart-scatter-visualizer-wrapper :id="item._id" :key="item._id" />
-				</div>
-				<div
-					v-else-if="item.datalink.inline_data.visualization.type == 'bar-plot'"
-				>
-					<chart-barplot-visualizer-wrapper :id="item._id" :key="item._id" />
-				</div>
+				<chart-scatter-visualizer-wrapper
+					v-if="
+						item.datalink.inline_data.visualization.type == '2D-plot' &&
+						index == tab
+					"
+					:id="item._id"
+					:key="item._id"
+					class="mt-5"
+				/>
+				<chart-barplot-visualizer-wrapper
+					v-else-if="
+						item.datalink.inline_data.visualization.type == 'bar-plot' &&
+						index == tab
+					"
+					:id="item._id"
+					:key="item._id"
+					class="mt-5"
+				/>
 				<div v-else>No visual representation implemented</div>
 			</v-tab-item>
 		</v-tabs>
@@ -36,6 +52,7 @@ export default {
 	data() {
 		return {
 			hostName: this.$config.OEB_LEGACY_ANGULAR_URI,
+			tab: null,
 			breadcrumbs: [
 				{
 					text: 'Home',
