@@ -1,14 +1,15 @@
-import { mount } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 import ChartScatterVisualizerWrapper from './ChartScatterVisualizerWrapper.vue';
 
 jest.mock('@inb/oeb-classification-table');
 // eslint-disable-next-line
 import { load_scatter_visualization } from '@inb/oeb-chart-scatter';
 
-const factory = () => {
-	return mount(ChartScatterVisualizerWrapper, {
+const factory = (methods) => {
+	return shallowMount(ChartScatterVisualizerWrapper, {
 		...createComponentMocks({}),
 		propsData,
+		methods,
 	});
 };
 
@@ -25,8 +26,11 @@ describe('ChartScatterVisualizerWrapper', () => {
 	});
 
 	it('is calls load_scatter_visualization after mount', () => {
-		const wrapper = factory();
+		const methods = { loadVisualization: jest.fn() };
+
+		const wrapper = factory(methods);
+
 		expect(wrapper).toBeTruthy();
-		expect(load_scatter_visualization).toHaveBeenCalled();
+		expect(methods.loadVisualization).toHaveBeenCalled();
 	});
 });

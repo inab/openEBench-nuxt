@@ -1,14 +1,15 @@
-import { mount } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 import ChartBarplotVisualizerWrapper from './ChartBarplotVisualizerWrapper.vue';
 
 jest.mock('@inb/oeb-classification-table');
 // eslint-disable-next-line
 import { load_barplot_visualization } from '@inb/oeb-chart-Barplot';
 
-const factory = () => {
-	return mount(ChartBarplotVisualizerWrapper, {
+const factory = (methods) => {
+	return shallowMount(ChartBarplotVisualizerWrapper, {
 		...createComponentMocks({}),
 		propsData,
+		methods,
 	});
 };
 
@@ -25,8 +26,10 @@ describe('ChartBarplotVisualizerWrapper', () => {
 	});
 
 	it('is calls load_Barplot_visualization after mount', () => {
-		const wrapper = factory();
+		const methods = { loadVisualization: jest.fn() };
+		const wrapper = factory(methods);
+
 		expect(wrapper).toBeTruthy();
-		expect(load_barplot_visualization).toHaveBeenCalled();
+		expect(methods.loadVisualization).toHaveBeenCalled();
 	});
 });
