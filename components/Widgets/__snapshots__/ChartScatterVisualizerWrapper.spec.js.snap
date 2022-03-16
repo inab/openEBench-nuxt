@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ChartScatterVisualizerWrapper should match snapshot 1`] = `"<div data-id=\\"someid\\" data-api-url=\\"https://jest-openebench.bsc.es/api/scientific/graphql\\" totable=\\"true\\" data-mode=\\"openebench\\" class=\\"benchmarkingChart_scatter\\"></div>"`;
