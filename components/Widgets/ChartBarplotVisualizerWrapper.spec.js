@@ -25,11 +25,8 @@ describe('ChartBarplotVisualizerWrapper', () => {
 		expect(wrapper).toBeTruthy();
 	});
 
-	it('is calls load_Barplot_visualization after mount', () => {
-		const methods = { loadVisualization: jest.fn() };
-		const wrapper = factory(methods);
-
-		expect(wrapper).toBeTruthy();
-		expect(methods.loadVisualization).toHaveBeenCalled();
+	it('should match snapshot', () => {
+		const wrapper = factory();
+		expect(wrapper.html()).toMatchSnapshot();
 	});
 });

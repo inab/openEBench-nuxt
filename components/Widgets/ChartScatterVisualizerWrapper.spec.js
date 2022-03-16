@@ -5,11 +5,10 @@ jest.mock('@inb/oeb-classification-table');
 // eslint-disable-next-line
 import { load_scatter_visualization } from '@inb/oeb-chart-scatter';
 
-const factory = (methods) => {
+const factory = () => {
 	return shallowMount(ChartScatterVisualizerWrapper, {
 		...createComponentMocks({}),
 		propsData,
-		methods,
 	});
 };
 
@@ -25,12 +24,8 @@ describe('ChartScatterVisualizerWrapper', () => {
 		expect(wrapper).toBeTruthy();
 	});
 
-	it('is calls load_scatter_visualization after mount', () => {
-		const methods = { loadVisualization: jest.fn() };
-
-		const wrapper = factory(methods);
-
-		expect(wrapper).toBeTruthy();
-		expect(methods.loadVisualization).toHaveBeenCalled();
+	it('should match snapshot', () => {
+		const wrapper = factory();
+		expect(wrapper.html()).toMatchSnapshot();
 	});
 });
