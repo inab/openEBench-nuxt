@@ -32,6 +32,10 @@ global.IntersectionObserver = class IntersectionObserver {
 	}
 };
 
+HTMLCanvasElement.prototype.getContext = () => {
+	// return whatever getContext has to return
+};
+
 // A helper for creating Vue component mocks
 global.createComponentMocks = ({ mocks, store, router }) => {
 	// Use a local version of Vue, to avoid polluting the global
