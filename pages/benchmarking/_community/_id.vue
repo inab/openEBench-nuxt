@@ -1,24 +1,38 @@
 <template>
-	<iframe
-		:src="
-			hostName +
-			`scientific/` +
-			$route.params.community +
-			`/` +
-			$route.params.id
-		"
-		width="100%"
-		height="100%"
-		frameborder="0"
-		class="mt-5"
-	>
-	</iframe>
+	<v-container fluid>
+		<v-tabs class="mb-10">
+			<v-tab v-for="(item, index) in datasets" :key="index">
+				{{
+					item.datalink.inline_data.visualization.type == '2D-plot'
+						? item.datalink.inline_data.visualization.x_axis +
+						  '+' +
+						  item.datalink.inline_data.visualization.y_axis
+						: item.datalink.inline_data.visualization.metric
+				}}
+			</v-tab>
+			<v-tab-item v-for="(item, index) in datasets" :key="index">
+				<div v-if="item.datalink.inline_data.visualization.type == '2D-plot'">
+					<chart-scatter-visualizer-wrapper :id="item._id" :key="item._id" />
+				</div>
+				<div
+					v-else-if="item.datalink.inline_data.visualization.type == 'bar-plot'"
+				>
+					<chart-barplot-visualizer-wrapper :id="item._id" :key="item._id" />
+				</div>
+				<div v-else>No visual representation implemented</div>
+			</v-tab-item>
+		</v-tabs>
+	</v-container>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+import ChartBarplotVisualizerWrapper from '~/components/Widgets/ChartBarplotVisualizerWrapper';
+import ChartScatterVisualizerWrapper from '~/components/Widgets/ChartScatterVisualizerWrapper';
+
 export default {
 	name: 'CommunityParticipantPage',
-	layout: 'embedIframeFullWidth',
+	components: { ChartBarplotVisualizerWrapper, ChartScatterVisualizerWrapper },
 	data() {
 		return {
 			hostName: this.$config.OEB_LEGACY_ANGULAR_URI,
@@ -49,8 +63,16 @@ export default {
 			],
 		};
 	},
+	computed: {
+		...mapGetters('benchmark', {
+			datasets: 'datasetsList',
+		}),
+	},
 	mounted() {
 		this.$parent.$emit('emitBreadcrumbs', this.breadcrumbs);
+		this.$store.dispatch('benchmark/getDatasets', {
+			id: this.$route.params.id,
+		});
 	},
 };
 </script>
