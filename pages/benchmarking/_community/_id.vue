@@ -31,14 +31,8 @@
 			type="card-heading, image"
 		/>
 		<div v-else>
-			<h2 v-if="datasets.length > 1" class="text-h6 mt-10">Choose dataset:</h2>
-			<v-chip-group
-				v-model="tab"
-				active-class="primary--text"
-				class="mt-2"
-				column
-				mandatory
-			>
+			<h2 class="text-h6 mt-10">Dataset:</h2>
+			<v-chip-group v-model="tab" active-class="primary--text" column mandatory>
 				<v-chip v-for="item in datasets" :key="item._id">
 					{{
 						item.datalink.inline_data.visualization.type == '2D-plot'
