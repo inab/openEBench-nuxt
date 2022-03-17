@@ -6,6 +6,8 @@ import MockEvents from '~/test/unit/mockData/Events';
 import MockChallenge from '~/test/unit/mockData/Challenge';
 import MockChallengeDatasetsBarplot from '~/test/unit/mockData/ChallengeDatasetsBarplot';
 import MockChallengeDatasetsScatter from '~/test/unit/mockData/ChallengeDatasetsScatter';
+import ChartBarplotVisualizerWrapper from '~/components/Widgets/ChartBarplotVisualizerWrapper';
+import ChartScatterVisualizerWrapper from '~/components/Widgets/ChartScatterVisualizerWrapper';
 
 const factory = (mockStore) => {
 	return mount(Challenge, {
@@ -113,7 +115,8 @@ describe('Community Participant', () => {
 		};
 		const wrapper = factory(mockStore);
 		expect(wrapper).toBeTruthy();
-		expect(wrapper.html()).toMatchSnapshot();
+		const barplot = wrapper.findComponent(ChartBarplotVisualizerWrapper); // => finds Bar by `name`
+		expect(barplot.exists()).toBe(true);
 	});
 
 	it('renders the scatter-plot component', () => {
@@ -122,6 +125,7 @@ describe('Community Participant', () => {
 		};
 		const wrapper = factory(mockStore);
 		expect(wrapper).toBeTruthy();
-		expect(wrapper.html()).toMatchSnapshot();
+		const scatter = wrapper.findComponent(ChartScatterVisualizerWrapper); // => finds Bar by `name`
+		expect(scatter.exists()).toBe(true);
 	});
 });
