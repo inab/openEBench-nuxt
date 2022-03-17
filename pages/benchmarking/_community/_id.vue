@@ -20,8 +20,7 @@
 				the best efficiency and the arrow in the plot represents the optimal
 				corner.
 			</p>
-			<h2 class="text-h5 mt-10 mb-5">Benchmarking Result Visualization</h2>
-			<v-alert class="mt-5" border="left" dense text color="info" type="info">
+			<v-alert class="mt-8" border="left" dense text color="info" type="info">
 				The menu button above the diagram can be used to switch between the
 				different classification methods / visualization modes (Square
 				Quartiles; Diagonal Quartiles, and k-means Clustering).
@@ -34,7 +33,7 @@
 		<v-tabs
 			v-else
 			v-model="tab"
-			class="mb-10 mt-6"
+			class="mb-10 mt-8"
 			show-arrows
 			center-active
 			next-icon="mdi-arrow-right-bold-box-outline"
