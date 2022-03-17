@@ -118,7 +118,7 @@ export default {
 					to: './',
 				},
 				{
-					text: this.challenge ? this.challenge.name : '',
+					text: this.challenge ? this.challenge.acronym : '',
 					disabled: true,
 					to: this.$route.params.id,
 				},

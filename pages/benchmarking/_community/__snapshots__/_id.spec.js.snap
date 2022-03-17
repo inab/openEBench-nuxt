@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Community Participant renders the bar-plot component 1`] = `
+"<div class=\\"container container--fluid\\">
+  <div>
+    <h1 class=\\"text-h4\\">
+
+    </h1>
+    <h2 class=\\"text-subtitle-1 mb-5\\">
+
+    </h2>
+    <p class=\\"text--secondary\\">
+      In this 2D plot two metrics from the challenge
+      are represented in the X and Y axis, showing the
+      results from the participating tools in this challenge. The gray line
+      represents the pareto frontier, which runs over the participants showing
+      the best efficiency and the arrow in the plot represents the optimal
+      corner.
+    </p>
+    <div role=\\"alert\\" class=\\"v-alert mt-8 v-sheet theme--dark v-alert--border v-alert--dense v-alert--text v-alert--border-left info--text\\">
+      <div class=\\"v-alert__wrapper\\"><i aria-hidden=\\"true\\" class=\\"v-icon notranslate v-alert__icon mdi mdi-information theme--dark info--text\\"></i>
+        <div class=\\"v-alert__content\\">
+          The menu button above the diagram can be used to switch between the
+          different classification methods / visualization modes (Square
+          Quartiles; Diagonal Quartiles, and k-means Clustering).
+        </div>
+        <div class=\\"v-alert__border v-alert__border--left\\"></div>
+      </div>
+    </div>
+  </div>
+  <div class=\\"v-tabs mb-10 mt-8 theme--light\\">
+    <div role=\\"tablist\\" class=\\"v-item-group theme--light v-slide-group v-tabs-bar v-tabs-bar--is-mobile v-tabs-bar--show-arrows primary--text\\">
+      <div class=\\"v-slide-group__prev v-slide-group__prev--disabled\\">
+        <transition-stub name=\\"fade-transition\\"><i aria-hidden=\\"true\\" class=\\"v-icon notranslate v-icon--disabled mdi mdi-arrow-left-bold-box-outline theme--light\\"></i></transition-stub>
+      </div>
+      <div class=\\"v-slide-group__wrapper\\">
+        <div class=\\"v-slide-group__content v-tabs-bar__content\\">
+          <div class=\\"v-tabs-slider-wrapper\\" style=\\"transition: none;\\">
+            <div class=\\"v-tabs-slider\\"></div>
+          </div>
+          <div tabindex=\\"0\\" aria-selected=\\"true\\" role=\\"tab\\" class=\\"v-tab v-tab--active\\">
+            Weighted Probabilistic Concordance Index (WPC-i)
+          </div>
+        </div>
+      </div>
+      <div class=\\"v-slide-group__next v-slide-group__next--disabled\\">
+        <transition-stub name=\\"fade-transition\\"><i aria-hidden=\\"true\\" class=\\"v-icon notranslate v-icon--disabled mdi mdi-arrow-right-bold-box-outline theme--light\\"></i></transition-stub>
+      </div>
+    </div>
+    <div class=\\"v-window v-item-group theme--light v-tabs-items\\">
+      <div class=\\"v-window__container\\">
+        <transition-stub name=\\"\\">
+          <!---->
+        </transition-stub>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
