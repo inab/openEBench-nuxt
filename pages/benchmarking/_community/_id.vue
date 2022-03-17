@@ -30,46 +30,53 @@
 			v-if="$store.state.challenge.loading.datasets"
 			type="card-heading, image"
 		/>
-		<v-tabs
-			v-else
-			v-model="tab"
-			class="mb-10 mt-8"
-			show-arrows
-			center-active
-			next-icon="mdi-arrow-right-bold-box-outline"
-			prev-icon="mdi-arrow-left-bold-box-outline"
-		>
-			<v-tab v-for="(item, index) in datasets" :key="index">
-				{{
-					item.datalink.inline_data.visualization.type == '2D-plot'
-						? item.datalink.inline_data.visualization.x_axis +
-						  ' + ' +
-						  item.datalink.inline_data.visualization.y_axis
-						: item.datalink.inline_data.visualization.metric
-				}}
-			</v-tab>
-			<v-tab-item v-for="(item, index) in datasets" :key="index">
-				<chart-scatter-visualizer-wrapper
-					v-if="
-						item.datalink.inline_data.visualization.type == '2D-plot' &&
-						index == tab
-					"
-					:id="item._id"
-					:key="item._id"
-					class="mt-5"
-				/>
-				<chart-barplot-visualizer-wrapper
-					v-else-if="
-						item.datalink.inline_data.visualization.type == 'bar-plot' &&
-						index == tab
-					"
-					:id="item._id"
-					:key="item._id"
-					class="mt-5"
-				/>
-				<div v-else>No visual representation implemented</div>
-			</v-tab-item>
-		</v-tabs>
+		<div v-else>
+			<h2 v-if="datasets.length > 1" class="text-h6 mt-10">Choose dataset:</h2>
+			<v-chip-group
+				v-model="tab"
+				active-class="primary--text"
+				class="mt-2"
+				column
+				mandatory
+			>
+				<v-chip v-for="item in datasets" :key="item._id">
+					{{
+						item.datalink.inline_data.visualization.type == '2D-plot'
+							? item.datalink.inline_data.visualization.x_axis +
+							  ' + ' +
+							  item.datalink.inline_data.visualization.y_axis
+							: item.datalink.inline_data.visualization.metric
+					}}
+				</v-chip>
+			</v-chip-group>
+			<v-tabs-items v-model="tab">
+				<v-tab-item
+					v-for="(item, index) in datasets"
+					:key="index"
+					:transition="false"
+				>
+					<chart-scatter-visualizer-wrapper
+						v-if="
+							item.datalink.inline_data.visualization.type == '2D-plot' &&
+							index == tab
+						"
+						:id="item._id"
+						:key="item._id"
+						class="mt-5"
+					/>
+					<chart-barplot-visualizer-wrapper
+						v-else-if="
+							item.datalink.inline_data.visualization.type == 'bar-plot' &&
+							index == tab
+						"
+						:id="item._id"
+						:key="item._id"
+						class="mt-5"
+					/>
+					<div v-else>No visual representation implemented</div>
+				</v-tab-item>
+			</v-tabs-items>
+		</div>
 	</v-container>
 </template>
 
