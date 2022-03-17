@@ -12,7 +12,7 @@
 			<h2 class="text-subtitle-1 mb-5">
 				{{ challenge.name }}
 			</h2>
-			<p class="text--secondary d-flex align-center">
+			<p class="text--secondary">
 				In this 2D plot two metrics from the challenge
 				{{ challenge.acronym }} are represented in the X and Y axis, showing the
 				results from the participating tools in this challenge. The gray line
@@ -23,8 +23,8 @@
 			<h2 class="text-h5 mt-10 mb-5">Benchmarking Result Visualization</h2>
 			<v-alert class="mt-5" border="left" dense text color="info" type="info">
 				The menu button above the diagram can be used to switch between the
-				different classification methods / visualization modes (square
-				quartiles, diagonal quartiles and k-means clustering).
+				different classification methods / visualization modes (Square
+				Quartiles; Diagonal Quartiles and k-means clustering).
 			</v-alert>
 		</div>
 		<v-skeleton-loader
