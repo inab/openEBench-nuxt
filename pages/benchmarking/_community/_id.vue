@@ -24,7 +24,7 @@
 			<v-alert class="mt-5" border="left" dense text color="info" type="info">
 				The menu button above the diagram can be used to switch between the
 				different classification methods / visualization modes (Square
-				Quartiles; Diagonal Quartiles and k-means clustering).
+				Quartiles; Diagonal Quartiles, and k-means Clustering).
 			</v-alert>
 		</div>
 		<v-skeleton-loader
