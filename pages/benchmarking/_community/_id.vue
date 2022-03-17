@@ -91,7 +91,7 @@ export default {
 	data() {
 		return {
 			hostName: this.$config.OEB_LEGACY_ANGULAR_URI,
-			tab: null,
+			tab: 0,
 		};
 	},
 	computed: {

@@ -5,6 +5,7 @@ import MockEvent from '~/test/unit/mockData/Event';
 import MockEvents from '~/test/unit/mockData/Events';
 import MockChallenge from '~/test/unit/mockData/Challenge';
 import MockChallengeDatasetsBarplot from '~/test/unit/mockData/ChallengeDatasetsBarplot';
+import MockChallengeDatasetsScatter from '~/test/unit/mockData/ChallengeDatasetsScatter';
 
 const factory = (mockStore) => {
 	return mount(Challenge, {
@@ -115,12 +116,12 @@ describe('Community Participant', () => {
 		expect(wrapper.html()).toMatchSnapshot();
 	});
 
-	// it('renders the bar-chart component', async () => {
-	// 	mockStore.challenge.getters.datasetsList = () => {
-	// 		return MockChallengeDatasetsScatterChart;
-	// 	};
-	// 	const wrapper = factory(mockStore);
-	// 	expect(wrapper).toBeTruthy();
-	// 	await wrapper.vm.$nextTick();
-	// });
+	it('renders the scatter-plot component', () => {
+		mockStore.challenge.getters.datasetsList = () => {
+			return MockChallengeDatasetsScatter;
+		};
+		const wrapper = factory(mockStore);
+		expect(wrapper).toBeTruthy();
+		expect(wrapper.html()).toMatchSnapshot();
+	});
 });
