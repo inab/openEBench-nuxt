@@ -6,25 +6,26 @@
 			type="heading, list-item-three-line"
 		/>
 		<div v-else>
-			<h1 class="text-h4 mb-5">
-				{{ challenge.name }} ({{ challenge.acronym }})
+			<h1 class="text-h4">
+				{{ challenge.acronym }}
 			</h1>
-			<p class="text-body-2 text--secondary d-flex align-center">
-				In order to facilitate the interpretation of benchmarking results
-				OpenEbench offers several ways to visualize metrics: <br />
+			<h2 class="text-subtitle-1 mb-5">
+				{{ challenge.name }}
+			</h2>
+			<p class="text--secondary d-flex align-center">
 				In this 2D plot two metrics from the challenge
 				{{ challenge.acronym }} are represented in the X and Y axis, showing the
-				results from the participants in this challenge. The gray line
+				results from the participating tools in this challenge. The gray line
 				represents the pareto frontier, which runs over the participants showing
 				the best efficiency and the arrow in the plot represents the optimal
 				corner.
-				<br />
-				The blue selection list can be used to switch between the different
-				classification methods / visualization modes (square quartiles, diagonal
-				quartiles and k-means clustering) Along with the chart these results are
-				also transformed to a table which separates the participants in
-				different groups.
 			</p>
+			<h2 class="text-h5 mt-10 mb-5">Benchmarking Result Visualization</h2>
+			<v-alert class="mt-5" border="left" dense text color="info" type="info">
+				The menu button above the diagram can be used to switch between the
+				different classification methods / visualization modes (square
+				quartiles, diagonal quartiles and k-means clustering).
+			</v-alert>
 		</div>
 		<v-skeleton-loader
 			v-if="$store.state.challenge.loading.datasets"
@@ -33,8 +34,9 @@
 		<v-tabs
 			v-else
 			v-model="tab"
-			class="mb-10"
+			class="mb-10 mt-6"
 			show-arrows
+			center-active
 			next-icon="mdi-arrow-right-bold-box-outline"
 			prev-icon="mdi-arrow-left-bold-box-outline"
 		>
@@ -42,7 +44,7 @@
 				{{
 					item.datalink.inline_data.visualization.type == '2D-plot'
 						? item.datalink.inline_data.visualization.x_axis +
-						  '+' +
+						  ' + ' +
 						  item.datalink.inline_data.visualization.y_axis
 						: item.datalink.inline_data.visualization.metric
 				}}
