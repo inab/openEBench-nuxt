@@ -31,7 +31,7 @@
 			type="card-heading, image"
 		/>
 		<div v-else>
-			<h2 class="text-h6 mt-10">Dataset:</h2>
+			<h2 class="text-h6 mt-8">Dataset:</h2>
 			<v-chip-group v-model="tab" active-class="primary--text" column mandatory>
 				<v-chip v-for="item in datasets" :key="item._id">
 					{{
