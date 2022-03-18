@@ -42,6 +42,11 @@ export default {
 <style lang="scss">
 .benchmarkingTable_scatter {
 	background-color: #fff;
+	width: 28vw;
+}
+
+.benchmarkingSVG {
+	width: 69vw !important;
 }
 </style>
 >

@@ -109,6 +109,14 @@ describe('Community Participant', () => {
 		await wrapper.vm.$nextTick();
 	});
 
+	it('calls store actions on mount', () => {
+		const wrapper = factory(mockStore);
+		expect(wrapper).toBeTruthy();
+
+		expect(mockStore.challenge.actions.getDatasets).toHaveBeenCalled();
+		expect(mockStore.challenge.actions.getChallenge).toHaveBeenCalled();
+	});
+
 	it('renders the bar-plot component', () => {
 		mockStore.challenge.getters.datasetsList = () => {
 			return MockChallengeDatasetsBarplot;

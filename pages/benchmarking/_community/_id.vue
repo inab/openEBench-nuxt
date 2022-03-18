@@ -32,7 +32,7 @@
 		/>
 		<div v-else>
 			<h2 class="text-h6 mt-8">
-				Choose which metrics you want to visualize in the diagram:
+				Choose the metrics you want to visualize in the diagram:
 			</h2>
 			<v-chip-group v-model="tab" active-class="primary--text" column mandatory>
 				<v-chip v-for="item in datasets" :key="item._id">

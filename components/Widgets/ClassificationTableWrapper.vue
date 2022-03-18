@@ -73,8 +73,4 @@ export default {
 .oeb-table-scroll {
 	margin-top: 15px;
 }
-
-.benchmarkingTable_bars {
-	background-color: #fff;
-}
 </style>
