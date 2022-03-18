@@ -34,4 +34,11 @@ describe('ChartBarplotVisualizerWrapper', () => {
 		expect(wrapper).toBeTruthy();
 		expect(load_bars_visualization).toHaveBeenCalled();
 	});
+
+	it('sets the apiUrl according to SCIENTIFIC_SERVICE_URL env var', () => {
+		const wrapper = factory();
+		expect(wrapper.vm.$data.apiUrl).toBe(
+			'https://jest-openebench.bsc.es/api/scientific/graphql'
+		);
+	});
 });

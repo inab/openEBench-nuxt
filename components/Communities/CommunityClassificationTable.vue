@@ -1,10 +1,11 @@
 <template>
 	<div>
 		<p class="text-body-2 text--secondary d-flex align-center">
-			<v-icon small class="mr-1">mdi-information-outline</v-icon>
-			An Event corresponds to a benchmarking experiment which is held within a
-			certain time-frame, usually including a set of Benchmarking Event
-			Challenges.
+			<v-icon small class="mr-3">mdi-information-outline</v-icon>
+			An Event corresponds to a time-bound contest where a tool, pipeline,
+			service or product, i.e. the participant, is compared against other
+			participants using a predefined collection of reference datasets and
+			assessment metrics.
 		</p>
 		<classification-table
 			:id="event._id"
@@ -15,15 +16,17 @@
 
 		<h2 class="text-h5 mt-10 mb-5">Challenges</h2>
 		<p class="text-body-2 text--secondary d-flex align-center">
-			<v-icon small class="mr-1">mdi-information-outline</v-icon>
+			<v-icon small class="mr-3">mdi-information-outline</v-icon>
 			Challenges are a set of tests which the community uses to benchmark
-			participating tools
+			participating tools. Each of the categories in which a benchmarking event
+			is divided. In its simplest form, one challenge comprises one reference
+			dataset and one or more evaluation metrics. This can be customised if
+			needed.
 		</p>
-		<p class="text-body-2 text--secondary d-flex align-center">
-			<v-icon small class="mr-1">mdi-information-outline</v-icon>
+		<v-alert class="mt-5" border="left" dense text color="info" type="info">
 			To filter the table results, please select single challenges below, the
 			table will automatically update.
-		</p>
+		</v-alert>
 		<v-data-table
 			:key="event._id + '_challenges'"
 			v-model="selected"
