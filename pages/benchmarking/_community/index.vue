@@ -47,7 +47,7 @@
 				<v-skeleton-loader
 					v-if="$store.state.community.loading.events"
 					type="table"
-				></v-skeleton-loader>
+				/>
 
 				<v-card v-else-if="currentEvent" outlined class="pa-5" elevation="1">
 					<v-row no-gutters align="center">
