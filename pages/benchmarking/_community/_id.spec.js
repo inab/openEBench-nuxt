@@ -117,7 +117,7 @@ describe('Community Participant', () => {
 		expect(mockStore.challenge.actions.getChallenge).toHaveBeenCalled();
 	});
 
-	it('renders the bar-plot component', () => {
+	it('renders the bar-plot component with the right ID', () => {
 		mockStore.challenge.getters.datasetsList = () => {
 			return MockChallengeDatasetsBarplot;
 		};
@@ -125,9 +125,10 @@ describe('Community Participant', () => {
 		expect(wrapper).toBeTruthy();
 		const barplot = wrapper.findComponent(ChartBarplotVisualizerWrapper); // => finds Bar by `name`
 		expect(barplot.exists()).toBe(true);
+		expect(barplot.props().id).toBe(MockChallengeDatasetsBarplot[0]._id);
 	});
 
-	it('renders the scatter-plot component', () => {
+	it('renders the scatter-plot component with the right ID', () => {
 		mockStore.challenge.getters.datasetsList = () => {
 			return MockChallengeDatasetsScatter;
 		};
@@ -135,5 +136,6 @@ describe('Community Participant', () => {
 		expect(wrapper).toBeTruthy();
 		const scatter = wrapper.findComponent(ChartScatterVisualizerWrapper); // => finds Bar by `name`
 		expect(scatter.exists()).toBe(true);
+		expect(scatter.props().id).toBe(MockChallengeDatasetsScatter[0]._id);
 	});
 });

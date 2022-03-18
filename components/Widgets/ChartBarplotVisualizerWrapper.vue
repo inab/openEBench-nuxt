@@ -36,5 +36,6 @@ export default {
 <style lang="scss">
 .benchmarkingTable_bars {
 	background-color: #fff;
+	width: 28vw;
 }
 </style>

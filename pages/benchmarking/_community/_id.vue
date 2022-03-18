@@ -34,7 +34,7 @@
 			<h2 class="text-h6 mt-8">
 				Choose the metrics you want to visualize in the diagram:
 			</h2>
-			<v-chip-group v-model="tab" active-class="primary--text" column mandatory>
+			<v-chip-group v-model="tab" active-class="accent--text" column mandatory>
 				<v-chip v-for="item in datasets" :key="item._id">
 					{{
 						item.datalink.inline_data.visualization.type == '2D-plot'
