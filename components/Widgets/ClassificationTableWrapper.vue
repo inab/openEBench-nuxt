@@ -69,8 +69,12 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .oeb-table-scroll {
 	margin-top: 15px;
+}
+
+.benchmarkingTable_bars {
+	background-color: #fff;
 }
 </style>

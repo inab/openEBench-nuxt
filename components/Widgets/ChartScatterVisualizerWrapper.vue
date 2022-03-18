@@ -38,3 +38,10 @@ export default {
 	},
 };
 </script>
+
+<style lang="scss">
+.benchmarkingTable_scatter {
+	background-color: #fff;
+}
+</style>
+>

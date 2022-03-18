@@ -16,9 +16,9 @@
 				In this 2D plot two metrics from the challenge
 				{{ challenge.acronym }} are represented in the X and Y axis, showing the
 				results from the participating tools in this challenge. The gray line
-				represents the pareto frontier, which runs over the participants showing
-				the best efficiency and the arrow in the plot represents the optimal
-				corner.
+				represents the pareto frontier, which runs over the participants tools,
+				showing the best efficiency, while the arrow in the plot represents the
+				optimal corner.
 			</p>
 			<v-alert class="mt-8" border="left" dense text color="info" type="info">
 				The menu button above the diagram can be used to switch between the
@@ -31,7 +31,9 @@
 			type="card-heading, image"
 		/>
 		<div v-else>
-			<h2 class="text-h6 mt-8">Dataset:</h2>
+			<h2 class="text-h6 mt-8">
+				Choose which metrics you want to visualize in the diagram:
+			</h2>
 			<v-chip-group v-model="tab" active-class="primary--text" column mandatory>
 				<v-chip v-for="item in datasets" :key="item._id">
 					{{
