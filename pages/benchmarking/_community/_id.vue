@@ -97,6 +97,7 @@ export default {
 		}),
 		...mapGetters('community', {
 			currentEvent: 'currentEvent',
+			community: 'community',
 		}),
 		breadcrumbs() {
 			return [
@@ -113,15 +114,17 @@ export default {
 					to: '/benchmarking',
 				},
 				{
-					text: this.currentEvent
-						? this.currentEvent.name
-						: this.$route.params.community,
+					text: this.community.name
+						? this.community.name
+						: this.$route.params.community + ' Events',
 					disabled: false,
 					exact: true,
 					to: 'events',
 				},
 				{
-					text: 'Last Event',
+					text: this.currentEvent
+						? this.currentEvent.name
+						: this.$route.params.community + ' Results',
 					disabled: false,
 					exact: true,
 					to: './',
