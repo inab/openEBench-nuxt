@@ -76,7 +76,7 @@ export default {
 					to: '/benchmarking',
 				},
 				{
-					text: this.community ? this.community.name : '',
+					text: this.community ? this.community.acronym : '',
 					disabled: true,
 					to: this.$route.params.community + '/events',
 				},

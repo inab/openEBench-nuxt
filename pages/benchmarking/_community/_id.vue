@@ -114,8 +114,8 @@ export default {
 					to: '/benchmarking',
 				},
 				{
-					text: this.community.name
-						? this.community.name
+					text: this.community.acronym
+						? this.community.acronym
 						: this.$route.params.community + ' Events',
 					disabled: false,
 					exact: true,
