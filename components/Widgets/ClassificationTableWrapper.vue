@@ -68,3 +68,9 @@ export default {
 	},
 };
 </script>
+
+<style lang="scss">
+.oeb-table-scroll {
+	margin-top: 15px;
+}
+</style>

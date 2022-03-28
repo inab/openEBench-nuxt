@@ -107,7 +107,7 @@ export default {
 			return this.links.filter((link) => link.comment !== '@logo');
 		},
 		to() {
-			return '/scientific/' + this._id;
+			return '/benchmarking/' + this._id;
 		},
 		statusChipColor() {
 			switch (this.status) {

@@ -1,6 +1,6 @@
 <template>
 	<v-container fluid>
-		<v-container class="pt-0">
+		<v-container>
 			<h1 class="text-h4 mt-13 mb-5 hidden-md-and-up">
 				Benchmarking Communities
 			</h1>
@@ -91,7 +91,7 @@ export default {
 				},
 				{
 					text: 'Benchmarking Communities',
-					to: '/scientific',
+					to: '/benchmarking',
 				},
 			],
 		};
@@ -103,7 +103,9 @@ export default {
 	},
 	mounted() {
 		this.$parent.$emit('emitBreadcrumbs', this.breadcrumbs);
-		this.$store.dispatch('communities/getCommunities');
+
+		if (this.$store.state.communities.list.length === 0)
+			this.$store.dispatch('communities/getCommunities');
 	},
 };
 </script>

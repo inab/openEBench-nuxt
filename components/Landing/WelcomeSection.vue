@@ -7,16 +7,15 @@
 					The ELIXIR gateway to benchmarking communities, software monitoring,
 					and quality metrics for life sciences tools and workflows.
 				</h2>
-				<v-row class="mt-0 mt-lg-5" align="end">
+				<v-row class="mt-0 mt-lg-10" align="end">
 					<v-col align="center">
 						<v-avatar color="primary" size="62" class="mb-10">
 							<v-icon dark>$vuetify.icons.values.benchmark</v-icon>
 						</v-avatar>
-						<p>
-							As a Researcher I want to search for benchmarking communities and
-							results
+						<p class="body-1">
+							I want to search for benchmarking communities and results
 						</p>
-						<v-btn color="primary" class="mt-10" large block to="/scientific">
+						<v-btn color="primary" class="mt-10" large block to="/benchmarking">
 							Scientific Benchmarking
 						</v-btn>
 					</v-col>
@@ -24,9 +23,8 @@
 						<v-avatar color="accent" size="62" class="mb-10">
 							<v-icon dark>$vuetify.icons.values.observatory</v-icon>
 						</v-avatar>
-						<p>
-							As a Developer I want to learn how to develop sustainable research
-							tools
+						<p class="body-1">
+							I want to see how to develop sustainable research tools
 						</p>
 						<v-btn color="accent" class="mt-10" large block to="/observatory">
 							Tools Observatory
