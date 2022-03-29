@@ -124,6 +124,21 @@ export default {
 				path: '/dashboard',
 				component: resolve(__dirname, 'pages/index.vue'),
 			});
+			routes.push({
+				name: 'scientific',
+				path: '/scientific',
+				component: resolve(__dirname, 'pages/benchmarking'),
+			});
+			routes.push({
+				name: 'scientific-community',
+				path: '/scientific/:community',
+				component: resolve(__dirname, 'pages/benchmarking/_community'),
+			});
+			routes.push({
+				name: 'scientific-community-challenge',
+				path: '/scientific/:community/:id',
+				component: resolve(__dirname, 'pages/benchmarking/_community/_id'),
+			});
 		},
 	},
 };

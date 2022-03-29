@@ -1,7 +1,7 @@
 <template>
-	<div>
+	<div class="text--clickable" @click="expand = !expand">
 		<v-row>
-			<v-col class="d-flex headline" cols="auto" @click="expand = !expand">
+			<v-col class="d-flex" cols="auto">
 				<slot name="header" icon />
 				<v-btn class="ml-2" color="primary" icon>
 					<v-icon>{{
@@ -42,7 +42,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.headline {
+.text--clickable {
 	cursor: pointer;
 }
 </style>
