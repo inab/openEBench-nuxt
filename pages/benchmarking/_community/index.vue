@@ -23,7 +23,19 @@
 							<v-img :src="community.logo" contain max-width="500" />
 						</v-col>
 						<v-col class="text-body-2 text--secondary" cols="10">
-							{{ community.description }}
+							<p>
+								{{ community.description }}
+							</p>
+							<p v-if="community.keywords">
+								Keywords:
+								<span
+									v-for="(keyword, index) in community.keywords"
+									:key="index"
+									class="font-weight-medium"
+								>
+									{{ keyword }};
+								</span>
+							</p>
 						</v-col>
 					</v-row>
 				</v-expand-transition>
@@ -70,16 +82,16 @@
 											:key="index"
 											link
 											dense
+											@click="handleEventSelection(event)"
 										>
-											<v-list-item-title @click="handleEventSelection(event)">{{
-												event.name
-											}}</v-list-item-title>
+											<v-list-item-title>{{ event.name }}</v-list-item-title>
 										</v-list-item>
 									</v-list>
 								</v-menu>
 							</h2>
 						</v-col>
-						<v-col cols="4" class="text--secondary">
+						<v-col cols="4" class="d-flex align-center">
+							<v-icon class="mr-1 text--primary"> mdi-flag-outline </v-icon>
 							{{ currentEvent.challenges.length }}
 							{{ 'Challenges' | pluralize(currentEvent.challenges.length) }}
 						</v-col>

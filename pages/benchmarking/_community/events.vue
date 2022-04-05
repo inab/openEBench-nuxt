@@ -5,8 +5,8 @@
 			class="mb-5"
 			type="heading, list-item-three-line"
 		/>
-		<div v-else class="text--clickable" @click="expand = !expand">
-			<h1 class="text-h4 mb-5 d-flex">
+		<div v-else>
+			<h1 class="text-h4 mb-5 d-flex text--clickable" @click="expand = !expand">
 				{{ community.acronym }} - {{ community.name }}
 				<v-btn class="ml-2" color="primary" icon>
 					<v-icon>{{
@@ -22,7 +22,29 @@
 						<v-img :src="community.logo" contain max-width="500" />
 					</v-col>
 					<v-col class="text-body-2 text--secondary" cols="10">
-						{{ community.description }}
+						<p>{{ community.description }}</p>
+						<p v-if="community.keywords">
+							Keywords:
+							<span
+								v-for="(keyword, index) in community.keywords"
+								:key="index"
+								class="font-weight-medium"
+							>
+								{{ keyword }};
+							</span>
+						</p>
+						<p v-if="communityReferences">
+							References:
+							<a
+								v-for="(keyword, index) in communityReferences"
+								:key="index"
+								target="_blank"
+								class="font-weight-medium"
+								:href="keyword.href"
+							>
+								{{ keyword.doi }}
+							</a>
+						</p>
 					</v-col>
 				</v-row>
 			</v-expand-transition>
@@ -36,10 +58,20 @@
 			></v-skeleton-loader>
 		</div>
 		<v-list v-else>
-			<v-list-item v-for="(event, index) in events" :key="index" link>
-				<v-list-item-title @click="handleEventClick(event)">{{
-					event.name
-				}}</v-list-item-title>
+			<v-list-item
+				v-for="(event, index) in events"
+				:key="index"
+				link
+				@click="handleEventClick(event)"
+			>
+				<v-list-item-content>
+					<v-list-item-title>{{ event.name }}</v-list-item-title>
+					<v-list-item-subtitle class="d-flex align-center">
+						<v-icon small class="mr-1"> mdi-flag-outline </v-icon>
+						{{ event.challenges.length }}
+						{{ 'Challenges' | pluralize(event.challenges.length) }}
+					</v-list-item-subtitle>
+				</v-list-item-content>
 			</v-list-item>
 		</v-list>
 	</v-container>
@@ -60,6 +92,7 @@ export default {
 		...mapGetters('community', {
 			events: 'events',
 			community: 'community',
+			communityReferences: 'communityReferences',
 		}),
 		breadcrumbs() {
 			return [
@@ -121,3 +154,8 @@ export default {
 	},
 };
 </script>
+<style lang="scss" scoped>
+.text--clickable {
+	cursor: pointer;
+}
+</style>
