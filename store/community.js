@@ -28,6 +28,9 @@ export default {
 						acronym
 						description
 						status
+						keywords
+						references
+						community_contact_ids
 						links {
 							uri
 							comment
@@ -161,6 +164,16 @@ export default {
 
 	getters: {
 		community: (state) => state.community,
+		communityReferences: (state) => {
+			return state.community.references
+				? state.community.references.map((reference) => {
+						return {
+							href: 'https://doi.org/' + reference.split(':')[1],
+							doi: reference,
+						};
+				  })
+				: [];
+		},
 		events: (state) => state.events,
 		getEventById: (state) => (id) => {
 			return state.events.find((event) => event._id === id);
