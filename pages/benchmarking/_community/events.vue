@@ -33,7 +33,7 @@
 								{{ keyword }};
 							</span>
 						</p>
-						<p v-if="communityReferences">
+						<p v-if="communityReferences.length > 0">
 							References:
 							<a
 								v-for="(keyword, index) in communityReferences"
@@ -42,7 +42,7 @@
 								class="font-weight-medium"
 								:href="keyword.href"
 							>
-								{{ keyword.doi }}
+								{{ keyword.doi }};
 							</a>
 						</p>
 					</v-col>
@@ -50,6 +50,13 @@
 			</v-expand-transition>
 		</div>
 		<h2 class="text-h5 mt-10">Please choose an event:</h2>
+		<p class="text-body-2 text--secondary d-flex align-center mt-3">
+			<v-icon small class="mr-3">mdi-information-outline</v-icon>
+			An Event corresponds to a time-bound contest where a tool, pipeline,
+			service or product, i.e. the participant, is compared against other
+			participants using a predefined collection of reference datasets and
+			assessment metrics.
+		</p>
 		<div v-if="$store.state.community.loading.events">
 			<v-skeleton-loader
 				v-for="index in 10"
