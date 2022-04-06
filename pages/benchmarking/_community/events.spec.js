@@ -119,7 +119,7 @@ describe('Event Index Page', () => {
 		expect(mockStore.community.actions.getTools).not.toHaveBeenCalled();
 	});
 
-	it('does display a list of events', () => {
+	it('does display a list of events and clicking an event pushes to community route', () => {
 		const wrapper = factory(mockStore, routeWithOutEventQuery);
 		expect(wrapper).toBeTruthy();
 
