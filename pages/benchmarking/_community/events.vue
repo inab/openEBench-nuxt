@@ -69,6 +69,7 @@
 				v-for="(event, index) in events"
 				:key="index"
 				link
+				data-test="event"
 				@click="handleEventClick(event)"
 			>
 				<v-list-item-content>
