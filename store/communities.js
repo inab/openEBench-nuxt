@@ -19,6 +19,7 @@ export default {
 						acronym
 						description
 						status
+						keywords
 						links {
 							uri
 							comment
