@@ -19,6 +19,7 @@
 				small
 				color="primary lighten-5"
 				text-color="black"
+				:to="to + '/events'"
 			>
 				<v-icon small class="mr-1">mdi-calendar-star</v-icon>
 				{{ benchmarkingEvents.length }}
@@ -39,7 +40,7 @@
 			</v-chip>
 		</v-card-text>
 		<v-card-actions>
-			<v-btn text color="primary" :to="to"> Open Community </v-btn>
+			<v-btn text color="primary" :to="to"> Current Event </v-btn>
 			<v-spacer />
 			<v-menu bottom left>
 				<template #activator="{ on, attrs }">
