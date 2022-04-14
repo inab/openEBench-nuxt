@@ -1,8 +1,3 @@
----
-title: BasicMarkdown
-description: This is a markdown example page.
----
-
 # h1 Heading 8-)
 
 ## h2 Heading
