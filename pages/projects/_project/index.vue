@@ -50,8 +50,7 @@
 				<v-card outlined class="pa-5" elevation="1">
 					<v-row no-gutters align="center">
 						<v-col cols="8">
-							<h2 class="text-h6">General</h2>
-							<marked-wrapper :markdown="markdownContent" />
+							<nuxt-content :document="page" />
 						</v-col>
 					</v-row>
 				</v-card>
@@ -62,16 +61,20 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import MarkedWrapper from '~/components/Molecules/MarkedWrapper.vue';
-import mdFile from '~/static/markdown/markdown.md';
 
 export default {
 	name: 'ProjectPage',
-	components: { MarkedWrapper },
+	async asyncData({ $content }) {
+		const slug = 'basicmarkdown';
+		const page = await $content(slug).fetch();
+
+		return {
+			page,
+		};
+	},
 	data() {
 		return {
 			expand: true,
-			markdownContent: mdFile,
 		};
 	},
 	computed: {
