@@ -79,6 +79,39 @@
 				</v-list>
 			</v-menu>
 			<v-spacer v-if="$vuetify.breakpoint.mdAndUp" />
+			<div>
+				<v-tooltip v-if="!$vuetify.theme.dark" bottom>
+					<template #activator="{ on }">
+						<v-btn
+							class="mr-2"
+							color="info"
+							small
+							fab
+							v-on="on"
+							@click="darkMode"
+						>
+							<v-icon class="mr-1">mdi-moon-waxing-crescent</v-icon>
+						</v-btn>
+					</template>
+					<span>Dark Mode On</span>
+				</v-tooltip>
+
+				<v-tooltip v-else bottom>
+					<template #activator="{ on }">
+						<v-btn
+							class="mr-2"
+							color="info"
+							small
+							fab
+							v-on="on"
+							@click="darkMode"
+						>
+							<v-icon color="yellow">mdi-white-balance-sunny</v-icon>
+						</v-btn>
+					</template>
+					<span>Dark Mode Off</span>
+				</v-tooltip>
+			</div>
 			<v-btn
 				v-if="$vuetify.breakpoint.mdAndUp"
 				:href="vreHref"
@@ -89,6 +122,7 @@
 			>
 				<v-icon left>mdi-open-in-new</v-icon> Benchmark your Tool
 			</v-btn>
+
 			<!-- <v-btn v-if="$vuetify.breakpoint.mdAndUp" depressed color="ml-3 primary">
 				<v-icon left>mdi-login-variant</v-icon> Login
 			</v-btn> -->
@@ -121,6 +155,9 @@ export default {
 	methods: {
 		handleToggleOpen() {
 			this.openNavMobile = !this.openNavMobile;
+		},
+		darkMode() {
+			this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
 		},
 	},
 };

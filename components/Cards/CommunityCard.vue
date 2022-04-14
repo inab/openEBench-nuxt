@@ -18,7 +18,7 @@
 				v-if="benchmarkingEvents.length > 0"
 				small
 				color="primary lighten-5"
-				text-color="black"
+				text-color="black--text"
 				:to="to + '/events'"
 			>
 				<v-icon small class="mr-1">mdi-calendar-star</v-icon>
@@ -29,7 +29,7 @@
 				v-if="referenceTools.length > 0"
 				small
 				color="primary lighten-5"
-				text-color="black"
+				text-color="black--text"
 			>
 				<v-icon small class="mr-1">mdi-tire</v-icon>
 				{{ referenceTools.length }}

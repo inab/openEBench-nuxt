@@ -8,7 +8,7 @@
 			@click="$vuetify.goTo('#key-features')"
 		/>
 		<key-features id="key-features" class="landing-mt mb-16" />
-		<section class="grey lighten-5 landing-mt">
+		<section class="darken-1 landing-mt">
 			<feature-teaser id="feature-teaser" class="pt-16 pb-16" />
 		</section>
 		<hero-numbers
