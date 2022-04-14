@@ -17,7 +17,7 @@
 				</div>
 				<div class="text-h5 d-flex align-center mt-10">
 					<v-icon color="accent" class="mr-3" x-large>mdi-check-circle</v-icon
-					>Monitoring software quality for life sciences
+					>Monitoring of software quality in life sciences
 				</div>
 				<div class="text-h5 d-flex align-center mt-10">
 					<v-icon color="accent" class="mr-3" x-large>mdi-check-circle</v-icon

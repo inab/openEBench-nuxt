@@ -59,7 +59,7 @@
 
 <script>
 import AnimatedNumber from '~/components/Landing/AnimatedNumber';
-import material2 from '~/static/images/material2_parallax.jpg';
+import material2 from '~/static/images/material2_parallax.webp';
 
 export default {
 	name: 'HeroNumbers',

@@ -1,20 +1,19 @@
-import { shallowMount } from '@vue/test-utils';
-import CommunityPage from './index.vue';
+import { mount } from '@vue/test-utils';
+import EventIndexPage from './events.vue';
 import MockCommunity from '~/test/unit/mockData/Community';
-import MockEvent from '~/test/unit/mockData/Event';
 import MockEvents from '~/test/unit/mockData/Events';
 
 const factory = (mockStore, route) => {
-	return shallowMount(CommunityPage, {
+	return mount(EventIndexPage, {
 		...createComponentMocks({ store: mockStore }),
 		mocks: {
 			$route: route,
-			$router: [],
+			$router: { push: jest.fn() },
 		},
 	});
 };
 
-describe('CommunityPage', () => {
+describe('Event Index Page', () => {
 	afterEach(() => {
 		jest.clearAllMocks();
 	});
@@ -26,7 +25,7 @@ describe('CommunityPage', () => {
 					return MockEvents;
 				},
 				currentEvent: () => {
-					return MockEvent;
+					return {};
 				},
 				datasets: () => {
 					return [];
@@ -38,7 +37,10 @@ describe('CommunityPage', () => {
 					return MockCommunity;
 				},
 				getEventById: () => {
-					return () => MockEvent;
+					return () => {};
+				},
+				communityReferences: () => {
+					return () => [];
 				},
 			},
 			actions: {
@@ -68,11 +70,6 @@ describe('CommunityPage', () => {
 				};
 			},
 		},
-	};
-
-	const routeWithEventQuery = {
-		params: { community: 'OEBC005' },
-		query: { event: 'testEventID' },
 	};
 
 	const routeWithEventQueryDifferentCommmunityId = {
@@ -108,29 +105,10 @@ describe('CommunityPage', () => {
 		expect(mockStore.community.actions.setCurrentEvent).not.toHaveBeenCalled();
 	});
 
-	it('calls setCurrentEvent, and no other store actions with event ID if url param with event id is set and community is already in store', () => {
-		const wrapper = factory(mockStore, routeWithEventQuery);
-		expect(wrapper).toBeTruthy();
-
-		expect(wrapper.vm.$route.query.event).toBe('testEventID');
-		expect(wrapper.vm.$route.params.community).toBe('OEBC005');
-		expect(wrapper.vm.$store.commit).toHaveBeenCalledWith(
-			'community/setCurrentEvent',
-			MockEvent
-		);
-		expect(mockStore.community.actions.getCommunity).not.toHaveBeenCalled();
-		expect(
-			mockStore.community.actions.getBenchmarkingEvents
-		).not.toHaveBeenCalled();
-		expect(mockStore.community.actions.getDatasets).not.toHaveBeenCalled();
-		expect(mockStore.community.actions.getTools).not.toHaveBeenCalled();
-	});
-
-	it('does not call store actions if no url param with event id and community is already in store', () => {
+	it('does not call store actions if community is already in store', () => {
 		const wrapper = factory(mockStore, routeWithOutEventQuery);
 		expect(wrapper).toBeTruthy();
 
-		expect(wrapper.vm.$route.query.event).toBe(undefined);
 		expect(wrapper.vm.$route.params.community).toBe('OEBC005');
 		expect(mockStore.community.actions.setCurrentEvent).not.toHaveBeenCalled();
 		expect(mockStore.community.actions.getCommunity).not.toHaveBeenCalled();
@@ -141,47 +119,23 @@ describe('CommunityPage', () => {
 		expect(mockStore.community.actions.getTools).not.toHaveBeenCalled();
 	});
 
-	it('triggers store action setCurrentEvent when handleEventSelection is called', () => {
+	it('does display a list of events and clicking an event pushes to community route', () => {
 		const wrapper = factory(mockStore, routeWithOutEventQuery);
 		expect(wrapper).toBeTruthy();
 
-		expect(wrapper.vm.$route.query.event).toBe(undefined);
-		expect(wrapper.vm.$route.params.community).toBe('OEBC005');
-		expect(wrapper.vm.$store.commit).not.toHaveBeenCalled();
-		wrapper.vm.handleEventSelection(MockEvent);
+		const eventElements = wrapper.findAll("[data-test='event']");
+		expect(eventElements.length).toEqual(MockEvents.length);
 
-		expect(wrapper.vm.$store.commit).toHaveBeenCalledWith(
-			'community/setCurrentEvent',
-			MockEvent
-		);
-	});
+		eventElements.at(0).trigger('click');
 
-	it('triggers url update in route object when current event watcher is called', () => {
-		const wrapper = factory(mockStore, routeWithOutEventQuery);
-		expect(wrapper).toBeTruthy();
-
-		expect(wrapper.vm.$route.query.event).toBe(undefined);
-
-		expect(wrapper.vm.$router).toEqual([]);
-		wrapper.vm.$options.watch.currentEvent.call(wrapper.vm);
-		expect(wrapper.vm.$router[0].query.event).toBe('OEBE0020000000');
-	});
-
-	it('dispatches setCurrentEvent action when events watcher is called', () => {
-		const wrapper = factory(mockStore, routeWithEventQuery);
-		expect(wrapper).toBeTruthy();
-
-		expect(wrapper.vm.$route.query.event).toBe('testEventID');
-
-		expect(wrapper.vm.$store.commit).toHaveBeenCalledWith(
-			'community/setCurrentEvent',
-			MockEvent
-		);
-		wrapper.vm.$store.commit.mockClear();
-		wrapper.vm.$options.watch.events.call(wrapper.vm);
-		expect(wrapper.vm.$store.commit).toHaveBeenCalledWith(
-			'community/setCurrentEvent',
-			MockEvent
-		);
+		expect(wrapper.vm.$router.push).toHaveBeenCalledWith({
+			name: 'benchmarking-community',
+			params: {
+				community: MockCommunity._id,
+			},
+			query: {
+				event: MockEvents[0]._id,
+			},
+		});
 	});
 });

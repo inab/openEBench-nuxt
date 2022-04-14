@@ -12,7 +12,7 @@ exports[`CommunityCard should match snapshot for active community 1`] = `
 			Translational Bioinformatics Network - CNVs Benchmarking Group
 		</span></v-card-subtitle-stub>
   <v-card-text-stub tag=\\"div\\" align=\\"bottom\\" class=\\"mt-auto\\">
-    <v-chip-stub color=\\"primary lighten-5\\" small=\\"true\\" activeclass=\\"\\" tag=\\"span\\" active=\\"true\\" closeicon=\\"$delete\\" closelabel=\\"$vuetify.close\\" filtericon=\\"$complete\\" textcolor=\\"black\\">
+    <v-chip-stub color=\\"primary lighten-5\\" small=\\"true\\" activeclass=\\"\\" to=\\"/benchmarking/OEBC005/events\\" tag=\\"span\\" active=\\"true\\" closeicon=\\"$delete\\" closelabel=\\"$vuetify.close\\" filtericon=\\"$complete\\" textcolor=\\"black\\">
       <v-icon-stub small=\\"\\" class=\\"mr-1\\">mdi-calendar-star</v-icon-stub>
       1
       Events
@@ -23,7 +23,7 @@ exports[`CommunityCard should match snapshot for active community 1`] = `
     </v-chip-stub>
   </v-card-text-stub>
   <v-card-actions-stub tag=\\"div\\">
-    <v-btn-stub color=\\"primary\\" tag=\\"button\\" activeclass=\\"\\" to=\\"/benchmarking/OEBC005\\" text=\\"true\\" type=\\"button\\"> Open Community </v-btn-stub>
+    <v-btn-stub color=\\"primary\\" tag=\\"button\\" activeclass=\\"\\" to=\\"/benchmarking/OEBC005\\" text=\\"true\\" type=\\"button\\"> Current Event </v-btn-stub>
     <v-spacer-stub tag=\\"div\\"></v-spacer-stub>
     <v-menu-stub opendelay=\\"0\\" closedelay=\\"0\\" bottom=\\"true\\" left=\\"true\\" openonclick=\\"true\\" contentclass=\\"\\" maxwidth=\\"auto\\" nudgebottom=\\"0\\" nudgeleft=\\"0\\" nudgeright=\\"0\\" nudgetop=\\"0\\" nudgewidth=\\"0\\" closeonclick=\\"true\\" closeoncontentclick=\\"true\\" maxheight=\\"auto\\" origin=\\"top left\\" transition=\\"v-menu-transition\\">
       <v-list-stub tag=\\"div\\">
@@ -55,7 +55,7 @@ exports[`CommunityCard should match snapshot for incubating community 1`] = `
 			Translational Bioinformatics Network - CNVs Benchmarking Group
 		</span></v-card-subtitle-stub>
   <v-card-text-stub tag=\\"div\\" align=\\"bottom\\" class=\\"mt-auto\\">
-    <v-chip-stub color=\\"primary lighten-5\\" small=\\"true\\" activeclass=\\"\\" tag=\\"span\\" active=\\"true\\" closeicon=\\"$delete\\" closelabel=\\"$vuetify.close\\" filtericon=\\"$complete\\" textcolor=\\"black\\">
+    <v-chip-stub color=\\"primary lighten-5\\" small=\\"true\\" activeclass=\\"\\" to=\\"/benchmarking/OEBC005/events\\" tag=\\"span\\" active=\\"true\\" closeicon=\\"$delete\\" closelabel=\\"$vuetify.close\\" filtericon=\\"$complete\\" textcolor=\\"black\\">
       <v-icon-stub small=\\"\\" class=\\"mr-1\\">mdi-calendar-star</v-icon-stub>
       1
       Events
@@ -66,7 +66,7 @@ exports[`CommunityCard should match snapshot for incubating community 1`] = `
     </v-chip-stub>
   </v-card-text-stub>
   <v-card-actions-stub tag=\\"div\\">
-    <v-btn-stub color=\\"primary\\" tag=\\"button\\" activeclass=\\"\\" to=\\"/benchmarking/OEBC005\\" text=\\"true\\" type=\\"button\\"> Open Community </v-btn-stub>
+    <v-btn-stub color=\\"primary\\" tag=\\"button\\" activeclass=\\"\\" to=\\"/benchmarking/OEBC005\\" text=\\"true\\" type=\\"button\\"> Current Event </v-btn-stub>
     <v-spacer-stub tag=\\"div\\"></v-spacer-stub>
     <v-menu-stub opendelay=\\"0\\" closedelay=\\"0\\" bottom=\\"true\\" left=\\"true\\" openonclick=\\"true\\" contentclass=\\"\\" maxwidth=\\"auto\\" nudgebottom=\\"0\\" nudgeleft=\\"0\\" nudgeright=\\"0\\" nudgetop=\\"0\\" nudgewidth=\\"0\\" closeonclick=\\"true\\" closeoncontentclick=\\"true\\" maxheight=\\"auto\\" origin=\\"top left\\" transition=\\"v-menu-transition\\">
       <v-list-stub tag=\\"div\\">

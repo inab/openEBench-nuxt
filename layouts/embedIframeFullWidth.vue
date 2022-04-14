@@ -35,7 +35,7 @@ export default {
 	},
 	watch: {
 		$route() {
-			this.breadcrumbs = [];
+			if (newRoute.path !== oldRoute.path) this.breadcrumbs = [];
 		},
 	},
 	methods: {
@@ -45,10 +45,3 @@ export default {
 	},
 };
 </script>
-
-<style lang="scss" scoped>
-.v-container-custom {
-	height: 100%;
-	width: 100%;
-}
-</style>

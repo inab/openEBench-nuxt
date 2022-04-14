@@ -19,6 +19,7 @@ export default {
 						acronym
 						description
 						status
+						keywords
 						links {
 							uri
 							comment
@@ -56,5 +57,8 @@ export default {
 
 	getters: {
 		communitiesList: (state) => state.list,
+		getCommunityById: (state) => (id) => {
+			return state.list.find((community) => community._id === id);
+		},
 	},
 };
