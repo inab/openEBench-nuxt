@@ -13,7 +13,6 @@ module.exports = {
 			use: ['style-loader', 'css-loader', 'sass-loader'],
 			include: path.resolve(__dirname, '../'),
 		});
-
 		let rule = config.module.rules.find(
 			(r) =>
 				// it can be another rule with file loader

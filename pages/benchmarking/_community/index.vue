@@ -140,7 +140,6 @@ export default {
 	},
 	data() {
 		return {
-			illustration: require('~/static/images/illustrations/lab_community.png'),
 			expand: true,
 		};
 	},

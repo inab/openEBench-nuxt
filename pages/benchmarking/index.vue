@@ -59,6 +59,7 @@
 						:status="community.status"
 						:benchmarking-events="community.benchmarkingEvents"
 						:reference-tools="[]"
+						:to="'/benchmarking/' + community._id"
 						class="fill-height"
 					/>
 				</v-col>

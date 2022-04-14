@@ -39,7 +39,7 @@
 				</feature-card>
 			</v-col>
 			<v-col align="center" cols="12" md="3" class="mt-10 mt-md-0">
-				<feature-card to="/">
+				<feature-card to="projects">
 					<template #icon>
 						<v-icon dark>$vuetify.icons.values.projects</v-icon>
 					</template>
