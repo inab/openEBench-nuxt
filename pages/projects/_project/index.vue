@@ -50,7 +50,6 @@
 				<v-card outlined class="pa-5" elevation="1">
 					<v-row no-gutters align="center">
 						<v-col cols="8">
-							<h2 class="text-h6">General</h2>
 							<marked-wrapper :markdown="markdownContent" />
 						</v-col>
 					</v-row>
