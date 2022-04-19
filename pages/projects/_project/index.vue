@@ -62,7 +62,7 @@
 <script>
 import { mapGetters } from 'vuex';
 import MarkedWrapper from '~/components/Molecules/MarkedWrapper.vue';
-import mdFile from '~/static/markdown/markdown.md';
+import mdFile from '~/static/markdown/permedcoe.md';
 
 export default {
 	name: 'ProjectPage',

@@ -45,8 +45,8 @@
 					</template>
 					<template #title> Project Spaces </template>
 					<template #description>
-						Community spaces for projects to collaborate on software in Life
-						Sciences</template
+						Community spaces for projects to collaborate on software in life
+						sciences</template
 					>
 				</feature-card>
 			</v-col>

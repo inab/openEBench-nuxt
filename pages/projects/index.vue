@@ -7,13 +7,11 @@
 					<h1 class="text-h4">Project Spaces</h1>
 				</template>
 				<p class="text--secondary">
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-					eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-					minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-					aliquip ex ea commodo consequat. Duis aute irure dolor in
-					reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-					pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-					culpa qui officia deserunt mollit anim id est laborum.
+					Project spaces enable research communities to collaborate on software
+					in life sciences. They offer extendable spaces to collaboratively
+					improve methods, tools and web services by comparing their performance
+					on previously agreed datasets and metrics with other similar
+					resources.
 				</p>
 			</info-slider>
 			<v-row v-if="$store.state.projects.loading">

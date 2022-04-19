@@ -34,8 +34,8 @@ exports[`FeatureTeaser should match snapshot 1`] = `
         <div class=\\"v-avatar mb-10 primary\\" style=\\"height: 62px; min-width: 62px; width: 62px;\\"><i aria-hidden=\\"true\\" class=\\"v-icon notranslate material-icons theme--dark\\">$vuetify.icons.values.projects</i></div>
         <h2 class=\\"text-h6 mb-2\\"> Project Spaces </h2>
         <p class=\\"body-1\\">
-          Community spaces for projects to collaborate on software in Life
-          Sciences</p> <a class=\\"mt-2 v-btn v-btn--outlined v-btn--router theme--light v-size--default primary--text\\"><span class=\\"v-btn__content\\"> Explore </span></a>
+          Community spaces for projects to collaborate on software in life
+          sciences</p> <a class=\\"mt-2 v-btn v-btn--outlined v-btn--router theme--light v-size--default primary--text\\"><span class=\\"v-btn__content\\"> Explore </span></a>
       </div>
     </div>
   </div>
