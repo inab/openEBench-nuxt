@@ -47,4 +47,8 @@ export default {
 	border: solid 1px var(--v-primary-lighten5);
 	padding: 10px;
 }
+
+.markup img {
+	max-width: 100%;
+}
 </style>
