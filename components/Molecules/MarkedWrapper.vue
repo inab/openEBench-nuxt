@@ -23,32 +23,49 @@ export default {
 };
 </script>
 <style lang="scss">
-.markup > table {
-	display: block;
-	width: 100%;
-	width: max-content;
-	max-width: 100%;
-	overflow: auto;
-	margin-bottom: 30px;
-}
+.markup {
+	h2,
+	h3 {
+		margin-bottom: 8px;
+	}
 
-.markup > table {
-	border: solid 1px #ddeeee;
-	border-collapse: collapse;
-	border-spacing: 0;
-	font-size: 12px;
-}
-.markup > table > thead th {
-	background-color: var(--v-primary-lighten5);
-	border: solid 1px var(--v-primary-lighten5);
-	padding: 10px;
-}
-.markup > table > tbody td {
-	border: solid 1px var(--v-primary-lighten5);
-	padding: 10px;
-}
+	p,
+	ul {
+		font-size: 0.875rem !important;
+		font-weight: 400;
+		line-height: 1.25rem;
+		letter-spacing: 0.0178571429em !important;
+	}
 
-.markup img {
-	max-width: 100%;
+	ul {
+		margin-bottom: 16px;
+	}
+
+	img {
+		max-width: 100%;
+	}
+
+	table {
+		display: block;
+		width: 100%;
+		width: max-content;
+		max-width: 100%;
+		overflow: auto;
+		margin-bottom: 30px;
+		border: solid 1px #ddeeee;
+		border-collapse: collapse;
+		border-spacing: 0;
+		font-size: 12px;
+
+		tbody td {
+			border: solid 1px var(--v-primary-lighten5);
+			padding: 10px;
+		}
+		thead th {
+			background-color: var(--v-primary-lighten5);
+			border: solid 1px var(--v-primary-lighten5);
+			padding: 10px;
+		}
+	}
 }
 </style>
