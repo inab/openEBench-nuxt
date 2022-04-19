@@ -1,6 +1,6 @@
 <template>
 	<!-- eslint-disable-next-line vue/no-v-html -->
-	<div v-html="markup"></div>
+	<div class="markup" v-html="markup"></div>
 </template>
 <script>
 import { marked } from 'marked';
@@ -22,3 +22,29 @@ export default {
 	},
 };
 </script>
+<style lang="scss">
+.markup > table {
+	display: block;
+	width: 100%;
+	width: max-content;
+	max-width: 100%;
+	overflow: auto;
+	margin-bottom: 30px;
+}
+
+.markup > table {
+	border: solid 1px #ddeeee;
+	border-collapse: collapse;
+	border-spacing: 0;
+	font-size: 12px;
+}
+.markup > table > thead th {
+	background-color: var(--v-primary-lighten5);
+	border: solid 1px var(--v-primary-lighten5);
+	padding: 10px;
+}
+.markup > table > tbody td {
+	border: solid 1px var(--v-primary-lighten5);
+	padding: 10px;
+}
+</style>

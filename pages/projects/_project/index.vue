@@ -44,12 +44,12 @@
 		<v-tabs :vertical="vertical" class="mt-10">
 			<v-tab class="justify-start">
 				<v-icon left> mdi-information-outline </v-icon>
-				General
+				Summary
 			</v-tab>
 			<v-tab-item class="ma-5 mt-5 mt-md-0" :transition="false">
 				<v-card outlined class="pa-5" elevation="1">
 					<v-row no-gutters align="center">
-						<v-col cols="8">
+						<v-col>
 							<marked-wrapper :markdown="markdownContent" />
 						</v-col>
 					</v-row>
