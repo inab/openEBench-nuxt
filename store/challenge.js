@@ -16,7 +16,7 @@ export default {
 
 			const response = await this.$graphql.$post('/graphql', {
 				query: `
-					query getChallenges($id: String!) {
+					query ($id: String!) {
 						getChallenges(challengeFilters: { id: $id }) {
 							_id
 							name
@@ -28,22 +28,7 @@ export default {
 								}
 							}
 						}
-					}
-				`,
-				variables: {
-					id: params.id,
-				},
-			});
 
-			commit('setChallenge', response.data);
-			commit('setLoading', { challenge: false });
-		},
-		async getDatasets({ commit }, params) {
-			commit('setLoading', { datasets: true });
-
-			const response = await this.$graphql.$post('/graphql', {
-				query: `
-					query getDatasets($id: String!) {
 						getDatasets(
 							datasetFilters: { challenge_id: $id, type: "aggregation" }
 						) {
@@ -58,6 +43,9 @@ export default {
 					id: params.id,
 				},
 			});
+
+			commit('setChallenge', response.data);
+			commit('setLoading', { challenge: false });
 
 			commit('setDatasets', response.data);
 			commit('setLoading', { datasets: false });
