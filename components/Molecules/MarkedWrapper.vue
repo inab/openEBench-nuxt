@@ -1,6 +1,6 @@
 <template>
 	<!-- eslint-disable-next-line vue/no-v-html -->
-	<div class="markup" v-html="markup"></div>
+	<v-container class="markup" v-html="markup"></v-container>
 </template>
 <script>
 import { marked } from 'marked';
