@@ -210,15 +210,6 @@ export default {
 			this.$store.dispatch('community/getCommunity', {
 				id: this.$route.params.community,
 			});
-			this.$store.dispatch('community/getBenchmarkingEvents', {
-				id: this.$route.params.community,
-			});
-			this.$store.dispatch('community/getDatasets', {
-				id: this.$route.params.community,
-			});
-			this.$store.dispatch('community/getTools', {
-				id: this.$route.params.community,
-			});
 		} else if (this.$route.query.event) {
 			this.setCurrentEvent(this.$route.query.event);
 		}

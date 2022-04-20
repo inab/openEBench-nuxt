@@ -43,9 +43,6 @@ describe('CommunityPage', () => {
 			},
 			actions: {
 				setCurrentEvent: jest.fn(),
-				getTools: jest.fn(),
-				getDatasets: jest.fn(),
-				getBenchmarkingEvents: jest.fn(),
 				getCommunity: jest.fn(),
 			},
 			mutations: {
@@ -100,11 +97,6 @@ describe('CommunityPage', () => {
 		expect(wrapper.vm.$route.query.event).toBe('testEventID');
 		expect(wrapper.vm.$route.params.community).toBe('someCommunityID');
 		expect(mockStore.community.actions.getCommunity).toHaveBeenCalled();
-		expect(
-			mockStore.community.actions.getBenchmarkingEvents
-		).toHaveBeenCalled();
-		expect(mockStore.community.actions.getDatasets).toHaveBeenCalled();
-		expect(mockStore.community.actions.getTools).toHaveBeenCalled();
 		expect(mockStore.community.actions.setCurrentEvent).not.toHaveBeenCalled();
 	});
 
@@ -119,11 +111,6 @@ describe('CommunityPage', () => {
 			MockEvent
 		);
 		expect(mockStore.community.actions.getCommunity).not.toHaveBeenCalled();
-		expect(
-			mockStore.community.actions.getBenchmarkingEvents
-		).not.toHaveBeenCalled();
-		expect(mockStore.community.actions.getDatasets).not.toHaveBeenCalled();
-		expect(mockStore.community.actions.getTools).not.toHaveBeenCalled();
 	});
 
 	it('does not call store actions if no url param with event id and community is already in store', () => {
@@ -134,11 +121,6 @@ describe('CommunityPage', () => {
 		expect(wrapper.vm.$route.params.community).toBe('OEBC005');
 		expect(mockStore.community.actions.setCurrentEvent).not.toHaveBeenCalled();
 		expect(mockStore.community.actions.getCommunity).not.toHaveBeenCalled();
-		expect(
-			mockStore.community.actions.getBenchmarkingEvents
-		).not.toHaveBeenCalled();
-		expect(mockStore.community.actions.getDatasets).not.toHaveBeenCalled();
-		expect(mockStore.community.actions.getTools).not.toHaveBeenCalled();
 	});
 
 	it('triggers store action setCurrentEvent when handleEventSelection is called', () => {

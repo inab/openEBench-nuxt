@@ -48,9 +48,6 @@ describe('Community Participant', () => {
 			},
 			actions: {
 				setCurrentEvent: jest.fn(),
-				getTools: jest.fn(),
-				getDatasets: jest.fn(),
-				getBenchmarkingEvents: jest.fn(),
 				getCommunity: jest.fn(),
 			},
 			mutations: {
@@ -113,7 +110,6 @@ describe('Community Participant', () => {
 		const wrapper = factory(mockStore);
 		expect(wrapper).toBeTruthy();
 
-		expect(mockStore.challenge.actions.getDatasets).toHaveBeenCalled();
 		expect(mockStore.challenge.actions.getChallenge).toHaveBeenCalled();
 	});
 

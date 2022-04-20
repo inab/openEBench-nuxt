@@ -45,9 +45,6 @@ describe('Event Index Page', () => {
 			},
 			actions: {
 				setCurrentEvent: jest.fn(),
-				getTools: jest.fn(),
-				getDatasets: jest.fn(),
-				getBenchmarkingEvents: jest.fn(),
 				getCommunity: jest.fn(),
 			},
 			mutations: {
@@ -97,11 +94,6 @@ describe('Event Index Page', () => {
 		expect(wrapper.vm.$route.query.event).toBe('testEventID');
 		expect(wrapper.vm.$route.params.community).toBe('someCommunityID');
 		expect(mockStore.community.actions.getCommunity).toHaveBeenCalled();
-		expect(
-			mockStore.community.actions.getBenchmarkingEvents
-		).toHaveBeenCalled();
-		expect(mockStore.community.actions.getDatasets).toHaveBeenCalled();
-		expect(mockStore.community.actions.getTools).toHaveBeenCalled();
 		expect(mockStore.community.actions.setCurrentEvent).not.toHaveBeenCalled();
 	});
 
@@ -112,11 +104,6 @@ describe('Event Index Page', () => {
 		expect(wrapper.vm.$route.params.community).toBe('OEBC005');
 		expect(mockStore.community.actions.setCurrentEvent).not.toHaveBeenCalled();
 		expect(mockStore.community.actions.getCommunity).not.toHaveBeenCalled();
-		expect(
-			mockStore.community.actions.getBenchmarkingEvents
-		).not.toHaveBeenCalled();
-		expect(mockStore.community.actions.getDatasets).not.toHaveBeenCalled();
-		expect(mockStore.community.actions.getTools).not.toHaveBeenCalled();
 	});
 
 	it('does display a list of events and clicking an event pushes to community route', () => {

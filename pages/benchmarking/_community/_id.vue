@@ -145,9 +145,6 @@ export default {
 	mounted() {
 		this.$parent.$emit('emitBreadcrumbs', this.breadcrumbs);
 		if (this.$store.state.challenge.challenge._id !== this.$route.params.id) {
-			this.$store.dispatch('challenge/getDatasets', {
-				id: this.$route.params.id,
-			});
 			this.$store.dispatch('challenge/getChallenge', {
 				id: this.$route.params.id,
 			});
