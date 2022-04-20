@@ -7,7 +7,7 @@
 		<p class="body-1">
 			<slot name="description" />
 		</p>
-		<v-btn class="mt-2" text color="primary" :to="to"> Explore </v-btn>
+		<v-btn class="mt-2" outlined color="primary" :to="to"> Explore </v-btn>
 	</div>
 </template>
 
