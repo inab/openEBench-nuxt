@@ -42,7 +42,11 @@ export default {
 	}
 
 	img {
+		max-height: 80vh;
 		max-width: 100%;
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
 	}
 
 	table {
