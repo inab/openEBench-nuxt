@@ -2,7 +2,7 @@
 	<v-container fluid>
 		<v-container>
 			<v-skeleton-loader
-				v-if="$store.state.projects.loading"
+				v-if="$store.state.community.loading.community"
 				class="mb-5"
 				type="heading, list-item-three-line"
 			/>
@@ -74,8 +74,8 @@ export default {
 		};
 	},
 	computed: {
-		...mapGetters('projects', {
-			project: 'currentProject',
+		...mapGetters('community', {
+			project: 'community',
 		}),
 		vertical() {
 			return this.$vuetify.breakpoint.mdAndUp;
@@ -110,6 +110,16 @@ export default {
 	},
 	mounted() {
 		this.$parent.$emit('emitBreadcrumbs', this.breadcrumbs);
+
+		if (
+			this.$store.state.community.community._id !== this.$route.params.project
+		) {
+			this.$store.commit('community/setCurrentEvent', null);
+
+			this.$store.dispatch('community/getCommunity', {
+				id: this.$route.params.project,
+			});
+		}
 	},
 	methods: {},
 };

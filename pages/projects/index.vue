@@ -14,7 +14,7 @@
 					resources.
 				</p>
 			</info-slider>
-			<v-row v-if="$store.state.projects.loading">
+			<v-row v-if="$store.state.communities.loading">
 				<v-col
 					v-for="(c, i) in [1, 2, 3, 4, 5, 6, 7, 8]"
 					:key="i"
@@ -86,12 +86,15 @@ export default {
 		};
 	},
 	computed: {
-		...mapGetters('projects', {
-			projects: 'projectsList',
+		...mapGetters('communities', {
+			projects: 'communitiesFilteredByProjects',
 		}),
 	},
 	mounted() {
 		this.$parent.$emit('emitBreadcrumbs', this.breadcrumbs);
+
+		if (this.$store.state.communities.list.length === 0)
+			this.$store.dispatch('communities/getCommunities');
 	},
 };
 </script>
