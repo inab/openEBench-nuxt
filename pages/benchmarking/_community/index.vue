@@ -6,40 +6,7 @@
 				class="mb-5"
 				type="heading, list-item-three-line"
 			/>
-			<div v-else class="text--clickable" @click="expand = !expand">
-				<h1 class="text-h4 mb-5 d-flex">
-					{{ community.acronym }} - {{ community.name }}
-					<v-btn class="ml-2" color="primary" icon>
-						<v-icon>{{
-							expand
-								? 'mdi-chevron-up-circle-outline'
-								: 'mdi-chevron-down-circle-outline'
-						}}</v-icon>
-					</v-btn>
-				</h1>
-				<v-expand-transition>
-					<v-row v-show="expand" align="center">
-						<v-col align="center" cols="2">
-							<v-img :src="community.logo" contain max-width="500" />
-						</v-col>
-						<v-col class="text-body-2 text--secondary" cols="10">
-							<p>
-								{{ community.description }}
-							</p>
-							<p v-if="community.keywords">
-								Keywords:
-								<span
-									v-for="(keyword, index) in community.keywords"
-									:key="index"
-									class="font-weight-medium"
-								>
-									{{ keyword }};
-								</span>
-							</p>
-						</v-col>
-					</v-row>
-				</v-expand-transition>
-			</div>
+			<community-info v-else :community="community" />
 		</v-container>
 		<v-tabs :vertical="vertical" class="mt-10">
 			<v-tab class="justify-start">
@@ -61,41 +28,11 @@
 					type="table"
 				></v-skeleton-loader>
 				<v-card v-else-if="currentEvent" outlined class="pa-5" elevation="1">
-					<v-row no-gutters align="center">
-						<v-col cols="8">
-							<h2 v-if="currentEvent" class="text-h6">
-								<v-menu auto>
-									<template #activator="{ on, attrs }">
-										<span
-											class="text--clickable primary--text"
-											v-bind="attrs"
-											v-on="on"
-											>Event - {{ currentEvent.name }}</span
-										>
-										<v-btn icon color="primary" v-bind="attrs" v-on="on">
-											<v-icon>mdi-chevron-down</v-icon>
-										</v-btn>
-									</template>
-									<v-list>
-										<v-list-item
-											v-for="(event, index) in events"
-											:key="index"
-											link
-											dense
-											@click="handleEventSelection(event)"
-										>
-											<v-list-item-title>{{ event.name }}</v-list-item-title>
-										</v-list-item>
-									</v-list>
-								</v-menu>
-							</h2>
-						</v-col>
-						<v-col cols="4" class="d-flex align-center">
-							<v-icon class="mr-1 text--primary"> mdi-flag-outline </v-icon>
-							{{ currentEvent.challenges.length }}
-							{{ 'Challenges' | pluralize(currentEvent.challenges.length) }}
-						</v-col>
-					</v-row>
+					<community-event-selector
+						:current-event="currentEvent"
+						:events="events"
+						@change="handleEventSelection"
+					/>
 					<community-classification-table
 						:key="currentEvent._id + '_table'"
 						class="mt-5"
@@ -130,6 +67,8 @@ import { mapGetters } from 'vuex';
 import CommunityClassificationTable from '~/components/Communities/CommunityClassificationTable';
 import CommunityToolsTable from '~/components/Communities/CommunityToolsTable';
 import CommunityDatasetsTable from '~/components/Communities/CommunityDatasetsTable';
+import CommunityEventSelector from '~/components/Communities/CommunityEventSelector';
+import CommunityInfo from '~/components/Communities/CommunityInfo';
 
 export default {
 	name: 'CommunityPage',
@@ -137,11 +76,8 @@ export default {
 		CommunityClassificationTable,
 		CommunityToolsTable,
 		CommunityDatasetsTable,
-	},
-	data() {
-		return {
-			expand: true,
-		};
+		CommunityEventSelector,
+		CommunityInfo,
 	},
 	computed: {
 		...mapGetters('community', {
@@ -228,9 +164,5 @@ export default {
 <style lang="scss" scoped>
 .v-tab {
 	text-transform: none !important;
-}
-
-.text--clickable {
-	cursor: pointer;
 }
 </style>

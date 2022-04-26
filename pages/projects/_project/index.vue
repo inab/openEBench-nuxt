@@ -6,40 +6,7 @@
 				class="mb-5"
 				type="heading, list-item-three-line"
 			/>
-			<div v-else class="text--clickable" @click="expand = !expand">
-				<h1 class="text-h4 mb-5 d-flex">
-					{{ project.acronym }}
-					<v-btn class="ml-2" color="primary" icon>
-						<v-icon>{{
-							expand
-								? 'mdi-chevron-up-circle-outline'
-								: 'mdi-chevron-down-circle-outline'
-						}}</v-icon>
-					</v-btn>
-				</h1>
-				<v-expand-transition>
-					<v-row v-show="expand" align="center">
-						<v-col align="center" cols="2">
-							<v-img :src="project.logo" contain max-width="500" />
-						</v-col>
-						<v-col class="text-body-2 text--secondary" cols="10">
-							<p>
-								{{ project.description }}
-							</p>
-							<p v-if="project.keywords">
-								Keywords:
-								<span
-									v-for="(keyword, index) in project.keywords"
-									:key="index"
-									class="font-weight-medium"
-								>
-									{{ keyword }};
-								</span>
-							</p>
-						</v-col>
-					</v-row>
-				</v-expand-transition>
-			</div>
+			<community-info v-else :community="project" />
 		</v-container>
 		<v-tabs :vertical="vertical" class="mt-10">
 			<v-tab class="justify-start">
@@ -62,15 +29,11 @@
 <script>
 import { mapGetters } from 'vuex';
 import MarkedWrapper from '~/components/Molecules/MarkedWrapper.vue';
+import CommunityInfo from '~/components/Communities/CommunityInfo';
 
 export default {
 	name: 'ProjectPage',
-	components: { MarkedWrapper },
-	data() {
-		return {
-			expand: true,
-		};
-	},
+	components: { MarkedWrapper, CommunityInfo },
 	computed: {
 		...mapGetters('community', {
 			project: 'community',
@@ -129,9 +92,5 @@ export default {
 <style lang="scss" scoped>
 .v-tab {
 	text-transform: none !important;
-}
-
-.text--clickable {
-	cursor: pointer;
 }
 </style>

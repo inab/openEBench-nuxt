@@ -45,7 +45,7 @@
 						:logo="project.logo"
 						:links="project.links"
 						:status="project.status"
-						:benchmarking-events="project.benchmarkingEvents"
+						:benchmarking-events="[]"
 						:reference-tools="[]"
 						:to="'/projects/' + project._id"
 						class="fill-height"
