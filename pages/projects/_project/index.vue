@@ -62,7 +62,6 @@
 <script>
 import { mapGetters } from 'vuex';
 import MarkedWrapper from '~/components/Molecules/MarkedWrapper.vue';
-import mdFile from '~/static/markdown/projects/permedcoe.md';
 
 export default {
 	name: 'ProjectPage',
@@ -70,7 +69,6 @@ export default {
 	data() {
 		return {
 			expand: true,
-			markdownContent: mdFile,
 		};
 	},
 	computed: {
@@ -114,14 +112,17 @@ export default {
 		if (
 			this.$store.state.community.community._id !== this.$route.params.project
 		) {
-			this.$store.commit('community/setCurrentEvent', null);
-
 			this.$store.dispatch('community/getCommunity', {
 				id: this.$route.params.project,
 			});
 		}
 	},
-	methods: {},
+	created() {
+		const {
+			default: md,
+		} = require(`~/static/markdown/projects/${this.$route.params.project}.md`);
+		this.markdownContent = md;
+	},
 };
 </script>
 

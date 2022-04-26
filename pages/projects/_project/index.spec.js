@@ -3,11 +3,12 @@ import Index from './index.vue';
 import MockCommunity from '~/test/unit/mockData/Community';
 jest.mock('marked', () => ({ marked: jest.fn(() => 'foo') }));
 
-const factory = (mockStore) => {
+const factory = (mockStore, route) => {
 	return shallowMount(Index, {
 		...createComponentMocks({ store: mockStore }),
 		mocks: {
-			$route: { params: { project: '1' } },
+			$route: route,
+			$router: [],
 		},
 	});
 };
@@ -42,8 +43,20 @@ describe('Index.vue', () => {
 		},
 	};
 
+	const routeWithProjectId = {
+		params: { project: 'sample' },
+	};
+
 	it('is instantiated', () => {
-		const wrapper = factory(mockStore);
+		const wrapper = factory(mockStore, routeWithProjectId);
 		expect(wrapper).toBeTruthy();
+	});
+
+	it('calls store actions if community id URL param is not equal community in store', () => {
+		const wrapper = factory(mockStore, routeWithProjectId);
+		expect(wrapper).toBeTruthy();
+
+		expect(wrapper.vm.$route.params.project).toBe('sample');
+		expect(mockStore.community.actions.getCommunity).toHaveBeenCalled();
 	});
 });
