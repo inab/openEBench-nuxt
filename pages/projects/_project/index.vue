@@ -81,10 +81,15 @@ export default {
 		}
 	},
 	created() {
-		const {
-			default: md,
-		} = require(`~/static/markdown/projects/${this.$route.params.project}.md`);
-		this.markdownContent = md;
+		try {
+			const {
+				default: md,
+			} = require(`~/static/markdown/projects/${this.$route.params.project}.md`);
+			this.markdownContent = md;
+		} catch (error) {
+			console.error(error);
+			this.markdownContent = '';
+		}
 	},
 };
 </script>
