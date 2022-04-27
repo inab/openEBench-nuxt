@@ -12,7 +12,7 @@ export default {
 		// eslint-disable-next-line vue/prop-name-casing
 		markdown: {
 			// eslint-disable-next-line vue/require-prop-type-constructor
-			type: String | undefined,
+			type: String,
 			required: true,
 		},
 	},
