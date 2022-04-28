@@ -8,7 +8,11 @@
 			/>
 			<community-info v-else :community="community" />
 		</v-container>
-		<v-tabs :vertical="vertical" class="mt-10">
+		<v-tabs
+			v-if="$store.state.community.loading.community || currentEvent"
+			:vertical="vertical"
+			class="mt-10"
+		>
 			<v-tab class="justify-start">
 				<v-icon left> mdi-view-dashboard </v-icon>
 				Results
@@ -59,6 +63,9 @@
 				</v-card>
 			</v-tab-item>
 		</v-tabs>
+		<v-container v-else>
+			<community-empty-state class="mt-10" />
+		</v-container>
 	</v-container>
 </template>
 
@@ -69,6 +76,7 @@ import CommunityToolsTable from '~/components/Communities/CommunityToolsTable';
 import CommunityDatasetsTable from '~/components/Communities/CommunityDatasetsTable';
 import CommunityEventSelector from '~/components/Communities/CommunityEventSelector';
 import CommunityInfo from '~/components/Communities/CommunityInfo';
+import CommunityEmptyState from '~/components/Communities/CommunityEmptyState';
 
 export default {
 	name: 'CommunityPage',
@@ -78,6 +86,7 @@ export default {
 		CommunityDatasetsTable,
 		CommunityEventSelector,
 		CommunityInfo,
+		CommunityEmptyState,
 	},
 	computed: {
 		...mapGetters('community', {
