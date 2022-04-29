@@ -19,12 +19,18 @@ describe('CommunityCard', () => {
 	});
 
 	it('should match snapshot for active community', () => {
-		const wrapper = factory(MockCommunity, { status: 'active' });
+		const wrapper = factory(MockCommunity, {
+			to: '/benchmarking/' + MockCommunity._id,
+			status: 'active',
+		});
 		expect(wrapper.html()).toMatchSnapshot();
 	});
 
 	it('should match snapshot for incubating community', () => {
-		const wrapper = factory(MockCommunity, { status: 'incubating' });
+		const wrapper = factory(MockCommunity, {
+			to: '/benchmarking/' + MockCommunity._id,
+			status: 'incubating',
+		});
 		expect(wrapper.html()).toMatchSnapshot();
 	});
 });

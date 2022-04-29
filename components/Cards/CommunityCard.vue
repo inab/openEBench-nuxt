@@ -42,7 +42,7 @@
 		<v-card-actions>
 			<v-btn text color="primary" :to="to"> Current Event </v-btn>
 			<v-spacer />
-			<v-menu bottom left>
+			<v-menu v-if="links.length > 0" bottom left>
 				<template #activator="{ on, attrs }">
 					<v-btn icon v-bind="attrs" v-on="on">
 						<v-icon>mdi-dots-vertical</v-icon>
@@ -102,13 +102,14 @@ export default {
 			type: Array,
 			required: true,
 		},
+		to: {
+			type: String,
+			required: true,
+		},
 	},
 	computed: {
 		linksFiltered() {
 			return this.links.filter((link) => link.comment !== '@logo');
-		},
-		to() {
-			return '/benchmarking/' + this._id;
 		},
 		statusChipColor() {
 			switch (this.status) {

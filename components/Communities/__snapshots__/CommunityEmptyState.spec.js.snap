@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CommunityEmptyState should match snapshot 1`] = `
+"<div>
+  <div class=\\"v-image v-responsive theme--light\\" style=\\"max-height: 300px;\\">
+    <div class=\\"v-responsive__content\\"></div>
+  </div>
+  <h2 class=\\"mt-10 text-h4 text--secondary text-center\\">
+    No benchmarking results yet...
+  </h2>
+  <h3 class=\\"mt-5 text-h5 text--secondary text-center\\">
+    Come back soon to see some benchmarking results.
+  </h3>
+</div>"
+`;

@@ -1,29 +1,17 @@
 <template>
 	<v-container fluid>
 		<v-container>
-			<h1 class="text-h4 mt-13 mb-5 hidden-md-and-up">
-				Benchmarking Communities
-			</h1>
+			<h1 class="text-h4 mt-13 mb-5 hidden-md-and-up">Project Spaces</h1>
 			<info-slider class="mb-5 hidden-sm-and-down" :img="illustration">
 				<template #header>
-					<h1 class="text-h4">Benchmarking Communities</h1>
+					<h1 class="text-h4">Project Spaces</h1>
 				</template>
 				<p class="text--secondary">
-					Unbiased and objective evaluations of bioinformatics resources are
-					challenging to set up and can only be effective when built and
-					implemented around community driven efforts. Thus, in OpenEBench we
-					gather several community initiatives which establish standards and
-					automated services to facilitate scientific benchmarking.
-				</p>
-
-				<p class="text--secondary">
-					These efforts provide a way for software developers to implement more
-					efficient methods, tools and web services by comparing their
-					performance on previously agreed datasets and metrics with other
-					similar resources and, more importantly, help end-users that tend to
-					have difficulties in choosing the right tool for the problem at hand,
-					and are not necessarily aware of the latest developments in each of
-					the fields of the bioinformatics methods they need to use.
+					Project spaces enable research communities to collaborate on software
+					in life sciences. They offer extendable spaces to collaboratively
+					improve methods, tools and web services by comparing their performance
+					on previously agreed datasets and metrics with other similar
+					resources.
 				</p>
 			</info-slider>
 			<v-row v-if="$store.state.communities.loading">
@@ -44,22 +32,22 @@
 			</v-row>
 			<v-row v-else>
 				<v-col
-					v-for="(community, index) in communities"
+					v-for="(project, index) in projects"
 					:key="index"
 					cols="12"
 					sm="4"
 					md="3"
 				>
 					<community-card
-						:_id="community._id"
-						:acronym="community.acronym"
-						:name="community.name"
-						:logo="community.logo"
-						:links="community.links"
-						:status="community.status"
-						:benchmarking-events="community.benchmarkingEvents"
+						:_id="project._id"
+						:acronym="project.acronym"
+						:name="project.name"
+						:logo="project.logo"
+						:links="project.links"
+						:status="project.status"
+						:benchmarking-events="[]"
 						:reference-tools="[]"
-						:to="'/benchmarking/' + community._id"
+						:to="'/projects/' + project._id"
 						class="fill-height"
 					/>
 				</v-col>
@@ -91,15 +79,15 @@ export default {
 					to: '/',
 				},
 				{
-					text: 'Benchmarking Communities',
-					to: '/benchmarking',
+					text: 'Project Spaces',
+					to: '/projects',
 				},
 			],
 		};
 	},
 	computed: {
 		...mapGetters('communities', {
-			communities: 'communitiesList',
+			projects: 'communitiesFilteredByProjects',
 		}),
 	},
 	mounted() {

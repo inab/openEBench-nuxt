@@ -2,36 +2,53 @@
 	<v-parallax :height="containerHeight" :src="material2">
 		<v-container>
 			<v-row align="center" justify="center" class="root">
-				<v-col align="center" cols="12" sm="4">
+				<v-col align="center" cols="12" sm="3">
 					<div class="counter-item">
 						<span class="icon ion-leaf" />
 						<div class="text">
 							<h4 class="text-h3">
 								<animated-number :value="communityCount" />
 							</h4>
-							<h6 class="title">Communities</h6>
+							<h6 class="title">
+								{{ 'Community' | pluralize(communityCount) }}
+							</h6>
 						</div>
 					</div>
 				</v-col>
-				<v-col align="center" cols="12" sm="4">
+				<v-col align="center" cols="12" sm="3">
 					<div class="counter-item">
 						<span class="icon ion-ios-lightbulb-outline" />
 						<div class="text">
 							<h4 class="text-h3">
 								<animated-number :value="toolsCount" />
 							</h4>
-							<h6 class="title">Tools</h6>
+							<h6 class="title">
+								{{ 'Tool' | pluralize(toolsCount) }}
+							</h6>
 						</div>
 					</div>
 				</v-col>
-				<v-col align="center" cols="12" sm="4">
+				<v-col align="center" cols="12" sm="3">
 					<div class="counter-item">
 						<span class="icon ion-ios-world-outline" />
 						<div class="text">
 							<h4 class="text-h3 font-weight-normal">
 								<animated-number :value="resourcesCount" />
 							</h4>
-							<h6 class="title">Resources</h6>
+							<h6 class="title">
+								{{ 'Resource' | pluralize(resourcesCount) }}
+							</h6>
+						</div>
+					</div>
+				</v-col>
+				<v-col align="center" cols="12" sm="3">
+					<div class="counter-item">
+						<span class="icon ion-ios-world-outline" />
+						<div class="text">
+							<h4 class="text-h3 font-weight-normal">
+								<animated-number :value="1" />
+							</h4>
+							<h6 class="title">{{ 'Project Space' | pluralize(1) }}</h6>
 						</div>
 					</div>
 				</v-col>
@@ -70,7 +87,7 @@ export default {
 	},
 	computed: {
 		containerHeight() {
-			return this.$vuetify.breakpoint.xs ? 350 : 170;
+			return this.$vuetify.breakpoint.xs ? 450 : 170;
 		},
 	},
 };

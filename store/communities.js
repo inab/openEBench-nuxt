@@ -28,6 +28,7 @@ export default {
 						benchmarkingEvents {
 							_id
 						}
+						_metadata
 					}
 				  }
 				`,
@@ -46,6 +47,7 @@ export default {
 						community.logo = link.uri;
 					}
 				});
+				community._metadata = JSON.parse(community._metadata);
 				if (community.status === 'abandoned') community.status = 'inactive';
 				return community;
 			});
@@ -56,7 +58,14 @@ export default {
 	},
 
 	getters: {
-		communitiesList: (state) => state.list,
+		communitiesList: (state) =>
+			state.list.filter(
+				(item) => (item._metadata ? !item._metadata.project_spaces : true) // filter project communities
+			),
+		communitiesFilteredByProjects: (state) =>
+			state.list.filter((item) =>
+				item._metadata ? item._metadata.project_spaces : false
+			),
 		getCommunityById: (state) => (id) => {
 			return state.list.find((community) => community._id === id);
 		},

@@ -64,7 +64,7 @@
 				type="list-item"
 			></v-skeleton-loader>
 		</div>
-		<v-list v-else>
+		<v-list v-else-if="events.length > 0">
 			<v-list-item
 				v-for="(event, index) in events"
 				:key="index"
@@ -82,14 +82,17 @@
 				</v-list-item-content>
 			</v-list-item>
 		</v-list>
+		<community-empty-state v-else class="mt-10" />
 	</v-container>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
+import CommunityEmptyState from '~/components/Communities/CommunityEmptyState';
+
 export default {
 	name: 'CommunityPage',
-	components: {},
+	components: { CommunityEmptyState },
 	data() {
 		return {
 			illustration: require('~/static/images/illustrations/lab_community.png'),
@@ -138,15 +141,6 @@ export default {
 			this.$store.commit('community/setCurrentEvent', null);
 
 			this.$store.dispatch('community/getCommunity', {
-				id: this.$route.params.community,
-			});
-			this.$store.dispatch('community/getBenchmarkingEvents', {
-				id: this.$route.params.community,
-			});
-			this.$store.dispatch('community/getDatasets', {
-				id: this.$route.params.community,
-			});
-			this.$store.dispatch('community/getTools', {
 				id: this.$route.params.community,
 			});
 		}

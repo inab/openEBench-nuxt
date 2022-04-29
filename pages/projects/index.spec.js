@@ -38,5 +38,5 @@ describe('Index.vue', () => {
 		expect(mockStore.communities.actions.getCommunities).toHaveBeenCalled();
 	});
 
-	it.todo('should just render communities without project flag');
+	it.todo('should just render communities with project flag');
 });
