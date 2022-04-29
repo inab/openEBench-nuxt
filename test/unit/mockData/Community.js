@@ -7,6 +7,16 @@ export default {
 	status: 'active',
 	benchmarkingEvents: [{ _id: 'OEBE0050000000' }],
 	referenceTools: [],
+	references: ['doi:10.1186/gb-2009-10-9-403'],
+	keywords: [
+		'Phylogenetics',
+		'Speciation',
+		'Sequence alignment',
+		'Gene ontologies',
+		'Comparative genomics',
+		'Orthology',
+		'Orthologs',
+	],
 	links: [
 		{
 			uri: 'https://inb-elixir.es/transbionet',

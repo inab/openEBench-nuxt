@@ -1,5 +1,6 @@
 import WelcomeSection from '~/components/Landing/WelcomeSection.vue';
 import HeroSearchbar from '~/components/Landing/HeroSearchbar';
+import KeyFeatures from '~/components/Landing/KeyFeatures';
 import FeatureTeaser from '~/components/Landing/FeatureTeaser';
 import HeroNumbers from '~/components/Landing/HeroNumbers';
 import NewsCards from '~/components/Landing/NewsCards';
@@ -18,6 +19,11 @@ export const Welcome = () => ({
 export const ToolSearchbar = () => ({
 	components: { HeroSearchbar },
 	template: '<hero-searchbar />',
+});
+
+export const KeyFeaturesOverview = () => ({
+	components: { KeyFeatures },
+	template: '<key-features />',
 });
 
 export const FeatureOverview = () => ({

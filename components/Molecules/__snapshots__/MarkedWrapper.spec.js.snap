@@ -1,0 +1,155 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MarkedWrapper renders some markdown 1`] = `
+"<v-container-stub tag=\\"div\\" class=\\"markup\\">
+  <h1 id=\\"h1-heading-8-\\">h1 Heading 8-)</h1>
+  <h2 id=\\"h2-heading\\">h2 Heading</h2>
+  <h3 id=\\"h3-heading\\">h3 Heading</h3>
+  <h4 id=\\"h4-heading\\">h4 Heading</h4>
+  <h5 id=\\"h5-heading\\">h5 Heading</h5>
+  <h6 id=\\"h6-heading\\">h6 Heading</h6>
+  <h2 id=\\"horizontal-rules\\">Horizontal Rules</h2>
+  <hr>
+  <hr>
+  <hr>
+  <h2 id=\\"typographic-replacements\\">Typographic replacements</h2>
+  <p>Enable typographer option to see result.</p>
+  <p>(c) (C) (r) (R) (tm) (TM) (p) (P) +-</p>
+  <p>test.. test... test..... test?..... test!....</p>
+  <p>!!!!!! ???? ,, -- ---</p>
+  <p>\\"Smartypants, double quotes\\" and 'single quotes'</p>
+  <h2 id=\\"emphasis\\">Emphasis</h2>
+  <p><strong>This is bold text</strong></p>
+  <p><strong>This is bold text</strong></p>
+  <p><em>This is italic text</em></p>
+  <p><em>This is italic text</em></p>
+  <p><del>Strikethrough</del></p>
+  <h2 id=\\"blockquotes\\">Blockquotes</h2>
+  <blockquote>
+    <p>Blockquotes can also be nested...</p>
+    <blockquote>
+      <p>...by using additional greater-than signs right next to each other...</p>
+      <blockquote>
+        <p>...or with spaces between arrows.</p>
+      </blockquote>
+    </blockquote>
+  </blockquote>
+  <h2 id=\\"lists\\">Lists</h2>
+  <p>Unordered</p>
+  <ul>
+    <li>Create a list by starting a line with <code>+</code>, <code>-</code>, or <code>*</code></li>
+    <li>Sub-lists are made by indenting 2 spaces:<ul>
+        <li>Marker character change forces new list start:<ul>
+            <li>Ac tristique libero volutpat at</li>
+            <li>Facilisis in pretium nisl aliquet</li>
+            <li>Nulla volutpat aliquam velit</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Very easy!</li>
+  </ul>
+  <p>Ordered</p>
+  <ol>
+    <li>
+      <p>Lorem ipsum dolor sit amet</p>
+    </li>
+    <li>
+      <p>Consectetur adipiscing elit</p>
+    </li>
+    <li>
+      <p>Integer molestie lorem at massa</p>
+    </li>
+    <li>
+      <p>You can use sequential numbers...</p>
+    </li>
+    <li>
+      <p>...or keep all the numbers as <code>1.</code></p>
+    </li>
+  </ol>
+  <p>Start numbering with offset:</p>
+  <ol start=\\"57\\">
+    <li>foo</li>
+    <li>bar</li>
+  </ol>
+  <h2 id=\\"code\\">Code</h2>
+  <p>Inline <code>code</code></p>
+  <p>Indented code</p>
+  <pre><code>// Some comments
+line 1 of code
+line 2 of code
+line 3 of code
+</code></pre>
+  <p>Block code \\"fences\\"</p>
+  <pre><code>Sample text here...
+</code></pre>
+  <p>Syntax highlighting</p>
+  <pre><code class=\\"language-js\\">var foo = function (bar) {
+    return bar++;
+};
+
+console.log(foo(5));
+</code></pre>
+  <h2 id=\\"tables\\">Tables</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Option</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>data</td>
+        <td>path to data files to supply the data that will be passed into templates.</td>
+      </tr>
+      <tr>
+        <td>engine</td>
+        <td>engine to be used for processing templates. Handlebars is the default.</td>
+      </tr>
+      <tr>
+        <td>ext</td>
+        <td>extension to be used for dest files.</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>Right aligned columns</p>
+  <table>
+    <thead>
+      <tr>
+        <th align=\\"right\\">Option</th>
+        <th align=\\"right\\">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td align=\\"right\\">data</td>
+        <td align=\\"right\\">path to data files to supply the data that will be passed into templates.</td>
+      </tr>
+      <tr>
+        <td align=\\"right\\">engine</td>
+        <td align=\\"right\\">engine to be used for processing templates. Handlebars is the default.</td>
+      </tr>
+      <tr>
+        <td align=\\"right\\">ext</td>
+        <td align=\\"right\\">extension to be used for dest files.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h2>Links</h2>
+  <p><a href=\\"http://dev.nodeca.com\\">link text</a></p>
+  <p><a title=\\"title text!\\" href=\\"http://nodeca.github.io/pica/demo/\\">link with title</a></p>
+  <p>Autoconverted link <a href=\\"https://github.com/nodeca/pica\\">https://github.com/nodeca/pica</a> (enable linkify to see)</p>
+  <h2>Images</h2>
+  <p><img alt=\\"Minion\\" src=\\"https://octodex.github.com/images/minion.png\\"> <img title=\\"The Stormtroopocat\\" alt=\\"Stormtroopocat\\" src=\\"https://octodex.github.com/images/stormtroopocat.jpg\\"></p>
+  <p>Like links, Images also have a footnote style syntax</p>
+  <p><img title=\\"The Dojocat\\" alt=\\"Alt text\\" src=\\"https://octodex.github.com/images/dojocat.jpg\\"></p>
+  <p>With a reference later in the document defining the URL location:</p>
+</v-container-stub>"
+`;
+
+exports[`MarkedWrapper sanitizes the output 1`] = `
+"<v-container-stub tag=\\"div\\" class=\\"markup\\">
+  <p>This is test <a style=\\"opacity: 0.1\\">Link</a></p>
+</v-container-stub>"
+`;
