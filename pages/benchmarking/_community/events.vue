@@ -6,7 +6,7 @@
 			type="heading, list-item-three-line"
 		/>
 		<div v-else>
-			<h1 class="text-h4 mb-5 d-flex text--clickable" @click="expand = !expand">
+			<h1 class="text-h4 d-flex text--clickable" @click="expand = !expand">
 				{{ community.acronym }} - {{ community.name }}
 				<v-btn class="ml-2" color="primary" icon>
 					<v-icon>{{
@@ -16,6 +16,7 @@
 					}}</v-icon>
 				</v-btn>
 			</h1>
+			<h2 class="subtitle-1 mb-5">{{ community.name }}</h2>
 			<v-expand-transition>
 				<v-row v-show="expand" align="center">
 					<v-col align="center" cols="2">

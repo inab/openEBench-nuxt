@@ -18,6 +18,7 @@
 						class="ma-5 pa-2"
 						max-height="150"
 						max-width="200"
+						width="200"
 						:src="image.src"
 					>
 					</v-img>
