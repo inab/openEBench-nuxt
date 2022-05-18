@@ -89,6 +89,23 @@
 			>
 				<v-icon left>mdi-open-in-new</v-icon> Benchmark your Tool
 			</v-btn>
+			<v-btn
+				v-if="!$store.state.auth.loggedIn"
+				color="primary"
+				depressed
+				class="ml-2"
+				@click="LoginHandler"
+				><v-icon left>mdi-login</v-icon> Login</v-btn
+			>
+			<v-btn
+				v-if="$store.state.auth.loggedIn"
+				color="secondary"
+				depressed
+				outlined
+				class="ml-2"
+				@click="LogoutHandler"
+				><v-icon left>mdi-logout</v-icon>Logout</v-btn
+			>
 			<!-- <v-btn v-if="$vuetify.breakpoint.mdAndUp" depressed color="ml-3 primary">
 				<v-icon left>mdi-login-variant</v-icon> Login
 			</v-btn> -->
@@ -121,6 +138,12 @@ export default {
 	methods: {
 		handleToggleOpen() {
 			this.openNavMobile = !this.openNavMobile;
+		},
+		LoginHandler() {
+			this.$auth.loginWith('keycloak');
+		},
+		LogoutHandler() {
+			this.$auth.logout();
 		},
 	},
 };
