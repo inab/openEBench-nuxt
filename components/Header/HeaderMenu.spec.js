@@ -6,6 +6,7 @@ const factory = (mockStore) => {
 		...createComponentMocks({
 			mocks: {
 				$vuetify: { breakpoint: {} },
+				$auth: { loginWith: jest.fn(), logout: jest.fn() },
 			},
 			store: mockStore,
 		}),
@@ -49,6 +50,9 @@ describe('HeaderMenu', () => {
 
 		const btnLogout = wrapper.find('[data-testid="btn-logout"]');
 		expect(btnLogout.exists()).toBe(false);
+
+		btnLogin.trigger('click');
+		expect(wrapper.vm.$auth.loginWith).toHaveBeenCalled();
 	});
 
 	it('should show the logout button, hide the login button if logged in', () => {
@@ -60,6 +64,9 @@ describe('HeaderMenu', () => {
 
 		const btnLogout = wrapper.find('[data-testid="btn-logout"]');
 		expect(btnLogout.exists()).toBe(true);
+
+		btnLogout.trigger('click');
+		expect(wrapper.vm.$auth.logout).toHaveBeenCalled();
 	});
 
 	it('should toggle the side menu on button click on mobile', async () => {
