@@ -35,7 +35,7 @@
 		"dompurify": "^2.3.6",
 		"gsap": "^3.10.4",
 		"lodash.debounce": "^4.0.8",
-		"marked": "^4.0.14",
+		"marked": "^4.0.16",
 		"nuxt": "^2.15.8",
 		"pluralize": "^8.0.0",
 		"vue": "^2.6.14",
