@@ -1,12 +1,13 @@
 import { mount } from '@vue/test-utils';
 import HeaderMenu from './HeaderMenu.vue';
 
-const factory = () => {
+const factory = (mockStore) => {
 	return mount(HeaderMenu, {
 		...createComponentMocks({
 			mocks: {
 				$vuetify: { breakpoint: {} },
 			},
+			store: mockStore,
 		}),
 		stubs: ['fragment', 'nuxt-link', 'router-link'],
 		propsData: { vreHref: 'somehref' },
@@ -14,13 +15,55 @@ const factory = () => {
 };
 
 describe('HeaderMenu', () => {
+	const mockStoreLoggedOut = {
+		auth: {
+			state: () => {
+				return {
+					loggedIn: false,
+				};
+			},
+		},
+	};
+
+	const mockStoreLoggedIn = {
+		auth: {
+			state: () => {
+				return {
+					loggedIn: true,
+				};
+			},
+		},
+	};
+
 	it('is instantiated', () => {
-		const wrapper = factory();
+		const wrapper = factory(mockStoreLoggedOut);
 		expect(wrapper).toBeTruthy();
 	});
 
+	it('should show the login button, hide the logout button if logged out', () => {
+		const wrapper = factory(mockStoreLoggedOut);
+		expect(wrapper).toBeTruthy();
+
+		const btnLogin = wrapper.find('[data-testid="btn-login"]');
+		expect(btnLogin.exists()).toBe(true);
+
+		const btnLogout = wrapper.find('[data-testid="btn-logout"]');
+		expect(btnLogout.exists()).toBe(false);
+	});
+
+	it('should show the logout button, hide the login button if logged in', () => {
+		const wrapper = factory(mockStoreLoggedIn);
+		expect(wrapper).toBeTruthy();
+
+		const btnLogin = wrapper.find('[data-testid="btn-login"]');
+		expect(btnLogin.exists()).toBe(false);
+
+		const btnLogout = wrapper.find('[data-testid="btn-logout"]');
+		expect(btnLogout.exists()).toBe(true);
+	});
+
 	it('should toggle the side menu on button click on mobile', async () => {
-		const wrapper = factory();
+		const wrapper = factory(mockStoreLoggedOut);
 		expect(wrapper).toBeTruthy();
 
 		wrapper.vm.$vuetify.breakpoint.smAndDown = false;

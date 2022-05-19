@@ -94,6 +94,7 @@
 				color="primary"
 				depressed
 				class="ml-2"
+				data-testid="btn-login"
 				@click="LoginHandler"
 				><v-icon left>mdi-login</v-icon> Login</v-btn
 			>
@@ -103,6 +104,7 @@
 				depressed
 				outlined
 				class="ml-2"
+				data-testid="btn-logout"
 				@click="LogoutHandler"
 				><v-icon left>mdi-logout</v-icon>Logout</v-btn
 			>
