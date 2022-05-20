@@ -3,25 +3,12 @@
 exports[`TheFooter should match snapshot 1`] = `
 "<footer class=\\"v-main footer primary white--text\\" style=\\"padding: 0px 0px 0px 0px;\\">
   <div class=\\"v-main__wrap\\">
-    <transition-stub name=\\"slideFromBottom\\" appear=\\"true\\">
-      <div class=\\"Cookie Cookie--bottom Cookie--dark-lime\\">
-        <div class=\\"Cookie__content\\">
-          <div>
-            OpenEBench uses 🍪 to ensure you get the best experience on our website.
-          </div>
-        </div>
-        <div class=\\"Cookie__buttons\\">
-          <!---->
-          <!---->
-          <!----> <button class=\\"Cookie__button\\">Got it!</button></div>
-      </div>
-    </transition-stub>
     <div class=\\"row\\">
       <div align=\\"center\\" class=\\"pa-4 col-md-3 col-12\\">
         <div aria-label=\\"logo\\" role=\\"img\\" class=\\"v-image v-responsive theme--light\\" style=\\"max-width: 150px;\\">
           <div class=\\"v-responsive__content\\"></div>
         </div>
-        <p class=\\"body-2\\">©&nbsp; BSC-CNS 2021</p>
+        <p class=\\"body-2\\">©&nbsp; BSC-CNS 2022</p>
       </div>
       <div class=\\"pa-4 col-md-6 col-12\\">
         <!---->
@@ -38,6 +25,18 @@ exports[`TheFooter should match snapshot 1`] = `
                 <!---->
               </li>
               <li><a dark=\\"\\" class=\\"white--text\\">
+                  Observatory
+                </a>
+                <!---->
+                <!---->
+              </li>
+              <li><a dark=\\"\\" class=\\"white--text\\">
+                  Projects
+                </a>
+                <!---->
+                <!---->
+              </li>
+              <li><a dark=\\"\\" class=\\"white--text\\">
                   Tools
                 </a>
                 <!---->
@@ -45,12 +44,6 @@ exports[`TheFooter should match snapshot 1`] = `
               </li>
               <li><a dark=\\"\\" class=\\"white--text\\">
                   Stats
-                </a>
-                <!---->
-                <!---->
-              </li>
-              <li><a dark=\\"\\" class=\\"white--text\\">
-                  Observatory
                 </a>
                 <!---->
                 <!---->

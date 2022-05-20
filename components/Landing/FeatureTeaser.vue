@@ -9,8 +9,8 @@
 					</template>
 					<template #title> Benchmarks </template>
 					<template #description
-						>Explore benchmarks of the scientific performance of bioinformatics
-						methods</template
+						>Explore existing community-driven scientific benchmark results for
+						Life Sciences software</template
 					>
 				</feature-card>
 			</v-col>
@@ -21,8 +21,8 @@
 					</template>
 					<template #title> Tools & Metrics </template>
 					<template #description
-						>Individually browse metrics of bioinformatics tools, server and
-						workflows</template
+						>Individually browse technical metrics for popular research software
+						in Life Sciences</template
 					>
 				</feature-card>
 			</v-col>

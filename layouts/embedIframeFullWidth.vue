@@ -34,7 +34,7 @@ export default {
 		};
 	},
 	watch: {
-		$route() {
+		$route(newRoute, oldRoute) {
 			if (newRoute.path !== oldRoute.path) this.breadcrumbs = [];
 		},
 	},

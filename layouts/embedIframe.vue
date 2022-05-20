@@ -6,6 +6,7 @@
 			<v-container class="v-container-custom">
 				<Nuxt @emitBreadcrumbs="handleBreadcrumbs" />
 			</v-container>
+			<Footer class="mt-16" />
 		</v-main>
 		<v-footer class="justify-center" app>
 			Made with <v-icon color="red">mdi-heart</v-icon>
@@ -17,12 +18,14 @@
 <script>
 import HeaderMenu from '~/components/Header/HeaderMenu.vue';
 import BreadcrumbsBar from '~/components/Molecules/BreadcrumbsBar';
+import Footer from '~/components/TheFooter';
 
 export default {
 	name: 'EmbedIframe',
 	components: {
 		'main-header': HeaderMenu,
 		BreadcrumbsBar,
+		Footer,
 	},
 	data() {
 		return {
@@ -36,7 +39,7 @@ export default {
 		};
 	},
 	watch: {
-		$route() {
+		$route(newRoute, oldRoute) {
 			if (newRoute.path !== oldRoute.path) this.breadcrumbs = [];
 		},
 	},

@@ -42,4 +42,19 @@ describe('HeaderMenu', () => {
 		await btnToggleMenu.trigger('click');
 		expect(wrapper.vm.openNavMobile).toBe(false);
 	});
+
+	it('should show the cookie hint, and hide on button click', async () => {
+		const wrapper = factory();
+		let cookieBanner = wrapper.find('.Cookie');
+		expect(cookieBanner.exists()).toBe(true);
+
+		const cookieAcceptButton = wrapper.find('.Cookie__button');
+		expect(cookieAcceptButton.exists()).toBe(true);
+
+		cookieAcceptButton.trigger('click');
+		await wrapper.vm.$nextTick();
+
+		cookieBanner = wrapper.find('.Cookie');
+		expect(cookieBanner.exists()).toBe(false);
+	});
 });

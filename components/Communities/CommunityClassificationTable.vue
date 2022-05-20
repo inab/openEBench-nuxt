@@ -25,7 +25,7 @@
 		</p>
 		<v-alert class="mt-5" border="left" dense text color="info" type="info">
 			To filter the table results, please select single challenges below, the
-			table will automatically update.
+			table will update automatically.
 		</v-alert>
 		<v-data-table
 			:key="event._id + '_challenges'"

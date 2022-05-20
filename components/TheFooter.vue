@@ -1,14 +1,9 @@
 <template>
 	<v-main tag="footer" class="footer primary white--text">
-		<cookie-law theme="dark-lime">
-			<div slot="message">
-				OpenEBench uses 🍪 to ensure you get the best experience on our website.
-			</div>
-		</cookie-law>
 		<v-row>
 			<v-col class="pa-4" md="3" cols="12" align="center">
 				<v-img :src="logo" alt="logo" max-width="150" contain />
-				<p class="body-2">&copy;&nbsp; BSC-CNS 2021</p>
+				<p class="body-2">&copy;&nbsp; BSC-CNS 2022</p>
 			</v-col>
 			<v-col class="pa-4" md="6" cols="12">
 				<v-expansion-panels v-if="isMobile">
@@ -103,14 +98,12 @@
 </template>
 
 <script>
-import CookieLaw from 'vue-cookie-law';
 import logo from '~/static/images/opeb_logo_white_minimal.png';
 import euFlag from '~/static/images/eu.svg';
 import menuEntries from '~/components/Header/menuEntries';
 import subMenuEntries from '~/components/Header/subMenuEntries';
 
 export default {
-	components: { CookieLaw },
 	data: () => ({
 		logo,
 		euFlag,
