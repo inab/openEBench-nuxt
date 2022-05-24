@@ -42,6 +42,7 @@ export default {
 	plugins: [
 		'~/plugins/vue-fragment-config',
 		'~/plugins/graphql',
+		'~/plugins/observatory',
 		'~/plugins/pluralize',
 	],
 
@@ -106,6 +107,9 @@ export default {
 		BENCH_EVENT_API_URL:
 			process.env.BENCH_EVENT_API_URL ||
 			'https://dev-openebench.bsc.es/rest/bench_event_api',
+		OBSERVATORY_API_URL:
+			process.env.OBSERVATORY_API_URL ||
+			'https://observatory.openebench.bsc.es/api/stats',
 		axios: {
 			// See https://github.com/nuxt-community/axios-module#options
 			baseURL:
