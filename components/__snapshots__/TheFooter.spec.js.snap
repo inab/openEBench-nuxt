@@ -99,7 +99,7 @@ exports[`TheFooter should match snapshot 1`] = `
         </div>
       </div>
       <div class=\\"pa-4 col-md-3 col-12\\">
-        <div class=\\"socmed\\"><a href=\\"https://twitter.com/openebench\\" target=\\"_blank\\" class=\\"button v-btn v-btn--icon v-btn--round v-btn--text theme--dark v-size--default\\"><span class=\\"v-btn__content\\"><i aria-hidden=\\"true\\" class=\\"v-icon notranslate mdi mdi-twitter theme--dark\\"></i></span></a></div>
+        <div><a href=\\"mailto:openebench-support@bsc.es \\" class=\\"button v-btn v-btn--icon v-btn--round v-btn--text theme--dark v-size--default\\"><span class=\\"v-btn__content\\"><i aria-hidden=\\"true\\" class=\\"v-icon notranslate mdi mdi-email-outline theme--dark\\"></i></span></a> <a href=\\"https://twitter.com/openebench\\" target=\\"_blank\\" class=\\"button v-btn v-btn--icon v-btn--round v-btn--text theme--dark v-size--default\\"><span class=\\"v-btn__content\\"><i aria-hidden=\\"true\\" class=\\"v-icon notranslate mdi mdi-twitter theme--dark\\"></i></span></a></div>
         <div class=\\"row mt-5 no-gutters\\">
           <div align=\\"left\\" class=\\"col col-9\\">
             <p class=\\"text-sm-body-2\\">

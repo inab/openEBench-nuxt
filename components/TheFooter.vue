@@ -69,7 +69,16 @@
 				</v-row>
 			</v-col>
 			<v-col md="3" cols="12" class="pa-4">
-				<div class="socmed">
+				<div>
+					<v-btn
+						text
+						icon
+						dark
+						class="button"
+						href="mailto:openebench-support@bsc.es "
+					>
+						<v-icon>mdi-email-outline</v-icon>
+					</v-btn>
 					<v-btn
 						text
 						icon
