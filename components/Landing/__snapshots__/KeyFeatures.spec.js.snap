@@ -15,8 +15,8 @@ exports[`KeyFeatures should match snapshot 1`] = `
       </div>
       <div class=\\"text-h5 d-flex align-center mt-10\\"><i aria-hidden=\\"true\\" class=\\"v-icon notranslate mr-3 mdi mdi-check-circle theme--light accent--text\\" style=\\"font-size: 40px;\\"></i>Monitoring of software quality in life sciences
       </div>
-      <div class=\\"text-h5 d-flex align-center mt-10\\"><i aria-hidden=\\"true\\" class=\\"v-icon notranslate mr-3 mdi mdi-check-circle theme--light accent--text\\" style=\\"font-size: 40px;\\"></i>Contributing towards the best practices of research software
-        development
+      <div class=\\"text-h5 d-flex align-center mt-10\\"><i aria-hidden=\\"true\\" class=\\"v-icon notranslate mr-3 mdi mdi-check-circle theme--light accent--text\\" style=\\"font-size: 40px;\\"></i>Contributing towards the adoption of best practices for research
+        software development
       </div>
     </div>
   </div>

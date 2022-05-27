@@ -15,6 +15,7 @@
 			:community-count="communitiesCount"
 			:tools-count="toolsCount"
 			:resources-count="resourcesCount"
+			:projects-count="projectsCount"
 		/>
 		<logo-slider class="landing-mt landing-mb" />
 	</div>
@@ -44,6 +45,7 @@ export default {
 			communitiesCount: 'communitiesCount',
 			toolsCount: 'toolsCount',
 			resourcesCount: 'resourcesCount',
+			projectsCount: 'projectsCount',
 		}),
 	},
 	mounted() {
