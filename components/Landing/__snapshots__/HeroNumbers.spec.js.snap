@@ -44,9 +44,11 @@ exports[`HeroNumbers should match snapshot 1`] = `
         <div class=\\"counter-item\\"><span class=\\"icon ion-ios-world-outline\\"></span>
           <div class=\\"text\\">
             <h4 class=\\"text-h3 font-weight-normal\\">
-              <animated-number-stub value=\\"1\\"></animated-number-stub>
+              <animated-number-stub value=\\"0\\"></animated-number-stub>
             </h4>
-            <h6 class=\\"title\\">Project Space</h6>
+            <h6 class=\\"title\\">
+              Project Space
+            </h6>
           </div>
         </div>
       </v-col-stub>

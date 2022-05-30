@@ -6,7 +6,11 @@
 				class="mb-5"
 				type="heading, list-item-three-line"
 			/>
-			<community-info v-else :community="community" />
+			<community-info
+				v-else
+				:community="community"
+				:community-references="communityReferences"
+			/>
 		</v-container>
 		<v-tabs
 			v-if="$store.state.community.loading.community || currentEvent"
@@ -109,6 +113,7 @@ export default {
 			datasets: 'datasets',
 			tools: 'tools',
 			community: 'community',
+			communityReferences: 'communityReferences',
 		}),
 		vertical() {
 			return this.$vuetify.breakpoint.mdAndUp;

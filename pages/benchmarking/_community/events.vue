@@ -5,51 +5,11 @@
 			class="mb-5"
 			type="heading, list-item-three-line"
 		/>
-		<div v-else>
-			<h1 class="text-h4 d-flex text--clickable" @click="expand = !expand">
-				{{ community.acronym }} - {{ community.name }}
-				<v-btn class="ml-2" color="primary" icon>
-					<v-icon>{{
-						expand
-							? 'mdi-chevron-up-circle-outline'
-							: 'mdi-chevron-down-circle-outline'
-					}}</v-icon>
-				</v-btn>
-			</h1>
-			<h2 class="subtitle-1 mb-5">{{ community.name }}</h2>
-			<v-expand-transition>
-				<v-row v-show="expand" align="center">
-					<v-col align="center" cols="2">
-						<v-img :src="community.logo" contain max-width="500" />
-					</v-col>
-					<v-col class="text-body-2 text--secondary" cols="10">
-						<p>{{ community.description }}</p>
-						<p v-if="community.keywords">
-							Keywords:
-							<span
-								v-for="(keyword, index) in community.keywords"
-								:key="index"
-								class="font-weight-medium"
-							>
-								{{ keyword }};
-							</span>
-						</p>
-						<p v-if="communityReferences.length > 0">
-							References:
-							<a
-								v-for="(keyword, index) in communityReferences"
-								:key="index"
-								target="_blank"
-								class="font-weight-medium"
-								:href="keyword.href"
-							>
-								{{ keyword.doi }};
-							</a>
-						</p>
-					</v-col>
-				</v-row>
-			</v-expand-transition>
-		</div>
+		<community-info
+			v-else
+			:community="community"
+			:community-references="communityReferences"
+		/>
 		<h2 class="text-h5 mt-10">Please choose an event:</h2>
 		<p class="text-body-2 text--secondary d-flex align-center mt-3">
 			<v-icon small class="mr-3">mdi-information-outline</v-icon>
@@ -90,10 +50,11 @@
 <script>
 import { mapGetters } from 'vuex';
 import CommunityEmptyState from '~/components/Communities/CommunityEmptyState';
+import CommunityInfo from '~/components/Communities/CommunityInfo';
 
 export default {
 	name: 'CommunityPage',
-	components: { CommunityEmptyState },
+	components: { CommunityEmptyState, CommunityInfo },
 	data() {
 		return {
 			illustration: require('~/static/images/illustrations/lab_community.png'),

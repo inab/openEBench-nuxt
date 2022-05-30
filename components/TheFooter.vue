@@ -98,7 +98,7 @@
 						</p>
 					</v-col>
 					<v-col cols="3" align="center">
-						<v-img :src="euFlag" alt="logo" max-width="50" contain />
+						<v-img :src="euFlag" alt="logo" max-width="70" contain />
 					</v-col>
 				</v-row>
 			</v-col>

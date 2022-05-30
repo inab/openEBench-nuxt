@@ -108,7 +108,7 @@ exports[`TheFooter should match snapshot 1`] = `
             </p>
           </div>
           <div align=\\"center\\" class=\\"col col-3\\">
-            <div aria-label=\\"logo\\" role=\\"img\\" class=\\"v-image v-responsive theme--light\\" style=\\"max-width: 50px;\\">
+            <div aria-label=\\"logo\\" role=\\"img\\" class=\\"v-image v-responsive theme--light\\" style=\\"max-width: 70px;\\">
               <div class=\\"v-responsive__content\\"></div>
             </div>
           </div>
