@@ -4,7 +4,7 @@
 		<v-main>
 			<breadcrumbs-bar v-if="breadcrumbs.length > 0" :items="breadcrumbs" />
 			<Nuxt @emitBreadcrumbs="handleBreadcrumbs" />
-			<Footer class="mt-16" />
+			<Footer />
 		</v-main>
 		<v-footer class="justify-center" app>
 			Made with <v-icon color="red">mdi-heart</v-icon>
