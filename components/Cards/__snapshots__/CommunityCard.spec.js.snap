@@ -8,7 +8,7 @@ exports[`CommunityCard should match snapshot for active community 1`] = `
   <v-card-title-stub tag=\\"div\\" class=\\"justify-center text-truncate inline-flex\\">
     TransBioNet_CNVs
   </v-card-title-stub>
-  <v-card-subtitle-stub tag=\\"div\\" class=\\"text-left\\"><span class=\\"text--muted\\">
+  <v-card-subtitle-stub tag=\\"div\\" class=\\"text-left\\"><span class=\\"text--primary\\">
 			Translational Bioinformatics Network - CNVs Benchmarking Group
 		</span></v-card-subtitle-stub>
   <v-card-text-stub tag=\\"div\\" align=\\"bottom\\" class=\\"mt-auto\\">
@@ -51,7 +51,7 @@ exports[`CommunityCard should match snapshot for incubating community 1`] = `
   <v-card-title-stub tag=\\"div\\" class=\\"justify-center text-truncate inline-flex\\">
     TransBioNet_CNVs
   </v-card-title-stub>
-  <v-card-subtitle-stub tag=\\"div\\" class=\\"text-left\\"><span class=\\"text--muted\\">
+  <v-card-subtitle-stub tag=\\"div\\" class=\\"text-left\\"><span class=\\"text--primary\\">
 			Translational Bioinformatics Network - CNVs Benchmarking Group
 		</span></v-card-subtitle-stub>
   <v-card-text-stub tag=\\"div\\" align=\\"bottom\\" class=\\"mt-auto\\">
