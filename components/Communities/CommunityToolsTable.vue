@@ -27,6 +27,7 @@
 					append
 					target="_blank"
 				>
+					<v-icon x-small>mdi-open-in-new</v-icon>
 					{{ item.name }}
 				</nuxt-link>
 			</template>

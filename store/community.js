@@ -38,7 +38,7 @@ export default {
 						links {
 							uri
 							comment
-							__typename
+							label
 						}
 						__typename
 						}

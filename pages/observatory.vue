@@ -9,7 +9,22 @@ export default {
 	data() {
 		return {
 			URI: this.$config.OBSERVATORY_URI,
+			breadcrumbs: [
+				{
+					text: 'Home',
+					disabled: false,
+					exact: true,
+					to: '/',
+				},
+				{
+					text: 'Observatory',
+					disabled: true,
+				},
+			],
 		};
+	},
+	mounted() {
+		this.$parent.$emit('emitBreadcrumbs', this.breadcrumbs);
 	},
 };
 </script>
