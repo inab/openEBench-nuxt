@@ -8,7 +8,7 @@
 				<template #header>
 					<h1 class="text-h4">Benchmarking Communities</h1>
 				</template>
-				<p class="text--secondary">
+				<p class="text--primary">
 					Unbiased and objective evaluations of bioinformatics resources are
 					challenging to set up and can only be effective when built and
 					implemented around community driven efforts. Thus, in OpenEBench we
@@ -16,7 +16,7 @@
 					automated services to facilitate scientific benchmarking.
 				</p>
 
-				<p class="text--secondary">
+				<p class="text--primary">
 					These efforts provide a way for software developers to implement more
 					efficient methods, tools and web services by comparing their
 					performance on previously agreed datasets and metrics with other

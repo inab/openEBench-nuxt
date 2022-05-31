@@ -18,7 +18,7 @@
 				<v-col align="center" cols="2">
 					<v-img :src="community.logo" contain max-width="500" />
 				</v-col>
-				<v-col class="text-body-2 text--secondary" cols="10">
+				<v-col class="text-body-2 text--primary" cols="10">
 					<p>
 						{{ community.description }}
 					</p>
