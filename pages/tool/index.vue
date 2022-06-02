@@ -1,14 +1,12 @@
 <template>
-	<iframe
-		:src="hostName + `tool?search=` + query"
-		width="100%"
-		height="100%"
-		frameborder="0"
-	>
-	</iframe>
+	<div>
+		<div v-for="(item, i) in results" :key="i">{{ item.id }}</div>
+	</div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
 	name: 'ToolsMonitoringPage',
 	layout: 'embedIframeFullWidth',
@@ -30,8 +28,14 @@ export default {
 			],
 		};
 	},
+	computed: {
+		...mapGetters('tools', {
+			results: 'toolsList',
+		}),
+	},
 	mounted() {
 		this.$parent.$emit('emitBreadcrumbs', this.breadcrumbs);
+		this.$store.dispatch('tools/getTools');
 	},
 };
 </script>
