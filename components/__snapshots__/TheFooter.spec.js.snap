@@ -62,7 +62,7 @@ exports[`TheFooter should match snapshot 1`] = `
                 <!---->
               </li>
               <li>
-                <!----> <a href=\\"https://openebench.bsc.es/docs/\\" target=\\"_blank\\" dark=\\"\\" class=\\"white--text\\">
+                <!----> <a href=\\"https://docs.openebench.bsc.es/\\" target=\\"_blank\\" dark=\\"\\" class=\\"white--text\\">
                   Github Docs
                 </a> <i aria-hidden=\\"true\\" class=\\"v-icon notranslate v-icon--right mdi mdi-open-in-new theme--dark\\" style=\\"font-size: 16px;\\"></i></li>
               <li>
