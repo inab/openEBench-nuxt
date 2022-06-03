@@ -7,7 +7,7 @@ const subMenuEntries = [
 	},
 	{
 		title: 'Github Docs',
-		href: 'https://openebench.bsc.es/docs/',
+		href: 'https://docs.openebench.bsc.es/',
 		external: true,
 	},
 	{
