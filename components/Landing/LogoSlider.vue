@@ -12,7 +12,12 @@
 				:key="`logoslider_` + index"
 				disabled
 			>
-				<a :href="image.href" target="_blank" class="d-flex">
+				<a
+					:href="image.href"
+					target="_blank"
+					class="d-flex"
+					:aria-label="image.title"
+				>
 					<v-img
 						contain
 						class="ma-5 pa-2"

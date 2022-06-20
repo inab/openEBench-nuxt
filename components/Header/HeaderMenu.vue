@@ -39,11 +39,12 @@
 				v-if="$vuetify.breakpoint.smAndDown"
 				icon
 				data-testid="btn-toggle-menu"
+				aria-label="Toggle Menu"
 				@click.stop="handleToggleOpen"
 			>
 				<v-icon>mdi-menu</v-icon>
 			</v-btn>
-			<nuxt-link to="/">
+			<nuxt-link to="/" aria-label="Home">
 				<v-img
 					class="mx-2"
 					:src="opebLogo"

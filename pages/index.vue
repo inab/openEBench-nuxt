@@ -5,6 +5,7 @@
 		<a
 			class="scroll-down mt-5"
 			aria-label="Scroll to feature overview"
+			href="#"
 			@click="$vuetify.goTo('#key-features')"
 		/>
 		<key-features id="key-features" class="landing-mt mb-16" />

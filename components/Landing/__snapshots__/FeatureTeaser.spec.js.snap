@@ -6,7 +6,7 @@ exports[`FeatureTeaser should match snapshot 1`] = `
   <div class=\\"row\\">
     <div align=\\"center\\" class=\\"col-md-3 col-12\\">
       <div>
-        <div class=\\"v-avatar mb-10 primary\\" style=\\"height: 62px; min-width: 62px; width: 62px;\\"><i aria-hidden=\\"true\\" class=\\"v-icon notranslate material-icons theme--dark\\">$vuetify.icons.values.benchmark</i></div>
+        <div class=\\"v-avatar mb-5 mb-md-10 primary\\" style=\\"height: 62px; min-width: 62px; width: 62px;\\"><i aria-hidden=\\"true\\" class=\\"v-icon notranslate material-icons theme--dark\\">$vuetify.icons.values.benchmark</i></div>
         <h2 class=\\"text-h6 mb-2\\"> Benchmarks </h2>
         <p class=\\"body-1\\">Explore existing community-driven scientific benchmark results for
           Life Sciences software</p> <a class=\\"mt-2 v-btn v-btn--outlined v-btn--router theme--light v-size--default primary--text\\"><span class=\\"v-btn__content\\"> Explore </span></a>
@@ -14,7 +14,7 @@ exports[`FeatureTeaser should match snapshot 1`] = `
     </div>
     <div align=\\"center\\" class=\\"mt-10 mt-md-0 col-md-3 col-12\\">
       <div>
-        <div class=\\"v-avatar mb-10 primary\\" style=\\"height: 62px; min-width: 62px; width: 62px;\\"><i aria-hidden=\\"true\\" class=\\"v-icon notranslate mdi mdi-clipboard-list-outline theme--dark\\" style=\\"font-size: 36px;\\"></i></div>
+        <div class=\\"v-avatar mb-5 mb-md-10 primary\\" style=\\"height: 62px; min-width: 62px; width: 62px;\\"><i aria-hidden=\\"true\\" class=\\"v-icon notranslate mdi mdi-clipboard-list-outline theme--dark\\" style=\\"font-size: 36px;\\"></i></div>
         <h2 class=\\"text-h6 mb-2\\"> Tools &amp; Metrics </h2>
         <p class=\\"body-1\\">Individually browse technical metrics for popular research software
           in Life Sciences</p> <a class=\\"mt-2 v-btn v-btn--outlined v-btn--router theme--light v-size--default primary--text\\"><span class=\\"v-btn__content\\"> Explore </span></a>
@@ -22,7 +22,7 @@ exports[`FeatureTeaser should match snapshot 1`] = `
     </div>
     <div align=\\"center\\" class=\\"mt-10 mt-md-0 col-md-3 col-12\\">
       <div>
-        <div class=\\"v-avatar mb-10 primary\\" style=\\"height: 62px; min-width: 62px; width: 62px;\\"><i aria-hidden=\\"true\\" class=\\"v-icon notranslate material-icons theme--dark\\">$vuetify.icons.values.observatory</i></div>
+        <div class=\\"v-avatar mb-5 mb-md-10 primary\\" style=\\"height: 62px; min-width: 62px; width: 62px;\\"><i aria-hidden=\\"true\\" class=\\"v-icon notranslate material-icons theme--dark\\">$vuetify.icons.values.observatory</i></div>
         <h2 class=\\"text-h6 mb-2\\"> Tools Observatory </h2>
         <p class=\\"body-1\\">
           Quantitative monitoring of the technical quality of software in Life
@@ -31,7 +31,7 @@ exports[`FeatureTeaser should match snapshot 1`] = `
     </div>
     <div align=\\"center\\" class=\\"mt-10 mt-md-0 col-md-3 col-12\\">
       <div>
-        <div class=\\"v-avatar mb-10 primary\\" style=\\"height: 62px; min-width: 62px; width: 62px;\\"><i aria-hidden=\\"true\\" class=\\"v-icon notranslate material-icons theme--dark\\">$vuetify.icons.values.projects</i></div>
+        <div class=\\"v-avatar mb-5 mb-md-10 primary\\" style=\\"height: 62px; min-width: 62px; width: 62px;\\"><i aria-hidden=\\"true\\" class=\\"v-icon notranslate material-icons theme--dark\\">$vuetify.icons.values.projects</i></div>
         <h2 class=\\"text-h6 mb-2\\"> Project Spaces </h2>
         <p class=\\"body-1\\">
           Community spaces for projects to collaborate on software in life

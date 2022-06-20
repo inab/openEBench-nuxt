@@ -1,7 +1,7 @@
 <template>
 	<v-card class="d-flex flex-column">
 		<div class="pa-5">
-			<nuxt-link :to="to">
+			<nuxt-link :to="to" :aria-label="name">
 				<v-img :src="logo" contain max-height="100" height="100" />
 			</nuxt-link>
 		</div>
@@ -44,7 +44,7 @@
 			<v-spacer />
 			<v-menu v-if="links.length > 0" bottom left>
 				<template #activator="{ on, attrs }">
-					<v-btn icon v-bind="attrs" v-on="on">
+					<v-btn icon v-bind="attrs" aria-label="Expand sub menu" v-on="on">
 						<v-icon>mdi-dots-vertical</v-icon>
 					</v-btn>
 				</template>
