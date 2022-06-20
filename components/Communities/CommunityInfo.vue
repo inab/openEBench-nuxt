@@ -2,7 +2,12 @@
 	<div>
 		<h1 class="text-h4 d-flex text--clickable" @click="expand = !expand">
 			{{ community.acronym }}
-			<v-btn class="ml-2" color="primary" icon>
+			<v-btn
+				class="ml-2"
+				color="primary"
+				icon
+				aria-label="Expand Community Information"
+			>
 				<v-icon>{{
 					expand
 						? 'mdi-chevron-up-circle-outline'

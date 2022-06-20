@@ -75,7 +75,8 @@
 						icon
 						dark
 						class="button"
-						href="mailto:openebench-support@bsc.es "
+						href="mailto:openebench-support@bsc.es"
+						aria-label="Mail link for OpenEBench Support"
 					>
 						<v-icon>mdi-email-outline</v-icon>
 					</v-btn>
@@ -86,6 +87,7 @@
 						class="button"
 						href="https://twitter.com/openebench"
 						target="_blank"
+						aria-label="Link to Twitter Profile of OpenEBench"
 					>
 						<v-icon>mdi-twitter</v-icon>
 					</v-btn>

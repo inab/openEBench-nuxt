@@ -43,7 +43,7 @@
 			>
 				<v-icon>mdi-menu</v-icon>
 			</v-btn>
-			<nuxt-link to="/">
+			<nuxt-link to="/" aria-label="Home">
 				<v-img
 					class="mx-2"
 					:src="opebLogo"

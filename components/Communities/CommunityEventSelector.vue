@@ -7,7 +7,13 @@
 						<span class="text--clickable primary--text" v-bind="attrs" v-on="on"
 							>Event - {{ currentEvent.name }}</span
 						>
-						<v-btn icon color="primary" v-bind="attrs" v-on="on">
+						<v-btn
+							icon
+							color="primary"
+							v-bind="attrs"
+							aria-label="Expand Community Selector"
+							v-on="on"
+						>
 							<v-icon>mdi-chevron-down</v-icon>
 						</v-btn>
 					</template>

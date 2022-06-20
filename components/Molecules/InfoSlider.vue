@@ -3,7 +3,12 @@
 		<v-row>
 			<v-col class="d-flex" cols="auto">
 				<slot name="header" icon />
-				<v-btn class="ml-2" color="primary" icon>
+				<v-btn
+					class="ml-2"
+					color="primary"
+					icon
+					aria-label="Expand Information"
+				>
 					<v-icon>{{
 						expand
 							? 'mdi-chevron-up-circle-outline'
