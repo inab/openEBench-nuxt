@@ -2,7 +2,7 @@
 
 exports[`FeatureCard should match snapshot 1`] = `
 "<div>
-  <v-avatar-stub color=\\"primary\\" size=\\"62\\" class=\\"mb-10\\"></v-avatar-stub>
+  <v-avatar-stub color=\\"primary\\" size=\\"62\\" class=\\"mb-5 mb-md-10\\"></v-avatar-stub>
   <h2 class=\\"text-h6 mb-2\\"></h2>
   <p class=\\"body-1\\"></p>
   <v-btn-stub color=\\"primary\\" outlined=\\"true\\" tag=\\"button\\" activeclass=\\"\\" to=\\"someroute\\" type=\\"button\\" class=\\"mt-2\\"> Explore </v-btn-stub>
