@@ -94,7 +94,7 @@ describe('HeaderMenu', () => {
 	});
 
 	it('should show the cookie hint, and hide on button click', async () => {
-		const wrapper = factory();
+		const wrapper = factory(mockStoreLoggedIn);
 		let cookieBanner = wrapper.find('.Cookie');
 		expect(cookieBanner.exists()).toBe(true);
 
