@@ -91,7 +91,7 @@
 					</v-list-item>
 				</v-list>
 			</v-menu>
-			<v-spacer v-if="$vuetify.breakpoint.lgAndUp" />
+			<v-spacer />
 			<v-btn
 				v-if="$vuetify.breakpoint.lgAndUp"
 				:href="vreHref"
