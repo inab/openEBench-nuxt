@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<v-avatar color="primary" size="62" class="mb-10">
+		<v-avatar color="primary" size="62" class="mb-5 mb-md-10">
 			<slot name="icon" />
 		</v-avatar>
 		<h2 class="text-h6 mb-2"><slot name="title" /></h2>

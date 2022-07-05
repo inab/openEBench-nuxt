@@ -29,7 +29,12 @@ export default {
 		meta: [
 			{ charset: 'utf-8' },
 			{ name: 'viewport', content: 'width=device-width, initial-scale=1' },
-			{ hid: 'description', name: 'description', content: '' },
+			{
+				hid: 'description',
+				name: 'description',
+				content:
+					'OpenEBench is the ELIXIR gateway to benchmarking communities, software monitoring, and quality metrics for life sciences tools and workflows.',
+			},
 			{ name: 'format-detection', content: 'telephone=no' },
 		],
 		link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
@@ -42,6 +47,7 @@ export default {
 	plugins: [
 		'~/plugins/vue-fragment-config',
 		'~/plugins/graphql',
+		'~/plugins/observatory',
 		'~/plugins/pluralize',
 	],
 
@@ -64,6 +70,7 @@ export default {
 	modules: [
 		// https://go.nuxtjs.dev/axios
 		'@nuxtjs/axios',
+		'@nuxtjs/robots',
 		'@nuxtjs/auth-next',
 	],
 
@@ -93,6 +100,11 @@ export default {
 				codeChallengeMethod: 'S256',
 			},
 		},
+	},
+
+	robots: {
+		UserAgent: '*',
+		Allow: '/',
 	},
 
 	// Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -135,6 +147,9 @@ export default {
 		BENCH_EVENT_API_URL:
 			process.env.BENCH_EVENT_API_URL ||
 			'https://dev-openebench.bsc.es/rest/bench_event_api',
+		OBSERVATORY_API_URL:
+			process.env.OBSERVATORY_API_URL ||
+			'https://observatory.openebench.bsc.es/api/stats',
 		axios: {
 			// See https://github.com/nuxt-community/axios-module#options
 			baseURL:

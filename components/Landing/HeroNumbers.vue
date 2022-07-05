@@ -46,9 +46,11 @@
 						<span class="icon ion-ios-world-outline" />
 						<div class="text">
 							<h4 class="text-h3 font-weight-normal">
-								<animated-number :value="1" />
+								<animated-number :value="projectsCount" />
 							</h4>
-							<h6 class="title">{{ 'Project Space' | pluralize(1) }}</h6>
+							<h6 class="title">
+								{{ 'Project Space' | pluralize(projectsCount) }}
+							</h6>
 						</div>
 					</div>
 				</v-col>
@@ -76,6 +78,10 @@ export default {
 			required: true,
 		},
 		resourcesCount: {
+			type: Number,
+			required: true,
+		},
+		projectsCount: {
 			type: Number,
 			required: true,
 		},

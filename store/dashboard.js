@@ -4,6 +4,7 @@ export default {
 			resourcesCount: 0,
 			toolsCount: 0,
 			communitiesCount: 0,
+			projectsCount: 0,
 		};
 	},
 
@@ -14,6 +15,7 @@ export default {
 				{
 					getCommunities {
 					  _id
+					  _metadata
 					}
 				  }
 				`,
@@ -21,16 +23,9 @@ export default {
 
 			commit('setCommunitiesCount', response.data);
 		},
-		getResourcesCount({ commit }) {
-			// hard coded observatory data, until the API is ready
-			const data = {
-				biotools: 22799,
-				bioconda: 8564,
-				galaxy: 4919,
-				bioconductor: 2041,
-				total: 35784,
-			};
-			commit('setResourcesCount', data);
+		async getResourcesCount({ commit }) {
+			const response = await this.$observatory.$get('tools/count_total');
+			commit('setResourcesCount', response[0]);
 		},
 		async getToolsCount({ commit }) {
 			const response = await this.$axios.head('/aggregate', {
@@ -44,7 +39,7 @@ export default {
 
 	mutations: {
 		setResourcesCount(state, payload) {
-			state.resourcesCount = payload.total;
+			state.resourcesCount = payload.data;
 		},
 		setToolsCount(state, payload) {
 			const matches = payload.headers['content-range'].match(
@@ -53,7 +48,18 @@ export default {
 			state.toolsCount = parseInt(matches[3]);
 		},
 		setCommunitiesCount(state, payload) {
-			state.communitiesCount = payload.getCommunities.length;
+			const communities = payload.getCommunities.map((community) => {
+				community._metadata = JSON.parse(community._metadata);
+				return community;
+			});
+
+			state.communitiesCount = communities.filter((item) =>
+				item._metadata ? !item._metadata.project_spaces : true
+			).length;
+
+			state.projectsCount = communities.filter((item) =>
+				item._metadata ? item._metadata.project_spaces : false
+			).length;
 		},
 	},
 
@@ -61,5 +67,6 @@ export default {
 		resourcesCount: (state) => state.resourcesCount,
 		toolsCount: (state) => state.toolsCount,
 		communitiesCount: (state) => state.communitiesCount,
+		projectsCount: (state) => state.projectsCount,
 	},
 };

@@ -6,7 +6,11 @@
 				class="mb-5"
 				type="heading, list-item-three-line"
 			/>
-			<community-info v-else :community="community" />
+			<community-info
+				v-else
+				:community="community"
+				:community-references="communityReferences"
+			/>
 		</v-container>
 		<v-tabs
 			v-if="$store.state.community.loading.community || currentEvent"
@@ -17,13 +21,27 @@
 				<v-icon left> mdi-view-dashboard </v-icon>
 				Results
 			</v-tab>
-			<v-tab class="justify-start">
+			<v-tab class="justify-start v-tab--min-width">
 				<v-icon left> mdi-folder </v-icon>
-				Datasets
+				<v-badge
+					color="secondary"
+					:value="datasets.length"
+					:content="datasets.length"
+					offset-x="-1"
+				>
+					Datasets
+				</v-badge>
 			</v-tab>
 			<v-tab class="justify-start">
 				<v-icon left> mdi-cube-outline </v-icon>
-				Tools
+				<v-badge
+					color="secondary"
+					:value="tools.length"
+					:content="tools.length"
+					offset-x="-1"
+				>
+					Tools
+				</v-badge>
 			</v-tab>
 
 			<v-tab-item class="ma-5 mt-5 mt-md-0" :transition="false">
@@ -95,6 +113,7 @@ export default {
 			datasets: 'datasets',
 			tools: 'tools',
 			community: 'community',
+			communityReferences: 'communityReferences',
 		}),
 		vertical() {
 			return this.$vuetify.breakpoint.mdAndUp;
@@ -173,5 +192,8 @@ export default {
 <style lang="scss" scoped>
 .v-tab {
 	text-transform: none !important;
+}
+.v-tab--min-width {
+	min-width: 160px;
 }
 </style>

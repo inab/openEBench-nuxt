@@ -28,6 +28,10 @@
 					<v-list-item-title>{{ item.title }}</v-list-item-title>
 					<v-icon v-if="item.external" right small>mdi-open-in-new</v-icon>
 				</v-list-item>
+				<v-list-item :href="vreHref" target="_blank">
+					<v-list-item-title>Benchmark your Tool</v-list-item-title>
+					<v-icon right small>mdi-open-in-new</v-icon>
+				</v-list-item>
 			</v-list>
 		</v-navigation-drawer>
 		<v-app-bar fixed app>
@@ -35,11 +39,12 @@
 				v-if="$vuetify.breakpoint.smAndDown"
 				icon
 				data-testid="btn-toggle-menu"
+				aria-label="Toggle Menu"
 				@click.stop="handleToggleOpen"
 			>
 				<v-icon>mdi-menu</v-icon>
 			</v-btn>
-			<nuxt-link to="/">
+			<nuxt-link to="/" aria-label="Home">
 				<v-img
 					class="mx-2"
 					:src="opebLogo"
@@ -76,11 +81,19 @@
 						<v-list-item-title>{{ item.title }}</v-list-item-title>
 						<v-icon v-if="item.external" right small>mdi-open-in-new</v-icon>
 					</v-list-item>
+					<v-list-item
+						v-if="$vuetify.breakpoint.mdAndDown"
+						:href="vreHref"
+						target="_blank"
+					>
+						<v-list-item-title>Benchmark your Tool</v-list-item-title>
+						<v-icon right small>mdi-open-in-new</v-icon>
+					</v-list-item>
 				</v-list>
 			</v-menu>
-			<v-spacer v-if="$vuetify.breakpoint.mdAndUp" />
+			<v-spacer v-if="$vuetify.breakpoint.lgAndUp" />
 			<v-btn
-				v-if="$vuetify.breakpoint.mdAndUp"
+				v-if="$vuetify.breakpoint.lgAndUp"
 				:href="vreHref"
 				target="_blank"
 				depressed
@@ -112,16 +125,23 @@
 				<v-icon left>mdi-login-variant</v-icon> Login
 			</v-btn> -->
 		</v-app-bar>
+		<cookie-law theme="dark-lime">
+			<div slot="message">
+				OpenEBench uses 🍪 to ensure you get the best experience on our website.
+			</div>
+		</cookie-law>
 	</div>
 </template>
 
 <script>
+import CookieLaw from 'vue-cookie-law';
 import menuEntries from './menuEntries';
 import subMenuEntries from './subMenuEntries';
 import opebLogo from '~/static/images/opeb_logo.gif';
 
 export default {
 	name: 'HeaderMenu',
+	components: { CookieLaw },
 	props: {
 		vreHref: {
 			type: String,

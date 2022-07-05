@@ -1,14 +1,9 @@
 <template>
 	<v-main tag="footer" class="footer primary white--text">
-		<cookie-law theme="dark-lime">
-			<div slot="message">
-				OpenEBench uses 🍪 to ensure you get the best experience on our website.
-			</div>
-		</cookie-law>
 		<v-row>
 			<v-col class="pa-4" md="3" cols="12" align="center">
 				<v-img :src="logo" alt="logo" max-width="150" contain />
-				<p class="body-2">&copy;&nbsp; BSC-CNS 2021</p>
+				<p class="body-2">&copy;&nbsp; BSC-CNS 2022</p>
 			</v-col>
 			<v-col class="pa-4" md="6" cols="12">
 				<v-expansion-panels v-if="isMobile">
@@ -74,7 +69,17 @@
 				</v-row>
 			</v-col>
 			<v-col md="3" cols="12" class="pa-4">
-				<div class="socmed">
+				<div>
+					<v-btn
+						text
+						icon
+						dark
+						class="button"
+						href="mailto:openebench-support@bsc.es"
+						aria-label="Mail link for OpenEBench Support"
+					>
+						<v-icon>mdi-email-outline</v-icon>
+					</v-btn>
 					<v-btn
 						text
 						icon
@@ -82,6 +87,7 @@
 						class="button"
 						href="https://twitter.com/openebench"
 						target="_blank"
+						aria-label="Link to Twitter Profile of OpenEBench"
 					>
 						<v-icon>mdi-twitter</v-icon>
 					</v-btn>
@@ -94,7 +100,7 @@
 						</p>
 					</v-col>
 					<v-col cols="3" align="center">
-						<v-img :src="euFlag" alt="logo" max-width="50" contain />
+						<v-img :src="euFlag" alt="logo" max-width="70" contain />
 					</v-col>
 				</v-row>
 			</v-col>
@@ -103,14 +109,12 @@
 </template>
 
 <script>
-import CookieLaw from 'vue-cookie-law';
 import logo from '~/static/images/opeb_logo_white_minimal.png';
 import euFlag from '~/static/images/eu.svg';
 import menuEntries from '~/components/Header/menuEntries';
 import subMenuEntries from '~/components/Header/subMenuEntries';
 
 export default {
-	components: { CookieLaw },
 	data: () => ({
 		logo,
 		euFlag,
