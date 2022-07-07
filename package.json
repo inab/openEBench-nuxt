@@ -43,7 +43,7 @@
 		"vue-cookie-law": "^1.13.3",
 		"vue-fragment": "^1.5.2",
 		"vue-observe-visibility": "^1.0.0",
-		"vue-server-renderer": "^2.6.14",
+		"vue-server-renderer": "^2.7.3",
 		"vue-template-compiler": "^2.6.14",
 		"vuetify": "^2.6.6",
 		"webpack": "^4.46.0"
@@ -71,7 +71,7 @@
 		"eslint": "^8.19.0",
 		"eslint-config-prettier": "^8.5.0",
 		"eslint-plugin-nuxt": "^3.2.0",
-		"eslint-plugin-storybook": "^0.5.12",
+		"eslint-plugin-storybook": "^0.5.13",
 		"eslint-plugin-vue": "^8.6.0",
 		"husky": "^8.0.1",
 		"jest": "^27.5.1",
