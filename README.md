@@ -2,6 +2,51 @@
 
 Make sure **npm** version is at least 8.x.x
 
+## Auto Deployment
+
+The Deployment is set up with Docker and GIT workflows.
+
+`docker-image-dev.yml`, `docker-image-dev2.yml`, `docker-image-prod.yml` contain the GIT workflow specifications, using `DOCKER_HUB_USER_NAME` and `DOCKER_HUB_ACCESS_TOKEN` as Docker Hub credentials.
+
+`Dockerfile.develop`, `Dockerfile.develop2` and `Dockerfile.production` contain the ENV variables and Build stage (nginx).
+
+### Production and Develop
+
+```yml
+name: Docker Image CI production
+
+on:
+  push:
+    branches:
+      - 'master'
+    tags:
+      - 'v[0-9].[0-9]+.[0-9]+'
+```
+
+The git workflow for building and pushing the Docker Image for <https://dev-openebench.bsc.es/> and <https://openebench.bsc.es/> is triggered by a push or pull_request to the `master` branch.
+
+Important: Only tagging a `master` branch with e.g. `v1.0.0` will set the `latest`tag on the docker image and therefore enable Auto Deployment.
+
+`dev-`and `prod`are built from the same (master) image, using different ENV variables.
+
+### Develop-2
+
+```yml
+name: Docker Image CI develop-2
+
+on:
+  push:
+    branches: [develop-2]
+  pull_request:
+    branches: [develop-2]
+```
+
+The git workflow for building and pushing the Docker Image for <https://dev2-openebench.bsc.es/> is triggered by a push or pull_request to the `develop-2` branch.
+
+### Docker compose
+
+The respective docker compose files for the oeb landscape can be found in this repo: <https://github.com/inab/oeb-docker-compose>
+
 ## Build Setup
 
 ```bash
