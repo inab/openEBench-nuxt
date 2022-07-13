@@ -122,6 +122,9 @@ describe('Community Participant', () => {
 		const barplot = wrapper.findComponent(ChartBarplotVisualizerWrapper); // => finds Bar by `name`
 		expect(barplot.exists()).toBe(true);
 		expect(barplot.props().id).toBe(MockChallengeDatasetsBarplot[0]._id);
+		expect(barplot.props().data).toBe(
+			MockChallengeDatasetsBarplot[0].graphData
+		);
 	});
 
 	it('renders the scatter-plot component with the right ID', () => {

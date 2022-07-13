@@ -12,7 +12,24 @@ const factory = () => {
 	});
 };
 
-const propsData = { id: 'someid' };
+const propsData = {
+	id: 'someid',
+	data: [
+		{
+			toolname: 'group01',
+			mode: 'lines',
+			type: 'bar-plot',
+			metric_value: 0.936,
+		},
+		{
+			toolname: 'group02',
+			mode: 'lines',
+			type: 'bar-plot',
+			metric_value: 0.9279,
+		},
+	],
+	metricName: 'Metric Name',
+};
 
 describe('ChartBarplotVisualizerWrapper', () => {
 	afterEach(() => {
