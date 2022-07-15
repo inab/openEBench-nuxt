@@ -113,7 +113,7 @@ describe('Community Participant', () => {
 		expect(mockStore.challenge.actions.getChallenge).toHaveBeenCalled();
 	});
 
-	it('renders the bar-plot component with the right ID', () => {
+	it('renders the bar-plot component with the right ID and JSON data structure for rendering', () => {
 		mockStore.challenge.getters.datasetsList = () => {
 			return MockChallengeDatasetsBarplot;
 		};
