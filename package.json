@@ -43,7 +43,7 @@
 		"vue-cookie-law": "^1.13.3",
 		"vue-fragment": "^1.5.2",
 		"vue-observe-visibility": "^1.0.0",
-		"vue-server-renderer": "^2.6.14",
+		"vue-server-renderer": "^2.7.7",
 		"vue-template-compiler": "^2.6.14",
 		"vuetify": "^2.6.6",
 		"webpack": "^4.46.0"
