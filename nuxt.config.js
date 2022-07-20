@@ -100,6 +100,9 @@ export default {
 				codeChallengeMethod: 'S256',
 			},
 		},
+		redirect: {
+			login: '/',
+		},
 	},
 
 	robots: {
