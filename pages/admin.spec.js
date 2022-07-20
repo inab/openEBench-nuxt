@@ -3,8 +3,16 @@ import Admin from './admin.vue';
 
 const factory = () => {
 	return mount(Admin, {
-		...createComponentMocks({}),
+		...createComponentMocks({ store: mockStore }),
 	});
+};
+
+const mockStore = {
+	auth: {
+		state: () => {
+			return { loggedIn: false, user: {} };
+		},
+	},
 };
 
 describe('Admin', () => {
