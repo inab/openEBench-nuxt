@@ -57,14 +57,17 @@ export default {
 			let i = 0;
 			state.datasets.forEach(async (dataset) => {
 				const id = dataset._id;
-				const response = await this.$graphql
-					.$get(
-						`/widget/${dataset.datalink.inline_data.visualization.type}/${dataset._id}`
-					)
-					.catch(() => {
-						return [];
-					});
-
+				// TODO remove if statement, once more visualizations are consuming the widget endpoint
+				const response =
+					dataset.datalink.inline_data.visualization.type === 'bar-plot'
+						? await this.$graphql
+								.$get(
+									`/widget/${dataset.datalink.inline_data.visualization.type}/${dataset._id}`
+								)
+								.catch(() => {
+									return [];
+								})
+						: [];
 				await commit('setDatasetGraphData', { id, response });
 
 				i++;
