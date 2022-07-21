@@ -18,6 +18,9 @@ describe('Index.vue', () => {
 				communitiesList: () => {
 					return [];
 				},
+				communitiesFilteredByProjects: () => {
+					return [];
+				},
 			},
 			actions: {
 				getCommunities: jest.fn(),
