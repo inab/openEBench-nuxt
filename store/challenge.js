@@ -54,6 +54,7 @@ export default {
 		},
 
 		getGraphData({ state, commit }) {
+			let i = 0;
 			state.datasets.forEach(async (dataset) => {
 				const id = dataset._id;
 				const response = await this.$graphql
@@ -63,9 +64,12 @@ export default {
 					.catch(() => {
 						return [];
 					});
+
 				await commit('setDatasetGraphData', { id, response });
 
-				commit('setLoading', { datasets: false });
+				i++;
+				if (i === state.datasets.length)
+					commit('setLoading', { datasets: false });
 			});
 		},
 	},
