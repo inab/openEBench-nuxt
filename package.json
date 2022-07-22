@@ -27,7 +27,7 @@
 		"*.**": "prettier --check --ignore-unknown"
 	},
 	"dependencies": {
-		"@inb/oeb-chart-barplot": "^1.1.4",
+		"@inb/oeb-chart-barplot": "^1.2.0",
 		"@inb/oeb-chart-scatter": "^1.1.4",
 		"@inb/oeb-classification-table": "^1.2.3",
 		"@nuxtjs/auth-next": "^5.0.0-1648802546.c9880dc",

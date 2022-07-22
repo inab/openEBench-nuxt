@@ -81,8 +81,8 @@
 	"todohighlight.keywords": ["TODO", "FIX", "REFACTOR"],
 	"typescript.tsdk": "node_modules\\typescript\\lib",
 	"workbench.colorCustomizations": {
-		"activityBar.background": "#4F1F12",
-		"titleBar.activeBackground": "#6F2B19",
+		"activityBar.background": "#124c4f",
+		"titleBar.activeBackground": "#124c4f",
 		"titleBar.activeForeground": "#FDF9F8"
 	}
 }
