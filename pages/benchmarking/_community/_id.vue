@@ -63,10 +63,13 @@
 					<chart-barplot-visualizer-wrapper
 						v-else-if="
 							item.datalink.inline_data.visualization.type == 'bar-plot' &&
-							index == tab
+							index == tab &&
+							item.graphData
 						"
 						:id="item._id"
 						:key="item._id"
+						:data="item.graphData"
+						:metric-name="item.datalink.inline_data.visualization.metric"
 						class="mt-5"
 					/>
 					<div v-else>No visual representation implemented</div>

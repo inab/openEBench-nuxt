@@ -1,5 +1,10 @@
 <template>
-	<div :data-id="id" class="benchmarkingChart_bars" :data-api-url="apiUrl" />
+	<div
+		:data-id="id"
+		class="benchmarkingChart_bars"
+		:data-data="JSON.stringify(data)"
+		:data-metric-name="metricName"
+	/>
 </template>
 
 <script>
@@ -9,6 +14,14 @@ import { load_bars_visualization } from '@inb/oeb-chart-barplot';
 export default {
 	props: {
 		id: {
+			type: String,
+			required: true,
+		},
+		data: {
+			type: Array,
+			required: true,
+		},
+		metricName: {
 			type: String,
 			required: true,
 		},

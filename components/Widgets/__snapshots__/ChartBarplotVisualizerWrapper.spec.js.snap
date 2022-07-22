@@ -1,3 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ChartBarplotVisualizerWrapper should match snapshot 1`] = `"<div data-id=\\"someid\\" data-api-url=\\"https://jest-openebench.bsc.es/api/scientific/graphql\\" class=\\"benchmarkingChart_bars\\"></div>"`;
+exports[`ChartBarplotVisualizerWrapper should match snapshot 1`] = `"<div data-id=\\"someid\\" data-data=\\"[{&quot;toolname&quot;:&quot;group01&quot;,&quot;mode&quot;:&quot;lines&quot;,&quot;type&quot;:&quot;bar-plot&quot;,&quot;metric_value&quot;:0.936},{&quot;toolname&quot;:&quot;group02&quot;,&quot;mode&quot;:&quot;lines&quot;,&quot;type&quot;:&quot;bar-plot&quot;,&quot;metric_value&quot;:0.9279}]\\" data-metric-name=\\"Metric Name\\" class=\\"benchmarkingChart_bars\\"></div>"`;

@@ -11,8 +11,9 @@ export default {
 	},
 
 	actions: {
-		async getChallenge({ commit }, params) {
+		async getChallenge({ commit, dispatch }, params) {
 			commit('setLoading', { challenge: true });
+			commit('setLoading', { datasets: true });
 
 			const response = await this.$graphql.$post('/graphql', {
 				query: `
@@ -48,7 +49,34 @@ export default {
 			commit('setLoading', { challenge: false });
 
 			commit('setDatasets', response.data);
-			commit('setLoading', { datasets: false });
+
+			dispatch('getGraphData');
+		},
+
+		getGraphData({ state, commit }) {
+			let i = 0;
+			state.datasets.forEach(async (dataset) => {
+				const id = dataset._id;
+				// TODO remove if statement, once more visualizations are consuming the widget endpoint
+				const response =
+					dataset.datalink.inline_data.visualization.type === 'bar-plot'
+						? await this.$graphql
+								.$get(
+									`/widget/${dataset.datalink.inline_data.visualization.type}/${dataset._id}`
+								)
+								.catch(() => {
+									return [];
+								})
+						: [];
+				await commit('setDatasetGraphData', { id, response });
+
+				i++;
+				if (i === state.datasets.length)
+					commit('setLoading', { datasets: false });
+			});
+
+			if (state.datasets.length === 0)
+				commit('setLoading', { datasets: false });
 		},
 	},
 
@@ -61,6 +89,9 @@ export default {
 		},
 		setChallenge(state, payload) {
 			state.challenge = payload.getChallenges[0];
+		},
+		setDatasetGraphData(state, { id, response }) {
+			state.datasets.find((x) => x._id === id).graphData = response;
 		},
 		setLoading(state, loading) {
 			state.loading[Object.keys(loading)[0]] = loading[Object.keys(loading)[0]];
