@@ -71,7 +71,39 @@ export default {
 		// https://go.nuxtjs.dev/axios
 		'@nuxtjs/axios',
 		'@nuxtjs/robots',
+		'@nuxtjs/auth-next',
 	],
+
+	auth: {
+		strategies: {
+			keycloak: {
+				scheme: '~/plugins/keycloak.js',
+				endpoints: {
+					authorization: `${process.env.KEYCLOAK_HOST}/auth/realms/${process.env.KEYCLOAK_REALM}/protocol/openid-connect/auth`,
+					userInfo: `${process.env.KEYCLOAK_HOST}/auth/realms/${process.env.KEYCLOAK_REALM}/protocol/openid-connect/userinfo`,
+					token: `${process.env.KEYCLOAK_HOST}/auth/realms/${process.env.KEYCLOAK_REALM}/protocol/openid-connect/token`,
+					logout: `${process.env.KEYCLOAK_HOST}/auth/realms/${process.env.KEYCLOAK_REALM}/protocol/openid-connect/logout`,
+					property: 'access_token',
+					type: 'Bearer',
+					name: 'Authorization',
+					maxAge: 1800, // Can be dynamic ?
+				},
+				refreshToken: {
+					property: 'refresh_token',
+					maxAge: 60 * 60 * 24 * 30, // Can be dynamic ?
+				},
+				responseType: 'code',
+				responseMode: 'fragment',
+				grantType: 'authorization_code',
+				clientId: process.env.KEYCLOAK_CLIENT_ID,
+				scope: ['openid'],
+				codeChallengeMethod: 'S256',
+			},
+		},
+		redirect: {
+			login: '/',
+		},
+	},
 
 	robots: {
 		UserAgent: '*',
@@ -127,6 +159,9 @@ export default {
 				process.env.REST_API_URL ||
 				'https://dev-openebench.bsc.es/monitor/rest/',
 		},
+		KEYCLOAK_HOST: process.env.KEYCLOAK_HOST || 'https://inb.bsc.es/auth',
+		KEYCLOAK_REALM: process.env.KEYCLOAK_REALM || 'openebench',
+		KEYCLOAK_CLIENT_ID: process.env.KEYCLOAK_CLIENT_ID || 'oeb-frontend',
 	},
 
 	// Build Configuration: https://go.nuxtjs.dev/config-build
