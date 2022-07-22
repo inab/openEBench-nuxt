@@ -74,6 +74,9 @@ export default {
 				if (i === state.datasets.length)
 					commit('setLoading', { datasets: false });
 			});
+
+			if (state.datasets.length === 0)
+				commit('setLoading', { datasets: false });
 		},
 	},
 
