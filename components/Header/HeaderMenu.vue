@@ -32,6 +32,10 @@
 					<v-list-item-title>Benchmark your Tool</v-list-item-title>
 					<v-icon right small>mdi-open-in-new</v-icon>
 				</v-list-item>
+				<v-list-item to="./intranet" target="_blank">
+					<v-list-item-title>Intranet</v-list-item-title>
+					<v-icon right small>mdi-open-in-new</v-icon>
+				</v-list-item>
 			</v-list>
 		</v-navigation-drawer>
 		<v-app-bar fixed app>
@@ -89,9 +93,26 @@
 						<v-list-item-title>Benchmark your Tool</v-list-item-title>
 						<v-icon right small>mdi-open-in-new</v-icon>
 					</v-list-item>
+					<v-list-item
+						v-if="$vuetify.breakpoint.mdAndDown"
+						:href="vreHref"
+						target="_blank"
+					>
+					</v-list-item>
 				</v-list>
 			</v-menu>
 			<v-spacer />
+			<v-btn
+				v-if="$vuetify.breakpoint.lgAndUp"
+				to="./intranet"
+				target="_blank"
+				depressed
+				outlined
+				color="primary"
+			>
+				<v-icon left>mdi-pencil-box-multiple-outline</v-icon> Intranet
+			</v-btn>
+			&nbsp;&nbsp;
 			<v-btn
 				v-if="$vuetify.breakpoint.lgAndUp"
 				:href="vreHref"
@@ -121,6 +142,7 @@
 				@click="LogoutHandler"
 				><v-icon left>mdi-logout</v-icon>Logout</v-btn
 			>
+
 			<!-- <v-btn v-if="$vuetify.breakpoint.mdAndUp" depressed color="ml-3 primary">
 				<v-icon left>mdi-login-variant</v-icon> Login
 			</v-btn> -->
