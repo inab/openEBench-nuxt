@@ -32,7 +32,11 @@
 					<v-list-item-title>Benchmark your Tool</v-list-item-title>
 					<v-icon right small>mdi-open-in-new</v-icon>
 				</v-list-item>
-				<v-list-item to="./intranet" target="_blank">
+				<v-list-item
+					to="/intranet/communities"
+					v-if="$store.state.auth.loggedIn"
+					target="_blank"
+				>
 					<v-list-item-title>Intranet</v-list-item-title>
 					<v-icon right small>mdi-open-in-new</v-icon>
 				</v-list-item>
@@ -103,8 +107,8 @@
 			</v-menu>
 			<v-spacer />
 			<v-btn
-				v-if="$vuetify.breakpoint.lgAndUp"
-				to="./intranet"
+				v-if="$store.state.auth.loggedIn"
+				to="/intranet/communities"
 				target="_blank"
 				depressed
 				outlined
