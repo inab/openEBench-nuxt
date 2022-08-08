@@ -121,10 +121,10 @@ export default {
 			});
 		},
 		goToChallenges() {
-			this.$router.push('./challenges');
+			this.$router.push('/intranet/challenges');
 		},
 		Return() {
-			this.$router.push('./communities');
+			this.$router.push('/intranet/communities');
 		},
 	},
 };
