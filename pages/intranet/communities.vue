@@ -121,7 +121,7 @@ export default {
 			});
 		},
 		goToEvents() {
-			this.$router.push('./events');
+			this.$router.push('/intranet/events');
 		},
 	},
 };
