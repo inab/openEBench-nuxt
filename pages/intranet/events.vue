@@ -2,8 +2,8 @@
 	<v-card>
 		<template>
 			<v-tabs
-				dark
 				v-model="currentItem"
+				dark
 				background-color="#0b579f"
 				show-arrows
 				fixed-tabs
@@ -15,7 +15,7 @@
 		</template>
 		<v-tabs-items v-model="currentItem">
 			<v-tab-item v-for="item in items" :key="item" :value="'tab-' + item">
-				<v-card flat v-if="item == 'Community Administration'" height="100%">
+				<v-card v-if="item == 'Community Administration'" flat height="100%">
 					<v-tabs vertical>
 						<v-tab> Events </v-tab>
 						<v-tab> Tools </v-tab>
@@ -25,15 +25,22 @@
 								<v-card-text>
 									<div>
 										<v-row>
-											<v-col><h2>Listing Events - COMMUNITY NAME</h2></v-col>
+											<v-col>
+												<h2>
+													Listing Events - COMMUNITY NAME
+													<v-icon @click="newEvent()"
+														>mdi-plus-circle-outline</v-icon
+													>
+												</h2>
+											</v-col>
 
-											<v-col align="right" @click="Return()"
-												><v-btn color="primary"
-													><v-icon>mdi-keyboard-return</v-icon>Return</v-btn
-												></v-col
-											>
+											<v-col align="right" @click="Return()">
+												<v-btn color="primary">
+													<v-icon>mdi-keyboard-return</v-icon>Return
+												</v-btn>
+											</v-col>
 										</v-row>
-										<table class="table" id="datatable">
+										<table id="datatable" class="table">
 											<thead>
 												<tr>
 													<th>Event Name</th>
@@ -73,13 +80,13 @@
 						</v-tab-item>
 					</v-tabs>
 				</v-card>
-				<v-card flat v-else-if="item == 'User Administration'">
+				<v-card v-else-if="item == 'User Administration'" flat>
 					<v-card-text>
 						2
 						{{ text }}
 					</v-card-text>
 				</v-card>
-				<v-card flat v-else-if="item == 'Petition Management'">
+				<v-card v-else-if="item == 'Petition Management'" flat>
 					<v-card-text>
 						3
 						{{ text }}
@@ -125,6 +132,9 @@ export default {
 		},
 		Return() {
 			this.$router.push('/intranet/communities');
+		},
+		newEvent() {
+			this.$router.push('/intranet/new');
 		},
 	},
 };

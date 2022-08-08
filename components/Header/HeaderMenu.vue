@@ -33,8 +33,8 @@
 					<v-icon right small>mdi-open-in-new</v-icon>
 				</v-list-item>
 				<v-list-item
-					to="/intranet/communities"
 					v-if="$store.state.auth.loggedIn"
+					to="/intranet/communities"
 					target="_blank"
 				>
 					<v-list-item-title>Intranet</v-list-item-title>

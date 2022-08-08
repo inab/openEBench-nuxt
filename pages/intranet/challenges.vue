@@ -25,7 +25,14 @@
 								<v-card-text>
 									<div>
 										<v-row>
-											<v-col><h2>Listing Challenges - EVENT NAME</h2></v-col>
+											<v-col>
+												<h2>
+													Listing Challenges - EVENT NAME
+													<v-icon @click="newChallenge()"
+														>mdi-plus-circle-outline</v-icon
+													>
+												</h2>
+											</v-col>
 
 											<v-col align="right" @click="Return()"
 												><v-btn color="primary"
@@ -47,9 +54,14 @@
 													<td>a</td>
 													<td>b</td>
 													<td>
-														<v-icon right @click="goToChallenges()"
-															>mdi-open-in-new</v-icon
+														<v-btn
+															rounded
+															color="#E4E4E4"
+															style="text-transform: none"
+															@click.stop="showMetricsForm = true"
+															>Show Metrics</v-btn
 														>
+														<MetricsForm v-model="showMetricsForm" />
 													</td>
 													<td>
 														<v-icon small>mdi-pencil</v-icon
@@ -96,13 +108,16 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'datatables.net-dt/js/dataTables.dataTables';
 import 'datatables.net-dt/css/jquery.dataTables.min.css';
 import ToolsComp from '../tool';
+import MetricsForm from './metrics';
 
 export default {
 	name: 'IntranetChallengesPage',
 	components: {
 		ToolsComp,
+		MetricsForm,
 	},
 	data: () => ({
+		showMetricsForm: false,
 		currentItem: 'tab-Community Administration',
 		items: [
 			'Community Administration',
@@ -125,6 +140,9 @@ export default {
 		},
 		Return() {
 			this.$router.push('/intranet/events');
+		},
+		newChallenge() {
+			this.$router.push('/intranet/new');
 		},
 	},
 };
