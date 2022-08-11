@@ -127,3 +127,20 @@ More information about the usage of this directory in [the documentation](https:
 This directory contains your Vuex store files. Creating a file in this directory automatically activates Vuex.
 
 More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/store).
+
+## Prettier Solutions for GitHub commits
+
+Prettier is an opinionated code formatter with support for JavaScript, Angular, Vue,...
+
+It is necessary to do the new code compatible with this tool before doing the commit. If it is not compatible it will appear an error message.
+
+### Visual Studio Code
+
+To do the new code compatible with this tool it is necessary to install the [Prettier Extension](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode).
+
+Once installed from Visual Studio you have to do:
+
+1.  Ctrl + Shift + P
+2.  Write "Format Document" and select it.
+
+The code automatically addapt the structure to be validated with the Prettier Tool.
