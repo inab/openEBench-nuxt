@@ -132,13 +132,13 @@ More information about the usage of this directory in [the documentation](https:
 
 Prettier is an opinionated code formatter with support for JavaScript, Angular, Vue,...
 
-It is necessary to do the new code compatible with this tool before doing the commit. If it is not compatible it will appear an error message.
+It is necessary to do the new code compatible with this tool before doing the commit in Git. If it is not compatible it will appear an error message.
 
 ### Visual Studio Code
 
-To do the new code compatible with this tool it is necessary to install the [Prettier Extension](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode).
+To do the new code compatible with Prettier it is necessary to install the [Prettier Extension](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode).
 
-Once installed from Visual Studio you have to do:
+Once installed, from Visual Studio you have to do:
 
 1.  Ctrl + Shift + P
 2.  Write "Format Document" and select it.
