@@ -1,0 +1,199 @@
+{
+	"$id": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/2.0/BenchmarkingEvent",
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$comment": "allOf and placeholders inspired by https://stackoverflow.com/a/24365393",
+	"type": "object",
+	"properties": {
+		"_id": {
+			"title": "Benchmarking Event ID",
+			"description": "The unique id of the benchmarking event, according to the rules. For submissions there are temporary identifiers. This identifier cannot begin by OEB",
+			"type": "string",
+			"pattern": "^(OEBE[0-9]{3}[A-Z0-9]{7})$|^(OEBE[0-9]{3}t[A-Z0-9]{6})$|^((?![Oo][Ee][Bb]).*)$",
+			"widget": {
+				"formlyConfig": {
+					"templateOptions": {
+						"placeholder": "Example: Benchmarking_event_322"
+					}
+				}
+			}
+		},
+		"orig_id": {
+			"$comment": "Placeholder covered by _shared#/definitions/OrigIdProp",
+			"title": "The benchmarking event original id",
+			"widget": {
+				"formlyConfig": {
+					"templateOptions": {
+						"placeholder": "Example: ORIG_ID_1999"
+					}
+				}
+			}
+		},
+		"name": {
+			"$comment": "Placeholder covered by _shared#/definitions/LinksDescProp",
+			"title": "Name",
+			"widget": {
+				"formlyConfig": {
+					"templateOptions": {
+						"placeholder": "Example: Some Event Name"
+					}
+				}
+			}
+		},
+		"description": {
+			"$comment": "Placeholder covered by _shared#/definitions/LinksDescProp",
+			"title": "Description",
+			"description": "Long benchmarking event description, written in Markdown",
+			"widget": {
+				"formlyConfig": {
+					"templateOptions": {
+						"placeholder": "Example: This is the description about the benchmarking event"
+					}
+				}
+			}
+		},
+		"is_automated": {
+			"title": "Is this an automated event?",
+			"type": "boolean"
+		},
+		"community_id": {
+			"title": "Community ID",
+			"description": "The community id where this benchmarking event belongs",
+			"type": "string",
+			"foreign_keys": [
+				{
+					"schema_id": "Community",
+					"members": ["."]
+				}
+			],
+			"minLength": 1,
+			"widget": {
+				"formlyConfig": {
+					"type": "BDMLoader",
+					"templateOptions": {
+						"short_name": "community",
+						"title": "Community ID",
+						"BDMType": "community_id",
+						"multiple": false,
+						"url_select": {
+							"url_staged": "https://dev2-openebench.bsc.es/api/scientific/staged/Community?privileged=true"
+						}
+					}
+				}
+			}
+		},
+		"references": {
+			"title": "Reference id(s)",
+			"description": "The related reference id(s) (if any)",
+			"$comment": "Placeholder covered by _shared#/definitions/ReferencesProp"
+		},
+		"links": {
+			"$comment": "Placeholder covered by _shared#/definitions/LinksDescProp",
+			"title": "Links",
+			"description": "Ways to contact the benchmarking event responsible. It can be many different ones: public page, a social media link, some public chat, a public mailing list, ..."
+		},
+		"dates": {
+			"title": "Benchmarking event Dates",
+			"description": "Relevant dates for this benchmarking event",
+			"type": "object",
+			"properties": {
+				"creation": {
+					"title": "Creation date of the benchmarking event",
+					"type": "string",
+					"format": "date-time",
+					"widget": {
+						"formlyConfig": {
+							"templateOptions": {
+								"placeholder": "Example: 2018-11-13T20:20:39+00:00"
+							}
+						}
+					}
+				},
+				"modification": {
+					"title": "Last modification date of the benchmarking event",
+					"type": "string",
+					"format": "date-time",
+					"widget": {
+						"formlyConfig": {
+							"templateOptions": {
+								"placeholder": "Example: 2018-11-13T20:20:39+00:00"
+							}
+						}
+					}
+				},
+				"public": {
+					"title": "The date when this benchmarking event becomes public",
+					"type": "string",
+					"format": "date-time",
+					"widget": {
+						"formlyConfig": {
+							"templateOptions": {
+								"placeholder": "Example: 2018-11-13T20:20:39+00:00"
+							}
+						}
+					}
+				},
+				"benchmark_start": {
+					"title": "Start date benchmarking event",
+					"description": "When starts the benchmarking event?",
+					"type": "string",
+					"format": "date-time",
+					"widget": {
+						"formlyConfig": {
+							"templateOptions": {
+								"placeholder": "Example: 2018-11-13T20:20:39+00:00"
+							}
+						}
+					}
+				},
+				"benchmark_stop": {
+					"title": "End date benchmarking event",
+					"description": "When stops the benchmarking event?",
+					"type": "string",
+					"format": "date-time",
+					"widget": {
+						"formlyConfig": {
+							"templateOptions": {
+								"placeholder": "Example: 2018-11-13T20:20:39+00:00"
+							}
+						}
+					}
+				}
+			},
+			"required": ["creation", "modification"],
+			"dependencies": {
+				"benchmark_start": ["benchmark_stop"],
+				"benchmark_stop": ["benchmark_start"]
+			}
+		},
+		"bench_contact_ids": {
+			"title": "The benchmarking event contact id(s) (*)",
+			"type": "array",
+			"minItems": 1,
+			"widget": {
+				"formlyConfig": {
+					"type": "BDMLoader",
+					"templateOptions": {
+						"short_name": "contact",
+						"title": "Contact id(s)",
+						"BDMType": "bench_contact_ids",
+						"multiple": true,
+						"url_select": {
+							"url_staged": "https://dev2-openebench.bsc.es/api/scientific/staged/Contact?privileged=true"
+						}
+					}
+				}
+			}
+		}
+	},
+	"additionalProperties": false,
+	"required": [
+		"_id",
+		"_schema",
+		"name",
+		"dates",
+		"community_id",
+		"bench_contact_ids"
+	],
+	"primary_key": ["_id"],
+	"dependencies": {}
+}

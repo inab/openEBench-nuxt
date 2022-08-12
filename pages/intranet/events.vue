@@ -34,8 +34,8 @@
 												</h2>
 											</v-col>
 
-											<v-col align="right" @click="Return()">
-												<v-btn color="primary">
+											<v-col align="right">
+												<v-btn color="primary" @click="Return()">
 													<v-icon>mdi-keyboard-return</v-icon>Return
 												</v-btn>
 											</v-col>

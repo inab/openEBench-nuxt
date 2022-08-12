@@ -18,17 +18,20 @@
 				<v-card v-if="item == 'Community Administration'" flat height="100%">
 					<v-card flat>
 						<v-card-text>
-							<div>
+							<div class="mt-2 mx-10">
 								<v-row>
-									<v-col><h2>NEW</h2></v-col>
+									<v-col><h2>Add new Component</h2></v-col>
 
-									<v-col align="right" @click="Return()"
-										><v-btn color="primary"
+									<v-col align="right"
+										><v-btn color="primary" @click="Return()"
 											><v-icon>mdi-keyboard-return</v-icon>Return</v-btn
 										></v-col
 									>
 								</v-row>
-								THIS IS NEW
+								<v-row>
+									<JsonSchema :schema="schema" v-model="value" />
+									<pre>{{ value }}</pre>
+								</v-row>
 							</div>
 						</v-card-text>
 					</v-card>
@@ -55,11 +58,17 @@ import 'jquery/dist/jquery.min.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'datatables.net-dt/js/dataTables.dataTables';
 import 'datatables.net-dt/css/jquery.dataTables.min.css';
+import JsonSchema from '@roma219/vue-jsonschema-form';
+import myschema from './myschema.json';
 
 export default {
 	name: 'IntranetChallengesPage',
-	components: {},
+	components: { JsonSchema },
 	data: () => ({
+		value: {},
+		model: {
+			name: 'Yourtion',
+		},
 		currentItem: 'tab-Community Administration',
 		items: [
 			'Community Administration',
@@ -68,6 +77,11 @@ export default {
 		],
 		text: 'Lorem ipsum dolor sit amet, con.',
 	}),
+	computed: {
+		schema() {
+			return myschema;
+		},
+	},
 	methods: {
 		addItem(item) {
 			const removed = this.items.splice(0, 1);
