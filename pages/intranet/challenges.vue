@@ -27,7 +27,8 @@
 										<v-row>
 											<v-col>
 												<h2>
-													Listing Challenges - EVENT NAME
+													Listing Challenges -
+													{{ $store.state.community.currentEvent.name }}
 													<v-icon @click="newChallenge()"
 														>mdi-plus-circle-outline</v-icon
 													>
@@ -50,8 +51,14 @@
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
-													<td>a</td>
+												<tr
+													v-for="(challenge, c) in $store.state.community
+														.currentEvent.challenges"
+													:key="c"
+													dense
+													:id="challenge._id"
+												>
+													<td>{{ challenge.acronym }}</td>
 													<td>b</td>
 													<td>
 														<v-btn
@@ -107,6 +114,7 @@ import 'jquery/dist/jquery.min.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'datatables.net-dt/js/dataTables.dataTables';
 import 'datatables.net-dt/css/jquery.dataTables.min.css';
+import { mapGetters } from 'vuex';
 import ToolsComp from '../tool';
 import MetricsForm from './metrics';
 
@@ -126,6 +134,18 @@ export default {
 		],
 		text: 'Lorem ipsum dolor sit amet, con.',
 	}),
+	computed: {
+		...mapGetters('event', {
+			challenges: 'challenges',
+			datasets: 'datasets',
+			currentEvent: 'currentEvent',
+		}),
+	},
+	mounted() {
+		this.$store.dispatch('challenge/getChallenge', {
+			id: this.$route.params.event,
+		});
+	},
 	methods: {
 		addItem(item) {
 			const removed = this.items.splice(0, 1);
@@ -139,10 +159,14 @@ export default {
 			this.$router.push('/intranet/communities');
 		},
 		Return() {
-			this.$router.push('/intranet/events');
+			console.log(this.$route.params);
+			this.$router.push(
+				'/intranet/communities/' + this.$route.params.community
+			);
 		},
 		newChallenge() {
-			this.$router.push('/intranet/new');
+			console.log(this.$store.state.community.currentEvent);
+			/* this.$router.push('/intranet/new'); */
 		},
 	},
 };

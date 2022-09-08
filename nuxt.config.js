@@ -196,6 +196,21 @@ export default {
 				path: '/scientific/:community/:id',
 				component: resolve(__dirname, 'pages/benchmarking/_community/_id'),
 			});
+			routes.push({
+				name: 'intranet-communities',
+				path: '/intranet/communities',
+				component: resolve(__dirname, 'pages/intranet/communities'),
+			});
+			routes.push({
+				name: 'intranet-communities-events',
+				path: '/intranet/communities/:community',
+				component: resolve(__dirname, 'pages/intranet/events'),
+			});
+			routes.push({
+				name: 'intranet-communities-events-challenges',
+				path: '/intranet/communities/:community/:event',
+				component: resolve(__dirname, 'pages/intranet/challenges'),
+			});
 		},
 	},
 };

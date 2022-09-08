@@ -13,6 +13,7 @@
 
 <script>
 export default {
+	name: 'IntranetMetricsPage',
 	props: {
 		value: Boolean,
 	},

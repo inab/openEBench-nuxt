@@ -41,27 +41,38 @@
 												<tr>
 													<th>Community Name</th>
 													<th>Owners</th>
-													<th>Type</th>
-													<th>Follow</th>
+													<th>Follow (To Do)</th>
 													<th>Events</th>
 													<th>Actions</th>
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
-													<td>a</td>
-													<td>b</td>
-													<td>c</td>
-													<td>d</td>
+												<tr
+													v-for="(community, c) in communities"
+													:key="c"
+													dense
+													:id="community._id"
+												>
+													<td>{{ community.acronym }}</td>
+													<td>orcid problems - ToDo</td>
 													<td>
-														<v-icon right @click="goToEvents()"
-															>mdi-open-in-new</v-icon
+														<v-icon right @click="follow()"
+															>mdi-plus-thick</v-icon
 														>
+													</td>
+													<td>
+														<v-icon right @click="goToEvents(community._id)">
+															mdi-open-in-new
+														</v-icon>
+														<!--<router-link style="text-decoration: none; color: inherit;" :to="'./communities/' + community._id"><v-icon right
+															>mdi-open-in-new</v-icon
+														></router-link>-->
 													</td>
 													<td>
 														<v-icon small>mdi-pencil</v-icon
 														><v-icon small>mdi-delete</v-icon
-														><v-icon small>mdi-eye-off</v-icon
+														><v-icon small @click="showHide(community._id)"
+															>mdi-eye-off</v-icon
 														><v-icon small>mdi-account-plus</v-icon>
 													</td>
 												</tr>
@@ -102,6 +113,7 @@ import 'jquery/dist/jquery.min.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'datatables.net-dt/js/dataTables.dataTables';
 import 'datatables.net-dt/css/jquery.dataTables.min.css';
+import { mapGetters } from 'vuex';
 import ToolsComp from '../tool';
 
 export default {
@@ -118,6 +130,14 @@ export default {
 		],
 		text: 'Lorem ipsum dolor sit amet, con.',
 	}),
+	computed: {
+		...mapGetters('communities', {
+			communities: 'communitiesList',
+		}),
+	},
+	mounted() {
+		this.$store.dispatch('communities/getCommunities');
+	},
 	methods: {
 		addItem(item) {
 			const removed = this.items.splice(0, 1);
@@ -127,11 +147,19 @@ export default {
 				this.currentItem = 'tab-' + item;
 			});
 		},
-		goToEvents() {
-			this.$router.push('/intranet/events');
+		goToEvents(id) {
+			this.$router.push({
+				path: '/intranet/communities/' + id,
+			});
 		},
 		newCommunity() {
 			this.$router.push('/intranet/new');
+		},
+		follow() {
+			console.log('follow');
+		},
+		showHide(id) {
+			console.log('show ' + id);
 		},
 	},
 };

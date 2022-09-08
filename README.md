@@ -144,3 +144,12 @@ Once installed, from Visual Studio you have to do:
 2.  Write "Format Document" and select it.
 
 The code automatically addapt the structure to be validated with the Prettier Tool.
+
+### Command Line
+
+To adapt the file by command line it is necessary to launch for EACH file this command:
+
+```bash
+# adapt your code to be validated by Prettier
+$ PATH="$(npm bin):$PATH" prettier --ignore-unknown --write PATH_FILE_YOU_WANT_VALIDATE
+```

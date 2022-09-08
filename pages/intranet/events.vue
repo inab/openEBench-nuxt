@@ -27,7 +27,7 @@
 										<v-row>
 											<v-col>
 												<h2>
-													Listing Events - COMMUNITY NAME
+													Listing Events - {{ community.acronym }}
 													<v-icon @click="newEvent()"
 														>mdi-plus-circle-outline</v-icon
 													>
@@ -50,11 +50,16 @@
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
-													<td>a</td>
+												<tr
+													v-for="(event, e) in events"
+													:key="e"
+													dense
+													:id="event._id"
+												>
+													<td>{{ event.name }}</td>
 													<td>b</td>
 													<td>
-														<v-icon right @click="goToChallenges()"
+														<v-icon right @click="goToChallenges(event._id)"
 															>mdi-open-in-new</v-icon
 														>
 													</td>
@@ -102,6 +107,7 @@ import 'jquery/dist/jquery.min.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'datatables.net-dt/js/dataTables.dataTables';
 import 'datatables.net-dt/css/jquery.dataTables.min.css';
+import { mapGetters } from 'vuex';
 import ToolsComp from '../tool';
 
 export default {
@@ -118,6 +124,18 @@ export default {
 		],
 		text: 'Lorem ipsum dolor sit amet, con.',
 	}),
+	computed: {
+		...mapGetters('community', {
+			events: 'events',
+			community: 'community',
+			communityReferences: 'communityReferences',
+		}),
+	},
+	mounted() {
+		this.$store.dispatch('community/getCommunity', {
+			id: this.$route.params.community,
+		});
+	},
 	methods: {
 		addItem(item) {
 			const removed = this.items.splice(0, 1);
@@ -127,8 +145,11 @@ export default {
 				this.currentItem = 'tab-' + item;
 			});
 		},
-		goToChallenges() {
-			this.$router.push('/intranet/challenges');
+		goToChallenges(id) {
+			this.$router.push({
+				path:
+					'/intranet/communities/' + this.$route.params.community + '/' + id,
+			});
 		},
 		Return() {
 			this.$router.push('/intranet/communities');
