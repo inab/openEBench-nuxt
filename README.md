@@ -151,5 +151,5 @@ To adapt the file by command line it is necessary to launch for EACH file this c
 
 ```bash
 # adapt your code to be validated by Prettier
-$ PATH="$(npm bin):$PATH" prettier --ignore-unknown --write PATH_FILE_YOU_WANT_VALIDATE
+$ PATH="$(npm bin):$PATH" prettier --ignore-unknown --write PATH_FILE_YOU_WANT_TO_VALIDATE
 ```
