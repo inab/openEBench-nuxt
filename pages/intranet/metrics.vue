@@ -4,7 +4,9 @@
 			<v-card-text>
 				<h3>Hola!</h3>
 				<v-card-actions>
-					<v-btn color="primary" @click.stop="show = false">Close</v-btn>
+					<v-btn color="primary" @click.stop="showMetricsForm = false"
+						>Close</v-btn
+					>
 				</v-card-actions>
 			</v-card-text>
 		</v-card>
@@ -18,7 +20,7 @@ export default {
 		value: Boolean,
 	},
 	computed: {
-		show: {
+		showMetricsForm: {
 			get() {
 				return this.value;
 			},

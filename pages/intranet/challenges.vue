@@ -28,7 +28,7 @@
 											<v-col>
 												<h2>
 													Listing Challenges -
-													{{ $store.state.community.currentEvent.name }}
+													{{ $store.state.challenges.event.name }}
 													<v-icon @click="newChallenge()"
 														>mdi-plus-circle-outline</v-icon
 													>
@@ -52,8 +52,8 @@
 											</thead>
 											<tbody>
 												<tr
-													v-for="(challenge, c) in $store.state.community
-														.currentEvent.challenges"
+													v-for="(challenge, c) in $store.state.challenges
+														.challenges"
 													:key="c"
 													dense
 													:id="challenge._id"
@@ -93,16 +93,10 @@
 					</v-tabs>
 				</v-card>
 				<v-card flat v-else-if="item == 'User Administration'">
-					<v-card-text>
-						2
-						{{ text }}
-					</v-card-text>
+					<v-card-text> 2 </v-card-text>
 				</v-card>
 				<v-card flat v-else-if="item == 'Petition Management'">
-					<v-card-text>
-						3
-						{{ text }}
-					</v-card-text>
+					<v-card-text> 3 </v-card-text>
 				</v-card>
 			</v-tab-item>
 		</v-tabs-items>
@@ -132,17 +126,14 @@ export default {
 			'User Administration',
 			'Petition Management',
 		],
-		text: 'Lorem ipsum dolor sit amet, con.',
 	}),
 	computed: {
-		...mapGetters('event', {
+		...mapGetters('challenges', {
 			challenges: 'challenges',
-			datasets: 'datasets',
-			currentEvent: 'currentEvent',
 		}),
 	},
 	mounted() {
-		this.$store.dispatch('challenge/getChallenge', {
+		this.$store.dispatch('challenges/getChallenges', {
 			id: this.$route.params.event,
 		});
 	},
@@ -155,18 +146,13 @@ export default {
 				this.currentItem = 'tab-' + item;
 			});
 		},
-		goToChallenges() {
-			this.$router.push('/intranet/communities');
-		},
 		Return() {
-			console.log(this.$route.params);
 			this.$router.push(
 				'/intranet/communities/' + this.$route.params.community
 			);
 		},
 		newChallenge() {
-			console.log(this.$store.state.community.currentEvent);
-			/* this.$router.push('/intranet/new'); */
+			this.$router.push('/intranet/new');
 		},
 	},
 };
