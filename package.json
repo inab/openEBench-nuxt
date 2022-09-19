@@ -35,7 +35,7 @@
 		"@nuxtjs/robots": "^2.5.0",
 		"@roma219/vue-jsonschema-form": "^0.1.14",
 		"bootstrap": "^5.2.0",
-		"core-js": "^3.22.6",
+		"core-js": "^3.25.2",
 		"datatables.net-dt": "^1.12.1",
 		"dompurify": "^2.3.8",
 		"gsap": "^3.10.4",
