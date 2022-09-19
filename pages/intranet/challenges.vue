@@ -65,10 +65,13 @@
 															rounded
 															color="#E4E4E4"
 															style="text-transform: none"
-															@click.stop="showMetricsForm = true"
+															@click="showMetricsForm = true"
 															>Show Metrics</v-btn
 														>
-														<MetricsForm v-model="showMetricsForm" />
+														<MetricsForm
+															v-model="showMetricsForm"
+															:passedObject="challenge._id"
+														/>
 													</td>
 													<td>
 														<v-icon small>mdi-pencil</v-icon
@@ -153,6 +156,9 @@ export default {
 		},
 		newChallenge() {
 			this.$router.push('/intranet/new');
+		},
+		getMetrics(id, acronym) {
+			console.log('ID: ' + id + '; ACRONYM: ' + acronym);
 		},
 	},
 };
