@@ -62,16 +62,18 @@
 													<td>b</td>
 													<td>
 														<v-btn
+															id="show-modal"
 															rounded
 															color="#E4E4E4"
 															style="text-transform: none"
-															@click="showMetricsForm = true"
+															@click="openModal()"
 															>Show Metrics</v-btn
 														>
 														<MetricsForm
-															v-model="showMetricsForm"
 															:passedObject="challenge._id"
-														/>
+															@close="closeModal"
+															>hola</MetricsForm
+														>
 													</td>
 													<td>
 														<v-icon small>mdi-pencil</v-icon
@@ -122,7 +124,7 @@ export default {
 		MetricsForm,
 	},
 	data: () => ({
-		showMetricsForm: false,
+		showModal: false,
 		currentItem: 'tab-Community Administration',
 		items: [
 			'Community Administration',
@@ -159,6 +161,14 @@ export default {
 		},
 		getMetrics(id, acronym) {
 			console.log('ID: ' + id + '; ACRONYM: ' + acronym);
+		},
+		openModal() {
+			this.showModal = true;
+			console.log(this.showModal);
+		},
+		closeModal() {
+			this.showModal = false;
+			console.log(this.showModal);
 		},
 	},
 };

@@ -1,13 +1,12 @@
 <template>
-	<v-dialog v-model="showMetricsForm" max-width="500px">
+	<v-dialog v-if="show" class="openDialog" max-width="500px">
 		<v-card>
 			<v-card-text>
 				<h3>Hola! {{ passedObject }}</h3>
 				<v-btn @click="getInfo()">BOTÓN</v-btn>
 				<v-card-actions>
-					<v-btn color="primary" @click.stop="showMetricsForm = false"
-						>Close</v-btn
-					>
+					<button class="btn btn-success" @click="handleSave">Save</button>
+					<button class="btn btn-secondary" @click="handleClose">Close</button>
 				</v-card-actions>
 			</v-card-text>
 		</v-card>
@@ -23,21 +22,23 @@ import { mapGetters } from 'vuex';
 export default {
 	name: 'IntranetMetricsPage',
 	props: {
-		value: Boolean,
 		passedObject: String,
+		show: Boolean,
+	},
+	data() {
+		return {
+			showModal5: this.show,
+		};
 	},
 	computed: {
-		showMetricsForm: {
-			get() {
-				return this.value;
-			},
-			set(value) {
-				this.$emit('input', value);
-			},
-		},
 		...mapGetters('challenges', {
 			challenges: 'challenges',
 		}),
+	},
+	watch: {
+		show(newVal) {
+			this.showModal5 = newVal;
+		},
 	},
 	mounted() {
 		this.$store.dispatch('challenges/getChallenges', {
@@ -45,6 +46,12 @@ export default {
 		});
 	},
 	methods: {
+		handleSave() {
+			this.handleClose();
+		},
+		handleClose() {
+			this.$emit('close');
+		},
 		addItem(item) {
 			const removed = this.items.splice(0, 1);
 			this.items.push(...this.more.splice(this.more.indexOf(item), 1));
