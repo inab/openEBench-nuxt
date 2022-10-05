@@ -56,7 +56,7 @@
 		"vue-template-compiler": "^2.6.14",
 		"vuejs-smart-table": "^0.0.8",
 		"vuelidate": "^0.7.7",
-		"vuetify": "^2.6.6",
+		"vuetify": "^2.6.11",
 		"webpack": "^4.46.0"
 	},
 	"devDependencies": {
