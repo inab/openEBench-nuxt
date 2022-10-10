@@ -16,7 +16,7 @@ jobs:
 
     steps:
       - name: Checkout 🛎
-        uses: actions/checkout@master
+        uses: actions/checkout@v3.1.0
 
       - name: Install dependencies 👨🏻‍💻
         run: npm ci --prefer-offline --no-audit
