@@ -42,7 +42,7 @@
 		"gsap": "^3.10.4",
 		"jquery": "^3.6.0",
 		"lodash.debounce": "^4.0.8",
-		"marked": "^4.0.16",
+		"marked": "^4.2.0",
 		"mdbvue": "^6.7.3",
 		"nuxt": "^2.15.8",
 		"pluralize": "^8.0.0",
