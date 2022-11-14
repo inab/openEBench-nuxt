@@ -36,7 +36,7 @@
 		"@roma219/vue-jsonschema-form": "^0.1.14",
 		"bootstrap": "^5.2.1",
 		"bootstrap-vue": "^2.22.0",
-		"core-js": "^3.22.6",
+		"core-js": "^3.26.1",
 		"datatables.net-dt": "^1.12.1",
 		"dompurify": "^2.3.8",
 		"gsap": "^3.10.4",
