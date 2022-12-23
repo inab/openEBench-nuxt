@@ -4,7 +4,7 @@ exports[`WelcomeSection should match snapshot 1`] = `
 "<div class=\\"container\\">
   <div column=\\"\\" class=\\"row align-end\\">
     <div align=\\"left\\" class=\\"col-sm-12 col-md-7 offset-md-0 col\\">
-      <h1 class=\\"text-h3 mb-4 primary--text\\">Welcome to OpenEBench</h1>
+      <h1 class=\\"text-h3 mb-4 primary--text\\">Welcome to OpenEBenchh</h1>
       <h2 class=\\"text-subtitle-1 mb-5\\">
         The ELIXIR gateway to benchmarking communities, software monitoring,
         and quality metrics for life sciences tools and workflows.

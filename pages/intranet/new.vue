@@ -20,7 +20,7 @@
 						<v-card-text>
 							<div class="mt-2 mx-10">
 								<v-row>
-									<v-col><h2>Add new Component</h2></v-col>
+									<v-col><h2>Add new Community</h2></v-col>
 
 									<v-col align="right"
 										><v-btn color="primary" @click="Return()"
@@ -28,9 +28,10 @@
 										></v-col
 									>
 								</v-row>
-								<v-row>
+								<p v-if="!jsonData">Loading...</p>
+								<v-row v-else>
 									<JsonSchema :schema="schema" v-model="value" />
-									<pre>{{ value }}</pre>
+									<br />
 								</v-row>
 							</div>
 						</v-card-text>
@@ -59,16 +60,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'datatables.net-dt/js/dataTables.dataTables';
 import 'datatables.net-dt/css/jquery.dataTables.min.css';
 import JsonSchema from '@roma219/vue-jsonschema-form';
-import myschema from './myschema.json';
+import $ from 'jquery';
 
 export default {
 	name: 'IntranetChallengesPage',
 	components: { JsonSchema },
 	data: () => ({
 		value: {},
-		model: {
-			name: 'Yourtion',
-		},
+		model: {},
 		currentItem: 'tab-Community Administration',
 		items: [
 			'Community Administration',
@@ -76,11 +75,15 @@ export default {
 			'Petition Management',
 		],
 		text: 'Lorem ipsum dolor sit amet, con.',
+		jsonData: null,
 	}),
 	computed: {
-		schema() {
-			return myschema;
+		schema: function () {
+			return JSON.parse(JSON.stringify(this.jsonData));
 		},
+	},
+	created: function () {
+		this.getJSONMethod();
 	},
 	methods: {
 		addItem(item) {
@@ -94,6 +97,43 @@ export default {
 		Return() {
 			this.$router.push('/intranet/communities');
 		},
+		async getJSONMethod() {
+			const jsonRaw = await $.getJSON(
+				'https://raw.githubusercontent.com/sthhher/prueba2/main/myschema.json'
+			).then(function (data) {
+				return data;
+			});
+			this.jsonData = jsonRaw;
+		},
 	},
 };
 </script>
+<style>
+.form {
+	text-align: left;
+	width: 600px;
+	margin: auto;
+}
+
+h1 {
+	font-size: 1.7em;
+	text-align: center;
+	margin-top: 0;
+	margin-bottom: 0.2em;
+}
+
+h1 + p {
+	display: block;
+	text-align: center;
+	margin-bottom: 1.2em;
+}
+
+small {
+	line-height: 20px;
+	display: block;
+}
+
+.el-alert {
+	margin-bottom: 15px;
+}
+</style>

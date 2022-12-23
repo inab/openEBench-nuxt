@@ -13,19 +13,22 @@ export default {
 		async getTools({ commit }) {
 			commit('setLoading', { tools: true });
 
-			const response = await this.$graphql.$post('/graphql', {
-				query: `
-					query ($community_id: String!) {
-						getTools(toolFilters:{community_id: $community_id}) {
-							registry_tool_id
-							name
-						}
-					}
-				`,
-				variables: {
-					community_id: 'OEBC002',
-				},
-			});
+			const URL = 'https://dev2-openebench.bsc.es/api/scientific/staged/Tool';
+
+			const response = await this.$axios
+				.get(URL, {
+					headers: {
+						'Content-Type':
+							'application/x-www-form-urlencoded; charset=UTF-8;application/json',
+						'Access-Control-Allow-Origin': '*',
+						Accept: 'application/json',
+					},
+				})
+				.then((response) => {
+					console.log(response);
+				})
+				.catch((e) => console.log(e));
+
 			commit('setTools', response.data);
 			commit('setLoading', { tools: false });
 		},
