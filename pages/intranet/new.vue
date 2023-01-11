@@ -30,18 +30,22 @@
 								</v-row>
 								<p v-if="!jsonData">Loading...</p>
 								<v-row v-else>
-									<JsonSchema :schema="schema" v-model="value" />
-									<br />
+									<v-form v-model="valid">
+										<v-jsf v-model="model" :schema="schema" />
+										<v-btn color="primary" @click="saveJson()">Create</v-btn>
+									</v-form>
 								</v-row>
 							</div>
 						</v-card-text>
 					</v-card>
 				</v-card>
 				<v-card v-else-if="item == 'User Administration'" flat>
-					<v-card-text>
-						2
-						{{ text }}
-					</v-card-text>
+					<v-card flat>
+						<v-card-text>
+							2
+							{{ text }}
+						</v-card-text>
+					</v-card>
 				</v-card>
 				<v-card v-else-if="item == 'Petition Management'" flat>
 					<v-card-text>
@@ -59,12 +63,15 @@ import 'jquery/dist/jquery.min.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'datatables.net-dt/js/dataTables.dataTables';
 import 'datatables.net-dt/css/jquery.dataTables.min.css';
-import JsonSchema from '@roma219/vue-jsonschema-form';
 import $ from 'jquery';
+
+import VJsf from '@koumoul/vjsf/lib/VJsf.js';
+import '@koumoul/vjsf/lib/VJsf.css';
+import '@koumoul/vjsf/lib/deps/third-party.js';
 
 export default {
 	name: 'IntranetChallengesPage',
-	components: { JsonSchema },
+	components: { VJsf },
 	data: () => ({
 		value: {},
 		model: {},
@@ -76,6 +83,12 @@ export default {
 		],
 		text: 'Lorem ipsum dolor sit amet, con.',
 		jsonData: null,
+		valid: false,
+		schemaOptions: {
+			debug: false,
+			disableAll: false,
+			autoFoldObjects: true,
+		},
 	}),
 	computed: {
 		schema: function () {
@@ -98,12 +111,14 @@ export default {
 			this.$router.push('/intranet/communities');
 		},
 		async getJSONMethod() {
-			const jsonRaw = await $.getJSON(
-				'https://raw.githubusercontent.com/sthhher/prueba2/main/myschema.json'
+			this.jsonData = await $.getJSON(
+				'https://raw.githubusercontent.com/inab/benchmarking-data-model/2.0.x/json-schemas/2.0.x/community.json'
 			).then(function (data) {
 				return data;
 			});
-			this.jsonData = jsonRaw;
+		},
+		saveJson() {
+			console.log('save');
 		},
 	},
 };
