@@ -56,7 +56,9 @@
 													dense
 													:id="event._id"
 												>
-													<td>{{ event.name }}</td>
+													<td @click="goToChallenges(event._id)">
+														{{ event.name }}
+													</td>
 													<td>b</td>
 													<td>
 														<v-icon right @click="goToChallenges(event._id)"
@@ -155,7 +157,7 @@ export default {
 			this.$router.push('/intranet/communities');
 		},
 		newEvent() {
-			this.$router.push('/intranet/new');
+			this.$router.push('/intranet/newEvent');
 		},
 	},
 };

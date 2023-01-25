@@ -20,7 +20,7 @@
 						<v-card-text>
 							<div class="mt-2 mx-10">
 								<v-row>
-									<v-col><h2>Add new Community</h2></v-col>
+									<v-col><h2>Add new Challenge</h2></v-col>
 
 									<v-col align="right"
 										><v-btn color="primary" @click="Return()"
@@ -32,6 +32,7 @@
 								<v-row v-else>
 									<v-form v-model="valid">
 										<v-jsf v-model="model" :schema="schema" />
+										<br />
 										<v-btn color="primary" @click="saveJson()">Create</v-btn>
 									</v-form>
 								</v-row>
@@ -108,11 +109,17 @@ export default {
 			});
 		},
 		Return() {
-			this.$router.push('/intranet/communities');
+			console.log(this.$store.state);
+			this.$router.push(
+				'/intranet/communities/' +
+					this.$store.state.community.community._id +
+					'/' +
+					this.$store.state.challenges.event._id
+			);
 		},
 		async getJSONMethod() {
 			this.jsonData = await $.getJSON(
-				'https://raw.githubusercontent.com/inab/benchmarking-data-model/2.0.x/json-schemas/2.0.x/community.json'
+				'https://raw.githubusercontent.com/inab/benchmarking-data-model/2.0.x/json-schemas/2.0.x/challenge.json'
 			).then(function (data) {
 				return data;
 			});

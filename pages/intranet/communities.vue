@@ -53,7 +53,9 @@
 													dense
 													:id="community._id"
 												>
-													<td>{{ community.acronym }}</td>
+													<td @click="goToEvents(community._id)">
+														{{ community.acronym }}
+													</td>
 													<td>orcid problems - ToDo</td>
 													<td>
 														<v-icon right @click="follow()"
@@ -69,7 +71,8 @@
 														></router-link>-->
 													</td>
 													<td>
-														<v-icon small>mdi-pencil</v-icon
+														<v-icon small @click="editCommunity(community._id)"
+															>mdi-pencil</v-icon
 														><v-icon small>mdi-delete</v-icon
 														><v-icon small @click="showHide(community._id)"
 															>mdi-eye-off</v-icon
@@ -153,13 +156,22 @@ export default {
 			});
 		},
 		newCommunity() {
-			this.$router.push('/intranet/new');
+			this.$router.push('/intranet/newCommunity');
 		},
 		follow() {
 			console.log('follow');
 		},
 		showHide(id) {
 			console.log('show ' + id);
+		},
+		editCommunity(id) {
+			console.log('edit: ' + id);
+			this.$router.push({
+				name: 'intranet-newCommunity',
+				params: {
+					idCommunity: id,
+				},
+			});
 		},
 	},
 };

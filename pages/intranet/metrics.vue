@@ -1,16 +1,21 @@
 <template>
-	<v-dialog v-if="show" class="openDialog" max-width="500px">
-		<v-card>
-			<v-card-text>
-				<h3>Hola! {{ passedObject }}</h3>
-				<v-btn @click="getInfo()">BOTÓN</v-btn>
-				<v-card-actions>
-					<button class="btn btn-success" @click="handleSave">Save</button>
-					<button class="btn btn-secondary" @click="handleClose">Close</button>
-				</v-card-actions>
-			</v-card-text>
-		</v-card>
-	</v-dialog>
+	<mdb-modal side position="top-right" v-if="showModal5" @close="closeModal">
+		<mdb-modal-header class="divider-outside-bottom">
+			<mdb-modal-title>
+				<span class="modalTitle"
+					>Unsere eCommerce Angebote</span
+				></mdb-modal-title
+			>
+		</mdb-modal-header>
+		<mdb-modal-body>
+			<div class="container">Hier kommt der Text rein</div>
+		</mdb-modal-body>
+		<mdb-modal-footer>
+			<mdb-btn flat size="lg" darkWaves @click.native="closeModal"
+				><X> </X
+			></mdb-btn>
+		</mdb-modal-footer>
+	</mdb-modal>
 </template>
 
 <script>
@@ -27,7 +32,7 @@ export default {
 	},
 	data() {
 		return {
-			showModal5: this.show,
+			showModal5: this.showModal,
 		};
 	},
 	computed: {
@@ -36,7 +41,7 @@ export default {
 		}),
 	},
 	watch: {
-		show(newVal) {
+		showModal(newVal) {
 			this.showModal5 = newVal;
 		},
 	},
@@ -46,12 +51,6 @@ export default {
 		});
 	},
 	methods: {
-		handleSave() {
-			this.handleClose();
-		},
-		handleClose() {
-			this.$emit('close');
-		},
 		addItem(item) {
 			const removed = this.items.splice(0, 1);
 			this.items.push(...this.more.splice(this.more.indexOf(item), 1));
@@ -59,6 +58,10 @@ export default {
 			this.$nextTick(() => {
 				this.currentItem = 'tab-' + item;
 			});
+		},
+		closeModal() {
+			this.showModal5 = false;
+			this.$emit('closeModal');
 		},
 		getInfo() {
 			console.log(this.$store.state.challenges);

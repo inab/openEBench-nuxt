@@ -200,6 +200,7 @@ export default {
 				name: 'intranet-communities',
 				path: '/intranet/communities',
 				component: resolve(__dirname, 'pages/intranet/communities'),
+				props: true,
 			});
 			routes.push({
 				name: 'intranet-communities-events',
@@ -210,6 +211,12 @@ export default {
 				name: 'intranet-communities-events-challenges',
 				path: '/intranet/communities/:community/:event',
 				component: resolve(__dirname, 'pages/intranet/challenges'),
+			});
+			routes.push({
+				name: 'intranet-newCommunity',
+				path: '/intranet/newCommunity',
+				component: resolve(__dirname, 'pages/intranet/newCommunity'),
+				props: true,
 			});
 		},
 	},

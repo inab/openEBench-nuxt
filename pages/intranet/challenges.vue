@@ -70,8 +70,8 @@
 															>Show Metrics</v-btn
 														>
 														<MetricsForm
-															:passedObject="challenge._id"
-															@close="closeModal"
+															:show="showModal"
+															@closeModal="closeModal"
 															>hola</MetricsForm
 														>
 													</td>
@@ -157,7 +157,7 @@ export default {
 			);
 		},
 		newChallenge() {
-			this.$router.push('/intranet/new');
+			this.$router.push('/intranet/newChallenge');
 		},
 		getMetrics(id, acronym) {
 			console.log('ID: ' + id + '; ACRONYM: ' + acronym);
