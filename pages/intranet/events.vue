@@ -56,7 +56,7 @@
 													dense
 													:id="event._id"
 												>
-													<td @click="goToChallenges(event._id)">
+													<td @click="detectClick(event._id)">
 														{{ event.name }}
 													</td>
 													<td>b</td>
@@ -66,7 +66,8 @@
 														>
 													</td>
 													<td>
-														<v-icon small>mdi-pencil</v-icon
+														<v-icon small @click="editEvent(event._id)"
+															>mdi-pencil</v-icon
 														><v-icon small>mdi-delete</v-icon
 														><v-icon small>mdi-eye-off</v-icon
 														><v-icon small>mdi-account-plus</v-icon>
@@ -125,6 +126,9 @@ export default {
 			'Petition Management',
 		],
 		text: 'Lorem ipsum dolor sit amet, con.',
+		clicks: 0,
+		delay: 300,
+		timer: null,
 	}),
 	computed: {
 		...mapGetters('community', {
@@ -152,6 +156,30 @@ export default {
 				path:
 					'/intranet/communities/' + this.$route.params.community + '/' + id,
 			});
+		},
+		editEvent(id) {
+			console.log('edit: ' + id);
+			this.$router.push({
+				name: 'intranet-newEvent',
+				params: {
+					idBenchmarkingEvent: id,
+				},
+			});
+		},
+		detectClick(id) {
+			this.clicks++;
+			if (this.clicks === 1) {
+				// simple click
+				this.timer = setTimeout(() => {
+					this.goToChallenges(id);
+					this.clicks = 0;
+				}, this.delay);
+			} else {
+				// doble click
+				clearTimeout(this.timer);
+				this.editEvent(id);
+				this.clicks = 0;
+			}
 		},
 		Return() {
 			this.$router.push('/intranet/communities');

@@ -218,6 +218,18 @@ export default {
 				component: resolve(__dirname, 'pages/intranet/newCommunity'),
 				props: true,
 			});
+			routes.push({
+				name: 'intranet-newEvent',
+				path: '/intranet/newEvent',
+				component: resolve(__dirname, 'pages/intranet/newEvent'),
+				props: true,
+			});
+			routes.push({
+				name: 'intranet-newChallenge',
+				path: '/intranet/newChallenge',
+				component: resolve(__dirname, 'pages/intranet/newChallenge'),
+				props: true,
+			});
 		},
 	},
 };

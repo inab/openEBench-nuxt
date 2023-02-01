@@ -53,7 +53,7 @@
 													dense
 													:id="community._id"
 												>
-													<td @click="goToEvents(community._id)">
+													<td @click="detectClick(community._id)">
 														{{ community.acronym }}
 													</td>
 													<td>orcid problems - ToDo</td>
@@ -132,6 +132,9 @@ export default {
 			'Petition Management',
 		],
 		text: 'Lorem ipsum dolor sit amet, con.',
+		clicks: 0,
+		delay: 300,
+		timer: null,
 	}),
 	computed: {
 		...mapGetters('communities', {
@@ -154,6 +157,21 @@ export default {
 			this.$router.push({
 				path: '/intranet/communities/' + id,
 			});
+		},
+		detectClick(id) {
+			this.clicks++;
+			if (this.clicks === 1) {
+				// simple click
+				this.timer = setTimeout(() => {
+					this.goToEvents(id);
+					this.clicks = 0;
+				}, this.delay);
+			} else {
+				// doble click
+				clearTimeout(this.timer);
+				this.editCommunity(id);
+				this.clicks = 0;
+			}
 		},
 		newCommunity() {
 			this.$router.push('/intranet/newCommunity');

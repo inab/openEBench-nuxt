@@ -58,25 +58,28 @@
 													dense
 													:id="challenge._id"
 												>
-													<td>{{ challenge.acronym }}</td>
+													<td @click="detectClick(challenge._id)">
+														{{ challenge.acronym }}
+													</td>
 													<td>b</td>
 													<td>
 														<v-btn
-															id="show-modal"
+															:id="'metrics_' + challenge._id"
 															rounded
 															color="#E4E4E4"
 															style="text-transform: none"
-															@click="openModal()"
-															>Show Metrics</v-btn
-														>
+															@click="openModal(challenge._id)"
+															>Show Metrics
+														</v-btn>
 														<MetricsForm
-															:show="showModal"
-															@closeModal="closeModal"
-															>hola</MetricsForm
-														>
+															style="display: none; width: 40%; height: auto"
+															:id="'modal_' + challenge._id"
+															@close="closeModal(challenge._id)"
+														></MetricsForm>
 													</td>
 													<td>
-														<v-icon small>mdi-pencil</v-icon
+														<v-icon small @click="editChallenge(challenge._id)"
+															>mdi-pencil</v-icon
 														><v-icon small>mdi-delete</v-icon
 														><v-icon small>mdi-eye-off</v-icon
 														><v-icon small>mdi-account-plus</v-icon>
@@ -113,6 +116,7 @@ import 'jquery/dist/jquery.min.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'datatables.net-dt/js/dataTables.dataTables';
 import 'datatables.net-dt/css/jquery.dataTables.min.css';
+
 import { mapGetters } from 'vuex';
 import ToolsComp from '../tool';
 import MetricsForm from './metrics';
@@ -125,12 +129,16 @@ export default {
 	},
 	data: () => ({
 		showModal: false,
+		modalOpen: false,
 		currentItem: 'tab-Community Administration',
 		items: [
 			'Community Administration',
 			'User Administration',
 			'Petition Management',
 		],
+		clicks: 0,
+		delay: 300,
+		timer: null,
 	}),
 	computed: {
 		...mapGetters('challenges', {
@@ -162,13 +170,40 @@ export default {
 		getMetrics(id, acronym) {
 			console.log('ID: ' + id + '; ACRONYM: ' + acronym);
 		},
-		openModal() {
-			this.showModal = true;
-			console.log(this.showModal);
+		openModal(challengeID) {
+			const actualModal = document.getElementById('modal_' + challengeID);
+			if (actualModal.style.display === 'none') {
+				actualModal.style.display = 'block';
+			}
 		},
-		closeModal() {
-			this.showModal = false;
-			console.log(this.showModal);
+		closeModal(challengeID) {
+			const actualModal = document.getElementById('modal_' + challengeID);
+			if (actualModal.style.display === 'block') {
+				actualModal.style.display = 'none';
+			}
+		},
+		editChallenge(id) {
+			this.$router.push({
+				name: 'intranet-newChallenge',
+				params: {
+					idChallenge: id,
+				},
+			});
+		},
+		detectClick(id) {
+			this.clicks++;
+			if (this.clicks === 1) {
+				// simple click
+				this.timer = setTimeout(() => {
+					this.openModal(id);
+					this.clicks = 0;
+				}, this.delay);
+			} else {
+				// doble click
+				clearTimeout(this.timer);
+				this.editChallenge(id);
+				this.clicks = 0;
+			}
 		},
 	},
 };

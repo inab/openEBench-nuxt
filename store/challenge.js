@@ -49,6 +49,7 @@ export default {
 			commit('setLoading', { challenge: false });
 
 			commit('setDatasets', response.data);
+			commit('setLoading', { datasets: false });
 
 			dispatch('getGraphData');
 		},

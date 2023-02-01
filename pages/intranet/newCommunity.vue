@@ -31,7 +31,7 @@
 								<p v-if="!jsonData">Loading...</p>
 								<v-row v-else>
 									<v-form v-model="valid">
-										<v-jsf v-model="model" :schema="schema" />
+										<v-jsf v-model="community" :schema="schema" />
 										<br />
 										<v-btn color="primary" @click="saveJson()">Create</v-btn>
 									</v-form>
@@ -65,6 +65,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'datatables.net-dt/js/dataTables.dataTables';
 import 'datatables.net-dt/css/jquery.dataTables.min.css';
 import $ from 'jquery';
+import { mapGetters } from 'vuex';
 
 import VJsf from '@koumoul/vjsf/lib/VJsf.js';
 import '@koumoul/vjsf/lib/VJsf.css';
@@ -75,9 +76,6 @@ export default {
 	components: { VJsf },
 	data: () => ({
 		value: {},
-		model: {
-			acronym: 'AAA',
-		},
 		currentItem: 'tab-Community Administration',
 		items: [
 			'Community Administration',
@@ -95,8 +93,19 @@ export default {
 	}),
 	computed: {
 		schema: function () {
+			// This is needed because the instance has getters and setters which interfere
 			return JSON.parse(JSON.stringify(this.jsonData));
 		},
+		...mapGetters('community', {
+			events: 'events',
+			community: 'community',
+			communityReferences: 'communityReferences',
+		}),
+	},
+	mounted() {
+		this.$store.dispatch('community/getCommunity', {
+			id: this.$route.params.idCommunity,
+		});
 	},
 	created: function () {
 		this.getJSONMethod();
@@ -122,7 +131,6 @@ export default {
 		},
 		saveJson() {
 			console.log('save');
-			console.log(this.$route.params.idCommunity);
 		},
 	},
 };

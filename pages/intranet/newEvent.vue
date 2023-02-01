@@ -31,7 +31,7 @@
 								<p v-if="!jsonData">Loading...</p>
 								<v-row v-else>
 									<v-form v-model="valid">
-										<v-jsf v-model="model" :schema="schema" />
+										<v-jsf v-model="event" :schema="schema" />
 										<br />
 										<v-btn color="primary" @click="saveJson()">Create</v-btn>
 									</v-form>
@@ -65,6 +65,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'datatables.net-dt/js/dataTables.dataTables';
 import 'datatables.net-dt/css/jquery.dataTables.min.css';
 import $ from 'jquery';
+import { mapGetters } from 'vuex';
 
 import VJsf from '@koumoul/vjsf/lib/VJsf.js';
 import '@koumoul/vjsf/lib/VJsf.css';
@@ -95,6 +96,15 @@ export default {
 		schema: function () {
 			return JSON.parse(JSON.stringify(this.jsonData));
 		},
+		...mapGetters('challenges', {
+			challenges: 'challenges',
+			event: 'event',
+		}),
+	},
+	mounted() {
+		this.$store.dispatch('challenges/getChallenges', {
+			id: this.$route.params.idBenchmarkingEvent,
+		});
 	},
 	created: function () {
 		this.getJSONMethod();
