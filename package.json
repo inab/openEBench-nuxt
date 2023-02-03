@@ -58,6 +58,7 @@
 		"vue-observe-visibility": "^1.0.0",
 		"vue-server-renderer": "^2.7.13",
 		"vue-template-compiler": "^2.7.13",
+		"vue2-filters": "^0.14.0",
 		"vuejs-smart-table": "^0.0.8",
 		"vuelidate": "^0.7.7",
 		"vuetify": "^2.6.6",

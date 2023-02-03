@@ -26,15 +26,13 @@
 									<div>
 										<v-row>
 											<v-col>
-												<h2>
-													Listing Events - {{ community.acronym }}
-													<v-icon @click="newEvent()"
-														>mdi-plus-circle-outline</v-icon
-													>
-												</h2>
+												<h2>Listing Events - {{ community.acronym }}</h2>
 											</v-col>
 
 											<v-col align="right">
+												<v-btn color="success" outlined @click="newEvent()">
+													<v-icon>mdi-plus </v-icon> Add event
+												</v-btn>
 												<v-btn color="primary" @click="Return()">
 													<v-icon>mdi-keyboard-return</v-icon>Return
 												</v-btn>
@@ -51,26 +49,27 @@
 											</thead>
 											<tbody>
 												<tr
-													v-for="(event, e) in events"
+													v-for="(event, e) in orderBy(events, 'name', -1)"
 													:key="e"
 													dense
 													:id="event._id"
 												>
-													<td @click="detectClick(event._id)">
+													<td @click="detectClick(event._id)" class="goto">
 														{{ event.name }}
 													</td>
-													<td>b</td>
+													<td>To Do</td>
 													<td>
 														<v-icon right @click="goToChallenges(event._id)"
 															>mdi-open-in-new</v-icon
 														>
 													</td>
 													<td>
-														<v-icon small @click="editEvent(event._id)"
+														<v-icon @click="editEvent(event._id)"
 															>mdi-pencil</v-icon
-														><v-icon small>mdi-delete</v-icon
-														><v-icon small>mdi-eye-off</v-icon
-														><v-icon small>mdi-account-plus</v-icon>
+														>
+														<v-icon>mdi-delete</v-icon>
+														<v-icon>mdi-eye-off</v-icon>
+														<v-icon>mdi-account-plus</v-icon>
 													</td>
 												</tr>
 											</tbody>
@@ -111,6 +110,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'datatables.net-dt/js/dataTables.dataTables';
 import 'datatables.net-dt/css/jquery.dataTables.min.css';
 import { mapGetters } from 'vuex';
+import Vue2Filters from 'vue2-filters';
 import ToolsComp from '../tool';
 
 export default {
@@ -118,6 +118,7 @@ export default {
 	components: {
 		ToolsComp,
 	},
+	mixins: [Vue2Filters.mixin],
 	data: () => ({
 		currentItem: 'tab-Community Administration',
 		items: [
@@ -190,3 +191,9 @@ export default {
 	},
 };
 </script>
+<style>
+.goto:hover {
+	text-decoration: underline;
+	background-color: #f3f3f3;
+}
+</style>

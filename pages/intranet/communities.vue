@@ -26,57 +26,54 @@
 									<div>
 										<v-row>
 											<v-col>
-												<h2>
-													Listing Communities
-													<v-icon @click="newCommunity()"
-														>mdi-plus-circle-outline</v-icon
-													>
-												</h2>
+												<h2>Listing Communities</h2>
 											</v-col>
-
-											<v-col></v-col>
+											<v-col align="right">
+												<v-btn color="success" outlined @click="newCommunity()">
+													<v-icon>mdi-plus </v-icon> Add community
+												</v-btn>
+											</v-col>
 										</v-row>
 										<table id="datatable" class="table">
 											<thead>
 												<tr>
 													<th>Community Name</th>
 													<th>Owners</th>
-													<th>Follow (To Do)</th>
 													<th>Events</th>
 													<th>Actions</th>
 												</tr>
 											</thead>
 											<tbody>
 												<tr
-													v-for="(community, c) in communities"
+													v-for="(community, c) in orderBy(
+														communities,
+														'acronym'
+													)"
 													:key="c"
 													dense
 													:id="community._id"
 												>
-													<td @click="detectClick(community._id)">
+													<td @click="detectClick(community._id)" class="goto">
 														{{ community.acronym }}
 													</td>
-													<td>orcid problems - ToDo</td>
-													<td>
-														<v-icon right @click="follow()"
-															>mdi-plus-thick</v-icon
-														>
-													</td>
+													<td>To Do</td>
 													<td>
 														<v-icon right @click="goToEvents(community._id)">
 															mdi-open-in-new
 														</v-icon>
-														<!--<router-link style="text-decoration: none; color: inherit;" :to="'./communities/' + community._id"><v-icon right
-															>mdi-open-in-new</v-icon
-														></router-link>-->
 													</td>
 													<td>
-														<v-icon small @click="editCommunity(community._id)"
+														<v-icon @click="editCommunity(community._id)"
 															>mdi-pencil</v-icon
-														><v-icon small>mdi-delete</v-icon
-														><v-icon small @click="showHide(community._id)"
+														>
+														<v-icon>mdi-delete</v-icon>
+														<v-icon @click="showHide(community._id)"
 															>mdi-eye-off</v-icon
-														><v-icon small>mdi-account-plus</v-icon>
+														>
+														<v-icon>mdi-account-plus</v-icon>
+														<v-icon @click="follow(community._id)"
+															>mdi-heart-outline</v-icon
+														>
 													</td>
 												</tr>
 											</tbody>
@@ -117,6 +114,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'datatables.net-dt/js/dataTables.dataTables';
 import 'datatables.net-dt/css/jquery.dataTables.min.css';
 import { mapGetters } from 'vuex';
+import Vue2Filters from 'vue2-filters';
 import ToolsComp from './tools.vue';
 
 export default {
@@ -124,6 +122,7 @@ export default {
 	components: {
 		ToolsComp,
 	},
+	mixins: [Vue2Filters.mixin],
 	data: () => ({
 		currentItem: 'tab-Community Administration',
 		items: [
@@ -176,8 +175,8 @@ export default {
 		newCommunity() {
 			this.$router.push('/intranet/newCommunity');
 		},
-		follow() {
-			console.log('follow');
+		follow(id) {
+			console.log('follow ' + id);
 		},
 		showHide(id) {
 			console.log('show ' + id);
@@ -194,3 +193,9 @@ export default {
 	},
 };
 </script>
+<style>
+.goto:hover {
+	text-decoration: underline;
+	background-color: #f3f3f3;
+}
+</style>

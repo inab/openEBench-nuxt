@@ -29,14 +29,14 @@
 												<h2>
 													Listing Challenges -
 													{{ $store.state.challenges.event.name }}
-													<v-icon @click="newChallenge()"
-														>mdi-plus-circle-outline</v-icon
-													>
 												</h2>
 											</v-col>
 
-											<v-col align="right"
-												><v-btn color="primary" @click="Return()"
+											<v-col align="right">
+												<v-btn color="success" outlined @click="newChallenge()">
+													<v-icon>mdi-plus </v-icon> Add challenge
+												</v-btn>
+												<v-btn color="primary" @click="Return()"
 													><v-icon>mdi-keyboard-return</v-icon>Return</v-btn
 												></v-col
 											>
@@ -52,16 +52,18 @@
 											</thead>
 											<tbody>
 												<tr
-													v-for="(challenge, c) in $store.state.challenges
-														.challenges"
+													v-for="(challenge, c) in orderBy(
+														$store.state.challenges.challenges,
+														'acronym'
+													)"
 													:key="c"
 													dense
 													:id="challenge._id"
 												>
-													<td @click="detectClick(challenge._id)">
+													<td @click="detectClick(challenge._id)" class="goto">
 														{{ challenge.acronym }}
 													</td>
-													<td>b</td>
+													<td>To Do</td>
 													<td>
 														<v-btn
 															:id="'metrics_' + challenge._id"
@@ -75,14 +77,16 @@
 															style="display: none; width: 40%; height: auto"
 															:id="'modal_' + challenge._id"
 															@close="closeModal(challenge._id)"
+															:challengeID="challenge._id"
 														></MetricsForm>
 													</td>
 													<td>
-														<v-icon small @click="editChallenge(challenge._id)"
+														<v-icon @click="editChallenge(challenge._id)"
 															>mdi-pencil</v-icon
-														><v-icon small>mdi-delete</v-icon
-														><v-icon small>mdi-eye-off</v-icon
-														><v-icon small>mdi-account-plus</v-icon>
+														>
+														<v-icon>mdi-delete</v-icon>
+														<v-icon>mdi-eye-off</v-icon>
+														<v-icon>mdi-account-plus</v-icon>
 													</td>
 												</tr>
 											</tbody>
@@ -117,6 +121,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'datatables.net-dt/js/dataTables.dataTables';
 import 'datatables.net-dt/css/jquery.dataTables.min.css';
 
+import Vue2Filters from 'vue2-filters';
 import { mapGetters } from 'vuex';
 import ToolsComp from '../tool';
 import MetricsForm from './metrics';
@@ -127,6 +132,7 @@ export default {
 		ToolsComp,
 		MetricsForm,
 	},
+	mixins: [Vue2Filters.mixin],
 	data: () => ({
 		showModal: false,
 		modalOpen: false,
@@ -143,6 +149,10 @@ export default {
 	computed: {
 		...mapGetters('challenges', {
 			challenges: 'challenges',
+		}),
+		...mapGetters('challenge', {
+			challenge: 'challenge',
+			datasets: 'datasets',
 		}),
 	},
 	mounted() {
@@ -173,6 +183,10 @@ export default {
 		openModal(challengeID) {
 			const actualModal = document.getElementById('modal_' + challengeID);
 			if (actualModal.style.display === 'none') {
+				this.$store.dispatch('challenge/getChallenge', {
+					id: challengeID,
+				});
+
 				actualModal.style.display = 'block';
 			}
 		},
@@ -208,3 +222,9 @@ export default {
 	},
 };
 </script>
+<style>
+.goto:hover {
+	text-decoration: underline;
+	background-color: #f3f3f3;
+}
+</style>
