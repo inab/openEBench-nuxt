@@ -61,7 +61,7 @@
 		"@nuxtjs/vuetify": "^1.12.3",
 		"@socheatsok78/storybook-addon-vuetify": "^0.1.9",
 		"@storybook/addon-actions": "^6.4.20",
-		"@storybook/addon-docs": "^6.5.9",
+		"@storybook/addon-docs": "^7.0.20",
 		"@storybook/addon-essentials": "^6.5.9",
 		"@storybook/addon-links": "^6.5.9",
 		"@storybook/vue": "^6.5.9",
