@@ -38,7 +38,7 @@
 		"gsap": "^3.10.4",
 		"lodash.debounce": "^4.0.8",
 		"marked": "^4.0.16",
-		"nuxt": "^2.15.8",
+		"nuxt": "^3.6.1",
 		"pluralize": "^8.0.0",
 		"vue": "2.7.14",
 		"vue-cookie-law": "^1.13.3",
