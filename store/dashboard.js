@@ -25,7 +25,7 @@ export default {
 		},
 		async getResourcesCount({ commit }) {
 			const response = await this.$observatory.$get('tools/count_total');
-			commit('setResourcesCount', response[0]);
+			commit('setResourcesCount', response);
 		},
 		async getToolsCount({ commit }) {
 			const response = await this.$axios.head('/aggregate', {

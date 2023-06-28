@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-lone-template -->
 <template>
 	<v-card>
 		<template>
@@ -16,6 +17,19 @@
 		<v-tabs-items v-model="currentItem">
 			<v-tab-item v-for="item in items" :key="item" :value="'tab-' + item">
 				<v-card v-if="item == 'Community Administration'" flat height="100%">
+					<div class="breadcrumbs">
+						<v-breadcrumbs>
+							<v-breadcrumbs-item
+								v-for="(breadcrumb, index) in breadcrumbs"
+								:key="index"
+								:disabled="breadcrumb.disabled"
+								:exact="breadcrumb.exact"
+								:to="breadcrumb.to"
+							>
+								{{ breadcrumb.text }}
+							</v-breadcrumbs-item>
+						</v-breadcrumbs>
+					</div>
 					<v-tabs vertical>
 						<v-tab> Communities </v-tab>
 						<v-tab> All tools </v-tab>
@@ -49,11 +63,11 @@
 														communities,
 														'acronym'
 													)"
+													:id="community._id"
 													:key="c"
 													dense
-													:id="community._id"
 												>
-													<td @click="detectClick(community._id)" class="goto">
+													<td class="goto" @click="detectClick(community._id)">
 														{{ community.acronym }}
 													</td>
 													<td>To Do</td>
@@ -66,7 +80,9 @@
 														<v-icon @click="editCommunity(community._id)"
 															>mdi-pencil</v-icon
 														>
-														<v-icon>mdi-delete</v-icon>
+														<v-icon @click="removeCommunity(community._id)"
+															>mdi-delete</v-icon
+														>
 														<v-icon @click="showHide(community._id)"
 															>mdi-eye-off</v-icon
 														>
@@ -130,6 +146,18 @@ export default {
 			'User Administration',
 			'Petition Management',
 		],
+		breadcrumbs: [
+			{
+				text: 'Home',
+				disabled: false,
+				exact: true,
+				to: '/',
+			},
+			{
+				text: 'Petition New Community',
+				disabled: true,
+			},
+		],
 		text: 'Lorem ipsum dolor sit amet, con.',
 		clicks: 0,
 		delay: 300,
@@ -142,6 +170,7 @@ export default {
 	},
 	mounted() {
 		this.$store.dispatch('communities/getCommunities');
+		this.$parent.$emit('emitBreadcrumbs', this.breadcrumbs);
 	},
 	methods: {
 		addItem(item) {
@@ -176,12 +205,15 @@ export default {
 			this.$router.push('/intranet/newCommunity');
 		},
 		follow(id) {
+			// eslint-disable-next-line no-console
 			console.log('follow ' + id);
 		},
 		showHide(id) {
+			// eslint-disable-next-line no-console
 			console.log('show ' + id);
 		},
 		editCommunity(id) {
+			// eslint-disable-next-line no-console
 			console.log('edit: ' + id);
 			this.$router.push({
 				name: 'intranet-newCommunity',
@@ -189,6 +221,10 @@ export default {
 					idCommunity: id,
 				},
 			});
+		},
+		removeCommunity(id) {
+			// eslint-disable-next-line no-console
+			console.log('remove ' + id);
 		},
 	},
 };

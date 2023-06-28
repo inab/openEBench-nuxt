@@ -1,12 +1,13 @@
+<!-- eslint-disable vue/no-lone-template -->
 <template>
 	<v-card>
 		<template>
 			<v-tabs
-				dark
 				v-model="currentItem"
 				background-color="#0b579f"
 				show-arrows
 				fixed-tabs
+				dark
 			>
 				<v-tab v-for="item in items" :key="item" :href="'#tab-' + item">
 					{{ item }}
@@ -15,7 +16,7 @@
 		</template>
 		<v-tabs-items v-model="currentItem">
 			<v-tab-item v-for="item in items" :key="item" :value="'tab-' + item">
-				<v-card flat v-if="item == 'Community Administration'" height="100%">
+				<v-card v-if="item == 'Community Administration'" flat height="100%">
 					<v-tabs vertical>
 						<v-tab> Challenges </v-tab>
 						<v-tab> Tools </v-tab>
@@ -41,7 +42,7 @@
 												></v-col
 											>
 										</v-row>
-										<table class="table" id="datatable">
+										<table id="datatable" class="table">
 											<thead>
 												<tr>
 													<th>Challenge Name</th>
@@ -56,11 +57,11 @@
 														$store.state.challenges.challenges,
 														'acronym'
 													)"
+													:id="challenge._id"
 													:key="c"
 													dense
-													:id="challenge._id"
 												>
-													<td @click="detectClick(challenge._id)" class="goto">
+													<td class="goto" @click="detectClick(challenge._id)">
 														{{ challenge.acronym }}
 													</td>
 													<td>To Do</td>
@@ -74,10 +75,10 @@
 															>Show Metrics
 														</v-btn>
 														<MetricsForm
-															style="display: none; width: 40%; height: auto"
 															:id="'modal_' + challenge._id"
+															style="display: none; width: 40%; height: auto"
+															:challenge-id="challenge._id"
 															@close="closeModal(challenge._id)"
-															:challengeID="challenge._id"
 														></MetricsForm>
 													</td>
 													<td>
@@ -104,10 +105,10 @@
 						</v-tab-item>
 					</v-tabs>
 				</v-card>
-				<v-card flat v-else-if="item == 'User Administration'">
+				<v-card v-else-if="item == 'User Administration'" flat>
 					<v-card-text> 2 </v-card-text>
 				</v-card>
-				<v-card flat v-else-if="item == 'Petition Management'">
+				<v-card v-else-if="item == 'Petition Management'" flat>
 					<v-card-text> 3 </v-card-text>
 				</v-card>
 			</v-tab-item>
@@ -145,6 +146,7 @@ export default {
 		clicks: 0,
 		delay: 300,
 		timer: null,
+		community: null,
 	}),
 	computed: {
 		...mapGetters('challenges', {
@@ -176,9 +178,6 @@ export default {
 		},
 		newChallenge() {
 			this.$router.push('/intranet/newChallenge');
-		},
-		getMetrics(id, acronym) {
-			console.log('ID: ' + id + '; ACRONYM: ' + acronym);
 		},
 		openModal(challengeID) {
 			const actualModal = document.getElementById('modal_' + challengeID);

@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-lone-template -->
 <template>
 	<v-card>
 		<template>
@@ -31,10 +32,15 @@
 								<p v-if="!jsonData">Loading...</p>
 								<v-row v-else>
 									<v-form v-model="valid">
-										<v-jsf v-model="community" :schema="schema" />
+										<v-jsf v-model="formData" :schema="schema" />
 										<br />
 										<v-btn color="primary" @click="saveJson()">Create</v-btn>
 									</v-form>
+									<v-card v-if="submitted">
+										<v-card-text>
+											<pre>{{ submittedData }}</pre>
+										</v-card-text>
+									</v-card>
 								</v-row>
 							</div>
 						</v-card-text>
@@ -90,6 +96,9 @@ export default {
 			disableAll: false,
 			autoFoldObjects: true,
 		},
+		formData: {},
+		submitted: false,
+		submittedData: null,
 	}),
 	computed: {
 		schema: function () {
@@ -98,9 +107,16 @@ export default {
 		},
 		...mapGetters('community', {
 			events: 'events',
-			community: 'community',
 			communityReferences: 'communityReferences',
 		}),
+		community: {
+			get() {
+				return this.$store.getters['community/community'];
+			},
+			set(value) {
+				this.$store.commit('community/setCommunity', value);
+			},
+		},
 	},
 	mounted() {
 		this.$store.dispatch('community/getCommunity', {
@@ -124,13 +140,16 @@ export default {
 		},
 		async getJSONMethod() {
 			this.jsonData = await $.getJSON(
-				'https://raw.githubusercontent.com/inab/benchmarking-data-model/2.0.x/json-schemas/2.0.x/community.json'
+				'https://raw.githubusercontent.com/sthhher/pruebas_benchmarking/main/2.0.x/community.json'
 			).then(function (data) {
 				return data;
 			});
 		},
 		saveJson() {
-			console.log('save');
+			this.submittedData = this.formData;
+			this.submitted = true;
+			console.log(this.submittedData);
+			// handle response
 		},
 	},
 };

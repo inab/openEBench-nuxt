@@ -21,6 +21,10 @@ const menuEntries = [
 		title: 'Stats',
 		to: '/statistics',
 	},
+	{
+		title: 'Create Community',
+		to: '/new-community-form',
+	},
 ];
 
 export default menuEntries;

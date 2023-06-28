@@ -9,7 +9,6 @@ export default {
 			},
 		};
 	},
-
 	actions: {
 		async getChallenge({ commit, dispatch }, params) {
 			commit('setLoading', { challenge: true });

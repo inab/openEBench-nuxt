@@ -101,35 +101,39 @@ export default {
 
 	mutations: {
 		setCommunity(state, payload) {
-			state.community = payload.getCommunities.map((community) => {
-				community.links.forEach((link) => {
-					if (link.comment === '@logo') {
-						community.logo = link.uri;
-					}
-				});
-				return community;
-			})[0];
+			if (payload && payload.getCommunities) {
+				state.community = payload.getCommunities.map((community) => {
+					community.links.forEach((link) => {
+						if (link.comment === '@logo') {
+							community.logo = link.uri;
+						}
+					});
+					return community;
+				})[0];
+			}
 		},
 		setEvents(state, payload) {
-			state.events = payload.getBenchmarkingEvents.sort((a, b) => {
-				if (a._id < b._id) {
-					return 1;
-				}
-				if (a._id > b._id) {
-					return -1;
-				}
-				return 0;
-			});
-			this.commit('community/setCurrentEvent', state.events[0]);
+			if (payload && payload.getBenchmarkingEvents) {
+				state.events = payload.getBenchmarkingEvents.sort((a, b) => {
+					if (a._id < b._id) {
+						return 1;
+					}
+					if (a._id > b._id) {
+						return -1;
+					}
+					return 0;
+				});
+				this.commit('community/setCurrentEvent', state.events[0]);
+			}
 		},
 		setCurrentEvent(state, currentEvent) {
 			state.currentEvent = currentEvent;
 		},
 		setDatasets(state, payload) {
-			state.datasets = payload.getDatasets;
+			if (payload && payload.getDatasets) state.datasets = payload.getDatasets;
 		},
 		setTools(state, payload) {
-			state.tools = payload.getTools;
+			if (payload && payload.getTools) state.tools = payload.getTools;
 		},
 		setLoading(state, loading) {
 			state.loading[Object.keys(loading)[0]] = loading[Object.keys(loading)[0]];

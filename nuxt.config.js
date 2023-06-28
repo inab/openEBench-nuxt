@@ -146,7 +146,7 @@ export default {
 			process.env.OBSERVATORY_URI || 'https://observatory.openebench.bsc.es',
 		SCIENTIFIC_SERVICE_URL:
 			process.env.SCIENTIFIC_SERVICE_URL ||
-			'https://dev-openebench.bsc.es/api/scientific',
+			'https://dev2-openebench.bsc.es/api/scientific',
 		BENCH_EVENT_API_URL:
 			process.env.BENCH_EVENT_API_URL ||
 			'https://dev-openebench.bsc.es/rest/bench_event_api',
@@ -172,6 +172,7 @@ export default {
 				loader: 'raw-loader',
 			});
 		},
+		transpile: ['vuetify/lib', /@koumoul/],
 	},
 
 	router: {

@@ -7,7 +7,11 @@
 			<info-slider class="mb-5 hidden-sm-and-down" :img="illustration">
 				<template #header>
 					<h1 class="text-h4">Benchmarking Communities</h1>
+					<v-btn icon color="primary" class="ml-1">
+						<v-icon>mdi-plus</v-icon>
+					</v-btn>
 				</template>
+
 				<p class="text--primary">
 					Unbiased and objective evaluations of bioinformatics resources are
 					challenging to set up and can only be effective when built and
