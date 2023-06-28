@@ -17,19 +17,6 @@
 		<v-tabs-items v-model="currentItem">
 			<v-tab-item v-for="item in items" :key="item" :value="'tab-' + item">
 				<v-card v-if="item == 'Community Administration'" flat height="100%">
-					<div class="breadcrumbs">
-						<v-breadcrumbs>
-							<v-breadcrumbs-item
-								v-for="(breadcrumb, index) in breadcrumbs"
-								:key="index"
-								:disabled="breadcrumb.disabled"
-								:exact="breadcrumb.exact"
-								:to="breadcrumb.to"
-							>
-								{{ breadcrumb.text }}
-							</v-breadcrumbs-item>
-						</v-breadcrumbs>
-					</div>
 					<v-tabs vertical>
 						<v-tab> Communities </v-tab>
 						<v-tab> All tools </v-tab>
@@ -154,7 +141,7 @@ export default {
 				to: '/',
 			},
 			{
-				text: 'Petition New Community',
+				text: 'Communities',
 				disabled: true,
 			},
 		],

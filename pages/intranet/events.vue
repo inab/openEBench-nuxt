@@ -50,11 +50,11 @@
 											<tbody>
 												<tr
 													v-for="(event, e) in orderBy(events, 'name', -1)"
+													:id="event._id"
 													:key="e"
 													dense
-													:id="event._id"
 												>
-													<td @click="detectClick(event._id)" class="goto">
+													<td class="goto" @click="detectClick(event._id)">
 														{{ event.name }}
 													</td>
 													<td>To Do</td>
@@ -126,6 +126,24 @@ export default {
 			'User Administration',
 			'Petition Management',
 		],
+		breadcrumbs: [
+			{
+				text: 'Home',
+				disabled: false,
+				exact: true,
+				to: '/',
+			},
+			{
+				text: 'Communities',
+				disabled: false,
+				exact: true,
+				to: '/intranet/communities',
+			},
+			{
+				text: 'Benchmarking Events',
+				disabled: true,
+			},
+		],
 		text: 'Lorem ipsum dolor sit amet, con.',
 		clicks: 0,
 		delay: 300,
@@ -142,6 +160,7 @@ export default {
 		this.$store.dispatch('community/getCommunity', {
 			id: this.$route.params.community,
 		});
+		this.$parent.$emit('emitBreadcrumbs', this.breadcrumbs);
 	},
 	methods: {
 		addItem(item) {
