@@ -8,7 +8,6 @@ import MockChallengeDatasetsBarplot from '~/test/unit/mockData/ChallengeDatasets
 import MockChallengeDatasetsScatter from '~/test/unit/mockData/ChallengeDatasetsScatter';
 import ChartBarplotVisualizerWrapper from '~/components/Widgets/ChartBarplotVisualizerWrapper';
 import ChartScatterVisualizerWrapper from '~/components/Widgets/ChartScatterVisualizerWrapper';
-import ChartBarplotVisualizer from '~/components/Widgets/ChartBarplotVisualizationWrapper';
 import ChartBoxplotViz from '~/components/Widgets/ChartBoxplotVizWrapper.spec';
 
 const factory = (mockStore) => {

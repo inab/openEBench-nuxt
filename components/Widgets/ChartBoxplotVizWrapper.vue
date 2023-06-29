@@ -58,9 +58,7 @@ export default {
 		loadVisualization(data) {
 			try {
 				loadBoxplotVisualization(data);
-			} catch (error) {
-				console.log(error);
-			}
+			} catch (error) {}
 		},
 	},
 };
@@ -76,4 +74,3 @@ export default {
 	width: 69vw !important;
 }
 </style>
->
