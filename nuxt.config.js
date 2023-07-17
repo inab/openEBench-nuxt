@@ -274,6 +274,11 @@ export default {
 			//	path: '/benchmarking/:community/:id/participants',
 			//	component: resolve(__dirname, 'pages/benchmarking/_community/_id/participants'),
 			// });
+			routes.push({
+				name: 'search-results',
+				path: '/tool/results',
+				component: resolve(__dirname, 'pages/tool/results'),
+			});
 		},
 	},
 };
