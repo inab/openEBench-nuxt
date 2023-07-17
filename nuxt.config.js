@@ -196,6 +196,11 @@ export default {
 				path: '/scientific/:community/:id',
 				component: resolve(__dirname, 'pages/benchmarking/_community/_id'),
 			});
+			routes.push({
+				name: 'search-results',
+				path: '/tool/results',
+				component: resolve(__dirname, 'pages/tool/results'),
+			});
 		},
 	},
 };

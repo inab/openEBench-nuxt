@@ -3,8 +3,11 @@
 		<v-carousel-item v-for="(slide, i) in slides" :key="i">
 			<v-sheet color="gery lighten-3" height="100%">
 				<v-row class="fill-height" align="center" justify="center">
-					<div class="text-h5">
-						{{ slide }}
+					<div class="text-h5 text-center">
+						🚧 {{ slide }} slide 🚧
+						<br />
+						<br />
+						Sample content
 					</div>
 				</v-row>
 			</v-sheet>
@@ -17,13 +20,7 @@ export default {
 	name: 'SearchCarousel',
 	data() {
 		return {
-			slides: [
-				'First - sample content 🚧',
-				'Second - sample content 🚧',
-				'Third - sample content 🚧',
-				'Fourth - sample content 🚧',
-				'Fifth - sample content 🚧',
-			],
+			slides: ['First', 'Second', 'Third', 'Fourth', 'Fifth'],
 		};
 	},
 };

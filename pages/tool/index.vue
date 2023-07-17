@@ -50,9 +50,6 @@ export default {
 			if (newRoute.path !== oldRoute.path) this.breadcrumbs = [];
 		},
 	},
-	mounted() {
-		this.$parent.$emit('emitBreadcrumbs', this.breadcrumbs);
-	},
 };
 </script>
 <style scoped>
