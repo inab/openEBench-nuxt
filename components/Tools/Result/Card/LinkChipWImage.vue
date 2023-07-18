@@ -4,12 +4,18 @@
 		light
 		outlined
 		:link="link"
-		:color="getColor(type)"
-		:text-color="getColor(type)"
-		class="pr-2 pl-1"
+		color="grey lighten-3"
+		:text-color="colors[type]"
+		class="pr-2 pl-1 mt-1"
 		@click="openLink(link)"
 	>
-		<v-img height="20px" width="20px" contain class="ma-0" :src="src"></v-img>
+		<v-img
+			height="20px"
+			width="20px"
+			contain
+			class="ma-0"
+			:src="icons[type]"
+		></v-img>
 		{{ text }}
 	</v-chip>
 </template>
@@ -48,66 +54,34 @@ export default {
 	},
 	data() {
 		return {
-			types: {
-				biotools: {
-					src: '~/static/icons/elixir-logo.png',
-					color: 'orange lighten-2',
-					text: 'bio.tools',
-				},
-				bioconda: {
-					src: '~/static/icons/bioconda-logo.png',
-					color: '#00550099',
-					text: 'Bioconda',
-				},
-				github: {
-					src: '~/static/icons/github-logo.png',
-					color: 'grey',
-					text: 'GitHub',
-				},
-				bioconductor: {
-					src: '~/static/icons/bioconductor-logo.png',
-					color: '#2f93ba99',
-					text: 'Bioconductor',
-				},
-				galaxy: {
-					src: '~/static/icons/galaxy-logo.png',
-					color: '#13479899',
-					text: 'Galaxy Eu',
-				},
-				toolshed: {
-					src: '~/static/icons/galaxy-logo.png',
-					color: '#13479899',
-					text: 'Galaxy Toolshed',
-				},
-				sourceforge: {
-					src: '~/static/icons/sourceforge-logo.png',
-					color: '#ff660299',
-					text: 'SourceForge',
-				},
-				bitbucket: {
-					src: '~/static/icons/bitbucket-logo.png',
-					color: '#005ed999',
-					text: 'Bitbucket',
-				},
-				openebench: {
-					src: '~/static/icons/openebench-logo.png',
-					color: '#0b579f',
-					text: 'OpenEBench',
-				},
-				other: {
-					src: '~/static/icons/other-logo.png',
-					color: '#53568299',
-					text: 'Homepage',
-				},
+			icons: {
+				biotools: require('~/static/icons/elixir-logo-color.png'),
+				bioconda: require('~/static/icons/bioconda-logo-color.png'),
+				github: require('~/static/icons/github-logo-color.png'),
+				bioconductor: require('~/static/icons/bioconductor-logo-color.png'),
+				galaxy: require('~/static/icons/galaxy-logo-color.png'),
+				toolshed: require('~/static/icons/galaxy-logo-color.png'),
+				sourceforge: require('~/static/icons/sourceforge-logo-color.png'),
+				bitbucket: require('~/static/icons/bitbucket-logo-color.png'),
+				openebench: require('~/static/icons/OEB-minimal-logo-blue.png'),
+			},
+			colors: {
+				biotools: 'orange lighten-2',
+				bioconda: '#00550099',
+				github: 'grey darken-1',
+				bioconductor: '#2f93ba99',
+				galaxy: '#13479899',
+				toolshed: '#13479899',
+				sourceforge: '#ff660299',
+				bitbucket: '#005ed999',
+				openebench: '#0b579f',
+				other: '#53568299',
 			},
 		};
 	},
 	methods: {
 		getColor(type) {
-			return this.types[type].color;
-		},
-		getSrc(type) {
-			return this.types[type].src;
+			return this.colors[type].color;
 		},
 		openLink(link) {
 			window.open(link, '_blank');
