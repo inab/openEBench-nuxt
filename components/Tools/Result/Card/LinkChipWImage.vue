@@ -3,7 +3,6 @@
 		small
 		light
 		outlined
-		:link="link"
 		color="grey lighten-3"
 		:text-color="colors[type]"
 		class="pr-2 pl-1 mt-1"
@@ -34,13 +33,6 @@ export default {
 		 * Type of chip. It will change the color and the image
 		 * */
 		type: {
-			type: String,
-			required: true,
-		},
-		/**
-		 * Image to display on the chip
-		 * */
-		src: {
 			type: String,
 			required: true,
 		},
