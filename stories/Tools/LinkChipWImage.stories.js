@@ -20,7 +20,6 @@ Bioconda.args = {
 	link: 'https://www.google.com',
 	type: 'bioconda',
 	text: 'Bioconda',
-	src: require('~/static/icons/bioconda-logo-color.png'),
 };
 
 export const Biotools = (_args, { argTypes }) => ({
@@ -39,7 +38,6 @@ Biotools.args = {
 	link: 'https://www.google.com',
 	type: 'biotools',
 	text: 'Biotools',
-	src: require('~/static/icons/elixir-logo-color.png'),
 };
 
 export const Galaxy = (_args, { argTypes }) => ({
@@ -58,7 +56,6 @@ Galaxy.args = {
 	link: 'https://www.google.com',
 	type: 'galaxy',
 	text: 'Galaxy',
-	src: require('~/static/icons/galaxy-logo-color.png'),
 };
 
 export const Github = (_args, { argTypes }) => ({
@@ -77,7 +74,6 @@ Github.args = {
 	link: 'https://www.google.com',
 	type: 'github',
 	text: 'Github',
-	src: require('~/static/icons/github-logo-color.png'),
 };
 
 export const Bioconductor = (_args, { argTypes }) => ({
@@ -96,7 +92,6 @@ Bioconductor.args = {
 	link: 'https://www.google.com',
 	type: 'bioconductor',
 	text: 'Bioconductor',
-	src: require('~/static/icons/bioconductor-logo-color.png'),
 };
 
 export const Sourceforge = (_args, { argTypes }) => ({
@@ -115,7 +110,6 @@ Sourceforge.args = {
 	link: 'https://www.google.com',
 	type: 'sourceforge',
 	text: 'Sourceforge',
-	src: require('~/static/icons/sourceforge-logo-color.png'),
 };
 
 export const Bitbucket = (_args, { argTypes }) => ({
@@ -134,7 +128,6 @@ Bitbucket.args = {
 	link: 'https://www.google.com',
 	type: 'bitbucket',
 	text: 'Bitbucket',
-	src: require('~/static/icons/bitbucket-logo-color.png'),
 };
 
 export const Openebench = (_args, { argTypes }) => ({
@@ -153,7 +146,6 @@ Openebench.args = {
 	link: 'https://www.google.com',
 	type: 'openebench',
 	text: 'Openebench',
-	src: require('~/static/icons/OEB-minimal-logo-blue.png'),
 };
 
 export const Toolshed = (_args, { argTypes }) => ({
@@ -172,5 +164,4 @@ Toolshed.args = {
 	link: 'https://www.google.com',
 	type: 'toolshed',
 	text: 'Toolshed',
-	src: require('~/static/icons/galaxy-logo-color.png'),
 };
