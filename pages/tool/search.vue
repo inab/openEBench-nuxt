@@ -7,16 +7,31 @@
 					<CardsFilter />
 				</v-col>
 				<v-col cols="8">
-					<ResultCards />
+					<v-row v-if="loading.search" justify="center" class="mt-5">
+						<v-col cols="11">
+							<v-skeleton-loader type="list-item-two-line"></v-skeleton-loader>
+						</v-col>
+						<v-col v-for="n in 9" :key="n" cols="11">
+							<v-skeleton-loader
+								v-bind="attrs"
+								type="article"
+							></v-skeleton-loader>
+						</v-col>
+					</v-row>
+					<v-row v-else class="mt-1">
+						<ResultCards />
+					</v-row>
 				</v-col>
 			</v-row>
 		</v-container>
 	</v-container>
 </template>
 <script>
+import { mapGetters } from 'vuex';
 import SearchBar from '~/components/Tools/Search/SearchBar.vue';
 import CardsFilter from '~/components/Tools/Search/CardsFilter.vue';
 import ResultCards from '~/components/Tools/Search/ResultCards.vue';
+import { SearchTools } from '~/mixins/SearchTools.js';
 
 export default {
 	name: 'SearchResultPage',
@@ -25,7 +40,38 @@ export default {
 		CardsFilter,
 		ResultCards,
 	},
+	mixins: [SearchTools],
 	layout: 'plain',
+	computed: {
+		// get q value from url
+		q() {
+			return this.$route.query.q;
+		},
+		...mapGetters({
+			loading: 'tool/loading',
+		}),
+	},
+	data() {
+		return {
+			// q value from url
+			attrs: {
+				class: 'mb-6',
+				boilerplate: true,
+				elevation: 2,
+			},
+		};
+	},
+	watch: {
+		// if new q value is different from old q value, search
+		q: {
+			handler(newVal, oldVal) {
+				if (newVal !== oldVal) {
+					this.search(newVal);
+				}
+			},
+			immediate: true,
+		},
+	},
 };
 </script>
 

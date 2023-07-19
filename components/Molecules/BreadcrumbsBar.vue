@@ -6,18 +6,12 @@
 		<template #item="{ item }">
 			<v-breadcrumbs-item
 				v-if="item.disabled"
-				:class="colorClass"
 				:href="item.to"
 				:disabled="item.disabled"
 			>
 				<span :class="classDisabled">{{ item.text }}</span>
 			</v-breadcrumbs-item>
-			<v-breadcrumbs-item
-				v-else
-				:class="colorClass"
-				:href="item.to"
-				:disabled="item.disabled"
-			>
+			<v-breadcrumbs-item v-else :href="item.to" :disabled="item.disabled">
 				<span :class="classActive">{{ item.text }}</span>
 			</v-breadcrumbs-item>
 		</template>
