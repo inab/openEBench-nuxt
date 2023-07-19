@@ -20,13 +20,26 @@
 				<h5 class="text-subtitle-1 mt-0">Explore Tools in OpenEBench</h5>
 			</v-col>
 			<v-col cols="5" class="d-flex align-center mt-0 pt-0">
-				<v-text-field v-model="value" solo dense hide-details class="mt-3 mr-3">
+				<v-text-field
+					v-model="value"
+					solo
+					dense
+					hide-details
+					class="mt-3 mr-3"
+					@keydown.enter="triggerSearch(value)"
+				>
 					<template #prepend>
 						<v-icon color="white"> mdi-magnify </v-icon>
 					</template>
 				</v-text-field>
 
-				<v-btn elevation="2" color="#021A54" dark class="mt-3 mr-2">
+				<v-btn
+					elevation="2"
+					color="#021A54"
+					dark
+					class="mt-3 mr-2"
+					@click="triggerSearch(value)"
+				>
 					Search
 				</v-btn>
 			</v-col>
@@ -34,13 +47,16 @@
 	</v-container>
 </template>
 <script>
+import { mapGetters } from 'vuex';
 import BreadcrumbsBar from '~/components/Molecules/BreadcrumbsBar';
+import { SearchTools } from '~/mixins/SearchTools';
 
 export default {
 	name: 'SearchBar',
 	components: {
 		BreadcrumbsBar,
 	},
+	mixins: [SearchTools],
 	data() {
 		return {
 			breadcrumbs: [
@@ -61,14 +77,22 @@ export default {
 					disabled: true,
 				},
 			],
-			value: '',
 			show: false,
+			value: '',
 		};
 	},
 	watch: {
 		$route(newRoute, oldRoute) {
 			if (newRoute.path !== oldRoute.path) this.breadcrumbs = [];
 		},
+	},
+	computed: {
+		...mapGetters({
+			searchedTerm: 'tool/searchedTerm',
+		}),
+	},
+	mounted() {
+		this.value = this.searchedTerm;
 	},
 };
 </script>

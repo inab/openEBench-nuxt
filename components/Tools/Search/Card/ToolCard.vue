@@ -39,15 +39,13 @@
 					small
 					class="mr-1"
 				/>
-
-				<LinkChipWIcon
+				<LinkChipPublication
 					link="https://bio.tools/protk"
 					icon="mdi-text-box-outline"
 					text="Publication"
 					color="grey darken-1"
 					class="mr-1"
 				/>
-
 				<LinkChipWIcon
 					link="https://bio.tools/protk"
 					icon="mdi-web"
@@ -62,12 +60,14 @@
 <script>
 import LinkChipWImage from '~/components/Tools/Search/Card/LinkChipWImage.vue';
 import LinkChipWIcon from '~/components/Tools/Search/Card/LinkChipWIcon.vue';
+import LinkChipPublication from '~/components/Tools/Search/Card/LinkChipPublication.vue';
 
 export default {
 	name: 'ToolCard',
 	components: {
 		LinkChipWImage,
 		LinkChipWIcon,
+		LinkChipPublication,
 	},
 	data() {
 		return {
