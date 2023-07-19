@@ -1,7 +1,7 @@
-import LinkChipWIcon from '~/components/Tools/Result/Card/LinkChipWIcon.vue';
+import LinkChipWIcon from '~/components/Tools/Search/Card/LinkChipWIcon.vue';
 
 export default {
-	title: 'Molecules/Tools/Result/Card/LinkChipWIcon',
+	title: 'Molecules/Tools/Search/Card/LinkChipWIcon',
 };
 
 export const Publication = (_args, { argTypes }) => ({

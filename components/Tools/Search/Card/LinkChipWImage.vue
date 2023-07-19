@@ -56,6 +56,7 @@ export default {
 				sourceforge: require('~/static/icons/sourceforge-logo-color.png'),
 				bitbucket: require('~/static/icons/bitbucket-logo-color.png'),
 				openebench: require('~/static/icons/OEB-minimal-logo-blue.png'),
+				other: '',
 			},
 			colors: {
 				biotools: 'orange lighten-2',
@@ -68,6 +69,18 @@ export default {
 				bitbucket: '#005ed999',
 				openebench: '#0b579f',
 				other: '#53568299',
+			},
+			labels: {
+				biotools: 'bio.tools',
+				bioconda: 'Bioconda',
+				github: 'GitHub',
+				bioconductor: 'Bioconductor',
+				galaxy: 'GalaxyEU',
+				toolshed: 'Toolshed',
+				sourceforge: 'Sourceforge',
+				bitbucket: 'Bitbucket',
+				openebench: 'OpenEBench',
+				other: 'link',
 			},
 		};
 	},

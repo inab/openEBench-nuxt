@@ -1,7 +1,7 @@
-import LinkChipWImage from '~/components/Tools/Result/Card/LinkChipWImage.vue';
+import LinkChipWImage from '~/components/Tools/Search/Card/LinkChipWImage.vue';
 
 export default {
-	title: 'Molecules/Tools/Result/Card/LinkChipWImage',
+	title: 'Molecules/Tools/Search/Card/LinkChipWImage',
 };
 
 export const Bioconda = (_args, { argTypes }) => ({
