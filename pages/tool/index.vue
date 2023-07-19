@@ -18,8 +18,8 @@
 
 <script>
 import BreadcrumbsBar from '~/components/Molecules/BreadcrumbsBar';
-import MainCard from '~/components/Tools/Search/MainCard.vue';
-import SearchCarousel from '~/components/Tools/Search/SearchCarousel.vue';
+import MainCard from '~/components/Tools/MainCard.vue';
+import SearchCarousel from '~/components/Tools/SearchCarousel.vue';
 
 export default {
 	name: 'ToolsMonitoringPage',

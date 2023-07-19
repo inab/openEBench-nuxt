@@ -198,8 +198,8 @@ export default {
 			});
 			routes.push({
 				name: 'search-results',
-				path: '/tool/results',
-				component: resolve(__dirname, 'pages/tool/results'),
+				path: '/tool/search',
+				component: resolve(__dirname, 'pages/tool/search'),
 			});
 		},
 	},

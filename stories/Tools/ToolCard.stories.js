@@ -1,7 +1,7 @@
-import ToolCard from '~/components/Tools/Result/Card/ToolCard.vue';
+import ToolCard from '~/components/Tools/Search/Card/ToolCard.vue';
 
 export default {
-	title: 'Molecules/Tools/Result/Card/ToolCard',
+	title: 'Molecules/Tools/Search/Card/ToolCard',
 };
 
 export const List = (_args, { argTypes }) => ({
@@ -9,7 +9,7 @@ export const List = (_args, { argTypes }) => ({
 	props: Object.keys(argTypes),
 	template: `
 		<v-row>
-			<v-col cols=11>
+			<v-col cols=9>
 				<tool-card v-bind="$props"/>
 			</v-col>
 		</v-row>
