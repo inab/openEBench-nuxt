@@ -9,25 +9,21 @@
 				:text-color="color"
 				class="pr-2 pl-1 mt-1"
 				v-bind="attrs"
-				@click="openLink(link)"
+				@click="openLink"
 				v-on="on"
 			>
 				<v-icon small class="pa-1">{{ icon }}</v-icon>
-				{{ text }}
+				Publication
 			</v-chip>
 		</template>
 
-		<span class="black--text text-caption font-weight-medium"
-			>trimAl: A tool for automated alignment trimming in large-scale
-			phylogenetic analyses</span
-		>
-		<br />
-		<span class="black--text text-caption font-weight-light"
-			>Capella-Gutierrez S. Silla-Martinez J.M. Gabaldon T.
+		<span class="black--text text-caption font-weight-medium">{{ title }}</span>
+		<span class="black--text text-caption font-weight-light">
+			({{ year }})
 		</span>
 		<br />
 		<span class="black--text text-caption font-weight-light font-italic"
-			>Bioinformatics 2009</span
+			>DOI: {{ doi }}</span
 		>
 	</v-tooltip>
 </template>
@@ -35,13 +31,25 @@
 export default {
 	name: 'LinkChipPublication',
 	props: {
-		text: {
+		title: {
 			type: String,
 			required: true,
 		},
-		link: {
+		year: {
+			type: Number,
+			required: true,
+		},
+		doi: {
 			type: String,
 			required: true,
+		},
+		pmcid: {
+			type: String,
+			required: false,
+		},
+		pmid: {
+			type: String,
+			required: false,
 		},
 		icon: {
 			type: String,
@@ -53,7 +61,18 @@ export default {
 		},
 	},
 	methods: {
-		openLink(link) {
+		openLink() {
+			let link = '';
+
+			if (this.doi) {
+				link = 'https://doi.org/' + this.doi;
+			} else if (this.pmcid) {
+				link = 'https://www.ncbi.nlm.nih.gov/pmc/articles/' + this.pmcid;
+			} else if (this.pmid) {
+				link = 'https://pubmed.ncbi.nlm.nih.gov/' + this.pmid;
+			} else {
+				link = 'https://www.google.com/search?q=' + this.title;
+			}
 			window.open(link, '_blank');
 		},
 	},

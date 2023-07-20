@@ -6,26 +6,42 @@
 		</v-row>
 		<v-row v-if="displayCards">
 			<v-col
-				v-for="(c, i) in visibleTools"
+				v-for="(tool, i) in visibleTools"
 				:key="i"
 				justify="center"
 				cols="12"
 				sm="12"
 				md="4"
 			>
-				<ToolCard />
+				<ToolCard
+					:name="tool.label[0]"
+					:description="tool.description[0]"
+					:type="tool.type"
+					:topics="tool.topics"
+					:operations="tool.operations"
+					:sources_labels="tool.sources_labels"
+					:publications="tool.publication"
+				/>
 			</v-col>
 		</v-row>
 		<v-row v-else>
 			<v-col
-				v-for="(c, i) in visibleTools"
+				v-for="(tool, i) in visibleTools"
 				:key="i"
 				justify="center"
 				cols="12"
 				sm="12"
 				md="11"
 			>
-				<ToolCard />
+				<ToolCard
+					:name="tool.label[0]"
+					:description="tool.description[0]"
+					:type="tool.type"
+					:topics="tool.topics"
+					:operations="tool.operations"
+					:sources_labels="tool.sources_labels"
+					:publications="tool.publication"
+				/>
 			</v-col>
 		</v-row>
 	</v-card>

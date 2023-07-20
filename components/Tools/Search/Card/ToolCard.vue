@@ -1,19 +1,20 @@
 <template>
 	<v-card class="m-1 pa-2 rounded-lg" outlined elevation="1">
 		<v-card-title class="mb-0 pb-0">
-			<h3 class="text-subtitle-1"><a id="title">trimAl</a></h3>
+			<h3 class="text-subtitle-1">
+				<a id="title">{{ name }}</a>
+			</h3>
 			<v-spacer></v-spacer>
-			<v-chip small label text-color="black" outlined>CMD</v-chip>
+			<v-chip small label text-color="black" outlined>{{
+				type.toUpperCase()
+			}}</v-chip>
 		</v-card-title>
 
 		<v-card-text class="mb-0 mt-0 pt-1">
 			<p class="text-caption mb-2">
-				TrimAl is a bioinformatic tool that cleans multiple protein or
-				nucleotide sequence alignment. The clean alignment (as a result of the
-				TrimAl cleaning process) is used for phylogenetic reconstruction. TrimAl
-				improves the quality of the reconstructed trees.
+				{{ description }}
 			</p>
-			<div justify="center" class="mt-1">
+			<div v-if="topics.length > 0" justify="center" class="mt-1">
 				<span class="text-caption text-center subtitle">Topics: </span>
 				<v-chip
 					v-for="(item, i) in topics"
@@ -24,7 +25,21 @@
 					color="grey lighten-3"
 					class="mr-1 mt-1"
 				>
-					{{ item }}
+					{{ cleanString(item.term) }}
+				</v-chip>
+			</div>
+			<div v-if="operations.length > 0" justify="center" class="mt-1">
+				<span class="text-caption text-center subtitle">Operations: </span>
+				<v-chip
+					v-for="(item, i) in operations"
+					:key="i"
+					label
+					small
+					light
+					color="grey lighten-3"
+					class="mr-1 mt-1"
+				>
+					{{ cleanString(item.term) }}
 				</v-chip>
 			</div>
 			<div justify="center" class="mt-2">
@@ -39,17 +54,24 @@
 					small
 					class="mr-1"
 				/>
-				<LinkChipPublication
-					link="https://bio.tools/protk"
-					icon="mdi-text-box-outline"
-					text="Publication"
+				<LinkChipWIcon
+					v-if="sources_labels['other']"
+					:link="sources_labels['other']"
+					icon="mdi-web"
+					text="Homepage"
 					color="grey darken-1"
 					class="mr-1"
 				/>
-				<LinkChipWIcon
-					link="https://bio.tools/protk"
-					icon="mdi-web"
-					text="Homepage"
+				<LinkChipPublication
+					v-for="(item, i) in publications"
+					:key="i"
+					:doi="item.doi"
+					:pmcid="item.pmcid"
+					:pmid="item.pmid"
+					:title="item.title"
+					:year="item.year"
+					icon="mdi-text-box-outline"
+					text="Publication"
 					color="grey darken-1"
 					class="mr-1"
 				/>
@@ -69,15 +91,38 @@ export default {
 		LinkChipWIcon,
 		LinkChipPublication,
 	},
+	props: {
+		name: {
+			type: String,
+			required: true,
+		},
+		type: {
+			type: String,
+			required: true,
+		},
+		description: {
+			type: String,
+			required: true,
+		},
+		topics: {
+			type: Array,
+			required: true,
+		},
+		operations: {
+			type: Array,
+			required: true,
+		},
+		sources_labels: {
+			type: Object,
+			required: true,
+		},
+		publications: {
+			type: Array,
+			required: true,
+		},
+	},
 	data() {
 		return {
-			sources_labels: {
-				bioconda:
-					'https://anaconda.org/bioconda/protk/1.4.4a/download/linux-64/protk-1.4.4a-hc9114bc_1.tar.bz2',
-				biotools: 'https://bio.tools/protk',
-				github:
-					'https://github.com/iracooke/protk/archive/32669e1bcbcf72fe75212f95cfe9f149f4df19cc.tar.gz',
-			},
 			items: [
 				{
 					label: 'Homepage',
@@ -90,12 +135,20 @@ export default {
 					icon: 'mdi-file-outline',
 				},
 			],
-			topics: [
-				'Sequence analysis',
-				'Sequencing',
-				'Sequence sites, features and motifs',
-			],
 		};
+	},
+	methods: {
+		cleanString(str) {
+			// remove " at the beginning of the string
+			if (str.charAt(0) === '"') {
+				str = str.substr(1);
+			}
+			// remove " at the end of the string
+			if (str.charAt(str.length - 1) === '"') {
+				str = str.substr(0, str.length - 1);
+			}
+			return str;
+		},
 	},
 };
 </script>

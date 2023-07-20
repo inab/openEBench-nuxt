@@ -1,5 +1,6 @@
 <template>
 	<v-chip
+		v-if="type != 'other'"
 		small
 		light
 		outlined
