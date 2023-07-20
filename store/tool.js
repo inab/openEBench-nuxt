@@ -8,6 +8,7 @@ export default {
 				search: false,
 			},
 			tools: [],
+			counts: {},
 		};
 	},
 	actions: {
@@ -22,15 +23,11 @@ export default {
 		},
 		async searchTools({ commit }, q) {
 			commit('updateLoadingSearch', true);
-			console.log(
-				`This is a request to shearch tools with the term: "${q}" 🚀`
-			);
 
-			// TODO: actually make the request to the API
-			const result = await this.$axios.$get(
-				'https://jsonplaceholder.typicode.com/todos/1'
-			);
-			commit('updateTools', result);
+			const result = await this.$observatory.$get('/search?q=' + q);
+
+			commit('updateTools', result.tools);
+			commit('updateCounts', result.counts);
 
 			commit('updateLoadingSearch', false);
 		},
@@ -48,11 +45,15 @@ export default {
 		updateTools(state, value) {
 			state.tools = value;
 		},
+		updateCounts(state, value) {
+			state.counts = value;
+		},
 	},
 	getters: {
 		searchedTerm: (state) => state.searchedTerm,
 		toolsDisplayCards: (state) => state.toolsDisplayCards,
 		loading: (state) => state.loading,
 		tools: (state) => state.tools,
+		counts: (state) => state.counts,
 	},
 };
