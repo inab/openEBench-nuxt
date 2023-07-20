@@ -9,7 +9,11 @@ export default function ({ $axios, $config: { OBSERVATORY_API_URL } }, inject) {
 	});
 
 	// Set baseURL to something different
-	observatory.setBaseURL(OBSERVATORY_API_URL);
+	observatory.setBaseURL(
+		process.env.NODE_ENV !== 'production'
+			? 'http://localhost:3000/'
+			: OBSERVATORY_API_URL
+	);
 
 	// Inject to context as $api
 	inject('observatory', observatory);

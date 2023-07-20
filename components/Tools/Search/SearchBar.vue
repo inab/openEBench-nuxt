@@ -81,15 +81,15 @@ export default {
 			value: '',
 		};
 	},
-	watch: {
-		$route(newRoute, oldRoute) {
-			if (newRoute.path !== oldRoute.path) this.breadcrumbs = [];
-		},
-	},
 	computed: {
 		...mapGetters({
 			searchedTerm: 'tool/searchedTerm',
 		}),
+	},
+	watch: {
+		$route(newRoute, oldRoute) {
+			if (newRoute.path !== oldRoute.path) this.breadcrumbs = [];
+		},
 	},
 	mounted() {
 		this.value = this.searchedTerm;

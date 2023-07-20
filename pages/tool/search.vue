@@ -42,15 +42,6 @@ export default {
 	},
 	mixins: [SearchTools],
 	layout: 'plain',
-	computed: {
-		// get q value from url
-		q() {
-			return this.$route.query.q;
-		},
-		...mapGetters({
-			loading: 'tool/loading',
-		}),
-	},
 	data() {
 		return {
 			// q value from url
@@ -60,6 +51,15 @@ export default {
 				elevation: 2,
 			},
 		};
+	},
+	computed: {
+		// get q value from url
+		q() {
+			return this.$route.query.q;
+		},
+		...mapGetters({
+			loading: 'tool/loading',
+		}),
 	},
 	watch: {
 		// if new q value is different from old q value, search

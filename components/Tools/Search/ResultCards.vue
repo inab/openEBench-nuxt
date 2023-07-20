@@ -9,12 +9,29 @@
 				class="ml-4"
 				active-class="primary--text"
 			>
-				<v-chip filter outlined> Tool Name (1,345) </v-chip>
-				<v-chip filter outlined> Tool Description (2,547) </v-chip>
-				<v-chip filter outlined> Associated Topics (625) </v-chip>
-				<v-chip filter outlined> Associated Operations (25) </v-chip>
-				<v-chip filter outlined> Publication Title (16) </v-chip>
-				<v-chip filter outlined> Publication Abstract (238) </v-chip>
+				<v-chip filter outlined>
+					Tool Name (<b>{{ counts.name }}</b
+					>)
+				</v-chip>
+				<v-chip filter outlined>
+					Tool Description (<b>{{ counts.description }}</b
+					>)
+				</v-chip>
+				<v-chip filter outlined>
+					Associated Topics (<b>{{ counts.topics }}</b
+					>)
+				</v-chip>
+				<v-chip filter outlined>
+					Associated Operations (<b></b>{{ counts.operations }})
+				</v-chip>
+				<v-chip filter outlined>
+					Publication Title (<b>{{ counts.publication_title }}</b
+					>)
+				</v-chip>
+				<v-chip filter outlined>
+					Publication Abstract (<b>{{ counts.publication_abstract }}</b
+					>)
+				</v-chip>
 			</v-chip-group>
 		</v-row>
 		<v-row v-if="displayCards">
@@ -58,8 +75,9 @@ export default {
 		};
 	},
 	computed: {
-		...mapGetters({
-			displayCards: 'tool/toolsDisplayCards',
+		...mapGetters('tool', {
+			displayCards: 'toolsDisplayCards',
+			counts: 'counts',
 		}),
 	},
 };
