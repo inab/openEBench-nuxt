@@ -2,41 +2,11 @@
 	<v-card id="main-container" class="mt-2 pa-4" elevation="0">
 		<v-row justify="start" align="center">
 			<span class="text-subtitle-2 ml-4 mt-1">Search in:</span>
-			<v-chip-group
-				v-model="searchingIn"
-				column
-				multiple
-				class="ml-4"
-				active-class="primary--text"
-			>
-				<v-chip filter outlined>
-					Tool Name (<b>{{ counts.name }}</b
-					>)
-				</v-chip>
-				<v-chip filter outlined>
-					Tool Description (<b>{{ counts.description }}</b
-					>)
-				</v-chip>
-				<v-chip filter outlined>
-					Associated Topics (<b>{{ counts.topics }}</b
-					>)
-				</v-chip>
-				<v-chip filter outlined>
-					Associated Operations (<b></b>{{ counts.operations }})
-				</v-chip>
-				<v-chip filter outlined>
-					Publication Title (<b>{{ counts.publication_title }}</b
-					>)
-				</v-chip>
-				<v-chip filter outlined>
-					Publication Abstract (<b>{{ counts.publication_abstract }}</b
-					>)
-				</v-chip>
-			</v-chip-group>
+			<SearchCategories :counts="counts" class="pr-3" />
 		</v-row>
 		<v-row v-if="displayCards">
 			<v-col
-				v-for="(c, i) in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]"
+				v-for="(c, i) in visibleTools"
 				:key="i"
 				justify="center"
 				cols="12"
@@ -48,7 +18,7 @@
 		</v-row>
 		<v-row v-else>
 			<v-col
-				v-for="(c, i) in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]"
+				v-for="(c, i) in visibleTools"
 				:key="i"
 				justify="center"
 				cols="12"
@@ -63,11 +33,13 @@
 <script>
 import { mapGetters } from 'vuex';
 import ToolCard from '~/components/Tools/Search/Card/ToolCard.vue';
+import SearchCategories from '~/components/Tools/Search/SearchCategories.vue';
 
 export default {
 	name: 'ResultCards',
 	components: {
 		ToolCard,
+		SearchCategories,
 	},
 	data() {
 		return {
@@ -78,6 +50,7 @@ export default {
 		...mapGetters('tool', {
 			displayCards: 'toolsDisplayCards',
 			counts: 'counts',
+			visibleTools: 'visibleTools',
 		}),
 	},
 };
