@@ -1,5 +1,5 @@
 <template>
-	<v-container fluid class="pa-0">
+	<v-container id="infinite-scroll" fluid class="pa-0">
 		<SearchBar />
 		<v-container :fluid="$vuetify.breakpoint.width < 1550">
 			<v-row justify="center">
@@ -20,6 +20,15 @@
 					</v-row>
 					<v-row v-else class="mt-1">
 						<ResultCards />
+
+						<v-col cols="11" align="center">
+							<v-progress-circular
+								v-show="loading.loadMore"
+								indeterminate
+								color="primary"
+								transition="scroll-y-transition"
+							></v-progress-circular>
+						</v-col>
 					</v-row>
 				</v-col>
 			</v-row>
@@ -41,7 +50,7 @@ export default {
 		ResultCards,
 	},
 	mixins: [SearchTools],
-	layout: 'plain',
+	layout: 'SearchTools',
 	data() {
 		return {
 			// q value from url
@@ -70,6 +79,14 @@ export default {
 				}
 			},
 			immediate: true,
+		},
+	},
+	methods: {
+		loadMore() {
+			this.loading = true;
+			this.page = this.page + 1;
+			this.$store.dispatch('tool/loadMoreTools', this.page);
+			this.loading = false;
 		},
 	},
 };
