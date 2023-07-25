@@ -11,39 +11,56 @@
 		</v-card-title>
 
 		<v-card-text class="mb-0 mt-0 pt-1">
-			<p class="text-caption mb-2">
+			<p class="text-caption black--text mb-2">
 				{{ description }}
 			</p>
 			<div v-if="topics.length > 0" justify="center" class="mt-1">
-				<span class="text-caption text-center subtitle">Topics: </span>
 				<v-chip
 					v-for="(item, i) in topics"
 					:key="i"
 					label
 					small
 					light
-					color="grey lighten-3"
+					color="grey lighten-4"
 					class="mr-1 mt-1"
 				>
+					<v-icon small class="mr-1">mdi-label-multiple-outline</v-icon>
 					{{ cleanString(item.term) }}
 				</v-chip>
 			</div>
 			<div v-if="operations.length > 0" justify="center" class="mt-1">
-				<span class="text-caption text-center subtitle">Operations: </span>
 				<v-chip
 					v-for="(item, i) in operations"
 					:key="i"
 					label
 					small
 					light
-					color="grey lighten-3"
+					color="grey lighten-4"
 					class="mr-1 mt-1"
 				>
+					<v-icon small class="mr-1">mdi-cog</v-icon>
 					{{ cleanString(item.term) }}
 				</v-chip>
 			</div>
+			<div v-if="license.length > 0" justify="center" class="mt-2">
+				<v-chip
+					v-for="(item, i) in license"
+					:key="i"
+					label
+					small
+					light
+					color="grey lighten-4"
+					class="mr-1 mt-1"
+				>
+					<v-icon small class="mr-1">mdi-scale-balance</v-icon>
+					<a v-if="item.url" :href="item.url"
+						><span class="ml-1">{{ cleanString(item.name) }}</span></a
+					>
+					<span v-else class="ml-1">{{ cleanString(item.name) }}</span>
+				</v-chip>
+			</div>
+
 			<div justify="center" class="mt-2">
-				<span class="text-caption text-center subtitle">Links: </span>
 				<LinkChipWImage
 					v-for="[key, value] in Object.entries(sources_labels)"
 					:key="key"
@@ -59,7 +76,6 @@
 					:link="sources_labels['other']"
 					icon="mdi-web"
 					text="Homepage"
-					color="grey darken-1"
 					class="mr-1"
 				/>
 				<LinkChipPublication
@@ -72,7 +88,6 @@
 					:year="item.year"
 					icon="mdi-text-box-outline"
 					text="Publication"
-					color="grey darken-1"
 					class="mr-1"
 				/>
 			</div>
@@ -117,6 +132,10 @@ export default {
 			required: true,
 		},
 		publications: {
+			type: Array,
+			required: true,
+		},
+		license: {
 			type: Array,
 			required: true,
 		},

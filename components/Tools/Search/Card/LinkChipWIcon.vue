@@ -2,9 +2,7 @@
 	<v-chip
 		small
 		light
-		outlined
-		color="grey lighten-3"
-		:text-color="color"
+		color="grey lighten-4"
 		class="pr-2 pl-1 mt-1"
 		@click="openLink(link)"
 	>
@@ -25,10 +23,6 @@ export default {
 			required: true,
 		},
 		icon: {
-			type: String,
-			required: true,
-		},
-		color: {
 			type: String,
 			required: true,
 		},

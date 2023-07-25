@@ -3,9 +3,7 @@
 		v-if="type != 'other'"
 		small
 		light
-		outlined
-		color="grey lighten-3"
-		:text-color="colors[type]"
+		color="grey lighten-4"
 		class="pr-2 pl-1 mt-1"
 		@click="openLink(link)"
 	>
@@ -48,15 +46,15 @@ export default {
 	data() {
 		return {
 			icons: {
-				biotools: require('~/static/icons/elixir-logo-color.png'),
-				bioconda: require('~/static/icons/bioconda-logo-color.png'),
-				github: require('~/static/icons/github-logo-color.png'),
-				bioconductor: require('~/static/icons/bioconductor-logo-color.png'),
-				galaxy: require('~/static/icons/galaxy-logo-color.png'),
-				toolshed: require('~/static/icons/galaxy-logo-color.png'),
-				sourceforge: require('~/static/icons/sourceforge-logo-color.png'),
-				bitbucket: require('~/static/icons/bitbucket-logo-color.png'),
-				openebench: require('~/static/icons/OEB-minimal-logo-blue.png'),
+				biotools: require('~/static/icons/elixir-logo-black.png'),
+				bioconda: require('~/static/icons/bioconda-logo-black.png'),
+				github: require('~/static/icons/github-logo-black.png'),
+				bioconductor: require('~/static/icons/bioconductor-logo-black.png'),
+				galaxy: require('~/static/icons/galaxy-logo-black.png'),
+				toolshed: require('~/static/icons/galaxy-logo-black.png'),
+				sourceforge: require('~/static/icons/sourceforge-logo-black.png'),
+				bitbucket: require('~/static/icons/bitbucket-logo-black.png'),
+				openebench: require('~/static/icons/OEB-minimal-logo-black.png'),
 				other: '',
 			},
 			colors: {
