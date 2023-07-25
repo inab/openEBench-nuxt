@@ -18,6 +18,7 @@ export default {
 				'publication_title',
 				'publication_abstract',
 			],
+			EDAMTerms: [],
 		};
 	},
 	actions: {
@@ -37,15 +38,7 @@ export default {
 
 			commit('updateTools', result.tools);
 
-			const allTools = [];
-			allTools.push(...result.tools.name);
-			allTools.push(...result.tools.description);
-			allTools.push(...result.tools.topics);
-			allTools.push(...result.tools.operations);
-			allTools.push(...result.tools.publication_title);
-			allTools.push(...result.tools.publication_abstract);
-
-			commit('updateVisibleTools', allTools);
+			commit('updateVisibleTools', result.tools);
 			commit('updateCounts', result.counts);
 
 			commit('updateLoadingSearch', false);
@@ -62,9 +55,57 @@ export default {
 		updateVisibleTools({ state, commit }) {
 			const newVisibleTools = [];
 			for (const category of state.visibleCategories) {
-				newVisibleTools.push(...this.state.tool.tools[category]);
+				// filter tools with cateegory in foundIn field
+				const visibleTools = state.tools.filter((tool) =>
+					tool.foundIn.includes(category)
+				);
+				// add tools to newVisibleTools
+				for (const tool of visibleTools) {
+					if (!newVisibleTools.includes(tool)) {
+						newVisibleTools.push(tool);
+					}
+				}
 			}
 			commit('updateVisibleTools', newVisibleTools);
+		},
+
+		updateVisibleToolsByTopic({ state, commit }, topics) {
+			// 🚧 This function recieves the array of topics selected by the user
+			// and updates the visible tools array accordingly.
+			// This function should not commit, but be called by another function
+			console.log('updateVisibleToolsByTopic');
+
+			function topicInTool(tool, topics) {
+				for (const topic of tool.topics) {
+					for (const selectedTopic of topics) {
+						if (topic.term === selectedTopic) {
+							return true;
+						}
+					}
+				}
+				return false;
+			}
+
+			// filter visible tools
+			if (topics.length > 0) {
+				const visibleTools = state.visibleTools.filter((tool) =>
+					topicInTool(tool, topics)
+				);
+				console.log(visibleTools);
+				commit('updateVisibleTools', visibleTools);
+			} else {
+				// this is repeated
+
+				const visibleTools = state.tools;
+				commit('updateVisibleTools', visibleTools);
+			}
+		},
+
+		async getEDAMTerms({ commit }) {
+			// This function gets the EDAM terms from the API
+			const response = await this.$observatory.$get('/EDAMTerms');
+
+			commit('updateEDAMTerms', response);
 		},
 	},
 	mutations: {
@@ -89,6 +130,9 @@ export default {
 		updateVisibleCategories(state, value) {
 			state.visibleCategories = value;
 		},
+		updateEDAMTerms(state, value) {
+			state.EDAMTerms = value;
+		},
 	},
 	getters: {
 		searchedTerm: (state) => state.searchedTerm,
@@ -98,5 +142,9 @@ export default {
 		counts: (state) => state.counts,
 		visibleTools: (state) => state.visibleTools,
 		visibleCategories: (state) => state.visibleCategories,
+		EDAMFormats: (state) => state.EDAMTerms.format,
+		EDAMOperations: (state) => state.EDAMTerms.operation,
+		EDAMTopics: (state) => state.EDAMTerms.topic,
+		EDAMTypes: (state) => state.EDAMTerms.datatype,
 	},
 };

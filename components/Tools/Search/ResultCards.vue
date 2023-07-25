@@ -21,6 +21,7 @@
 					:operations="tool.operations"
 					:sources_labels="tool.sources_labels"
 					:publications="tool.publication"
+					:license="tool.license"
 				/>
 			</v-col>
 		</v-row>
@@ -41,6 +42,7 @@
 					:operations="tool.operations"
 					:sources_labels="tool.sources_labels"
 					:publications="tool.publication"
+					:license="tool.license"
 				/>
 			</v-col>
 		</v-row>
