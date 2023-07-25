@@ -5,11 +5,11 @@ export default {
 			searchedTerm: '',
 			toolsDisplayCards: false,
 			loading: {
+				initialSearch: false,
 				search: false,
 				loadMore: false,
 			},
 			tools: [],
-			visibleTools: [],
 			counts: {},
 			visibleCategories: [
 				'name',
@@ -20,6 +20,14 @@ export default {
 				'publication_abstract',
 			],
 			EDAMTerms: [],
+			filters: {
+				// This object is used to filter the tools
+				source: [],
+				type: [],
+				topics: [],
+				operation: [],
+				license: [],
+			},
 		};
 	},
 	actions: {
@@ -32,18 +40,41 @@ export default {
 		updateLoadingSearch({ commit }, value) {
 			commit('updateLoadingSearch', value);
 		},
+		updateInitialSearch({ commit }, value) {
+			commit('updateInitialSearch', value);
+		},
 		updateLoadingLoadMore({ commit }, value) {
 			commit('updateLoadingLoadMore', value);
 		},
-		async searchTools({ commit }, q) {
-			commit('updateLoadingSearch', true);
 
+		async initialSearch({ commit }, q) {
+			commit('updateLoadingInitialSearch', true);
 			const result = await this.$observatory.$get('/search?page=0&q=' + q);
 
 			commit('updateTools', result.tools);
 
-			commit('updateVisibleTools', result.tools);
 			commit('updateCounts', result.counts);
+
+			commit('updateLoadingInitialSearch', false);
+		},
+
+		async searchTools({ commit }, q) {
+			commit('updateLoadingSearch', true);
+
+			let query = '';
+			if (state.visibleCategories) {
+				query += '&categories=';
+				for (const category of state.visibleCategories) {
+					query += category + ',';
+				}
+				query = query.slice(0, -1);
+			}
+
+			const result = await this.$observatory.$get(
+				'/search?page=0&q=' + q + query
+			);
+
+			commit('updateTools', result.tools);
 
 			commit('updateLoadingSearch', false);
 		},
@@ -53,6 +84,7 @@ export default {
 			/  component to hide/show tools found in that category.
 			/  The value is the visible categories.
 			*/
+
 			commit('updateVisibleCategories', value);
 		},
 
@@ -65,7 +97,6 @@ export default {
 
 			const newTools = state.tools.concat(result.tools);
 			commit('updateTools', newTools);
-			commit('updateVisibleTools', newTools);
 			commit('updateCounts', result.counts);
 		},
 
@@ -86,6 +117,9 @@ export default {
 		updateLoadingSearch(state, value) {
 			state.loading.search = value;
 		},
+		updateLoadingInitialSearch(state, value) {
+			state.loading.initialSearch = value;
+		},
 		updateLoadingLoadMore(state, value) {
 			state.loading.loadMore = value;
 		},
@@ -94,9 +128,6 @@ export default {
 		},
 		updateCounts(state, value) {
 			state.counts = value;
-		},
-		updateVisibleTools(state, value) {
-			state.visibleTools = value;
 		},
 		updateVisibleCategories(state, value) {
 			state.visibleCategories = value;
@@ -111,7 +142,6 @@ export default {
 		loading: (state) => state.loading,
 		tools: (state) => state.tools,
 		counts: (state) => state.counts,
-		visibleTools: (state) => state.visibleTools,
 		visibleCategories: (state) => state.visibleCategories,
 		EDAMFormats: (state) => state.EDAMTerms.format,
 		EDAMOperations: (state) => state.EDAMTerms.operation,

@@ -7,7 +7,7 @@
 					<CardsFilter />
 				</v-col>
 				<v-col cols="8">
-					<v-row v-if="loading.search" justify="center" class="mt-5">
+					<v-row v-if="loading.initialSearch" justify="center" class="mt-5">
 						<v-col cols="11">
 							<v-skeleton-loader type="list-item-two-line"></v-skeleton-loader>
 						</v-col>
@@ -82,11 +82,10 @@ export default {
 		},
 	},
 	methods: {
-		loadMore() {
-			this.loading = true;
-			this.page = this.page + 1;
-			this.$store.dispatch('tool/loadMoreTools', this.page);
-			this.loading = false;
+		// search for tools
+		search(q) {
+			this.$store.dispatch('tool/updateSearchedTerm', q);
+			this.$store.dispatch('tool/initialSearch', q);
 		},
 	},
 };

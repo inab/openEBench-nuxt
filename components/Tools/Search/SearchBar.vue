@@ -94,6 +94,16 @@ export default {
 	mounted() {
 		this.value = this.searchedTerm;
 	},
+
+	methods: {
+		triggerSearch(value) {
+			this.$store.dispatch('tool/setSearchedTerm', value);
+			this.$router.push({
+				path: '/tool/search',
+				query: { q: value },
+			});
+		},
+	},
 };
 </script>
 <style scoped>
