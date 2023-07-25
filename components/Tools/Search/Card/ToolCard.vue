@@ -3,9 +3,10 @@
 		<v-card-title class="mb-0 pb-0">
 			<h3 class="text-subtitle-1">
 				<a id="title">{{ name }}</a>
-				<br />
-				<span class="text-caption grey--text font-italic">{{ subname }}</span>
 			</h3>
+			<span class="text-caption grey--text font-italic ml-2">
+				{{ subname }}</span
+			>
 			<v-spacer></v-spacer>
 			<v-chip small label text-color="black" outlined>{{
 				type.toUpperCase()
