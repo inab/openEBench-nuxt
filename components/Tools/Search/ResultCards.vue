@@ -20,6 +20,7 @@
 			>
 				<ToolCard
 					:name="tool.label[0]"
+					:subname="tool.name"
 					:description="tool.description[0]"
 					:type="tool.type"
 					:topics="tool.topics"
@@ -42,6 +43,7 @@
 				>
 					<ToolCard
 						:name="tool.label[0]"
+						:subname="tool.name"
 						:description="tool.description[0]"
 						:type="tool.type"
 						:topics="tool.topics"
