@@ -65,7 +65,6 @@ export default {
 			await this.$store.dispatch('tool/updateLoadingLoadMore', false);
 		},
 		scrollToTop() {
-			console.log('Scrolling to top');
 			document.getElementById('main-container').scrollTo({
 				top: 0,
 				behavior: 'smooth',

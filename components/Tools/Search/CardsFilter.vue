@@ -6,6 +6,7 @@
 				<!--ViewSelector /-->
 
 				<SourcesFilter />
+				<TypeFilter />
 				<TopicsFilter />
 				<OperationsFilter />
 				<LicenseFilter />
@@ -23,6 +24,7 @@
 </template>
 <script>
 import SourcesFilter from '~/components/Tools/Search/Filters/SourcesFilter.vue';
+import TypeFilter from '~/components/Tools/Search/Filters/TypeFilter.vue';
 import TopicsFilter from '~/components/Tools/Search/Filters/TopicsFilter.vue';
 import OperationsFilter from '~/components/Tools/Search/Filters/OperationsFilter.vue';
 import InputDataFormatFilter from '~/components/Tools/Search/Filters/InputDataFormatFilter.vue';
@@ -34,6 +36,7 @@ export default {
 	name: 'CardsFilter',
 	components: {
 		SourcesFilter,
+		TypeFilter,
 		TopicsFilter,
 		OperationsFilter,
 		InputDataFormatFilter,
