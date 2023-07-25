@@ -30,9 +30,8 @@ export default {
 	name: 'SourcesFilter',
 	data() {
 		return {
-			sources: [0, 1, 2, 3, 4, 5, 6, 7, 8],
+			sources: [0, 1, 2, 3, 4, 5, 6, 7],
 			source_items: [
-				'OpenEBench',
 				'bio.tools',
 				'bioconda',
 				'bioconductor',

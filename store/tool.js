@@ -3,6 +3,7 @@ export default {
 	state: () => {
 		return {
 			searchedTerm: '',
+			query: '',
 			toolsDisplayCards: false,
 			loading: {
 				initialSearch: false,
@@ -22,8 +23,27 @@ export default {
 			EDAMTerms: [],
 			filters: {
 				// This object is used to filter the tools
-				source: [],
-				type: [],
+				source: [
+					'biotools',
+					'bioconda_recipes',
+					'bioconductor',
+					'galaxy',
+					'toolshed',
+					'github',
+					'sourceforge',
+					'bitbucket',
+				],
+				type: [
+					'cmd',
+					'app',
+					'web',
+					'lib',
+					'api',
+					'db',
+					'workflow',
+					'suite',
+					'other',
+				],
 				topics: [],
 				operation: [],
 				license: [],
@@ -52,26 +72,51 @@ export default {
 			const result = await this.$observatory.$get('/search?page=0&q=' + q);
 
 			commit('updateTools', result.tools);
-
 			commit('updateCounts', result.counts);
-
 			commit('updateLoadingInitialSearch', false);
 		},
 
-		async searchTools({ commit }, q) {
+		async searchTools({ commit, state }) {
 			commit('updateLoadingSearch', true);
 
 			let query = '';
-			if (state.visibleCategories) {
-				query += '&categories=';
+
+			// Add filters to query
+
+			// 'Search In' Categories
+			if (
+				state.visibleCategories.length > 0 &&
+				state.visibleCategories.length < 7
+			) {
+				query += '&searchIn=';
 				for (const category of state.visibleCategories) {
 					query += category + ',';
 				}
 				query = query.slice(0, -1);
 			}
 
+			// 'Source' Filters
+			if (state.filters.source.length > 0 && state.filters.source.length < 8) {
+				query += '&source=';
+				for (const source of state.filters.source) {
+					query += source + ',';
+				}
+				query = query.slice(0, -1);
+			}
+
+			// 'Type' Filters
+			if (state.filters.type.length > 0 && state.filters.type.length < 9) {
+				query += '&type=';
+				for (const type of state.filters.type) {
+					query += type + ',';
+				}
+				query = query.slice(0, -1);
+			}
+
+			commit('updateQuery', query);
+
 			const result = await this.$observatory.$get(
-				'/search?page=0&q=' + q + query
+				'/search?page=0&q=' + state.searchedTerm + query
 			);
 
 			commit('updateTools', result.tools);
@@ -92,12 +137,11 @@ export default {
 			// This function loads more tools from the API
 			const q = state.searchedTerm;
 			const result = await this.$observatory.$get(
-				'/search?page=' + page + '&q=' + q
+				'/search?page=' + page + '&q=' + q + state.query
 			);
 
 			const newTools = state.tools.concat(result.tools);
 			commit('updateTools', newTools);
-			commit('updateCounts', result.counts);
 		},
 
 		async getEDAMTerms({ commit }) {
@@ -113,6 +157,9 @@ export default {
 		},
 		updateSearchedTerm(state, value) {
 			state.searchedTerm = value;
+		},
+		updateQuery(state, value) {
+			state.query = value;
 		},
 		updateLoadingSearch(state, value) {
 			state.loading.search = value;

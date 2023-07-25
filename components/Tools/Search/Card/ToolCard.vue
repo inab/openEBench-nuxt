@@ -3,6 +3,8 @@
 		<v-card-title class="mb-0 pb-0">
 			<h3 class="text-subtitle-1">
 				<a id="title">{{ name }}</a>
+				<br />
+				<span class="text-caption grey--text font-italic">{{ subname }}</span>
 			</h3>
 			<v-spacer></v-spacer>
 			<v-chip small label text-color="black" outlined>{{
@@ -108,6 +110,10 @@ export default {
 	},
 	props: {
 		name: {
+			type: String,
+			required: true,
+		},
+		subname: {
 			type: String,
 			required: true,
 		},
