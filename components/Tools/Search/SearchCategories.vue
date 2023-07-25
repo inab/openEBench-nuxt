@@ -55,7 +55,7 @@ export default {
 			);
 
 			// Update the visible tools in store
-			this.$store.dispatch('tool/updateVisibleTools');
+			this.$store.dispatch('tool/searchTools');
 		},
 	},
 	methods: {

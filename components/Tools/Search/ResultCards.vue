@@ -4,6 +4,11 @@
 			<span class="text-subtitle-2 ml-4 mt-1">Search in:</span>
 			<SearchCategories :counts="counts" class="pr-3" />
 		</v-row>
+		<v-row v-if="loading.search" justify="center" class="mt-5">
+			<v-col v-for="n in 9" :key="n" cols="11">
+				<v-skeleton-loader v-bind="attrs" type="article"></v-skeleton-loader>
+			</v-col>
+		</v-row>
 		<v-row v-if="displayCards">
 			<v-col
 				v-for="(tool, i) in visibleTools"
@@ -70,7 +75,8 @@ export default {
 		...mapGetters('tool', {
 			displayCards: 'toolsDisplayCards',
 			counts: 'counts',
-			visibleTools: 'visibleTools',
+			visibleTools: 'tools',
+			loading: 'loading',
 		}),
 	},
 };
