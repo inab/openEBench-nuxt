@@ -73,6 +73,7 @@ export default {
 	left: 0;
 	right: 0;
 	height: 290px;
+	overflow: auto;
 }
 
 .v-input >>> v-input__control {

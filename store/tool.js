@@ -6,6 +6,7 @@ export default {
 			toolsDisplayCards: false,
 			loading: {
 				search: false,
+				loadMore: false,
 			},
 			tools: [],
 			visibleTools: [],
@@ -31,10 +32,13 @@ export default {
 		updateLoadingSearch({ commit }, value) {
 			commit('updateLoadingSearch', value);
 		},
+		updateLoadingLoadMore({ commit }, value) {
+			commit('updateLoadingLoadMore', value);
+		},
 		async searchTools({ commit }, q) {
 			commit('updateLoadingSearch', true);
 
-			const result = await this.$observatory.$get('/search?q=' + q);
+			const result = await this.$observatory.$get('/search?page=0&q=' + q);
 
 			commit('updateTools', result.tools);
 
@@ -52,53 +56,17 @@ export default {
 			commit('updateVisibleCategories', value);
 		},
 
-		updateVisibleTools({ state, commit }) {
-			const newVisibleTools = [];
-			for (const category of state.visibleCategories) {
-				// filter tools with cateegory in foundIn field
-				const visibleTools = state.tools.filter((tool) =>
-					tool.foundIn.includes(category)
-				);
-				// add tools to newVisibleTools
-				for (const tool of visibleTools) {
-					if (!newVisibleTools.includes(tool)) {
-						newVisibleTools.push(tool);
-					}
-				}
-			}
-			commit('updateVisibleTools', newVisibleTools);
-		},
+		async loadMoreTools({ commit, state }, page) {
+			// This function loads more tools from the API
+			const q = state.searchedTerm;
+			const result = await this.$observatory.$get(
+				'/search?page=' + page + '&q=' + q
+			);
 
-		updateVisibleToolsByTopic({ state, commit }, topics) {
-			// 🚧 This function recieves the array of topics selected by the user
-			// and updates the visible tools array accordingly.
-			// This function should not commit, but be called by another function
-			console.log('updateVisibleToolsByTopic');
-
-			function topicInTool(tool, topics) {
-				for (const topic of tool.topics) {
-					for (const selectedTopic of topics) {
-						if (topic.term === selectedTopic) {
-							return true;
-						}
-					}
-				}
-				return false;
-			}
-
-			// filter visible tools
-			if (topics.length > 0) {
-				const visibleTools = state.visibleTools.filter((tool) =>
-					topicInTool(tool, topics)
-				);
-				console.log(visibleTools);
-				commit('updateVisibleTools', visibleTools);
-			} else {
-				// this is repeated
-
-				const visibleTools = state.tools;
-				commit('updateVisibleTools', visibleTools);
-			}
+			const newTools = state.tools.concat(result.tools);
+			commit('updateTools', newTools);
+			commit('updateVisibleTools', newTools);
+			commit('updateCounts', result.counts);
 		},
 
 		async getEDAMTerms({ commit }) {
@@ -117,6 +85,9 @@ export default {
 		},
 		updateLoadingSearch(state, value) {
 			state.loading.search = value;
+		},
+		updateLoadingLoadMore(state, value) {
+			state.loading.loadMore = value;
 		},
 		updateTools(state, value) {
 			state.tools = value;
