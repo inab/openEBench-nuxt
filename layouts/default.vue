@@ -3,25 +3,6 @@
 		<main-header :vre-href="$config.VRE_URI" />
 		<v-main>
 			<breadcrumbs-bar v-if="breadcrumbs.length > 0" :items="breadcrumbs" />
-			<v-row justify="center">
-				<v-col class="ml-6 mb-2" sm="11" md="9" lg="8" xl="8">
-					<v-alert
-						border="left"
-						color="primary"
-						dismissible
-						outlined
-						text
-						type="warning"
-					>
-						This site will be <b>unavailable</b> from Monday, <b>July 31</b>, at
-						<b>14:00 CEST</b> to Wednesday, <b>August 2</b>, at
-						<b>19:00 CEST</b> due to maintenance. We apologize for the
-						inconvenience.
-					</v-alert>
-					<Intro />
-				</v-col>
-			</v-row>
-
 			<Nuxt @emitBreadcrumbs="handleBreadcrumbs" />
 			<Footer class="mt-16" />
 		</v-main>
