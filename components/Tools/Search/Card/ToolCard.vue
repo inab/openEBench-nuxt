@@ -8,7 +8,7 @@
 				{{ subname }}</span
 			>
 			<v-spacer></v-spacer>
-			<v-chip small label text-color="black" outlined>{{
+			<v-chip small label text-color="#F48F43" color="#F48F43" outlined>{{
 				type.toUpperCase()
 			}}</v-chip>
 		</v-card-title>

@@ -54,7 +54,7 @@ export default {
 </script>
 <style scoped>
 .v-breadcrumbs {
-	background-color: #0b579f !important;
+	background-color: #396fba !important;
 	color: white !important;
 }
 

@@ -201,6 +201,11 @@ export default {
 				path: '/tool/search',
 				component: resolve(__dirname, 'pages/tool/search'),
 			});
+			routes.push({
+				name: 'tool',
+				path: '/tool',
+				component: resolve(__dirname, 'pages/tool/index'),
+			});
 		},
 	},
 };

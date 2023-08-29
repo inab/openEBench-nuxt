@@ -35,7 +35,7 @@
 
 				<v-btn
 					elevation="2"
-					color="#021A54"
+					color="#F48633"
 					dark
 					class="mt-3 mr-2"
 					@click="triggerSearch(value)"
@@ -108,7 +108,7 @@ export default {
 </script>
 <style scoped>
 #search-container {
-	background-color: #0b579f !important;
+	background-color: #396fba !important;
 	color: white;
 	top: 0;
 	height: 110px;

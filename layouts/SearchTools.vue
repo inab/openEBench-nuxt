@@ -1,25 +1,26 @@
 <template>
-	<v-app id="main-container">
+	<v-app id="layout-container">
 		<main-header :vre-href="$config.VRE_URI" />
 		<v-main>
 			<Nuxt />
-			<v-btn
-				id="to-top"
-				class="mx-2"
-				fab
-				dark
-				small
-				color="primary"
-				@click="scrollToTop"
-			>
-				<v-icon dark> mdi-arrow-up </v-icon>
-			</v-btn>
+
 			<Footer class="mt-16" />
 		</v-main>
 		<v-footer class="justify-center" app>
 			Made with <v-icon color="red">mdi-heart</v-icon>
 			in Barcelona.
 		</v-footer>
+		<v-btn
+			id="to-top"
+			class="mx-2"
+			fab
+			dark
+			small
+			color="#f48f43"
+			@click="scrollToTop"
+		>
+			<v-icon dark> mdi-arrow-up </v-icon>
+		</v-btn>
 	</v-app>
 </template>
 
@@ -47,7 +48,7 @@ export default {
 	},
 	mounted() {
 		// Detect when scrolled to bottom.
-		const listElm = document.querySelector('#main-container');
+		const listElm = document.querySelector('#layout-container');
 		listElm.addEventListener('scroll', (_e) => {
 			if (
 				listElm.scrollTop + listElm.clientHeight >=
@@ -65,7 +66,7 @@ export default {
 			await this.$store.dispatch('tool/updateLoadingLoadMore', false);
 		},
 		scrollToTop() {
-			document.getElementById('main-container').scrollTo({
+			document.getElementById('layout-container').scrollTo({
 				top: 0,
 				behavior: 'smooth',
 			});
@@ -75,10 +76,10 @@ export default {
 </script>
 
 <style scoped>
-#main-container {
+#layout-container {
 	padding-top: 0 !important;
 	overflow: auto;
-	height: 250vh;
+	height: 100vh;
 }
 
 #to-top {
