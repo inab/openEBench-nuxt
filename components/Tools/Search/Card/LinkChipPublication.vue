@@ -21,12 +21,16 @@
 			</v-chip>
 		</template>
 
-		<span class="black--text text-caption font-weight-medium">{{ title }}</span>
-		<span class="black--text text-caption font-weight-light">
+		<span v-if="title" class="black--text text-caption font-weight-medium">{{
+			title
+		}}</span>
+		<span v-if="year" class="black--text text-caption font-weight-light">
 			({{ year }})
 		</span>
 		<br />
-		<span class="black--text text-caption font-weight-light font-italic"
+		<span
+			v-if="doi"
+			class="black--text text-caption font-weight-light font-italic"
 			>DOI: {{ doi }}</span
 		>
 	</v-tooltip>
