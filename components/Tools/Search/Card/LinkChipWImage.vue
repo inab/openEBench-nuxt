@@ -14,7 +14,7 @@
 			class="ma-0"
 			:src="icons[type]"
 		></v-img>
-		{{ text }}
+		{{ labels[text] }}
 	</v-chip>
 </template>
 <script>

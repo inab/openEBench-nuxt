@@ -1,5 +1,11 @@
 <template>
-	<v-tooltip bottom color="grey lighten-4" max-width="450px" allow-overflow>
+	<v-tooltip
+		bottom
+		attach
+		color="grey lighten-4"
+		max-width="450px"
+		allow-overflow
+	>
 		<template #activator="{ on, attrs }">
 			<v-chip
 				small

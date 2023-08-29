@@ -17,7 +17,7 @@
 				<template #append-outer>
 					<v-btn
 						elevation="2"
-						color="#021A54"
+						color="#F48633"
 						dark
 						@click="triggerSearch(value)"
 					>
@@ -67,7 +67,7 @@ export default {
 </script>
 <style scoped>
 #search-container {
-	background-color: #0b579f !important;
+	background-color: #396fba !important;
 	color: white;
 	top: 0;
 	left: 0;

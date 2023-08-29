@@ -1,5 +1,5 @@
 <template>
-	<v-container id="infinite-scroll" fluid class="pa-0">
+	<v-container fluid class="pa-0">
 		<SearchBar />
 		<v-container :fluid="$vuetify.breakpoint.width < 1550">
 			<v-row justify="center">
@@ -93,7 +93,7 @@ export default {
 
 <style scoped>
 #search-container {
-	background-color: #0b579f !important;
+	background-color: #396fba !important;
 	color: white;
 	top: 0;
 	left: 0;
