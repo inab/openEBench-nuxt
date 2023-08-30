@@ -53,6 +53,10 @@ export default {
 };
 </script>
 <style scoped>
+.blue-background {
+	background-color: #396fba !important;
+}
+
 .v-breadcrumbs {
 	background-color: #396fba !important;
 	color: white !important;

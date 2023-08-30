@@ -8,9 +8,7 @@
 				{{ subname }}</span
 			>
 			<v-spacer></v-spacer>
-			<v-chip small label text-color="#F48F43" color="#F48F43" outlined>{{
-				type.toUpperCase()
-			}}</v-chip>
+			<ChipType :type="type" />
 		</v-card-title>
 
 		<v-card-text class="mb-0 mt-0 pt-1">
@@ -98,6 +96,7 @@
 	</v-card>
 </template>
 <script>
+import ChipType from './ChipType.vue';
 import LinkChipWImage from '~/components/Tools/Search/Card/LinkChipWImage.vue';
 import LinkChipWIcon from '~/components/Tools/Search/Card/LinkChipWIcon.vue';
 import LinkChipPublication from '~/components/Tools/Search/Card/LinkChipPublication.vue';
@@ -108,6 +107,7 @@ export default {
 		LinkChipWImage,
 		LinkChipWIcon,
 		LinkChipPublication,
+		ChipType,
 	},
 	props: {
 		name: {

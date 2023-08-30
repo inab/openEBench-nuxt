@@ -2,7 +2,7 @@
 	<v-tooltip
 		bottom
 		attach
-		color="grey lighten-4"
+		color="blue lighten-5"
 		max-width="450px"
 		allow-overflow
 	>
@@ -27,7 +27,7 @@
 		<span v-if="year" class="black--text text-caption font-weight-light">
 			({{ year }})
 		</span>
-		<br />
+		<br v-if="title" />
 		<span
 			v-if="doi"
 			class="black--text text-caption font-weight-light font-italic"
