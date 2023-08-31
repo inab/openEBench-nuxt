@@ -1,11 +1,5 @@
 <template>
-	<v-tooltip
-		bottom
-		attach
-		color="blue lighten-5"
-		max-width="450px"
-		allow-overflow
-	>
+	<v-tooltip bottom attach color="#EAF1F7" max-width="450px" allow-overflow>
 		<template #activator="{ on, attrs }">
 			<v-chip
 				small
@@ -20,10 +14,10 @@
 				Publication
 			</v-chip>
 		</template>
-
-		<span v-if="title" class="black--text text-caption font-weight-medium">{{
-			title
-		}}</span>
+		<v-icon small class="pa-0">mdi-open-in-new</v-icon>
+		<span v-if="title" class="black--text text-caption font-weight-medium">
+			{{ title }}
+		</span>
 		<span v-if="year" class="black--text text-caption font-weight-light">
 			({{ year }})
 		</span>
@@ -31,7 +25,8 @@
 		<span
 			v-if="doi"
 			class="black--text text-caption font-weight-light font-italic"
-			>DOI: {{ doi }}</span
+		>
+			DOI: {{ doi }}</span
 		>
 	</v-tooltip>
 </template>
