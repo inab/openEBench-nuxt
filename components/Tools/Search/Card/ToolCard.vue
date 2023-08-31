@@ -12,9 +12,11 @@
 		</v-card-title>
 
 		<v-card-text class="mb-0 mt-0 pt-1">
+			<!-- DESCRIPTION -->
 			<p class="text-caption black--text mb-2">
-				{{ description }}
+				<span v-html="description"></span>
 			</p>
+			<!-- TOPICS -->
 			<div v-if="topics.length > 0" justify="center" class="mt-1">
 				<v-chip
 					v-for="(item, i) in topics"
@@ -24,11 +26,15 @@
 					light
 					color="grey lighten-4"
 					class="mr-1 mt-1"
+					link
+					:href="item.uri"
+					target="_blank"
 				>
 					<v-icon small class="mr-1">mdi-label-multiple-outline</v-icon>
 					{{ cleanString(item.term) }}
 				</v-chip>
 			</div>
+			<!-- OPERATIONS -->
 			<div v-if="operations.length > 0" justify="center" class="mt-1">
 				<v-chip
 					v-for="(item, i) in operations"
@@ -36,6 +42,9 @@
 					label
 					small
 					light
+					link
+					:href="item.uri"
+					target="_blank"
 					color="grey lighten-4"
 					class="mr-1 mt-1"
 				>
@@ -43,6 +52,7 @@
 					{{ cleanString(item.term) }}
 				</v-chip>
 			</div>
+			<!-- LICENSE -->
 			<div v-if="license.length > 0" justify="center" class="mt-2">
 				<v-chip
 					v-for="(item, i) in license"
@@ -62,6 +72,7 @@
 			</div>
 
 			<div justify="center" class="mt-2">
+				<!-- LINKS -->
 				<LinkChipWImage
 					v-for="[key, value] in Object.entries(sources_labels)"
 					:key="key"
@@ -73,12 +84,13 @@
 					class="mr-1"
 				/>
 				<LinkChipWIcon
-					v-if="sources_labels['other']"
-					:link="sources_labels['other']"
+					v-if="webpage"
+					:link="webpage"
 					icon="mdi-web"
 					text="Homepage"
 					class="mr-1"
 				/>
+				<!-- PUBLICATIONS -->
 				<LinkChipPublication
 					v-for="(item, i) in publications"
 					:key="i"
@@ -145,6 +157,10 @@ export default {
 		license: {
 			type: Array,
 			required: true,
+		},
+		webpage: {
+			type: String,
+			required: false,
 		},
 	},
 	data() {

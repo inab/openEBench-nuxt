@@ -1,14 +1,22 @@
 <template>
-	<v-chip
-		small
-		light
-		color="grey lighten-4"
-		class="pr-2 pl-1 mt-1"
-		@click="openLink(link)"
-	>
-		<v-icon small class="pa-1">{{ icon }}</v-icon>
-		{{ text }}
-	</v-chip>
+	<v-tooltip bottom attach color="#EAF1F7" max-width="450px" allow-overflow>
+		<template #activator="{ on, attrs }">
+			<v-chip
+				small
+				light
+				color="grey lighten-4"
+				class="pr-2 pl-1 mt-1"
+				v-bind="attrs"
+				@click="openLink(link)"
+				v-on="on"
+			>
+				<v-icon small class="pa-1">{{ icon }}</v-icon>
+				{{ text }}
+			</v-chip>
+		</template>
+		<v-icon small class="pa-0">mdi-open-in-new</v-icon>
+		<span class="text-caption black--text"> {{ link }} </span>
+	</v-tooltip>
 </template>
 <script>
 export default {

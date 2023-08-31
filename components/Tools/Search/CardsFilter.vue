@@ -55,7 +55,7 @@ export default {
 	methods: {
 		filterTools() {
 			// 🚧 TODO: build URL and send request to API
-			// this.$store.dispatch('tool/filterTools');
+			this.$store.dispatch('tool/searchTools');
 		},
 	},
 };
