@@ -44,6 +44,14 @@ export default {
 	data() {
 		return {
 			searchingIn: [0, 1, 2, 3, 4, 5],
+			equivalencies: {
+				0: 'name',
+				1: 'description',
+				2: 'topics',
+				3: 'operations',
+				4: 'publication_title',
+				5: 'publication_abstract',
+			},
 		};
 	},
 	watch: {
@@ -60,18 +68,10 @@ export default {
 	},
 	methods: {
 		searchingInCategories() {
-			const equivalencies = {
-				0: 'name',
-				1: 'description',
-				2: 'topics',
-				3: 'operations',
-				4: 'publication_title',
-				5: 'publication_abstract',
-			};
 			const searchingInCatgs = [];
-			for (const key in equivalencies) {
+			for (const key in this.equivalencies) {
 				if (this.searchingIn.includes(parseInt(key))) {
-					searchingInCatgs.push(equivalencies[key]);
+					searchingInCatgs.push(this.equivalencies[key]);
 				}
 			}
 			return searchingInCatgs;

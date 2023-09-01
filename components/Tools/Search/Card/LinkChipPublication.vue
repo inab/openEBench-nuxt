@@ -14,7 +14,6 @@
 				Publication
 			</v-chip>
 		</template>
-		<v-icon small class="pa-0">mdi-open-in-new</v-icon>
 		<span v-if="title" class="black--text text-caption font-weight-medium">
 			{{ title }}
 		</span>

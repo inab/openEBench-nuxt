@@ -14,7 +14,6 @@
 				{{ text }}
 			</v-chip>
 		</template>
-		<v-icon small class="pa-0">mdi-open-in-new</v-icon>
 		<span class="text-caption black--text"> {{ link }} </span>
 	</v-tooltip>
 </template>
