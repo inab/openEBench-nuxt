@@ -30,10 +30,11 @@
 					:href="item.uri"
 					target="_blank"
 				>
-					<v-icon small class="mr-1">mdi-label-multiple-outline</v-icon>
+					<v-icon small class="mr-1">mdi-label-multiple</v-icon>
 					{{ cleanString(item.term) }}
 				</v-chip>
 			</div>
+
 			<!-- OPERATIONS -->
 			<div v-if="operations.length > 0" justify="center" class="mt-1">
 				<v-chip
