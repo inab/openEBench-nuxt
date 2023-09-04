@@ -16,7 +16,7 @@
 				x-small
 				text
 				outlined
-				class="text-caption float-end mt-2"
+				class="float-end mt-2"
 				@click="displayAll = !displayAll"
 				><v-icon color="grey-darken-1" small
 					>mdi-chevron-double-down</v-icon
@@ -35,7 +35,7 @@
 					x-small
 					text
 					outlined
-					class="text-caption float-end mt-2"
+					class="float-end mt-2"
 					@click="displayAll = !displayAll"
 					><v-icon color="grey-darken-1" small
 						>mdi-chevron-double-up</v-icon
