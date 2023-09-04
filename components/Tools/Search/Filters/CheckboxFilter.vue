@@ -1,80 +1,56 @@
 <template>
-	<v-row :style="style" class="ma-1 pa-0 d-flex align-center">
-		<v-col cols="10" class="pa-0 ma-0 d-flex align-left flex-column">
-			<v-checkbox v-model="checkbox" class="pa-0 ma-0" hide-details dense>
-				<template #label>
-					<span
-						class="ma-0 pa-0 text-body-2 black--text primary--text"
-						:class="{ active: checkbox }"
-						>{{ label }}</span
-					>
-				</template>
-			</v-checkbox>
-		</v-col>
-		<v-col
-			cols="2"
-			class="pa-0 ma-0 pr-1 text-right d-flex align-right flex-column"
-		>
-			<span
-				class="ma-0 pa-0 text-body-2 primary--text"
-				:class="{ active: checkbox }"
-				>{{ numberWithCommas(count) }}</span
-			>
-		</v-col>
-	</v-row>
+	<div>
+		<StripeStats
+			v-for="(item, i) in items"
+			:key="i"
+			:label="item.label"
+			:count="item.count"
+			:percent="item.percent"
+			:active="active.includes(i)"
+			@update:active="updateActive(i)"
+		/>
+	</div>
 </template>
 <script>
+import StripeStats from './StripeStats.vue';
+
 export default {
 	name: 'CheckboxFilter',
+	components: {
+		StripeStats,
+	},
 	props: {
-		label: {
+		items: {
+			type: Array,
+			required: true,
+		},
+		property: {
 			type: String,
 			required: true,
 		},
-		count: {
-			type: Number,
-			required: true,
-		},
-		percent: {
-			type: Number,
-			required: true,
-		},
 	},
-	data: () => ({
-		checkbox: false,
-		height: 30,
-		emptyPercent: null,
-	}),
-	computed: {
-		style() {
-			return {
-				height: this.height + 'px',
-				background:
-					'linear-gradient(to right, white, white calc(' +
-					this.emptyPercent +
-					' * 100%) , #EAF1F7 calc(' +
-					this.emptyPercent +
-					' * 100%), #EAF1F7)',
-			};
-		},
-	},
-	mounted() {
-		this.emptyPercent = 1 - this.percent;
+	data() {
+		return {
+			active: [],
+		};
 	},
 	methods: {
-		numberWithCommas(x) {
-			return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+		updateActive(i) {
+			// add or remove index from active array
+			if (this.active.includes(i)) {
+				this.active.splice(this.active.indexOf(i), 1);
+			} else {
+				this.active.push(i);
+			}
+			// values are items from items array whose index is in active array
+			const payload = {
+				property: this.property,
+				values: this.active.map((i) => this.items[i].value),
+			};
+
+			this.$store.dispatch('tool/updateFilters', payload);
+			this.$store.dispatch('tool/searchTools');
 		},
 	},
 };
 </script>
-<style lang="scss" scoped>
-.active {
-	font-weight: bold;
-}
-
-::v-deep .v-input--selection-controls__input {
-	margin: 0 !important;
-	padding-right: 0 !important;
-}
-</style>

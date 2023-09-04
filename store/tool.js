@@ -23,31 +23,14 @@ export default {
 			EDAMTerms: [],
 			filters: {
 				// This object is used to filter the tools
-				source: [
-					'biotools',
-					'bioconda_recipes',
-					'bioconductor',
-					'galaxy',
-					'toolshed',
-					'github',
-					'sourceforge',
-					'bitbucket',
-				],
-				type: [
-					'cmd',
-					'app',
-					'web',
-					'lib',
-					'api',
-					'db',
-					'workflow',
-					'suite',
-					'other',
-				],
+				source: [],
+				type: [],
 				topics: [],
 				operation: [],
 				license: [],
 			},
+			stats: {},
+			totalTools: 0,
 		};
 	},
 	actions: {
@@ -67,12 +50,22 @@ export default {
 			commit('updateLoadingLoadMore', value);
 		},
 
+		updateFilters({ commit }, payload) {
+			// This function is called whenever the user clicks on a checkbox in Filters
+			// component to add/remove a filter.
+			// The payload is an object with the filter property and values.
+			commit('updateFilters', payload);
+		},
+
 		async initialSearch({ commit }, q) {
 			commit('updateLoadingInitialSearch', true);
 			const result = await this.$observatory.$get('/search?page=0&q=' + q);
 
 			commit('updateTools', result.tools);
 			commit('updateCounts', result.counts);
+			commit('updateStats', result.stats);
+			commit('updateTotalTools', result.total_tools);
+
 			commit('updateLoadingInitialSearch', false);
 		},
 
@@ -120,6 +113,7 @@ export default {
 			);
 
 			commit('updateTools', result.tools);
+			commit('updateTotalTools', result.total_tools);
 
 			commit('updateLoadingSearch', false);
 		},
@@ -141,7 +135,10 @@ export default {
 			);
 
 			const newTools = state.tools.concat(result.tools);
+
 			commit('updateTools', newTools);
+
+			commit('updateTotalTools', result.total_tools);
 		},
 
 		async getEDAMTerms({ commit }) {
@@ -152,6 +149,9 @@ export default {
 		},
 	},
 	mutations: {
+		updateFilters(state, payload) {
+			state.filters[payload.property] = payload.values;
+		},
 		updateToolsDisplayCards(state, value) {
 			state.toolsDisplayCards = value;
 		},
@@ -173,8 +173,14 @@ export default {
 		updateTools(state, value) {
 			state.tools = value;
 		},
+		updateStats(state, value) {
+			state.stats = value;
+		},
 		updateCounts(state, value) {
 			state.counts = value;
+		},
+		updateTotalTools(state, value) {
+			state.totalTools = value;
 		},
 		updateVisibleCategories(state, value) {
 			state.visibleCategories = value;
@@ -188,7 +194,9 @@ export default {
 		toolsDisplayCards: (state) => state.toolsDisplayCards,
 		loading: (state) => state.loading,
 		tools: (state) => state.tools,
+		stats: (state) => state.stats,
 		counts: (state) => state.counts,
+		totalTools: (state) => state.totalTools,
 		visibleCategories: (state) => state.visibleCategories,
 		EDAMFormats: (state) => state.EDAMTerms.format,
 		EDAMOperations: (state) => state.EDAMTerms.operation,

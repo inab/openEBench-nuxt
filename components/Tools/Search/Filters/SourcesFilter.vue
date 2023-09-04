@@ -4,48 +4,58 @@
 			<h3 class="text-overline mt-1">Sources</h3>
 		</v-expansion-panel-header>
 		<v-expansion-panel-content>
-			<v-btn-toggle
-				v-model="sources"
-				group
-				dense
-				multiple
-				tile
-				color="primary"
-				class="flex-wrap"
-			>
-				<v-btn
-					v-for="(item, i) in source_items"
-					:key="i"
-					@click="updateSources"
-				>
-					<span class="text-caption">{{ item }}</span>
-				</v-btn>
-			</v-btn-toggle>
+			<CheckboxFilterExpand :items="items" property="source" />
 		</v-expansion-panel-content>
 		<v-divider></v-divider>
 	</v-expansion-panel>
 </template>
 <script>
+import { mapState } from 'vuex';
+import CheckboxFilterExpand from './CheckboxFilterExpand.vue';
+
 export default {
 	name: 'SourcesFilter',
+	components: {
+		CheckboxFilterExpand,
+	},
 	data() {
 		return {
-			sources: [0, 1, 2, 3, 4, 5, 6, 7],
-			source_items: [
-				'bio.tools',
-				'bioconda',
-				'bioconductor',
-				'GalaxyEU',
-				'Toolshed',
-				'Github',
-				'Sourceforge',
-				'Bitbucket',
-			],
+			newItems: [],
+			labels: {
+				biotools: 'bio.tools',
+				bioconda: 'Bioconda',
+				bioconductor: 'Bioconductor',
+				galaxy: 'GalaxyEU',
+				toolshed: 'Toolshed',
+				github: 'Github',
+				sourceforge: 'Sourceforge',
+				bitbucket: 'Bitbucket',
+			},
 		};
 	},
+	computed: {
+		...mapState({
+			totalTools: (state) => state.tool.totalTools,
+			stats: (state) => state.tool.stats,
+		}),
+		items() {
+			const newItems = [];
+			for (const key in this.stats.source) {
+				newItems.push({
+					value: key,
+					label: this.labels[key],
+					count: this.stats.source[key],
+					percent: this.percentage(this.stats.source[key]),
+				});
+			}
+			// sort by count
+			newItems.sort((a, b) => b.count - a.count);
+			return newItems;
+		},
+	},
 	methods: {
-		updateSources(value) {
-			this.$store.dispatch('tool/updateToolsSources', value);
+		percentage(count) {
+			return count / this.totalTools;
 		},
 	},
 };
