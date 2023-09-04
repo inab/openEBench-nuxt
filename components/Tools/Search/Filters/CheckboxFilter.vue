@@ -4,7 +4,7 @@
 			<v-checkbox v-model="checkbox" class="pa-0 ma-0" hide-details dense>
 				<template #label>
 					<span
-						class="ma-0 pa-0 text-caption black--text primary--text"
+						class="ma-0 pa-0 text-body-2 black--text primary--text"
 						:class="{ active: checkbox }"
 						>{{ label }}</span
 					>
@@ -16,7 +16,7 @@
 			class="pa-0 ma-0 pr-1 text-right d-flex align-right flex-column"
 		>
 			<span
-				class="ma-0 pa-0 text-caption primary--text"
+				class="ma-0 pa-0 text-body-2 primary--text"
 				:class="{ active: checkbox }"
 				>{{ numberWithCommas(count) }}</span
 			>
