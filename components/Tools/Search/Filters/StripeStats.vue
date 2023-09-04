@@ -62,14 +62,15 @@ export default {
 	}),
 	computed: {
 		style() {
+			const emptyPercent = 1 - this.percent;
 			if (this.active) {
 				return {
 					height: this.height + 'px',
 					background:
 						'linear-gradient(to right, #ECECEC, #ECECEC calc(' +
-						this.emptyPercent +
+						emptyPercent +
 						' * 100%) , #EAF1F7 calc(' +
-						this.emptyPercent +
+						emptyPercent +
 						' * 100%), #EAF1F7)',
 				};
 			} else {
@@ -77,16 +78,13 @@ export default {
 					height: this.height + 'px',
 					background:
 						'linear-gradient(to right, white, white calc(' +
-						this.emptyPercent +
+						emptyPercent +
 						' * 100%) , #EAF1F7 calc(' +
-						this.emptyPercent +
+						emptyPercent +
 						' * 100%), #EAF1F7)',
 				};
 			}
 		},
-	},
-	mounted() {
-		this.emptyPercent = 1 - this.percent;
 	},
 	methods: {
 		numberWithCommas(x) {
