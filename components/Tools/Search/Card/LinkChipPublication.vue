@@ -11,7 +11,7 @@
 				v-on="on"
 			>
 				<v-icon small class="pa-1">{{ icon }}</v-icon>
-				Publication
+				{{ text }}
 			</v-chip>
 		</template>
 		<span v-if="title" class="black--text text-caption font-weight-medium">
@@ -54,6 +54,10 @@ export default {
 			required: false,
 		},
 		icon: {
+			type: String,
+			required: true,
+		},
+		text: {
 			type: String,
 			required: true,
 		},

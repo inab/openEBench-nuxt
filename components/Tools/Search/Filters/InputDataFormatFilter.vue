@@ -1,74 +1,56 @@
 <template>
 	<v-expansion-panel>
 		<v-expansion-panel-header>
-			<h3 class="text-overline mt-1">INPUT DATA</h3>
+			<h3 class="text-overline mt-1">Input data</h3>
 		</v-expansion-panel-header>
 		<v-expansion-panel-content>
-			<v-autocomplete
-				v-model="input_data_formats"
-				:items="EDAMFormats"
-				multiple
-				outlined
-				hint="Filter tools annotated with at least on of the selected input data formats."
-				persistent-hint
-				color="primary lighten-1"
-				label="Select"
-				item-text="value"
-				item-value="value"
-				class="text-body-2 ml-2"
-			>
-				<template #selection="data">
-					<v-chip
-						v-bind="data.attrs"
-						:input-value="data.selected"
-						close
-						label
-						color="#D2E0ED"
-						text-color="primary"
-						@click="data.select"
-						@click:close="remove(data.item)"
-					>
-						{{ data.item }}
-					</v-chip>
-				</template>
-				<template #item="data">
-					<template>
-						<v-list-item-content
-							class="text-body-2"
-							v-text="data.item"
-						></v-list-item-content>
-					</template>
-				</template>
-			</v-autocomplete>
+			<CheckboxFilterExpand :items="items" property="input" />
 		</v-expansion-panel-content>
 		<v-divider class="mt-0 mb-0"></v-divider>
 	</v-expansion-panel>
 </template>
 <script>
-import { mapGetters } from 'vuex';
+import { mapState } from 'vuex';
+import CheckboxFilterExpand from './CheckboxFilterExpand.vue';
+import { EDAMDict } from '~/static/dictionaries/EDAM.js';
 
 export default {
 	name: 'InputDataFormatFilter',
-	data() {
-		return {
-			input_data_formats: [],
-		};
+	components: {
+		CheckboxFilterExpand,
 	},
 	computed: {
-		...mapGetters({
-			EDAMFormats: 'tool/EDAMFormats',
+		...mapState({
+			totalTools: (state) => state.tool.totalTools,
+			stats: (state) => state.tool.stats,
 		}),
-	},
-	watch: {
-		topics: function (val) {
-			// 🚧 Write following functions in store/tool.js
-			this.$store.dispatch('tool/updateInputDataFilter', val);
-			this.$store.dispatch('tool/updateVisibleTools');
+		items() {
+			const newItems = [];
+			for (const key in this.stats.input) {
+				newItems.push({
+					value: key,
+					label: this.keyToLabel(key),
+					count: this.stats.input[key],
+					percent: this.percentage(this.stats.input[key]),
+				});
+			}
+			// Sort by count. Highest count first
+			newItems.sort((a, b) => b.count - a.count);
+			return newItems;
 		},
 	},
 	methods: {
-		remove(item) {
-			this.input_data_formats.splice(this.input_data_formats.indexOf(item), 1);
+		percentage(count) {
+			return count / this.totalTools;
+		},
+		keyToLabel(key) {
+			// Some keys are EDAM URIs, so we need to convert them to labels
+			// Some keys are free text, and are returned as they are
+			if (key.includes('http://edamontology.org/')) {
+				return EDAMDict(key);
+			} else {
+				return key;
+			}
 		},
 	},
 };

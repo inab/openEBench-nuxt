@@ -92,17 +92,24 @@
 					class="mr-1"
 				/>
 				<!-- PUBLICATIONS -->
+				<!-- Most recent publication. Chip with tooltip showing title,year and DOI -->
 				<LinkChipPublication
-					v-for="(item, i) in publications"
-					:key="i"
-					:doi="item.doi"
-					:pmcid="item.pmcid"
-					:pmid="item.pmid"
-					:title="item.title"
-					:year="item.year"
+					v-if="latestPublication"
+					:doi="latestPublication.doi"
+					:pmcid="latestPublication.pmcid"
+					:pmid="latestPublication.pmid"
+					:title="latestPublication.title"
+					:year="latestPublication.year"
 					icon="mdi-text-box-outline"
-					text="Publication"
+					:text="publications.length > 1 ? 'Latest Publication' : 'Publication'"
 					class="mr-1"
+				/>
+				<!-- Remaining publications. Go to -->
+				<LinkMorePublications
+					v-if="publications.length > 1"
+					:publications="publications.slice(1)"
+					:name="name"
+					icon="mdi-text-box-multiple-outline"
 				/>
 			</div>
 		</v-card-text>
@@ -110,6 +117,7 @@
 </template>
 <script>
 import ChipType from './ChipType.vue';
+import LinkMorePublications from './LinkMorePublications.vue';
 import LinkChipWImage from '~/components/Tools/Search/Card/LinkChipWImage.vue';
 import LinkChipWIcon from '~/components/Tools/Search/Card/LinkChipWIcon.vue';
 import LinkChipPublication from '~/components/Tools/Search/Card/LinkChipPublication.vue';
@@ -120,6 +128,7 @@ export default {
 		LinkChipWImage,
 		LinkChipWIcon,
 		LinkChipPublication,
+		LinkMorePublications,
 		ChipType,
 	},
 	props: {
@@ -179,6 +188,22 @@ export default {
 				},
 			],
 		};
+	},
+	computed: {
+		// return the latest publication
+		latestPublication() {
+			if (this.publications.length === 0) {
+				return null;
+			} else {
+				let latestPublication = this.publications[0];
+				for (const publication in this.publications) {
+					if (publication.year > latestPublication.year) {
+						latestPublication = publication;
+					}
+				}
+				return latestPublication;
+			}
+		},
 	},
 	methods: {
 		cleanString(str) {

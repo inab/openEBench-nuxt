@@ -1,7 +1,7 @@
 <template>
 	<v-row id="search-container" align="center" justify="center" class="mr-0">
 		<v-col cols="10" class="text-center mt-0 mb-0 pb-0">
-			<h3 class="text-h5 mt-8">Explore Tools in OpenEBench</h3>
+			<h3 class="text-h5 mt-8">Explore Software in OpenEBench</h3>
 		</v-col>
 		<v-col cols="5" class="mt-0 mb-5 pt-0">
 			<v-text-field

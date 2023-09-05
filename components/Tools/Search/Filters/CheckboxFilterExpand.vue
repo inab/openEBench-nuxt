@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<CheckboxFilter :items="items.slice(0, 4)" :property="property" />
+		<CheckboxFilter :items="items.slice(0, 5)" :property="property" />
 
 		<!--If more than 5 items, add "expand" btn and remaining items hiden until btn clicked -->
 		<div v-if="items.length > 5">
@@ -17,7 +17,7 @@
 			>
 
 			<div v-if="displayAll">
-				<CheckboxFilter :items="items.slice(4)" :property="property" />
+				<CheckboxFilter :items="items.slice(5)" :property="property" />
 
 				<v-btn
 					x-small
