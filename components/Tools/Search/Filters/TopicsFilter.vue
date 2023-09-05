@@ -1,74 +1,47 @@
 <template>
 	<v-expansion-panel>
 		<v-expansion-panel-header>
-			<h3 class="text-overline mt-1">TOPICS</h3>
+			<h3 class="text-overline mt-1">Topics</h3>
 		</v-expansion-panel-header>
 		<v-expansion-panel-content>
-			<v-autocomplete
-				v-model="topics"
-				:items="EDAMTopics"
-				multiple
-				outlined
-				hint="Filter tools annotated with at least one of the selected topics."
-				persistent-hint
-				color="primary lighten-1"
-				label="Select"
-				item-text="value"
-				item-value="value"
-				class="text-body-2 ml-2"
-			>
-				<template #selection="data">
-					<v-chip
-						v-bind="data.attrs"
-						:input-value="data.selected"
-						close
-						label
-						color="#D2E0ED"
-						text-color="primary"
-						@click="data.select"
-						@click:close="remove(data.item)"
-					>
-						{{ data.item }}
-					</v-chip>
-				</template>
-				<template #item="data">
-					<template>
-						<v-list-item-content
-							class="text-body-2"
-							v-text="data.item"
-						></v-list-item-content>
-					</template>
-				</template>
-			</v-autocomplete>
+			<CheckboxFilterExpand :items="items" property="topics" />
 		</v-expansion-panel-content>
 		<v-divider class="mt-0 mb-0"></v-divider>
 	</v-expansion-panel>
 </template>
 <script>
-import { mapGetters } from 'vuex';
+import { mapState } from 'vuex';
+import CheckboxFilterExpand from './CheckboxFilterExpand.vue';
+import { EDAMDict } from '~/static/dictionaries/EDAM.js';
 
 export default {
 	name: 'TopicsFilter',
-	data() {
-		return {
-			topics: [],
-		};
+	components: {
+		CheckboxFilterExpand,
 	},
 	computed: {
-		...mapGetters({
-			EDAMTopics: 'tool/EDAMTopics',
+		...mapState({
+			totalTools: (state) => state.tool.totalTools,
+			stats: (state) => state.tool.stats,
 		}),
-	},
-	watch: {
-		topics: function (val) {
-			// 🚧 Write following functions in store/tool.js
-			this.$store.dispatch('tool/updateTopicsFilter', val);
-			this.$store.dispatch('tool/updateVisibleTools', val);
+		items() {
+			const newItems = [];
+			for (const key in this.stats.topics) {
+				newItems.push({
+					value: key,
+					label: EDAMDict(key),
+					count: this.stats.topics[key],
+					percent: this.percentage(this.stats.topics[key]),
+				});
+			}
+			// sort by count
+			newItems.sort((a, b) => b.count - a.count);
+			return newItems;
 		},
 	},
 	methods: {
-		remove(item) {
-			this.topics.splice(this.topics.indexOf(item), 1);
+		percentage(count) {
+			return count / this.totalTools;
 		},
 	},
 };

@@ -1,7 +1,7 @@
 <template>
 	<v-expansion-panel>
 		<v-expansion-panel-header>
-			<h3 class="text-overline mt-1">Sources</h3>
+			<h3 class="text-overline mt-1">Source</h3>
 		</v-expansion-panel-header>
 		<v-expansion-panel-content>
 			<CheckboxFilterExpand :items="items" property="source" />
