@@ -18,40 +18,22 @@
 			</p>
 			<!-- TOPICS -->
 			<div v-if="topics.length > 0" justify="center" class="mt-1">
-				<v-chip
+				<LinkChipTopicOperation
 					v-for="(item, i) in topics"
 					:key="i"
-					label
-					small
-					light
-					color="grey lighten-4"
-					class="mr-1 mt-1"
-					link
-					:href="item.uri"
-					target="_blank"
-				>
-					<v-icon small class="mr-1">mdi-label-multiple</v-icon>
-					{{ cleanString(item.term) }}
-				</v-chip>
+					:uri="item.uri"
+					:text="cleanString(item.term)"
+				/>
 			</div>
 
 			<!-- OPERATIONS -->
 			<div v-if="operations.length > 0" justify="center" class="mt-1">
-				<v-chip
+				<LinkChipTopicOperation
 					v-for="(item, i) in operations"
 					:key="i"
-					label
-					small
-					light
-					link
-					:href="item.uri"
-					target="_blank"
-					color="grey lighten-4"
-					class="mr-1 mt-1"
-				>
-					<v-icon small class="mr-1">mdi-cog</v-icon>
-					{{ cleanString(item.term) }}
-				</v-chip>
+					:uri="item.uri"
+					:text="cleanString(item.term)"
+				/>
 			</div>
 			<!-- LICENSE -->
 			<div v-if="license.length > 0" justify="center" class="mt-2">
@@ -92,7 +74,7 @@
 					class="mr-1"
 				/>
 				<!-- PUBLICATIONS -->
-				<!-- Most recent publication. Chip with tooltip showing title,year and DOI -->
+				<!-- Latest publication. Chip with tooltip showing title,year and DOI -->
 				<LinkChipPublication
 					v-if="latestPublication"
 					:doi="latestPublication.doi"
@@ -118,6 +100,7 @@
 <script>
 import ChipType from './ChipType.vue';
 import LinkMorePublications from './LinkMorePublications.vue';
+import LinkChipTopicOperation from './LinkChipTopicOperation.vue';
 import LinkChipWImage from '~/components/Tools/Search/Card/LinkChipWImage.vue';
 import LinkChipWIcon from '~/components/Tools/Search/Card/LinkChipWIcon.vue';
 import LinkChipPublication from '~/components/Tools/Search/Card/LinkChipPublication.vue';
@@ -129,6 +112,7 @@ export default {
 		LinkChipWIcon,
 		LinkChipPublication,
 		LinkMorePublications,
+		LinkChipTopicOperation,
 		ChipType,
 	},
 	props: {
