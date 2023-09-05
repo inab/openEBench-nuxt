@@ -17,7 +17,7 @@
 			>
 
 			<div v-if="displayAll">
-				<CheckboxFilter :items="items.slice(4, -1)" :property="property" />
+				<CheckboxFilter :items="items.slice(4)" :property="property" />
 
 				<v-btn
 					x-small
