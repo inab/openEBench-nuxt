@@ -30,6 +30,12 @@ export default {
 				workflow: 'Workflow',
 				sparql: 'SPARQL Endpoint',
 				unknown: 'Unknown',
+				undefined: 'Undefined',
+				db: 'Database',
+				script: 'Script',
+				suite: 'Suite',
+				ontology: 'Ontology',
+				soap: 'SOAP API',
 			},
 		};
 	},
