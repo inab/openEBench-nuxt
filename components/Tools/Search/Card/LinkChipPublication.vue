@@ -35,11 +35,11 @@ export default {
 	props: {
 		title: {
 			type: String,
-			required: true,
+			required: false,
 		},
 		year: {
 			type: Number,
-			required: true,
+			required: false,
 		},
 		doi: {
 			type: String,

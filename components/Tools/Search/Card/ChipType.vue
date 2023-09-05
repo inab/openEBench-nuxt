@@ -1,13 +1,5 @@
 <template>
-	<v-chip
-		small
-		label
-		text-color="#F48F43"
-		color="#F48F43"
-		outlined
-		v-bind="attrs"
-		v-on="on"
-	>
+	<v-chip small label text-color="#F48F43" color="#F48F43" outlined>
 		{{ descriptions[type] }}
 	</v-chip>
 </template>
