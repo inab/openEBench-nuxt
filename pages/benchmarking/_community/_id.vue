@@ -50,6 +50,7 @@
 					The menu button above the diagram can be used to switch between the
 					different classification methods / visualization modes (Square
 					Quartiles; Diagonal Quartiles, and k-means Clustering).
+					{{ datasets[0].datalink.inline_data.visualization.type }}
 				</v-alert>
 			</div>
 		</div>

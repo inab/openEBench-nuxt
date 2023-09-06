@@ -3,16 +3,16 @@
 </template>
 
 <script>
-const loadBoxplotVisualization = (data) => {
+export function loadBoxplotVisualization( data ) {
 	if (data.data.length > 0) {
 		const yaxis = data.data[0].metric_id;
-		const cx = data.data.map((x) => x.name);
-		const cq1 = data.data.map((x) => x.q1);
-		const cq3 = data.data.map((x) => x.q3);
-		const cmn = data.data.map((x) => x.mean);
-		const cmd = data.data.map((x) => x.median);
-		const lf = data.data.map((x) => x.lowerfence);
-		const uf = data.data.map((x) => x.upperfence);
+		const cx  = data.data.map( ( x ) => x.name );
+		const cq1 = data.data.map( ( x ) => x.q1 );
+		const cq3 = data.data.map( ( x ) => x.q3 );
+		const cmn = data.data.map( ( x ) => x.mean );
+		const cmd = data.data.map( ( x ) => x.median );
+		const lf  = data.data.map( ( x ) => x.lowerfence );
+		const uf  = data.data.map( ( x ) => x.upperfence );
 		Plotly.newPlot(
 			'chart-box-plot',
 			[
@@ -57,7 +57,7 @@ export default {
 
 		loadVisualization(data) {
 			try {
-				loadBoxplotVisualization(data);
+				loadBoxplotVisualization( data );
 			} catch (error) {}
 		},
 	},
