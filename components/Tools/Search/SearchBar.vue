@@ -17,7 +17,7 @@
 		</v-row>
 		<v-row justify="center" class="mt-0 pt-0">
 			<v-col cols="10" class="text-center mt-0 mb-0 pb-0 pt-0">
-				<h5 class="text-subtitle-1 mt-0">Explore Tools in OpenEBench</h5>
+				<h5 class="text-subtitle-1 mt-0">Explore Software in OpenEBench</h5>
 			</v-col>
 			<v-col cols="5" class="d-flex align-center mt-0 pt-0">
 				<v-text-field

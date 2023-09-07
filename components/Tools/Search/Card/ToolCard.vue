@@ -14,7 +14,7 @@
 		<v-card-text class="mb-0 mt-0 pt-1">
 			<!-- DESCRIPTION -->
 			<p class="text-caption black--text mb-2">
-				<span v-html="description"></span>
+				<span>{{ description }}</span>
 			</p>
 			<!-- TOPICS -->
 			<div v-if="topics.length > 0" justify="center" class="mt-1">
@@ -23,6 +23,7 @@
 					:key="i"
 					:uri="item.uri"
 					:text="cleanString(item.term)"
+					icon="mdi-label-multiple"
 				/>
 			</div>
 
@@ -33,6 +34,7 @@
 					:key="i"
 					:uri="item.uri"
 					:text="cleanString(item.term)"
+					icon="mdi-cog"
 				/>
 			</div>
 			<!-- LICENSE -->
@@ -57,7 +59,7 @@
 			<div justify="center" class="mt-2">
 				<!-- LINKS -->
 				<LinkChipWImage
-					v-for="[key, value] in Object.entries(sources_labels)"
+					v-for="[key, value] in Object.entries(sourcesLabels)"
 					:key="key"
 					:link="value"
 					:type="key"
@@ -140,7 +142,7 @@ export default {
 			type: Array,
 			required: true,
 		},
-		sources_labels: {
+		sourcesLabels: {
 			type: Object,
 			required: true,
 		},
@@ -155,6 +157,7 @@ export default {
 		webpage: {
 			type: String,
 			required: false,
+			default: '',
 		},
 	},
 	data() {

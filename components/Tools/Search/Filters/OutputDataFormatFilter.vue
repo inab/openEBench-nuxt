@@ -28,7 +28,7 @@ export default {
 			const newItems = [];
 			for (const key in this.stats.output) {
 				newItems.push({
-					value: key,
+					value: this.keyToLabel(key),
 					label: this.keyToLabel(key),
 					count: this.stats.output[key],
 					percent: this.percentage(this.stats.output[key]),

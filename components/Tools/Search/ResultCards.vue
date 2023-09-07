@@ -6,7 +6,7 @@
 		</v-row>
 		<v-row v-if="loading.search" justify="center" class="mt-5">
 			<v-col v-for="n in 9" :key="n" cols="11">
-				<v-skeleton-loader v-bind="attrs" type="article"></v-skeleton-loader>
+				<v-skeleton-loader type="article"></v-skeleton-loader>
 			</v-col>
 		</v-row>
 		<v-row v-if="visibleTools.length > 0">
@@ -25,7 +25,7 @@
 					:type="tool.type"
 					:topics="tool.topics"
 					:operations="tool.operations"
-					:sources_labels="tool.sources_labels"
+					:sources-labels="tool.sources_labels"
 					:publications="tool.publication"
 					:license="tool.license"
 					:webpage="tool.webpage[0]"

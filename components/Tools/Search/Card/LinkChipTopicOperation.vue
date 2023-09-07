@@ -13,7 +13,7 @@
 				v-bind="attrs"
 				v-on="on"
 			>
-				<v-icon small class="mr-1">mdi-label-multiple</v-icon>
+				<v-icon small class="mr-1">{{ icon }}</v-icon>
 				{{ text }}
 			</v-chip>
 		</template>
@@ -33,6 +33,11 @@ export default {
 		text: {
 			type: String,
 			required: true,
+		},
+		icon: {
+			type: String,
+			required: false,
+			default: 'mdi-label-multiple',
 		},
 	},
 };
