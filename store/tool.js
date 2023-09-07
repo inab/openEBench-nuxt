@@ -28,6 +28,9 @@ export default {
 				topics: [],
 				operation: [],
 				license: [],
+				tags: [],
+				inputFormat: [],
+				outputFormat: [],
 			},
 			stats: {},
 			totalTools: 0,
@@ -106,6 +109,59 @@ export default {
 				query = query.slice(0, -1);
 			}
 
+			// 'License' Filters
+			if (state.filters.license.length > 0) {
+				query += '&license=';
+				for (const license of state.filters.license) {
+					query += license + ',';
+				}
+				query = query.slice(0, -1);
+			}
+			// 'Tags' Filters
+			if (state.filters.tags.length > 0) {
+				query += '&tags=';
+				for (const tag of state.filters.tags) {
+					query += tag + ',';
+				}
+				query = query.slice(0, -1);
+			}
+
+			// 'Topics' Filters
+			if (state.filters.topics.length > 0) {
+				query += '&topics=';
+				for (const topic of state.filters.topics) {
+					query += topic + ',';
+				}
+				query = query.slice(0, -1);
+			}
+
+			// 'Operation' Filters
+			if (state.filters.operation.length > 0) {
+				query += '&operation=';
+				for (const operation of state.filters.operation) {
+					query += operation + ',';
+				}
+				query = query.slice(0, -1);
+			}
+
+			// 'Input Format' Filters
+			if (state.filters.inputFormat.length > 0) {
+				query += '&input_format=';
+				for (const inputFormat of state.filters.inputFormat) {
+					query += inputFormat + ',';
+				}
+				query = query.slice(0, -1);
+			}
+
+			// 'Output Format' Filters
+			if (state.filters.outputFormat.length > 0) {
+				query += '&output_format=';
+				for (const outputFormat of state.filters.outputFormat) {
+					query += outputFormat + ',';
+				}
+				query = query.slice(0, -1);
+			}
+
 			commit('updateQuery', query);
 
 			const result = await this.$observatory.$get(
@@ -113,7 +169,7 @@ export default {
 			);
 
 			commit('updateTools', result.tools);
-			commit('updateTotalTools', result.total_tools);
+			// commit('updateTotalTools', result.total_tools);
 
 			commit('updateLoadingSearch', false);
 		},

@@ -36,10 +36,12 @@ export default {
 		title: {
 			type: String,
 			required: false,
+			default: '',
 		},
 		year: {
 			type: Number,
 			required: false,
+			default: 0,
 		},
 		doi: {
 			type: String,
@@ -48,10 +50,12 @@ export default {
 		pmcid: {
 			type: String,
 			required: false,
+			default: '',
 		},
 		pmid: {
 			type: String,
 			required: false,
+			default: '',
 		},
 		icon: {
 			type: String,
