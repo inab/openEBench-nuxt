@@ -19,13 +19,23 @@
 					</v-list-item-content>
 				</v-list-item>
 				<v-list-item
-					v-for="(item, index) in subMenuEntries"
+					v-for="(item, index) in subMenuEntriesDocs"
 					:key="`sub` + index"
 					:to="item.to"
 					:href="item.href"
 					:target="item.external ? '_blank' : ''"
 				>
-					<v-list-item-title>{{ item.title }}</v-list-item-title>
+					<v-list-item-title>{{ item.title_hide }}</v-list-item-title>
+					<v-icon v-if="item.external" right small>mdi-open-in-new</v-icon>
+				</v-list-item>
+				<v-list-item
+					v-for="(item, index) in subMenuEntriesAbout"
+					:key="`sub` + index"
+					:to="item.to"
+					:href="item.href"
+					:target="item.external ? '_blank' : ''"
+				>
+					<v-list-item-title>{{ item.title_hide }}</v-list-item-title>
 					<v-icon v-if="item.external" right small>mdi-open-in-new</v-icon>
 				</v-list-item>
 				<v-list-item :href="vreHref" target="_blank">
@@ -67,12 +77,12 @@
 				<template #activator="{ on, attrs }">
 					<v-btn v-bind="attrs" text v-on="on">
 						<v-icon>mdi-chevron-down</v-icon>
-						More
+						Docs
 					</v-btn>
 				</template>
 				<v-list>
 					<v-list-item
-						v-for="(item, index) in subMenuEntries"
+						v-for="(item, index) in subMenuEntriesDocs"
 						:key="`sub` + index"
 						:to="item.to"
 						:href="item.href"
@@ -91,6 +101,35 @@
 					</v-list-item>
 				</v-list>
 			</v-menu>
+			<v-menu v-if="$vuetify.breakpoint.mdAndUp" left offset-y>
+				<template #activator="{ on, attrs }">
+					<v-btn v-bind="attrs" text v-on="on">
+						<v-icon>mdi-chevron-down</v-icon>
+						About
+					</v-btn>
+				</template>
+				<v-list>
+					<v-list-item
+						v-for="(item, index) in subMenuEntriesAbout"
+						:key="`sub` + index"
+						:to="item.to"
+						:href="item.href"
+						:target="item.external ? '_blank' : ''"
+					>
+						<v-list-item-title>{{ item.title }}</v-list-item-title>
+						<v-icon v-if="item.external" right small>mdi-open-in-new</v-icon>
+					</v-list-item>
+					<v-list-item
+						v-if="$vuetify.breakpoint.mdAndDown"
+						:href="vreHref"
+						target="_blank"
+					>
+						<v-list-item-title>Benchmark your Tool</v-list-item-title>
+						<v-icon right small>mdi-open-in-new</v-icon>
+					</v-list-item>
+				</v-list>
+			</v-menu>
+
 			<v-spacer />
 			<v-btn
 				v-if="$vuetify.breakpoint.lgAndUp"
@@ -136,7 +175,8 @@
 <script>
 import CookieLaw from 'vue-cookie-law';
 import menuEntries from './menuEntries';
-import subMenuEntries from './subMenuEntries';
+import subMenuEntriesDocs from './subMenuEntriesDocs';
+import subMenuEntriesAbout from './subMenuEntriesAbout';
 import opebLogo from '~/static/images/opeb_logo.gif';
 
 export default {
@@ -153,7 +193,8 @@ export default {
 			openNavMobile: null,
 			fixed: false,
 			menuEntries,
-			subMenuEntries,
+			subMenuEntriesDocs,
+			subMenuEntriesAbout,
 			opebLogo,
 		};
 	},

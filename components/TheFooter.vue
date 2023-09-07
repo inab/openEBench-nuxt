@@ -112,7 +112,7 @@
 import logo from '~/static/images/opeb_logo_white_minimal.png';
 import euFlag from '~/static/images/eu.svg';
 import menuEntries from '~/components/Header/menuEntries';
-import subMenuEntries from '~/components/Header/subMenuEntries';
+import subMenuEntries from '~/components/Header/subMenuEntriesDocs';
 
 export default {
 	data: () => ({

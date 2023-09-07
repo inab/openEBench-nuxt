@@ -55,19 +55,13 @@ exports[`TheFooter should match snapshot 1`] = `
               Project
             </h6>
             <ul>
-              <li><a dark=\\"\\" class=\\"white--text\\">
-                  About
-                </a>
-                <!---->
-                <!---->
-              </li>
               <li>
                 <!----> <a href=\\"https://docs.openebench.bsc.es/\\" target=\\"_blank\\" dark=\\"\\" class=\\"white--text\\">
-                  Github Docs
+                  Github
                 </a> <i aria-hidden=\\"true\\" class=\\"v-icon notranslate v-icon--right mdi mdi-open-in-new theme--dark\\" style=\\"font-size: 16px;\\"></i></li>
               <li>
                 <!----> <a href=\\"https://openebench.readthedocs.io/en/latest/\\" target=\\"_blank\\" dark=\\"\\" class=\\"white--text\\">
-                  Project Docs
+                  Project
                 </a> <i aria-hidden=\\"true\\" class=\\"v-icon notranslate v-icon--right mdi mdi-open-in-new theme--dark\\" style=\\"font-size: 16px;\\"></i></li>
             </ul>
           </div>

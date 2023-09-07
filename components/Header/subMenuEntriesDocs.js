@@ -1,20 +1,18 @@
 // Displayed in Header and Footer
 
-const subMenuEntries = [
+const subMenuEntriesDocs = [
 	{
-		title: 'About',
-		to: '/about',
-	},
-	{
-		title: 'Github Docs',
+		title: 'Github',
+		title_hide: 'Github Docs',
 		href: 'https://docs.openebench.bsc.es/',
 		external: true,
 	},
 	{
-		title: 'Project Docs',
+		title: 'Project',
+		title_hide: 'Project Docs',
 		href: 'https://openebench.readthedocs.io/en/latest/',
 		external: true,
 	},
 ];
 
-export default subMenuEntries;
+export default subMenuEntriesDocs;
