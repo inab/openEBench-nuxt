@@ -59,8 +59,7 @@ export default {
 				const id = dataset._id;
 				// TODO remove if statement, once more visualizations are consuming the widget endpoint
 				const response =
-					dataset.datalink.inline_data.visualization.type === 'bar-plot' ||
-					dataset.datalink.inline_data.visualization.type === 'box-plot'
+					dataset.datalink.inline_data.visualization.type === 'bar-plot'
 						? await this.$graphql
 								.$get(
 									`/widget/${dataset.datalink.inline_data.visualization.type}/${dataset._id}`

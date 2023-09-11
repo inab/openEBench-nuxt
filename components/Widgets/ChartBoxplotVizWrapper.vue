@@ -3,7 +3,7 @@
 </template>
 
 <script>
-export function loadBoxplotVisualization(data) {
+const loadBoxplotVisualization = (data) => {
 	if (data.data.length > 0) {
 		const yaxis = data.data[0].metric_id;
 		const cx = data.data.map((x) => x.name);
@@ -33,7 +33,7 @@ export function loadBoxplotVisualization(data) {
 			}
 		);
 	}
-}
+};
 
 export default {
 	props: {
@@ -47,10 +47,12 @@ export default {
 	},
 	methods: {
 		async getData() {
-			const apiUrl = this.$config
-				? this.$config.SCIENTIFIC_SERVICE_URL + '/widget/box-plot'
-				: 'https://openebench.bsc.es/api/scientific/widget/box-plot/';
-			return await this.$axios.get(apiUrl + this.id + '?log2=true');
+			// OEBD0100000013
+			return await this.$axios.get(
+				'https://openebench.bsc.es/api/scientific/widget/box-plot/' +
+					this.id +
+					'?log2=true'
+			);
 		},
 
 		loadVisualization(data) {
