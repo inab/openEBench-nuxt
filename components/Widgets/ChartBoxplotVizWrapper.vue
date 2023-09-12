@@ -47,12 +47,10 @@ export default {
 	},
 	methods: {
 		async getData() {
-			// OEBD0100000013
-			return await this.$axios.get(
-				'https://openebench.bsc.es/api/scientific/widget/box-plot/' +
-					this.id +
-					'?log2=true'
-			);
+			const apiUrl = this.$config
+				? this.$config.SCIENTIFIC_SERVICE_URL + '/widget/box-plot/'
+				: 'https://openebench.bsc.es/api/scientific/widget/box-plot/';
+			return await this.$axios.get(apiUrl + this.id + '?log2=true');
 		},
 
 		loadVisualization(data) {
@@ -63,14 +61,3 @@ export default {
 	},
 };
 </script>
-
-<style lang="scss">
-.benchmarkingTable_scatter {
-	background-color: #fff;
-	width: 28vw;
-}
-
-.benchmarkingSVG {
-	width: 69vw !important;
-}
-</style>
