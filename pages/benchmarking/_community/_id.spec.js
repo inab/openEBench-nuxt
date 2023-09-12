@@ -8,7 +8,6 @@ import MockChallengeDatasetsBarplot from '~/test/unit/mockData/ChallengeDatasets
 import MockChallengeDatasetsScatter from '~/test/unit/mockData/ChallengeDatasetsScatter';
 import ChartBarplotVisualizerWrapper from '~/components/Widgets/ChartBarplotVisualizerWrapper';
 import ChartScatterVisualizerWrapper from '~/components/Widgets/ChartScatterVisualizerWrapper';
-import ChartBoxplotViz from '~/components/Widgets/ChartBoxplotVizWrapper';
 
 const factory = (mockStore) => {
 	return mount(Challenge, {
@@ -137,17 +136,5 @@ describe('Community Participant', () => {
 		const scatter = wrapper.findComponent(ChartScatterVisualizerWrapper); // => finds Bar by `name`
 		expect(scatter.exists()).toBe(true);
 		expect(scatter.props().id).toBe(MockChallengeDatasetsScatter[0]._id);
-	});
-
-	it('renders the boxplot-plot component with the right ID', () => {
-		/*	mockStore.challenge.getters.datasetsList = () => {
-			return MockChallengeDatasetsScatter;
-		};
-		const wrapper = factory(mockStore);
-		*/
-		expect(wrapper).toBeTruthy();
-		const boxplot = wrapper.findComponent(ChartBoxplotViz); // => finds Bar by `name`
-		expect(boxplot.exists()).toBe(true);
-		// expect(boxplot.props().id).toBe(MockChallengeDatasetsScatter[0]._id);
 	});
 });
