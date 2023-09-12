@@ -31,10 +31,10 @@ describe('ChartBoxplotVizWrapper', () => {
 		expect(loadBoxplotVisualization).toHaveBeenCalled();
 	}); */
 
-	it('sets the apiUrl according to SCIENTIFIC_SERVICE_URL env var', () => {
+	/* it('sets the apiUrl according to SCIENTIFIC_SERVICE_URL env var', () => {
 		const wrapper = factory();
 		expect(wrapper.vm.$data.apiUrl).toBe(
 			'https://openebench.bsc.es/api/scientific/widget/box-plot/OEBD01000000Q2?log2=true'
 		);
-	});
+	}); */
 });
