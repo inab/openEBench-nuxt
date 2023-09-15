@@ -1,8 +1,25 @@
 <template>
 	<div>
-		<CheckboxFilter :items="items.slice(0, 5)" :property="property" />
+		<!--When list expanded, show btn to collapse-->
+		<div v-if="displayAll" id="upper-collapse-btn">
+			<v-btn
+				x-small
+				text
+				outlined
+				class="float-end mt-2 mb-2"
+				@click="displayAll = !displayAll"
+				><v-icon color="grey-darken-1" small
+					>mdi-chevron-double-up</v-icon
+				></v-btn
+			>
+		</div>
+
+		<div>
+			<CheckboxFilter :items="items.slice(0, 5)" :property="property" />
+		</div>
 
 		<!--If more than 5 items, add "expand" btn and remaining items hiden until btn clicked -->
+
 		<div v-if="items.length > 5">
 			<v-btn
 				v-if="!displayAll"
@@ -58,3 +75,9 @@ export default {
 	},
 };
 </script>
+<style scoped>
+#upper-collapse-btn {
+	display: block;
+	clear: both;
+}
+</style>
