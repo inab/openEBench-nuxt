@@ -63,27 +63,16 @@ export default {
 	computed: {
 		style() {
 			const emptyPercent = 1 - this.percent;
-			if (this.active) {
-				return {
-					height: this.height + 'px',
-					background:
-						'linear-gradient(to right, #ECECEC, #ECECEC calc(' +
-						emptyPercent +
-						' * 100%) , #EAF1F7 calc(' +
-						emptyPercent +
-						' * 100%), #EAF1F7)',
-				};
-			} else {
-				return {
-					height: this.height + 'px',
-					background:
-						'linear-gradient(to right, white, white calc(' +
-						emptyPercent +
-						' * 100%) , #EAF1F7 calc(' +
-						emptyPercent +
-						' * 100%), #EAF1F7)',
-				};
-			}
+			return {
+				height: this.height + 'px',
+				width: '100%',
+				background:
+					'linear-gradient(to right, white, white calc(' +
+					emptyPercent +
+					' * 100%) , #EAF1F7 calc(' +
+					emptyPercent +
+					' * 100%), #EAF1F7)',
+			};
 		},
 	},
 	methods: {

@@ -194,6 +194,9 @@ export default {
 	},
 	methods: {
 		cleanString(str) {
+			if (!str) {
+				return '';
+			}
 			// remove " at the beginning of the string
 			if (str.charAt(0) === '"') {
 				str = str.substr(1);
