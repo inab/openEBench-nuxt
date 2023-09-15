@@ -6,7 +6,7 @@
 				color="grey"
 				elevation="0"
 				text
-				class="ml-2"
+				class="ml-2 mb-2"
 				@click="filterRestore()"
 			>
 				<v-icon small class="mr-1">mdi-restore</v-icon>

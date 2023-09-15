@@ -14,7 +14,16 @@
 		<v-card-text class="mb-0 mt-0 pt-1">
 			<!-- DESCRIPTION -->
 			<p class="text-caption black--text mb-2">
-				<span>{{ description }}</span>
+				<span v-if="description.length > 300"
+					>{{ cutDescription(description)
+					}}<a
+						v-if="descriptionCollapsed"
+						class="text-decoration-underline"
+						@click="extendDescription()"
+						>more</a
+					>
+				</span>
+				<span v-else>{{ description }}</span>
 			</p>
 			<!-- TOPICS -->
 			<div v-if="topics.length > 0" justify="center" class="mt-1">
@@ -174,6 +183,7 @@ export default {
 					icon: 'mdi-file-outline',
 				},
 			],
+			descriptionCollapsed: true,
 		};
 	},
 	computed: {
@@ -193,6 +203,16 @@ export default {
 		},
 	},
 	methods: {
+		extendDescription() {
+			this.descriptionCollapsed = !this.descriptionCollapsed;
+		},
+		cutDescription(description) {
+			if (this.descriptionCollapsed === true) {
+				return description.substring(0, 300) + '... ';
+			} else {
+				return description;
+			}
+		},
 		cleanString(str) {
 			if (!str) {
 				return '';
