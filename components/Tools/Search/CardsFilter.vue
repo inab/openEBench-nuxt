@@ -1,6 +1,17 @@
 <template>
-	<v-row justify="start" class="ml-5">
+	<v-row justify="start" class="ml-5 mt-2">
 		<v-col cols="12">
+			<v-btn
+				small
+				color="grey"
+				elevation="0"
+				text
+				class="ml-2"
+				@click="filterRestore()"
+			>
+				<v-icon small class="mr-1">mdi-restore</v-icon>
+				Restore filters
+			</v-btn>
 			<v-divider class="mt-3 mb-0"></v-divider>
 			<v-expansion-panels v-model="expanded" accordion multiple flat>
 				<!--ViewSelector /-->
@@ -14,11 +25,6 @@
 				<OutputDataFormatFilter />
 				<CollectionFilter />
 			</v-expansion-panels>
-		</v-col>
-		<v-col cols="12" class="d-flex align-end flex-column">
-			<v-btn elevation="0" color="primary" class="mr-2" @click="filterTools">
-				Filter
-			</v-btn>
 		</v-col>
 	</v-row>
 </template>
@@ -53,9 +59,9 @@ export default {
 		this.$store.dispatch('tool/getEDAMTerms');
 	},
 	methods: {
-		filterTools() {
-			// 🚧 TODO: build URL and send request to API
-			this.$store.dispatch('tool/searchTools');
+		filterRestore() {
+			this.$store.dispatch('tool/restoreFilters');
+			this.$store.dispatch('tool/initialSearch', this.$route.query.q);
 		},
 	},
 };

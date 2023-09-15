@@ -60,6 +60,10 @@ export default {
 			commit('updateFilters', payload);
 		},
 
+		restoreFilters({ commit }) {
+			commit('restoreFilters');
+		},
+
 		async initialSearch({ commit }, q) {
 			commit('updateLoadingInitialSearch', true);
 			const result = await this.$observatory.$get('/search?page=0&q=' + q);
@@ -205,6 +209,19 @@ export default {
 		},
 	},
 	mutations: {
+		restoreFilters(state) {
+			state.filters = {
+				// This object is used to filter the tools
+				source: [],
+				type: [],
+				topics: [],
+				operation: [],
+				license: [],
+				tags: [],
+				inputFormat: [],
+				outputFormat: [],
+			};
+		},
 		updateFilters(state, payload) {
 			state.filters[payload.property] = payload.values;
 		},
@@ -253,6 +270,7 @@ export default {
 		stats: (state) => state.stats,
 		counts: (state) => state.counts,
 		totalTools: (state) => state.totalTools,
+		filters: (state) => state.filters,
 		visibleCategories: (state) => state.visibleCategories,
 		EDAMFormats: (state) => state.EDAMTerms.format,
 		EDAMOperations: (state) => state.EDAMTerms.operation,

@@ -12,6 +12,7 @@
 	</div>
 </template>
 <script>
+import { mapGetters } from 'vuex';
 import StripeStats from './StripeStats.vue';
 
 export default {
@@ -29,10 +30,21 @@ export default {
 			required: true,
 		},
 	},
-	data() {
-		return {
-			active: [],
-		};
+	computed: {
+		...mapGetters({
+			filters: 'tool/filters',
+		}),
+
+		active() {
+			// index of items whose value is in filters property proterty
+			const active = [];
+			for (let i = 0; i < this.items.length; i++) {
+				if (this.filters[this.property].includes(this.items[i].value)) {
+					active.push(i);
+				}
+			}
+			return active;
+		},
 	},
 	methods: {
 		updateActive(i) {
