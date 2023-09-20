@@ -11,8 +11,10 @@ export default function ({ $axios, $config: { OBSERVATORY_API_URL } }, inject) {
 	// Set baseURL to something different
 	observatory.setBaseURL(
 		process.env.NODE_ENV !== 'production'
-			? 'http://localhost:3500/'
+			? 'http://localhost:3500'
 			: OBSERVATORY_API_URL
+		// ? 'https://e096-84-88-188-229.ngrok-free.app'
+		//	: 'https://e096-84-88-188-229.ngrok-free.app'
 	);
 
 	// Inject to context as $api

@@ -66,7 +66,11 @@ export default {
 
 		async initialSearch({ commit }, q) {
 			commit('updateLoadingInitialSearch', true);
-			const result = await this.$observatory.$get('/search?page=0&q=' + q);
+			const result = await this.$observatory.$get('/search?page=0&q=' + q, {
+				headers: {
+					'ngrok-skip-browser-warning': '69420',
+				},
+			});
 
 			commit('updateTools', result.tools);
 			commit('updateCounts', result.counts);
@@ -191,7 +195,12 @@ export default {
 			// This function loads more tools from the API
 			const q = state.searchedTerm;
 			const result = await this.$observatory.$get(
-				'/search?page=' + page + '&q=' + q + state.query
+				'/search?page=' + page + '&q=' + q + state.query,
+				{
+					headers: {
+						'ngrok-skip-browser-warning': '69420',
+					},
+				}
 			);
 
 			const newTools = state.tools.concat(result.tools);
