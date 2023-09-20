@@ -34,6 +34,8 @@ export default {
 				db: 'Database',
 				ontology: 'Ontology',
 				other: 'Other',
+				plugin: 'Plugin',
+				workbench: 'Workbench',
 			},
 		};
 	},
