@@ -4,7 +4,7 @@
 			<h3 class="text-overline mt-1">Output data</h3>
 		</v-expansion-panel-header>
 		<v-expansion-panel-content>
-			<CheckboxFilterExpand :items="items" property="output" />
+			<CheckboxFilterExpand :items="items" property="outputFormat" />
 		</v-expansion-panel-content>
 		<v-divider class="mt-0 mb-0"></v-divider>
 	</v-expansion-panel>
