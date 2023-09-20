@@ -1,11 +1,11 @@
 <template>
 	<div>
-		<!--When list expanded, show btn to collapse-->
-		<div v-if="displayAll" id="upper-collapse-btn">
+		<!--When list expanded, show btn to collapse at top-->
+		<div v-if="displayAll && items.length > 20" id="upper-collapse-btn">
 			<v-btn
 				x-small
-				text
-				outlined
+				color="grey lighten-4"
+				elevation="0"
 				class="float-end mt-2 mb-2"
 				@click="displayAll = !displayAll"
 				><v-icon color="grey-darken-1" small
@@ -24,8 +24,8 @@
 			<v-btn
 				v-if="!displayAll"
 				x-small
-				text
-				outlined
+				color="grey lighten-4"
+				elevation="0"
 				class="float-end mt-2"
 				@click="displayAll = !displayAll"
 				><v-icon color="grey-darken-1" small
@@ -38,8 +38,8 @@
 
 				<v-btn
 					x-small
-					text
-					outlined
+					color="grey lighten-4"
+					elevation="0"
 					class="float-end mt-2"
 					@click="displayAll = !displayAll"
 					><v-icon color="grey-darken-1" small
