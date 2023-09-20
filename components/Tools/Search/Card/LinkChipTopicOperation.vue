@@ -3,7 +3,7 @@
 		<template #activator="{ on, attrs }">
 			<v-chip
 				label
-				small
+				:small="!big"
 				light
 				color="grey lighten-4"
 				class="mr-1 mt-1"
@@ -38,6 +38,11 @@ export default {
 			type: String,
 			required: false,
 			default: 'mdi-label-multiple',
+		},
+		big: {
+			type: Boolean,
+			required: false,
+			default: false,
 		},
 	},
 };

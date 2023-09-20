@@ -10,7 +10,7 @@
 				@click="filterRestore()"
 			>
 				<v-icon small class="mr-1">mdi-restore</v-icon>
-				Restore filters
+				Reset filters
 			</v-btn>
 			<v-divider class="mt-3 mb-0"></v-divider>
 			<v-expansion-panels v-model="expanded" accordion multiple flat>

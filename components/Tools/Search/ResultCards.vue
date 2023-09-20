@@ -9,6 +9,7 @@
 				<v-skeleton-loader type="article"></v-skeleton-loader>
 			</v-col>
 		</v-row>
+
 		<v-row v-if="visibleTools.length > 0">
 			<v-col
 				v-for="(tool, i) in visibleTools"
@@ -16,7 +17,7 @@
 				justify="center"
 				cols="12"
 				sm="12"
-				md="11"
+				md="12"
 			>
 				<ToolCard
 					:name="tool.label[0]"
@@ -32,6 +33,7 @@
 				/>
 			</v-col>
 		</v-row>
+
 		<v-row v-else class="mt-6" justify="center">
 			<v-alert
 				class="pa-4 mt-6 grey--text text-body-2"

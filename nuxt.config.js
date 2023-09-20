@@ -284,6 +284,11 @@ export default {
 				path: '/tool',
 				component: resolve(__dirname, 'pages/tool/index'),
 			});
+			routes.push({
+				name: 'tool-entry',
+				path: '/tool/:name/:type',
+				component: resolve(__dirname, 'pages/tool/_id.vue'),
+			});
 		},
 	},
 };
