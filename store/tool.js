@@ -26,7 +26,7 @@ export default {
 				source: [],
 				type: [],
 				topics: [],
-				operation: [],
+				operations: [],
 				license: [],
 				tags: [],
 				inputFormat: [],
@@ -144,10 +144,10 @@ export default {
 			}
 
 			// 'Operation' Filters
-			if (state.filters.operation.length > 0) {
-				query += '&operation=';
-				for (const operation of state.filters.operation) {
-					query += operation + ',';
+			if (state.filters.operations.length > 0) {
+				query += '&operations=';
+				for (const operations of state.filters.operations) {
+					query += operations + ',';
 				}
 				query = query.slice(0, -1);
 			}
@@ -173,10 +173,17 @@ export default {
 			commit('updateQuery', query);
 
 			const result = await this.$observatory.$get(
-				'/search?page=0&q=' + state.searchedTerm + query
+				'/search?page=0&q=' + state.searchedTerm + query,
+				{
+					headers: {
+						'ngrok-skip-browser-warning': '69420',
+					},
+				}
 			);
 
 			commit('updateTools', result.tools);
+			commit('updateCounts', result.counts);
+			commit('updateStatsAfterFilter', result.stats);
 			// commit('updateTotalTools', result.total_tools);
 
 			commit('updateLoadingSearch', false);
@@ -224,7 +231,7 @@ export default {
 				source: [],
 				type: [],
 				topics: [],
-				operation: [],
+				operations: [],
 				license: [],
 				tags: [],
 				inputFormat: [],
@@ -257,6 +264,22 @@ export default {
 		},
 		updateStats(state, value) {
 			state.stats = value;
+		},
+		updateStatsAfterFilter(state, value) {
+			// for each stat key
+			for (const key in state.stats) {
+				// for each field in the value[key] (topic, collection, etc)
+				for (const field in state.stats[key]) {
+					// if field exists in value[key]
+					if (value[key][field]) {
+						// for each value in the field
+						state.stats[key][field] = value[key][field];
+					} else {
+						// if field does not exist in value[key], set it to 0
+						state.stats[key][field] = 0;
+					}
+				}
+			}
 		},
 		updateCounts(state, value) {
 			state.counts = value;

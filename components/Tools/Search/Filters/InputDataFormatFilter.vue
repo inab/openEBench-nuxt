@@ -4,7 +4,7 @@
 			<h3 class="text-overline mt-1">Input data</h3>
 		</v-expansion-panel-header>
 		<v-expansion-panel-content>
-			<CheckboxFilterExpand :items="items" property="input" />
+			<CheckboxFilterExpand :items="items" property="inputFormat" />
 		</v-expansion-panel-content>
 		<v-divider class="mt-0 mb-0"></v-divider>
 	</v-expansion-panel>

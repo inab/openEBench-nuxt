@@ -36,6 +36,8 @@ export default {
 				suite: 'Suite',
 				ontology: 'Ontology',
 				soap: 'SOAP API',
+				plugin: 'Plugin',
+				workbench: 'Workbench',
 			},
 		};
 	},
