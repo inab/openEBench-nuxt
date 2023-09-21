@@ -36,6 +36,8 @@ export default {
 				other: 'Other',
 				plugin: 'Plugin',
 				workbench: 'Workbench',
+				script: 'Script',
+				soap: 'SOAP API',
 			},
 		};
 	},
