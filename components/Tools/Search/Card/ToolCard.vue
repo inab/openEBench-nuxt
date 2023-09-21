@@ -121,7 +121,7 @@
 						color="white"
 						@click="expand1 = !expand1"
 					>
-						<div class="circle c1"></div>
+						<div class="circle" :style="opacity(findability)"></div>
 					</v-chip>
 				</div>
 				<v-slide-x-transition>
@@ -133,8 +133,12 @@
 						@click="expand1 = !expand1"
 					>
 						<span class="fair-text pl-2 text-caption">Findability</span>
-						<v-chip class="inner-chip text-caption c1" color="#396fba"
-							>85</v-chip
+						<v-chip
+							class="inner-chip text-caption"
+							:style="opacity(findability)"
+							><span class="font-weight-bold" :style="color(findability)">{{
+								score(findability)
+							}}</span></v-chip
 						>
 					</v-chip>
 				</v-slide-x-transition>
@@ -146,7 +150,7 @@
 						color="white"
 						@click="expand2 = !expand2"
 					>
-						<div class="circle c2"></div>
+						<div class="circle" :style="opacity(accessibility)"></div>
 					</v-chip>
 				</div>
 				<v-slide-x-transition>
@@ -158,8 +162,12 @@
 						@click="expand2 = !expand2"
 					>
 						<span class="fair-text pl-2 text-caption">Accessibility</span>
-						<v-chip class="inner-chip text-caption c2" color="#396fba"
-							>30</v-chip
+						<v-chip
+							class="inner-chip text-caption"
+							:style="opacity(accessibility)"
+							><span class="font-weight-bold" :style="color(accessibility)">{{
+								score(accessibility)
+							}}</span></v-chip
 						>
 					</v-chip>
 				</v-slide-x-transition>
@@ -171,7 +179,7 @@
 						color="white"
 						@click="expand3 = !expand3"
 					>
-						<div class="circle c3"></div>
+						<div class="circle" :style="opacity(interoperability)"></div>
 					</v-chip>
 				</div>
 				<v-slide-x-transition>
@@ -183,8 +191,15 @@
 						@click="expand3 = !expand3"
 					>
 						<span class="fair-text pl-2 text-caption">Interoperability</span>
-						<v-chip class="inner-chip text-caption c3" color="#396fba"
-							>70</v-chip
+						<v-chip
+							class="inner-chip text-caption"
+							:style="opacity(interoperability)"
+							color="#396fba"
+							><span
+								class="font-weight-bold"
+								:style="color(interoperability)"
+								>{{ score(interoperability) }}</span
+							></v-chip
 						>
 					</v-chip>
 				</v-slide-x-transition>
@@ -196,7 +211,7 @@
 						color="white"
 						@click="expand4 = !expand4"
 					>
-						<div class="circle c4"></div>
+						<div class="circle" :style="opacity(reusability)"></div>
 					</v-chip>
 				</div>
 				<v-slide-x-transition>
@@ -208,8 +223,13 @@
 						@click="expand4 = !expand4"
 					>
 						<span class="fair-text pl-2 text-caption">Reusability</span>
-						<v-chip class="inner-chip text-caption c4" color="#396fba"
-							>50</v-chip
+						<v-chip
+							class="inner-chip text-caption"
+							:style="opacity(reusability)"
+							color="#396fba"
+							><span class="font-weight-bold" :style="color(reusability)">{{
+								score(reusability)
+							}}</span></v-chip
 						>
 					</v-chip>
 				</v-slide-x-transition>
@@ -277,6 +297,22 @@ export default {
 			required: false,
 			default: '',
 		},
+		findability: {
+			type: Number,
+			required: true,
+		},
+		accessibility: {
+			type: Number,
+			required: true,
+		},
+		interoperability: {
+			type: Number,
+			required: true,
+		},
+		reusability: {
+			type: Number,
+			required: true,
+		},
 	},
 	data() {
 		return {
@@ -339,6 +375,30 @@ export default {
 				str = str.substr(0, str.length - 1);
 			}
 			return str;
+		},
+		score(score) {
+			// return the score of the letter from 0 to 100
+			// Math.ceil to round up to the nearest integer
+			console.log(score);
+			return Math.ceil(score * 100);
+		},
+		opacity(score) {
+			// return the opacity of the circle from 0 to 1
+			return {
+				background: 'rgba(57, 111, 186,' + score + ')',
+			};
+		},
+		color(score) {
+			// return the color of the circle from 0 to 1
+			if (score < 0.4) {
+				return {
+					color: '#0B579F',
+				};
+			} else {
+				return {
+					color: 'white',
+				};
+			}
 		},
 	},
 };
@@ -420,21 +480,5 @@ export default {
 	color: white !important;
 	position: absolute;
 	right: 8px;
-}
-
-.c1 {
-	opacity: 0.9;
-}
-
-.c2 {
-	opacity: 0.3;
-}
-
-.c3 {
-	opacity: 0.7;
-}
-
-.c4 {
-	opacity: 0.5;
 }
 </style>

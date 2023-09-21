@@ -30,6 +30,10 @@
 					:publications="tool.publication"
 					:license="tool.license"
 					:webpage="tool.webpage[0]"
+					:findability="tool.indicators_scores.F"
+					:accessibility="tool.indicators_scores.A"
+					:interoperability="tool.indicators_scores.I"
+					:reusability="tool.indicators_scores.R"
 				/>
 			</v-col>
 		</v-row>
