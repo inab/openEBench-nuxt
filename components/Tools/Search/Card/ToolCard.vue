@@ -114,127 +114,101 @@
 				</v-card-text>
 			</v-card>
 		</v-col>
-		<v-col cols="1" class="ml-0 pl-0 mt-2">
+		<v-col cols="1" class="mt-2">
 			<div class="main">
-				<div class="sec">
-					<v-chip
-						v-if="!expand1"
-						class="elevation-1 fairchip"
-						color="white"
-						@click="expand1 = !expand1"
-					>
-						<div class="circle" :style="opacity(findability)"></div>
-					</v-chip>
-				</div>
-				<v-slide-x-transition>
-					<v-chip
-						v-if="expand1"
-						v-show="expand1"
-						class="elevation-1 fairexpandedchip findability"
-						color="white"
-						@click="expand1 = !expand1"
-					>
-						<span class="fair-text pl-2 text-caption">Findability</span>
-						<v-chip
-							class="inner-chip text-caption"
-							:style="opacity(findability)"
-							><span class="font-weight-bold" :style="color(findability)">{{
-								score(findability)
-							}}</span></v-chip
+				<v-row>
+					<v-col cols="3" class="mr-0 mt-0 mb-0 pb-0"
+						><v-card
+							class="sec pa-1 rounded-lg"
+							elevation="1"
+							v-if="!expand"
+							@click="expand = !expand"
 						>
-					</v-chip>
-				</v-slide-x-transition>
-
-				<div class="sec">
-					<v-chip
-						v-if="!expand2"
-						class="elevation-1 fairchip"
-						color="white"
-						@click="expand2 = !expand2"
+							<v-row justify="end" class="mb-0 pb-0">
+								<v-col cols="8" class="mt-1 pb-0 mr-1">
+									<div class="circle" :style="opacity(findability)"></div>
+								</v-col>
+							</v-row>
+							<v-row justify="end" class="mt-0 mb-0 pb-0">
+								<v-col cols="8" class="justify-end pb-0 pt-2 mr-1">
+									<div class="circle" :style="opacity(accessibility)"></div>
+								</v-col>
+							</v-row>
+							<v-row justify="end" class="mt-0 mb-0 pb-0">
+								<v-col cols="8" class="justify-end pb-0 pt-2 mr-1">
+									<div class="circle" :style="opacity(interoperability)"></div>
+								</v-col>
+							</v-row>
+							<v-row justify="end" class="mt-0 mb-0 pb-0">
+								<v-col cols="8" class="justify-end pb-0 mb-1 pt-2 mr-1">
+									<div class="circle" :style="opacity(reusability)"></div>
+								</v-col>
+							</v-row> </v-card
+					></v-col>
+					<v-col cols="9" class="trans mt-0 mb-0 pb-0"
+						><v-slide-x-transition>
+							<v-card
+								class="pa-1 rounded-lg fairexpandedchip"
+								elevation="1"
+								v-if="expand"
+								@click="expand = !expand"
+							>
+								<v-row justify="end" class="mb-0 pb-0">
+									<v-col cols="12" class="pb-0 mr-1 d-flex align-center">
+										<span class="fair-text pl-2 text-caption">Findability</span>
+										<v-chip
+											class="inner-chip text-caption"
+											:style="opacity(findability)"
+											><span :style="color(findability)">{{
+												score(findability)
+											}}</span></v-chip
+										>
+									</v-col>
+								</v-row>
+								<v-row justify="end" class="mt-0 mb-0 pb-0">
+									<v-col cols="12" class="pb-0 pt-2 mr-1 d-flex align-center">
+										<span class="fair-text pl-2 text-caption"
+											>Accessibility</span
+										>
+										<v-chip
+											class="inner-chip text-caption"
+											:style="opacity(accessibility)"
+											><span :style="color(accessibility)">{{
+												score(accessibility)
+											}}</span></v-chip
+										>
+									</v-col>
+								</v-row>
+								<v-row justify="end" class="mt-0 mb-0 pb-0">
+									<v-col cols="12" class="pb-0 pt-2 mr-1 d-flex align-center">
+										<span class="fair-text pl-2 text-caption"
+											>Interoperability</span
+										>
+										<v-chip
+											class="inner-chip text-caption"
+											:style="opacity(interoperability)"
+											><span :style="color(interoperability)">{{
+												score(interoperability)
+											}}</span></v-chip
+										>
+									</v-col>
+								</v-row>
+								<v-row justify="end" class="mt-0 mb-0 pb-0">
+									<v-col cols="12" class="pb-0 pt-2 mr-1 d-flex align-center">
+										<span class="fair-text pl-2 text-caption">Reusability</span>
+										<v-chip
+											class="inner-chip text-caption"
+											:style="opacity(reusability)"
+											><span :style="color(reusability)">{{
+												score(reusability)
+											}}</span></v-chip
+										>
+									</v-col>
+								</v-row>
+							</v-card>
+						</v-slide-x-transition></v-col
 					>
-						<div class="circle" :style="opacity(accessibility)"></div>
-					</v-chip>
-				</div>
-				<v-slide-x-transition>
-					<v-chip
-						v-if="expand2"
-						v-show="expand2"
-						class="elevation-1 fairexpandedchip accessibility"
-						color="white"
-						@click="expand2 = !expand2"
-					>
-						<span class="fair-text pl-2 text-caption">Accessibility</span>
-						<v-chip
-							class="inner-chip text-caption"
-							:style="opacity(accessibility)"
-							><span class="font-weight-bold" :style="color(accessibility)">{{
-								score(accessibility)
-							}}</span></v-chip
-						>
-					</v-chip>
-				</v-slide-x-transition>
-
-				<div class="sec">
-					<v-chip
-						v-if="!expand3"
-						class="elevation-1 fairchip"
-						color="white"
-						@click="expand3 = !expand3"
-					>
-						<div class="circle" :style="opacity(interoperability)"></div>
-					</v-chip>
-				</div>
-				<v-slide-x-transition>
-					<v-chip
-						v-if="expand3"
-						v-show="expand3"
-						class="elevation-1 fairexpandedchip interoperability"
-						color="white"
-						@click="expand3 = !expand3"
-					>
-						<span class="fair-text pl-2 text-caption">Interoperability</span>
-						<v-chip
-							class="inner-chip text-caption"
-							:style="opacity(interoperability)"
-							color="#396fba"
-							><span
-								class="font-weight-bold"
-								:style="color(interoperability)"
-								>{{ score(interoperability) }}</span
-							></v-chip
-						>
-					</v-chip>
-				</v-slide-x-transition>
-
-				<div class="sec">
-					<v-chip
-						v-if="!expand4"
-						class="elevation-1 fairchip"
-						color="white"
-						@click="expand4 = !expand4"
-					>
-						<div class="circle" :style="opacity(reusability)"></div>
-					</v-chip>
-				</div>
-				<v-slide-x-transition>
-					<v-chip
-						v-if="expand4"
-						v-show="expand4"
-						class="elevation-1 fairexpandedchip reusability"
-						color="white"
-						@click="expand4 = !expand4"
-					>
-						<span class="fair-text pl-2 text-caption">Reusability</span>
-						<v-chip
-							class="inner-chip text-caption"
-							:style="opacity(reusability)"
-							color="#396fba"
-							><span class="font-weight-bold" :style="color(reusability)">{{
-								score(reusability)
-							}}</span></v-chip
-						>
-					</v-chip>
-				</v-slide-x-transition>
+				</v-row>
 			</div>
 		</v-col>
 	</v-row>
@@ -335,10 +309,7 @@ export default {
 				},
 			],
 			descriptionCollapsed: true,
-			expand1: false,
-			expand2: false,
-			expand3: false,
-			expand4: false,
+			expand: false,
 		};
 	},
 	computed: {
@@ -416,7 +387,7 @@ export default {
 	},
 };
 </script>
-<style>
+<style scoped>
 #title {
 	font-weight: 700 !important;
 }
@@ -426,27 +397,29 @@ export default {
 }
 
 .main {
-	max-width: 200px;
+	width: 250px;
+	max-height: 100px;
 	display: inline-block;
 	position: relative !important;
-	margin-left: -40px;
+	margin-left: -37px;
 	z-index: 0;
 }
 
 .sec {
-	width: 80px;
+	width: 47px;
+}
+
+.trans {
+	margin-left: -70px;
 }
 
 .fairchip {
 	width: 60px;
 	margin-top: 3px;
-	height: 28px !important;
 }
 
 .fairexpandedchip {
-	width: 155px !important;
-	margin-top: 3px;
-	height: 28px !important;
+	width: 165px !important;
 }
 
 .findability {
@@ -476,8 +449,6 @@ export default {
 	width: 18px;
 	height: 18px;
 	border-radius: 50%;
-	position: absolute;
-	right: 8px;
 	background-color: #396fba;
 }
 
