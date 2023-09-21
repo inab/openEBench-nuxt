@@ -117,10 +117,10 @@
 		<v-col cols="1" class="mt-2">
 			<div class="main">
 				<v-row>
-					<v-col cols="3" class="mr-0 mt-0 mb-0 pb-0"
-						><v-card
+					<v-col cols="3" class="mr-0 mt-0 mb-0 pb-0">
+						<v-card
 							class="sec pa-1 rounded-lg"
-							elevation="1"
+							elevation="0"
 							v-if="!expand"
 							@click="expand = !expand"
 						>
@@ -143,15 +143,16 @@
 								<v-col cols="8" class="justify-end pb-0 mb-1 pt-2 mr-1">
 									<div class="circle" :style="opacity(reusability)"></div>
 								</v-col>
-							</v-row> </v-card
-					></v-col>
+							</v-row>
+						</v-card>
+					</v-col>
 					<v-col cols="9" class="trans mt-0 mb-0 pb-0"
 						><v-slide-x-transition>
 							<v-card
 								class="pa-1 rounded-lg fairexpandedchip"
-								elevation="1"
+								elevation="0"
 								v-if="expand"
-								@click="expand = !expand"
+								v-click-outside="close"
 							>
 								<v-row justify="end" class="mb-0 pb-0">
 									<v-col cols="12" class="pb-0 mr-1 d-flex align-center">
@@ -206,8 +207,8 @@
 									</v-col>
 								</v-row>
 							</v-card>
-						</v-slide-x-transition></v-col
-					>
+						</v-slide-x-transition>
+					</v-col>
 				</v-row>
 			</div>
 		</v-col>
@@ -383,6 +384,9 @@ export default {
 			return {
 				'z-index': 9998 - order,
 			};
+		},
+		close() {
+			this.expand = false;
 		},
 	},
 };
