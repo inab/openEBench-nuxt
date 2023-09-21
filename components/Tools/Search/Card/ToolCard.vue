@@ -120,7 +120,7 @@
 					<v-col cols="3" class="mr-0 mt-0 mb-0 pb-0">
 						<v-card
 							class="sec pa-1 rounded-lg"
-							elevation="0"
+							elevation="1"
 							v-if="!expand"
 							@click="expand = !expand"
 						>
@@ -150,7 +150,7 @@
 						><v-slide-x-transition>
 							<v-card
 								class="pa-1 rounded-lg fairexpandedchip"
-								elevation="0"
+								elevation="1"
 								v-if="expand"
 								v-click-outside="close"
 							>
