@@ -1,7 +1,12 @@
 <template>
 	<v-row>
 		<v-col cols="11" class="mr-0">
-			<v-card class="m-1 pa-2 rounded-lg" outlined elevation="1">
+			<v-card
+				class="m-1 pa-2 rounded-lg"
+				:style="zIndex(order)"
+				outlined
+				elevation="1"
+			>
 				<v-card-title class="mb-0 pb-0">
 					<h3 class="text-subtitle-1">
 						<a id="title">{{ name }}</a>
@@ -50,21 +55,18 @@
 					</div>
 					<!-- LICENSE -->
 					<div v-if="license.length > 0" justify="center" class="mt-2">
-						<v-chip
-							v-for="(item, i) in license"
-							:key="i"
-							label
-							small
+						<LinkChipWIcon
+							v-for="[key, value] in Object.entries(license)"
+							:key="key"
+							:link="value.url"
+							icon="mdi-scale-balance"
+							:text="value.name"
 							light
-							color="grey lighten-4"
-							class="mr-1 mt-1"
-						>
-							<v-icon small class="mr-1">mdi-scale-balance</v-icon>
-							<a v-if="item.url" :href="item.url"
-								><span class="ml-1">{{ cleanString(item.name) }}</span></a
-							>
-							<span v-else class="ml-1">{{ cleanString(item.name) }}</span>
-						</v-chip>
+							small
+							label
+							:disabled="value.url === ''"
+							class="mr-1"
+						/>
 					</div>
 
 					<div justify="center" class="mt-2">
@@ -313,6 +315,10 @@ export default {
 			type: Number,
 			required: true,
 		},
+		order: {
+			type: Number,
+			required: true,
+		},
 	},
 	data() {
 		return {
@@ -400,6 +406,13 @@ export default {
 				};
 			}
 		},
+		zIndex(order) {
+			// return the zIndex of the card
+			console.log(order);
+			return {
+				'z-index': 9998 - order,
+			};
+		},
 	},
 };
 </script>
@@ -410,13 +423,6 @@ export default {
 
 .subtitle {
 	font-weight: 700 !important;
-}
-
-.v-card {
-	width: 100%;
-	display: inline-block;
-	z-index: 1;
-	min-height: 145px;
 }
 
 .main {
@@ -463,6 +469,7 @@ export default {
 	display: inline-block;
 	margin-left: 15px;
 	margin-right: 20px;
+	color: #0b579f;
 }
 
 .circle {

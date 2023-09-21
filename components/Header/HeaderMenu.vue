@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div style="z-index: 9999">
 		<v-navigation-drawer
 			v-if="$vuetify.breakpoint.smAndDown"
 			v-model="openNavMobile"

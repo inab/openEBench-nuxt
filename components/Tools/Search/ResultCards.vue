@@ -34,6 +34,7 @@
 					:accessibility="tool.indicators_scores.A"
 					:interoperability="tool.indicators_scores.I"
 					:reusability="tool.indicators_scores.R"
+					:order="i"
 				/>
 			</v-col>
 		</v-row>

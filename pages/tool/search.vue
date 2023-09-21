@@ -3,7 +3,7 @@
 		<SearchBar />
 		<v-container :fluid="$vuetify.breakpoint.width < 1550">
 			<v-row justify="center">
-				<v-col cols="3">
+				<v-col cols="4">
 					<CardsFilter />
 				</v-col>
 				<v-col cols="8">

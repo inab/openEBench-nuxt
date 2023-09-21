@@ -52,3 +52,9 @@ export default {
 	},
 };
 </script>
+<style scoped>
+.v-tooltip {
+	z-index: 2;
+	position: static;
+}
+</style>
