@@ -3,10 +3,10 @@
 		<SearchBar />
 		<v-container :fluid="$vuetify.breakpoint.width < 1550">
 			<v-row justify="center">
-				<v-col cols="4">
+				<v-col cols="3" lg="3" xl="4">
 					<CardsFilter />
 				</v-col>
-				<v-col cols="8">
+				<v-col cols="7" lg="7" xl="8">
 					<v-row v-if="loading.initialSearch" justify="center" class="mt-5">
 						<v-col cols="11">
 							<v-skeleton-loader type="list-item-two-line"></v-skeleton-loader>

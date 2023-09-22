@@ -115,102 +115,12 @@
 			</v-card>
 		</v-col>
 		<v-col cols="1" class="mt-2">
-			<div class="main">
-				<v-row>
-					<v-col cols="3" class="mr-0 mt-0 mb-0 pb-0">
-						<v-card
-							class="sec pa-1 rounded-lg"
-							elevation="1"
-							v-if="!expand"
-							@click="expand = !expand"
-						>
-							<v-row justify="end" class="mb-0 pb-0">
-								<v-col cols="8" class="mt-1 pb-0 mr-1">
-									<div class="circle" :style="opacity(findability)"></div>
-								</v-col>
-							</v-row>
-							<v-row justify="end" class="mt-0 mb-0 pb-0">
-								<v-col cols="8" class="justify-end pb-0 pt-2 mr-1">
-									<div class="circle" :style="opacity(accessibility)"></div>
-								</v-col>
-							</v-row>
-							<v-row justify="end" class="mt-0 mb-0 pb-0">
-								<v-col cols="8" class="justify-end pb-0 pt-2 mr-1">
-									<div class="circle" :style="opacity(interoperability)"></div>
-								</v-col>
-							</v-row>
-							<v-row justify="end" class="mt-0 mb-0 pb-0">
-								<v-col cols="8" class="justify-end pb-0 mb-1 pt-2 mr-1">
-									<div class="circle" :style="opacity(reusability)"></div>
-								</v-col>
-							</v-row>
-						</v-card>
-					</v-col>
-					<v-col cols="9" class="trans mt-0 mb-0 pb-0"
-						><v-slide-x-transition>
-							<v-card
-								class="pa-1 rounded-lg fairexpandedchip"
-								elevation="1"
-								v-if="expand"
-								v-click-outside="close"
-							>
-								<v-row justify="end" class="mb-0 pb-0">
-									<v-col cols="12" class="pb-0 mr-1 d-flex align-center">
-										<span class="fair-text pl-2 text-caption">Findability</span>
-										<v-chip
-											class="inner-chip text-caption"
-											:style="opacity(findability)"
-											><span :style="color(findability)">{{
-												score(findability)
-											}}</span></v-chip
-										>
-									</v-col>
-								</v-row>
-								<v-row justify="end" class="mt-0 mb-0 pb-0">
-									<v-col cols="12" class="pb-0 pt-2 mr-1 d-flex align-center">
-										<span class="fair-text pl-2 text-caption"
-											>Accessibility</span
-										>
-										<v-chip
-											class="inner-chip text-caption"
-											:style="opacity(accessibility)"
-											><span :style="color(accessibility)">{{
-												score(accessibility)
-											}}</span></v-chip
-										>
-									</v-col>
-								</v-row>
-								<v-row justify="end" class="mt-0 mb-0 pb-0">
-									<v-col cols="12" class="pb-0 pt-2 mr-1 d-flex align-center">
-										<span class="fair-text pl-2 text-caption"
-											>Interoperability</span
-										>
-										<v-chip
-											class="inner-chip text-caption"
-											:style="opacity(interoperability)"
-											><span :style="color(interoperability)">{{
-												score(interoperability)
-											}}</span></v-chip
-										>
-									</v-col>
-								</v-row>
-								<v-row justify="end" class="mt-0 mb-0 pb-0">
-									<v-col cols="12" class="pb-0 pt-2 mr-1 d-flex align-center">
-										<span class="fair-text pl-2 text-caption">Reusability</span>
-										<v-chip
-											class="inner-chip text-caption"
-											:style="opacity(reusability)"
-											><span :style="color(reusability)">{{
-												score(reusability)
-											}}</span></v-chip
-										>
-									</v-col>
-								</v-row>
-							</v-card>
-						</v-slide-x-transition>
-					</v-col>
-				</v-row>
-			</div>
+			<BookMarkCard
+				:findability="findability"
+				:accessibility="accessibility"
+				:interoperability="interoperability"
+				:reusability="reusability"
+			/>
 		</v-col>
 	</v-row>
 </template>
@@ -218,6 +128,7 @@
 import ChipType from './ChipType.vue';
 import LinkMorePublications from './LinkMorePublications.vue';
 import LinkChipTopicOperation from './LinkChipTopicOperation.vue';
+import BookMarkCard from './BookMarkCard.vue';
 import LinkChipWImage from '~/components/Tools/Search/Card/LinkChipWImage.vue';
 import LinkChipWIcon from '~/components/Tools/Search/Card/LinkChipWIcon.vue';
 import LinkChipPublication from '~/components/Tools/Search/Card/LinkChipPublication.vue';
@@ -231,6 +142,7 @@ export default {
 		LinkMorePublications,
 		LinkChipTopicOperation,
 		ChipType,
+		BookMarkCard,
 	},
 	props: {
 		name: {
@@ -354,39 +266,12 @@ export default {
 			}
 			return str;
 		},
-		score(score) {
-			// return the score of the letter from 0 to 100
-			// Math.ceil to round up to the nearest integer
-			console.log(score);
-			return Math.ceil(score * 100);
-		},
-		opacity(score) {
-			// return the opacity of the circle from 0 to 1
-			return {
-				background: 'rgba(57, 111, 186,' + score + ')',
-			};
-		},
-		color(score) {
-			// return the color of the circle from 0 to 1
-			if (score < 0.4) {
-				return {
-					color: '#0B579F',
-				};
-			} else {
-				return {
-					color: 'white',
-				};
-			}
-		},
+
 		zIndex(order) {
 			// return the zIndex of the card
-			console.log(order);
 			return {
 				'z-index': 9998 - order,
 			};
-		},
-		close() {
-			this.expand = false;
 		},
 	},
 };
@@ -400,67 +285,7 @@ export default {
 	font-weight: 700 !important;
 }
 
-.main {
-	width: 250px;
-	max-height: 100px;
-	display: inline-block;
-	position: relative !important;
-	margin-left: -37px;
-	z-index: 0;
-}
-
-.sec {
-	width: 47px;
-}
-
-.trans {
-	margin-left: -70px;
-}
-
-.fairchip {
-	width: 60px;
-	margin-top: 3px;
-}
-
-.fairexpandedchip {
-	width: 165px !important;
-}
-
-.findability {
-	width: 151px !important;
-}
-
-.accessibility {
-	width: 163px !important;
-}
-
-.interoperability {
-	width: 175px !important;
-}
-
-.reusability {
-	width: 151px !important;
-}
-
-.fair-text {
-	display: inline-block;
-	margin-left: 15px;
-	margin-right: 20px;
-	color: #0b579f;
-}
-
-.circle {
-	width: 18px;
-	height: 18px;
-	border-radius: 50%;
-	background-color: #396fba;
-}
-
-.inner-chip {
-	height: 18px !important;
-	background-color: #396fba;
-	color: white !important;
-	position: absolute;
-	right: 8px;
+.v-card {
+	min-height: 130px;
 }
 </style>
