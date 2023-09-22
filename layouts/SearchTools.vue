@@ -6,7 +6,7 @@
 
 			<Footer class="mt-16" />
 		</v-main>
-		<v-footer class="justify-center" app>
+		<v-footer class="justify-center" app style="z-index: 9999">
 			Made with <v-icon color="red">mdi-heart</v-icon>
 			in Barcelona.
 		</v-footer>
