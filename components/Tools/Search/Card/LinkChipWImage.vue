@@ -4,7 +4,8 @@
 		small
 		light
 		color="grey lighten-4"
-		class="pr-2 pl-1 mt-1"
+		class="pl-1 mt-1"
+		:class="style()"
 		@click="openLink(link)"
 	>
 		<v-img
@@ -14,7 +15,7 @@
 			class="ma-0"
 			:src="icons[type]"
 		></v-img>
-		{{ labels[text] }}
+		<span v-if="!minimal">{{ labels[text] }}</span>
 	</v-chip>
 </template>
 <script>
@@ -41,6 +42,11 @@ export default {
 		text: {
 			type: String,
 			required: true,
+		},
+		minimal: {
+			type: Boolean,
+			required: false,
+			default: false,
 		},
 	},
 	data() {
@@ -89,6 +95,13 @@ export default {
 		},
 		openLink(link) {
 			window.open(link, '_blank');
+		},
+		style() {
+			if (this.minimal) {
+				return 'pr-1';
+			} else {
+				return 'pr-2';
+			}
 		},
 	},
 };
