@@ -1,9 +1,10 @@
 <template>
 	<v-chip :small="!big" label text-color="#F48F43" color="#F48F43" outlined>
-		{{ descriptions[type] }}
+		{{ text }}
 	</v-chip>
 </template>
 <script>
+import { getSoftwareTypeDescription } from '~/static/dictionaries/softwareTypes';
 export default {
 	name: 'ChipType',
 	props: {
@@ -18,27 +19,7 @@ export default {
 	},
 	data() {
 		return {
-			descriptions: {
-				web: 'Web Application',
-				cmd: 'Command Line Tool',
-				app: 'Desktop Application',
-				suite: 'Software Suite',
-				sparql: 'SPARQL Endpoint',
-				workflow: 'Workflow',
-				gui: 'Graphical User Interface',
-				api: 'Application Programming Interface',
-				rest: 'REST API',
-				lib: 'Library',
-				unknown: 'Undefined',
-				undefined: 'Undefined',
-				db: 'Database',
-				ontology: 'Ontology',
-				other: 'Other',
-				plugin: 'Plugin',
-				workbench: 'Workbench',
-				script: 'Script',
-				soap: 'SOAP API',
-			},
+			text: getSoftwareTypeDescription(this.type),
 		};
 	},
 };

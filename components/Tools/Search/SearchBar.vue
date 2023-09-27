@@ -2,7 +2,7 @@
 	<v-container
 		id="search-container"
 		justify="start"
-		class="mr-0 pr-0 pt-0"
+		class="mr-0 pr-0 pt-2 pb-2"
 		fluid
 	>
 		<v-row class="d-flex align-center justify-start mt-0 pt-0 pb-0">
@@ -111,7 +111,6 @@ export default {
 	background-color: #396fba !important;
 	color: white;
 	top: 0;
-	height: 110px;
 }
 
 .v-input >>> v-input__control {

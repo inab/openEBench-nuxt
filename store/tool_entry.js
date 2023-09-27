@@ -12,6 +12,7 @@ export default {
 			const { data } = await this.$observatory.get(
 				`/tools?name=${payload.name}&type=${payload.type}`
 			);
+
 			commit('updateTool', data);
 			commit('updateLoading', false);
 		},
