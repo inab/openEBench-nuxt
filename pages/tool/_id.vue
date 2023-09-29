@@ -1,35 +1,26 @@
 <template>
-	<v-container fluid class="pt-0 pl-0 pr-0">
-		<SearchBar class="mt-0 pt-0" />
-		<v-container>
+	<v-container id="main-container" ref="Main" fluid class="pt-2 pl-0 pr-0">
+		<v-container class="pt-4">
 			<v-row justify="space-around">
 				<v-col v-if="!loading" cols="2">
 					<ToolBrief
 						v-show="!introVisible"
+						id="tool-brief"
 						:name="tool.label[0]"
 						:type="tool.type"
 						:version="tool.version"
 						:sources-labels="tool.sources_labels"
 						:webpage="tool.webpage"
-						class="mt-0"
 					/>
-
-					<v-card
-						id="fixed-card"
-						:style="top()"
-						class="mt-8"
-						max-width="500"
-						elevation="0"
-						outlined
-					>
+					<v-card id="fixed-card" :style="top()" max-width="500" elevation="0">
 						<v-list class="pt-0 pb-0">
 							<v-list-item-group
-								v-model="selected"
+								v-model="activeItem"
 								active-class="primary--text"
 							>
 								<v-list-item v-for="(item, i) in items" :key="i">
 									<v-list-item-content
-										:active="selected"
+										:active="activeItem === i"
 										@click="$vuetify.goTo('#' + item.id)"
 									>
 										<v-list-item-title
@@ -43,7 +34,8 @@
 						</v-list>
 					</v-card>
 				</v-col>
-				<v-col v-if="!loading" class="mt-5" cols="8">
+				<!--v-divider vertical></v-divider-->
+				<v-col v-if="!loading" cols="8">
 					<EntryIntro
 						ref="Intro"
 						:name="tool.label[0]"
@@ -61,8 +53,7 @@
 						v-for="(item, i) in items"
 						:id="item.id"
 						:key="i"
-						elevation="0"
-						outlined
+						elevation="1"
 						class="mt-5 mb-5 pb-5 pl-5 content-cards"
 					>
 						<v-card-title
@@ -70,6 +61,7 @@
 							class="text-h5 card-titles"
 							v-text="item.title"
 						></v-card-title>
+						<component :is="item.component"></component>
 					</v-card>
 				</v-col>
 				<v-col v-else cols="8">
@@ -79,74 +71,85 @@
 					>
 					</v-skeleton-loader>
 				</v-col>
-				<v-col v-if="!loading" cols="2" class="mt-0 pt-1"> </v-col>
+				<v-col v-if="!loading" cols="2" class="mt-0 pt-1 pl-5" justify="left">
+					<v-row>
+						<div id="fixed-fair">
+							<FAIRtreeview
+								:active="sectionsIndicatorsMap[activeItem]"
+								:open="sectionsOpen[activeItem]"
+							/>
+						</div>
+					</v-row>
+				</v-col>
 			</v-row>
+			<v-btn
+				id="to-top"
+				ref="toTop"
+				class="mx-2"
+				fab
+				dark
+				small
+				color="#f48f43"
+				@click="$vuetify.goTo('#main-container')"
+			>
+				<v-icon dark> mdi-arrow-up </v-icon>
+			</v-btn>
 		</v-container>
 	</v-container>
 </template>
 <script>
 import { mapGetters } from 'vuex';
-import EntryIntro from '~/components/Tools/ToolEntry/EntryIntro.vue';
 import SearchBar from '~/components/Tools/ToolEntry/SearchBar.vue';
+import EntryIntro from '~/components/Tools/ToolEntry/EntryIntro.vue';
 import ToolBrief from '~/components/Tools/ToolEntry/ToolBrief.vue';
+import CitationContent from '~/components/Tools/ToolEntry/Citation/CitationContent.vue';
+import FAIRtreeview from '~/components/Tools/ToolEntry/FAIR/FAIRtreeview.vue';
 
 export default {
 	name: 'ToolEntry',
 	components: {
-		EntryIntro,
 		SearchBar,
+		EntryIntro,
 		ToolBrief,
+		CitationContent,
+		FAIRtreeview,
 	},
-	layout: 'ToolEntry',
+	layout: 'DefaultLayoutWOBreadcrumbs',
 	data() {
 		return {
 			items: [
 				{
+					title: 'Citation',
+					id: 'citation',
+					component: 'CitationContent',
+				},
+				{
 					title: 'Documentation',
 					id: 'documentation',
+					component: '',
 				},
 				{
 					title: 'Licensing',
 					id: 'licensing',
-				},
-				{
-					title: 'Publication',
-					id: 'publication',
+					component: '',
 				},
 				{
 					title: 'Accessibility',
 					id: 'accessibility',
+					component: '',
 				},
 				{
 					title: 'Recognition',
 					id: 'recognition',
+					component: '',
 				},
 				{
 					title: 'Similar Software',
 					id: 'similar',
+					component: '',
 				},
 			],
 			selected: 0,
-			breadcrumbs: [
-				{
-					text: 'Home',
-					disabled: false,
-					exact: true,
-					to: 'https://openebench.bsc.es/',
-				},
-				{
-					text: 'Observatory',
-					disabled: false,
-					exact: true,
-					to: '/',
-				},
-				{
-					text: 'Tool',
-					disabled: false,
-					exact: true,
-					to: '/Tool',
-				},
-			],
 			visible: false,
 			visibleItems: {
 				0: true,
@@ -159,6 +162,8 @@ export default {
 			introVisible: true,
 			activeItem: 0,
 			overviewtop: '80 px',
+			sectionsIndicatorsMap: [['F3'], ['F2', 'R1', 'R3'], ['R2'], [], [], []],
+			sectionsOpen: [['F'], ['F', 'R'], ['R'], [], []],
 		};
 	},
 
@@ -171,7 +176,6 @@ export default {
 		};
 
 		this.$store.dispatch('tool_entry/retrieveTool', payload);
-
 		window.addEventListener('scroll', this.handleScroll);
 	},
 	computed: {
@@ -202,23 +206,47 @@ export default {
 				return false;
 			}
 		},
-		handleScroll() {
-			this.visible = true;
 
+		menuSections() {
 			for (let i = 0; i < this.items.length; i++) {
 				const ref = this.$refs.Items[i];
-				this.visibleItems[i] = this.elementIsVisibleInViewport(ref);
+				if (ref !== undefined) {
+					this.visibleItems[i] = this.elementIsVisibleInViewport(ref);
+				}
 			}
-			// first visibleItem is activeItem
+			// activeItem is the first visibleItem
 			for (let i = 0; i < this.items.length; i++) {
 				if (this.visibleItems[i]) {
-					this.selected = i;
+					this.activeItem = i;
 					break;
 				}
 			}
-			ref = this.$refs.Intro.$refs.Intro;
-			this.introVisible = this.elementIsVisibleInViewport(ref);
-			this.overviewtop = this.introVisible ? 120 : 215;
+		},
+		entryBriefVisibility() {
+			const ref = this.$refs.Intro.$refs.Intro;
+			if (ref !== undefined) {
+				this.introVisible = this.elementIsVisibleInViewport(ref);
+			}
+			this.overviewtop = this.introVisible ? 90 : 240;
+		},
+
+		goToTopPosition() {
+			const refFooter = this.$root.$children[2].$refs.Footer;
+			const topOfFooter = refFooter.$el.offsetTop;
+			const bottom = window.scrollY + window.innerHeight;
+			const distanceFromFooter = bottom - topOfFooter;
+
+			if (bottom < topOfFooter + 120) {
+				this.$refs.toTop.$el.style.bottom = `${120}px`;
+			} else {
+				this.$refs.toTop.$el.style.bottom = `${distanceFromFooter}px`;
+			}
+		},
+		handleScroll() {
+			this.visible = true;
+			this.menuSections(); // Menu sections activiation
+			this.entryBriefVisibility(); // first visibleItem is activeItem
+			this.goToTopPosition(); // GoToTop button position -> stop at footer
 		},
 		top() {
 			return {
@@ -232,7 +260,13 @@ export default {
 #fixed-card {
 	position: fixed;
 	width: 180px;
-	top: 120px;
+	top: 90px;
+}
+
+#tool-brief {
+	position: fixed;
+	width: 180px;
+	top: 80px;
 }
 
 .card-titles {
@@ -241,6 +275,19 @@ export default {
 }
 
 .content-cards {
-	height: 200px;
+	min-height: 300px;
+}
+
+#to-top {
+	position: fixed;
+	bottom: 120px;
+	right: 100px;
+}
+
+#fixed-fair {
+	position: fixed;
+	top: 85px;
+	width: 260px;
+	word-wrap: normal;
 }
 </style>

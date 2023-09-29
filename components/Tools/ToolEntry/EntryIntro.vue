@@ -1,13 +1,13 @@
 <template>
 	<v-card elevation="0" class="pr-5 mb-4 pl-3">
-		<v-row class="d-flex align-center">
-			<v-col cols="9">
+		<v-row justify="space-between">
+			<v-col cols="6">
 				<span class="text-h5">
 					{{ name }}
 				</span>
 			</v-col>
-			<v-col ref="Intro" cols="3" class="align-self-center">
-				<ChipType :type="type" big />
+			<v-col ref="Intro" cols="6" class="d-flex">
+				<ChipType :type="type" big class="ml-auto" />
 			</v-col>
 		</v-row>
 		<v-row class="mt-0 pt-0">
