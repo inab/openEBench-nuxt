@@ -1,11 +1,5 @@
 <template>
-	<v-card
-		id="fixed"
-		class="mt-0 pb-2 pb-1"
-		max-width="500"
-		elevation="0"
-		outlined
-	>
+	<v-card id="fixed" class="mt-0 pb-2 pb-1" max-width="500" elevation="0">
 		<v-card-title class="pt-0 pb-0 mt-1 mb-0">
 			<span class="font-weight-regular text-h6">{{ name }}</span>
 		</v-card-title>
@@ -74,11 +68,11 @@ export default {
 			required: true,
 		},
 		sourcesLabels: {
-			type: Array,
+			type: Object,
 			required: true,
 		},
 		webpage: {
-			type: String,
+			type: Array,
 			required: true,
 		},
 	},
