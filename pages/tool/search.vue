@@ -1,5 +1,5 @@
 <template>
-	<v-container fluid class="pa-0">
+	<v-container id="#main-container" fluid class="pa-0">
 		<SearchBar />
 		<v-container :fluid="$vuetify.breakpoint.width < 1550">
 			<v-row justify="center">
@@ -50,7 +50,7 @@ export default {
 		ResultCards,
 	},
 	mixins: [SearchTools],
-	layout: 'SearchTools',
+	layout: 'DefaultLayoutWOBreadcrumbs',
 	data() {
 		return {
 			// q value from url

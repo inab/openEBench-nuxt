@@ -3,38 +3,69 @@
 		<v-container class="pt-4">
 			<v-row justify="space-around">
 				<v-col v-if="!loading" cols="2">
-					<ToolBrief
-						v-show="!introVisible"
-						id="tool-brief"
-						:name="tool.label[0]"
-						:type="tool.type"
-						:version="tool.version"
-						:sources-labels="tool.sources_labels"
-						:webpage="tool.webpage"
-					/>
-					<v-card id="fixed-card" :style="top()" max-width="500" elevation="0">
-						<v-list class="pt-0 pb-0">
-							<v-list-item-group
-								v-model="activeItem"
-								active-class="primary--text"
-							>
-								<v-list-item v-for="(item, i) in items" :key="i">
-									<v-list-item-content
-										:active="activeItem === i"
-										@click="$vuetify.goTo('#' + item.id)"
+					<div v-show="!introVisible">
+						<VueFixedScrollBreak
+							:total-offset="offsetMenu"
+							:top-of-stop-element="offset"
+						>
+							<ToolBrief
+								:name="tool.label[0]"
+								:type="tool.type"
+								:version="tool.version"
+								:sources-labels="tool.sources_labels"
+								:webpage="tool.webpage"
+							/>
+							<v-card class="fixed-card" max-width="500" elevation="0">
+								<v-list class="pt-0 pb-0">
+									<v-list-item-group
+										v-model="activeItem"
+										active-class="primary--text"
 									>
-										<v-list-item-title
-											class="text-subtitle-2"
-											v-text="item.title"
+										<v-list-item v-for="(item, i) in items" :key="i">
+											<v-list-item-content
+												:active="activeItem === i"
+												@click="$vuetify.goTo('#' + item.id)"
+											>
+												<v-list-item-title
+													class="text-subtitle-2"
+													v-text="item.title"
+												>
+												</v-list-item-title>
+											</v-list-item-content>
+										</v-list-item>
+									</v-list-item-group>
+								</v-list>
+							</v-card>
+						</VueFixedScrollBreak>
+					</div>
+					<div v-show="introVisible">
+						<v-card
+							class="fixed-card fixed-first"
+							max-width="500"
+							elevation="0"
+						>
+							<v-list class="pt-0 pb-0">
+								<v-list-item-group
+									v-model="activeItem"
+									active-class="primary--text"
+								>
+									<v-list-item v-for="(item, i) in items" :key="i">
+										<v-list-item-content
+											:active="activeItem === i"
+											@click="$vuetify.goTo('#' + item.id)"
 										>
-										</v-list-item-title>
-									</v-list-item-content>
-								</v-list-item>
-							</v-list-item-group>
-						</v-list>
-					</v-card>
+											<v-list-item-title
+												class="text-subtitle-2"
+												v-text="item.title"
+											>
+											</v-list-item-title>
+										</v-list-item-content>
+									</v-list-item>
+								</v-list-item-group>
+							</v-list>
+						</v-card>
+					</div>
 				</v-col>
-				<!--v-divider vertical></v-divider-->
 				<v-col v-if="!loading" cols="8">
 					<EntryIntro
 						ref="Intro"
@@ -82,23 +113,28 @@
 					</v-row>
 				</v-col>
 			</v-row>
-			<v-btn
+			<VueFixedScrollBreak
+				v-if="offset"
 				id="to-top"
-				ref="toTop"
-				class="mx-2"
-				fab
-				dark
-				small
-				color="#f48f43"
-				@click="$vuetify.goTo('#main-container')"
+				:top-of-stop-element="offset"
 			>
-				<v-icon dark> mdi-arrow-up </v-icon>
-			</v-btn>
+				<v-btn
+					class="mx-2"
+					fab
+					dark
+					small
+					color="#f48f43"
+					@click="$vuetify.goTo('#main-container')"
+				>
+					<v-icon dark> mdi-arrow-up </v-icon>
+				</v-btn>
+			</VueFixedScrollBreak>
 		</v-container>
 	</v-container>
 </template>
 <script>
 import { mapGetters } from 'vuex';
+import VueFixedScrollBreak from 'vue-fixed-scroll-break';
 import SearchBar from '~/components/Tools/ToolEntry/SearchBar.vue';
 import EntryIntro from '~/components/Tools/ToolEntry/EntryIntro.vue';
 import ToolBrief from '~/components/Tools/ToolEntry/ToolBrief.vue';
@@ -113,6 +149,7 @@ export default {
 		ToolBrief,
 		CitationContent,
 		FAIRtreeview,
+		VueFixedScrollBreak,
 	},
 	layout: 'DefaultLayoutWOBreadcrumbs',
 	data() {
@@ -161,7 +198,6 @@ export default {
 			},
 			introVisible: true,
 			activeItem: 0,
-			overviewtop: '80 px',
 			sectionsIndicatorsMap: [['F3'], ['F2', 'R1', 'R3'], ['R2'], [], [], []],
 			sectionsOpen: [['F'], ['F', 'R'], ['R'], [], []],
 		};
@@ -184,6 +220,7 @@ export default {
 			loading: 'loading',
 		}),
 	},
+
 	unmounted() {
 		window.removeEventListener('scroll', this.handleScroll);
 	},
@@ -227,46 +264,33 @@ export default {
 			if (ref !== undefined) {
 				this.introVisible = this.elementIsVisibleInViewport(ref);
 			}
-			this.overviewtop = this.introVisible ? 90 : 240;
 		},
 
-		goToTopPosition() {
-			const refFooter = this.$root.$children[2].$refs.Footer;
-			const topOfFooter = refFooter.$el.offsetTop;
-			const bottom = window.scrollY + window.innerHeight;
-			const distanceFromFooter = bottom - topOfFooter;
-
-			if (bottom < topOfFooter + 120) {
-				this.$refs.toTop.$el.style.bottom = `${120}px`;
-			} else {
-				this.$refs.toTop.$el.style.bottom = `${distanceFromFooter}px`;
-			}
-		},
 		handleScroll() {
 			this.visible = true;
 			this.menuSections(); // Menu sections activiation
 			this.entryBriefVisibility(); // first visibleItem is activeItem
-			this.goToTopPosition(); // GoToTop button position -> stop at footer
-		},
-		top() {
-			return {
-				top: this.overviewtop + 'px',
-			};
+
+			this.offset = this.$root.$children[2].$refs.Footer.$el.offsetTop; // GoToTop button position -> stop at footer
+
+			// 500 the height of the fixed menu + tool brief + nav bar
+			this.offsetMenu = window.innerHeight - 500; // Menu position -> stop at footer
 		},
 	},
 };
 </script>
 <style scoped>
-#fixed-card {
-	position: fixed;
+.fixed-card {
 	width: 180px;
-	top: 90px;
+}
+
+.fixed-first {
+	position: fixed;
 }
 
 #tool-brief {
 	position: fixed;
 	width: 180px;
-	top: 80px;
 }
 
 .card-titles {
@@ -280,8 +304,7 @@ export default {
 
 #to-top {
 	position: fixed;
-	bottom: 120px;
-	right: 100px;
+	right: 280px;
 }
 
 #fixed-fair {
