@@ -3,8 +3,9 @@
 		<main-header :vre-href="$config.VRE_URI" />
 		<v-main>
 			<Nuxt @emitBreadcrumbs="handleBreadcrumbs" />
-			<Footer ref="Footer" class="mt-16" />
 		</v-main>
+		<Footer ref="Footer" class="mt-16" />
+
 		<v-footer class="justify-center" app>
 			Made with <v-icon color="red">mdi-heart</v-icon>
 			in Barcelona.

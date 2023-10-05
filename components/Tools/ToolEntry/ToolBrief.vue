@@ -84,13 +84,6 @@ export default {
 };
 </script>
 <style scoped>
-#fixed {
-	position: fixed;
-	top: 90px;
-	width: 180px;
-	z-index: 1;
-}
-
 .v-card-title {
 	font-weight: 300;
 }
