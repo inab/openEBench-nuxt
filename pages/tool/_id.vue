@@ -78,6 +78,7 @@
 						:license="tool.license"
 						:topics="tool.topics"
 						:operations="tool.operations"
+						:sourcesLabels="tool.sources_labels"
 					/>
 
 					<v-card
@@ -260,9 +261,10 @@ export default {
 			}
 		},
 		entryBriefVisibility() {
-			const ref = this.$refs.Intro.$refs.Intro;
-			if (ref !== undefined) {
-				this.introVisible = this.elementIsVisibleInViewport(ref);
+			if (this.$refs.Intro.$refs.Intro !== undefined) {
+				this.introVisible = this.elementIsVisibleInViewport(
+					this.$refs.Intro.$refs.Intro
+				);
 			}
 		},
 
