@@ -4,6 +4,7 @@
 		:items="indicators"
 		:open="open"
 		color="warning"
+		active-class="warning--text"
 		transition
 		multiple-active
 		all-active

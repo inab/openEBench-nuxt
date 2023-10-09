@@ -7,7 +7,7 @@
 				</span>
 			</v-col>
 			<v-col ref="Intro" cols="6" class="d-flex">
-				<ChipType :type="type" big class="ml-auto" />
+				<ChipType :type="type" big class="ml-auto font-weight-bold" />
 			</v-col>
 		</v-row>
 		<v-row class="mt-0 pt-0">
@@ -37,6 +37,7 @@
 						:text="key"
 						light
 						class="ml-1 mr-2"
+						big
 					/>
 					<LinkChipWIcon
 						v-if="webpage"
@@ -44,13 +45,9 @@
 						text="Homepage"
 						icon="mdi-web"
 						class="ml-1"
+						big
 					/>
 				</div>
-			</v-col>
-		</v-row>
-		<v-row class="mt-1">
-			<v-col cols="12" class="pt-1">
-				<span class="text-subtitle-2">Documentation</span>
 			</v-col>
 		</v-row>
 	</v-card>
@@ -59,6 +56,7 @@
 import LinkChipWImage from '../Search/Card/LinkChipWImage.vue';
 import LinkChipWIcon from '../Search/Card/LinkChipWIcon.vue';
 import ChipType from '~/components/Tools/Search/Card/ChipType.vue';
+import { getSoftwareTypeDescription } from '~/static/dictionaries/softwareTypes';
 
 export default {
 	name: 'EntryIntro',
@@ -88,26 +86,15 @@ export default {
 			type: Array,
 			required: true,
 		},
-		repository: {
-			type: Array,
-			required: true,
-		},
-		license: {
-			type: Array,
-			required: true,
-		},
-		topics: {
-			type: Array,
-			required: true,
-		},
-		operations: {
-			type: Array,
-			required: true,
-		},
 		sourcesLabels: {
 			type: Object,
 			required: true,
 		},
+	},
+	data() {
+		return {
+			typeText: getSoftwareTypeDescription(this.type),
+		};
 	},
 
 	methods: {

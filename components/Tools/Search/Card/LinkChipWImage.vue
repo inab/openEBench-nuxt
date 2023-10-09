@@ -1,7 +1,7 @@
 <template>
 	<v-chip
 		v-if="type != 'other'"
-		small
+		:small="!big"
 		light
 		color="grey lighten-4"
 		class="pl-1 mt-1"
@@ -42,6 +42,11 @@ export default {
 		text: {
 			type: String,
 			required: true,
+		},
+		big: {
+			type: Boolean,
+			required: false,
+			default: false,
 		},
 		minimal: {
 			type: Boolean,
