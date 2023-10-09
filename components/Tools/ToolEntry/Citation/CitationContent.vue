@@ -1,15 +1,15 @@
 <template>
 	<div>
-		<CitationPlot />
+		<!--CitationPlot -->
 	</div>
 </template>
 <script>
-import CitationPlot from './CitationPlot.vue';
+// import CitationPlot from './CitationPlot.vue';
 
 export default {
 	name: 'CitationContent',
 	components: {
-		CitationPlot,
+		// CitationPlot,
 	},
 };
 </script>

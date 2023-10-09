@@ -74,19 +74,15 @@
 						:type="tool.type"
 						:version="tool.version"
 						:webpage="tool.webpage"
-						:repository="tool.repository"
-						:license="tool.license"
-						:topics="tool.topics"
-						:operations="tool.operations"
-						:sourcesLabels="tool.sources_labels"
+						:sources-labels="tool.sources_labels"
 					/>
 
 					<v-card
 						v-for="(item, i) in items"
 						:id="item.id"
 						:key="i"
-						elevation="1"
-						class="mt-5 mb-5 pb-5 pl-5 content-cards"
+						elevation="2"
+						class="mt-8 pt-4 mb-5 pb-6 pl-5 content-cards"
 					>
 						<v-card-title
 							ref="Items"
@@ -140,6 +136,7 @@ import SearchBar from '~/components/Tools/ToolEntry/SearchBar.vue';
 import EntryIntro from '~/components/Tools/ToolEntry/EntryIntro.vue';
 import ToolBrief from '~/components/Tools/ToolEntry/ToolBrief.vue';
 import CitationContent from '~/components/Tools/ToolEntry/Citation/CitationContent.vue';
+import DocumentationContent from '~/components/Tools/ToolEntry/Documentation/DocumentationContent.vue';
 import FAIRtreeview from '~/components/Tools/ToolEntry/FAIR/FAIRtreeview.vue';
 
 export default {
@@ -149,6 +146,7 @@ export default {
 		EntryIntro,
 		ToolBrief,
 		CitationContent,
+		DocumentationContent,
 		FAIRtreeview,
 		VueFixedScrollBreak,
 	},
@@ -157,23 +155,23 @@ export default {
 		return {
 			items: [
 				{
+					title: 'Documentation',
+					id: 'documentation',
+					component: 'DocumentationContent',
+				},
+				{
+					title: 'Accessibility',
+					id: 'accessibility',
+					component: '',
+				},
+				{
 					title: 'Citation',
 					id: 'citation',
 					component: 'CitationContent',
 				},
 				{
-					title: 'Documentation',
-					id: 'documentation',
-					component: '',
-				},
-				{
 					title: 'Licensing',
 					id: 'licensing',
-					component: '',
-				},
-				{
-					title: 'Accessibility',
-					id: 'accessibility',
 					component: '',
 				},
 				{
@@ -199,8 +197,16 @@ export default {
 			},
 			introVisible: true,
 			activeItem: 0,
-			sectionsIndicatorsMap: [['F3'], ['F2', 'R1', 'R3'], ['R2'], [], [], []],
-			sectionsOpen: [['F'], ['F', 'R'], ['R'], [], []],
+			sectionsIndicatorsMap: [
+				['F2', 'R1', 'R3'],
+				['A1', 'A3'],
+				['F3'],
+				['R2'],
+				[],
+				[],
+				[],
+			],
+			sectionsOpen: [['F', 'R'], ['A'], ['F'], ['R'], [], []],
 		};
 	},
 
