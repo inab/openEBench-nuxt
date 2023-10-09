@@ -27,62 +27,45 @@
 		<v-row>
 			<v-col>
 				<p class="text-body-2">{{ description }}</p>
+
+				<div class="d-flex justify-center">
+					<LinkChipWImage
+						v-for="[key, value] in Object.entries(sourcesLabels)"
+						:key="key"
+						:link="value"
+						:type="key"
+						:text="key"
+						light
+						class="ml-1 mr-2"
+					/>
+					<LinkChipWIcon
+						v-if="webpage"
+						:link="webpage[0].term"
+						text="Homepage"
+						icon="mdi-web"
+						class="ml-1"
+					/>
+				</div>
 			</v-col>
 		</v-row>
-		<!--v-row class="mt-0">
+		<v-row class="mt-1">
 			<v-col cols="12" class="pt-1">
-
-				<div v-if="topics.length > 0" justify="left" class="mt-1">
-					<LinkChipTopicOperation
-						v-for="(item, i) in topics"
-						:key="i"
-						:uri="item.term.uri"
-						:text="cleanString(item.term.term)"
-						icon="mdi-label-multiple"
-						big
-						class="mr-1"
-					/>
-				</div>
-
-				<div v-if="operations.length > 0" justify="center" class="mt-3">
-					<LinkChipTopicOperation
-						v-for="(item, i) in operations"
-						:key="i"
-						:uri="item.term.uri"
-						:text="cleanString(item.term.term)"
-						icon="mdi-cog"
-						big
-						class="mr-1"
-					/>
-				</div>
-
-				<div v-if="license.length > 0" justify="center" class="mt-2">
-					<LinkChipWIcon
-						v-for="(item, i) in license"
-						:key="i"
-						:link="item.term.u"
-						icon="mdi-scale-balance"
-						:text="item.term.name"
-						light
-						big
-						label
-						:disabled="item.term.url === ''"
-						class="mr-1"
-					/>
-				</div>
+				<span class="text-subtitle-2">Documentation</span>
 			</v-col>
-		</v-row-->
+		</v-row>
 	</v-card>
 </template>
 <script>
+import LinkChipWImage from '../Search/Card/LinkChipWImage.vue';
+import LinkChipWIcon from '../Search/Card/LinkChipWIcon.vue';
 import ChipType from '~/components/Tools/Search/Card/ChipType.vue';
-// import LinkChipTopicOperation from '~/components/Tools/Search/Card/LinkChipTopicOperation.vue';
-// import LinkChipWIcon from '~/components/Tools/Search/Card/LinkChipWIcon.vue';
 
 export default {
 	name: 'EntryIntro',
 	components: {
 		ChipType,
+		LinkChipWImage,
+		LinkChipWIcon,
 	},
 	props: {
 		name: {
@@ -119,6 +102,10 @@ export default {
 		},
 		operations: {
 			type: Array,
+			required: true,
+		},
+		sourcesLabels: {
+			type: Object,
 			required: true,
 		},
 	},
