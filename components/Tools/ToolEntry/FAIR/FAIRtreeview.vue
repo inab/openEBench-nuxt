@@ -11,7 +11,7 @@
 		dense
 	>
 		<template #label="{ item }">
-			<span class="text-body-2 font-weight-regular label-span">{{
+			<span class="text-body-2 font-weight-regular label-span pr-1">{{
 				item.name
 			}}</span>
 		</template>

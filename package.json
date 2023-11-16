@@ -50,6 +50,7 @@
 		"vue-axios": "^3.5.2",
 		"vue-code-highlight": "^0.7.8",
 		"vue-cookie-law": "^1.13.3",
+		"vue-fixed-scroll-break": "^1.0.0",
 		"vue-fragment": "^1.5.2",
 		"vue-observe-visibility": "^1.0.0",
 		"vue-server-renderer": "^2.6.14",

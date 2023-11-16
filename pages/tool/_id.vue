@@ -1,71 +1,32 @@
 <template>
-	<v-container id="main-container" ref="Main" fluid class="pt-2 pl-0 pr-0">
-		<v-container class="pt-4">
-			<v-row justify="space-around">
-				<v-col v-if="!loading" cols="2">
-					<div v-show="!introVisible">
-						<VueFixedScrollBreak
-							:total-offset="offsetMenu"
-							:top-of-stop-element="offset"
+	<div>
+		<ToolBrief
+			v-if="!introVisible && !loading"
+			:name="tool.label[0]"
+			:type="tool.type"
+			:version="tool.version"
+			:sources-labels="tool.sources_labels"
+			:webpage="tool.webpage"
+		/>
+
+		<v-card class="fixed-card ml-6" max-width="500" elevation="0">
+			<v-list class="pt-0 pb-0">
+				<v-list-item-group v-model="activeItem" active-class="primary--text">
+					<v-list-item v-for="(item, i) in items" :key="i">
+						<v-list-item-content
+							:active="activeItem === i"
+							@click="$vuetify.goTo('#' + item.id)"
 						>
-							<ToolBrief
-								:name="tool.label[0]"
-								:type="tool.type"
-								:version="tool.version"
-								:sources-labels="tool.sources_labels"
-								:webpage="tool.webpage"
-							/>
-							<v-card class="fixed-card" max-width="500" elevation="0">
-								<v-list class="pt-0 pb-0">
-									<v-list-item-group
-										v-model="activeItem"
-										active-class="primary--text"
-									>
-										<v-list-item v-for="(item, i) in items" :key="i">
-											<v-list-item-content
-												:active="activeItem === i"
-												@click="$vuetify.goTo('#' + item.id)"
-											>
-												<v-list-item-title
-													class="text-subtitle-2"
-													v-text="item.title"
-												>
-												</v-list-item-title>
-											</v-list-item-content>
-										</v-list-item>
-									</v-list-item-group>
-								</v-list>
-							</v-card>
-						</VueFixedScrollBreak>
-					</div>
-					<div v-show="introVisible">
-						<v-card
-							class="fixed-card fixed-first"
-							max-width="500"
-							elevation="0"
-						>
-							<v-list class="pt-0 pb-0">
-								<v-list-item-group
-									v-model="activeItem"
-									active-class="primary--text"
-								>
-									<v-list-item v-for="(item, i) in items" :key="i">
-										<v-list-item-content
-											:active="activeItem === i"
-											@click="$vuetify.goTo('#' + item.id)"
-										>
-											<v-list-item-title
-												class="text-subtitle-2"
-												v-text="item.title"
-											>
-											</v-list-item-title>
-										</v-list-item-content>
-									</v-list-item>
-								</v-list-item-group>
-							</v-list>
-						</v-card>
-					</div>
-				</v-col>
+							<v-list-item-title class="text-subtitle-2" v-text="item.title">
+							</v-list-item-title>
+						</v-list-item-content>
+					</v-list-item>
+				</v-list-item-group>
+			</v-list>
+		</v-card>
+
+		<v-container id="main-container" ref="Main" fluid class="pt-6">
+			<v-row justify="center">
 				<v-col v-if="!loading" cols="8">
 					<EntryIntro
 						ref="Intro"
@@ -82,7 +43,7 @@
 						:id="item.id"
 						:key="i"
 						elevation="2"
-						class="mt-8 pt-4 mb-5 pb-6 pl-5 content-cards"
+						class="mt-6 mb-6 pa-5 content-cards"
 					>
 						<v-card-title
 							ref="Items"
@@ -98,16 +59,6 @@
 						type="article, list-item-three-line, image"
 					>
 					</v-skeleton-loader>
-				</v-col>
-				<v-col v-if="!loading" cols="2" class="mt-0 pt-1 pl-5" justify="left">
-					<v-row>
-						<div id="fixed-fair">
-							<FAIRtreeview
-								:active="sectionsIndicatorsMap[activeItem]"
-								:open="sectionsOpen[activeItem]"
-							/>
-						</div>
-					</v-row>
 				</v-col>
 			</v-row>
 			<VueFixedScrollBreak
@@ -127,7 +78,7 @@
 				</v-btn>
 			</VueFixedScrollBreak>
 		</v-container>
-	</v-container>
+	</div>
 </template>
 <script>
 import { mapGetters } from 'vuex';
@@ -137,7 +88,7 @@ import EntryIntro from '~/components/Tools/ToolEntry/EntryIntro.vue';
 import ToolBrief from '~/components/Tools/ToolEntry/ToolBrief.vue';
 import CitationContent from '~/components/Tools/ToolEntry/Citation/CitationContent.vue';
 import DocumentationContent from '~/components/Tools/ToolEntry/Documentation/DocumentationContent.vue';
-import FAIRtreeview from '~/components/Tools/ToolEntry/FAIR/FAIRtreeview.vue';
+import AccessibilityContent from '~/components/Tools/ToolEntry/Accessibility/AccessibilityContent.vue';
 
 export default {
 	name: 'ToolEntry',
@@ -147,7 +98,7 @@ export default {
 		ToolBrief,
 		CitationContent,
 		DocumentationContent,
-		FAIRtreeview,
+		AccessibilityContent,
 		VueFixedScrollBreak,
 	},
 	layout: 'DefaultLayoutWOBreadcrumbs',
@@ -162,7 +113,7 @@ export default {
 				{
 					title: 'Accessibility',
 					id: 'accessibility',
-					component: '',
+					component: 'AccessibilityContent',
 				},
 				{
 					title: 'Citation',
@@ -197,16 +148,6 @@ export default {
 			},
 			introVisible: true,
 			activeItem: 0,
-			sectionsIndicatorsMap: [
-				['F2', 'R1', 'R3'],
-				['A1', 'A3'],
-				['F3'],
-				['R2'],
-				[],
-				[],
-				[],
-			],
-			sectionsOpen: [['F', 'R'], ['A'], ['F'], ['R'], [], []],
 		};
 	},
 
@@ -267,7 +208,8 @@ export default {
 			}
 		},
 		entryBriefVisibility() {
-			if (this.$refs.Intro.$refs.Intro !== undefined) {
+			if (this.$refs.Intro !== undefined) {
+				console.log(this.$refs.Intro);
 				this.introVisible = this.elementIsVisibleInViewport(
 					this.$refs.Intro.$refs.Intro
 				);
@@ -290,20 +232,13 @@ export default {
 <style scoped>
 .fixed-card {
 	width: 180px;
-}
-
-.fixed-first {
 	position: fixed;
+	top: 130px;
 }
 
 #tool-brief {
 	position: fixed;
 	width: 180px;
-}
-
-.card-titles {
-	font-weight: 400;
-	font-size: 1.2rem !important;
 }
 
 .content-cards {
@@ -312,7 +247,7 @@ export default {
 
 #to-top {
 	position: fixed;
-	right: 280px;
+	right: 80px;
 }
 
 #fixed-fair {

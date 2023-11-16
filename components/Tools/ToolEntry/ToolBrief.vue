@@ -1,46 +1,59 @@
 <template>
-	<v-card id="fixed" class="mt-0 pb-2 pb-1" max-width="500" elevation="0">
-		<v-card-title class="pt-0 pb-0 mt-1 mb-0">
-			<span class="font-weight-regular text-h6">{{ name }}</span>
-		</v-card-title>
-		<div class="ml-1">
-			<v-chip
-				v-for="(item, i) in cleanVersion(version)"
-				:key="i"
-				color="primary lighten-2"
-				x-small
-				outlined
-				class="pt-2 pb-2 pl-1 pr-1 mt-0 ml-2"
-			>
-				<span class="text-caption font-weight-bold">{{ item }}</span>
-			</v-chip>
-		</div>
-
-		<div class="ml-3 mt-2">
-			<ChipType :type="type" />
-		</div>
-
-		<div class="ml-2 mt-2">
-			<LinkChipWImage
-				v-for="[key, value] in Object.entries(sourcesLabels)"
-				:key="key"
-				:link="value"
-				:type="key"
-				:text="key"
-				light
-				small
-				minimal
-				class="ml-1"
-			/>
-			<LinkChipWIcon
-				v-if="webpage"
-				:link="webpage[0].term"
-				icon="mdi-web"
-				class="ml-0"
-				minimal
-			/>
-		</div>
-	</v-card>
+	<div class="fixed">
+		<v-app-bar color="white" dense flat outlined>
+			<v-container fluid>
+				<v-row align="center" justify="space-between">
+					<div class="d-flex align-left">
+						<div>
+							<v-toolbar-title class="ml-5 mr-5 mt-1">
+								{{ name }}
+							</v-toolbar-title>
+						</div>
+						<div class="mt-1">
+							<v-chip
+								v-for="(item, i) in cleanVersion(version)"
+								:key="i"
+								color="primary lighten-2"
+								small
+								outlined
+								class="pa-2 mt-0 mr-1"
+							>
+								<span class="font-weight-bold caption">{{ item }}</span>
+							</v-chip>
+						</div>
+					</div>
+					<div class="d-flex align-left">
+						<div>
+							<LinkChipWIcon
+								v-if="webpage"
+								:link="webpage[0].term"
+								text=""
+								icon="mdi-web"
+								class="ml-1"
+								big
+								minimal
+							/>
+							<LinkChipWImage
+								v-for="[key, value] in Object.entries(sourcesLabels)"
+								:key="key"
+								:link="value"
+								:type="key"
+								text=""
+								light
+								class="ml-1 mr-2"
+								big
+								minimal
+							/>
+						</div>
+						<div>
+							<ChipType :type="type" class="ml-5 mr-5 mt-2 font-weight-bold" />
+						</div>
+					</div>
+				</v-row>
+			</v-container>
+		</v-app-bar>
+		<v-divider></v-divider>
+	</div>
 </template>
 <script>
 import ChipType from '../Search/Card/ChipType.vue';
@@ -84,7 +97,9 @@ export default {
 };
 </script>
 <style scoped>
-.v-card-title {
-	font-weight: 300;
+.fixed {
+	position: fixed;
+	width: 100%;
+	z-index: 100;
 }
 </style>
