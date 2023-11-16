@@ -29,6 +29,14 @@
 				<p class="text-body-2">{{ description }}</p>
 
 				<div class="d-flex justify-center">
+					<LinkChipWIcon
+						v-if="webpage"
+						:link="webpage[0].term"
+						text="Homepage"
+						icon="mdi-web"
+						class="ml-1 mr-2"
+						big
+					/>
 					<LinkChipWImage
 						v-for="[key, value] in Object.entries(sourcesLabels)"
 						:key="key"
@@ -36,15 +44,7 @@
 						:type="key"
 						:text="key"
 						light
-						class="ml-1 mr-2"
-						big
-					/>
-					<LinkChipWIcon
-						v-if="webpage"
-						:link="webpage[0].term"
-						text="Homepage"
-						icon="mdi-web"
-						class="ml-1"
+						class="ml-2 mr-2"
 						big
 					/>
 				</div>
