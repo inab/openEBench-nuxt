@@ -2,11 +2,11 @@
 	<v-card elevation="0" class="pr-5 mb-4 pl-3">
 		<v-row justify="space-between">
 			<v-col cols="6">
-				<span class="text-h5">
+				<span class="text-h4">
 					{{ name }}
 				</span>
 			</v-col>
-			<v-col ref="Intro" cols="6" class="d-flex">
+			<v-col ref="Intro" cols="6" class="d-flex align-center">
 				<ChipType :type="type" big class="ml-auto font-weight-bold" />
 			</v-col>
 		</v-row>
