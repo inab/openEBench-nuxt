@@ -4,6 +4,7 @@ export default {
 		return {
 			tool: {},
 			loading: true,
+			edamDialog: false,
 		};
 	},
 	actions: {
@@ -16,6 +17,10 @@ export default {
 			commit('updateTool', data);
 			commit('updateLoading', false);
 		},
+
+		updateEdamDialog({ commit }, payload) {
+			commit('updateEdamDialog', payload);
+		},
 	},
 	mutations: {
 		updateTool(state, payload) {
@@ -24,6 +29,9 @@ export default {
 		updateLoading(state, payload) {
 			state.loading = payload;
 		},
+		updateEdamDialog(state, payload) {
+			state.edamDialog = payload;
+		},
 	},
 	getters: {
 		tool(state) {
@@ -31,6 +39,9 @@ export default {
 		},
 		loading(state) {
 			return state.loading;
+		},
+		edamDialog(state) {
+			return state.edamDialog;
 		},
 	},
 };

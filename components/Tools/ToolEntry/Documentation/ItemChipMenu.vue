@@ -42,16 +42,15 @@ export default {
 		color: {
 			type: String,
 			required: true,
-			default: 'green lighten-4',
 		},
 		textColor: {
 			type: String,
 			required: true,
-			default: '#F48F43',
 		},
 	},
 	data() {
 		return {
+			dialog: false,
 			items: [
 				{
 					text: 'Explore relationships',
@@ -59,7 +58,7 @@ export default {
 					action: this.exploreRelationships,
 				},
 				{
-					text: 'See details',
+					text: 'See details in Bioportal',
 					icon: 'mdi-open-in-new',
 					action: this.seeDetails,
 				},
@@ -68,7 +67,10 @@ export default {
 	},
 	methods: {
 		exploreRelationships() {
-			console.log('Explore relationships');
+			// emit true to open relationships dialog
+			const id = this.edamId.substring(this.edamId.lastIndexOf('/') + 1);
+			const URI = `https://edamontology.github.io/edam-browser/#${id}`;
+			window.open(URI, '_blank');
 		},
 		seeDetails() {
 			// open EDAM page of edam_id in new tab

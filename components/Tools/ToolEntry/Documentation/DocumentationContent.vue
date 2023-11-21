@@ -37,7 +37,6 @@
 					:color="colorTopic"
 					:text-color="textColorTopic"
 				/>
-				<!--v-icon small class="ml-2"> mdi-dots-vertical </v-icon-->
 			</v-col>
 		</v-row>
 		<v-row class="mt-0 mb-3">
@@ -48,22 +47,14 @@
 				</span>
 			</v-col>
 			<v-col cols="12" class="mt-0 pt-0 pl-8 ml-3">
-				<v-chip
+				<ItemChipMenu
 					v-for="item in tool.operations"
 					:key="item.id"
-					class="ml-2 mr-2 mt-0"
-					label
-					link
-					:href="item.term.uri"
-					target="_blank"
-					text-color="orange darken-3"
-					color="orange lighten-5"
-				>
-					<span class="text-body-2 font-weight-medium">{{
-						item.term.term
-					}}</span>
-					<v-icon small class="ml-2"> mdi-dots-vertical </v-icon>
-				</v-chip>
+					:text="item.term.term"
+					:edam-id="item.term.uri"
+					:color="colorOperation"
+					:text-color="textColorOperation"
+				/>
 			</v-col>
 		</v-row>
 	</v-container>
@@ -93,3 +84,10 @@ export default {
 	},
 };
 </script>
+
+<style>
+.v-dialog {
+	width: 75%;
+	height: 70%;
+}
+</style>
