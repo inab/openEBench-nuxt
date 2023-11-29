@@ -88,6 +88,7 @@ import EntryIntro from '~/components/Tools/ToolEntry/EntryIntro.vue';
 import ToolBrief from '~/components/Tools/ToolEntry/ToolBrief.vue';
 import CitationContent from '~/components/Tools/ToolEntry/Citation/CitationContent.vue';
 import DocumentationContent from '~/components/Tools/ToolEntry/Documentation/DocumentationContent.vue';
+import AccessibilityContent from '~/components/Tools/ToolEntry/Accessibility/AccessibilityContent.vue';
 
 export default {
 	name: 'ToolEntry',
@@ -97,6 +98,7 @@ export default {
 		ToolBrief,
 		CitationContent,
 		DocumentationContent,
+		AccessibilityContent,
 		VueFixedScrollBreak,
 	},
 	layout: 'DefaultLayoutWOBreadcrumbs',
@@ -111,7 +113,7 @@ export default {
 				{
 					title: 'Accessibility',
 					id: 'accessibility',
-					component: '',
+					component: 'AccessibilityContent',
 				},
 				{
 					title: 'Citation',
@@ -149,6 +151,13 @@ export default {
 		};
 	},
 
+	computed: {
+		...mapGetters('tool_entry', {
+			tool: 'tool',
+			loading: 'loading',
+		}),
+	},
+
 	beforeMount() {
 		// Get name and type from URL
 		// this.$store.dispatch('tool/setToolName', this.$route.params.name)
@@ -159,12 +168,6 @@ export default {
 
 		this.$store.dispatch('tool_entry/retrieveTool', payload);
 		window.addEventListener('scroll', this.handleScroll);
-	},
-	computed: {
-		...mapGetters('tool_entry', {
-			tool: 'tool',
-			loading: 'loading',
-		}),
 	},
 
 	unmounted() {
@@ -207,7 +210,7 @@ export default {
 		},
 		entryBriefVisibility() {
 			if (this.$refs.Intro !== undefined) {
-				console.log(this.$refs.Intro);
+				// console.log(this.$refs.Intro);
 				this.introVisible = this.elementIsVisibleInViewport(
 					this.$refs.Intro.$refs.Intro
 				);
