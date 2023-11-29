@@ -2,8 +2,10 @@
 	<v-container class="mt-0 pt-0 pl-8">
 		<v-row class="mt-0 pt-0 mb-3">
 			<v-col cols="12" class="pt-0 mt-0 mb-0 pb-1">
-				<span class="text-subtitle">
-					<v-icon x-small color="black"> mdi-text-box-multiple-outline </v-icon>
+				<span class="text-subtitle d-flex align-center">
+					<v-icon small color="black" class="mr-1">
+						mdi-text-box-multiple-outline
+					</v-icon>
 					Documents
 				</span>
 			</v-col>
@@ -23,8 +25,8 @@
 		</v-row>
 		<v-row class="mt-0 pt-0 mb-3">
 			<v-col cols="12" class="mt-0 pt-0 pb-0 mb-0">
-				<span class="text-subtitle">
-					<v-icon small color="black"> mdi-label-multiple</v-icon>
+				<span class="text-subtitle d-flex align-center">
+					<v-icon small color="black" class="mr-1"> mdi-label-multiple</v-icon>
 					Related topics
 				</span>
 			</v-col>
@@ -41,8 +43,8 @@
 		</v-row>
 		<v-row class="mt-0 mb-3">
 			<v-col cols="12" class="pt-1">
-				<span class="text-subtitle">
-					<v-icon small color="black"> mdi-cog</v-icon>
+				<span class="text-subtitle d-flex align-center">
+					<v-icon small color="black" class="mr-1"> mdi-cog</v-icon>
 					Operations performed by the software
 				</span>
 			</v-col>

@@ -27,6 +27,7 @@
 		"*.**": "prettier --check --ignore-unknown"
 	},
 	"dependencies": {
+		"@inb/oeb_visualizations": "^0.0.6",
 		"@inb/oeb-chart-barplot": "^1.2.0",
 		"@inb/oeb-chart-scatter": "^1.1.4",
 		"@inb/oeb-classification-table": "^1.2.3",
