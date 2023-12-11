@@ -31,21 +31,17 @@
 				</v-tabs>
 			</v-col>
 			<!--Status-->
-			<v-col cols="8">
+			<v-col cols="10" class="d-flex justify-left">
 				<upTimeStatus :status="status" :time="time" />
 			</v-col>
 			<!--Plot-->
 			<v-col cols="12">
 				<v-tabs-items v-model="tabUptime">
 					<v-tab-item>
-						<div class="d-flex justify-center">
-							<UptimePlotWeek class="mb-2" />
-						</div>
+						<UptimePlotWeek class="mb-2" />
 					</v-tab-item>
 					<v-tab-item>
-						<div class="d-flex justify-center">
-							<UptimePlotMonth class="mb-2" />
-						</div>
+						<UptimePlotMonth class="mb-2" />
 					</v-tab-item>
 					<v-tab-item> </v-tab-item>
 					<v-tab-item> </v-tab-item>
