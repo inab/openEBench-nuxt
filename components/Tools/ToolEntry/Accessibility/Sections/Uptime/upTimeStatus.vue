@@ -1,13 +1,13 @@
 <template>
 	<v-row>
-		<v-col cols="4" class="d-flex justify-left align-center">
+		<v-col cols="2" class="d-flex justify-left align-center">
 			<div class="status-title mr-1">
 				CURRENT <br />
 				STATUS
 			</div>
 			<div class="status-text">{{ status }}</div>
 		</v-col>
-		<v-col cols="4" class="d-flex justify-left align-center">
+		<v-col cols="2" class="d-flex justify-left align-center">
 			<div class="status-title mr-1">
 				DAYS <br />
 				{{ status }}

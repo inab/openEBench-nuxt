@@ -27,23 +27,21 @@
 					<v-tab class="tab">Week</v-tab>
 					<v-tab class="tab">Month</v-tab>
 					<v-tab class="tab">6 months</v-tab>
-					<v-tab class="tab">year</v-tab>
 				</v-tabs>
 			</v-col>
 			<!--Status-->
-			<v-col cols="10" class="d-flex justify-left">
+			<v-col cols="11" class="d-flex justify-left pb-0">
 				<upTimeStatus :status="status" :time="time" />
 			</v-col>
 			<!--Plot-->
-			<v-col cols="12">
+			<v-col cols="12" class="pt-0">
 				<v-tabs-items v-model="tabUptime">
 					<v-tab-item>
-						<UptimePlotWeek class="mb-2" />
+						<UptimePlotWeek class="mb-2 pl-3 pr-3" />
 					</v-tab-item>
 					<v-tab-item>
-						<UptimePlotMonth class="mb-2" />
+						<UptimePlotMonth class="mb-2 pl-3 pr-3" />
 					</v-tab-item>
-					<v-tab-item> </v-tab-item>
 					<v-tab-item> </v-tab-item>
 				</v-tabs-items>
 			</v-col>
