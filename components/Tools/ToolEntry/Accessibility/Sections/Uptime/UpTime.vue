@@ -13,9 +13,13 @@
 		<v-row class="mt-0 pt-0 mb-2">
 			<v-col cols="12" class="mt-0 pt-0 pb-0 mb-0 d-flex justify-center">
 				<v-chip color="indigo lighten-5" class="pl-5 pr-5"
-					><a class="text-body font-weight-medium">{{
-						tool.webpage[0].term
-					}}</a></v-chip
+					><a
+						class="text-body font-weight-medium"
+						:style="{ 'text-decoration': 'none' }"
+						:href="tool.webpage[0].term"
+						target="_blank"
+						>{{ tool.webpage[0].term }}</a
+					></v-chip
 				>
 			</v-col>
 		</v-row>
@@ -37,12 +41,32 @@
 			<v-col cols="12" class="pt-0">
 				<v-tabs-items v-model="tabUptime">
 					<v-tab-item>
-						<UptimePlotWeek class="mb-2 pl-3 pr-3" />
+						<UptimePlotWeek v-if="!loadingUptime" class="mb-2 pl-3 pr-3" />
+						<v-skeleton-loader
+							v-else
+							v-bind="attrs"
+							type="image"
+							class="mb-2 pl-3 pr-3"
+						></v-skeleton-loader>
 					</v-tab-item>
 					<v-tab-item>
-						<UptimePlotMonth class="mb-2 pl-3 pr-3" />
+						<UptimePlotMonth v-if="!loadingUptime" class="mb-2 pl-3 pr-3" />
+						<v-skeleton-loader
+							v-else
+							v-bind="attrs"
+							type="image"
+							class="mb-2 pl-3 pr-3"
+						></v-skeleton-loader>
 					</v-tab-item>
-					<v-tab-item> </v-tab-item>
+					<v-tab-item>
+						<UptimePlot6Month v-if="!loadingUptime" class="mb-2 pl-3 pr-3" />
+						<v-skeleton-loader
+							v-else
+							v-bind="attrs"
+							type="image"
+							class="mb-2 pl-3 pr-3"
+						></v-skeleton-loader>
+					</v-tab-item>
 				</v-tabs-items>
 			</v-col>
 		</v-row>
@@ -50,15 +74,17 @@
 </template>
 <script>
 import { mapGetters } from 'vuex';
-import UptimePlotMonth from './UptimePlotMonth.vue';
 import UptimePlotWeek from './UptimePlotWeek.vue';
+import UptimePlotMonth from './UptimePlotMonth.vue';
+import UptimePlot6Month from './UptimePlot6Month.vue';
 import upTimeStatus from './upTimeStatus.vue';
 
 export default {
 	name: 'UpTime',
 	components: {
-		UptimePlotMonth,
 		UptimePlotWeek,
+		UptimePlotMonth,
+		UptimePlot6Month,
 		upTimeStatus,
 	},
 	props: {
@@ -77,8 +103,14 @@ export default {
 	computed: {
 		...mapGetters('tool_entry', {
 			tool: 'tool',
+			uptimeWeb: 'uptimeWeb',
 			loading: 'loading',
+			loadingUptime: 'loadingUptime',
 		}),
+	},
+	mounted() {
+		// make request to fetch uptime data
+		this.$store.dispatch('tool_entry/retrieveUptimes');
 	},
 	methods: {
 		urlFormatter() {
