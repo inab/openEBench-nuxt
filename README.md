@@ -51,7 +51,7 @@ The respective docker compose files for the oeb landscape can be found in this r
 
 ```bash
 # install dependencies
-$ npm install
+$ npm ci
 
 # serve with hot reload at localhost:3000
 $ npm run dev
