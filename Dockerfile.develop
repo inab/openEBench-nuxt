@@ -1,5 +1,5 @@
 #stage 1
-FROM node:14 as node
+FROM node:20 as node
 WORKDIR /app
 #define env vars
 ARG ENVIRONMENT=dev-openebench
@@ -24,6 +24,7 @@ ENV KEYCLOAK_HOST $KEYCLOAK_HOST
 ENV KEYCLOAK_REALM $KEYCLOAK_REALM
 ENV KEYCLOAK_CLIENT_ID $KEYCLOAK_CLIENT_ID
 ENV OBSERVATORY_API_URL $OBSERVATORY_API_URL
+ENV NODE_OPTIONS --openssl-legacy-provider
 COPY . .
 RUN npm ci
 RUN npm run build
