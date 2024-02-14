@@ -34,7 +34,7 @@
 		<v-col cols="4" class="d-flex align-center">
 			<v-icon class="mr-1 text--primary"> mdi-flag-outline </v-icon>
 			{{ currentEvent.challenges.length }}
-			{{ 'Challenges' | pluralize(currentEvent.challenges.length) }}
+			{{ 'Charts' | pluralize(currentEvent.challenges.length) }}
 		</v-col>
 	</v-row>
 </template>

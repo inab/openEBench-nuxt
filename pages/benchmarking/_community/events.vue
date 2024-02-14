@@ -38,7 +38,7 @@
 					<v-list-item-subtitle class="d-flex align-center">
 						<v-icon small class="mr-1"> mdi-flag-outline </v-icon>
 						{{ event.challenges.length }}
-						{{ 'Challenges' | pluralize(event.challenges.length) }}
+						{{ 'Charts' | pluralize(event.challenges.length) }}
 					</v-list-item-subtitle>
 				</v-list-item-content>
 			</v-list-item>
