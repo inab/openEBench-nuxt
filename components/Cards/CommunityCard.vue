@@ -102,6 +102,10 @@ export default {
 			type: Array,
 			required: true,
 		},
+		summary: {
+			type: String,
+			required: true,
+		},
 		to: {
 			type: String,
 			required: true,

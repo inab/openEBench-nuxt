@@ -45,6 +45,7 @@
 						:logo="project.logo"
 						:links="project.links"
 						:status="project.status"
+						:summary="project.summary"
 						:benchmarking-events="[]"
 						:reference-tools="[]"
 						:to="'/projects/' + project._id"

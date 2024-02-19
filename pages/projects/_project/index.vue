@@ -17,7 +17,10 @@
 				<v-card outlined class="pa-5" elevation="1">
 					<v-row no-gutters align="center">
 						<v-col>
-							<marked-wrapper :markdown="markdownContent" />
+							<marked-wrapper
+								v-if="project.summary"
+								:markdown="project.summary"
+							/>
 						</v-col>
 					</v-row>
 				</v-card>
@@ -81,10 +84,10 @@ export default {
 		}
 	},
 	created() {
-		const {
-			default: md,
-		} = require(`~/static/markdown/projects/${this.$route.params.project}.md`);
-		this.markdownContent = md || '';
+		// const {
+		// 	default: md,
+		// } = require(`~/static/markdown/projects/${this.$route.params.project}.md`);
+		// this.markdownContent = md || '';
 	},
 };
 </script>
