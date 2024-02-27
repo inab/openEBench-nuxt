@@ -7,19 +7,19 @@
 				</v-card-title>
 				<div class="d-flex">
 					<v-chip
+						v-if="isOsiApproved"
 						color="green lighten-5"
 						text-color="green darken-3"
 						class="ml-4 mb-3 text-body font-weight-medium"
 						small
-						v-if="isOsiApproved"
 						>OSI Approved</v-chip
 					>
 					<v-chip
+						v-if="spdx"
 						outlined
 						text-color="grey darken-2"
 						class="ml-4 mb-3 text-body-2"
 						small
-						v-if="spdx"
 						><v-img :src="spdxLogo" height="15" max-width="60" contain></v-img
 					></v-chip>
 				</div>

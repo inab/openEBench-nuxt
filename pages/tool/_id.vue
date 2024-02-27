@@ -89,6 +89,7 @@ import ToolBrief from '~/components/Tools/ToolEntry/ToolBrief.vue';
 import CitationContent from '~/components/Tools/ToolEntry/Citation/CitationContent.vue';
 import DocumentationContent from '~/components/Tools/ToolEntry/Documentation/DocumentationContent.vue';
 import AccessibilityContent from '~/components/Tools/ToolEntry/Accessibility/AccessibilityContent.vue';
+import LicenseContent from '~/components/Tools/ToolEntry/License/LicenseContent.vue';
 
 export default {
 	name: 'ToolEntry',
@@ -100,6 +101,7 @@ export default {
 		DocumentationContent,
 		AccessibilityContent,
 		VueFixedScrollBreak,
+		LicenseContent,
 	},
 	layout: 'DefaultLayoutWOBreadcrumbs',
 	data() {
@@ -123,7 +125,7 @@ export default {
 				{
 					title: 'Licensing',
 					id: 'licensing',
-					component: '',
+					component: 'LicenseContent',
 				},
 				{
 					title: 'Recognition',
@@ -243,7 +245,7 @@ export default {
 }
 
 .content-cards {
-	min-height: 300px;
+	min-height: 100px;
 }
 
 #to-top {
