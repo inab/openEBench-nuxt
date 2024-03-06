@@ -40,6 +40,13 @@ export default {
 			{ name: 'format-detection', content: 'telephone=no' },
 		],
 		link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+		script: [
+			{
+				hid: 'stripe',
+				src: 'https://cdn.plot.ly/plotly-latest.min.js',
+				defer: true,
+			},
+		],
 	},
 
 	// Global CSS: https://go.nuxtjs.dev/config-css
@@ -148,7 +155,8 @@ export default {
 			process.env.OBSERVATORY_URI || 'https://observatory.openebench.bsc.es',
 		SCIENTIFIC_SERVICE_URL:
 			process.env.SCIENTIFIC_SERVICE_URL ||
-			'https://dev-openebench.bsc.es/api/scientific',
+			// 'https://dev-openebench.bsc.es/api/scientific',
+			'https://openebench.bsc.es/api/scientific',
 		BENCH_EVENT_API_URL:
 			process.env.BENCH_EVENT_API_URL ||
 			'https://dev-openebench.bsc.es/rest/bench_event_api',
