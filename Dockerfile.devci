@@ -1,0 +1,35 @@
+#stage 1
+FROM node:20 as node
+WORKDIR /app
+#define env vars
+ARG ENVIRONMENT=openebench
+ARG OEB_LEGACY_ANGULAR_URI=https://legacy.openebench.bsc.es/
+ARG VRE_URI=https://openebench.bsc.es/vre/home/
+ARG OBSERVATORY_URI=https://observatory.openebench.bsc.es
+ARG REST_API_URL=https://openebench.bsc.es/monitor/rest/
+ARG SCIENTIFIC_SERVICE_URL=https://openebench.bsc.es/api/scientific
+ARG BENCH_EVENT_API_URL=https://openebench.bsc.es/rest/bench_event_api
+ARG KEYCLOAK_HOST=https://inb.bsc.es
+ARG KEYCLOAK_REALM=openebench
+ARG KEYCLOAK_CLIENT_ID=oeb-frontend
+ARG OBSERVATORY_API_URL=https://observatory.openebench.bsc.es/api/stats
+ENV ENVIRONMENT $ENVIRONMENT
+ENV OEB_LEGACY_ANGULAR_URI $OEB_LEGACY_ANGULAR_URI
+ENV VRE_URI $VRE_URI
+ENV OBSERVATORY_URI $OBSERVATORY_URI
+ENV REST_API_URL $REST_API_URL
+ENV SCIENTIFIC_SERVICE_URL $SCIENTIFIC_SERVICE_URL
+ENV BENCH_EVENT_API_URL $BENCH_EVENT_API_URL
+ENV KEYCLOAK_HOST $KEYCLOAK_HOST
+ENV KEYCLOAK_REALM $KEYCLOAK_REALM
+ENV KEYCLOAK_CLIENT_ID $KEYCLOAK_CLIENT_ID
+ENV OBSERVATORY_API_URL $OBSERVATORY_API_URL
+ENV NODE_OPTIONS --openssl-legacy-provider
+
+COPY . .
+
+RUN npm ci
+
+EXPOSE 3000
+
+CMD ["npm", "run", "dev"]

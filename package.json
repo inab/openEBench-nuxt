@@ -4,7 +4,7 @@
 	"private": true,
 	"author": "Dominik Brüchner <dominik.bruchner@bsc.es>, José Mª Fernández <jose.m.fernandez@bsc.es>",
 	"scripts": {
-		"dev": "nuxt",
+		"dev": "nuxt dev",
 		"build": "nuxt build",
 		"start": "nuxt start",
 		"generate": "nuxt generate",
