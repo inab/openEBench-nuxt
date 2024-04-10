@@ -136,4 +136,4 @@ If you want to locally develop, you can use `docker compose`:
 docker compose -f docker-compose.devci.yml up
 ```
 
-Then, the continuous integration server is available at 8080.
+Then, the continuous integration server is available both at 3000 and 8080.

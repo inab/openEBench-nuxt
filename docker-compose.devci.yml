@@ -16,7 +16,7 @@ services:
       - ./layouts:/app/layouts:ro
       - ./pages:/app/pages:ro
       - ./plugins:/app/plugins:ro
-      - ./static:/app/static:ro
+      - ./static:/app/static
       - ./store:/app/store:ro
       - ./stories:/app/stories:ro
       - ./test:/app/test:ro
@@ -29,6 +29,8 @@ services:
 
       - node-modules-volume:/app/node_modules
       - dist-volume:/app/dist
+    ports:
+      - '3000:3000'
   proxy:
     image: nginx:alpine
     depends_on:
