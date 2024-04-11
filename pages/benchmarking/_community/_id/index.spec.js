@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import Challenge from './_id.vue';
+import Challenge from './index.vue';
 import MockCommunity from '~/test/unit/mockData/Community';
 import MockEvent from '~/test/unit/mockData/Event';
 import MockEvents from '~/test/unit/mockData/Events';
