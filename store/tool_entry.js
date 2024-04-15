@@ -27,7 +27,7 @@ export default {
 		updateEdamDialog({ commit }, payload) {
 			commit('updateEdamDialog', payload);
 		},
-		async retrieveUptimes({ state, commit, dispatch }) {
+		async retrieveUptimes({ state, commit }) {
 			let date2 = new Date();
 			date2 = Math.ceil(date2.getTime() / 1000);
 			// date1 is 7 days ago
@@ -48,9 +48,9 @@ export default {
 					// we need to remove the last slash from the url
 					webpage = webpage.replace(/\/$/, '');
 
-					let url = `https://openebench.bsc.es/monitor/rest/homepage/biotools:${state.tool.name}:${state.tool.version[j]}/cmd/${webpage}?date1=${date1}&date2=${date2}`;
+					const url = `https://openebench.bsc.es/monitor/rest/homepage/biotools:${state.tool.name}:${state.tool.version[j]}/cmd/${webpage}?date1=${date1}&date2=${date2}`;
 
-					let dataWeek = await this.$axios
+					const dataWeek = await this.$axios
 						.get(url)
 						.then((response) => {
 							for (let i = 0; i < response.data.length; i++) {
@@ -64,7 +64,7 @@ export default {
 							return response.data;
 						})
 						.catch((error) => {
-							console.log(error); //Logs a string: Error: Request failed with status code 404
+							console.log(error); // Logs a string: Error: Request failed with status code 404
 						});
 
 					if (dataWeek) {
@@ -88,10 +88,10 @@ export default {
 			// we know which version and web have uptime data from the previous loop.
 			let url = `https://openebench.bsc.es/monitor/rest/homepage/biotools:${state.tool.name}:${state.uptimeVersion}/cmd/${state.uptimeWeb}?date1=${date1}&date2=${date2}`;
 
-			let dataMonth = await this.$axios.get(url).then((response) => {
+			const dataMonth = await this.$axios.get(url).then((response) => {
 				console.log(response.data);
 				for (let i = 0; i < response.data.length; i++) {
-					let date = new Date(response.data[i].date.split('T')[0]);
+					const date = new Date(response.data[i].date.split('T')[0]);
 					// we take the previous day because the uptime is calculated at the end of the day
 					date.setDate(date.getDate() - 1);
 					response.data[i].date = date;
@@ -107,9 +107,9 @@ export default {
 			date1 = Math.ceil(date1.getTime() / 1000);
 
 			url = `https://openebench.bsc.es/monitor/rest/homepage/biotools:${state.tool.name}:${state.uptimeVersion}/cmd/${state.uptimeWeb}?date1=${date1}&date2=${date2}`;
-			let data6Month = await this.$axios.get(url).then((response) => {
+			const data6Month = await this.$axios.get(url).then((response) => {
 				for (let i = 0; i < response.data.length; i++) {
-					let date = new Date(response.data[i].date.split('T')[0]);
+					const date = new Date(response.data[i].date.split('T')[0]);
 					response.data[i].date = date;
 				}
 				return response.data;
@@ -117,8 +117,6 @@ export default {
 
 			commit('updateUptime6Month', data6Month);
 			commit('updateLoadingUptime', false);
-
-			return;
 		},
 	},
 	mutations: {

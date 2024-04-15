@@ -20,9 +20,9 @@ export default {
 	methods: {
 		range() {
 			// minus 2/3 a day
-			let min = this.data[0].date - 57600000;
+			const min = this.data[0].date - 57600000;
 			// plus 2/3 a day
-			let max = this.data[this.data.length - 1].date + 57600000;
+			const max = this.data[this.data.length - 1].date + 57600000;
 
 			return [min, max];
 		},

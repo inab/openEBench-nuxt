@@ -1,5 +1,5 @@
 <template>
-	<accessibilityPlot :data-items="data" sixMonths width="900" />
+	<accessibilityPlot :data-items="data" six-months width="900" />
 </template>
 <script>
 import { accessibilityPlot } from '@inb/oeb_visualizations';
