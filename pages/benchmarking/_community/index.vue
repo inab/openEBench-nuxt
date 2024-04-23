@@ -109,6 +109,7 @@ import CommunityDatasetsTable from '~/components/Communities/CommunityDatasetsTa
 import CommunityEventSelector from '~/components/Communities/CommunityEventSelector';
 import CommunityInfo from '~/components/Communities/CommunityInfo';
 import CommunityEmptyState from '~/components/Communities/CommunityEmptyState';
+import MarkedWrapper from '~/components/Molecules/MarkedWrapper.vue';
 
 export default {
 	name: 'CommunityPage',
@@ -119,6 +120,7 @@ export default {
 		CommunityEventSelector,
 		CommunityInfo,
 		CommunityEmptyState,
+		MarkedWrapper,
 	},
 	computed: {
 		...mapGetters('community', {
