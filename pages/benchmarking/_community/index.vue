@@ -191,6 +191,12 @@ export default {
 			this.setCurrentEvent(this.$route.query.event);
 		}
 	},
+	created() {
+		const {
+			default: md,
+		} = require(`~/static/markdown/projects/${this.$route.params.project}.md`);
+		this.markdownContent = md || '';
+	},
 	methods: {
 		handleEventSelection(event) {
 			this.$store.commit('community/setCurrentEvent', event);
