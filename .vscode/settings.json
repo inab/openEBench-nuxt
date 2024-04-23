@@ -36,8 +36,8 @@
 
 	"editor.formatOnSave": true,
 	"editor.codeActionsOnSave": {
-		"source.fixAll": true,
-		"source.fixAll.eslint": true
+		"source.fixAll": "explicit",
+		"source.fixAll.eslint": "explicit"
 	},
 	"eslint.validate": [
 		"javascript",
@@ -84,5 +84,8 @@
 		"activityBar.background": "#124c4f",
 		"titleBar.activeBackground": "#124c4f",
 		"titleBar.activeForeground": "#FDF9F8"
+	},
+	"[json]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	}
 }
