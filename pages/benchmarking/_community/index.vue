@@ -80,6 +80,20 @@
 					<community-tools-table v-else :tools="tools" />
 				</v-card>
 			</v-tab-item>
+
+			<v-tab class="justify-start">
+				<v-icon left> mdi-information-outline </v-icon>
+				Summary
+			</v-tab>
+			<v-tab-item class="ma-5 mt-5 mt-md-0" :transition="false">
+				<v-card outlined class="pa-5" elevation="1">
+					<v-row no-gutters align="center">
+						<v-col>
+							<marked-wrapper :markdown="markdownContent" />
+						</v-col>
+					</v-row>
+				</v-card>
+			</v-tab-item>
 		</v-tabs>
 		<v-container v-else>
 			<community-empty-state class="mt-10" />
