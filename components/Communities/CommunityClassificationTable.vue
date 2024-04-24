@@ -53,6 +53,9 @@
 				<nuxt-link :to="item._id" append>
 					{{ item.acronym }}
 				</nuxt-link>
+				(<nuxt-link :to="item._id + '/participants'" append>
+					participants </nuxt-link
+				>)
 			</template>
 		</v-data-table>
 	</div>
