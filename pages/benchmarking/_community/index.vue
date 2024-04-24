@@ -43,12 +43,17 @@
 					Tools
 				</v-badge>
 			</v-tab>
+			<v-tab v-if="community.summary" class="justify-start">
+				<v-icon left> mdi-information-outline </v-icon>
+				Summary
+			</v-tab>
 
 			<v-tab-item class="ma-5 mt-5 mt-md-0" :transition="false">
 				<v-skeleton-loader
 					v-if="$store.state.community.loading.events"
 					type="table"
 				></v-skeleton-loader>
+
 				<v-card v-else-if="currentEvent" outlined class="pa-5" elevation="1">
 					<community-event-selector
 						:current-event="currentEvent"
@@ -80,7 +85,6 @@
 					<community-tools-table v-else :tools="tools" />
 				</v-card>
 			</v-tab-item>
-
 			<v-tab v-if="community.summary" class="justify-start">
 				<v-icon left> mdi-information-outline </v-icon>
 				Summary
@@ -106,6 +110,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import MarkedWrapper from '~/components/Molecules/MarkedWrapper.vue';
 import CommunityClassificationTable from '~/components/Communities/CommunityClassificationTable';
 import CommunityToolsTable from '~/components/Communities/CommunityToolsTable';
 import CommunityDatasetsTable from '~/components/Communities/CommunityDatasetsTable';
@@ -117,6 +122,7 @@ import MarkedWrapper from '~/components/Molecules/MarkedWrapper.vue';
 export default {
 	name: 'CommunityPage',
 	components: {
+		MarkedWrapper,
 		CommunityClassificationTable,
 		CommunityToolsTable,
 		CommunityDatasetsTable,
@@ -152,7 +158,7 @@ export default {
 					to: '/benchmarking',
 				},
 				{
-					text: this.community ? this.community.acronym : '',
+					text: (this.community ? this.community.acronym : '') + ' Events',
 					disabled: false,
 					exact: true,
 					to: '/benchmarking/' + this.$route.params.community + '/events',
