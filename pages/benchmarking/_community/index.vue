@@ -80,6 +80,23 @@
 					<community-tools-table v-else :tools="tools" />
 				</v-card>
 			</v-tab-item>
+
+			<v-tab v-if="community.summary" class="justify-start">
+				<v-icon left> mdi-information-outline </v-icon>
+				Summary
+			</v-tab>
+			<v-tab-item class="ma-5 mt-5 mt-md-0" :transition="false">
+				<v-card outlined class="pa-5" elevation="1">
+					<v-row no-gutters align="center">
+						<v-col>
+							<marked-wrapper
+								v-if="community.summary"
+								:markdown="community.summary"
+							/>
+						</v-col>
+					</v-row>
+				</v-card>
+			</v-tab-item>
 		</v-tabs>
 		<v-container v-else>
 			<community-empty-state class="mt-10" />
@@ -95,6 +112,7 @@ import CommunityDatasetsTable from '~/components/Communities/CommunityDatasetsTa
 import CommunityEventSelector from '~/components/Communities/CommunityEventSelector';
 import CommunityInfo from '~/components/Communities/CommunityInfo';
 import CommunityEmptyState from '~/components/Communities/CommunityEmptyState';
+import MarkedWrapper from '~/components/Molecules/MarkedWrapper.vue';
 
 export default {
 	name: 'CommunityPage',
@@ -105,6 +123,7 @@ export default {
 		CommunityEventSelector,
 		CommunityInfo,
 		CommunityEmptyState,
+		MarkedWrapper,
 	},
 	computed: {
 		...mapGetters('community', {
