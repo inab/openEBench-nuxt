@@ -19,6 +19,13 @@ export default {
 	// Target: https://go.nuxtjs.dev/config-target
 	target: 'static',
 
+	telemetry: false,
+
+	server: {
+		host: '0.0.0.0',
+		timing: false,
+	},
+
 	// Global page headers: https://go.nuxtjs.dev/config-head
 	head: {
 		titleTemplate: '%s - openEBench-nuxt',

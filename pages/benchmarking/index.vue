@@ -58,6 +58,7 @@
 						:links="community.links"
 						:status="community.status"
 						:benchmarking-events="community.benchmarkingEvents"
+						:summary="community.summary"
 						:reference-tools="[]"
 						:to="'/benchmarking/' + community._id"
 						class="fill-height"

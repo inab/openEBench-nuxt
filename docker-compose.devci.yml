@@ -1,0 +1,42 @@
+version: '3'
+volumes:
+  dist-volume:
+  node-modules-volume:
+services:
+  nuxt:
+    build:
+      context: .
+      dockerfile: Dockerfile.devci
+    image: openebench-nuxt:devci
+    restart: on-failure
+    volumes:
+      - ./assets:/app/assets:ro
+      - ./components:/app/components:ro
+      - ./config:/app/config:ro
+      - ./layouts:/app/layouts:ro
+      - ./pages:/app/pages:ro
+      - ./plugins:/app/plugins:ro
+      - ./static:/app/static
+      - ./store:/app/store:ro
+      - ./stories:/app/stories:ro
+      - ./test:/app/test:ro
+      - ./jest.config.js:/app/jest.config.js:ro
+      - ./nuxt.config.js:/app/nuxt.config.js:ro
+      - ./package.json:/app/package.json:ro
+      - ./package-lock.json:/app/package-lock.json
+      - ./stylelint.config.js:/app/stylelint.config.js:ro
+      - ./tsconfig.json:/app/tsconfig.json:ro
+
+      - node-modules-volume:/app/node_modules
+      - dist-volume:/app/dist
+    ports:
+      - '3000:3000'
+  proxy:
+    image: nginx:alpine
+    depends_on:
+      - nuxt
+    volumes:
+      - dist-volume:/usr/share/nginx/html/:ro
+      - ./nginx.conf.devci:/etc/nginx/conf.d/default.conf:ro
+    ports:
+      - '8080:80'

@@ -1,3 +1,6 @@
+const parseDataURL = require('data-urls');
+const { labelToName, decode } = require('whatwg-encoding');
+
 export default {
 	state: () => {
 		return {
@@ -48,6 +51,18 @@ export default {
 					}
 				});
 				community._metadata = JSON.parse(community._metadata);
+				if (community._metadata && 'project:summary' in community._metadata) {
+					const dataURL = parseDataURL(community._metadata['project:summary']);
+					const encodingName = labelToName(
+						dataURL.mimeType.parameters.get('charset') || 'utf-8'
+					);
+					const decodedSummary = decode(dataURL.body, encodingName);
+
+					community.summary = decodedSummary;
+					community._metadata['project:summary'] = decodedSummary;
+				} else {
+					community.summary = null;
+				}
 				if (community.status === 'abandoned') community.status = 'inactive';
 				return community;
 			});

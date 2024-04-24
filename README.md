@@ -51,7 +51,7 @@ The respective docker compose files for the oeb landscape can be found in this r
 
 ```bash
 # install dependencies
-$ npm install
+$ npm ci
 
 # serve with hot reload at localhost:3000
 $ npm run dev
@@ -127,3 +127,13 @@ More information about the usage of this directory in [the documentation](https:
 This directory contains your Vuex store files. Creating a file in this directory automatically activates Vuex.
 
 More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/store).
+
+# Local development CI deployment (for developers!!!)
+
+If you want to locally develop, you can use `docker compose`:
+
+```bash
+docker compose -f docker-compose.devci.yml up
+```
+
+Then, the continuous integration server is available both at 3000 and 8080.
