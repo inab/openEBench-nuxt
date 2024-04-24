@@ -81,19 +81,18 @@
 				</v-card>
 			</v-tab-item>
 
-			<v-tab v-if="markdownContent != ''" class="justify-start">
+			<v-tab v-if="community.summary" class="justify-start">
 				<v-icon left> mdi-information-outline </v-icon>
 				Summary
 			</v-tab>
-			<v-tab-item
-				v-if="markdownContent != ''"
-				class="ma-5 mt-5 mt-md-0"
-				:transition="false"
-			>
+			<v-tab-item class="ma-5 mt-5 mt-md-0" :transition="false">
 				<v-card outlined class="pa-5" elevation="1">
 					<v-row no-gutters align="center">
 						<v-col>
-							<marked-wrapper :markdown="markdownContent" />
+							<marked-wrapper
+								v-if="community.summary"
+								:markdown="community.summary"
+							/>
 						</v-col>
 					</v-row>
 				</v-card>
@@ -196,12 +195,6 @@ export default {
 		} else if (this.$route.query.event) {
 			this.setCurrentEvent(this.$route.query.event);
 		}
-	},
-	created() {
-		const {
-			default: md,
-		} = require(`~/static/markdown/projects/${this.$route.params.community}.md`);
-		this.markdownContent = md || '';
 	},
 	methods: {
 		handleEventSelection(event) {
