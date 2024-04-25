@@ -7,18 +7,18 @@
 		/>
 		<div v-else>
 			<h1 class="text-h4">
-				{{ challenge.acronym }}
+				{{ challenge.challenge_label }} ({{ challenge._id }})
 			</h1>
 			<h2 class="text-subtitle-1 mb-5">
 				{{ challenge.name }}
 			</h2>
 			<p class="text--secondary">
 				In this 2D plot two metrics from the challenge
-				{{ challenge.acronym }} are represented in the X and Y axis, showing the
-				results from the participating tools in this challenge. The gray line
-				represents the pareto frontier, which runs over the participants tools,
-				showing the best efficiency, while the arrow in the plot represents the
-				optimal corner.
+				{{ challenge.challenge_label }} are represented in the X and Y axis,
+				showing the results from the participating tools in this challenge. The
+				gray line represents the pareto frontier, which runs over the
+				participants tools, showing the best efficiency, while the arrow in the
+				plot represents the optimal corner.
 			</p>
 			<v-alert class="mt-8" border="left" dense text color="info" type="info">
 				The menu button above the diagram can be used to switch between the
@@ -85,7 +85,7 @@ import ChartBarplotVisualizerWrapper from '~/components/Widgets/ChartBarplotVisu
 import ChartScatterVisualizerWrapper from '~/components/Widgets/ChartScatterVisualizerWrapper';
 
 export default {
-	name: 'CommunityParticipantPage',
+	name: 'CommunityChallengePlotsPage',
 	components: { ChartBarplotVisualizerWrapper, ChartScatterVisualizerWrapper },
 	data() {
 		return {
@@ -117,12 +117,13 @@ export default {
 					to: '/benchmarking',
 				},
 				{
-					text: this.community.acronym
-						? this.community.acronym
-						: this.$route.params.community + ' Events',
+					text:
+						(this.community.acronym
+							? this.community.acronym
+							: this.$route.params.community) + ' Events',
 					disabled: false,
 					exact: true,
-					to: 'events',
+					to: './events',
 				},
 				{
 					text: this.currentEvent
@@ -130,10 +131,10 @@ export default {
 						: this.$route.params.community + ' Results',
 					disabled: false,
 					exact: true,
-					to: './',
+					to: './?event=' + this.$route.params.id,
 				},
 				{
-					text: this.challenge ? this.challenge.acronym : '',
+					text: this.challenge ? this.challenge.challenge_label : '',
 					disabled: true,
 					to: this.$route.params.id,
 				},

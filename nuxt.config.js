@@ -203,6 +203,19 @@ export default {
 				path: '/scientific/:community/:id',
 				component: resolve(__dirname, 'pages/benchmarking/_community/_id'),
 			});
+			routes.push({
+				name: 'scientific-community-challenge-participants',
+				path: '/scientific/:community/:id/participants',
+				component: resolve(
+					__dirname,
+					'pages/benchmarking/_community/_id/participants'
+				),
+			});
+			// routes.push({
+			//	name: 'scientific-community-challenge-participants',
+			//	path: '/benchmarking/:community/:id/participants',
+			//	component: resolve(__dirname, 'pages/benchmarking/_community/_id/participants'),
+			// });
 		},
 	},
 };
