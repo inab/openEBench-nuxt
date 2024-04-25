@@ -110,7 +110,6 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import MarkedWrapper from '~/components/Molecules/MarkedWrapper.vue';
 import CommunityClassificationTable from '~/components/Communities/CommunityClassificationTable';
 import CommunityToolsTable from '~/components/Communities/CommunityToolsTable';
 import CommunityDatasetsTable from '~/components/Communities/CommunityDatasetsTable';
@@ -122,7 +121,6 @@ import MarkedWrapper from '~/components/Molecules/MarkedWrapper.vue';
 export default {
 	name: 'CommunityPage',
 	components: {
-		MarkedWrapper,
 		CommunityClassificationTable,
 		CommunityToolsTable,
 		CommunityDatasetsTable,
