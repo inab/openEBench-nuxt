@@ -43,10 +43,6 @@
 					Tools
 				</v-badge>
 			</v-tab>
-			<v-tab v-if="community.summary" class="justify-start">
-				<v-icon left> mdi-information-outline </v-icon>
-				Summary
-			</v-tab>
 
 			<v-tab-item class="ma-5 mt-5 mt-md-0" :transition="false">
 				<v-skeleton-loader
