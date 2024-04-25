@@ -43,10 +43,6 @@
 					Tools
 				</v-badge>
 			</v-tab>
-			<v-tab v-if="community.summary" class="justify-start">
-				<v-icon left> mdi-information-outline </v-icon>
-				Summary
-			</v-tab>
 
 			<v-tab-item class="ma-5 mt-5 mt-md-0" :transition="false">
 				<v-skeleton-loader
@@ -85,15 +81,19 @@
 					<community-tools-table v-else :tools="tools" />
 				</v-card>
 			</v-tab-item>
-
-			<v-tab-item
-				v-if="community.summary"
-				class="ma-5 mt-5 mt-md-0"
-				:transition="false"
-			>
+			<v-tab v-if="community.summary" class="justify-start">
+				<v-icon left> mdi-information-outline </v-icon>
+				Summary
+			</v-tab>
+			<v-tab-item class="ma-5 mt-5 mt-md-0" :transition="false">
 				<v-card outlined class="pa-5" elevation="1">
 					<v-row no-gutters align="center">
-						<v-col> <marked-wrapper :markdown="community.summary" /> </v-col>
+						<v-col>
+							<marked-wrapper
+								v-if="community.summary"
+								:markdown="community.summary"
+							/>
+						</v-col>
 					</v-row>
 				</v-card>
 			</v-tab-item>
@@ -106,24 +106,24 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import MarkedWrapper from '~/components/Molecules/MarkedWrapper.vue';
 import CommunityClassificationTable from '~/components/Communities/CommunityClassificationTable';
 import CommunityToolsTable from '~/components/Communities/CommunityToolsTable';
 import CommunityDatasetsTable from '~/components/Communities/CommunityDatasetsTable';
 import CommunityEventSelector from '~/components/Communities/CommunityEventSelector';
 import CommunityInfo from '~/components/Communities/CommunityInfo';
 import CommunityEmptyState from '~/components/Communities/CommunityEmptyState';
+import MarkedWrapper from '~/components/Molecules/MarkedWrapper.vue';
 
 export default {
 	name: 'CommunityPage',
 	components: {
-		MarkedWrapper,
 		CommunityClassificationTable,
 		CommunityToolsTable,
 		CommunityDatasetsTable,
 		CommunityEventSelector,
 		CommunityInfo,
 		CommunityEmptyState,
+		MarkedWrapper,
 	},
 	computed: {
 		...mapGetters('community', {
