@@ -19,7 +19,7 @@
 				sm="6"
 				md="4"
 			>
-				<v-card class="mx-auto my-4" max-width="350">
+				<v-card class="mx-auto my-4" max-width="374">
 					<!-- Centered container for circles -->
 					<div class="circle-container">
 						<!-- Outer circle -->
@@ -37,64 +37,105 @@
 							</div>
 						</div>
 					</div>
-
-					<!-- Card content -->
-
-					<!-- <v-card-title>{{ member.name }}</v-card-title>
-					<v-card-subtitle class="subtitle-container">
-						<span
-							v-for="(institution, index) in member.institution"
-							:key="index"
-							>{{ institution
-							}}<span v-if="index !== member.institution.length - 1"
-								>,&nbsp;</span
-							></span
-						>
-					</v-card-subtitle>
-					<v-divider class="mx-4 mb-1"></v-divider>
-					<v-card-text>
-						{{ member.position_description }}
-					</v-card-text> -->
-
 					<v-card-title>{{ member.name }}</v-card-title>
 					<v-card-subtitle class="subtitle-container">
-						<span
+						<div
 							v-for="(institution, index) in member.institution"
 							:key="index"
-							>{{ institution
-							}}<span v-if="index !== member.institution.length - 1"
-								>,</span
-							></span
 						>
-
+							<span
+								class="abbreviation"
+								@mouseover="showTooltip = index"
+								@mouseleave="showTooltip = null"
+							>
+								{{ institution }}
+							</span>
+							<span
+								v-if="showTooltip === index"
+								class="tooltip"
+								:style="{ top: subtitleHeight + 'px' }"
+								v-html="getFullForm(member.institution[index])"
+							></span>
+							<!-- Display comma if not the last item -->
+							<span v-if="index < member.institution.length - 1">, </span>
+						</div>
 						<v-btn icon @click="toggleExpand(member)" class="arrow">
 							<v-icon>{{
 								member.show ? 'mdi-chevron-up' : 'mdi-chevron-down'
 							}}</v-icon>
 						</v-btn>
 					</v-card-subtitle>
+
 					<v-expand-transition>
 						<div v-show="member.show">
-							<v-divider></v-divider>
+							<v-divider class="mx-4"></v-divider>
+							<v-card-text
+								><p class="text">Takes part on:</p>
 
-							<v-card-text>
-								{{ member.position_description }}
+								<v-layout row wrap class="icon-row mt-2" justify-center>
+									<v-flex v-for="(role, idx) in member.roles" :key="idx" xs4>
+										<v-card
+											v-if="!isMobile"
+											class="cell"
+											:style="{ backgroundColor: getItemColor(role.name) }"
+											@mouseenter="role.hover = true"
+											@mouseleave="role.hover = false"
+										>
+											<div class="content" :class="{ hovered: role.hover }">
+												<div class="icon-container">
+													<div
+														:style="{
+															backgroundImage: getItemIcon(role.name),
+														}"
+														class="icon"
+													></div>
+												</div>
+												<div class="word">{{ role.name }}</div>
+											</div>
+										</v-card>
+										<v-card
+											v-if="isMobile"
+											class="cell"
+											:style="{ backgroundColor: getItemColor(role.name) }"
+											@click="toggleRole(role)"
+										>
+											<div class="content" :class="{ hovered: role.hover }">
+												<div class="icon-container">
+													<div
+														:style="{ backgroundImage: getItemIcon(role.name) }"
+														class="icon"
+													></div>
+												</div>
+												<div class="word">{{ formatRoleName(role.name) }}</div>
+											</div>
+										</v-card>
+									</v-flex>
+								</v-layout>
 							</v-card-text>
 						</div>
 					</v-expand-transition>
-
 					<v-divider class="mx-4 mb-1"></v-divider>
 
-					<div class="px-4 mb-2">
-						<v-chip-group selected-class="bg-deep-purple-lighten-2">
-							<v-chip target="_blank" :href="member.orcid">
+					<div class="px-4 mb-2 centered-chips">
+						<v-chip-group>
+							<v-chip
+								class="chip"
+								v-if="member.orcid"
+								target="_blank"
+								:href="member.orcid"
+							>
 								<img
 									src="../static/images/teams/orcid.svg"
 									alt="ORCID Logo"
 									class="logo chip-with-logo"
 								/>ORCID
 							</v-chip>
-							<v-chip target="_blank" :href="member.github">
+							<v-chip
+								class="chip"
+								v-if="member.github"
+								target="_blank"
+								:href="member.github"
+							>
 								<img
 									src="../static/images/teams/github-logo.png"
 									alt="GitHub Logo"
@@ -132,17 +173,9 @@
 						<div class="card-title-wrapper">
 							<v-card-title class="card-title">{{ alumni.name }}</v-card-title>
 						</div>
-
-						<!-- <v-avatar class="avatar-right avatar-wrapper" size="48">
-							<img
-								:src="alumni.image"
-								alt="exmember"
-								:class="{ 'grayscale-image': !isMobile }"
-							/>
-						</v-avatar> -->
 					</div>
 
-					<v-card-text>{{ alumni.position_description }}</v-card-text>
+					<v-card-text>{{ alumni.roles }}</v-card-text>
 				</v-card>
 			</v-col>
 		</v-row>
@@ -150,7 +183,7 @@
 </template>
 
 <script>
-import teamData from '@/static/members.json';
+import membersData from '@/static/members/members.json';
 
 export default {
 	name: 'TeamPage',
@@ -173,34 +206,219 @@ export default {
 					disabled: true,
 				},
 			],
-			members: teamData.Members,
-			alumnis: teamData.Alumni,
+			items: [
+				{
+					color: '#ffcc99',
+					icon: require('~/static/members/icons/tl.png'),
+					word: 'Tooling (command line)',
+					hover: false,
+				},
+				{
+					color: '#ccffcc',
+					icon: require('~/static/members/icons/ce.png'),
+					word: 'Community Engagement',
+					hover: false,
+				},
+				{
+					color: '#ff6666',
+					icon: require('~/static/members/icons/ld.png'),
+					word: 'Leadership',
+					hover: false,
+				},
+				{
+					color: '#ff99cc',
+					icon: require('~/static/members/icons/so.png'),
+					word: 'Software Observatory',
+					hover: false,
+				},
+				{
+					color: '#ccccff',
+					icon: require('~/static/members/icons/sb.png'),
+					word: 'Scientific Benchmarking',
+					hover: false,
+				},
+				{
+					color: '#ffcccc',
+					icon: require('~/static/members/icons/cb.png'),
+					word: 'Compute Backend',
+					hover: false,
+				},
+				{
+					color: '#99ccff',
+					icon: require('~/static/members/icons/bo.png'),
+					word: 'Back-office',
+					hover: false,
+				},
+				{
+					color: '#ffffcc',
+					icon: require('~/static/members/icons/di.png'),
+					word: 'Data Interfaces',
+					hover: false,
+				},
+				{
+					color: '#cc99ff',
+					icon: require('~/static/members/icons/dm.png'),
+					word: 'Data Modelization',
+					hover: false,
+				},
+				{
+					color: '#ccff99',
+					icon: require('~/static/members/icons/dv.png'),
+					word: 'Data Visualization',
+					hover: false,
+				},
+				{
+					color: '#ffccff',
+					icon: require('~/static/members/icons/fd.png'),
+					word: 'Web Front-end',
+					hover: false,
+				},
+				{
+					color: '#ffcc66',
+					icon: require('~/static/members/icons/st.png'),
+					word: 'Security',
+					hover: false,
+				},
+				{
+					color: '#ccf2ff',
+					icon: require('~/static/members/icons/tm.png'),
+					word: 'Technical Monitoring',
+					hover: false,
+				},
+			],
+			members: [],
+			alumnis: [],
 			isMobile: false,
 		};
+	},
+	mounted() {
+		this.$parent.$emit('emitBreadcrumbs', this.breadcrumbs);
+		this.checkMobile();
+		window.addEventListener('resize', this.checkMobile);
+		this.members = membersData.Members.map((member) => ({
+			...member,
+			roles: member.roles.map((role) => ({ name: role, hover: false })),
+		}));
+		this.alumnis = membersData.Alumni;
+	},
+	beforeDestroy() {
+		window.removeEventListener('resize', this.checkMobile);
 	},
 	methods: {
 		toggleExpand(member) {
 			member.show = !member.show;
 		},
+		toggleRole(role) {
+			role.hover = !role.hover;
+		},
 		checkMobile() {
 			this.isMobile = window.innerWidth <= 850;
 		},
-	},
-	mounted() {
-		this.$parent.$emit('emitBreadcrumbs', this.breadcrumbs);
-		window.addEventListener('resize', this.checkMobile);
-	},
-	beforeDestroy() {
-		// Remove event listener to prevent memory leaks
-		window.removeEventListener('resize', this.checkMobile);
+		getItemColor(role) {
+			const item = this.items.find((item) => item.word === role);
+			return item ? item.color : '#ffffff';
+		},
+		getItemIcon(role) {
+			const item = this.items.find((item) => item.word === role);
+			return item ? `url(${item.icon})` : '';
+		},
+		formatRoleName(name) {
+			// Check if the role name contains parentheses
+			const index = name.indexOf('(');
+			if (index !== -1) {
+				const firstPart = name.substring(0, index).trim();
+				const secondPart = name.substring(index).trim();
+				return `${firstPart}\n${secondPart}`;
+			}
+			return name;
+		},
+		getFullForm(abbreviation) {
+			// Define your dictionary mapping abbreviations to full forms here
+			const abbreviationDictionary = {
+				UB: 'University of Barcelona',
+				NYU: 'New York University',
+				UCLA: 'University of California, Los Angeles',
+				MIT: 'Massachusetts Institute of Technology',
+				// Add more abbreviations and their full forms as needed
+			};
+
+			// Return the full form if abbreviation exists in the dictionary, otherwise return the abbreviation itself
+			return abbreviationDictionary[abbreviation] || abbreviation;
+		},
 	},
 };
 </script>
+
 <style scoped>
+.cell {
+	padding: 5px;
+	margin: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	height: 40px;
+}
+
+.content {
+	position: relative;
+	width: 100%;
+	text-align: center;
+}
+
+.icon-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+}
+
+.icon {
+	width: 30px;
+	height: 30px;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.word {
+	font-size: 12px;
+	white-space: pre-wrap;
+	display: none;
+	line-height: 1;
+}
+
+.hovered .icon {
+	display: none;
+}
+
+.hovered .word {
+	display: block;
+	cursor: default;
+}
+
+.icon-row {
+	margin: 0 -5px;
+}
+
+.chip-with-logo {
+	margin-bottom: 2px;
+}
+
 .logo {
 	margin-right: 5px;
 	width: 20px;
 	height: 20px;
+}
+
+.arrow {
+	margin-left: auto; /* Push the button to the right */
+}
+
+.subtitle-container {
+	display: flex;
+	align-items: center; /* Align items vertically */
 }
 
 .circle-container {
@@ -239,30 +457,12 @@ export default {
 	filter: none; /* Remove grayscale filter on hover */
 }
 
-.chip-with-logo {
-	margin-bottom: 2px;
-}
-
-.card-header {
+.centered-chips {
 	display: flex;
-	align-items: center;
+	justify-content: center;
 }
 
-.avatar-right {
-	margin-left: auto;
-	margin-right: 16px;
-}
-
-.card-title-wrapper {
-	margin-right: 16px;
-}
-
-.subtitle-container {
-	display: flex;
-	align-items: center; /* Align items vertically */
-}
-
-.arrow {
-	margin-left: auto; /* Push the button to the right */
+.text {
+	opacity: 0.6;
 }
 </style>
