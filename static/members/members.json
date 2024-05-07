@@ -4,7 +4,7 @@
 			"image": "https://www.earth.com/_next/image/?url=https%3A%2F%2Fcff2.earth.com%2Fuploads%2F2023%2F06%2F02100547%2FMountain-2-960x640.jpg&w=1920&q=75",
 			"name": "Andrea Morales Mata",
 			"institution": ["INB/ELIXIR-ES", "BSC-CNS"],
-			"position_description": ["Web Front-end", "Data Visualization"],
+			"roles": ["Web Front-end", "Data Visualization"],
 			"orcid": "https://orcid.org/0009-0008-7213-9577",
 			"github": "https://github.com/Androidbeingx ",
 			"show": false
@@ -13,7 +13,7 @@
 			"image": "https://www.earth.com/_next/image/?url=https%3A%2F%2Fcff2.earth.com%2Fuploads%2F2023%2F06%2F02100547%2FMountain-2-960x640.jpg&w=1920&q=75",
 			"name": "Ani Liseth Valle Banegas",
 			"institution": ["INB/ELIXIR-ES", "BSC-CNS"],
-			"position_description": ["Web Front-end", "Data Visualization"],
+			"roles": ["Web Front-end", "Data Visualization"],
 			"orcid": "https://orcid.org/0009-0009-6247-4475",
 			"github": "https://github.com/AniValle",
 			"show": false
@@ -22,7 +22,7 @@
 			"image": "https://www.earth.com/_next/image/?url=https%3A%2F%2Fcff2.earth.com%2Fuploads%2F2023%2F06%2F02100547%2FMountain-2-960x640.jpg&w=1920&q=75",
 			"name": "Eva Martin del Pico",
 			"institution": ["INB/ELIXIR-ES", "BSC-CNS"],
-			"position_description": [
+			"roles": [
 				"Software Observatory",
 				"Web Front-end",
 				"Data Visualization",
@@ -37,11 +37,11 @@
 			"image": "https://www.earth.com/_next/image/?url=https%3A%2F%2Fcff2.earth.com%2Fuploads%2F2023%2F06%2F02100547%2FMountain-2-960x640.jpg&w=1920&q=75",
 			"name": "Anna Redondo Guitarte",
 			"institution": ["INB/ELIXIR-ES", "BSC-CNS"],
-			"position_description": [
+			"roles": [
 				"Community Engagement",
-				"Scientific Benchmarking",
+				"Back-office",
 				"Tooling (command line)",
-				"Back-office"
+				"Scientific Benchmarking"
 			],
 			"orcid": "https://orcid.org/0000-0003-0020-759X",
 			"github": "https://github.com/abredondo",
@@ -51,15 +51,15 @@
 			"image": "https://www.earth.com/_next/image/?url=https%3A%2F%2Fcff2.earth.com%2Fuploads%2F2023%2F06%2F02100547%2FMountain-2-960x640.jpg&w=1920&q=75",
 			"name": "Salvador Capella-Gutierrez",
 			"institution": ["INB/ELIXIR-ES", "BSC-CNS"],
-			"position_description": [
+			"roles": [
 				"Leadership",
+				"Scientific Benchmarking",
 				"Data Modelization",
 				"Software Observatory",
+				"Back-office",
 				"Data Visualization",
 				"Community Engagement",
-				"Scientific Benchmarking",
 				"Tooling (command line)",
-				"Back-office",
 				"Technical Monitoring"
 			],
 			"orcid": "https://orcid.org/0000-0002-0309-604X ",
@@ -70,7 +70,7 @@
 			"image": "https://www.earth.com/_next/image/?url=https%3A%2F%2Fcff2.earth.com%2Fuploads%2F2023%2F06%2F02100547%2FMountain-2-960x640.jpg&w=1920&q=75",
 			"name": "Laura Portell-Silva",
 			"institution": ["INB/ELIXIR-ES", "BSC-CNS"],
-			"position_description": ["Community Engagement"],
+			"roles": ["Community Engagement"],
 			"orcid": "https://orcid.org/0000-0003-0390-3208",
 			"github": "https://github.com/lauportell",
 			"show": false
@@ -79,7 +79,7 @@
 			"image": "https://www.earth.com/_next/image/?url=https%3A%2F%2Fcff2.earth.com%2Fuploads%2F2023%2F06%2F02100547%2FMountain-2-960x640.jpg&w=1920&q=75",
 			"name": "Alfonso Valencia",
 			"institution": ["INB/ELIXIR-ES", "BSC-CNS", "ICREA"],
-			"position_description": ["Leadership"],
+			"roles": ["Leadership"],
 			"orcid": "https://orcid.org/0000-0002-8937-6789",
 			"github": null,
 			"show": false
@@ -88,7 +88,7 @@
 			"image": "https://www.earth.com/_next/image/?url=https%3A%2F%2Fcff2.earth.com%2Fuploads%2F2023%2F06%2F02100547%2FMountain-2-960x640.jpg&w=1920&q=75",
 			"name": "Carles Hernandez-Ferrer",
 			"institution": ["INB/ELIXIR-ES", "BSC-CNS", "UB"],
-			"position_description": [
+			"roles": [
 				"Community Engagement",
 				"Compute Backend",
 				"Scientific Benchmarking",
@@ -104,7 +104,7 @@
 			"image": "https://www.earth.com/_next/image/?url=https%3A%2F%2Fcff2.earth.com%2Fuploads%2F2023%2F06%2F02100547%2FMountain-2-960x640.jpg&w=1920&q=75",
 			"name": "José M. Fernández",
 			"institution": ["INB/ELIXIR-ES", "BSC-CNS"],
-			"position_description": [
+			"roles": [
 				"Community Engagement",
 				"Compute Backend",
 				"Scientific Benchmarking",
@@ -123,7 +123,7 @@
 			"image": "https://www.earth.com/_next/image/?url=https%3A%2F%2Fcff2.earth.com%2Fuploads%2F2023%2F06%2F02100547%2FMountain-2-960x640.jpg&w=1920&q=75",
 			"name": "Laia Codó",
 			"institution": ["INB/ELIXIR-ES", "BSC-CNS"],
-			"position_description": [
+			"roles": [
 				"Community Engagement",
 				"Compute Backend",
 				"Scientific Benchmarking",
@@ -137,7 +137,7 @@
 			"image": "https://www.earth.com/_next/image/?url=https%3A%2F%2Fcff2.earth.com%2Fuploads%2F2023%2F06%2F02100547%2FMountain-2-960x640.jpg&w=1920&q=75",
 			"name": "Josep Lluís Gelpí",
 			"institution": ["INB/ELIXIR-ES", "BSC-CNS", "UB"],
-			"position_description": ["Leadership", "Data Modelization"],
+			"roles": ["Leadership", "Data Modelization"],
 			"orcid": "https://orcid.org/0000-0002-0566-7723",
 			"github": "https://github.com/jlgelpi",
 			"show": false
@@ -147,22 +147,22 @@
 		{
 			"image": "https://www.earth.com/_next/image/?url=https%3A%2F%2Fcff2.earth.com%2Fuploads%2F2023%2F06%2F02100547%2FMountain-2-960x640.jpg&w=1920&q=75",
 			"name": "Alumni 1",
-			"position_description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+			"roles": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
 		},
 		{
 			"image": "https://www.earth.com/_next/image/?url=https%3A%2F%2Fcff2.earth.com%2Fuploads%2F2023%2F06%2F02100547%2FMountain-2-960x640.jpg&w=1920&q=75",
 			"name": "Alumni 2",
-			"position_description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+			"roles": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
 		},
 		{
 			"image": "https://www.earth.com/_next/image/?url=https%3A%2F%2Fcff2.earth.com%2Fuploads%2F2023%2F06%2F02100547%2FMountain-2-960x640.jpg&w=1920&q=75",
 			"name": "Alumni 3",
-			"position_description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+			"roles": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
 		},
 		{
 			"image": "https://www.earth.com/_next/image/?url=https%3A%2F%2Fcff2.earth.com%2Fuploads%2F2023%2F06%2F02100547%2FMountain-2-960x640.jpg&w=1920&q=75",
 			"name": "Alumni 4",
-			"position_description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+			"roles": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
 		}
 	]
 }
