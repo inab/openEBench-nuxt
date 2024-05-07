@@ -67,7 +67,7 @@
 			"show": false
 		},
 		{
-			"image": "https://www.earth.com/_next/image/?url=https%3A%2F%2Fcff2.earth.com%2Fuploads%2F2023%2F06%2F02100547%2FMountain-2-960x640.jpg&w=1920&q=75",
+			"image": "/laura-portell.jpg",
 			"name": "Laura Portell-Silva",
 			"institution": ["INB/ELIXIR-ES", "BSC-CNS"],
 			"roles": ["Community Engagement"],
@@ -85,7 +85,7 @@
 			"show": false
 		},
 		{
-			"image": "https://www.earth.com/_next/image/?url=https%3A%2F%2Fcff2.earth.com%2Fuploads%2F2023%2F06%2F02100547%2FMountain-2-960x640.jpg&w=1920&q=75",
+			"image": "/carles-hernandez.png",
 			"name": "Carles Hernandez-Ferrer",
 			"institution": ["INB/ELIXIR-ES", "BSC-CNS", "UB"],
 			"roles": [
@@ -101,7 +101,7 @@
 			"show": false
 		},
 		{
-			"image": "https://www.earth.com/_next/image/?url=https%3A%2F%2Fcff2.earth.com%2Fuploads%2F2023%2F06%2F02100547%2FMountain-2-960x640.jpg&w=1920&q=75",
+			"image": "/jm-fernandez.jpg",
 			"name": "José M. Fernández",
 			"institution": ["INB/ELIXIR-ES", "BSC-CNS"],
 			"roles": [
@@ -120,7 +120,7 @@
 			"show": false
 		},
 		{
-			"image": "https://www.earth.com/_next/image/?url=https%3A%2F%2Fcff2.earth.com%2Fuploads%2F2023%2F06%2F02100547%2FMountain-2-960x640.jpg&w=1920&q=75",
+			"image": "/laia-codo.jpg",
 			"name": "Laia Codó",
 			"institution": ["INB/ELIXIR-ES", "BSC-CNS"],
 			"roles": [
@@ -134,7 +134,7 @@
 			"show": false
 		},
 		{
-			"image": "https://www.earth.com/_next/image/?url=https%3A%2F%2Fcff2.earth.com%2Fuploads%2F2023%2F06%2F02100547%2FMountain-2-960x640.jpg&w=1920&q=75",
+			"image": "/jl-gelpi.jpg",
 			"name": "Josep Lluís Gelpí",
 			"institution": ["INB/ELIXIR-ES", "BSC-CNS", "UB"],
 			"roles": ["Leadership", "Data Modelization"],
