@@ -1,6 +1,8 @@
 import { shallowMount } from '@vue/test-utils';
 import Index from './index.vue';
 import MockCommunity from '~/test/unit/mockData/Community';
+import MockDatasets from '~/test/unit/mockData/Datasets';
+import MockTools from '~/test/unit/mockData/Tools';
 jest.mock('marked', () => ({ marked: jest.fn(() => 'foo') }));
 
 const factory = (mockStore, route) => {
@@ -13,7 +15,7 @@ const factory = (mockStore, route) => {
 	});
 };
 
-describe('Index.vue', () => {
+describe('index.vue', () => {
 	afterEach(() => {
 		jest.clearAllMocks();
 	});
@@ -27,6 +29,12 @@ describe('Index.vue', () => {
 				community: () => {
 					return MockCommunity;
 				},
+				datasets: () => {
+					return MockDatasets;
+				},
+				tools: () => {
+					return MockTools;
+				},
 			},
 			actions: { getCommunity: jest.fn() },
 			state: () => {
@@ -38,6 +46,8 @@ describe('Index.vue', () => {
 						community: false,
 					},
 					community: MockCommunity,
+					datasets: MockDatasets,
+					tools: MockTools,
 				};
 			},
 		},
