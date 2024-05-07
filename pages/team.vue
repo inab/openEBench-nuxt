@@ -28,8 +28,18 @@
 							<div class="inner-circle">
 								<!-- Circle image of team member -->
 								<v-avatar size="185" class="avatar-wrapper">
+									<!-- Render this img if member.image is an external URL (starts with http) -->
 									<img
+										v-if="member.image.startsWith('http')"
 										:src="member.image"
+										alt="Team Member"
+										:class="{ 'grayscale-image': !isMobile }"
+									/>
+
+									<!-- Render this img if member.image is a local file path -->
+									<img
+										v-else
+										:src="require('@/static/members/images' + member.image)"
 										alt="Team Member"
 										:class="{ 'grayscale-image': !isMobile }"
 									/>
@@ -44,20 +54,21 @@
 							:key="index"
 						>
 							<span
-								class="abbreviation"
-								@mouseover="showTooltip = index"
-								@mouseleave="showTooltip = null"
+								@mouseenter="showTooltip($event, member, index)"
+								@mouseleave="hideTooltip"
 							>
 								{{ institution }}
 							</span>
-							<span
-								v-if="showTooltip === index"
-								class="tooltip"
-								:style="{ top: subtitleHeight + 'px' }"
-								v-html="getFullForm(member.institution[index])"
-							></span>
 							<!-- Display comma if not the last item -->
 							<span v-if="index < member.institution.length - 1">, </span>
+							<!-- Tooltip Element -->
+							<span
+								v-if="showingTooltip && tooltipIndex === index"
+								class="tooltip"
+								:style="{ top: tooltipTop + 'px', left: tooltipLeft + 'px' }"
+							>
+								{{ tooltipText }}
+							</span>
 						</div>
 						<v-btn icon @click="toggleExpand(member)" class="arrow">
 							<v-icon>{{
@@ -90,7 +101,7 @@
 														class="icon"
 													></div>
 												</div>
-												<div class="word">{{ role.name }}</div>
+												<div class="word">{{ formatRoleName(role.name) }}</div>
 											</div>
 										</v-card>
 										<v-card
@@ -289,6 +300,10 @@ export default {
 			members: [],
 			alumnis: [],
 			isMobile: false,
+			showingTooltip: false,
+			tooltipText: '',
+			tooltipTop: 0,
+			tooltipLeft: 0,
 		};
 	},
 	mounted() {
@@ -332,18 +347,24 @@ export default {
 			}
 			return name;
 		},
-		getFullForm(abbreviation) {
-			// Define your dictionary mapping abbreviations to full forms here
-			const abbreviationDictionary = {
-				UB: 'University of Barcelona',
-				NYU: 'New York University',
-				UCLA: 'University of California, Los Angeles',
-				MIT: 'Massachusetts Institute of Technology',
-				// Add more abbreviations and their full forms as needed
-			};
+		showTooltip(event, institutionText, institutionIndex) {
+			const rect = event.target.getBoundingClientRect();
+			const tooltipTop = rect.bottom + 30;
+			const tooltipLeft = rect.left;
 
-			// Return the full form if abbreviation exists in the dictionary, otherwise return the abbreviation itself
-			return abbreviationDictionary[abbreviation] || abbreviation;
+			// Set the tooltip position based on the hovered institution
+			this.tooltipText = institutionText.institution[institutionIndex];
+			this.tooltipTop = tooltipTop;
+			this.tooltipLeft = tooltipLeft;
+			this.showingTooltip = true;
+			this.tooltipIndex = institutionIndex; // Store the index for conditional display
+		},
+		hideTooltip() {
+			this.showingTooltip = false;
+			this.tooltipText = '';
+			this.tooltipTop = 0;
+			this.tooltipLeft = 0;
+			this.tooltipIndex = -1; // Reset the stored index
 		},
 	},
 };
@@ -464,5 +485,14 @@ export default {
 
 .text {
 	opacity: 0.6;
+}
+
+.tooltip {
+	background-color: black;
+	opacity: 0.6;
+	color: white;
+	padding: 5px;
+	border-radius: 3px;
+	z-index: 999; /* Ensure tooltip appears above other content */
 }
 </style>
