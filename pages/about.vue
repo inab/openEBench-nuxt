@@ -179,6 +179,10 @@ export default {
 					text: 'About',
 					disabled: true,
 				},
+				{
+					text: 'OpenEBench',
+					disabled: true,
+				},
 			],
 		};
 	},

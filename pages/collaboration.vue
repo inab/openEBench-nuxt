@@ -18,6 +18,10 @@ export default {
 					to: '/',
 				},
 				{
+					text: 'About',
+					disabled: true,
+				},
+				{
 					text: 'Collaboration',
 					disabled: true,
 				},
