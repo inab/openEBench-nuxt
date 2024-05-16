@@ -57,6 +57,34 @@ services:
       - ./tsconfig.json:/app/tsconfig.json:ro
 
       - node-modules-volume:/app/node_modules
+  npm_run:
+    build:
+      context: .
+      dockerfile: Dockerfile.devci
+    image: openebench-nuxt:devci
+    user: ${DEV_UID:-0}:${DEV_GID:-0}
+    profiles:
+      - manual
+    command: npm run ${NPM_RUN:-lintfix}
+    volumes:
+      - ./assets:/app/assets
+      - ./components:/app/components
+      - ./config:/app/config
+      - ./layouts:/app/layouts
+      - ./pages:/app/pages
+      - ./plugins:/app/plugins
+      - ./static:/app/static
+      - ./store:/app/store
+      - ./stories:/app/stories
+      - ./test:/app/test
+      - ./jest.config.js:/app/jest.config.js:ro
+      - ./nuxt.config.js:/app/nuxt.config.js:ro
+      - ./package.json:/app/package.json
+      - ./package-lock.json:/app/package-lock.json
+      - ./stylelint.config.js:/app/stylelint.config.js:ro
+      - ./tsconfig.json:/app/tsconfig.json:ro
+
+      - node-modules-volume:/app/node_modules
   nuxt:
     build:
       context: .
