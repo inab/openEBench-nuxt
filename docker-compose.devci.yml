@@ -3,11 +3,69 @@ volumes:
   dist-volume:
   node-modules-volume:
 services:
+  npm_ci_deps:
+    build:
+      context: .
+      dockerfile: Dockerfile.devci
+    image: openebench-nuxt:devci
+    user: ${DEV_UID:-0}:${DEV_GID:-0}
+    command: npm ci
+    volumes:
+      - ./assets:/app/assets:ro
+      - ./components:/app/components:ro
+      - ./config:/app/config:ro
+      - ./layouts:/app/layouts:ro
+      - ./pages:/app/pages:ro
+      - ./plugins:/app/plugins:ro
+      - ./static:/app/static
+      - ./store:/app/store:ro
+      - ./stories:/app/stories:ro
+      - ./test:/app/test:ro
+      - ./jest.config.js:/app/jest.config.js:ro
+      - ./nuxt.config.js:/app/nuxt.config.js:ro
+      - ./package.json:/app/package.json:ro
+      - ./package-lock.json:/app/package-lock.json
+      - ./stylelint.config.js:/app/stylelint.config.js:ro
+      - ./tsconfig.json:/app/tsconfig.json:ro
+
+      - node-modules-volume:/app/node_modules
+  npm_install_deps:
+    build:
+      context: .
+      dockerfile: Dockerfile.devci
+    image: openebench-nuxt:devci
+    user: ${DEV_UID:-0}:${DEV_GID:-0}
+    profiles:
+      - manual
+    command: npm install ${DEPENDENCIES:-YOU_NEED_TO_PROVIDE_YOUR_DEPENDENCIES_THROUGH_DEPENDENCIES_VARIABLE_TO_DOCKER_COMPOSE}
+    volumes:
+      - ./assets:/app/assets:ro
+      - ./components:/app/components:ro
+      - ./config:/app/config:ro
+      - ./layouts:/app/layouts:ro
+      - ./pages:/app/pages:ro
+      - ./plugins:/app/plugins:ro
+      - ./static:/app/static
+      - ./store:/app/store:ro
+      - ./stories:/app/stories:ro
+      - ./test:/app/test:ro
+      - ./jest.config.js:/app/jest.config.js:ro
+      - ./nuxt.config.js:/app/nuxt.config.js:ro
+      - ./package.json:/app/package.json
+      - ./package-lock.json:/app/package-lock.json
+      - ./stylelint.config.js:/app/stylelint.config.js:ro
+      - ./tsconfig.json:/app/tsconfig.json:ro
+
+      - node-modules-volume:/app/node_modules
   nuxt:
     build:
       context: .
       dockerfile: Dockerfile.devci
     image: openebench-nuxt:devci
+    user: ${DEV_UID:-0}:${DEV_GID:-0}
+    depends_on:
+      npm_ci_deps:
+        condition: service_completed_successfully
     restart: on-failure
     volumes:
       - ./assets:/app/assets:ro
