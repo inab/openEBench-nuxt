@@ -137,3 +137,50 @@ docker compose -f docker-compose.devci.yml up
 ```
 
 Then, the continuous integration server is available both at 3000 and 8080.
+
+## Adding new dependencies
+
+Once docker compose is up and running, and you want to add some dependencies
+to [package.json](package.json) and updated [package-lock.json](package-lock.json), you have to do next in
+a separated terminal:
+
+```bash
+DEPENDENCIES=mynewdepency docker compose -f docker-compose.devci.yml run npm_install_deps
+```
+
+After that, you might need to restart it through
+
+```bash
+docker compose -f docker-compose.devci.yml restart nuxt
+```
+
+Have a look at the messages, because some mismatch between the dependencies
+of the new packages and the already recorded ones could break havoc.
+
+In those cases, you need to figure out the source of the problem, rollback
+both [package.json](package.json) and [package-lock.json](package-lock.json), and re-add the updated
+dependency.
+
+## Running custom `npm run` commands
+
+Another usual issue is that the CI checks either on service or locally complain
+about styling. So, in order to run those checks locally you have to run:
+
+```bash
+NPM_RUN=lint docker compose -f docker-compose.devci.yml run npm_run
+```
+
+and to (blindly) apply the fixes:
+
+```bash
+docker compose -f docker-compose.devci.yml run npm_run
+```
+
+or
+
+```bash
+NPM_RUN=lintfix docker compose -f docker-compose.devci.yml run npm_run
+```
+
+Any other command defined in [package.json](package.json), like `test:unit`
+can also be used.
