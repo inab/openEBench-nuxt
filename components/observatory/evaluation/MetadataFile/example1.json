@@ -1,0 +1,75 @@
+{
+	"example": {
+		"@context": {
+			"@import": "https://openebench.bsc.es/bioschemas/oebtools.jsonld"
+		},
+		"@id": "https://openebench.bsc.es/bioschemas/tools/observatory:protk:1.4.4a/cmd",
+		"@type": "htpps://openebench.bsc.es/bioschemas/oebtools#cmd",
+		"bioschemas:input": [
+			{
+				"@type": "https://bioschemas.org/FormatParameter",
+				"biochemas:encodingFormat": "edam:format_1929"
+			},
+			{
+				"@type": "https://bioschemas.org/FormatParameter",
+				"biochemas:encodingFormat": "edam:format_3655"
+			}
+		],
+		"bioschemas:output": [
+			{
+				"@type": "https://bioschemas.org/FormatParameter",
+				"biochemas:encodingFormat": "edam:format_3655"
+			},
+			{
+				"@type": "https://bioschemas.org/FormatParameter",
+				"biochemas:encodingFormat": "edam:format_3247"
+			},
+			{
+				"@type": "https://bioschemas.org/FormatParameter",
+				"biochemas:encodingFormat": "edam:format_3475"
+			},
+			{
+				"@type": "https://bioschemas.org/FormatParameter",
+				"biochemas:encodingFormat": "edam:format_3475"
+			}
+		],
+		"schema:additionalType": "cmd",
+		"schema:applicationCategory": "cmd",
+		"schema:applicationSubcategory": ["edam:topic_0121"],
+		"schema:author": [
+			{
+				"@type": "https://schema.org/Person",
+				"schema:name": "Ira Cook"
+			}
+		],
+		"schema:codeRepository": [
+			"https://github.com/iracooke/protk",
+			"https://github.com/iracooke/protk/archive/32669e1bcbcf72fe75212f95cfe9f149f4df19cc.tar.gz",
+			"https://anaconda.org/bioconda/protk/1.4.4a/download/linux-64/protk-1.4.4a-0.tar.bz2",
+			"https://anaconda.org/bioconda/protk/1.4.4a/download/linux-64/protk-1.4.4a-hc9114bc_1.tar.bz2"
+		],
+		"schema:dateModified": "06/06/2023T02:37:27Z",
+		"schema:description": "protk (Proteomics toolkit)",
+		"schema:downloadURL": [
+			"https://anaconda.org/bioconda/protk/1.4.4a/download/linux-64/protk-1.4.4a-0.tar.bz2",
+			"https://anaconda.org/bioconda/protk/1.4.4a/download/linux-64/protk-1.4.4a-hc9114bc_1.tar.bz2",
+			"https://github.com/iracooke/protk/archive/32669e1bcbcf72fe75212f95cfe9f149f4df19cc.tar.gz",
+			"https://github.com/iracooke/protk/archive/32669e1bcbcf72fe75212f95cfe9f149f4df19cc.tar.gz"
+		],
+		"schema:featureList": [
+			"edam:operation_2409",
+			"edam:operation_3631",
+			"edam:operation_3630"
+		],
+		"schema:license": [
+			{
+				"@type": "https://schema.org/CreativeWork",
+				"schema:name": "MIT"
+			}
+		],
+		"schema:name": "protk",
+		"schema:operatingSystem": ["Linux", "macOS", "Windows"],
+		"schema:requirements": ["compiler_c", "ruby  >=2.4", "libxml2", "tpp"],
+		"schema:softwareVersion": "1.4.4a"
+	}
+}

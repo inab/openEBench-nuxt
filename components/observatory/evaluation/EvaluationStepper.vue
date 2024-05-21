@@ -10,46 +10,45 @@
 				justify="space-around"
 				class="mb-4 mt-4 mr-0 ml-0 d-flex align-center"
 			>
-				<v-col cols="4" md="5" sm="7">
+				<v-col cols="3" md="3" sm="7">
 					<EvaluationSourceCard
 						title="Software Observatory"
 						description="Select a software from the Software Observatory's database"
 						source="software_observatory"
 						icon="mdi-database"
 					>
-						<template v-slot:note>
+						<!--template v-slot:note>
 							<span>
 								Learn more about database content
 								<a href="/Data" target="blank">here.</a>
 							</span>
-						</template>
+						</template-->
 					</EvaluationSourceCard>
 				</v-col>
-				<v-col cols="4" md="5" sm="7">
+				<v-col cols="3" md="3" sm="7">
 					<EvaluationSourceCard
 						title="GitHub repository"
-						description="Enter the URL of the software's GitHub <br> repository"
+						description="Enter the URL of the software's GitHub repository"
 						source="github"
 						icon="mdi-github"
 					>
-						<template v-slot:note>
+						<!--template v-slot:note>
 							<span> The repository must be public. </span>
-						</template>
+						</template-->
 					</EvaluationSourceCard>
 				</v-col>
-				<!--v-col
-                    cols="4">
-                    <EvaluationSourceCard
-                        title="Metadata JSON"
-                        description="Upload a software's metadata manually in CodeMeta format"
-                        source="software_observatory"
-                        icon="mdi-code-json"
-                        v-slot:note>
-                        <span>
-                            Use this option if you have a metadata file.
-                        </span>
-                    </EvaluationSourceCard>
-                </v-col-->
+				<v-col cols="3" md="3" sm="7">
+					<EvaluationSourceCard
+						title="Metadata file"
+						description="Provide the URL of a metadata file in Bioschema format"
+						source="metadata_file"
+						icon="mdi-code-json"
+					>
+						<!--template v-slot:note>
+							<span> Use this option if you have a metadata file. </span>
+						</template-->
+					</EvaluationSourceCard>
+				</v-col>
 			</v-row>
 		</v-stepper-content>
 		<!-------------------------------------------->
@@ -62,9 +61,17 @@
 			<GitHubInput />
 		</v-stepper-content>
 
-		<v-stepper-content v-else step="2">
+		<v-stepper-content
+			v-else-if="this.source === 'software_observatory'"
+			step="2"
+		>
 			<ObservatoryInput />
 		</v-stepper-content>
+
+		<v-stepper-content v-else step="2">
+			<MetadataFileInput />
+		</v-stepper-content>
+
 		<!-------------------------------------------->
 
 		<!---------------- STEP 3 -------------------->
@@ -91,6 +98,7 @@ import { mapGetters } from 'vuex';
 import EvaluationSourceCard from './EvaluationSourceCard.vue';
 import GitHubInput from './GitHub/GitHubInput.vue';
 import ObservatoryInput from './Observatory/ObservatoryInput.vue';
+import MetadataFileInput from './MetadataFile/MetadataFileInput.vue';
 import MetadataEdit from './Metadata/MetadataEdit.vue';
 import FAIRresults from './Results/FAIRresults.vue';
 
@@ -100,6 +108,7 @@ export default {
 		EvaluationSourceCard,
 		GitHubInput,
 		ObservatoryInput,
+		MetadataFileInput,
 		MetadataEdit,
 		FAIRresults,
 	},
