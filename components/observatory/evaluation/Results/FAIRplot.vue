@@ -40,13 +40,6 @@ export default {
 					},
 				},
 				showlegend: true,
-				legend: {
-					orientation: 'h',
-					yanchor: 'top',
-					xanchor: 'left',
-					x: 0.0,
-					y: 1.4,
-				},
 				margin: {
 					t: 4,
 					b: 6,

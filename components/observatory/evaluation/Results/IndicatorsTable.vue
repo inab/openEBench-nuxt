@@ -12,174 +12,210 @@
 		>
 			<!-----    INDICATOR COLUMN  ---------->
 			<template v-slot:[`item.indicator`]="{ item }">
-				<p
-					v-if="idsMainIndicators.includes(item.id)"
-					class="text-subtitle-2 primary--text ma-auto"
-				>
-					{{ item.indicator }}
-				</p>
-				<p v-else class="text-body-2 ml-4 ma-auto">
-					{{ item.indicator }}
-				</p>
+				<tr>
+					<td>
+						<p
+							v-if="idsMainIndicators.includes(item.id)"
+							class="text-subtitle-2 primary--text ma-auto"
+						>
+							{{ item.indicator }}
+						</p>
+						<p v-else class="text-body-2 ml-4 ma-auto">
+							{{ item.indicator }}
+						</p>
+					</td>
+				</tr>
 			</template>
 
 			<!-----    STATUS COLUMN  ---------->
 			<template v-slot:[`item.status`]="{ item }">
 				<!-- only chip on rows of low-level indicators-->
-				<div v-if="indicatorsExplanation[item.id].measured === false">
-					<v-chip
-						v-if="
-							!indicatorsExplanation[item.id].types.includes(metaType(item))
-						"
-						class="font-weight-bold grey--text"
-						color="#f5f5f5"
-						small
-						label
-					>
-						NOT APPLICABLE
-					</v-chip>
-					<v-chip
-						v-else
-						class="font-weight-bold grey--text"
-						color="#f5f5f5"
-						small
-						label
-					>
-						NOT MEASURED
-					</v-chip>
-				</div>
-				<div v-else>
-					<div
-						v-if="
-							!idsMainIndicators.includes(item.id) &&
-							!indicatorsExplanation[item.id].types.includes(metaType(item))
-						"
-					>
-						<v-chip
-							v-if="
-								!indicatorsExplanation[item.id].types.includes(metaType(item))
-							"
-							class="font-weight-bold grey--text"
-							color="#f5f5f5"
-							small
-							label
-						>
-							NOT APPLICABLE
-						</v-chip>
-					</div>
-					<div
-						v-if="
-							!idsMainIndicators.includes(item.id) &&
-							indicatorsExplanation[item.id].types.includes(metaType(item))
-						"
-					>
-						<v-chip
-							v-if="item.status === true"
-							class="font-weight-bold success--text"
-							color="#d3f0d4"
-							small
-							label
-						>
-							PASSED
-						</v-chip>
-						<v-chip
-							v-else
-							class="font-weight-bold"
-							style="color: #ffa000"
-							color="amber lighten-4"
-							small
-							label
-						>
-							FAILED
-						</v-chip>
-					</div>
-				</div>
+				<tr>
+					<td>
+						<div v-if="indicatorsExplanation[item.id].measured === false">
+							<v-chip
+								v-if="
+									!indicatorsExplanation[item.id].types.includes(metaType(item))
+								"
+								class="font-weight-bold grey--text"
+								color="#f5f5f5"
+								small
+								label
+							>
+								NOT APPLICABLE
+							</v-chip>
+							<v-chip
+								v-else
+								class="font-weight-bold grey--text"
+								color="#f5f5f5"
+								small
+								label
+							>
+								NOT MEASURED
+							</v-chip>
+						</div>
+						<div v-else>
+							<div
+								v-if="
+									!idsMainIndicators.includes(item.id) &&
+									!indicatorsExplanation[item.id].types.includes(metaType(item))
+								"
+							>
+								<v-chip
+									v-if="
+										!indicatorsExplanation[item.id].types.includes(
+											metaType(item)
+										)
+									"
+									class="font-weight-bold grey--text"
+									color="#f5f5f5"
+									small
+									label
+								>
+									NOT APPLICABLE
+								</v-chip>
+							</div>
+							<div
+								v-if="
+									!idsMainIndicators.includes(item.id) &&
+									indicatorsExplanation[item.id].types.includes(metaType(item))
+								"
+							>
+								<v-chip
+									v-if="item.status === true"
+									class="font-weight-bold success--text"
+									color="#d3f0d4"
+									small
+									label
+								>
+									PASSED
+								</v-chip>
+								<v-chip
+									v-else
+									class="font-weight-bold"
+									style="color: #ffa000"
+									color="amber lighten-4"
+									small
+									label
+								>
+									FAILED
+								</v-chip>
+							</div>
+						</div>
+					</td>
+				</tr>
 			</template>
 
 			<!-----     EXPANSION  ---------->
 			<template #expanded-item="{ headers, item }">
 				<td :colspan="headers.length">
-					<v-alert class="mt-3" colored-border border="left" type="info">
-						<div class="text-caption font-weight-bold primary--text">
-							About this indicator:
-						</div>
-						<!------ For high-level indicators  ------->
-						<div
-							v-if="idsMainIndicators.includes(item.id)"
-							class="text-caption mt-3 mb-3"
-						>
-							<span class="font-weight-bold"> What it is: </span>
-							<span>
-								{{ indicatorsExplanation[item.id].what }}
-							</span>
-						</div>
-
-						<!------ For low-level indicators  ------->
-						<div
-							v-if="!idsMainIndicators.includes(item.id)"
-							class="text-caption mt-3 mb-2"
-						>
-							<span class="font-weight-bold"> What it is: </span>
-							<span>
-								{{ indicatorsExplanation[item.id].what }}
-							</span>
-						</div>
-
-						<div
-							v-if="!idsMainIndicators.includes(item.id)"
-							class="text-caption"
-						>
-							<span class="font-weight-bold"> Why it is important: </span>
-							<span>
-								{{ indicatorsExplanation[item.id].why }}
-							</span>
-						</div>
-						<div
-							v-if="!idsMainIndicators.includes(item.id)"
-							class="text-caption mt-2"
-						>
-							<span class="font-weight-bold mt-2"> How it is meadured: </span>
-							<span>
-								{{ indicatorsExplanation[item.id].how }}
-							</span>
-							<span
-								v-if="indicatorsExplanation[item.id].how === 'Not measured.'"
+					<v-row justify="center">
+						<v-col cols="11">
+							<!------ For high-level indicators  ------->
+							<div
+								v-if="idsMainIndicators.includes(item.id)"
+								class="mt-3 mb-3"
+								style="font-size: 0.8rem"
 							>
-								<a href="#not-measured"
-									><v-icon small>mdi-information-slab-circle-outline</v-icon></a
-								>
-							</span>
-						</div>
-						<div
-							v-if="!idsMainIndicators.includes(item.id)"
-							class="text-caption mt-2 mb-3"
-						>
-							<span class="font-weight-bold">
-								Types of software it applies to:
-							</span>
-							<span v-if="indicatorsExplanation[item.id].types.length === 2">
-								"web" and "non-web"
-							</span>
-							<span v-if="indicatorsExplanation[item.id].types.length === 1">
-								"{{ indicatorsExplanation[item.id].types[0] }}"
-							</span>
-							<a href="#types"
-								><v-icon small>mdi-information-slab-circle-outline</v-icon></a
+								<span class="font-weight-bold"> What it is: </span>
+								<span>
+									{{ indicatorsExplanation[item.id].what }}
+								</span>
+							</div>
+
+							<!------ For low-level indicators  ------->
+							<div
+								v-if="!idsMainIndicators.includes(item.id)"
+								class="mt-3 mb-2"
+								style="font-size: 0.8rem"
 							>
-						</div>
-						<div
-							v-if="
-								!idsMainIndicators.includes(item.id) &&
-								indicatorsExplanation[item.id].note != ''
-							"
-							class="text-caption mt-2 mb-3"
-						>
-							<v-icon small>mdi-alert-outline</v-icon>
-							<span>
-								{{ indicatorsExplanation[item.id].note }}
-							</span>
-						</div>
-					</v-alert>
+								<li>
+									<span class="font-weight-bold"> What it is: </span>
+									<span>
+										{{ indicatorsExplanation[item.id].what }}
+									</span>
+								</li>
+							</div>
+
+							<div
+								v-if="!idsMainIndicators.includes(item.id)"
+								style="font-size: 0.8rem"
+							>
+								<li>
+									<span class="font-weight-bold"> Why it is important: </span>
+									<span>
+										{{ indicatorsExplanation[item.id].why }}
+									</span>
+								</li>
+							</div>
+							<div
+								v-if="!idsMainIndicators.includes(item.id)"
+								class="mt-2"
+								style="font-size: 0.8rem"
+							>
+								<li>
+									<span class="font-weight-bold mt-2">
+										How it is meadured:
+									</span>
+									<span>
+										{{ indicatorsExplanation[item.id].how }}
+									</span>
+									<span
+										v-if="
+											indicatorsExplanation[item.id].how === 'Not measured.'
+										"
+									>
+										<a href="#not-measured"
+											><v-icon small
+												>mdi-information-slab-circle-outline</v-icon
+											></a
+										>
+									</span>
+								</li>
+							</div>
+							<div
+								v-if="!idsMainIndicators.includes(item.id)"
+								class="mt-2 mb-3"
+								style="font-size: 0.8rem"
+							>
+								<li>
+									<span class="font-weight-bold"
+										>Types of software it applies to:</span
+									>
+									<span
+										v-if="indicatorsExplanation[item.id].types.length === 2"
+									>
+										"web" and "non-web"
+									</span>
+									<span
+										v-if="indicatorsExplanation[item.id].types.length === 1"
+									>
+										"{{ indicatorsExplanation[item.id].types[0] }}"
+									</span>
+									<a href="#types"
+										><v-icon small
+											>mdi-information-slab-circle-outline</v-icon
+										></a
+									>
+								</li>
+							</div>
+							<v-alert
+								text
+								dense
+								type="warning"
+								v-if="
+									!idsMainIndicators.includes(item.id) &&
+									indicatorsExplanation[item.id].note != ''
+								"
+								class="mt-2 mb-3"
+								style="font-size: 0.8rem"
+							>
+								<span>
+									{{ indicatorsExplanation[item.id].note }}
+								</span>
+							</v-alert>
+						</v-col>
+					</v-row>
 				</td>
 			</template>
 		</v-data-table>
@@ -201,11 +237,10 @@ export default {
 					align: 'start',
 					sortable: false,
 					value: 'indicator',
-					width: '35%',
 				},
 				{
 					text: 'Status',
-					align: 'center',
+					align: 'start',
 					value: 'status',
 				},
 				{
@@ -260,7 +295,10 @@ export default {
 </script>
 <style scoped>
 ::v-deep .v-data-table__wrapper tbody tr.v-data-table__expanded__content {
-	box-shadow: inset 0 1 1 -1 rgb(50, 50, 50 / 75%),
-		inset 0 -1 1 -1 rgb(50, 50, 50 / 50%) !important;
+	box-shadow: 0 0 0 1px #e0e0e0;
+}
+
+::v-deep .v-data-table__expanded__row {
+	background-color: #f5f5f5;
 }
 </style>

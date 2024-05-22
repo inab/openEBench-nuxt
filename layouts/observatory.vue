@@ -5,11 +5,41 @@
 			<breadcrumbs-bar v-if="breadcrumbs.length > 0" :items="breadcrumbs" />
 			<v-container fluid class="mt-0">
 				<v-row justify="center">
-					<v-col cols="12" sm="12" md="10" lg="10" xl="9">
+					<v-navigation-drawer
+						permanent
+						floating
+						v-if="$vuetify.breakpoint.lgAndUp"
+						:expand-on-hover="$vuetify.breakpoint.lgAndDown"
+						:width="$vuetify.breakpoint.lgAndDown ? 200 : 200"
+					>
+						<v-list nav dense>
+							<v-list-item-group
+								v-model="group"
+								active-class="text--accent-4"
+								color="primary"
+							>
+								<v-list-item
+									v-for="(item, i) in subMenuEntriesObservatory"
+									:key="i"
+									link
+									:to="item.to"
+								>
+									<v-list-item-icon class="mr-1">
+										<v-icon>{{ item.icon }}</v-icon>
+									</v-list-item-icon>
+									<v-list-item-title class="ml-1">{{
+										item.title
+									}}</v-list-item-title>
+								</v-list-item>
+							</v-list-item-group>
+						</v-list>
+					</v-navigation-drawer>
+					<v-col cols="12" sm="12" md="12" lg="10" xl="9">
 						<Nuxt @emitBreadcrumbs="handleBreadcrumbs" />
 					</v-col>
 				</v-row>
 			</v-container>
+
 			<Footer class="mt-16" />
 		</v-main>
 		<v-footer class="justify-center" app>
@@ -24,6 +54,7 @@ import debounce from 'lodash/debounce';
 import HeaderMenu from '~/components/Header/HeaderMenu.vue';
 import Footer from '~/components/TheFooter';
 import BreadcrumbsBar from '~/components/Molecules/BreadcrumbsBar';
+import subMenuEntriesObservatory from '~/components/Header/subMenuEntriesObservatory.js';
 
 export default {
 	name: 'Observatory',
@@ -35,6 +66,7 @@ export default {
 	data() {
 		return {
 			mainMenuElevation: 0,
+			subMenuEntriesObservatory,
 			sections: [
 				{
 					label: 'Trends',

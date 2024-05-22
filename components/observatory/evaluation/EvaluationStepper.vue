@@ -87,7 +87,7 @@
 		<!---------------- STEP 4 -------------------->
 		<v-stepper-step step="4"> Results </v-stepper-step>
 		<v-stepper-content step="4">
-			<FAIRresults />
+			<ResultsTabs />
 		</v-stepper-content>
 		<!-------------------------------------------->
 	</v-stepper>
@@ -100,7 +100,7 @@ import GitHubInput from './GitHub/GitHubInput.vue';
 import ObservatoryInput from './Observatory/ObservatoryInput.vue';
 import MetadataFileInput from './MetadataFile/MetadataFileInput.vue';
 import MetadataEdit from './Metadata/MetadataEdit.vue';
-import FAIRresults from './Results/FAIRresults.vue';
+import ResultsTabs from './Results/ResultsTabs.vue';
 
 export default {
 	name: 'EvaluationStepper',
@@ -110,7 +110,7 @@ export default {
 		ObservatoryInput,
 		MetadataFileInput,
 		MetadataEdit,
-		FAIRresults,
+		ResultsTabs,
 	},
 
 	computed: {

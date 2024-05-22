@@ -1,41 +1,46 @@
 <template>
 	<v-container v-if="data === true">
-		<h5 class="text-subtitle ml-2 mb-4 subtitle">Export Metadata</h5>
-		<ExportMetadataCardDownload />
-		<ExportMetadataCardPull />
-		<h5 class="text-subtitle mt-3 ml-2 mb-3 subtitle">FAIRsoft results</h5>
+		<v-row justify="space-around">
+			<v-col cols="12" md="5">
+				<ResultsCardExpansible
+					title="Findability"
+					:indicators-labels="labelsFindability"
+					color="#fabe69"
+					:items="itemsFindability"
+					class="mt-1 mb-4"
+				/>
+			</v-col>
 
-		<ResultsCard
-			title="Findability"
-			:indicators-labels="labelsFindability"
-			color="#fabe69"
-			:items="itemsFindability"
-			class="mt-1 mb-4"
-		/>
+			<v-col cols="12" md="5">
+				<ResultsCardExpansible
+					title="Accessibility"
+					:indicators-labels="labelsAccessibility"
+					color="#5C6BC0"
+					:items="itemsAccessibility"
+					class="mt-1 mb-4"
+				/>
+			</v-col>
 
-		<ResultsCard
-			title="Accessibility"
-			:indicators-labels="labelsAccessibility"
-			color="#5C6BC0"
-			:items="itemsAccessibility"
-			class="mt-1 mb-4"
-		/>
+			<v-col cols="12" md="5">
+				<ResultsCardExpansible
+					title="Interoperability"
+					:indicators-labels="labelsInteroperability"
+					color="#fabe69"
+					:items="itemsInteroperability"
+					class="mt-1 mb-4"
+				/>
+			</v-col>
 
-		<ResultsCard
-			title="Interoperability"
-			:indicators-labels="labelsInteroperability"
-			color="#fabe69"
-			:items="itemsInteroperability"
-			class="mt-1 mb-4"
-		/>
-
-		<ResultsCard
-			title="Reusability"
-			:indicators-labels="labelsReusability"
-			color="#5C6BC0"
-			:items="itemsReusability"
-			class="mt-1 mb-4"
-		/>
+			<v-col cols="12" md="5">
+				<ResultsCardExpansible
+					title="Reusability"
+					:indicators-labels="labelsReusability"
+					color="#5C6BC0"
+					:items="itemsReusability"
+					class="mt-1 mb-4"
+				/>
+			</v-col>
+		</v-row>
 
 		<v-row class="mt-4" justify="center">
 			<v-col cols="12">
@@ -71,9 +76,7 @@
 </template>
 <script>
 import { mapGetters } from 'vuex';
-import ExportMetadataCardDownload from '../Export/ExportMetadataCardDownload.vue';
-import ExportMetadataCardPull from '../Export/ExportMetadataCardPull.vue';
-import ResultsCard from './ResultsCard.vue';
+import ResultsCardExpansible from './ResultsCardExpansible.vue';
 import {
 	findability,
 	accessibility,
@@ -84,9 +87,7 @@ import {
 export default {
 	name: 'FAIRresults',
 	components: {
-		ResultsCard,
-		ExportMetadataCardDownload,
-		ExportMetadataCardPull,
+		ResultsCardExpansible,
 	},
 	data() {
 		return {

@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<v-row justify="center">
-			<v-col md="9" sm="9" cols="9" lg="9" xl="9">
+			<v-col md="8" sm="8" cols="8" lg="8" xl="8">
 				<div class="mb-3 text-h5">FAIRsoft Indicator Scoreboard</div>
 				<p style="line-height: 2.1" class="mb-1 mt-0">
 					This page brings to light the
@@ -10,8 +10,7 @@
 					software. <br />
 					Dive into the details:
 				</p>
-
-				<ul>
+				<ul style="line-height: 2.1; font-size: 0.9rem">
 					<li>
 						<strong>Aggregated Scores:</strong> Get a quick overview of how
 						different tools stack up in terms of their FAIRness.
@@ -26,6 +25,7 @@
 						>
 					</li>
 				</ul>
+				<p></p>
 				<p></p>
 			</v-col>
 			<v-col cols="3">

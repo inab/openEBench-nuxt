@@ -53,7 +53,7 @@ export const getters = {
 const BASE_URL = '/stats/tools/';
 
 export const actions = {
-	async getLicensesSunburst({ commit, _state }) {
+	async getLicensesSunburst({ commit, _state, rootState }) {
 		const URL =
 			BASE_URL +
 			'licenses_summary_sunburst?collection=' +
