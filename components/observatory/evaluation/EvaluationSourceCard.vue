@@ -1,15 +1,15 @@
 <template>
 	<v-card
 		class="pt-6 pb-4 d-flex flex-column justify-space-between"
-		min-height="350"
-		max-height="350"
+		min-height="320"
+		max-height="320"
 		min-width="230"
 		max-width="320"
 		rounded
 		outlined
 		elevation="1"
 	>
-		<v-row justify="center" class="mt-2">
+		<v-row justify="center" class="mt-5">
 			<v-avatar color="grey" size="42">
 				<v-icon color="white">{{ icon }}</v-icon>
 			</v-avatar>
@@ -22,16 +22,16 @@
 				<p class="mt-3" v-html="description"></p>
 			</v-col>
 		</v-row>
-		<v-row justify="center">
-			<v-btn class="mb-1" color="primary" @click="selectSource"> select </v-btn>
+		<v-row justify="center" class="mb-4">
+			<v-btn color="primary" @click="selectSource"> select </v-btn>
 		</v-row>
-		<v-row justify="center">
+		<!--v-row justify="center">
 			<v-col cols="10" class="text-center">
 				<p class="mt-2 text-caption grey--text">
 					<slot name="note"></slot>
 				</p>
 			</v-col>
-		</v-row>
+		</v-row-->
 	</v-card>
 </template>
 <script>

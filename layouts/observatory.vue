@@ -2,8 +2,8 @@
 	<v-app>
 		<main-header :vre-href="$config.VRE_URI" />
 		<v-main>
-			<breadcrumbs-bar v-if="breadcrumbs.length > 0" :items="breadcrumbs" />
-			<v-container fluid class="mt-0">
+			<!--breadcrumbs-bar v-if="breadcrumbs.length > 0" :items="breadcrumbs" /-->
+			<v-container fluid class="mt-3">
 				<v-row justify="center">
 					<v-navigation-drawer
 						permanent
@@ -53,7 +53,6 @@ import { mapGetters } from 'vuex';
 import debounce from 'lodash/debounce';
 import HeaderMenu from '~/components/Header/HeaderMenu.vue';
 import Footer from '~/components/TheFooter';
-import BreadcrumbsBar from '~/components/Molecules/BreadcrumbsBar';
 import subMenuEntriesObservatory from '~/components/Header/subMenuEntriesObservatory.js';
 
 export default {
@@ -61,7 +60,6 @@ export default {
 	components: {
 		'main-header': HeaderMenu,
 		Footer,
-		BreadcrumbsBar,
 	},
 	data() {
 		return {

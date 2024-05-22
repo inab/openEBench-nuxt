@@ -1,28 +1,16 @@
 <template>
 	<v-chip label color="blue lighten-5">
 		<span class="font-weight-medium text-body-2">{{ data.item.label }}</span>
-		<v-badge
-			:value="hoverType"
-			color="grey lighten-1"
-			text-color="primary"
-			content="Type of tool"
-			right
-			transition="slide-x-reverse-transition"
-			class="mr-1 ml-4"
+		<v-chip
+			label
+			dense
+			small
+			color="white"
+			text-color="grey darken-3"
+			class="text-caption ml-3"
 		>
-			<v-hover v-model="hoverType">
-				<v-chip
-					label
-					dense
-					small
-					color="white"
-					text-color="grey darken-3"
-					class="text-caption"
-				>
-					{{ data.item.type.toUpperCase() }}
-				</v-chip>
-			</v-hover>
-		</v-badge>
+			{{ data.item.type.toUpperCase() }}
+		</v-chip>
 	</v-chip>
 
 	<!--a :href="data.item['@id']" target="blank"-->
