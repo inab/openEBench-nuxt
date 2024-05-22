@@ -39,7 +39,8 @@
 					<p style="line-height: 1.5" class="mb-0 mt-0 ml-0">
 						<strong>Looking for a personalized analysis?</strong> 🤔 <br />
 						Head over to the
-						<a href="./Evaluation"><strong>FAIR Evaluator</strong></a
+						<NuxtLink to="./Evaluation"
+							><strong>FAIR Evaluator</strong></NuxtLink
 						>, where you can assess individual tools and really drill down into
 						the specifics.
 					</p>
