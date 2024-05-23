@@ -48,7 +48,7 @@
 				<v-card-actions>
 					<v-spacer></v-spacer>
 					<v-btn color="red darken-1" text @click="discardChanges"
-						>Dicard Changes</v-btn
+						>Discard Changes</v-btn
 					>
 					<v-btn color="green darken-1" text @click="saveJson"
 						>Save and Close</v-btn
