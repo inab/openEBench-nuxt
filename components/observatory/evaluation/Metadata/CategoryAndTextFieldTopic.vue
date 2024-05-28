@@ -9,7 +9,7 @@
 				outlined
 				dense
 				class="text-body-2"
-				@change="changeValue()"
+				@change="changeValue"
 			></v-combobox>
 			<!----------------------------------->
 		</v-col>
@@ -24,6 +24,7 @@
 				class="text-body-2"
 				item-color="white"
 				@input="changeValue"
+				@change="changeValue"
 			>
 				<template #selection="{ item }">
 					<span class="black--text text-body-2">
@@ -44,7 +45,6 @@
 				v-model="modelURI"
 				class="grey--text ml-1 text-body-2"
 				label="URI"
-				:disabled="!customVocabulary"
 				outlined
 				dense
 			>
@@ -67,6 +67,7 @@
 				class="text-body-2"
 				item-color="white"
 				@input="changeValue"
+				@change="changeValue"
 			/>
 		</v-col>
 		<v-col v-if="customVocabulary" cols="6">
@@ -149,6 +150,7 @@ export default {
 			this.changeValue();
 		},
 		changeValue() {
+			console.log('changeValue');
 			let newValue; // Declare newValue with `let` at the top
 
 			if (this.customVocabulary) {
@@ -163,6 +165,14 @@ export default {
 			} else if (this.selectVocabulary === 'EDAM') {
 				// Direct handling of 'EDAM' case without an additional `else`
 				this.modelURI = this.EDAMreversed[this.typeLabel][this.model];
+				newValue = {
+					id: this.id,
+					term: {
+						term: this.model,
+						uri: this.modelURI,
+						vocabulary: this.selectVocabulary,
+					},
+				};
 			} else {
 				newValue = {
 					id: this.id,
@@ -176,9 +186,12 @@ export default {
 
 			// Check if newValue is defined before emitting
 			if (newValue) {
-				this.$emit('changeEntry', this.index, newValue);
+				this.$emit('change', { index: this.index, value: newValue });
+				console.log('emitting change');
+				console.log({ index: this.index, value: newValue });
 			}
 
+			// Force update to ensure reactivity
 			this.$forceUpdate();
 		},
 	},

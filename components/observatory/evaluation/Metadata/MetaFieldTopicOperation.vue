@@ -28,7 +28,7 @@
 				:accepted-vocabularies="acceptedVocabularies"
 				class="mt-2 ml-3"
 				@remove="removeEntry(index)"
-				@change="changeEntry(index, newItem)"
+				@change="changeEntry"
 			/>
 		</v-row>
 	</v-col>
@@ -104,14 +104,17 @@ export default {
 			);
 			this.$forceUpdate();
 		},
-		changeEntry(index, newItem) {
+		changeEntry(initialPayload) {
 			const payload = {
 				field: this.field,
-				index,
-				newItem,
+				index: initialPayload.index,
+				value: initialPayload.value,
 			};
+
+			console.log(payload);
+
 			this.$store.dispatch(
-				'observatory/evaluation/metadata/clearEntry',
+				'observatory/evaluation/metadata/changeEntry',
 				payload
 			);
 			this.$forceUpdate();
