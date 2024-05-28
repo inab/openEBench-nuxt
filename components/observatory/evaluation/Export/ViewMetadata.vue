@@ -60,10 +60,11 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-
 export default {
 	name: 'ViewMetadata',
+	props: {
+		metadata: Object,
+	},
 	data() {
 		return {
 			dialog: false,
@@ -80,11 +81,7 @@ export default {
 	created() {
 		this.jsonContent = JSON.stringify(this.metadata, null, 2);
 	},
-	computed: {
-		...mapGetters({
-			metadata: 'observatory/evaluation/metadata/getToolMetadataJSONLD',
-		}),
-	},
+
 	methods: {
 		openDialog() {
 			this.dialog = true;

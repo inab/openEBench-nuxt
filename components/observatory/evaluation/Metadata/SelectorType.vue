@@ -21,7 +21,7 @@
 <script>
 export default {
 	name: 'SelectorType',
-	props: ['initialSelectedType'],
+	props: ['initialSelectedType', 'field'],
 	data() {
 		return {
 			selectedType: this.initialSelectedType,
@@ -37,20 +37,15 @@ export default {
 			],
 		};
 	},
-	watch: {
-		// Optional: React to future changes in prop value
-		initialSelectedType(newValue) {
-			this.selectedType = newValue;
-		},
-	},
+
 	methods: {
 		changeValue() {
 			const payload = {
 				field: this.field,
-				value: this.select,
+				value: this.selectedType,
 			};
 			this.$store.dispatch(
-				'observatory/evaluation/metadata/changeSelectorEntry',
+				'observatory/evaluation/metadata/updateSelectorEntry',
 				payload
 			);
 		},

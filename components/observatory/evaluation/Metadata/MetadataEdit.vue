@@ -41,7 +41,10 @@
 							:increasable="false"
 						>
 							<template #inputField>
-								<SelectorType field="type" :selected-type="toolMetadata.type" />
+								<SelectorType
+									field="type"
+									:initial-selected-type="toolMetadata.type"
+								/>
 							</template>
 						</MetaField>
 
