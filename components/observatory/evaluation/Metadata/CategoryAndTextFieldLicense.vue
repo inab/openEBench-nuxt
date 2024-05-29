@@ -54,7 +54,7 @@ export default {
 	methods: {
 		changeValueName() {
 			if (this.SPDXLicenses.includes(this.selectLicense)) {
-				this.$axios
+				this.$observatory
 					.get('/SPDXLicenses/url/' + this.selectLicense)
 					.then((response) => {
 						// console.log(response.data)
@@ -64,13 +64,13 @@ export default {
 						console.log(error);
 					});
 			} else {
-				this.URL = 'hello';
+				this.URL = '';
 			}
 
 			this.changeValue();
 		},
 		findMatchingLicense(license) {
-			this.$axios
+			this.$observatory
 				.get('/SPDXLicenses/match/' + license)
 				.then((response) => {
 					// console.log(response.data)
