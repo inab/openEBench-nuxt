@@ -169,6 +169,7 @@ function buildFeHelp(help) {
 	}
 }
 
+/*
 function buildFePublication(publication) {
 	console.log('building publication');
 	const newPublications = [];
@@ -222,7 +223,7 @@ function buildFePublication(publication) {
 
 	return newPublications;
 }
-
+*/
 function buildFeEdamTopicsOperations(topics) {
 	console.log('building edam topics operations');
 	console.log(topics);
@@ -362,44 +363,96 @@ export const actions = {
 		};
 	},
 
-	parseMetadataFile({ commit, dispatch, _state }, fileContent) {
+	importTxt({ commit }, file) {
+		return new Promise((resolve, reject) => {
+			if (!file) {
+				commit('setErrorDialogParseMetadata', true);
+				commit('setErrorProgressText', 'No file chosen');
+				reject(new Error('No file chosen'));
+			} else {
+				const reader = new FileReader();
+
+				console.log('file', file);
+
+				reader.readAsText(file);
+				reader.onload = () => {
+					const data = reader.result;
+					console.log('data', data);
+					resolve(data);
+				};
+				reader.onerror = () => {
+					const errorMessage =
+						'Could not read file, error code is ' + reader.error.code;
+					commit('setErrorDialogParseMetadata', true);
+					commit('setErrorProgressText', errorMessage);
+					reject(new Error(errorMessage));
+				};
+			}
+		});
+	},
+
+	async parseMetadataFile({ commit, dispatch }, file) {
 		commit('setParseProgressText', 'Parsing metadata file content...');
+		commit('setDialogParseMetadata', true);
+
+		let fileContent;
+		try {
+			fileContent = await dispatch('importTxt', file);
+		} catch (error) {
+			console.error('Error importing text:', error);
+			commit('setDialogParseMetadata', false);
+			return;
+		}
 
 		console.log(fileContent);
 
-		// transform file fields into the UI metadata model fields
+		// Trim whitespace from fileContent
+		fileContent = fileContent.trim();
+
+		let parsedContent;
+		try {
+			parsedContent = JSON.parse(fileContent);
+		} catch (error) {
+			console.error('Error parsing JSON:', error);
+			commit('setDialogParseMetadata', false);
+			commit('setErrorDialogParseMetadata', true);
+			commit('setErrorProgressText', 'Error parsing metadata file content.');
+			dispatch('observatory/evaluation/changeStep', 2, { root: true });
+			return;
+		}
+
+		// Transform file fields into the UI metadata model fields
 		let metadata = {
-			type: fileContent['@type'] || '',
 			topics: buildFeTopicsOperations(
-				fileContent['schema:applicationSubcategory']
+				parsedContent['schema:applicationSubcategory']
 			),
-			name: fileContent['schema:name'] || '',
-			webpage: fileContent['schema:url'] || '',
-			description: buildFeDescription(fileContent['schema:description']),
-			os: fileContent['schema:operatingSystem'] || [],
-			license: buildFeLicense(fileContent['schema:license']),
-			authors: buildFeAuthors(fileContent['schema:author']),
-			version: buildFeVersion(fileContent['schema:softwareVersion']),
-			repository: fileContent['schema:codeRepository'] || [],
-			operations: buildFeTopicsOperations(fileContent['schema:featureList']),
-			input: buildFeInputOutput(fileContent['bioschemas:input']),
-			output: buildFeInputOutput(fileContent['bioschemas:output']),
-			download: fileContent['schema:downloadURL'] || [],
-			documentation: buildFeHelp(fileContent['schema:softwareHelp']),
-			publication: buildFePublication(fileContent['schema:citation']),
-			dependencies: fileContent['schema:requirements'] || [],
+			name: parsedContent['schema:name'] || '',
+			webpage: parsedContent['schema:url'] || '',
+			description: buildFeDescription(parsedContent['schema:description']),
+			os: parsedContent['schema:operatingSystem'] || [],
+			license: buildFeLicense(parsedContent['schema:license']),
+			authors: buildFeAuthors(parsedContent['schema:author']),
+			version: buildFeVersion(parsedContent['schema:softwareVersion']),
+			repository: parsedContent['schema:codeRepository'] || [],
+			operations: buildFeTopicsOperations(parsedContent['schema:featureList']),
+			input: buildFeInputOutput(parsedContent['bioschemas:input']),
+			output: buildFeInputOutput(parsedContent['bioschemas:output']),
+			download: parsedContent['schema:downloadURL'] || [],
+			documentation: buildFeHelp(parsedContent['schema:softwareHelp']),
+			dependencies: parsedContent['schema:requirements'] || [],
 			registration_not_mandatory:
-				fileContent['schema:isAccessibleForFree'] || false,
+				parsedContent['schema:isAccessibleForFree'] || false,
 			edam_topics: buildFeEdamTopicsOperations(
-				fileContent['schema:applicationSubcategory']
+				parsedContent['schema:applicationSubcategory']
 			),
 			edam_operations: buildFeEdamTopicsOperations(
-				fileContent['schema:featureList']
+				parsedContent['schema:featureList']
 			),
-			label: [fileContent['schema:name']] || [],
-			src: fileContent['schema:codeRepository'] || [],
-			links: buildFeLinks(fileContent),
+			label: [parsedContent['schema:name']] || [],
+			src: parsedContent['schema:codeRepository'] || [],
+			links: buildFeLinks(parsedContent),
 			api_lib: false,
+			type: '',
 			test: [],
 			source: [],
 			registries: [],
@@ -423,6 +476,8 @@ export const actions = {
 		commit('setParseProgressText', 'Done');
 		commit('setParseProgressText', '');
 		commit('setDialogParseMetadata', false);
+
+		dispatch('observatory/evaluation/changeStep', 3, { root: true });
 	},
 
 	updateDialogParseMetadata({ commit, _state }, value) {
@@ -433,9 +488,13 @@ export const actions = {
 		commit('setDialogInstallApp', value);
 	},
 
-	cancelParse({ commit, _state }) {
+	cancelParse({ commit, _state, dispatch }) {
 		commit('setDialogParseMetadata', false);
+		commit('setErrorDialogParseMetadata', false);
 		commit('setParseProgressText', '');
+		dispatch('observatory/evaluation/changeStep', 2, {
+			root: true,
+		});
 	},
 };
 
@@ -443,8 +502,8 @@ export const mutations = {
 	setDialogParseMetadata(state, value) {
 		state._dialogParseMetadata = value;
 	},
-	setParseProgressText(state, text) {
-		state._parseProgressText = text;
+	setParseProgressText(state, value) {
+		state._parseProgressText = value;
 	},
 	setErrorDialogParseMetadata(state, value) {
 		state._errorDialogParseMetadata = value;

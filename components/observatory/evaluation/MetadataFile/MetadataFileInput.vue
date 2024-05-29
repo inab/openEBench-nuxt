@@ -16,11 +16,13 @@
 			</v-tabs-items>
 		</v-tabs>
 		<DialogParseMetadata />
+		<ErrorDialogParseMetadata />
 	</v-container>
 </template>
 <script>
 import MetadataFileUpload from './MetadataFileUpload.vue';
 import MetadataFileURL from './MetadataFileURL.vue';
+import ErrorDialogParseMetadata from './ErrorDialogParseMetadata.vue';
 import DialogParseMetadata from '~/components/observatory/evaluation/MetadataFile/DialogParseMetadata.vue';
 
 export default {
@@ -29,6 +31,7 @@ export default {
 		MetadataFileUpload,
 		MetadataFileURL,
 		DialogParseMetadata,
+		ErrorDialogParseMetadata,
 	},
 	data: () => ({
 		tab: 'Upload File',

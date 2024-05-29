@@ -49,33 +49,17 @@ export default {
 	methods: {
 		goBack() {
 			this.$store.dispatch('observatory/evaluation/changeStep', 1);
-			this.value = '';
+			this.file = '';
 		},
-		importTxt() {
-			if (!this.file) {
-				this.data = 'No file chosen';
+		async submitFile() {
+			try {
+				await this.$store.dispatch(
+					'observatory/evaluation/file/parseMetadataFile',
+					this.file
+				);
+			} catch (error) {
+				console.error('Error submitting file:', error);
 			}
-			const reader = new FileReader();
-
-			// Use the javascript reader object to load the contents
-			// of the file in the v-model prop
-			reader.readAsText(this.file);
-			reader.onload = () => {
-				this.data = reader.result;
-			};
-			reader.onerror = () => {
-				this.message =
-					'Could not read file, error code is ' + reader.error.code;
-			};
-			return this.data;
-		},
-		submitFile() {
-			const data = this.importTxt();
-			this.$store.dispatch(
-				'observatory/evaluation/file/parseMetadataFile',
-				data
-			);
-			// this.$store.dispatch('evaluation/changeStep', 3)
 		},
 	},
 	computed: {
