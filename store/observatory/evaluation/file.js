@@ -323,44 +323,28 @@ export const actions = {
 		}
 	},
 
-	async parseFromURL({ _commit, _dispatch, _state }, _payload) {
-		/*
-		TODO: Download the file from the url and return the file content
-		*/
-	},
-
-	parseFromUpload({ commit, dispatch, _state }, file) {
-		/*
-        Read the selected file and parse the content
-        */
-
+	async parseFromURL({ commit, dispatch }, { url }) {
+		commit('setParseProgressText', 'Downloading file from URL...');
 		commit('setDialogParseMetadata', true);
-		commit('setParseProgressText', 'Reading metadata file');
 
-		const fileContent = dispatch('readFile', file);
+		try {
+			// Create a new Axios instance
+			const axiosInstance = this.$axios.create();
+			axiosInstance.setBaseURL(url);
 
-		dispatch('parseMetadataFile', fileContent);
-	},
+			const response = await axiosInstance.get('');
 
-	readFile({ commit, _dispatch, _state }, file) {
-		if (!file) {
-			commit('setParseProgressText', 'No file selected');
+			const fileContent = response.data;
+			console.log('Downloaded file content:', fileContent);
+			await dispatch('parseMetadataFile', JSON.stringify(fileContent));
+		} catch (error) {
+			console.error('Error fetching or parsing file from URL:', error);
+			commit('setErrorDialogParseMetadata', true);
+			commit(
+				'setErrorProgressText',
+				`Error fetching file from URL: ${error.message}`
+			);
 		}
-		const reader = new FileReader();
-
-		// Use the javascript reader object to load the contents
-		// of the file in the v-model prop
-		reader.readAsText(file);
-		reader.onload = () => {
-			const data = reader.result;
-			return data;
-		};
-		reader.onerror = () => {
-			const message = 'Could not read file, error code is ' + reader.error.code;
-			commit('setParseProgressText', message);
-			const data = null;
-			return data;
-		};
 	},
 
 	importTxt({ commit }, file) {
@@ -375,14 +359,25 @@ export const actions = {
 				console.log('file', file);
 
 				reader.readAsText(file);
+
 				reader.onload = () => {
 					const data = reader.result;
 					console.log('data', data);
 					resolve(data);
 				};
+
 				reader.onerror = () => {
 					const errorMessage =
 						'Could not read file, error code is ' + reader.error.code;
+					console.error('File reading error:', reader.error);
+					commit('setErrorDialogParseMetadata', true);
+					commit('setErrorProgressText', errorMessage);
+					reject(new Error(errorMessage));
+				};
+
+				reader.onabort = () => {
+					const errorMessage = 'File read operation was aborted.';
+					console.error('File read aborted');
 					commit('setErrorDialogParseMetadata', true);
 					commit('setErrorProgressText', errorMessage);
 					reject(new Error(errorMessage));
@@ -400,11 +395,16 @@ export const actions = {
 			fileContent = await dispatch('importTxt', file);
 		} catch (error) {
 			console.error('Error importing text:', error);
+			const errorMessage =
+				'Error importing text from file:' +
+				'<br><br><pre>' +
+				error.message +
+				'</pre>';
 			commit('setDialogParseMetadata', false);
+			commit('setErrorDialogParseMetadata', true);
+			commit('setErrorProgressText', errorMessage);
 			return;
 		}
-
-		console.log(fileContent);
 
 		// Trim whitespace from fileContent
 		fileContent = fileContent.trim();
@@ -416,7 +416,12 @@ export const actions = {
 			console.error('Error parsing JSON:', error);
 			commit('setDialogParseMetadata', false);
 			commit('setErrorDialogParseMetadata', true);
-			commit('setErrorProgressText', 'Error parsing metadata file content.');
+			const errorMessage =
+				'Error parsing metadata file content:' +
+				'<pre>' +
+				error.message +
+				'</pre>';
+			commit('setErrorProgressText', errorMessage);
 			dispatch('observatory/evaluation/changeStep', 2, { root: true });
 			return;
 		}

@@ -100,7 +100,10 @@ export default {
 			if (this.payload) {
 				this.submitGitHubLink();
 			} else {
-				// 🚧 this.$store.dispatch('evaluation/file/parseFromURL', this.URL)
+				this.$store.dispatch(
+					'observatory/evaluation/file/parseFromURL',
+					this.URL
+				);
 			}
 
 			this.$store.dispatch('observatory/evaluation/changeStep', 3);

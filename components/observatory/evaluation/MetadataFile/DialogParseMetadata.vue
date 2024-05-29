@@ -5,11 +5,7 @@
 				Uploading metadata
 			</v-card-title>
 			<v-card-text>
-				<v-progress-linear
-					:size="40"
-					indeterminate
-					v-if="dialogParseMetadataProgressing"
-				></v-progress-linear>
+				<v-progress-linear :size="40" indeterminate></v-progress-linear>
 
 				<span style="color: #1565c0" class="text-body-2">
 					{{ parseProgressText }}
@@ -32,7 +28,6 @@ export default {
 		...mapGetters('observatory/evaluation/file/', {
 			dialogParseMetadata: 'getDialogParseMetadata',
 			parseProgressText: 'getParseProgressText',
-			dialogParseMetadataProgressing: 'getDialogParseMetadataProgressing',
 		}),
 	},
 	methods: {
