@@ -8,6 +8,7 @@ These functions are mainly called from the component `observatoryInput.vue`
 // state
 export const state = () => ({
 	_ObservatoryToolsNameTypeSources: [],
+	_loadingAutocomplete: false,
 	_loading: false,
 	_importationResult: null, //
 });
@@ -16,6 +17,10 @@ export const state = () => ({
 export const getters = {
 	getObservatoryToolsNameTypeSources(state) {
 		return state._ObservatoryToolsNameTypeSources;
+	},
+
+	getLoadingAutocomplete(state) {
+		return state._loadingAutocomplete;
 	},
 
 	getLoading(state) {
@@ -28,12 +33,15 @@ export const actions = {
 	async getObservatoryToolsNameTypeSources({ commit, _state }) {
 		const URL = '/tools/names_type_labels';
 
+		commit('setLoadingAutocomplete', true);
+
 		const result = await this.cache.dispatch(
 			'observatory/evaluation/observatory/GET_URL',
 			URL
 		);
 
 		commit('setObservatoryToolsNameTypeSources', result);
+		commit('setLoadingAutocomplete', false);
 	},
 
 	async fetchToolMetadata({ commit, dispatch }, payload) {
@@ -80,6 +88,10 @@ export const actions = {
 export const mutations = {
 	setObservatoryToolsNameTypeSources(state, data) {
 		state._ObservatoryToolsNameTypeSources = data;
+	},
+
+	setLoadingAutocomplete(state, data) {
+		state._loadingAutocomplete = data;
 	},
 
 	setLoading(state, data) {

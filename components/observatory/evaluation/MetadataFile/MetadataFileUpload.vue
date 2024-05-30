@@ -24,7 +24,7 @@
 			</v-col>
 		</v-row>
 		<v-row justify="space-around" class="d-flex mt-0 pt-0">
-			<v-col cols="10">
+			<v-col cols="10" class="text-right">
 				<v-btn color="primary" :disabled="invalid" @click="submitFile">
 					Continue
 				</v-btn>

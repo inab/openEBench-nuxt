@@ -1,6 +1,15 @@
 <template>
 	<v-container>
-		<v-form>
+		<v-row justify="space-around" v-if="loadingStep">
+			<v-col cols="10">
+				<v-skeleton-loader
+					class="mx-auto"
+					type="heading, list-item, actions"
+				></v-skeleton-loader>
+			</v-col>
+		</v-row>
+
+		<v-form v-else>
 			<v-row justify="space-around">
 				<v-col cols="10">
 					<p class="text-body-2">
@@ -34,7 +43,7 @@
 				</v-col>
 			</v-row>
 			<v-row justify="space-around" class="d-flex mt-0 pt-0">
-				<v-col cols="10">
+				<v-col cols="10" class="text-right">
 					<v-btn
 						color="primary"
 						:disabled="invalid"
@@ -78,6 +87,7 @@ export default {
 			observatoryTools:
 				'observatory/evaluation/observatory/getObservatoryToolsNameTypeSources',
 			loading: 'observatory/evaluation/observatory/getLoading',
+			loadingStep: 'observatory/evaluation/observatory/getLoadingAutocomplete',
 			step: 'observatory/evaluation/index/getStep',
 		}),
 		invalid() {
