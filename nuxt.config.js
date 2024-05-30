@@ -55,6 +55,7 @@ export default {
 		'~/plugins/vue-fragment-config',
 		'~/plugins/graphql',
 		'~/plugins/observatory',
+		'~/plugins/githubapp',
 		'~/plugins/pluralize',
 	],
 
@@ -159,7 +160,10 @@ export default {
 			'https://dev-openebench.bsc.es/rest/bench_event_api',
 		OBSERVATORY_API_URL:
 			process.env.OBSERVATORY_API_URL ||
-			'https://observatory.openebench.bsc.es/api/stats',
+			'https://observatory.openebench.bsc.es/api',
+		GITHUBAPP_API_URL:
+			process.env.GITHUBAPP_API_URL ||
+			'https://observatory.openebench.bsc.es/githubapp/api',
 		axios: {
 			// See https://github.com/nuxt-community/axios-module#options
 			baseURL:
@@ -192,6 +196,11 @@ export default {
 				name: 'scientific',
 				path: '/scientific',
 				component: resolve(__dirname, 'pages/benchmarking'),
+			});
+			routes.push({
+				name: 'observatory',
+				path: '/observatory',
+				component: resolve(__dirname, 'pages/observatory/Trends.vue'),
 			});
 			routes.push({
 				name: 'scientific-community',

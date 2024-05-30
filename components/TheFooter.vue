@@ -111,7 +111,7 @@
 <script>
 import logo from '~/static/images/opeb_logo_white_minimal.png';
 import euFlag from '~/static/images/eu.svg';
-import menuEntries from '~/components/Header/menuEntries';
+import footerEntries from '~/components/footerEntries';
 import subMenuEntries from '~/components/Header/subMenuEntriesDocs';
 
 export default {
@@ -122,7 +122,7 @@ export default {
 		footers: [
 			{
 				headline: 'OpenEBench',
-				links: menuEntries,
+				links: footerEntries,
 			},
 			{
 				headline: 'Project',

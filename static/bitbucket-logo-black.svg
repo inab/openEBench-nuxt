@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="164.80299mm"
+   height="158.3226mm"
+   viewBox="0 0 164.803 158.32261"
+   version="1.1"
+   id="svg8"
+   sodipodi:docname="bitbucket-logo-black.svg"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)">
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.70000002"
+     inkscape:cx="782.89282"
+     inkscape:cy="32.817843"
+     inkscape:document-units="mm"
+     inkscape:current-layer="g1861"
+     showgrid="false"
+     inkscape:window-width="2560"
+     inkscape:window-height="1376"
+     inkscape:window-x="2560"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1" />
+  <defs
+     id="defs2">
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Fade to Black or White"
+       id="filter1008">
+      <feColorMatrix
+         values="0.38 0 0 0 0.62 0 0.38 0 0 0.62 0 0 0.38 0 0.62 0 0 0 1 0"
+         id="feColorMatrix1006"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix1010" />
+      <feColorMatrix
+         id="feColorMatrix1012"
+         values="0.38 0 0 0 0.62 0 0.38 0 0 0.62 0 0 0.38 0 0.62 0 0 0 1 0"
+         in="fbSourceGraphic"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix1014" />
+      <feColorMatrix
+         id="feColorMatrix1016"
+         values="0.38 0 0 0 0.62 0 0.38 0 0 0.62 0 0 0.38 0 0.62 0 0 0 1 0"
+         in="fbSourceGraphic"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix1018" />
+      <feColorMatrix
+         id="feColorMatrix1020"
+         values="0.98 0 0 0 0.02 0 0.98 0 0 0.02 0 0 0.98 0 0.02 0 0 0 1 0"
+         in="fbSourceGraphic"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix1022" />
+      <feColorMatrix
+         id="feColorMatrix1024"
+         values="0.02 0 0 0 0.98 0 0.02 0 0 0.98 0 0 0.02 0 0.98 0 0 0 1 0"
+         in="fbSourceGraphic" />
+    </filter>
+  </defs>
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     transform="translate(-20.764521,-25.90615)"
+     id="layer1"
+     inkscape:groupmode="layer"
+     inkscape:label="Layer 1">
+    <g
+       transform="translate(2.6726953,-1.0690757)"
+       id="g1763">
+      <g
+         id="g1861"
+         transform="translate(-0.69666563,-13.790567)">
+        <g
+           inkscape:groupmode="layer"
+           id="layer4"
+           inkscape:label="Layer 2"
+           style="display:inline" />
+        <path
+           style="fill:#000000;stroke-width:0.07953095"
+           d="m 68.202469,164.30991 c -1.08692,-0.26356 -2.13493,-1.11279 -2.64376,-2.14233 -0.32471,-0.657 0.55292,4.54063 -7.91151,-46.85506 -2.94758,-17.897628 -5.38354,-32.526141 -5.41323,-32.507791 -0.0297,0.01833 -0.0791,-0.234679 -0.10981,-0.562299 -0.0557,-0.593994 0.003,-1.313751 0.10668,-1.314314 0.0301,-1.65e-4 0.12101,-0.16135 0.20195,-0.358187 0.21028,-0.511314 0.75685,-1.081679 1.33905,-1.397347 l 0.50205,-0.27221 h 45.451929 45.451932 l 0.45135,0.211584 c 0.24825,0.116373 0.61413,0.361625 0.81307,0.545006 0.38169,0.351828 0.84315,1.166043 0.84315,1.487671 0,0.106959 0.0349,0.169222 0.0795,0.141669 0.0502,-0.03101 0.0795,0.1598 0.0795,0.516945 0,0.311361 -0.0269,0.54958 -0.0597,0.529374 -0.0528,-0.0325 -2.19345,13.061882 -5.15311,31.521599 -2.44611,15.25671 -7.84334,48.19189 -7.95483,48.54234 -0.24984,0.7853 -0.81991,1.41689 -1.61561,1.78999 l -0.44697,0.20959 -31.77261,0.0135 c -27.232466,0.0115 -31.83927,-0.003 -32.239129,-0.0997 z m 41.635091,-28.64526 c 0.0314,-0.0323 1.1317,-6.35585 2.44503,-14.05235 1.74744,-10.24052 2.36488,-14.0213 2.30219,-14.09685 -0.0697,-0.084 -2.87438,-0.10323 -15.018018,-0.10323 -12.863675,0 -14.945442,0.0158 -15.026901,0.11393 -0.07471,0.0899 0.4665,3.04517 2.575021,14.06122 1.468264,7.67101 2.669573,13.97342 2.669573,14.00536 0,0.0319 0.0694,0.0838 0.15427,0.11517 0.203729,0.0754 19.824855,0.0327 19.898835,-0.0433 z"
+           id="path1615"
+           inkscape:connector-curvature="0" />
+      </g>
+    </g>
+  </g>
+</svg>

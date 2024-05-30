@@ -6,10 +6,6 @@ const menuEntries = [
 		to: '/benchmarking',
 	},
 	{
-		title: 'Observatory',
-		to: '/observatory',
-	},
-	{
 		title: 'Projects',
 		to: '/projects',
 	},
