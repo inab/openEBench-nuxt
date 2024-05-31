@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="164.80299mm"
+   height="158.3226mm"
+   viewBox="0 0 164.803 158.32261"
+   version="1.1"
+   id="svg8"
+   sodipodi:docname="galaxy-logo-black.svg"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)">
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.49497476"
+     inkscape:cx="250.61307"
+     inkscape:cy="-34.142467"
+     inkscape:document-units="mm"
+     inkscape:current-layer="g852"
+     showgrid="false"
+     inkscape:window-width="2560"
+     inkscape:window-height="1376"
+     inkscape:window-x="2560"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1" />
+  <defs
+     id="defs2">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient836">
+      <stop
+         style="stop-color:#1a1a1a;stop-opacity:1;"
+         offset="0"
+         id="stop832" />
+      <stop
+         style="stop-color:#1a1a1a;stop-opacity:0;"
+         offset="1"
+         id="stop834" />
+    </linearGradient>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Fade to Black or White"
+       id="filter1008">
+      <feColorMatrix
+         values="0.38 0 0 0 0.62 0 0.38 0 0 0.62 0 0 0.38 0 0.62 0 0 0 1 0"
+         id="feColorMatrix1006"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix1010" />
+      <feColorMatrix
+         id="feColorMatrix1012"
+         values="0.38 0 0 0 0.62 0 0.38 0 0 0.62 0 0 0.38 0 0.62 0 0 0 1 0"
+         in="fbSourceGraphic"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix1014" />
+      <feColorMatrix
+         id="feColorMatrix1016"
+         values="0.38 0 0 0 0.62 0 0.38 0 0 0.62 0 0 0.38 0 0.62 0 0 0 1 0"
+         in="fbSourceGraphic"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix1018" />
+      <feColorMatrix
+         id="feColorMatrix1020"
+         values="0.98 0 0 0 0.02 0 0.98 0 0 0.02 0 0 0.98 0 0.02 0 0 0 1 0"
+         in="fbSourceGraphic"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix1022" />
+      <feColorMatrix
+         id="feColorMatrix1024"
+         values="0.02 0 0 0 0.98 0 0.02 0 0 0.98 0 0 0.02 0 0.98 0 0 0 1 0"
+         in="fbSourceGraphic" />
+    </filter>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient836"
+       id="linearGradient840"
+       x1="73.245674"
+       y1="154.85812"
+       x2="145.20169"
+       y2="154.85812"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     transform="translate(-20.764521,-25.90615)"
+     id="layer1"
+     inkscape:groupmode="layer"
+     inkscape:label="Layer 1">
+    <g
+       transform="translate(2.6726953,-1.0690757)"
+       id="g1763">
+      <g
+         id="g1861"
+         transform="translate(-0.69666563,-13.790567)">
+        <g
+           inkscape:groupmode="layer"
+           id="layer4"
+           inkscape:label="Layer 2"
+           style="display:inline" />
+        <g
+           id="g852"
+           transform="matrix(0.89634715,0,0,0.9394106,14.781892,1.6017259)"
+           style="fill:#1a1a1a">
+          <path
+             style="opacity:1;fill:url(#linearGradient840);fill-opacity:1;fill-rule:nonzero;stroke-width:0.26263946"
+             d="m 73.538508,167.01377 c -0.204049,-0.38693 -0.292831,-4.1245 -0.292831,-12.32774 0,-10.41346 0.04791,-11.82107 0.415005,-12.19363 0.376075,-0.38166 2.889043,-0.4068 26.787988,-0.26795 25.0311,0.14542 42.45977,0.46947 44.03606,0.81874 l 0.71696,0.15886 v 11.58251 c 0,10.78627 -0.0314,11.59485 -0.45625,11.76184 -1.08662,0.42709 -12.82488,0.668 -40.89934,0.83941 l -30.01476,0.18325 z"
+             id="path866"
+             inkscape:connector-curvature="0"
+             sodipodi:nodetypes="cscsccscscc" />
+          <path
+             style="fill:#1a1a1a;stroke:#ffffff;stroke-width:0.26458332"
+             d="m 52.480576,123.44845 v -11.90626 h 31.08854 31.088544 v 11.90626 11.90625 H 83.569116 52.480576 Z m 0,-31.750009 V 79.525965 l 41.605729,0.06697 41.605725,0.06697 v 12.038536 12.038539 l -41.605725,0.067 -41.605729,0.067 z"
+             id="path854"
+             inkscape:connector-curvature="0" />
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
