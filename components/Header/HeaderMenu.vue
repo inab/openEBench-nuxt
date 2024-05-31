@@ -77,6 +77,28 @@
 				<template #activator="{ on, attrs }">
 					<v-btn v-bind="attrs" text v-on="on">
 						<v-icon>mdi-chevron-down</v-icon>
+						Observatory
+					</v-btn>
+				</template>
+				<v-list>
+					<v-list-item
+						v-for="(item, index) in subMenuEntriesObservatory"
+						:key="`sub` + index"
+						:to="item.to"
+						:href="item.href"
+						:target="item.external ? '_blank' : ''"
+					>
+						<v-list-item-title class="text-subtitle-2">{{
+							item.title
+						}}</v-list-item-title>
+						<v-icon v-if="item.external" right small>mdi-open-in-new</v-icon>
+					</v-list-item>
+				</v-list>
+			</v-menu>
+			<v-menu v-if="$vuetify.breakpoint.mdAndUp" left offset-y>
+				<template #activator="{ on, attrs }">
+					<v-btn v-bind="attrs" text v-on="on">
+						<v-icon>mdi-chevron-down</v-icon>
 						Docs
 					</v-btn>
 				</template>
@@ -88,7 +110,9 @@
 						:href="item.href"
 						:target="item.external ? '_blank' : ''"
 					>
-						<v-list-item-title>{{ item.title }}</v-list-item-title>
+						<v-list-item-title class="text-subtitle-2">{{
+							item.title
+						}}</v-list-item-title>
 						<v-icon v-if="item.external" right small>mdi-open-in-new</v-icon>
 					</v-list-item>
 					<v-list-item
@@ -116,7 +140,9 @@
 						:href="item.href"
 						:target="item.external ? '_blank' : ''"
 					>
-						<v-list-item-title>{{ item.title }}</v-list-item-title>
+						<v-list-item-title class="text-subtitle-2">{{
+							item.title
+						}}</v-list-item-title>
 						<v-icon v-if="item.external" right small>mdi-open-in-new</v-icon>
 					</v-list-item>
 					<v-list-item
@@ -177,6 +203,7 @@ import CookieLaw from 'vue-cookie-law';
 import menuEntries from './menuEntries';
 import subMenuEntriesDocs from './subMenuEntriesDocs';
 import subMenuEntriesAbout from './subMenuEntriesAbout';
+import subMenuEntriesObservatory from './subMenuEntriesObservatory';
 import opebLogo from '~/static/images/opeb_logo.gif';
 
 export default {
@@ -195,6 +222,7 @@ export default {
 			menuEntries,
 			subMenuEntriesDocs,
 			subMenuEntriesAbout,
+			subMenuEntriesObservatory,
 			opebLogo,
 		};
 	},

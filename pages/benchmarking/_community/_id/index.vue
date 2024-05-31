@@ -52,18 +52,23 @@
 					:transition="false"
 				>
 					<div v-if="index == tab">
-
 						<div v-if="item">
-							<LoaderChartWidgets :data="item" :metrics="metrics"></LoaderChartWidgets>
+							<LoaderChartWidgets
+								:data="item"
+								:metrics="metrics"
+							></LoaderChartWidgets>
 						</div>
 						<div v-else>
-							<v-progress-circular indeterminate color="primary"></v-progress-circular>
+							<v-progress-circular
+								indeterminate
+								color="primary"
+							></v-progress-circular>
 						</div>
 					</div>
-					<div v-else>No visual representation implemented
-						<img src="" alt="">
+					<div v-else>
+						No visual representation implemented
+						<img src="" alt="" />
 					</div>
-
 				</v-tab-item>
 			</v-tabs-items>
 		</div>
@@ -72,18 +77,18 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import ChartBarplotVisualizerWrapper from '~/components/Widgets/ChartBarplotVisualizerWrapper';
-import ChartScatterVisualizerWrapper from '~/components/Widgets/ChartScatterVisualizerWrapper';
 import LoaderChartWidgets from '~/components/Widgets/LoaderChartWidgets';
 
 export default {
 	name: 'CommunityChallengePlotsPage',
-	components: { ChartBarplotVisualizerWrapper, ChartScatterVisualizerWrapper, LoaderChartWidgets },
+	components: {
+		LoaderChartWidgets,
+	},
 	data() {
 		return {
 			hostName: this.$config.OEB_LEGACY_ANGULAR_URI,
 			tab: 0,
-			m: []
+			m: [],
 		};
 	},
 	computed: {

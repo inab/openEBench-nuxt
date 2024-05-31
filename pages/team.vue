@@ -28,7 +28,7 @@
 							<div class="inner-circle">
 								<!-- Circle image of team member -->
 								<v-tooltip top>
-									<template v-slot:activator="{ on }">
+									<template #activator="{ on }">
 										<!-- Use v-avatar to display the member's image -->
 										<v-avatar size="185" class="avatar-wrapper">
 											<!-- Conditional rendering of image based on URL type -->
@@ -60,11 +60,11 @@
 					<v-card-subtitle class="subtitle-container">
 						<div v-for="(institution, idx) in member.institution" :key="idx">
 							<v-tooltip bottom>
-								<template v-slot:activator="{ on }">
+								<template #activator="{ on }">
 									<a
 										href="#"
-										v-on="on"
 										class="institution-link"
+										v-on="on"
 										@click.prevent="navigateToLink(institution.trim())"
 										>{{ institution.trim() }}</a
 									>
@@ -76,7 +76,7 @@
 								<span>{{ getInstitutionFullName(institution).name }}</span>
 							</v-tooltip>
 						</div>
-						<v-btn icon @click="toggleExpand(member)" class="arrow">
+						<v-btn icon class="arrow" @click="toggleExpand(member)">
 							<v-icon>{{
 								member.show ? 'mdi-chevron-up' : 'mdi-chevron-down'
 							}}</v-icon>
@@ -136,8 +136,8 @@
 					<div class="px-4 mb-2 centered-chips">
 						<v-chip-group>
 							<v-chip
-								class="chip"
 								v-if="member.orcid"
+								class="chip"
 								target="_blank"
 								:href="member.orcid"
 							>
@@ -148,8 +148,8 @@
 								/>ORCID
 							</v-chip>
 							<v-chip
-								class="chip"
 								v-if="member.github"
+								class="chip"
 								target="_blank"
 								:href="member.github"
 							>

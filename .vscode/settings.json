@@ -87,5 +87,10 @@
 	},
 	"[json]": {
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	}
+	},
+	"editor.autoClosingBrackets": "never",
+	"html.autoClosingTags": false,
+	"javascript.autoClosingTags": false,
+	"typescript.autoClosingTags": false,
+	"vue.complete.casing.props": "autoCamel"
 }
