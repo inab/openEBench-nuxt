@@ -51,28 +51,19 @@
 					:key="index"
 					:transition="false"
 				>
-					<chart-scatter-visualizer-wrapper
-						v-if="
-							item.datalink.inline_data.visualization.type == '2D-plot' &&
-							index == tab
-						"
-						:id="item._id"
-						:key="item._id"
-						class="mt-5"
-					/>
-					<chart-barplot-visualizer-wrapper
-						v-else-if="
-							item.datalink.inline_data.visualization.type == 'bar-plot' &&
-							index == tab &&
-							item.graphData
-						"
-						:id="item._id"
-						:key="item._id"
-						:data="item.graphData"
-						:metric-name="item.datalink.inline_data.visualization.metric"
-						class="mt-5"
-					/>
-					<div v-else>No visual representation implemented</div>
+					<div v-if="index == tab">
+
+						<div v-if="item">
+							<LoaderChartWidgets :data="item" :metrics="metrics"></LoaderChartWidgets>
+						</div>
+						<div v-else>
+							<v-progress-circular indeterminate color="primary"></v-progress-circular>
+						</div>
+					</div>
+					<div v-else>No visual representation implemented
+						<img src="" alt="">
+					</div>
+
 				</v-tab-item>
 			</v-tabs-items>
 		</div>
@@ -83,20 +74,23 @@
 import { mapGetters } from 'vuex';
 import ChartBarplotVisualizerWrapper from '~/components/Widgets/ChartBarplotVisualizerWrapper';
 import ChartScatterVisualizerWrapper from '~/components/Widgets/ChartScatterVisualizerWrapper';
+import LoaderChartWidgets from '~/components/Widgets/LoaderChartWidgets';
 
 export default {
 	name: 'CommunityChallengePlotsPage',
-	components: { ChartBarplotVisualizerWrapper, ChartScatterVisualizerWrapper },
+	components: { ChartBarplotVisualizerWrapper, ChartScatterVisualizerWrapper, LoaderChartWidgets },
 	data() {
 		return {
 			hostName: this.$config.OEB_LEGACY_ANGULAR_URI,
 			tab: 0,
+			m: []
 		};
 	},
 	computed: {
 		...mapGetters('challenge', {
 			datasets: 'datasetsList',
 			challenge: 'challenge',
+			metrics: 'metrics',
 		}),
 		...mapGetters('community', {
 			currentEvent: 'currentEvent',
