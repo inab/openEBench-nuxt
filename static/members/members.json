@@ -1,8 +1,9 @@
 {
 	"Members": [
 		{
-			"image": "https://www.earth.com/_next/image/?url=https%3A%2F%2Fcff2.earth.com%2Fuploads%2F2023%2F06%2F02100547%2FMountain-2-960x640.jpg&w=1920&q=75",
+			"image": "/amorales.jpeg",
 			"name": "Andrea Morales Mata",
+			"alias": "Andrea",
 			"institution": ["INB/ELIXIR-ES", "BSC-CNS"],
 			"roles": ["Web Front-end", "Data Visualization"],
 			"orcid": "https://orcid.org/0009-0008-7213-9577",
@@ -10,8 +11,9 @@
 			"show": false
 		},
 		{
-			"image": "https://www.earth.com/_next/image/?url=https%3A%2F%2Fcff2.earth.com%2Fuploads%2F2023%2F06%2F02100547%2FMountain-2-960x640.jpg&w=1920&q=75",
+			"image": "/avalle.jpeg",
 			"name": "Ani Liseth Valle Banegas",
+			"alias": "Ani",
 			"institution": ["INB/ELIXIR-ES", "BSC-CNS"],
 			"roles": ["Web Front-end", "Data Visualization"],
 			"orcid": "https://orcid.org/0009-0009-6247-4475",
@@ -21,6 +23,7 @@
 		{
 			"image": "https://www.earth.com/_next/image/?url=https%3A%2F%2Fcff2.earth.com%2Fuploads%2F2023%2F06%2F02100547%2FMountain-2-960x640.jpg&w=1920&q=75",
 			"name": "Eva Martin del Pico",
+			"alias": "Eva",
 			"institution": ["INB/ELIXIR-ES", "BSC-CNS"],
 			"roles": [
 				"Software Observatory",
@@ -34,8 +37,9 @@
 			"show": false
 		},
 		{
-			"image": "https://www.earth.com/_next/image/?url=https%3A%2F%2Fcff2.earth.com%2Fuploads%2F2023%2F06%2F02100547%2FMountain-2-960x640.jpg&w=1920&q=75",
+			"image": "/aredondo.jpeg",
 			"name": "Anna Redondo Guitarte",
+			"alias": "Anna",
 			"institution": ["INB/ELIXIR-ES", "BSC-CNS"],
 			"roles": [
 				"Community Engagement",
@@ -48,8 +52,9 @@
 			"show": false
 		},
 		{
-			"image": "https://www.earth.com/_next/image/?url=https%3A%2F%2Fcff2.earth.com%2Fuploads%2F2023%2F06%2F02100547%2FMountain-2-960x640.jpg&w=1920&q=75",
+			"image": "/scapella.jpeg",
 			"name": "Salvador Capella-Gutierrez",
+			"alias": "Salva",
 			"institution": ["INB/ELIXIR-ES", "BSC-CNS"],
 			"roles": [
 				"Leadership",
@@ -69,6 +74,7 @@
 		{
 			"image": "/laura-portell.jpg",
 			"name": "Laura Portell-Silva",
+			"alias": "Laura",
 			"institution": ["INB/ELIXIR-ES", "BSC-CNS"],
 			"roles": ["Community Engagement"],
 			"orcid": "https://orcid.org/0000-0003-0390-3208",
@@ -76,8 +82,9 @@
 			"show": false
 		},
 		{
-			"image": "https://www.earth.com/_next/image/?url=https%3A%2F%2Fcff2.earth.com%2Fuploads%2F2023%2F06%2F02100547%2FMountain-2-960x640.jpg&w=1920&q=75",
+			"image": "/avalenci.jpeg",
 			"name": "Alfonso Valencia",
+			"alias": "Alfonso",
 			"institution": ["INB/ELIXIR-ES", "BSC-CNS", "ICREA"],
 			"roles": ["Leadership"],
 			"orcid": "https://orcid.org/0000-0002-8937-6789",
@@ -87,6 +94,7 @@
 		{
 			"image": "/carles-hernandez.png",
 			"name": "Carles Hernandez-Ferrer",
+			"alias": "Carles",
 			"institution": ["INB/ELIXIR-ES", "BSC-CNS", "UB"],
 			"roles": [
 				"Community Engagement",
@@ -103,6 +111,7 @@
 		{
 			"image": "/jm-fernandez.jpg",
 			"name": "José M. Fernández",
+			"alias": "JM",
 			"institution": ["INB/ELIXIR-ES", "BSC-CNS"],
 			"roles": [
 				"Community Engagement",
@@ -122,6 +131,7 @@
 		{
 			"image": "/laia-codo.jpg",
 			"name": "Laia Codó",
+			"alias": "Laia",
 			"institution": ["INB/ELIXIR-ES", "BSC-CNS"],
 			"roles": [
 				"Community Engagement",
@@ -136,6 +146,7 @@
 		{
 			"image": "/jl-gelpi.jpg",
 			"name": "Josep Lluís Gelpí",
+			"alias": "JL",
 			"institution": ["INB/ELIXIR-ES", "BSC-CNS", "UB"],
 			"roles": ["Leadership", "Data Modelization"],
 			"orcid": "https://orcid.org/0000-0002-0566-7723",
@@ -145,23 +156,43 @@
 	],
 	"Alumni": [
 		{
-			"image": "https://www.earth.com/_next/image/?url=https%3A%2F%2Fcff2.earth.com%2Fuploads%2F2023%2F06%2F02100547%2FMountain-2-960x640.jpg&w=1920&q=75",
-			"name": "Alumni 1",
+			"name": "Ester Vendrell",
+			"year": 2023,
 			"roles": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
 		},
 		{
-			"image": "https://www.earth.com/_next/image/?url=https%3A%2F%2Fcff2.earth.com%2Fuploads%2F2023%2F06%2F02100547%2FMountain-2-960x640.jpg&w=1920&q=75",
-			"name": "Alumni 2",
+			"name": "Meritxell Ferret",
+			"year": 2023,
 			"roles": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
 		},
 		{
-			"image": "https://www.earth.com/_next/image/?url=https%3A%2F%2Fcff2.earth.com%2Fuploads%2F2023%2F06%2F02100547%2FMountain-2-960x640.jpg&w=1920&q=75",
-			"name": "Alumni 3",
+			"name": "Asier Gonzalez Uriarte",
+			"year": 2023,
 			"roles": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
 		},
 		{
-			"image": "https://www.earth.com/_next/image/?url=https%3A%2F%2Fcff2.earth.com%2Fuploads%2F2023%2F06%2F02100547%2FMountain-2-960x640.jpg&w=1920&q=75",
-			"name": "Alumni 4",
+			"name": "Dominik Brüchner",
+			"year": 2023,
+			"roles": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+		},
+		{
+			"name": "Juergen Haas",
+			"year": 2023,
+			"roles": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+		},
+		{
+			"name": "Javier Garrayo",
+			"year": 2023,
+			"roles": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+		},
+		{
+			"name": "Vicky Sundesha",
+			"year": 2023,
+			"roles": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+		},
+		{
+			"name": "Diana de la Iglesia",
+			"year": 2023,
 			"roles": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
 		}
 	]
