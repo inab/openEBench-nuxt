@@ -13,11 +13,7 @@
 						:width="$vuetify.breakpoint.lgAndDown ? 200 : 200"
 					>
 						<v-list nav dense>
-							<v-list-item-group
-								v-model="group"
-								active-class="text--accent-4"
-								color="primary"
-							>
+							<v-list-item-group active-class="text--accent-4" color="primary">
 								<v-list-item
 									v-for="(item, i) in subMenuEntriesObservatory"
 									:key="i"
