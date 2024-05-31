@@ -27,48 +27,54 @@
 							<!-- Inner circle with white background -->
 							<div class="inner-circle">
 								<!-- Circle image of team member -->
-								<v-avatar size="185" class="avatar-wrapper">
-									<!-- Render this img if member.image is an external URL (starts with http) -->
-									<img
-										v-if="member.image.startsWith('http')"
-										:src="member.image"
-										alt="Team Member"
-										:class="{ 'grayscale-image': !isMobile }"
-									/>
-
-									<!-- Render this img if member.image is a local file path -->
-									<img
-										v-else
-										:src="require('@/static/members/images' + member.image)"
-										alt="Team Member"
-										:class="{ 'grayscale-image': !isMobile }"
-									/>
-								</v-avatar>
+								<v-tooltip top>
+									<template v-slot:activator="{ on }">
+										<!-- Use v-avatar to display the member's image -->
+										<v-avatar size="185" class="avatar-wrapper">
+											<!-- Conditional rendering of image based on URL type -->
+											<img
+												v-if="member.image.startsWith('http')"
+												:src="member.image"
+												:alt="getMemberAltText(member)"
+												:class="{ 'grayscale-image': !isMobile }"
+												v-on="on"
+											/>
+											<img
+												v-else
+												:src="require('@/static/members/images' + member.image)"
+												:alt="getMemberAltText(member)"
+												:class="{
+													'grayscale-image': !isMobile,
+												}"
+												v-on="on"
+											/>
+										</v-avatar>
+									</template>
+									<!-- Tooltip content to display member's name -->
+									<span>{{ member.alias }}</span>
+								</v-tooltip>
 							</div>
 						</div>
 					</div>
 					<v-card-title>{{ member.name }}</v-card-title>
 					<v-card-subtitle class="subtitle-container">
-						<div
-							v-for="(institution, index) in member.institution"
-							:key="index"
-						>
-							<span
-								@mouseenter="showTooltip($event, member, index)"
-								@mouseleave="hideTooltip"
-							>
-								{{ institution }}
-							</span>
-							<!-- Display comma if not the last item -->
-							<span v-if="index < member.institution.length - 1">, </span>
-							<!-- Tooltip Element -->
-							<span
-								v-if="showingTooltip && tooltipIndex === index"
-								class="tooltip"
-								:style="{ top: tooltipTop + 'px', left: tooltipLeft + 'px' }"
-							>
-								{{ tooltipText }}
-							</span>
+						<div v-for="(institution, idx) in member.institution" :key="idx">
+							<v-tooltip bottom>
+								<template v-slot:activator="{ on }">
+									<a
+										href="#"
+										v-on="on"
+										class="institution-link"
+										@click.prevent="navigateToLink(institution.trim())"
+										>{{ institution.trim() }}</a
+									>
+									<!-- Display comma if not the last item -->
+									<span v-if="idx < member.institution.length - 1"
+										>,&nbsp;</span
+									>
+								</template>
+								<span>{{ getInstitutionFullName(institution).name }}</span>
+							</v-tooltip>
 						</div>
 						<v-btn icon @click="toggleExpand(member)" class="arrow">
 							<v-icon>{{
@@ -181,8 +187,15 @@
 			>
 				<v-card class="mx-auto" max-width="400">
 					<div class="card-header">
-						<div class="card-title-wrapper">
-							<v-card-title class="card-title">{{ alumni.name }}</v-card-title>
+						<div class="card-header-content">
+							<div class="card-title-wrapper">
+								<v-card-title class="card-title">{{
+									alumni.name
+								}}</v-card-title>
+							</div>
+
+							<!-- Use a v-badge to display the year -->
+							<v-badge color="#0b579f" :content="alumni.year" inline></v-badge>
 						</div>
 					</div>
 
@@ -298,18 +311,35 @@ export default {
 				},
 			],
 			members: [],
+			institutionMapping: {
+				'BSC-CNS': {
+					name: 'Barcelona Supercomputing Center',
+					link: 'https://www.bsc.es/',
+				},
+				UB: {
+					name: 'University of Barcelona',
+					link: 'https://www.ub.edu/',
+				},
+				'INB/ELIXIR-ES': {
+					name: 'Spanish National Bioinformatics Institute',
+					link: 'https://www.inb-elixir.es/',
+				},
+				ICREA: {
+					name: 'Catalan Institution for Research and Advanced Studies',
+					link: 'https://www.icrea.cat/',
+				},
+				// Add more mappings as needed
+			},
 			alumnis: [],
 			isMobile: false,
-			showingTooltip: false,
-			tooltipText: '',
-			tooltipTop: 0,
-			tooltipLeft: 0,
+			show: false,
 		};
 	},
-	mounted() {
+	beforeMount() {
 		this.$parent.$emit('emitBreadcrumbs', this.breadcrumbs);
-		this.checkMobile();
-		window.addEventListener('resize', this.checkMobile);
+	},
+	mounted() {
+		// Initialize members data and store original institution names
 		this.members = membersData.Members.map((member) => ({
 			...member,
 			roles: member.roles.map((role) => ({ name: role, hover: false })),
@@ -320,6 +350,22 @@ export default {
 		window.removeEventListener('resize', this.checkMobile);
 	},
 	methods: {
+		getInstitutionFullName(acronym) {
+			const institution = this.institutionMapping[acronym];
+			if (institution) {
+				return { name: institution.name, link: institution.link };
+			}
+			return { name: acronym, link: '#' };
+		},
+		navigateToLink(institution) {
+			const institutionInfo = this.getInstitutionFullName(institution);
+			if (institutionInfo.link) {
+				window.open(institutionInfo.link, '_blank');
+			}
+		},
+		getMemberAltText(member) {
+			return `Photo of ${member.name}`;
+		},
 		toggleExpand(member) {
 			member.show = !member.show;
 		},
@@ -346,25 +392,6 @@ export default {
 				return `${firstPart}\n${secondPart}`;
 			}
 			return name;
-		},
-		showTooltip(event, institutionText, institutionIndex) {
-			const rect = event.target.getBoundingClientRect();
-			const tooltipTop = rect.bottom + 30;
-			const tooltipLeft = rect.left;
-
-			// Set the tooltip position based on the hovered institution
-			this.tooltipText = institutionText.institution[institutionIndex];
-			this.tooltipTop = tooltipTop;
-			this.tooltipLeft = tooltipLeft;
-			this.showingTooltip = true;
-			this.tooltipIndex = institutionIndex; // Store the index for conditional display
-		},
-		hideTooltip() {
-			this.showingTooltip = false;
-			this.tooltipText = '';
-			this.tooltipTop = 0;
-			this.tooltipLeft = 0;
-			this.tooltipIndex = -1; // Reset the stored index
 		},
 	},
 };
@@ -434,12 +461,12 @@ export default {
 }
 
 .arrow {
-	margin-left: auto; /* Push the button to the right */
+	margin-left: auto;
 }
 
 .subtitle-container {
 	display: flex;
-	align-items: center; /* Align items vertically */
+	align-items: center;
 }
 
 .circle-container {
@@ -470,12 +497,12 @@ export default {
 }
 
 .grayscale-image {
-	filter: grayscale(100%); /* Apply grayscale filter */
-	transition: filter 0.3s ease; /* Add transition for smooth effect */
+	filter: grayscale(100%);
+	transition: filter 0.3s ease;
 }
 
 .avatar-wrapper:hover .grayscale-image {
-	filter: none; /* Remove grayscale filter on hover */
+	filter: none;
 }
 
 .centered-chips {
@@ -487,12 +514,36 @@ export default {
 	opacity: 0.6;
 }
 
-.tooltip {
-	background-color: black;
-	opacity: 0.6;
-	color: white;
-	padding: 5px;
-	border-radius: 3px;
-	z-index: 999; /* Ensure tooltip appears above other content */
+.institution-link {
+	cursor: pointer;
+	text-decoration: none;
+	color: inherit;
+	outline: none;
+	white-space: nowrap;
+}
+
+.institution-link:hover {
+	text-decoration: underline;
+	color: #0b579f;
+}
+
+.card-header {
+	display: grid;
+	grid-template-columns: 1fr auto; /* Title area and badge area */
+	grid-gap: 10px; /* Spacing between title and badge */
+}
+
+.card-header-content {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.card-title-wrapper {
+	flex: 1; /* Allow title to take remaining space */
+}
+
+.card-title {
+	margin: 0; /* Remove default margin */
 }
 </style>
