@@ -1,6 +1,6 @@
 {
 	"name": "openEBench-nuxt",
-	"version": "1.0.4",
+	"version": "1.1.0",
 	"private": true,
 	"author": "Dominik Brüchner <dominik.bruchner@bsc.es>, José Mª Fernández <jose.m.fernandez@bsc.es>",
 	"scripts": {
