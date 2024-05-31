@@ -78,7 +78,7 @@
 			<v-tab-item>
 				<v-card outlined class="pa-5" elevation="1">
 					<div v-if="selectedPoster">
-						<v-btn @click="selectedPoster = null" class="mb-4">
+						<v-btn class="mb-4" @click="selectedPoster = null">
 							Back to posters
 						</v-btn>
 						<div class="selected-poster-details">
@@ -221,6 +221,11 @@ export default {
 			basePath: '/posters/poster_list/',
 		};
 	},
+	computed: {
+		vertical() {
+			return this.$vuetify.breakpoint.mdAndUp;
+		},
+	},
 	beforeMount() {
 		this.$parent.$emit('emitBreadcrumbs', this.breadcrumbs);
 		this.posters = posters;
@@ -228,11 +233,6 @@ export default {
 	async mounted() {
 		await this.fetchAllPaperDetails();
 		this.posterDetails();
-	},
-	computed: {
-		vertical() {
-			return this.$vuetify.breakpoint.mdAndUp;
-		},
 	},
 	methods: {
 		async fetchPaperInfo(doi) {
@@ -258,7 +258,7 @@ export default {
 					throw new Error('Invalid response format');
 				}
 			} catch (error) {
-				console.error('Error fetching paper information:', error);
+				console.error('Error fetching paper information:', error); // eslint-disable-line no-console
 				return null;
 			}
 		},
@@ -304,7 +304,7 @@ export default {
 						console.error(
 							`Error loading JSON for poster ${filenameWithoutExt}:`,
 							error
-						);
+						); // eslint-disable-line no-console
 					});
 			});
 		},
