@@ -28,7 +28,7 @@ export default {
 			],
 		};
 	},
-	mounted() {
+	beforeMount() {
 		this.$parent.$emit('emitBreadcrumbs', this.breadcrumbs);
 	},
 };
