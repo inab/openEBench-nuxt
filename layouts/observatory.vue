@@ -2,7 +2,7 @@
 	<v-app>
 		<main-header :vre-href="$config.VRE_URI" />
 		<v-main>
-			<!--breadcrumbs-bar v-if="breadcrumbs.length > 0" :items="breadcrumbs" /-->
+			<breadcrumbs-bar v-if="breadcrumbs.length > 0" :items="breadcrumbs" />
 			<v-container fluid class="mt-3">
 				<v-row justify="center">
 					<v-navigation-drawer
@@ -50,12 +50,14 @@ import debounce from 'lodash/debounce';
 import HeaderMenu from '~/components/Header/HeaderMenu.vue';
 import Footer from '~/components/TheFooter';
 import subMenuEntriesObservatory from '~/components/Header/subMenuEntriesObservatory.js';
+import BreadcrumbsBar from '~/components/Molecules/BreadcrumbsBar';
 
 export default {
 	name: 'Observatory',
 	components: {
 		'main-header': HeaderMenu,
 		Footer,
+		BreadcrumbsBar,
 	},
 	data() {
 		return {

@@ -217,15 +217,9 @@ export default {
 				},
 				{
 					text: 'Observatory',
-					disabled: false,
+					disabled: true,
 					exact: true,
 					to: '/observatory',
-				},
-				{
-					text: 'Data',
-					disabled: false,
-					exact: true,
-					to: '/observatory/Data',
 				},
 			],
 		};
