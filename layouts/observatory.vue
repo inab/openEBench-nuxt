@@ -6,9 +6,9 @@
 			<v-container fluid class="mt-3">
 				<v-row justify="center">
 					<v-navigation-drawer
+						v-if="$vuetify.breakpoint.lgAndUp"
 						permanent
 						floating
-						v-if="$vuetify.breakpoint.lgAndUp"
 						:expand-on-hover="$vuetify.breakpoint.lgAndDown"
 						:width="$vuetify.breakpoint.lgAndDown ? 200 : 200"
 					>
