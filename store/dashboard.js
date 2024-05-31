@@ -27,7 +27,7 @@ export default {
 			commit('setCommunitiesCount', response.data);
 		},
 		async getResourcesCount({ commit }) {
-			const response = await this.$observatory.$get('tools/count_total');
+			const response = await this.$observatory.$get('/stats/tools/count_total');
 			commit('setResourcesCount', response[0]);
 		},
 		async getToolsCount({ commit }) {
