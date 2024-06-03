@@ -14,7 +14,7 @@
 						v-model="value"
 						class="ml-1"
 						label="Link to GitHub repository"
-						:rules="[rules.required]"
+						:rules="[rules.required, rules.gitHubURL]"
 						outlined
 						clearable
 						clear-icon="mdi-close-circle"
@@ -73,7 +73,7 @@ export default {
 			required: (value) => !!value || 'Required.',
 			gitHubURL: (value) => {
 				const pattern =
-					/^(http(s?):\/\/)?(www\.)?github\.([a-z])+\/(.*)+\/(.*)+\/?$/i;
+					/^(https?:\/\/)?(www\.)?github\.[a-z]+\/[^/]+\/[^/]+\/?$/i;
 				return (
 					pattern.test(value) || 'Please enter a valid GitHub repository link.'
 				);
