@@ -66,8 +66,11 @@
 						</div>
 					</div>
 					<div v-else>
-						No visual representation implemented
-						<img src="" alt="" />
+						<div class="text--secondary mt-6 mx-10" align="center" color="rgba(0, 0, 0, 0.6)">
+							<img class="mb-4" src="~/static/icons/chart.png" alt="" height="100px">
+							<h2>No chart available</h2>
+							<p class="text-h6">We're working on adding a new visualization. Check back soon!</p>
+						</div>
 					</div>
 				</v-tab-item>
 			</v-tabs-items>
