@@ -98,25 +98,18 @@ export default {
 					? visualization.optimization
 					: null;
 
-				// get metrics
-				let xAxis, yAxis;
-				try {
-					const metricsNames =
-						this.metrics.length > 0
-							? await this.getMetricsNames(
-									visualization.x_axis,
-									visualization.y_axis
-							  )
-							: {
-									metricX: visualization.x_axis,
-									metricY: visualization.y_axis,
-							  };
-					xAxis = metricsNames.metricX;
-					yAxis = metricsNames.metricY;
-				} catch (error) {
-					console.error('Error getting the metric names:', error); // eslint-disable-line no-console
-					xAxis = visualization.x_axis;
-					yAxis = visualization.y_axis;
+
+
+				let xAxis = null;
+				let yAxis = null;
+
+				if (this.metrics.length > 0){
+					const metrics_names = this.getMetricsNames(visualization.x_axis, visualization.y_axis);
+					xAxis = metrics_names.metricX
+					yAxis = metrics_names.metricY
+				}else{
+					xAxis = visualization.x_axis
+					yAxis = visualization.y_axis
 				}
 
 				this.preparedData.inline_data.visualization = {
@@ -137,23 +130,18 @@ export default {
 
 		// Get metrics title
 		getMetricsNames(metricX, metricY) {
+			if (this.metrics.length === 0) return [];
+
 			const metricNames = { metricX: '', metricY: '' };
-			if (this.metrics.length > 0) {
-				this.metrics.forEach(function (metric) {
-					if (metric._metadata && 'level_2:metric_id' in metric._metadata) {
-						if (metric._metadata['level_2:metric_id'] === metricX) {
-							metricNames.metricX = metric.title;
-						}
-						if (metric._metadata['level_2:metric_id'] === metricY) {
-							metricNames.metricY = metric.title;
-						}
-					}
-				});
-			} else {
-				return [];
-			}
+			this.metrics.forEach((metric) => {
+				const metricId = metric._metadata?.['level_2:metric_id'] ?? metric._id;
+				if (metricId === metricX) metricNames.metricX = metric.title;
+				if (metricId === metricY) metricNames.metricY = metric.title;
+			});
+
 			return metricNames;
-		},
+		}
+
 	},
 };
 </script>
