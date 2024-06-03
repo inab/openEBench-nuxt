@@ -54,11 +54,15 @@
 							</p>
 						</v-col>
 						<v-col cols="2">
-							<v-img
-								:src="
-									require(`@/static/collections/${collections[model].image}`)
-								"
-							></v-img>
+							<div class="container">
+								<img
+									class="responsive-image"
+									alt="Community logo"
+									:src="
+										require(`@/static/collections/${collections[model].image}`)
+									"
+								/>
+							</div>
 						</v-col>
 					</v-row>
 				</v-sheet>
@@ -141,6 +145,20 @@ export default {
 };
 </script>
 <style scoped>
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 110px;
+	height: 130px;
+}
+
+.responsive-image {
+	width: 100%;
+	height: auto;
+	object-fit: contain;
+}
+
 .collections-header {
 	color: #0b579f;
 }
