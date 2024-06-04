@@ -170,10 +170,6 @@ After that, you might need to restart it through
 docker compose -f docker-compose.devci.yml restart nuxt
 ```
 
-Have a look at the messages, because some mismatch between the dependencies of the new packages and the already recorded ones could break havoc.
-
-In those cases, you need to figure out the source of the problem, rollback both [package.json](package.json) and [package-lock.json](package-lock.json), and re-add the updated dependency.
-
 ## Running custom `npm run` commands
 
 Another usual issue is that the CI checks either on service or locally complain about styling. So, in order to run those checks locally you have to run:
