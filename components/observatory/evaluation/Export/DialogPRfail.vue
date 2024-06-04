@@ -1,11 +1,11 @@
 <template>
 	<v-dialog v-model="dialogPRfail" max-width="600">
-		<v-card class="pt-3 pb-3 pl-2 pr-2">
+		<v-card class="pa-0">
 			<v-card-title class="mt-0 pt-0 text-h6">
 				Making Pull Request
 			</v-card-title>
-			<v-row class="pb-5 pl-5 pr-5">
-				<v-alert class="text-caption pa-4 ml-3 mr-3" type="warning" outlined>
+			<v-row class="pb-5 pl-5 pr-5 mt-5" justify="center">
+				<v-alert class="text-caption pa-4 ml-3 mr-3" type="error" outlined>
 					<span class="text-overlay"><b>ERROR</b></span>
 					<br />
 					Something went wrong while making the pull request.

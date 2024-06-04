@@ -42,6 +42,7 @@ export const actions = {
 		const parameters = {
 			repo: payload.repo,
 			owner: payload.owner,
+			filename: payload.filename,
 			installationID: payload.installationID,
 			metadata: payload.metadata,
 		};
