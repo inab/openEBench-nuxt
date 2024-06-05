@@ -2,6 +2,7 @@
 This store is used for the github integration.
 In Step 2: import of metadata from a github repository.
 */
+
 // state
 export const state = () => ({
 	// requested repository to import metadata from (as <owner>/<repo>)
@@ -12,6 +13,7 @@ export const state = () => ({
 	// opens/closes the main dialog for importing metadata from github
 	_dialogImportMetadata: false,
 	// text that appears in the ImportMetadata dialog
+	_importError: false,
 	_importProgressText: '',
 	// opens/closes the dialog for installing the app in the requester's github account
 	_dialogAppInstall: false,
@@ -28,6 +30,9 @@ export const getters = {
 	},
 	getDialogImportMetadata(state) {
 		return state._dialogImportMetadata;
+	},
+	getImportError(state) {
+		return state._importError;
 	},
 	getImportProgressText(state) {
 		return state._importProgressText;
@@ -57,25 +62,44 @@ export const actions = {
 			'Checking the permissions to read the repository ...'
 		);
 
-		// var URL = 'http://localhost:3500/installation/id' // temporary. Move to config file
-		const URL = 'installation/id';
+		try {
+			// var URL = 'http://localhost:3500/installation/id' // temporary. Move to config file
+			const URL = 'installation/id';
 
-		const response = await this.$githubapp.$get(URL, {
-			params: { owner: repository.owner, repo: repository.repo },
-		});
+			const response = await this.$githubapp.$get(URL, {
+				params: { owner: repository.owner, repo: repository.repo },
+			});
 
-		let installationID = null;
-		if (response.status === 200) {
-			installationID = response.data.data.id;
+			let installationID = null;
+			if (response.status === 200) {
+				installationID = response.data.data.id;
+			}
+
+			console.log('obtained installation ID: ' + installationID);
+			commit('setInstallationID', installationID);
+		} catch (error) {
+			console.log('Error while getting installation ID: ' + error);
+			commit(
+				'setImportProgressText',
+				"error while fetching the repositorie's installation ID"
+			);
+			commit('setImportError', true);
 		}
-
-		console.log('obtained installation ID: ' + installationID);
-		commit('setInstallationID', installationID);
 	},
 
 	updateInstallationID({ commit }, installationID) {
 		// This function updates the value of _installationID
 		commit('setInstallationID', installationID);
+	},
+
+	updateImportError({ commit }, value) {
+		// This function updates the value of _importError
+		commit('setImportError', value);
+	},
+
+	updateImportProgressText({ commit }, text) {
+		// This function updates the value of _importProgressText
+		commit('setImportProgressText', text);
 	},
 
 	updateDialogImportMetadata({ commit }, value) {
@@ -103,32 +127,38 @@ export const actions = {
 			installationID: state._installationID,
 		};
 
-		const response = await this.$githubapp.$post(URL, payload);
+		try {
+			const response = await this.$githubapp.$post(URL, payload);
 
-		let result = response.data;
+			let result = response.data;
+			result = await dispatch(
+				'observatory/evaluation/metadata/prepareMetadata',
+				result,
+				{ root: true }
+			);
 
-		result = await dispatch(
-			'observatory/evaluation/metadata/prepareMetadata',
-			result,
-			{ root: true }
-		);
+			dispatch('observatory/evaluation/metadata/updateToolsMetadata', result, {
+				root: true,
+			});
+			dispatch('observatory/evaluation/metadata/updateLoadedMetadata', true, {
+				root: true,
+			});
 
-		dispatch('observatory/evaluation/metadata/updateToolsMetadata', result, {
-			root: true,
-		});
-		dispatch('observatory/evaluation/metadata/updateLoadedMetadata', true, {
-			root: true,
-		});
+			commit('setImportProgressText', 'Importation finished');
+			commit('setDialogImportMetadata', false);
 
-		commit('setImportProgressText', 'Importation finished');
-		commit('setDialogImportMetadata', false);
-
-		// change step to 3 after importing metadata
-		dispatch('observatory/evaluation/changeStep', 3, { root: true });
+			// change step to 3 after importing metadata
+			dispatch('observatory/evaluation/changeStep', 3, { root: true });
+		} catch (error) {
+			console.log('Error while fetching metadata: ' + error);
+			commit('setImportProgressText', 'Error while fetching metadata');
+			commit('setImportError', true);
+		}
 	},
 
 	cancelImport({ commit, _state }) {
 		commit('setDialogImportMetadata', false);
+		commit('setImportError', false);
 		commit('setDialogAppInstall', false);
 		commit('setImportProgressText', '');
 	},
@@ -143,6 +173,9 @@ export const actions = {
 export const mutations = {
 	setRepository(state, repository) {
 		state._repository = repository;
+	},
+	setImportError(state, value) {
+		state._importError = value;
 	},
 	setImportProgressText(state, text) {
 		state._importProgressText = text;

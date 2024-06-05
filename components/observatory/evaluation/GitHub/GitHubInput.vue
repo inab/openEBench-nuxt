@@ -136,9 +136,15 @@ export default {
             If it is not installed, it opens a dialog to install it.
             */
 
-			// 1. Check if the app is installed
+			this.$store.dispatch(
+				'observatory/evaluation/github/updateDialogImportMetadata',
+				true
+			);
+
 			const owner = this.value.split('/')[3];
 			const repo = this.value.split('/')[4].split('.git')[0];
+
+			// 1. Check if the app is installed
 			this.$store.dispatch('observatory/evaluation/github/updateRepository', {
 				owner,
 				repo,
