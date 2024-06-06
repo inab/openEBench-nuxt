@@ -3,10 +3,13 @@
 		<h1 class="text--h3">OpenEBench Collaboration</h1>
 		<br />
 		<p>
-			Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-			veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-			commodo consequat.
+			Collaborations are at the heart of OpenEBench. OpenEBench has been designed as a space to foster collaborations within and across communities, taking ELIXIR as the overall framework. ELIXIR is the pan-European Research Infrastructure for managing research data and other digital assets in the Life Sciences domain.
+		</p>
+		<p>
+			Collaborations are essential to ensure that OpenEBench is fit for its purpose and responds to users' current needs. It is also a mechanism to contribute towards the platform's sustainability. Participation in EU and nationally funded projects is one of the existing collaboration mechanisms. Participating in funded projects allows us to prioritise specific developments to strengthen, extend and add new features to the platform that a specific project will utilise. Notably, these developments are made available to everyone across OpenEBench, fostering a continuous innovation cycle.
+		</p>
+		<p>
+			Beyond funded projects, OpenEBench also works with scientific communities willing to sustain their benchmarking efforts in the long run, as well as individuals interested in contributing to specific platform components.
 		</p>
 		<br />
 
