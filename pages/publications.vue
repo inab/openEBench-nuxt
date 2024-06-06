@@ -3,23 +3,27 @@
 		<h1 class="text--h3">OpenEBench Publications</h1>
 		<br />
 		<p>
-			Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-			veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-			commodo consequat.
+			Here, you can find different scientific contributions, e.g. peer-reviewed
+			articles, conference posters and public pre-prints, reflecting the work
+			carried out by the OpenEBench team and the multiple collaborations with
+			the scientific communities that use and support the platform.
+			<br class="mb-4" />
+			These contributions are organised into two sections to reflect whether
+			they are core to the OpenEBench activities or contribute to the different
+			communities.
 		</p>
 		<br />
 
 		<v-tabs :vertical="vertical" class="mt-10">
 			<v-tab>
 				<v-icon left>mdi-information-outline</v-icon>
-				Papers
+				Manuscripts
 			</v-tab>
 			<v-tab-item class="ma-5 mt-5 mt-md-0" :transition="false">
 				<v-card outlined class="pa-5" elevation="1">
 					<!-- Core Papers Section -->
 					<div v-if="papers.core.length > 0">
-						<h2>Core Papers</h2>
+						<h2>Core Contributions</h2>
 						<div class="paper-container">
 							<div v-for="paper in papers.core" :key="paper.doi" class="paper">
 								<h3>
@@ -40,7 +44,7 @@
 					<br />
 					<!-- Collaboration Papers Section -->
 					<div v-if="papers.collaboration.length > 0">
-						<h2>Collaboration Papers</h2>
+						<h2>Collaborations</h2>
 						<div class="paper-container">
 							<div
 								v-for="paper in papers.collaboration"
@@ -148,7 +152,7 @@
 					</div>
 				</v-card>
 			</v-tab-item>
-			<v-tab>
+			<!-- <v-tab>
 				<v-icon left>mdi-school-outline</v-icon>
 				Training
 			</v-tab>
@@ -173,7 +177,7 @@
 				>
 					Here will go the videos content SOON
 				</v-card>
-			</v-tab-item>
+			</v-tab-item> -->
 		</v-tabs>
 	</v-container>
 </template>
