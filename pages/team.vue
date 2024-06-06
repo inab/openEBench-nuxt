@@ -41,8 +41,8 @@
 			>
 				<MemberCard
 					:member="leader"
-					:isMobile="isMobile"
-					:institutionMapping="institutionMapping"
+					:is-mobile="isMobile"
+					:institution-mapping="institutionMapping"
 					:items="items"
 				/>
 			</v-col>
@@ -60,8 +60,8 @@
 			>
 				<MemberCard
 					:member="teammate"
-					:isMobile="isMobile"
-					:institutionMapping="institutionMapping"
+					:is-mobile="isMobile"
+					:institution-mapping="institutionMapping"
 					:items="items"
 				/>
 			</v-col>
@@ -88,8 +88,8 @@
 			>
 				<AlumniCard
 					:alumni="alumni"
-					:isMobile="isMobile"
-					:institutionMapping="institutionMapping"
+					:is-mobile="isMobile"
+					:institution-mapping="institutionMapping"
 					:items="items"
 				/>
 			</v-col>
@@ -232,6 +232,18 @@ export default {
 			show: false,
 		};
 	},
+	computed: {
+		leaders() {
+			return this.members.filter((member) =>
+				member.roles.some((role) => role.name === 'Leadership')
+			);
+		},
+		teammates() {
+			return this.members.filter(
+				(member) => !member.roles.some((role) => role.name === 'Leadership')
+			);
+		},
+	},
 	beforeMount() {
 		this.$parent.$emit('emitBreadcrumbs', this.breadcrumbs);
 	},
@@ -252,18 +264,6 @@ export default {
 	},
 	beforeDestroy() {
 		window.removeEventListener('resize', this.checkMobile);
-	},
-	computed: {
-		leaders() {
-			return this.members.filter((member) =>
-				member.roles.some((role) => role.name === 'Leadership')
-			);
-		},
-		teammates() {
-			return this.members.filter(
-				(member) => !member.roles.some((role) => role.name === 'Leadership')
-			);
-		},
 	},
 	methods: {
 		checkMobile() {
