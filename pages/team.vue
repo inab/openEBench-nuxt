@@ -245,6 +245,10 @@ export default {
 			...alumni,
 			roles: alumni.roles.map((role) => ({ name: role, hover: false })),
 		}));
+		// Initial check for mobile
+		this.checkMobile();
+		// Add event listener for window resize
+		window.addEventListener('resize', this.checkMobile);
 	},
 	beforeDestroy() {
 		window.removeEventListener('resize', this.checkMobile);
