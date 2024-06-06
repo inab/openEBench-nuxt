@@ -2,7 +2,9 @@
 	<v-card class="mx-auto mb-5" hover :href="href" target="_blank" max-width="344" min-height="250" max-height="350">
 		<div class="image-container">
 			<v-img :src="src" class="responsive-img" v-if="title =='ELIXIR STEERS'" max-width="65%"></v-img>
+			<v-img :src="src" class="responsive-img" v-else-if="title =='DataTools4Heart'" height="45px"></v-img>
 			<v-img :src="src" class="responsive-img" v-else max-width="80%"></v-img>
+
 		</div>
 		<v-divider></v-divider>
 		<h3 class="text-center mt-3">{{ title }}</h3>

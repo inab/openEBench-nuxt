@@ -18,7 +18,7 @@
 		<!-- Cards for collaborators -->
 		<v-row>
 			<v-col
-				v-for="(collaborator, index) in collaborators"
+				v-for="(collaborator, index) in sortedCollaborators"
 				:key="index"
 				cols="12"
 				sm="6"
@@ -69,7 +69,7 @@ export default {
 				{
 					title: 'EuCanImage',
 					href: 'https://eucanimage.eu/',
-					src: 'https://eucanimage.eu/wp-content/uploads/2020/12/eucanimage-logo.svg',
+					src: require('~/static/collaboration/EUCANImage.png'),
 				},
 				{
 					title: 'DataTools4Heart',
@@ -112,5 +112,12 @@ export default {
 	beforeMount() {
 		this.$parent.$emit('emitBreadcrumbs', this.breadcrumbs);
 	},
+	computed: {
+		sortedCollaborators() {
+			return this.collaborators.slice().sort((a, b) => {
+				return a.title.localeCompare(b.title);
+			});
+		}
+	}
 };
 </script>
