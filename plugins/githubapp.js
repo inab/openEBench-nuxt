@@ -10,6 +10,7 @@ export default function ({ $axios, $config: { GITHUBAPP_API_URL } }, inject) {
 
 	// Set baseURL to something different
 	githubapp.setBaseURL(GITHUBAPP_API_URL);
+	// githubapp.setBaseURL('http://localhost:3500');
 
 	// Inject to context as $api
 	inject('githubapp', githubapp);

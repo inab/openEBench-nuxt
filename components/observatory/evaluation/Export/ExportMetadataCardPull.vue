@@ -40,7 +40,7 @@
 												Enter repository details:
 											</v-card-text>
 										</v-col>
-										<v-col cols="6" class="mt-0 pt-2">
+										<v-col cols="4" class="mt-0 pt-2">
 											<v-text-field
 												v-model="owner"
 												:rules="[rules.required]"
@@ -48,10 +48,11 @@
 												dense
 												hide-details
 												label="Owner"
+												class="text-body-2"
 											>
 											</v-text-field>
 										</v-col>
-										<v-col cols="6" class="mt-0 pt-2">
+										<v-col cols="4" class="mt-0 pt-2">
 											<v-text-field
 												v-model="repo"
 												:rules="[rules.required]"
@@ -59,25 +60,25 @@
 												dense
 												hide-details
 												label="Repository"
+												class="text-body-2"
 											>
 											</v-text-field>
 										</v-col>
-										<v-col cols="12" class="mt-0 pt-0">
-											<span
-												class="mt-0 pt-0 text-body-2 grey--text font-italic"
+										<v-col cols="4" class="mt-0 pt-2">
+											<v-text-field
+												v-model="filename"
+												:rules="[rules.required]"
+												outlined
+												dense
+												hide-details
+												label="File name"
+												class="text-body-2"
 											>
-												Examples:
-												<span v-for="(item, i) in exampleValues" :key="i">
-													<a @click="inputExample(item)">
-														{{ item.repo }}
-													</a>
-													<span v-if="i < exampleValues.length - 1">, </span>
-												</span>
-											</span>
+											</v-text-field>
 										</v-col>
 									</v-row>
 									<v-spacer></v-spacer>
-									<v-row justify="end" class="mt-4">
+									<v-row justify="end" class="mt-5 mr-5">
 										<v-btn
 											color="success"
 											:disabled="invalid"
@@ -137,6 +138,7 @@ export default {
 			dialog: true,
 			owner: '',
 			repo: '',
+			filename: 'metadata.json',
 			rules: {
 				required: (value) => !!value || 'Required.',
 				gitHubURL: (value) => {
@@ -148,20 +150,6 @@ export default {
 					);
 				},
 			},
-			exampleValues: [
-				{
-					owner: 'inab',
-					repo: 'trimal',
-				},
-				{
-					owner: 'vlopezferrando',
-					repo: 'pymut',
-				},
-				{
-					owner: 'inab',
-					repo: 'WfExS-backend',
-				},
-			],
 			installDialogParameters: {
 				title: 'Unable to create a pull request',
 				text: 'Let the FAIRsoft Evaluator create a branch, create a metadata file and make a pull request in the repository by grantting the <a>OpenEBench FAIRsoft Evaluator GitHub App</a> the necessary permissions.',
@@ -170,7 +158,7 @@ export default {
 	},
 	computed: {
 		...mapGetters('observatory', {
-			repository: 'evaluation/github/getRepository',
+			initial_repository: 'evaluation/github/getRepository',
 			installationID: 'evaluation/github/getInstallationID',
 			dialogAppInstall: 'evaluation/export/getDialogAppInstall',
 			metadata: 'evaluation/metadata/getToolMetadataJSONLD',
@@ -184,8 +172,11 @@ export default {
 		},
 	},
 	mounted() {
-		this.repo = this.repository.repo;
-		this.owner = this.repository.owner;
+		this.repo = this.initial_repository.repo;
+		this.owner = this.initial_repository.owner;
+		if (this.metadata['schema:name']) {
+			this.filename = this.metadata['schema:name'] + '.metadata.json';
+		}
 	},
 	methods: {
 		clickBtn(itemID) {
@@ -194,10 +185,10 @@ export default {
 				// this.$store.commit('setDialogImportMetadata', true)
 			}
 		},
-		inputExample(item) {
-			this.repo = item.repo;
-			this.owner = item.owner;
+		buildRepositoryURL() {
+			return `https://github.com/${this.owner}/${this.repo}`;
 		},
+
 		cancel() {
 			this.$store.dispatch('observatory/evaluation/export/cancelRequest');
 		},
@@ -228,9 +219,13 @@ export default {
 				true
 			);
 			// 1.2 Get installation ID
+			const repository = {
+				owner: this.owner,
+				repo: this.repo,
+			};
 			await this.$store.dispatch(
 				'observatory/evaluation/github/getInstallationID',
-				this.repository
+				repository
 			);
 
 			// 2. If the app is installed, make the request
@@ -239,6 +234,7 @@ export default {
 				const payload = {
 					owner: this.owner,
 					repo: this.repo,
+					filename: this.filename,
 					installationID: this.installationID,
 					metadata: this.metadata,
 				};

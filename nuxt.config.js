@@ -213,6 +213,14 @@ export default {
 				component: resolve(__dirname, 'pages/observatory/Trends.vue'),
 			});
 			routes.push({
+				name: 'post-github-app-install',
+				path: '/post-github-app-install',
+				component: resolve(
+					__dirname,
+					'pages/observatory/PostGitHubInstall.vue'
+				),
+			});
+			routes.push({
 				name: 'scientific-community',
 				path: '/scientific/:community',
 				component: resolve(__dirname, 'pages/benchmarking/_community'),

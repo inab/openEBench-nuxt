@@ -274,6 +274,7 @@ export const mutations = {
 	},
 
 	setToolMetadata(state, result) {
+		state._toolMetadata = {};
 		state._toolMetadata = result;
 	},
 
