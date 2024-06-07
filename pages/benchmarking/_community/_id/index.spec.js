@@ -4,10 +4,7 @@ import MockCommunity from '~/test/unit/mockData/Community';
 import MockEvent from '~/test/unit/mockData/Event';
 import MockEvents from '~/test/unit/mockData/Events';
 import MockChallenge from '~/test/unit/mockData/Challenge';
-import MockChallengeDatasetsBarplot from '~/test/unit/mockData/ChallengeDatasetsBarplot';
-import MockChallengeDatasetsScatter from '~/test/unit/mockData/ChallengeDatasetsScatter';
-import ChartBarplotVisualizerWrapper from '~/components/Widgets/ChartBarplotVisualizerWrapper';
-import ChartScatterVisualizerWrapper from '~/components/Widgets/ChartScatterVisualizerWrapper';
+import LoaderChartWidgets from '~/components/Widgets/LoaderChartWidgets';
 
 const factory = (mockStore) => {
 	return mount(Challenge, {
@@ -113,28 +110,10 @@ describe('Community Participant', () => {
 		expect(mockStore.challenge.actions.getChallenge).toHaveBeenCalled();
 	});
 
-	it('renders the bar-plot component with the right ID and JSON data structure for rendering', () => {
-		mockStore.challenge.getters.datasetsList = () => {
-			return MockChallengeDatasetsBarplot;
-		};
+	it('renders LoaderChartWidgets component with correct props', () => {
 		const wrapper = factory(mockStore);
-		expect(wrapper).toBeTruthy();
-		const barplot = wrapper.findComponent(ChartBarplotVisualizerWrapper); // => finds Bar by `name`
-		expect(barplot.exists()).toBe(true);
-		expect(barplot.props().id).toBe(MockChallengeDatasetsBarplot[0]._id);
-		expect(barplot.props().data).toBe(
-			MockChallengeDatasetsBarplot[0].graphData
-		);
-	});
-
-	it('renders the scatter-plot component with the right ID', () => {
-		mockStore.challenge.getters.datasetsList = () => {
-			return MockChallengeDatasetsScatter;
-		};
-		const wrapper = factory(mockStore);
-		expect(wrapper).toBeTruthy();
-		const scatter = wrapper.findComponent(ChartScatterVisualizerWrapper); // => finds Bar by `name`
-		expect(scatter.exists()).toBe(true);
-		expect(scatter.props().id).toBe(MockChallengeDatasetsScatter[0]._id);
+		expect(wrapper.findComponent(LoaderChartWidgets).exists()).toBe(true);
+		expect(wrapper.findComponent(LoaderChartWidgets).props('data')).toEqual(MockChallengeDatasetsBarplot);
+		expect(wrapper.findComponent(LoaderChartWidgets).props('metrics')).toEqual([]);
 	});
 });
