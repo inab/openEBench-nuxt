@@ -39,7 +39,7 @@ export default {
 	},
 	methods: {
 		// Prepare data
-		async fetchDataAndRender(data) {
+		fetchDataAndRender(data) {
 			// Sets charging status based on data presence
 			this.loading = !data;
 			const visualization = data.datalink.inline_data.visualization;
@@ -98,18 +98,19 @@ export default {
 					? visualization.optimization
 					: null;
 
-
-
 				let xAxis = null;
 				let yAxis = null;
 
-				if (this.metrics.length > 0){
-					const metrics_names = this.getMetricsNames(visualization.x_axis, visualization.y_axis);
-					xAxis = metrics_names.metricX
-					yAxis = metrics_names.metricY
-				}else{
-					xAxis = visualization.x_axis
-					yAxis = visualization.y_axis
+				if (this.metrics.length > 0) {
+					const metricNames = this.getMetricsNames(
+						visualization.x_axis,
+						visualization.y_axis
+					);
+					xAxis = metricNames.metricX;
+					yAxis = metricNames.metricY;
+				} else {
+					xAxis = visualization.x_axis;
+					yAxis = visualization.y_axis;
 				}
 
 				this.preparedData.inline_data.visualization = {
@@ -140,8 +141,7 @@ export default {
 			});
 
 			return metricNames;
-		}
-
+		},
 	},
 };
 </script>
