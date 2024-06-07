@@ -9,10 +9,13 @@ module.exports = {
 	transform: {
 		'^.+\\.ts$': 'ts-jest',
 		'^.+\\.js$': 'babel-jest',
-		'.*\\.(vue)$': 'vue-jest',
+		'^.+\\.vue$': 'vue-jest',
 		'.+\\.(css|scss|png|jpg|svg|gif|webp)$': 'jest-transform-stub',
 		'\\.md$': 'jest-raw-loader',
 	},
+	transformIgnorePatterns: [
+		'/node_modules/(?!@inb/oeb-widgets/components/(LoaderWidgets)\\.vue)',
+	],
 	collectCoverage: true,
 	collectCoverageFrom: [
 		'<rootDir>/components/**/*.vue',
