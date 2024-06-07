@@ -48,6 +48,7 @@ export default {
 									uri
 									schema_uri
 								}
+
 								depends_on {
 									tool_id
 									metrics_id
@@ -66,6 +67,9 @@ export default {
 									uri
 									schema_uri
 								}
+								dates {
+									modification
+								}
 								depends_on {
 									tool_id
 									metrics_id
@@ -83,11 +87,15 @@ export default {
 							datalink {
 								inline_data
 							}
+							dates {
+								modification
+							}
 							_id
 						}
-						
+
 						getMetrics {
 							_id
+							title
 							orig_id
 							representation_hints
 							_metadata

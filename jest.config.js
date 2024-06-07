@@ -6,10 +6,11 @@ module.exports = {
 		'^vue$': 'vue/dist/vue.common.js',
 	},
 	moduleFileExtensions: ['ts', 'js', 'vue', 'json'],
+	transformIgnorePatterns: ['/node_modules/(?!@inb/oeb-widgets)'],
 	transform: {
 		'^.+\\.ts$': 'ts-jest',
 		'^.+\\.js$': 'babel-jest',
-		'.*\\.(vue)$': 'vue-jest',
+		'^.+\\.vue$': 'vue-jest',
 		'.+\\.(css|scss|png|jpg|svg|gif|webp)$': 'jest-transform-stub',
 		'\\.md$': 'jest-raw-loader',
 	},

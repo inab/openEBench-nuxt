@@ -1,3 +1,4 @@
+// jest.setup.js
 import Vue from 'vue';
 import Vuetify from 'vuetify';
 import VueRouter from 'vue-router';
@@ -35,6 +36,9 @@ global.IntersectionObserver = class IntersectionObserver {
 HTMLCanvasElement.prototype.getContext = () => {
 	// return whatever getContext has to return
 };
+
+// Mock for window.URL.createObjectURL
+global.URL.createObjectURL = jest.fn(() => 'mockedURL');
 
 // A helper for creating Vue component mocks
 global.createComponentMocks = ({ mocks, store, router }) => {

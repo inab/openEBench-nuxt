@@ -5,7 +5,7 @@
 			class="mb-5"
 			type="heading, list-item-three-line"
 		/>
-		<div v-else>
+		<div v-else class="mx-6">
 			<h1 class="text-h4">
 				{{ challenge.challenge_label }} ({{ challenge._id }})
 			</h1>
@@ -31,10 +31,16 @@
 			type="card-heading, image"
 		/>
 		<div v-else>
-			<h2 class="text-h6 mt-8">
+			<h2 class="text-h6 mt-8 mx-6">
 				Choose the metrics you want to visualize in the diagram:
 			</h2>
-			<v-chip-group v-model="tab" active-class="accent--text" column mandatory>
+			<v-chip-group
+				v-model="tab"
+				active-class="accent--text"
+				column
+				mandatory
+				class="mx-6"
+			>
 				<v-chip v-for="item in datasets" :key="item._id">
 					{{
 						item.datalink.inline_data.visualization.type == '2D-plot'
@@ -45,34 +51,44 @@
 					}}
 				</v-chip>
 			</v-chip-group>
-			<v-tabs-items v-model="tab">
+			<v-tabs-items v-model="tab" class="mx- 4">
 				<v-tab-item
 					v-for="(item, index) in datasets"
 					:key="index"
 					:transition="false"
 				>
-					<chart-scatter-visualizer-wrapper
-						v-if="
-							item.datalink.inline_data.visualization.type == '2D-plot' &&
-							index == tab
-						"
-						:id="item._id"
-						:key="item._id"
-						class="mt-5"
-					/>
-					<chart-barplot-visualizer-wrapper
-						v-else-if="
-							item.datalink.inline_data.visualization.type == 'bar-plot' &&
-							index == tab &&
-							item.graphData
-						"
-						:id="item._id"
-						:key="item._id"
-						:data="item.graphData"
-						:metric-name="item.datalink.inline_data.visualization.metric"
-						class="mt-5"
-					/>
-					<div v-else>No visual representation implemented</div>
+					<div v-if="index == tab">
+						<div v-if="item">
+							<LoaderChartWidgets
+								:data="item"
+								:metrics="metrics"
+							></LoaderChartWidgets>
+						</div>
+						<div v-else>
+							<v-progress-circular
+								indeterminate
+								color="primary"
+							></v-progress-circular>
+						</div>
+					</div>
+					<div v-else>
+						<div
+							class="text--secondary mt-6 mx-10"
+							align="center"
+							color="rgba(0, 0, 0, 0.6)"
+						>
+							<img
+								class="mb-4"
+								src="~/static/icons/chart.png"
+								alt=""
+								height="100px"
+							/>
+							<h2>No chart available</h2>
+							<p class="text-h6">
+								We're working on adding a new visualization. Check back soon!
+							</p>
+						</div>
+					</div>
 				</v-tab-item>
 			</v-tabs-items>
 		</div>
@@ -81,22 +97,25 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import ChartBarplotVisualizerWrapper from '~/components/Widgets/ChartBarplotVisualizerWrapper';
-import ChartScatterVisualizerWrapper from '~/components/Widgets/ChartScatterVisualizerWrapper';
+import LoaderChartWidgets from '~/components/Widgets/LoaderChartWidgets';
 
 export default {
 	name: 'CommunityChallengePlotsPage',
-	components: { ChartBarplotVisualizerWrapper, ChartScatterVisualizerWrapper },
+	components: {
+		LoaderChartWidgets,
+	},
 	data() {
 		return {
 			hostName: this.$config.OEB_LEGACY_ANGULAR_URI,
 			tab: 0,
+			m: [],
 		};
 	},
 	computed: {
 		...mapGetters('challenge', {
 			datasets: 'datasetsList',
 			challenge: 'challenge',
+			metrics: 'metrics',
 		}),
 		...mapGetters('community', {
 			currentEvent: 'currentEvent',

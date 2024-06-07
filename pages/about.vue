@@ -179,10 +179,14 @@ export default {
 					text: 'About',
 					disabled: true,
 				},
+				{
+					text: 'OpenEBench',
+					disabled: true,
+				},
 			],
 		};
 	},
-	mounted() {
+	beforeMount() {
 		this.$parent.$emit('emitBreadcrumbs', this.breadcrumbs);
 	},
 };

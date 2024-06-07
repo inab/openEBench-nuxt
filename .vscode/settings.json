@@ -85,6 +85,9 @@
 		"titleBar.activeBackground": "#124c4f",
 		"titleBar.activeForeground": "#FDF9F8"
 	},
+	"[json]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
 	"editor.autoClosingBrackets": "never",
 	"html.autoClosingTags": false,
 	"javascript.autoClosingTags": false,

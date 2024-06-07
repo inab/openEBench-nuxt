@@ -13,10 +13,6 @@ const menuEntries = [
 		title: 'Tools',
 		to: '/tool',
 	},
-	{
-		title: 'Stats',
-		to: '/statistics',
-	},
 ];
 
 export default menuEntries;

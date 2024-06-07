@@ -1,3 +1,4 @@
+import path from 'path';
 import colors from 'vuetify/es5/util/colors';
 
 const routerBase =
@@ -44,7 +45,17 @@ export default {
 			},
 			{ name: 'format-detection', content: 'telephone=no' },
 		],
-		link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+		link: [
+			{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+			{
+				rel: 'stylesheet',
+				href: 'https://fonts.googleapis.com/icon?family=Material+Icons',
+			},
+			{
+				rel: 'stylesheet',
+				href: 'https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap',
+			},
+		],
 	},
 
 	// Global CSS: https://go.nuxtjs.dev/config-css
@@ -181,6 +192,20 @@ export default {
 			config.module.rules.push({
 				test: /\.md$/,
 				loader: 'raw-loader',
+			});
+			config.module.rules.push({
+				test: /\.(pdf|ico)$/,
+				loader: 'file-loader',
+				options: {
+					name: '[path][name].[hash:8].[ext]',
+					outputPath: (resourcePath, context) => {
+						// `resourcePath` is original absolute path to asset
+						// `context` is directory where webpack's config is placed
+						// To get relative path you can use
+						const relativePath = path.relative(context, resourcePath);
+						return `static/${relativePath}`;
+					},
+				},
 			});
 		},
 	},

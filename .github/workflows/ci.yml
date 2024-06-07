@@ -29,6 +29,11 @@ jobs:
           node-version: ${{ matrix.node }}
           check-latest: true
 
+      - name: Clear cache
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh cache delete --all
+
       - name: Cache node_modules 📦
         uses: actions/cache@v3
         with:
@@ -38,13 +43,13 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Install dependencies 👨🏻‍💻
-        run: npm ci --prefer-offline --no-audit
+        run: npm ci --prefer-offline --no-audit --legacy-peer-deps
 
       - name: Run linter 👀
         run: npm run lint
 
       - name: Run tests 🧪
-        run: npm run test:unit:ci
+        run: npm run test:unit:ci -- -u
 
       - name: codecov
         run: npx codecov

@@ -42,12 +42,6 @@ exports[`TheFooter should match snapshot 1`] = `
                 <!---->
                 <!---->
               </li>
-              <li><a dark=\\"\\" class=\\"white--text\\">
-                  Stats
-                </a>
-                <!---->
-                <!---->
-              </li>
             </ul>
           </div>
           <div class=\\"pa-4 site-map-item col\\">
@@ -63,6 +57,37 @@ exports[`TheFooter should match snapshot 1`] = `
                 <!----> <a href=\\"https://openebench.readthedocs.io/en/latest/\\" target=\\"_blank\\" dark=\\"\\" class=\\"white--text\\">
                   Project
                 </a> <i aria-hidden=\\"true\\" class=\\"v-icon notranslate v-icon--right mdi mdi-open-in-new theme--dark\\" style=\\"font-size: 16px;\\"></i></li>
+            </ul>
+          </div>
+          <div class=\\"pa-4 site-map-item col\\">
+            <h6 class=\\"title mb-4\\">
+              About
+            </h6>
+            <ul>
+              <li><a dark=\\"\\" class=\\"white--text\\">
+                  OpenEBench
+                </a>
+                <!---->
+                <!---->
+              </li>
+              <li><a dark=\\"\\" class=\\"white--text\\">
+                  Publications
+                </a>
+                <!---->
+                <!---->
+              </li>
+              <li><a dark=\\"\\" class=\\"white--text\\">
+                  Collaboration
+                </a>
+                <!---->
+                <!---->
+              </li>
+              <li><a dark=\\"\\" class=\\"white--text\\">
+                  The Team
+                </a>
+                <!---->
+                <!---->
+              </li>
             </ul>
           </div>
           <div class=\\"pa-4 site-map-item col\\">

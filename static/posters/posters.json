@@ -1,0 +1,231 @@
+[
+	{
+		"title": "The FAIRsoft evaluator – A tool for developers and users to assess how specific software complies with FAIR for software indicators",
+		"date": "07 Jun 2023",
+		"authors": [
+			"Eva Martín del Pico",
+			"Josep Lluis Gelpi",
+			"Salvador Capella-Gutierrez"
+		],
+		"presented_loc": "ELIXIR All Hands 2023 ",
+		"link": "https://doi.org/10.7490/f1000research.1119456.1",
+		"poster": "f1000research-517594.pdf",
+		"abstract": "The OpenEBench Software Observatory aims to be an instrument for periodically assessing and diagnosing the quality of elements enhancing research software in the Life Sciences.\n\nHere we present its latest feature, the ¨FAIRsoft Evaluator¨, for assessing the fulfillment of FAIR for Research Software Indicators for individual tools.\n\nThe evaluation is heavily based on software metadata. Users can obtain it from the Software Observatory’s database or provide a GitHub repository. In the first case, the user can select a tool from the over 45,000 bioinformatic tools, whose metadata is gathered and consolidated across eight different software registries and repositories, including bio.tools, the Galaxy Toolshed and BioConductor, among others. In the case that one prefers to use GitHub as a metadata source, the URL for the repository should be provided. Then, all available metadata will be retrieved automatically using the GitHub API. After loading the metadata, the user can edit, modify, or add more information before assessing the fulfillment of FAIR indicators.\n\nIn addition to the evaluation of FAIR, the Software Observatory allows users to download the gathered metadata or even to make a pull request to a repository of the user’s choice to incorporate such metadata as a JSON-LD file compliant with CodeMeta and Bioschemas Compute tool profile. In this way, the FAIRsoft Evaluator also constitutes an automated tool for generating software metadata following accepted standards and to enhance the interoperability of bioinformatics tools."
+	},
+	{
+		"title": "OpenEBench opts Bioschemas",
+		"date": "09 Jun 2023",
+		"authors": [
+			"Dmitry Repchevsky",
+			"Eva Martin Del Pico",
+			"Salvador Capella-Gutierrez",
+			"Josep Lluis Gelpí"
+		],
+		"presented_loc": "ELIXIR All Hands 2023",
+		"link": "https://doi.org/10.7490/f1000research.1119437.1",
+		"poster": "f1000research-518434.pdf",
+		"abstract": "The OpenEBench platform (https://openebench.bsc.es) has been part of the ELIXIR Tools Ecosystem platform since its inception. Despite its broad functionality, OpenEBench contributes to the ecosystem by monitoring bioinformatics tools gathered from different sources such as bio.tools, Bioconda, Galaxy and DebianMed. It also provides a set of FAIR for Research Software indicators that are periodically updated. The current model for the tool descriptions has been greatly influenced by the biotoolsSchema and has been stable for the past six years.\n\nNevertheless, the Tools Ecosystem Platform is working towards a more standard description for software tools, which led to the plan of adopting a metadata standard with broad community support being at the moment two options: Bioschemas ”ComputationalTool” Profile and CodeMeta. Considering the great degree of overlap and ongoing discussions to achieve converge and full interoperability, the OpenEBench tools monitoring platform has started the adoption of the Bioschemas ”ComputationalTool” profile. Although JSON-LD provides great semantic data representation, it greatly expands the size of the containing data. The new approach keeps storing data in a JSON format and enrich data with JSON-LD artifacts (@context, @type, @id, etc.) on the fly while preparing the response to any request through the available API.\n\nThis effort should contribute to the existing discussions in the ELIXR Tools Ecosystem platform on the need to adopt widely supported standards for describing research software and should serve as exemplar on the implications of adopting Bioschemas as a standard data model within a given platform."
+	},
+	{
+		"title": "OpenEBench 2023 update: better support and deeper interactions with benchmarking scientific communities",
+		"date": "31 May 2023",
+		"authors": [
+			"Carles Hernandez-Ferrer",
+			"Laura Portell-Silva",
+			"Anna Redondo Guitarte",
+			"Esther Vendrell",
+			"Laia Codó",
+			"José M. Fernández",
+			"Dmitry Repchevsky",
+			"Lidia López",
+			"Alfonso Valencia",
+			"Josep Ll. Gelpí",
+			"Salvador Capella-Gutierrez"
+		],
+		"presented_loc": "ELIXIR All Hands 2023",
+		"link": "https://doi.org/10.7490/f1000research.1119437.1",
+		"poster": "f1000research-515805.pdf",
+		"abstract": "OpenEBench (https://openebench.bsc.es/) is the ELIXIR platform for supporting community-led benchmarking activities and the technical monitoring of bioinformatics software. It has been part of the ELIXIR Tools Platform since its inception, contributing to its development and consolidation. OpenEBench collaborates with more than 20 different scientific communities within and beyond ELIXIR. This interaction fosters the development of new components, both at the infrastructure level and extension of the visual interfaces. The Continuous Automated Model EvaluatiOn (CAMEO) runs weekly automated benchmarks on predictions of protein structures that are published in OpenEBench. The Intrinsically Disordered Proteins (IDP) has served to bring CAID into OpenEBench evaluating and improving the existing documentation. Our roadmap includes to integrate other relevant platforms, and we expect to work closely with APICURON to visibilize and credit the contributions made by the different members of the communities to the platform."
+	},
+	{
+		"title": "InSoLiTo project: The research software graph-based network from OpenEBench",
+		"date": "29 Aug 2022",
+		"authors": [
+			"Sergi Aguiló-Castillo",
+			"Jose M. Fernández",
+			"Josep Ll. Gelpí",
+			"Salvador Capella-Gutiérrez"
+		],
+		"presented_loc": "ELIXIR All Hands 2022",
+		"link": "https://doi.org/10.7490/f1000research.1119104.1",
+		"poster": "f1000research-447634.pdf",
+		"abstract": "InSoLiTo is a graph-based network of the co-usage of research software from the tools collection hosted by OpenEBench. Co-usage is understood as being cited in the same scientific publications. The initial aim of the project is to identify how bioinformatics tools relate to each other allowing to potentially infer analytical workflows commonly used in the literature. These results can be then used by research communities organizing scientific benchmarks on popular pipelines in their domains. Interestingly, this analysis can also be extended to include widely used databases and other relevant resources as part of those workflows.\n\nData is freely accessible from a data portal (add URL) In the webpage, the user can interact with the graph network by filtering any bioinformatics’ tool stored in OpenEBench and see which other tools works with. Also, users can filter per year to see the evolution of the usage of other software in relation to the selected tool, and see which bioinformatics’ community it belongs to. Moreover, the inter- and intra-relationships between different branches of bioinformatics regarding its tools co-usage can be examined.\n\nThis addition of OpenEBench will bring a new perspective of benchmarking and monitoring research software that will complement the existing capabilities of the platform."
+	},
+	{
+		"title": "Towards a User-Centered Design Approach for the OpenEBench Benchmarking Platform",
+		"date": "02 Jun 2022",
+		"authors": [
+			"Dominik Brüchner",
+			"Asier Gonzalez-Uriarte",
+			"Laura Portell-Silva",
+			"Josep Ll. Gelpí",
+			"Salvador Capella-Gutiérrez"
+		],
+		"presented_loc": "ELIXIR All Hands 2022",
+		"link": "https://doi.org/10.7490/f1000research.1118974.1",
+		"poster": "f1000research-429415.pdf",
+		"abstract": "OpenEBench (http://openebench.bsc.es) is the ELIXIR gateway to benchmarking evaluations and technical monitoring for bioinformatics tools, web servers, and workflows. The infrastructure supports community-driven benchmarking, helps monitor software quality in life sciences, and contributes to best practices in research software development.\n\nComplex research software projects are frequently developed with a strong focus on technical requirements, mainly when the target group consists of developers and researchers. Focusing on technical requirements often leads to organically grown user interfaces and systems, which are difficult to use and navigate. User Experience (UX) issues can lead to a smaller user scope, potentially disappointed users, and lower content-quality perception, including hard-earned research results.\n\nWe tackle this problem by applying qualitative and quantitative user-centered design methods to OpenEBench for building a solid understanding of user needs, requirements, and context of use. Specifically, we have used user story mapping, target group analysis, interviews, personas, surveys, mock-ups, and user tests. This approach avoids costly system extensions and redesigns while offering a better, need-focused UX. We learned that, while these methods should be applied before development, an existing system's user experience can still be improved and overhauled efficiently, paving the way for a state-of-the-art user experience in research software development."
+	},
+	{
+		"title": "OpenEBench Scientific Communities in 2022: More communities, better support, deeper interactions",
+		"date": "02 Jun 2022",
+		"authors": [
+			"Laura Portell-Silva",
+			"Asier Gonzalez-Uriarte",
+			"Meritxell Ferret",
+			"Anna Redondo Guitarte",
+			"Lidia López",
+			"Josep Ll. Gelpí",
+			"Salvador Capella-Gutierrez"
+		],
+		"presented_loc": "ELIXIR All Hands 2022",
+		"link": "https://doi.org/10.7490/f1000research.1118970.1",
+		"poster": "f1000research-429246.pdf",
+		"abstract": "OpenEBench is the ELIXIR benchmarking and technical monitoring open-data platform for bioinformatics software and it has been part of the ELIXIR Tools Platform since its inception. OpenEBench provides scientific communities with an online infrastructure to perform unbiased and objective benchmarking evaluations and to make the results freely available on a public website (https://openebench.bsc.es/). Between 2019 and 2022, the number of communities actively collaborating with OpenEBench has doubled, from four to eight, and many more (up to 11) to come."
+	},
+	{
+		"title": "Facilitating the use and re-use of OpenEBench FAIR data through EOSC services",
+		"date": "01 Jun 2022",
+		"authors": [
+			"José Maria Fernández",
+			"Meritxell Ferret",
+			"Laia Codó",
+			"Josep Ll. Gelpí",
+			"Salvador Capella-Gutierrez"
+		],
+		"presented_loc": "ELIXIR All Hands 2022",
+		"link": "https://doi.org/10.7490/f1000research.1118972.1",
+		"poster": "f1000research-429254.pdf",
+		"abstract": "OpenEBench is the ELIXIR open data infrastructure for supporting community-led scientific benchmarking and technical monitoring of bioinformatics methods and services. It is led by the Barcelona Supercomputing Center (BSC) in collaboration with partners within ELIXIR and beyond. Here we present some strategies that helps OpenEBench to further enforce the FAIR-by-design data strategies of the platform, which promotes benchmarking assessment transparency, reproducibility, and data reuse.\n\nThe design and implementation of the OpenEBench Benchmarking Data Model defining the structure of a whole scientific benchmarking process is one of these strategies. Using a set of JSON Schemas (draft 07 standard) plus some extensions, the model represents the concepts used for scientific communities during a benchmarking life cycle (e.g., benchmarking event, reference dataset, assessment metrics, etc). Labelled with permanent stable identifiers, OpenEBench holds them in a noSQL database, while providing REST  and graphQL APIs, together with the necessary tooling for data validation.\n\nOpenEBench also makes use of B2SHARE for long-term availability and storage of scientific benchmarking datasets. B2SHARE, as the EUDAT repository service for sharing research data, offers permanent storage capacity, which has permitted OpenEBench the minting of Digital Object Identifiers (DOIs) for the benchmarking data collections, always annotated with rich and modelled metadata."
+	},
+	{
+		"title": "Scientific communities management in OpenEBench",
+		"date": "05 Jun 2020",
+		"authors": [
+			"Jose M Fernández",
+			"Laia Codó",
+			"Vicky Sundesha",
+			"Javier Garrayo",
+			"Josep Ll Gelpí",
+			"Salvador Capella-Gutierrez"
+		],
+		"presented_loc": "ELIXIR All Hands 2020",
+		"link": "https://doi.org/10.7490/f1000research.1117995.1",
+		"poster": "f1000research-301223.pdf",
+		"abstract": "OpenEBench (http://openebench.bsc.es) is the ELIXIR benchmarking and technical monitoring platform for bioinformatic tools, web servers and workflows. The infrastructure provides the resources to enable an objective, reproducible and unbiased comparison of bioinformatic software through metrics-based critical measurements on technical and scientific performance. Software developers are able to evaluate their tools against predefined reference datasets related to their scientific communities in organized scientific challenge events, and the computed metrics are compiled, analysed and publicly exposed.\n\nScientific communities involvement are essential for having real benchmarking activities, as they promote collaboration, transparency and harmonised standards. OpenEBench aims to support them by offering a flexible and well-established framework from which to administer and operate evaluation events for specific research domains. Community managers are trusted users, as they act as representatives for these communities. Community managers are responsible for, first, designing and developing evaluation workflows and, second, framing them into scientific benchmarking challenges following the agreements reached by their respective communities. In OpenEBench, the benchmarking evaluation workflows depend on a set of software containers which validate and evaluate the results of the bioinformatics methods under assessment by computing community-agreed performance metrics. Thus, community managers are able to integrate those evaluation workflows into the OEB Virtual Research Environment (http://openebench.bsc.es/vre) following an interactive web-based procedure whose main input are the software container-building recipes.\n\nImportantly, communities control the publication life cycle of the benchmarking challenges by which evaluation workflows are made available on the platform. In similar terms, community managers also provide different reference datasets, under public or private terms, associated with each challenge. Reference datasets are used as input for participants to generate their predictions and as golden reference when evaluating participants input data.\n\nCommunity managers are an essential figure for incorporating scientific communities into OpenEBench and maintaining its activities up-to-date once the community is integrated into the platform. Thus, OpenEBench strives to provide easy-to-use tools and mechanisms to these privileged users as part of the interactions with its communities."
+	},
+	{
+		"title": "Scientific communities in OpenEBench",
+		"date": "05 Jun 2020",
+		"authors": [
+			"Vicky Sundesha",
+			"Javier Garrayo",
+			"Jose M Fernández",
+			"Laia Codó",
+			"Dmitry Repchevsky",
+			"Juergen Haas",
+			"Adrian Altenhoff",
+			"Christophe Dessimoz",
+			"Isabel Cuesta",
+			"Sara Monzon",
+			"Daniel López",
+			"Javier Perez Florido",
+			"Joaquín Dopazo",
+			"Alfonso Valencia",
+			"Josep Ll. Gelpi",
+			"Salvador Capella-Gutierrez"
+		],
+		"presented_loc": "ELIXIR All Hands 2020",
+		"link": "https://doi.org/10.7490/f1000research.1117991.1",
+		"poster": "f1000research-301186.pdf",
+		"abstract": "OpenEBench is the ELIXIR benchmarking and technical monitoring platform for bioinformatics tools, web servers and workflows. OpenEBench is part of the ELIXIR Tools platform and its development is led by the Barcelona Supercomputing Center (BSC) in collaboration with partners within ELIXIR and beyond.\nScientific benchmarking helps determining the precision, recall and other metrics of bioinformatics resources in unbiased scenarios, which have been set up through reference databases, ad-hoc input and test data sets reflecting specifying scientific challenges. Chosen metrics allow to objectively evaluate the relative scientific performance of the different participating resources. It is even possible to understand what are the software potential biases, strengths and weaknesses and/or under which conditions do they perform better or worse.\n\nUnbiased and objective evaluations of bioinformatics resources are challenging to set-up and can only be effective when built and implemented around community driven efforts. Several communities from different scientific domains collaborate with OpenEBench in order to set-up, host and further develop their scientific efforts. Communities can focus on  specific problems, e.g. Quest for Orthologs (QfO); or having a broader spectrum e.g. Spanish Network of Biomedical Research Centers on Rare Diseases (CIBERER); or covering different challenges on each of their editions, e.g. DREAM Challenges. Benchmarking efforts led by scientific communities might have a national scope e.g. CIBERER; or a global one e.g., Global Microbial Identifier Initiative (GMI).\n\nMost communities have similar needs in terms of reference data sets, metrics, and benchmarking results accessible within the community and beyond, independently of the scientific challenges tackled by each community and their geographical scope. Data sets should reflect existing challenges of  the scientific community in terms of size, complexity, and content. Moreover, data sets are used for producing predictions by participants and to compute the performance of each participant when comparing their predictions against a previously agreed, often private, data sets that are referred many times as golden data sets. Metrics are used to measure the performance of individual participants and should reflect the common practices in the field. Finally, making results available to the community and beyond is as relevant as generating them. It is important that researchers can access these results at any time, and have the tools to assist them in understanding them. Moreover, associated data and metadata to any benchmarking efforts should fulfill the FAIR principles and be available in long-term repositories such as Zenodo and/or EUDAT with permanent digital identifiers for further use and re-use.\n\nThus, OpenEBench has engaged with different communities offering assistance to bring their previously generated data and activities into the platform. Communities can make use of any of the three available levels in the OpenEBench architecture. However, how communities use the platform depends on their specific needs and resources. To ensure the long-term sustainability of OpenEBench, we are implementing a co-production model to accelerate the incorporation of new communities and the maintenance of the existing ones."
+	},
+	{
+		"title": "Reproducibility of workflows and containers at OpenEBench",
+		"date": "05 Jun 2020",
+		"authors": [
+			"Javier Garrayo",
+			"Laia Codó",
+			"Esther Vendrell",
+			"Vicky Sundesha",
+			"José María Fernandez-Gonzalez",
+			"Josep Ll. Gelpi",
+			"Salvador Capella-Gutierrez"
+		],
+		"presented_loc": "ELIXIR All Hands 2020",
+		"link": "https://doi.org/10.7490/f1000research.1117990.1",
+		"poster": "f1000research-301184.pdf",
+		"abstract": "Technical and scientific benchmarking of analysis procedures are becoming key aspects of modern science. As the amount available bioinformatic software keeps increasing, the necessity for open, unbiased and reproducible challenges which evaluate the scientific and computational performance of those resources becomes more evident. For such a purpose, platforms such as OpenEBench are being developed. OpenEBench is designed to establish an automated benchmarking system for bioinformatics tools, web servers and workflows. Gathered results help users to choose the most suitable software for the problem at hand, and they provide a reference to developers when they want to improve their methods.\n\nOne of the main issues in benchmarking nowadays is the low reusability of its workflows and components, mainly due to lack of standardization, ambiguity in tools and parameters, as well as problems in sharing and maintenance. Also, the proposed workflows are usually not well specified, making it complicated to understand the flow and utilization of data. Thus, we are addressing those limitations in our infrastructure by defining reproducible and interoperable benchmarking workflows in order to make those challenges available to the scientific community.\n\nOur efforts are directed towards standardization and reusability of workflows including the creation of a benchmarking ontology. This can be achieved by standardizing the required steps any benchmark challenge needs and recommending the usage of workflow managers such as Nextflow for its implementation. We also encourage tools reusability by using software container  technologies such as Docker or Singularity. Regarding the creation and use of a benchmarking ontology, this effort will allow to provide additional metadata to the data model used in OpenEBench. Such additional metadata will facilitate the data exchange across challenges within the same community and across communities as well as it will provide a formal description of datasets and workflows.\n\nOpenEBench benchmarking workflows system has already been successfully used to run benchmarking experiments in very diverse areas such as on orthology and paralogy predictions e.g. Quest for Orthologs Consortium; and in the identification of cancer driver genes e.g. The Cancer Genome Atlas’ Benchmarking group. Moreover, those workflows are supporting ongoing efforts, like some of the DREAM challenges, or the ones by the Spanish Network of Biomedical Research Center on Rare Diseases (CIBERER)."
+	},
+	{
+		"title": "Benchmarking data visualization",
+		"date": "27 Sep 2018",
+		"authors": [
+			"Javier Garrayo",
+			"Victor Fernández-Rodríguez",
+			"Jürgen Haas",
+			"Vicky Sundesha",
+			"Alfonso Valencia",
+			"Josep Lluís Gelpí",
+			"Salvador Capella-Gutiérrez"
+		],
+		"presented_loc": "ELIXIR All Hands 2018",
+		"link": "https://doi.org/10.7490/f1000research.1116157.1",
+		"poster": "f1000research-219740.pdf",
+		"abstract": "Benchmarking consists on measuring the performance of software under the same conditions. In the context of ELIXIR-EXCELERATE WP2 OpenEBench, we consider benchmarking activities from two perspectives: the technical performance of individual tools and workflows including some quality metrics, and the scientific performance of bioinformatics resources in the context of predefined reference datasets and metrics reflecting specific scientific challenges.\n\nUnbiased and objective evaluations of those resources are challenging to set up and can only be effective when built and implemented around community driven efforts. Thus, there are several community initiatives to establish standards and services to facilitate scientific benchmarking, which provides a way for users to identify the most effective methods for the problem at hand, sets a minimum requirement for new tools and resources, and guides the development of more accurate inference methods. Importantly, those communities cover an ample spectrum of bioinformatics fields and it is not restrictive to a particular domain of knowledge.\n\nHowever, understanding the results of specific scientific benchmark approaches is not a trivial task for end-users who might not have the background knowledge to correctly interpret visualized results. Thus, it is fundamental that OpenEBench offers mechanisms to facilitate the interpretation of results by specialists and non-specialists end-users. These mechanisms include an easy to use system for switching between both users profiles. This is achieved by applying different classification techniques, which render easy to interpret tools ranking in tabular format.\n\nWe have initially used data from the Quest for Orthologs and CAMEO to guide those efforts and gather feedback about the categorization mechanisms. We aim to follow similar strategies with data provided by others community driven efforts like CAFA and/or CoCoBench."
+	},
+	{
+		"title": "OpenEBench scientific benchmarking",
+		"date": "28 Jun 2019",
+		"authors": [
+			"Vicky Sundesha",
+			"Javier Garrayo",
+			"Laia Codó",
+			"Dmitry Repchevsky",
+			"Eva Martin del Pico",
+			"Victor Fernández-Rodríguez",
+			"José María Fernández González",
+			"Jürgen Haas",
+			"Eduard Porta-Pardo",
+			"Analia Lourenco",
+			"Adrian Altenhoff",
+			"Christophe Dessimoz",
+			"Isabel Cuesta",
+			"Sara Monzon",
+			"Alfonso Valencia",
+			"Josep Ll. Gelpi",
+			"Salvador Capella-Gutiérrez"
+		],
+		"presented_loc": "ELIXIR All Hands 2019",
+		"link": "https://doi.org/10.7490/f1000research.1116968.1",
+		"poster": "f1000research-252906.pdf",
+		"abstract": "We understand benchmarking as the comparison of research software performance under controlled conditions. It encompasses both the technical performance, including software quality metrics, and the scientific performance in predefined challenges. Scientific communities play an important role here as they are responsible for defining reference datasets and metrics, pointing out the existing scientific challenges in their respective fields. Thus, in the context of ELIXIR-EXCELERATE project, we have developed the OpenEBench platform (https://openebench.bsc.es) aiming to provide a reference place to host technical and scientific performance for research software across the life sciences.\n\nOpenEBench provides an infrastructure where end-users can learn from different available software options and select the one best fitting their scientific needs. Bioinformatics software developers can find relevant datasets and meaningful scientific challenges to evaluate their own developments, and communities interested in a particular scientific domain can easily define which datasets and metrics are relevant for developers to work on, which in turn will allow the field to move ahead.\n\nA web application (https://openebench.bsc.es/html/scientific) allows users to browse through the benchmarking results from the different communities engaged (TCGA, QFO, CAMEO, GMI) in the platform which can be viewed using one of the visualization charts and transformed to table format, which is easier to interpret by non-expert users.\n\nOn the technical side, the application uses several REST APIs, which can be used by other developers to upload and access the data for future studies or use cases. Another key feature is the Virtual Research Environment (https://openebench.bsc.es/submission), which includes the necessary mechanisms to import and execute benchmarking workflows on top of cloud computing infrastructures.\n\nOpenEBench follows the recommendations made by ELIXIR on the development of open source software making its code publicly available at https://github.com/inab/openebench-hub."
+	},
+	{
+		"title": "OpenEBench Widgets Gallery",
+		"date": "20 Jun 2018",
+		"authors": [
+			"Vicky Sundesha",
+			"M. Madrid-Mencía",
+			"J.M. Fernández",
+			" D. Repchevsky",
+			"A. Valencia",
+			"J.L. Gelpi",
+			"Salvador Capella-Gutiérrez"
+		],
+		"presented_loc": "ELIXIR All Hands 2018",
+		"link": "https://doi.org/10.7490/f1000research.1115592.1",
+		"poster": "f1000research-207965.pdf",
+		"abstract": "Benchmarking consists on measuring the performance of software under controlled conditions. In the context of the H2020 ELIXIR-EXCELERATE project, we have developed the OpenEBench platform. We consider benchmarking activities from two perspectives: the technical performance of individual tools and workflows, including software quality metrics; and the scientific performance of bioinformatics resources. Scientific benchmarking is done in the context of the reference datasets and metrics, reflecting specific scientific challenges as defined by their scientific communities.\n\nWe will present the current implementation of both major components at the time of setting the scope for the next development cycle, which will be strongly focused on assisting communities to bring in their data into OpenEBench. We will introduce the quality metrics for the technical monitoring, the widgets gallery developed to summarize and export OpenEBench data to other platforms, in particular the ELIXIR bio.tools registry, the visualization of scientific benchmarking results as well as the architecture to gather data from community driven scientific benchmarking activities. OpenEbench has three levels for gathering data: 1 is based on data by mature benchmarking communities, submitted via OpenEBench APIs; 2 is based on computing benchmarking metrics at the OpenEBench side, and level 3 where benchmarked tools (provided as software containers) will be executed using the same technical conditions for a fair technical and scientific assessment and comparison. To this end, OpenEBench will provide an integrated working environment to orchestrate reference and participants data and software tools and metrics."
+	}
+]
