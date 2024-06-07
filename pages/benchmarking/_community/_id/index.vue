@@ -5,7 +5,7 @@
 			class="mb-5"
 			type="heading, list-item-three-line"
 		/>
-		<div v-else>
+		<div v-else class="mx-6">
 			<h1 class="text-h4">
 				{{ challenge.challenge_label }} ({{ challenge._id }})
 			</h1>
@@ -31,10 +31,10 @@
 			type="card-heading, image"
 		/>
 		<div v-else>
-			<h2 class="text-h6 mt-8">
+			<h2 class="text-h6 mt-8 mx-6">
 				Choose the metrics you want to visualize in the diagram:
 			</h2>
-			<v-chip-group v-model="tab" active-class="accent--text" column mandatory>
+			<v-chip-group v-model="tab" active-class="accent--text" column mandatory class="mx-6">
 				<v-chip v-for="item in datasets" :key="item._id">
 					{{
 						item.datalink.inline_data.visualization.type == '2D-plot'
@@ -45,7 +45,7 @@
 					}}
 				</v-chip>
 			</v-chip-group>
-			<v-tabs-items v-model="tab">
+			<v-tabs-items v-model="tab" class="mx- 4">
 				<v-tab-item
 					v-for="(item, index) in datasets"
 					:key="index"
