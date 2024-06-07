@@ -41,7 +41,7 @@ jobs:
         run: npm ci --prefer-offline --no-audit --legacy-peer-deps
 
       - name: Run linter 👀
-        run: npm run lint --fix
+        run: npm run lint
 
       - name: Run tests 🧪
         run: npm run test:unit:ci
