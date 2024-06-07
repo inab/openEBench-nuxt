@@ -81,7 +81,7 @@
 
 <script>
 import posters from '@/static/posters/posters.json';
-import Manuscripts from '~/components/Cards/Manuscripts.vue';
+import Manuscripts from '~/components/Cards/ManuscriptsCards.vue';
 import Posters from '~/components/Cards/PosterList.vue';
 
 export default {
