@@ -44,7 +44,7 @@ jobs:
         run: npm run lint
 
       - name: Run tests 🧪
-        run: npm run test:unit:ci
+        run: npm run test:unit:ci -u
 
       - name: codecov
         run: npx codecov
