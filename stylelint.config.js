@@ -14,5 +14,7 @@ module.exports = {
 			true,
 			{ ignore: ['consecutive-duplicates'] },
 		],
+		'media-query-no-invalid': null,
+		'selector-anb-no-unmatchable': null,
 	},
 };
