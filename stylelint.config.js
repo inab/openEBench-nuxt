@@ -10,5 +10,9 @@ module.exports = {
 	rules: {
 		'selector-class-pattern': null,
 		'color-function-notation': null,
+		'declaration-block-no-duplicate-properties': [
+			true,
+			{ ignore: ['consecutive-duplicates'] },
+		],
 	},
 };
