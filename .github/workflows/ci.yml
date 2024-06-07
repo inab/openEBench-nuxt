@@ -40,11 +40,14 @@ jobs:
       - name: Install dependencies 👨🏻‍💻
         run: npm ci --prefer-offline --no-audit --legacy-peer-deps
 
+      - name: Clear cache 🔧
+        run: gh cache delete --all
+
       - name: Run linter 👀
         run: npm run lint
 
       - name: Run tests 🧪
-        run: npm run test:unit:ci -u
+        run: npm run test:unit:ci -- -u
 
       - name: codecov
         run: npx codecov
