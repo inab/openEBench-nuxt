@@ -16,66 +16,32 @@
 		<br />
 
 		<v-tabs :vertical="vertical" class="mt-10">
+			<!-- Manuscripts -->
 			<v-tab>
 				<v-icon left>mdi-information-outline</v-icon>
 				Manuscripts
 			</v-tab>
 			<v-tab-item class="ma-5 mt-5 mt-md-0" :transition="false">
 				<v-card outlined class="pa-5" elevation="1">
-					<!-- Core Papers Section -->
-					<div v-if="papers.core.length > 0">
-						<h2>Core Contributions</h2>
-						<div class="paper-container">
-							<div v-for="paper in papers.core" :key="paper.doi" class="paper">
-								<h3>
-									<a :href="`https://doi.org/${paper.doi}`" target="_blank">{{
-										paper.title
-									}}</a>
-								</h3>
-								<p v-if="paper.authors && paper.authors.length > 0">
-									Authors: {{ paper.authors }}
-								</p>
-								<p v-if="paper.publicationDate">
-									Publication Date: {{ formatDate(paper.publicationDate) }}
-								</p>
-								<hr />
-							</div>
-						</div>
-					</div>
-					<br />
-					<!-- Collaboration Papers Section -->
-					<div v-if="papers.collaboration.length > 0">
-						<h2>Collaborations</h2>
-						<div class="paper-container">
-							<div
-								v-for="paper in papers.collaboration"
-								:key="paper.doi"
-								class="paper"
-							>
-								<h3>
-									<a :href="`https://doi.org/${paper.doi}`" target="_blank">{{
-										paper.title
-									}}</a>
-								</h3>
-								<p v-if="paper.authors && paper.authors.length > 0">
-									Authors: {{ paper.authors }}
-								</p>
-								<p v-if="paper.publicationDate">
-									Publication Date: {{ formatDate(paper.publicationDate) }}
-								</p>
-								<hr />
-							</div>
-						</div>
-					</div>
+					<v-tabs v-model="activeTab">
+						<v-tab>
+							<h3>Core Contributions</h3>
+						</v-tab>
+						<v-tab>
+							<h3>Collaborations</h3>
+						</v-tab>
 
-					<!-- Display message if no papers available -->
-					<template
-						v-if="papers.core.length === 0 && papers.collaboration.length === 0"
-					>
-						<p>No papers available.</p>
-					</template>
+						<v-tab-item class="ma-5 mt-5 mt-md-0" :transition="false">
+							<Manuscripts :papers="papers.core"/>
+						</v-tab-item>
+						<v-tab-item class="ma-5 mt-5 mt-md-0" :transition="false">
+							<Manuscripts :papers="papers.collaboration" />
+						</v-tab-item>
+					</v-tabs>
 				</v-card>
 			</v-tab-item>
+
+			<!-- Posters -->
 			<v-tab>
 				<v-icon left>mdi-file-image-outline</v-icon>
 				Posters
@@ -185,9 +151,13 @@
 
 <script>
 import posters from '@/static/posters/posters.json';
+import Manuscripts from '~/components/Cards/Manuscripts.vue';
 
 export default {
 	name: 'PublicationsPage',
+	components: {
+       Manuscripts
+    },
 	data() {
 		return {
 			hostName: this.$config.OEB_LEGACY_ANGULAR_URI,
@@ -207,6 +177,7 @@ export default {
 					disabled: true,
 				},
 			],
+			activeTab: null,
 			papers: {
 				core: [
 					{ doi: '10.1101/181677' },
@@ -276,8 +247,11 @@ export default {
 						this.$set(this.papers[group], i, { ...paper, ...details });
 					}
 				}
+				// Sort papers by date after getting all details
+				this.papers[group].sort((a, b) => new Date(b.publicationDate) - new Date(a.publicationDate));
 			}
 		},
+
 		getPosterPath(filename) {
 			return `${this.basePath}${filename}`;
 		},
