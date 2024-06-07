@@ -3,15 +3,27 @@
 		<h1 class="text--h3">OpenEBench Collaboration</h1>
 		<br />
 		<p>
-			Collaborations are at the heart of OpenEBench. OpenEBench has been designed as a space to foster collaborations within and across communities,
-			taking ELIXIR as the overall framework. ELIXIR is the pan-European Research Infrastructure for managing research data and other digital assets in the Life Sciences domain.
+			Collaborations are at the heart of OpenEBench. OpenEBench has been
+			designed as a space to foster collaborations within and across
+			communities, taking ELIXIR as the overall framework. ELIXIR is the
+			pan-European Research Infrastructure for managing research data and other
+			digital assets in the Life Sciences domain.
 		</p>
 		<p>
-			Collaborations are essential to ensure that OpenEBench is fit for its purpose and responds to users' current needs. It is also a mechanism to contribute towards the platform's sustainability.
-			Participation in EU and nationally funded projects is one of the existing collaboration mechanisms. Participating in funded projects allows us to prioritise specific developments to strengthen, extend and add new features to the platform that a specific project will utilise. Notably, these developments are made available to everyone across OpenEBench, fostering a continuous innovation cycle.
+			Collaborations are essential to ensure that OpenEBench is fit for its
+			purpose and responds to users' current needs. It is also a mechanism to
+			contribute towards the platform's sustainability. Participation in EU and
+			nationally funded projects is one of the existing collaboration
+			mechanisms. Participating in funded projects allows us to prioritise
+			specific developments to strengthen, extend and add new features to the
+			platform that a specific project will utilise. Notably, these developments
+			are made available to everyone across OpenEBench, fostering a continuous
+			innovation cycle.
 		</p>
 		<p>
-			Beyond funded projects, OpenEBench also works with scientific communities willing to sustain their benchmarking efforts in the long run, as well as individuals interested in contributing to specific platform components.
+			Beyond funded projects, OpenEBench also works with scientific communities
+			willing to sustain their benchmarking efforts in the long run, as well as
+			individuals interested in contributing to specific platform components.
 		</p>
 		<br />
 
@@ -23,15 +35,15 @@
 				cols="12"
 				sm="6"
 				md="4"
-				>
+			>
 				<!-- Collaborators Card -->
 				<collaborators-card
-				:title="collaborator.title"
-				:href="collaborator.href"
-				:src="collaborator.src"/>
+					:title="collaborator.title"
+					:href="collaborator.href"
+					:src="collaborator.src"
+				/>
 			</v-col>
 		</v-row>
-
 	</v-container>
 </template>
 
@@ -106,18 +118,18 @@ export default {
 					href: 'https://bioinfo4women.bsc.es/research/',
 					src: require('~/static/collaboration/baiha.png'),
 				},
-			]
+			],
 		};
-	},
-	beforeMount() {
-		this.$parent.$emit('emitBreadcrumbs', this.breadcrumbs);
 	},
 	computed: {
 		sortedCollaborators() {
 			return this.collaborators.slice().sort((a, b) => {
 				return a.title.localeCompare(b.title);
 			});
-		}
-	}
+		},
+	},
+	beforeMount() {
+		this.$parent.$emit('emitBreadcrumbs', this.breadcrumbs);
+	},
 };
 </script>
