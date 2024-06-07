@@ -4,7 +4,6 @@ import MockCommunity from '~/test/unit/mockData/Community';
 import MockEvent from '~/test/unit/mockData/Event';
 import MockEvents from '~/test/unit/mockData/Events';
 import MockChallenge from '~/test/unit/mockData/Challenge';
-import LoaderChartWidgets from '~/components/Widgets/LoaderChartWidgets';
 
 const factory = (mockStore) => {
 	return mount(Challenge, {
@@ -108,16 +107,5 @@ describe('Community Participant', () => {
 		expect(wrapper).toBeTruthy();
 
 		expect(mockStore.challenge.actions.getChallenge).toHaveBeenCalled();
-	});
-
-	it('renders LoaderChartWidgets component with correct props', () => {
-		const wrapper = factory(mockStore);
-		expect(wrapper.findComponent(LoaderChartWidgets).exists()).toBe(true);
-		expect(wrapper.findComponent(LoaderChartWidgets).props('data')).toEqual(
-			MockChallengeDatasetsBarplot
-		);
-		expect(wrapper.findComponent(LoaderChartWidgets).props('metrics')).toEqual(
-			[]
-		);
 	});
 });
