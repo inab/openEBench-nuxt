@@ -10,11 +10,5 @@ module.exports = {
 	rules: {
 		'selector-class-pattern': null,
 		'color-function-notation': null,
-		'declaration-block-no-duplicate-properties': [
-			true,
-			{ ignore: ['consecutive-duplicates'] },
-		],
-		'media-query-no-invalid': null,
-		'selector-anb-no-unmatchable': null,
 	},
 };
