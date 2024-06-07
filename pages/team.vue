@@ -9,7 +9,8 @@
 			Data platform supporting community-driven scientific benchmarking
 			activities and the technical monitoring of research software in Life
 			Sciences.
-			<br class="mb-4" />
+		</p>
+		<p>
 			The OpenEBench team is a committed group of professionals with different
 			roles and complementary expertise who work together to maintain OpenEBench
 			and add new functionality for a better user experience. The team is mainly
@@ -22,7 +23,8 @@
 			However, we are open to collaborations worldwide as OpenEBench follows the
 			Open Science principles since its inception to facilitate working
 			together.
-			<br class="mb-4" />
+		</p>
+		<p>
 			The overall objective is to automatise the interactions within the
 			platform as much as possible so users can become an integral part of its
 			operations by curating and updating existing information within it.

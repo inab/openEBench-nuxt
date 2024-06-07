@@ -7,7 +7,8 @@
 			articles, conference posters and public pre-prints, reflecting the work
 			carried out by the OpenEBench team and the multiple collaborations with
 			the scientific communities that use and support the platform.
-			<br class="mb-4" />
+		</p>
+		<p>
 			These contributions are organised into two sections to reflect whether
 			they are core to the OpenEBench activities or contribute to the different
 			communities.
