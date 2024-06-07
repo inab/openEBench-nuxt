@@ -59,10 +59,21 @@
 					:transition="false"
 				>
 					<!-- No Visualization -->
-					<div class="text--secondary mt-6 mx-10" align="center" color="rgba(0, 0, 0, 0.6)">
-						<img class="mb-4" src="~/static/icons/chart.png" alt="" height="100px">
+					<div
+						class="text--secondary mt-6 mx-10"
+						align="center"
+						color="rgba(0, 0, 0, 0.6)"
+					>
+						<img
+							class="mb-4"
+							src="~/static/icons/chart.png"
+							alt=""
+							height="100px"
+						/>
 						<h2>No chart available</h2>
-						<p class="text-h6">No visual representation implemented yet. Check back soon!</p>
+						<p class="text-h6">
+							No visual representation implemented yet. Check back soon!
+						</p>
 					</div>
 				</v-tab-item>
 			</v-tabs-items>

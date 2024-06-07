@@ -34,5 +34,4 @@ describe('Collaboration', () => {
 			expect(card.props().src).toBe(collaborators[index].src);
 		});
 	});
-
 });

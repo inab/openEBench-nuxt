@@ -33,7 +33,7 @@ describe('Team', () => {
 		expect(leaderSection.text()).toBe('Leaders');
 
 		const leaderCards = wrapper.findAllComponents({ name: 'MemberCard' });
-		const leadersData = membersData.Members.filter(member =>
+		const leadersData = membersData.Members.filter((member) =>
 			member.roles.includes('Leadership')
 		);
 		expect(leaderCards.length).toBe(leadersData.length);
@@ -46,8 +46,8 @@ describe('Team', () => {
 		expect(groupMembersSection.text()).toBe('Group Members');
 
 		const memberCards = wrapper.findAllComponents({ name: 'MemberCard' });
-		const groupMembersData = membersData.Members.filter(member =>
-			!member.roles.includes('Leadership')
+		const groupMembersData = membersData.Members.filter(
+			(member) => !member.roles.includes('Leadership')
 		);
 		expect(memberCards.length).toBe(groupMembersData.length);
 	});
@@ -61,5 +61,4 @@ describe('Team', () => {
 		const alumniCards = wrapper.findAllComponents({ name: 'AlumniCard' });
 		expect(alumniCards.length).toBe(membersData.Alumni.length);
 	});
-
 });

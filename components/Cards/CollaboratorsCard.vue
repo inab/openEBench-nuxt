@@ -1,15 +1,31 @@
 <template>
-	<v-card class="mx-auto mb-5" hover :href="href" target="_blank" max-width="344" min-height="250" max-height="350">
+	<v-card
+		class="mx-auto mb-5"
+		hover
+		:href="href"
+		target="_blank"
+		max-width="344"
+		min-height="250"
+		max-height="350"
+	>
 		<div class="image-container">
-			<v-img :src="src" class="responsive-img" v-if="title =='ELIXIR STEERS'" max-width="65%"></v-img>
-			<v-img :src="src" class="responsive-img" v-else-if="title =='DataTools4Heart'" height="45px"></v-img>
+			<v-img
+				:src="src"
+				class="responsive-img"
+				v-if="title == 'ELIXIR STEERS'"
+				max-width="65%"
+			></v-img>
+			<v-img
+				:src="src"
+				class="responsive-img"
+				v-else-if="title == 'DataTools4Heart'"
+				height="45px"
+			></v-img>
 			<v-img :src="src" class="responsive-img" v-else max-width="80%"></v-img>
-
 		</div>
 		<v-divider></v-divider>
 		<h3 class="text-center mt-3">{{ title }}</h3>
 	</v-card>
-
 </template>
 <script>
 export default {
@@ -25,31 +41,31 @@ export default {
 		src: {
 			type: String,
 			required: true,
-		}
-	}
-}
+		},
+	},
+};
 </script>
 
 <style scoped>
 .image-container {
-  height: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+	height: 200px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .responsive-img {
-  max-height: 100%;
-  max-width: 75%;
-  object-fit: contain;
+	max-height: 100%;
+	max-width: 75%;
+	object-fit: contain;
 }
 
 .image-container a {
-  text-decoration: none;
-  outline: none;
+	text-decoration: none;
+	outline: none;
 }
 
-.text-center{
+.text-center {
 	text-align: center;
 }
 </style>

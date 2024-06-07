@@ -113,7 +113,11 @@ describe('Community Participant', () => {
 	it('renders LoaderChartWidgets component with correct props', () => {
 		const wrapper = factory(mockStore);
 		expect(wrapper.findComponent(LoaderChartWidgets).exists()).toBe(true);
-		expect(wrapper.findComponent(LoaderChartWidgets).props('data')).toEqual(MockChallengeDatasetsBarplot);
-		expect(wrapper.findComponent(LoaderChartWidgets).props('metrics')).toEqual([]);
+		expect(wrapper.findComponent(LoaderChartWidgets).props('data')).toEqual(
+			MockChallengeDatasetsBarplot
+		);
+		expect(wrapper.findComponent(LoaderChartWidgets).props('metrics')).toEqual(
+			[]
+		);
 	});
 });

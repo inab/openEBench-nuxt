@@ -10,8 +10,8 @@ const factory = (propsData) => {
 			title: 'Project Name',
 			href: 'https://projectname.com',
 			src: 'https://via.placeholder.com/150',
-			...propsData
-		}
+			...propsData,
+		},
 	});
 };
 
