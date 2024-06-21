@@ -194,17 +194,25 @@ export default {
 				loader: 'raw-loader',
 			});
 			config.module.rules.push({
-				test: /\.(pdf|ico)$/,
+				test: /\.json$/,
+				loader: 'json-loader',
+				include: [
+					// Adjust this path to your project's structure
+					path.resolve(__dirname, 'static/posters/poster_list'),
+				],
+			});
+			config.module.rules.push({
+				test: /\.ico$/,
 				loader: 'file-loader',
 				options: {
-					name: '[path][name].[hash:8].[ext]',
-					outputPath: (resourcePath, context) => {
-						// `resourcePath` is original absolute path to asset
-						// `context` is directory where webpack's config is placed
-						// To get relative path you can use
-						const relativePath = path.relative(context, resourcePath);
-						return `static/${relativePath}`;
-					},
+					name: '[path][name].[ext]',
+				},
+			});
+			config.module.rules.push({
+				test: /\.pdf$/,
+				loader: 'file-loader',
+				options: {
+					name: '[path][name].[ext]',
 				},
 			});
 		},
