@@ -46,8 +46,25 @@
 				<v-icon left>mdi-file-image-outline</v-icon>
 				Posters
 			</v-tab>
-			<v-tab-item>
-				<Posters :posters="posters"></Posters>
+			<v-tab-item class="ma-5 mt-5 mt-md-0" :transition="false">
+				<v-card outlined class="pa-5" elevation="1">
+					<v-tabs v-model="activeTab">
+						<v-tab>
+							<h3>About OEB</h3>
+						</v-tab>
+						<v-tab>
+							<h3>Mentions</h3>
+						</v-tab>
+						<br />
+
+						<v-tab-item class="ma-5 mt-5 mt-md-0" :transition="false">
+							<Posters :posters="posters.OEB" />
+						</v-tab-item>
+						<v-tab-item class="ma-5 mt-5 mt-md-0" :transition="false">
+							<Posters :posters="posters.MENTION" />
+						</v-tab-item>
+					</v-tabs>
+				</v-card>
 			</v-tab-item>
 			<!-- <v-tab>
 				<v-icon left>mdi-school-outline</v-icon>
