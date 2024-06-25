@@ -1,72 +1,113 @@
 <template>
-	<v-card outlined class="pa-5" elevation="1">
-		<div v-if="selectedPoster">
-			<v-btn class="mb-4" @click="selectedPoster = null">
-				Back to posters
-			</v-btn>
-			<div class="selected-poster-details">
-				<embed
-					:src="getPosterPath(selectedPoster.poster)"
-					type="application/pdf"
-					width="100%"
-					height="600px"
-				/>
-				<h3>
-					<a :href="selectedPoster.link" target="_blank"
-						>{{ selectedPoster.title
-						}}<v-icon small right>mdi-open-in-new</v-icon></a
-					>
-				</h3>
-				<br />
-				<p v-if="selectedPoster.authors && selectedPoster.authors.length > 0">
-					<b>Authors:</b>
-					<span v-for="(author, index) in selectedPoster.authors" :key="index">
-						{{ author }}
-						<span v-if="index < selectedPoster.authors.length - 1"
-							>,&nbsp;</span
-						>
-					</span>
-				</p>
-				<p>
-					Published in {{ formatDate(selectedPoster.date) }}
-					{{ selectedPoster.publication_loc }}
-				</p>
-				<p><b>Abstract:</b> {{ selectedPoster.abstract }}</p>
-				<p>Presented at {{ selectedPoster.presented_loc }}</p>
-			</div>
-		</div>
-		<div v-else>
-			<div class="license-text">
-				This is an open access work distributed under the terms of the Creative
-				Commons Attribution License, which permits unrestricted use,
-				distribution, and reproduction in any medium, provided the original work
-				is properly cited.
-			</div>
-			<div class="poster-grid">
-				<div
-					v-for="poster in sortedPosters"
-					:key="poster.title"
-					class="poster-preview"
-					@click="selectPoster(poster)"
-				>
+	<v-container fluid>
+		<v-card elevation="0">
+			<div v-if="selectedPoster" class="mt-8">
+				<v-btn class="mb-4" @click="selectedPoster = null">
+					Back to posters
+				</v-btn>
+				<div class="selected-pposter-details">
 					<embed
-						:src="getPosterPath(poster.poster)"
+						:src="getPosterPath(selectedPoster.poster)"
 						type="application/pdf"
 						width="100%"
-						height="200px"
+						height="600px"
 					/>
 					<h3>
-						{{ poster.title }}
+						<a :href="selectedPoster.link" target="_blank">
+							{{ selectedPoster.title }}
+							<v-icon v-if="selectedPoster.link" small right
+								>mdi-open-in-new</v-icon
+							>
+						</a>
 					</h3>
-					<p class="publication-date">
-						{{ formatDate(poster.date) }}
+					<br />
+					<p v-if="selectedPoster.authors && selectedPoster.authors.length > 0">
+						<b>Authors:</b>
+						<span
+							v-for="(author, index) in selectedPoster.authors"
+							:key="index"
+						>
+							{{ author }}
+							<span v-if="index < selectedPoster.authors.length - 1">, </span>
+						</span>
 					</p>
+					<p>
+						Published in {{ formatDate(selectedPoster.date) }}
+						{{ selectedPoster.publication_loc }}
+					</p>
+					<p>
+						<b>Abstract:</b>
+						<br />
+						<span
+							v-html="
+								sanitizeHtml(
+									getFormattedAbstract(
+										selectedPoster.abstract,
+										showFullAbstract
+									)
+								)
+							"
+						></span>
+						<span
+							v-if="shouldShowExpandIcon(selectedPoster.abstract)"
+							class="show-all-button"
+							@click="toggleShowFullAbstract"
+						>
+							<v-icon color="primary">{{
+								showFullAbstract ? 'mdi-minus' : 'mdi-plus'
+							}}</v-icon>
+						</span>
+					</p>
+					<p>Presented at {{ selectedPoster.presented_loc }}</p>
 				</div>
 			</div>
-		</div>
-	</v-card>
+			<div v-else class="mt-8">
+				<div class="license-text">
+					This is an open access work distributed under the terms of the
+					Creative Commons Attribution License, which permits unrestricted use,
+					distribution, and reproduction in any medium, provided the original
+					work is properly cited.
+				</div>
+				<v-row class="poster-grid">
+					<v-col
+						v-for="poster in paginatedPosters"
+						:key="poster.title"
+						cols="12"
+						md="6"
+						@click="selectPoster(poster)"
+					>
+						<v-card class="poster-preview" outlined>
+							<embed
+								:src="getPosterPath(poster.poster)"
+								type="application/pdf"
+								class="embed-pdf"
+							/>
+							<v-card-title class="poster-title">
+								<span
+									v-html="sanitizeHtml(formattedTitle(poster.title))"
+								></span>
+							</v-card-title>
+							<v-card-subtitle class="publication-date">
+								{{ formatDate(poster.date) }}
+							</v-card-subtitle>
+						</v-card>
+					</v-col>
+				</v-row>
+				<v-pagination
+					v-if="pageCount > 1"
+					v-model="currentPage"
+					class="mt-5"
+					:length="pageCount"
+					:total-visible="7"
+					color="primary"
+				></v-pagination>
+			</div>
+		</v-card>
+	</v-container>
 </template>
+
 <script>
+import DOMPurify from 'dompurify';
 import sharedMethodsMixin from '@/mixins/sharedMethodsMixin.js';
 
 export default {
@@ -83,6 +124,9 @@ export default {
 			selectedPoster: null,
 			basePath: '/posters/poster_list/',
 			localPosters: [],
+			showFullAbstract: false,
+			currentPage: 1,
+			postersPerPage: 10,
 		};
 	},
 	computed: {
@@ -91,10 +135,17 @@ export default {
 			const sorted = [...this.localPosters];
 			return sorted.sort((a, b) => new Date(b.date) - new Date(a.date));
 		},
+		paginatedPosters() {
+			const start = (this.currentPage - 1) * this.postersPerPage;
+			const end = start + this.postersPerPage;
+			return this.sortedPosters.slice(start, end);
+		},
+		pageCount() {
+			return Math.ceil(this.sortedPosters.length / this.postersPerPage);
+		},
 	},
 	mounted() {
 		this.localPosters = this.posters;
-		this.posterDetails();
 	},
 	methods: {
 		getPosterPath(filename) {
@@ -105,11 +156,12 @@ export default {
 		},
 		posterDetails() {
 			this.localPosters.forEach((poster) => {
-				const filenameWithoutExt = poster.poster.split('.')[0];
-				const filePath = `@/static/posters/poster_list/${filenameWithoutExt}.json`;
+				const filePath = poster.poster;
 
-				import(filePath)
-					.then((module) => {
+				try {
+					const module = context(filePath);
+
+					if (module) {
 						this.$set(poster, 'abstract', module.default.abstract);
 						this.$set(
 							poster,
@@ -123,66 +175,118 @@ export default {
 							'publicationDate',
 							module.default.publicationDate
 						);
-					})
-					.catch((error) => {
-						console.error(
-							`Error loading JSON for poster ${filenameWithoutExt}:`,
-							error
-						); // eslint-disable-line no-console
-					});
+					} else {
+						console.error(`Error loading JSON for poster ${filePath}`); // eslint-disable-line no-console
+					}
+				} catch (error) {
+					console.error(`Error loading JSON for poster ${filePath}:`, error); // eslint-disable-line no-console
+				}
 			});
+		},
+		formattedTitle(title) {
+			return title.replace(/\(([^)]+)\)/g, '<br/>($1)');
+		},
+		getFormattedAbstract(abstract, showFull) {
+			// Split the abstract into words and newline characters
+			const words = abstract.split(/(\s+)/);
+
+			if (showFull || words.length <= 50) {
+				// Join the words array with proper HTML line breaks
+				const formattedAbstract = words
+					.map((word) => {
+						if (word === '\n') {
+							return '<br>';
+						} else {
+							return word;
+						}
+					})
+					.join('');
+
+				return formattedAbstract.replace(/\n/g, '<br>');
+			} else {
+				// Truncate to 50 words
+				let truncatedWords = words.slice(0, 50);
+
+				// Check if the 50th word is a newline
+				if (truncatedWords[49] === '\n\n' || truncatedWords === '\n') {
+					// If the 50th word is a newline, truncate to 49 words
+					truncatedWords = words.slice(0, 49);
+				}
+
+				// Join the truncated words and add ellipsis
+				const truncatedAbstract =
+					truncatedWords
+						.map((word) => {
+							if (word === '\n') {
+								return '<br>';
+							} else {
+								return word;
+							}
+						})
+						.join('') + '...';
+
+				return truncatedAbstract.replace(/\n/g, '<br>');
+			}
+		},
+
+		shouldShowExpandIcon(abstract) {
+			// Count the words and newline characters
+			const words = abstract.split(/(\s+)/);
+			return words.length > 50;
+		},
+		toggleShowFullAbstract() {
+			this.showFullAbstract = !this.showFullAbstract;
+		},
+		sanitizeHtml(htmlContent) {
+			return DOMPurify.sanitize(htmlContent);
 		},
 	},
 };
 </script>
-<style scoped>
+
+<style lang="scss" scoped>
 .poster-grid {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 30px;
 }
 
 .poster-preview {
-	width: calc(50% - 16px); /* Two posters per row */
 	cursor: pointer;
-	text-align: center;
-	border: 1px solid #ddd; /* Add border */
-	padding: 10px; /* Add padding */
-	background-color: #fff; /* Background color */
-	border-radius: 4px; /* Rounded corners */
+	margin-bottom: 16px;
 	display: flex;
-	flex-direction: column; /* Stack items vertically */
-	justify-content: space-between; /* Space out items to push date to bottom */
+	flex-direction: column;
+	justify-content: space-between;
+	height: 100%;
+	min-height: 350px;
 }
 
-.poster-preview embed {
+.embed-pdf {
 	width: 100%;
-	height: 200px;
+	height: 200px; /* Ensure the embed PDF has a fixed height */
+	border: none;
 }
 
-.poster-preview h3 {
-	margin: 10px 0;
+.poster-title {
+	font-size: 14px; /* Smaller font size for titles */
+	margin: 8px 0; /* Ensure there is space between embed and title */
+	text-align: left;
+	word-break: break-word; /* Allow breaking long words */
+	overflow: hidden; /* Hide overflow text */
 }
 
-.poster-preview .publication-date {
-	background-color: #f0f0f0; /* Background color for date */
-	padding: 10px;
-	border-radius: 4px;
-	text-align: center; /* Center the text */
-	margin-top: 10px;
-	width: 100%;
-	bottom: 0;
-	box-sizing: border-box;
+.poster-title span {
+	display: block; /* Ensure the span occupies full width */
+}
+
+.publication-date {
+	text-align: center;
+	background-color: #f0f0f0; /* Light gray background for date section */
+	padding: 8px;
+	width: 100%; /* Occupy full card width */
 }
 
 .selected-poster-details {
-	text-align: left;
-}
-
-.selected-poster-details embed {
-	width: 100%;
-	height: 600px;
-	margin-bottom: 16px;
+	margin-top: 16px;
 }
 
 .license-text {
@@ -192,5 +296,10 @@ export default {
 	margin-bottom: 20px;
 	border-radius: 4px;
 	font-weight: bold;
+}
+
+.show-all-button {
+	cursor: pointer;
+	margin-left: 8px;
 }
 </style>
