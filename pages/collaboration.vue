@@ -1,6 +1,6 @@
 <template>
 	<v-container>
-		<h1 class="text--h3">OpenEBench Collaboration</h1>
+		<h1 class="text--h3">OpenEBench Collaborations</h1>
 		<br />
 		<p>
 			Collaborations are at the heart of OpenEBench. OpenEBench has been

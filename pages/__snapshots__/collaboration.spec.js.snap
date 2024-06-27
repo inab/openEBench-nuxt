@@ -1,0 +1,125 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CollaborationPage.vue matches the snapshot 1`] = `
+"<div class=\\"container\\">
+  <h1 class=\\"text--h3\\">OpenEBench Collaborations</h1> <br>
+  <p>
+    Collaborations are at the heart of OpenEBench. OpenEBench has been
+    designed as a space to foster collaborations within and across
+    communities, taking ELIXIR as the overall framework. ELIXIR is the
+    pan-European Research Infrastructure for managing research data and other
+    digital assets in the Life Sciences domain.
+  </p>
+  <p>
+    Collaborations are essential to ensure that OpenEBench is fit for its
+    purpose and responds to users' current needs. It is also a mechanism to
+    contribute towards the platform's sustainability. Participation in EU and
+    nationally funded projects is one of the existing collaboration
+    mechanisms. Participating in funded projects allows us to prioritise
+    specific developments to strengthen, extend and add new features to the
+    platform that a specific project will utilise. Notably, these developments
+    are made available to everyone across OpenEBench, fostering a continuous
+    innovation cycle.
+  </p>
+  <p>
+    Beyond funded projects, OpenEBench also works with scientific communities
+    willing to sustain their benchmarking efforts in the long run, as well as
+    individuals interested in contributing to specific platform components.
+  </p> <br>
+  <div class=\\"row\\">
+    <div class=\\"col-sm-6 col-md-4 col-12\\"><a tabindex=\\"0\\" href=\\"https://bioinfo4women.bsc.es/research/\\" target=\\"_blank\\" class=\\"mx-auto mb-5 v-card v-card--hover v-card--link v-sheet theme--light\\" style=\\"min-height: 250px; max-height: 350px; max-width: 344px;\\">
+        <div class=\\"image-container\\">
+          <div class=\\"v-image v-responsive responsive-img theme--light\\" style=\\"max-width: 80%;\\">
+            <div class=\\"v-responsive__content\\"></div>
+          </div>
+        </div>
+        <hr role=\\"separator\\" aria-orientation=\\"horizontal\\" class=\\"v-divider theme--light\\">
+        <h3 class=\\"text-center mt-3\\">BAIHA</h3>
+      </a></div>
+    <div class=\\"col-sm-6 col-md-4 col-12\\"><a tabindex=\\"0\\" href=\\"https://www.datatools4heart.eu/\\" target=\\"_blank\\" class=\\"mx-auto mb-5 v-card v-card--hover v-card--link v-sheet theme--light\\" style=\\"min-height: 250px; max-height: 350px; max-width: 344px;\\">
+        <div class=\\"image-container\\">
+          <div class=\\"v-image v-responsive responsive-img theme--light\\" style=\\"height: 45px;\\">
+            <transition-stub name=\\"fade-transition\\" mode=\\"in-out\\">
+              <div class=\\"v-image__image v-image__image--preload v-image__image--cover\\" style=\\"background-position: center center;\\"></div>
+            </transition-stub>
+            <div class=\\"v-responsive__content\\"></div>
+          </div>
+        </div>
+        <hr role=\\"separator\\" aria-orientation=\\"horizontal\\" class=\\"v-divider theme--light\\">
+        <h3 class=\\"text-center mt-3\\">DataTools4Heart</h3>
+      </a></div>
+    <div class=\\"col-sm-6 col-md-4 col-12\\"><a tabindex=\\"0\\" href=\\"https://www.deciderproject.eu/\\" target=\\"_blank\\" class=\\"mx-auto mb-5 v-card v-card--hover v-card--link v-sheet theme--light\\" style=\\"min-height: 250px; max-height: 350px; max-width: 344px;\\">
+        <div class=\\"image-container\\">
+          <div class=\\"v-image v-responsive responsive-img theme--light\\" style=\\"max-width: 80%;\\">
+            <div class=\\"v-responsive__content\\"></div>
+          </div>
+        </div>
+        <hr role=\\"separator\\" aria-orientation=\\"horizontal\\" class=\\"v-divider theme--light\\">
+        <h3 class=\\"text-center mt-3\\">DECIDER</h3>
+      </a></div>
+    <div class=\\"col-sm-6 col-md-4 col-12\\"><a tabindex=\\"0\\" href=\\"https://elixir-europe.org/about-us/how-funded/eu-projects/steers\\" target=\\"_blank\\" class=\\"mx-auto mb-5 v-card v-card--hover v-card--link v-sheet theme--light\\" style=\\"min-height: 250px; max-height: 350px; max-width: 344px;\\">
+        <div class=\\"image-container\\">
+          <div class=\\"v-image v-responsive responsive-img theme--light\\" style=\\"max-width: 65%;\\">
+            <transition-stub name=\\"fade-transition\\" mode=\\"in-out\\">
+              <div class=\\"v-image__image v-image__image--preload v-image__image--cover\\" style=\\"background-position: center center;\\"></div>
+            </transition-stub>
+            <div class=\\"v-responsive__content\\"></div>
+          </div>
+        </div>
+        <hr role=\\"separator\\" aria-orientation=\\"horizontal\\" class=\\"v-divider theme--light\\">
+        <h3 class=\\"text-center mt-3\\">ELIXIR STEERS</h3>
+      </a></div>
+    <div class=\\"col-sm-6 col-md-4 col-12\\"><a tabindex=\\"0\\" href=\\"https://everse.software/\\" target=\\"_blank\\" class=\\"mx-auto mb-5 v-card v-card--hover v-card--link v-sheet theme--light\\" style=\\"min-height: 250px; max-height: 350px; max-width: 344px;\\">
+        <div class=\\"image-container\\">
+          <div class=\\"v-image v-responsive responsive-img theme--light\\" style=\\"max-width: 80%;\\">
+            <transition-stub name=\\"fade-transition\\" mode=\\"in-out\\">
+              <div class=\\"v-image__image v-image__image--preload v-image__image--cover\\" style=\\"background-position: center center;\\"></div>
+            </transition-stub>
+            <div class=\\"v-responsive__content\\"></div>
+          </div>
+        </div>
+        <hr role=\\"separator\\" aria-orientation=\\"horizontal\\" class=\\"v-divider theme--light\\">
+        <h3 class=\\"text-center mt-3\\">EOSC-EVERSE</h3>
+      </a></div>
+    <div class=\\"col-sm-6 col-md-4 col-12\\"><a tabindex=\\"0\\" href=\\"https://cancerimage.eu/\\" target=\\"_blank\\" class=\\"mx-auto mb-5 v-card v-card--hover v-card--link v-sheet theme--light\\" style=\\"min-height: 250px; max-height: 350px; max-width: 344px;\\">
+        <div class=\\"image-container\\">
+          <div class=\\"v-image v-responsive responsive-img theme--light\\" style=\\"max-width: 80%;\\">
+            <div class=\\"v-responsive__content\\"></div>
+          </div>
+        </div>
+        <hr role=\\"separator\\" aria-orientation=\\"horizontal\\" class=\\"v-divider theme--light\\">
+        <h3 class=\\"text-center mt-3\\">EUCAIM</h3>
+      </a></div>
+    <div class=\\"col-sm-6 col-md-4 col-12\\"><a tabindex=\\"0\\" href=\\"https://eucanimage.eu/\\" target=\\"_blank\\" class=\\"mx-auto mb-5 v-card v-card--hover v-card--link v-sheet theme--light\\" style=\\"min-height: 250px; max-height: 350px; max-width: 344px;\\">
+        <div class=\\"image-container\\">
+          <div class=\\"v-image v-responsive responsive-img theme--light\\" style=\\"max-width: 80%;\\">
+            <div class=\\"v-responsive__content\\"></div>
+          </div>
+        </div>
+        <hr role=\\"separator\\" aria-orientation=\\"horizontal\\" class=\\"v-divider theme--light\\">
+        <h3 class=\\"text-center mt-3\\">EuCanImage</h3>
+      </a></div>
+    <div class=\\"col-sm-6 col-md-4 col-12\\"><a tabindex=\\"0\\" href=\\"https://dev-openebench.bsc.es/benchmarking/OEBC900?event=OEBE9000000000\\" target=\\"_blank\\" class=\\"mx-auto mb-5 v-card v-card--hover v-card--link v-sheet theme--light\\" style=\\"min-height: 250px; max-height: 350px; max-width: 344px;\\">
+        <div class=\\"image-container\\">
+          <div class=\\"v-image v-responsive responsive-img theme--light\\" style=\\"max-width: 80%;\\">
+            <div class=\\"v-responsive__content\\"></div>
+          </div>
+        </div>
+        <hr role=\\"separator\\" aria-orientation=\\"horizontal\\" class=\\"v-divider theme--light\\">
+        <h3 class=\\"text-center mt-3\\">Fujitsu AMetaPred</h3>
+      </a></div>
+    <div class=\\"col-sm-6 col-md-4 col-12\\"><a tabindex=\\"0\\" href=\\"https://permedcoe.eu/\\" target=\\"_blank\\" class=\\"mx-auto mb-5 v-card v-card--hover v-card--link v-sheet theme--light\\" style=\\"min-height: 250px; max-height: 350px; max-width: 344px;\\">
+        <div class=\\"image-container\\">
+          <div class=\\"v-image v-responsive responsive-img theme--light\\" style=\\"max-width: 80%;\\">
+            <transition-stub name=\\"fade-transition\\" mode=\\"in-out\\">
+              <div class=\\"v-image__image v-image__image--preload v-image__image--cover\\" style=\\"background-position: center center;\\"></div>
+            </transition-stub>
+            <div class=\\"v-responsive__content\\"></div>
+          </div>
+        </div>
+        <hr role=\\"separator\\" aria-orientation=\\"horizontal\\" class=\\"v-divider theme--light\\">
+        <h3 class=\\"text-center mt-3\\">PerMedCoE</h3>
+      </a></div>
+  </div>
+</div>"
+`;
