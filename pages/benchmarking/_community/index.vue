@@ -1,27 +1,23 @@
 <template>
 	<v-container fluid>
-		<v-container>
-			<v-skeleton-loader
-				v-if="$store.state.community.loading.community"
-				class="mb-5"
-				type="heading, list-item-three-line"
-			/>
+		<v-container v-if="$store.state.community.loading.community">
+			<v-skeleton-loader class="mb-5" type="heading, list-item-three-line" />
+		</v-container>
+		<v-container v-else>
 			<community-info
-				v-else
 				:community="community"
 				:community-references="communityReferences"
 			/>
 		</v-container>
-		<v-tabs
-			v-if="$store.state.community.loading.community || currentEvent"
-			:vertical="vertical"
-			class="mt-10"
-		>
+		<v-tabs :vertical="vertical" class="mt-10">
 			<v-tab class="justify-start">
 				<v-icon left> mdi-view-dashboard </v-icon>
 				Results
 			</v-tab>
-			<v-tab class="justify-start v-tab--min-width">
+			<v-tab
+				v-if="$store.state.community.loading.community || currentEvent"
+				class="justify-start v-tab--min-width"
+			>
 				<v-icon left> mdi-folder </v-icon>
 				<v-badge
 					color="secondary"
@@ -32,7 +28,10 @@
 					Datasets
 				</v-badge>
 			</v-tab>
-			<v-tab class="justify-start">
+			<v-tab
+				v-if="$store.state.community.loading.community || currentEvent"
+				class="justify-start"
+			>
 				<v-icon left> mdi-cube-outline </v-icon>
 				<v-badge
 					color="secondary"
@@ -44,7 +43,11 @@
 				</v-badge>
 			</v-tab>
 
-			<v-tab-item class="ma-5 mt-5 mt-md-0" :transition="false">
+			<v-tab-item
+				v-if="$store.state.community.loading.community || currentEvent"
+				class="ma-5 mt-5 mt-md-0"
+				:transition="false"
+			>
 				<v-skeleton-loader
 					v-if="$store.state.community.loading.events"
 					type="table"
@@ -63,7 +66,24 @@
 					/>
 				</v-card>
 			</v-tab-item>
-			<v-tab-item class="ma-5 mt-5 mt-md-0" :transition="false">
+			<v-tab-item v-else class="ma-5 mt-5 mt-md-0" :translate="false">
+				<v-card outlined class="pa-5" elevation="1">
+					<div>
+						<v-img :src="illustration" contain max-height="300" />
+						<h2 class="mt-10 text-h4 text--secondary text-center">
+							No benchmarking results yet...
+						</h2>
+						<h3 class="mt-5 text-h5 text--secondary text-center">
+							Come back soon to see some benchmarking results.
+						</h3>
+					</div>
+				</v-card>
+			</v-tab-item>
+			<v-tab-item
+				v-if="$store.state.community.loading.community || currentEvent"
+				class="ma-5 mt-5 mt-md-0"
+				:transition="false"
+			>
 				<v-card outlined elevation="1">
 					<v-skeleton-loader
 						v-if="$store.state.community.loading.datasets"
@@ -72,7 +92,11 @@
 					<community-datasets-table v-else :datasets="datasets" />
 				</v-card>
 			</v-tab-item>
-			<v-tab-item class="ma-5 mt-5 mt-md-0" :transition="false">
+			<v-tab-item
+				v-if="$store.state.community.loading.community || currentEvent"
+				class="ma-5 mt-5 mt-md-0"
+				:transition="false"
+			>
 				<v-card outlined elevation="1">
 					<v-skeleton-loader
 						v-if="$store.state.community.loading.tools"
@@ -98,9 +122,6 @@
 				</v-card>
 			</v-tab-item>
 		</v-tabs>
-		<v-container v-else>
-			<community-empty-state class="mt-10" />
-		</v-container>
 	</v-container>
 </template>
 
@@ -111,7 +132,6 @@ import CommunityToolsTable from '~/components/Communities/CommunityToolsTable';
 import CommunityDatasetsTable from '~/components/Communities/CommunityDatasetsTable';
 import CommunityEventSelector from '~/components/Communities/CommunityEventSelector';
 import CommunityInfo from '~/components/Communities/CommunityInfo';
-import CommunityEmptyState from '~/components/Communities/CommunityEmptyState';
 import MarkedWrapper from '~/components/Molecules/MarkedWrapper.vue';
 
 export default {
@@ -122,8 +142,12 @@ export default {
 		CommunityDatasetsTable,
 		CommunityEventSelector,
 		CommunityInfo,
-		CommunityEmptyState,
 		MarkedWrapper,
+	},
+	data() {
+		return {
+			illustration: require('~/static/images/illustrations/empty-state.svg'),
+		};
 	},
 	computed: {
 		...mapGetters('community', {
