@@ -42,13 +42,18 @@
 				class="mx-6"
 			>
 				<v-chip v-for="item in datasets" :key="item._id">
-					{{
+					<span v-if="item.datalink.inline_data.visualization.type == 'box-plot'">
+						{{ item.datalink.inline_data.visualization.available_metrics[0] }}
+					</span>
+					<span v-else>
+						{{
 						item.datalink.inline_data.visualization.type == '2D-plot'
 							? item.datalink.inline_data.visualization.x_axis +
 							  ' + ' +
 							  item.datalink.inline_data.visualization.y_axis
 							: item.datalink.inline_data.visualization.metric
-					}}
+						}}
+					</span>
 				</v-chip>
 			</v-chip-group>
 			<v-tabs-items v-model="tab" class="mx- 4">
