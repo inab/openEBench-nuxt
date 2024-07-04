@@ -5,33 +5,34 @@
 			class="mb-5"
 			type="heading, list-item-three-line"
 		/>
-		<div v-else class="mx-6">
+		<div v-else class="mx-3">
 			<h1 class="text-h4">
 				{{ challenge.challenge_label }} ({{ challenge._id }})
 			</h1>
 			<h2 class="text-subtitle-1 mb-5">
 				{{ challenge.name }}
 			</h2>
-			<p class="text--secondary">
-				In this 2D plot two metrics from the challenge
-				{{ challenge.challenge_label }} are represented in the X and Y axis,
-				showing the results from the participating tools in this challenge. The
-				gray line represents the pareto frontier, which runs over the
-				participants tools, showing the best efficiency, while the arrow in the
-				plot represents the optimal corner.
-			</p>
-			<v-alert class="mt-8" border="left" dense text color="info" type="info">
-				The menu button above the diagram can be used to switch between the
-				different classification methods / visualization modes (Square
-				Quartiles; Diagonal Quartiles, and k-means Clustering).
-			</v-alert>
+
+			<!-- Description -->
+			<div v-if="!$store.state.challenge.loading.datasets">
+				<div v-for="(item, index) in datasets" :key="index">
+					<div v-if="index == tab">
+						<div v-if="item">
+							<ChartDescriptionCard
+								:data="item"
+								:challenge_label="challenge.challenge_label"
+							></ChartDescriptionCard>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 		<v-skeleton-loader
 			v-if="$store.state.challenge.loading.datasets"
 			type="card-heading, image"
 		/>
 		<div v-else>
-			<h2 class="text-h6 mt-8 mx-6">
+			<h2 class="text-h6 mt-8 mx-3">
 				Choose the metrics you want to visualize in the diagram:
 			</h2>
 			<v-chip-group
@@ -39,7 +40,7 @@
 				active-class="accent--text"
 				column
 				mandatory
-				class="mx-6"
+				class="mx-3"
 			>
 				<v-chip v-for="item in datasets" :key="item._id">
 					{{
@@ -98,11 +99,13 @@
 <script>
 import { mapGetters } from 'vuex';
 import LoaderChartWidgets from '~/components/Widgets/LoaderChartWidgets';
+import ChartDescriptionCard from '~/components/Cards/ChartDescriptionCard';
 
 export default {
 	name: 'CommunityChallengePlotsPage',
 	components: {
 		LoaderChartWidgets,
+		ChartDescriptionCard,
 	},
 	data() {
 		return {
