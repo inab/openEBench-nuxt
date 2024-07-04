@@ -3,7 +3,7 @@
 		<v-row>
 			<v-col class="pa-4" md="3" cols="12" align="center">
 				<v-img :src="logo" alt="logo" max-width="150" contain />
-				<p class="body-2">&copy;&nbsp; BSC-CNS 2022</p>
+				<p class="body-2">&copy;&nbsp; BSC-CNS {{ currentYear }}</p>
 			</v-col>
 			<v-col class="pa-4" md="6" cols="12">
 				<v-expansion-panels v-if="isMobile">
@@ -18,12 +18,21 @@
 							</h6>
 						</v-expansion-panel-header>
 						<v-expansion-panel-content>
-							<ul>
-								<li v-for="(link, n) in footer.links" :key="n">
-									<nuxt-link v-if="link.to" :to="link.to">
+							<ul class="no-bullets aligned-list">
+								<li
+									v-for="(link, n) in footer.links"
+									:key="n"
+									class="list-item"
+								>
+									<nuxt-link v-if="link.to" :to="link.to" class="no-underline">
 										{{ link.title }}
 									</nuxt-link>
-									<a v-if="link.href" :href="link.href" target="_blank">
+									<a
+										v-if="link.href"
+										:href="link.href"
+										target="_blank"
+										class="no-underline"
+									>
 										{{ link.title }}
 									</a>
 									<v-icon v-if="link.href" small right>mdi-open-in-new</v-icon>
@@ -41,12 +50,12 @@
 						<h6 class="title mb-4">
 							{{ footer.headline }}
 						</h6>
-						<ul>
-							<li v-for="(link, m) in footer.links" :key="m">
+						<ul class="no-bullets aligned-list">
+							<li v-for="(link, m) in footer.links" :key="m" class="list-item">
 								<nuxt-link
 									v-if="link.to"
 									dark
-									class="white--text"
+									class="white--text no-underline"
 									:to="link.to"
 								>
 									{{ link.title }}
@@ -56,7 +65,7 @@
 									:href="link.href"
 									target="_blank"
 									dark
-									class="white--text"
+									class="white--text no-underline"
 								>
 									{{ link.title }}
 								</a>
@@ -85,18 +94,23 @@
 						icon
 						dark
 						class="button"
-						href="https://twitter.com/openebench"
+						href="https://x.com/openebench"
 						target="_blank"
-						aria-label="Link to Twitter Profile of OpenEBench"
+						aria-label="Link to X Profile of OpenEBench"
 					>
-						<v-icon>mdi-twitter</v-icon>
+						<v-img
+							src="/icons/twitter-x-64.png"
+							alt="X icon"
+							max-width="18"
+							max-height="18"
+						></v-img>
 					</v-btn>
 				</div>
 				<v-row no-gutters class="mt-5">
 					<v-col cols="9" align="left">
 						<p class="text-sm-body-2">
-							This project receives funding from the @EU_H2020 Research &
-							Innovation programme.
+							OpenEBench receives funding from different EC funding Research &
+							Innovation programmes.
 						</p>
 					</v-col>
 					<v-col cols="3" align="center">
@@ -150,6 +164,9 @@ export default {
 		isDesktop() {
 			return this.$vuetify.breakpoint.mdAndUp;
 		},
+		currentYear() {
+			return new Date().getFullYear();
+		},
 	},
 };
 </script>
@@ -160,5 +177,36 @@ export default {
 }
 .Cookie--dark-lime .Cookie__button:hover {
 	background: var(--v-info-lighten1);
+}
+
+.no-bullets {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+.no-underline {
+	text-decoration: none;
+}
+
+.aligned-list {
+	padding-left: 0;
+}
+
+.list-item {
+	margin-left: 0;
+	padding-left: 0;
+	display: flex;
+	align-items: center;
+}
+
+.site-map-item .title {
+	margin-left: 0;
+	padding-left: 0;
+}
+
+.site-map-item ul {
+	margin-top: 0;
+	padding-left: 0;
 }
 </style>
