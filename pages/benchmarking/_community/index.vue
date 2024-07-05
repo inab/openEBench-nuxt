@@ -1,5 +1,5 @@
 <template>
-	<v-container fluid>
+	<v-container>
 		<v-container v-if="$store.state.community.loading.community">
 			<v-skeleton-loader class="mb-5" type="heading, list-item-three-line" />
 		</v-container>
