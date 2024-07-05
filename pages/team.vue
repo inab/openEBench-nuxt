@@ -45,7 +45,6 @@
 					:member="leader"
 					:is-mobile="isMobile"
 					:institution-mapping="institutionMapping"
-					:items="items"
 				/>
 			</v-col>
 		</v-row>
@@ -64,7 +63,6 @@
 					:member="teammate"
 					:is-mobile="isMobile"
 					:institution-mapping="institutionMapping"
-					:items="items"
 				/>
 			</v-col>
 		</v-row>
@@ -92,7 +90,6 @@
 					:alumni="alumni"
 					:is-mobile="isMobile"
 					:institution-mapping="institutionMapping"
-					:items="items"
 				/>
 			</v-col>
 		</v-row>
@@ -129,86 +126,6 @@ export default {
 					disabled: true,
 				},
 			],
-			items: [
-				{
-					color: '#ffcc99',
-					icon: require('~/static/members/icons/tl.png'),
-					word: 'Tooling (command line)',
-					hover: false,
-				},
-				{
-					color: '#ccffcc',
-					icon: require('~/static/members/icons/ce.png'),
-					word: 'Community Engagement',
-					hover: false,
-				},
-				{
-					color: '#ff6666',
-					icon: require('~/static/members/icons/ld.png'),
-					word: 'Leadership',
-					hover: false,
-				},
-				{
-					color: '#ff99cc',
-					icon: require('~/static/members/icons/so.png'),
-					word: 'Software Observatory',
-					hover: false,
-				},
-				{
-					color: '#ccccff',
-					icon: require('~/static/members/icons/sb.png'),
-					word: 'Scientific Benchmarking',
-					hover: false,
-				},
-				{
-					color: '#ffcccc',
-					icon: require('~/static/members/icons/cb.png'),
-					word: 'Compute Back-end',
-					hover: false,
-				},
-				{
-					color: '#99ccff',
-					icon: require('~/static/members/icons/bo.png'),
-					word: 'Back-office',
-					hover: false,
-				},
-				{
-					color: '#ffffcc',
-					icon: require('~/static/members/icons/di.png'),
-					word: 'Data Interfaces',
-					hover: false,
-				},
-				{
-					color: '#cc99ff',
-					icon: require('~/static/members/icons/dm.png'),
-					word: 'Data Modelization',
-					hover: false,
-				},
-				{
-					color: '#ccff99',
-					icon: require('~/static/members/icons/dv.png'),
-					word: 'Data Visualization',
-					hover: false,
-				},
-				{
-					color: '#ffccff',
-					icon: require('~/static/members/icons/fd.png'),
-					word: 'Web Front-end',
-					hover: false,
-				},
-				{
-					color: '#ffcc66',
-					icon: require('~/static/members/icons/st.png'),
-					word: 'Security',
-					hover: false,
-				},
-				{
-					color: '#ccf2ff',
-					icon: require('~/static/members/icons/tm.png'),
-					word: 'Technical Monitoring',
-					hover: false,
-				},
-			],
 			members: [],
 			institutionMapping: {
 				'BSC-CNS': {
@@ -237,12 +154,12 @@ export default {
 	computed: {
 		leaders() {
 			return this.members.filter((member) =>
-				member.roles.some((role) => role.name === 'Leadership')
+				member.roles.includes('Leadership')
 			);
 		},
 		teammates() {
 			return this.members.filter(
-				(member) => !member.roles.some((role) => role.name === 'Leadership')
+				(member) => !member.roles.includes('Leadership')
 			);
 		},
 	},
@@ -251,14 +168,8 @@ export default {
 	},
 	mounted() {
 		// Initialize members data and store original institution names
-		this.members = membersData.Members.map((member) => ({
-			...member,
-			roles: member.roles.map((role) => ({ name: role, hover: false })),
-		}));
-		this.alumnis = membersData.Alumni.map((alumni) => ({
-			...alumni,
-			roles: alumni.roles.map((role) => ({ name: role, hover: false })),
-		}));
+		this.members = membersData.Members;
+		this.alumnis = membersData.Alumni;
 		// Initial check for mobile
 		this.checkMobile();
 		// Add event listener for window resize
@@ -278,7 +189,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .section-title-border {
 	border-bottom: 2px solid black;
 	margin-bottom: 50px;
