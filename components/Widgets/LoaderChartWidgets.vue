@@ -54,6 +54,7 @@ export default {
 					visualization: {},
 				},
 			};
+
 			// Prepare specific data for Plots
 			if (type === 'bar-plot') {
 				// Process challenge_participants data for BarPlot
@@ -119,6 +120,37 @@ export default {
 					y_axis: yAxis,
 					optimization,
 				};
+			} else if(type === 'box-plot') {
+				// Process visualization data for ScatterPlot
+				const visualization = data.datalink.inline_data.visualization;
+				const optimization = visualization.optimization
+					? visualization.optimization
+					: null;
+
+				this.preparedData.inline_data.visualization = {
+					type: visualization.type,
+					y_axis: visualization.yAxis??null,
+					optimization,
+				};
+
+				data.graphData.forEach(
+					(participant) => {
+						const preparedParticipant = {
+							name: participant.name,
+							metric_id: participant.metric_id,
+							q1:	participant.q1,
+							mean: participant.mean,
+							median:	participant.median,
+							q3:	participant.q3,
+							lowerfence:	participant.lowerfence,
+							upperfence:	participant.upperfence
+						};
+						this.preparedData.inline_data.challenge_participants.push(
+							preparedParticipant
+						);
+					}
+				);
+
 			} else {
 				return null;
 			}
