@@ -18,7 +18,7 @@
 		<v-tabs :vertical="vertical" class="mt-10">
 			<!-- Manuscripts -->
 			<v-tab>
-				<v-icon left>mdi-information-outline</v-icon>
+				<v-icon left>mdi-text-box-multiple-outline</v-icon>
 				Manuscripts
 			</v-tab>
 			<v-tab-item class="ma-5 mt-5 mt-md-0" :transition="false">
@@ -43,7 +43,7 @@
 
 			<!-- Posters -->
 			<v-tab>
-				<v-icon left>mdi-file-image-outline</v-icon>
+				<v-icon left>mdi-file-table-outline</v-icon>
 				Posters
 			</v-tab>
 			<v-tab-item class="ma-5 mt-5 mt-md-0" :transition="false">
