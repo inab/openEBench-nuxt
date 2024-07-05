@@ -19,6 +19,16 @@
 					</v-list-item-content>
 				</v-list-item>
 				<v-list-item
+					v-for="(item, index) in subMenuEntriesObservatory"
+					:key="`sub` + index"
+					:to="item.to"
+					:href="item.href"
+					:target="item.external ? '_blank' : ''"
+				>
+					<v-list-item-title>{{ item.title_hide }}</v-list-item-title>
+					<v-icon v-if="item.external" right small>mdi-open-in-new</v-icon>
+				</v-list-item>
+				<v-list-item
 					v-for="(item, index) in subMenuEntriesDocs"
 					:key="`sub` + index"
 					:to="item.to"
