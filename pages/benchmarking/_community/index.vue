@@ -53,7 +53,12 @@
 					type="table"
 				></v-skeleton-loader>
 
-				<v-card v-else-if="currentEvent" outlined class="pa-5" elevation="1">
+				<v-card
+					v-else-if="currentEvent"
+					outlined
+					class="pa-5 d-flex flex-column"
+					elevation="1"
+				>
 					<community-event-selector
 						:current-event="currentEvent"
 						:events="events"
