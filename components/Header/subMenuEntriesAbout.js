@@ -2,11 +2,6 @@
 
 const subMenuEntriesAbout = [
 	{
-		title: 'OpenEBench',
-		title_hide: 'OpenEBench About',
-		to: '/about',
-	},
-	{
 		title: 'Publications',
 		title_hide: 'Publications About',
 		to: '/publications',

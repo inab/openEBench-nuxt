@@ -13,9 +13,7 @@
 						class="accordion-content"
 					>
 						<v-expansion-panel-header>
-							<h6 class="title mb-4">
-								{{ footer.headline }}
-							</h6>
+							<h6 class="title mb-4">{{ footer.headline }}</h6>
 						</v-expansion-panel-header>
 						<v-expansion-panel-content>
 							<ul class="no-bullets aligned-list">
@@ -24,17 +22,19 @@
 									:key="n"
 									class="list-item"
 								>
-									<nuxt-link v-if="link.to" :to="link.to" class="no-underline">
-										{{ link.title }}
-									</nuxt-link>
+									<nuxt-link
+										v-if="link.to"
+										:to="link.to"
+										class="no-underline link-hover"
+										>{{ link.title }}</nuxt-link
+									>
 									<a
 										v-if="link.href"
 										:href="link.href"
 										target="_blank"
-										class="no-underline"
+										class="no-underline link-hover"
+										>{{ link.title }}</a
 									>
-										{{ link.title }}
-									</a>
 									<v-icon v-if="link.href" small right>mdi-open-in-new</v-icon>
 								</li>
 							</ul>
@@ -47,28 +47,24 @@
 						:key="index"
 						class="pa-4 site-map-item"
 					>
-						<h6 class="title mb-4">
-							{{ footer.headline }}
-						</h6>
+						<h6 class="title mb-4">{{ footer.headline }}</h6>
 						<ul class="no-bullets aligned-list">
 							<li v-for="(link, m) in footer.links" :key="m" class="list-item">
 								<nuxt-link
 									v-if="link.to"
 									dark
-									class="white--text no-underline"
+									class="white--text no-underline link-hover"
 									:to="link.to"
+									>{{ link.title }}</nuxt-link
 								>
-									{{ link.title }}
-								</nuxt-link>
 								<a
 									v-if="link.href"
 									:href="link.href"
 									target="_blank"
 									dark
-									class="white--text no-underline"
+									class="white--text no-underline link-hover"
+									>{{ link.title }}</a
 								>
-									{{ link.title }}
-								</a>
 								<v-icon v-if="link.href" small right dark
 									>mdi-open-in-new</v-icon
 								>
@@ -126,7 +122,7 @@
 import logo from '~/static/images/opeb_logo_white_minimal.png';
 import euFlag from '~/static/images/eu.svg';
 import footerEntries from '~/components/footerEntries';
-import subMenuEntries from '~/components/Header/subMenuEntriesDocs';
+import subMenuEntriesObservatory from '~/components/Header/subMenuEntriesObservatory';
 import subMenuEntriesAbout from '~/components/Header/subMenuEntriesAbout';
 
 export default {
@@ -135,18 +131,9 @@ export default {
 		euFlag,
 		lang: 'en',
 		footers: [
-			{
-				headline: 'OpenEBench',
-				links: footerEntries,
-			},
-			{
-				headline: 'Project',
-				links: subMenuEntries,
-			},
-			{
-				headline: 'About',
-				links: subMenuEntriesAbout,
-			},
+			{ headline: 'OpenEBench', links: footerEntries },
+			{ headline: 'Observatory', links: subMenuEntriesObservatory },
+			{ headline: 'About', links: subMenuEntriesAbout },
 			{
 				headline: 'Legal',
 				links: [
@@ -172,11 +159,9 @@ export default {
 </script>
 
 <style lang="scss">
-.Cookie--dark-lime .Cookie__button {
-	background: var(--v-info-base);
-}
-.Cookie--dark-lime .Cookie__button:hover {
-	background: var(--v-info-lighten1);
+.primary {
+	background-color: #1976d2; // Example background color
+	color: white;
 }
 
 .no-bullets {
@@ -187,6 +172,10 @@ export default {
 
 .no-underline {
 	text-decoration: none;
+}
+
+.link-hover:hover {
+	text-decoration: underline;
 }
 
 .aligned-list {
