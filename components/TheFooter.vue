@@ -106,7 +106,16 @@
 					<v-col cols="9" align="left">
 						<p class="text-sm-body-2">
 							OpenEBench receives funding from different EC funding Research &
-							Innovation programmes.
+							Innovation programmes.<br />
+							<a
+								href="/collaboration"
+								target="_blank"
+								class="link-hover"
+								aria-label="Learn more about collaboration"
+							>
+								Learn more
+								<v-icon dark right small>mdi-open-in-new</v-icon>
+							</a>
 						</p>
 					</v-col>
 					<v-col cols="3" align="center">
@@ -172,6 +181,16 @@ export default {
 
 .no-underline {
 	text-decoration: none;
+}
+
+.link-hover {
+	color: white !important;
+	text-decoration: none;
+	transition: text-decoration 0.3s ease;
+}
+
+.link-hover:hover {
+	text-decoration: underline;
 }
 
 .link-hover:hover {
