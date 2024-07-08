@@ -1,5 +1,5 @@
 <template>
-	<v-container fluid>
+	<v-container>
 		<v-skeleton-loader
 			v-if="$store.state.challenge.loading.challenge"
 			class="mb-5"
@@ -12,6 +12,7 @@
 			<h2 class="text-subtitle-1 mb-5">
 				{{ challenge.name }}
 			</h2>
+			<!-- TODO -->
 			<p class="text--secondary">
 				In this 2D plot two metrics from the challenge
 				{{ challenge.challenge_label }} are represented in the X and Y axis,
@@ -84,14 +85,9 @@
 <script>
 import { mapGetters } from 'vuex';
 import ChallengeParticipantMetricsTable from '~/components/Challenges/ChallengeParticipantMetricsTable';
-/*
-import ChartBarplotVisualizerWrapper from '~/components/Widgets/ChartBarplotVisualizerWrapper';
-import ChartScatterVisualizerWrapper from '~/components/Widgets/ChartScatterVisualizerWrapper';
-*/
 
 export default {
 	name: 'CommunityChallengeParticipantsPage',
-	//	components: { ChartBarplotVisualizerWrapper, ChartScatterVisualizerWrapper },
 	components: { ChallengeParticipantMetricsTable },
 	data() {
 		return {
