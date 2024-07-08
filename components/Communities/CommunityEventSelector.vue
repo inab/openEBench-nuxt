@@ -47,7 +47,7 @@
 			<!-- Challenges count for desktop (conditionally hidden) -->
 			<div class="d-flex align-center" v-if="!isMobile">
 				<v-icon class="mr-1 text--primary">mdi-flag-outline</v-icon>
-				<span>{{ currentEvent.challenges.length }}</span>
+				<span>{{ currentEvent.challenges.length }}&nbsp;</span>
 				<span>{{
 					'Challenges' | pluralize(currentEvent.challenges.length)
 				}}</span>
