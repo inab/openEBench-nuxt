@@ -28,15 +28,13 @@
 					<v-list-item-title>{{ item.title_hide }}</v-list-item-title>
 					<v-icon v-if="item.external" right small>mdi-open-in-new</v-icon>
 				</v-list-item>
-				<v-list-item
-					v-for="(item, index) in subMenuEntriesDocs"
-					:key="`sub` + index"
-					:to="item.to"
-					:href="item.href"
-					:target="item.external ? '_blank' : ''"
-				>
-					<v-list-item-title>{{ item.title_hide }}</v-list-item-title>
-					<v-icon v-if="item.external" right small>mdi-open-in-new</v-icon>
+				<v-list-item :href="subMenuEntriesDocs[1].href" target="_blank">
+					<v-list-item-title>{{
+						subMenuEntriesDocs[1].title_hide
+					}}</v-list-item-title>
+					<v-icon v-if="subMenuEntriesDocs[1].external" right small
+						>mdi-open-in-new</v-icon
+					>
 				</v-list-item>
 				<v-list-item
 					v-for="(item, index) in subMenuEntriesAbout"
@@ -105,36 +103,17 @@
 					</v-list-item>
 				</v-list>
 			</v-menu>
-			<v-menu v-if="$vuetify.breakpoint.mdAndUp" left offset-y>
-				<template #activator="{ on, attrs }">
-					<v-btn v-bind="attrs" text v-on="on">
-						<v-icon>mdi-chevron-down</v-icon>
-						Docs
-					</v-btn>
-				</template>
-				<v-list>
-					<v-list-item
-						v-for="(item, index) in subMenuEntriesDocs"
-						:key="`sub` + index"
-						:to="item.to"
-						:href="item.href"
-						:target="item.external ? '_blank' : ''"
-					>
-						<v-list-item-title class="text-subtitle-2">{{
-							item.title
-						}}</v-list-item-title>
-						<v-icon v-if="item.external" right small>mdi-open-in-new</v-icon>
-					</v-list-item>
-					<v-list-item
-						v-if="$vuetify.breakpoint.mdAndDown"
-						:href="vreHref"
-						target="_blank"
-					>
-						<v-list-item-title>Benchmark your Tool</v-list-item-title>
-						<v-icon right small>mdi-open-in-new</v-icon>
-					</v-list-item>
-				</v-list>
-			</v-menu>
+			<v-btn
+				v-if="subMenuEntriesDocs.length > 1"
+				:href="subMenuEntriesDocs[1].href"
+				target="_blank"
+				text
+			>
+				DOCS
+				<v-icon right small v-if="subMenuEntriesDocs[1].external"
+					>mdi-open-in-new</v-icon
+				>
+			</v-btn>
 			<v-menu v-if="$vuetify.breakpoint.mdAndUp" left offset-y>
 				<template #activator="{ on, attrs }">
 					<v-btn v-bind="attrs" text v-on="on">
