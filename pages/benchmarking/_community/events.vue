@@ -145,6 +145,10 @@ export default {
 </script>
 
 <style scoped>
+.container {
+	height: calc(100% - 390px);
+}
+
 .events-grid {
 	margin-top: 20px;
 }

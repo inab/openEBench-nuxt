@@ -1,101 +1,100 @@
 <template>
-	<v-container >
-	  <v-container >
-		<v-skeleton-loader
-		  v-if="$store.state.community.loading.community"
-		  class="mb-5"
-		  type="heading, list-item-three-line"
-		/>
-		<community-info v-else :community="project" />
-	  </v-container>
-	  <v-tabs :vertical="vertical" class="mt-10">
-		<v-tab >
-		  <v-icon left> mdi-information-outline </v-icon>
-		  Summary
-		</v-tab>
-		<v-tab>
-		  <v-icon left> mdi-view-dashboard </v-icon>
-		  Results
-		</v-tab>
-		<v-tab >
-		  <v-icon left> mdi-folder </v-icon>
-		  <v-badge
-			class="badge-margin"
-			color="secondary"
-			:value="datasets.length"
-			:content="datasets.length"
-			offset-x="-1"
-		  >
-			Datasets
-		  </v-badge>
-		</v-tab>
-		<v-tab >
-		  <v-icon left> mdi-cube-outline </v-icon>
-		  <v-badge
-			class="badge-margin"
-			color="secondary"
-			:value="tools.length"
-			:content="tools.length"
-			offset-x="-1"
-		  >
-			Tools
-		  </v-badge>
-		</v-tab>
-
-		<v-tab-item class="ma-5 mt-5 mt-md-0" :transition="false">
-		  <v-card outlined class="pa-5" elevation="1">
-			<v-row no-gutters align="center">
-			  <v-col>
-				<marked-wrapper
-				  v-if="project.summary"
-				  :markdown="project.summary"
-				/>
-			  </v-col>
-			</v-row>
-		  </v-card>
-		</v-tab-item>
-
-		<v-tab-item class="ma-5 mt-5 mt-md-0" :transition="false">
-		  <v-skeleton-loader
-			v-if="$store.state.community.loading.events"
-			type="table"
-		  ></v-skeleton-loader>
-
-		  <v-card v-else-if="currentEvent" outlined class="pa-5" elevation="1">
-			<community-event-selector
-			  :current-event="currentEvent"
-			  :events="events"
-			  @change="handleEventSelection"
-			/>
-			<community-classification-table
-			  :key="currentEvent._id + '_table'"
-			  class="mt-5"
-			  :event="currentEvent"
-			/>
-		  </v-card>
-		</v-tab-item>
-		<v-tab-item class="ma-5 mt-5 mt-md-0" :transition="false">
-		  <v-card outlined elevation="1">
+	<v-container class="height">
+		<v-container>
 			<v-skeleton-loader
-			  v-if="$store.state.community.loading.datasets"
-			  type="table"
-			></v-skeleton-loader>
-			<community-datasets-table v-else :datasets="datasets" />
-		  </v-card>
-		</v-tab-item>
-		<v-tab-item class="ma-5 mt-5 mt-md-0" :transition="false">
-		  <v-card outlined elevation="1">
-			<v-skeleton-loader
-			  v-if="$store.state.community.loading.tools"
-			  type="table"
-			></v-skeleton-loader>
-			<community-tools-table v-else :tools="tools" />
-		  </v-card>
-		</v-tab-item>
-	  </v-tabs>
+				v-if="$store.state.community.loading.community"
+				class="mb-5"
+				type="heading, list-item-three-line"
+			/>
+			<community-info v-else :community="project" />
+		</v-container>
+		<v-tabs :vertical="vertical" class="mt-10">
+			<v-tab>
+				<v-icon left> mdi-information-outline </v-icon>
+				Summary
+			</v-tab>
+			<v-tab>
+				<v-icon left> mdi-view-dashboard </v-icon>
+				Results
+			</v-tab>
+			<v-tab>
+				<v-icon left> mdi-folder </v-icon>
+				<v-badge
+					class="badge-margin"
+					color="secondary"
+					:value="datasets.length"
+					:content="datasets.length"
+					offset-x="-1"
+				>
+					Datasets
+				</v-badge>
+			</v-tab>
+			<v-tab>
+				<v-icon left> mdi-cube-outline </v-icon>
+				<v-badge
+					class="badge-margin"
+					color="secondary"
+					:value="tools.length"
+					:content="tools.length"
+					offset-x="-1"
+				>
+					Tools
+				</v-badge>
+			</v-tab>
+
+			<v-tab-item class="ma-5 mt-5 mt-md-0" :transition="false">
+				<v-card outlined class="pa-5" elevation="1">
+					<v-row no-gutters align="center">
+						<v-col>
+							<marked-wrapper
+								v-if="project.summary"
+								:markdown="project.summary"
+							/>
+						</v-col>
+					</v-row>
+				</v-card>
+			</v-tab-item>
+
+			<v-tab-item class="ma-5 mt-5 mt-md-0" :transition="false">
+				<v-skeleton-loader
+					v-if="$store.state.community.loading.events"
+					type="table"
+				></v-skeleton-loader>
+
+				<v-card v-else-if="currentEvent" outlined class="pa-5" elevation="1">
+					<community-event-selector
+						:current-event="currentEvent"
+						:events="events"
+						@change="handleEventSelection"
+					/>
+					<community-classification-table
+						:key="currentEvent._id + '_table'"
+						class="mt-5"
+						:event="currentEvent"
+					/>
+				</v-card>
+			</v-tab-item>
+			<v-tab-item class="ma-5 mt-5 mt-md-0" :transition="false">
+				<v-card outlined elevation="1">
+					<v-skeleton-loader
+						v-if="$store.state.community.loading.datasets"
+						type="table"
+					></v-skeleton-loader>
+					<community-datasets-table v-else :datasets="datasets" />
+				</v-card>
+			</v-tab-item>
+			<v-tab-item class="ma-5 mt-5 mt-md-0" :transition="false">
+				<v-card outlined elevation="1">
+					<v-skeleton-loader
+						v-if="$store.state.community.loading.tools"
+						type="table"
+					></v-skeleton-loader>
+					<community-tools-table v-else :tools="tools" />
+				</v-card>
+			</v-tab-item>
+		</v-tabs>
 	</v-container>
-  </template>
-
+</template>
 
 <script>
 import { mapGetters } from 'vuex';
@@ -191,8 +190,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.height {
+	height: calc(100% - 390px);
+}
 .v-tab {
-  text-transform: none !important;
+	text-transform: none !important;
 }
 
 .badge-margin {
