@@ -6,7 +6,10 @@
 		@mouseleave="toggleHovered(false)"
 		@click="handleClickOutside"
 	>
-		<div class="chips-container" :class="{ 'show-chips': isHovered }">
+		<div
+			class="chips-container"
+			:class="{ 'show-chips': isHovered || isMobile }"
+		>
 			<v-chip
 				v-if="member.orcid"
 				class="chip"
@@ -67,19 +70,15 @@
 			</div>
 		</v-card-subtitle>
 
-		<transition name="slide-right">
-			<div
-				v-if="isHovered || isRolesExpanded"
-				class="roles-toggle"
-				@click.stop="toggleRoles"
-			>
-				<span class="roles-text">Roles</span>
-				<v-icon class="arrow-icon">{{
-					isRolesExpanded ? 'mdi-chevron-up' : 'mdi-chevron-down'
-				}}</v-icon>
-			</div>
-		</transition>
+		<!-- Roles toggle without transition -->
+		<div class="roles-toggle" @click.stop="toggleRoles">
+			<span class="roles-text">Roles</span>
+			<v-icon class="arrow-icon">{{
+				isRolesExpanded ? 'mdi-chevron-up' : 'mdi-chevron-down'
+			}}</v-icon>
+		</div>
 
+		<!-- Roles container with Vue transition -->
 		<transition name="slide-up">
 			<div v-if="isRolesExpanded" class="roles-container">
 				<h3 class="roles-title">Takes part on:</h3>
@@ -234,6 +233,9 @@ export default {
 
 .name {
 	margin-top: 30px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 /* Institution link styles */
@@ -253,6 +255,8 @@ export default {
 /* Main card styles */
 .main-card {
 	cursor: default; /* Normal cursor for the entire card */
+	min-width: 300px; /* Add minimum width */
+	max-width: 350px; /* Adjust maximum width */
 }
 
 .main-card:hover {
@@ -279,7 +283,6 @@ export default {
 	justify-content: center;
 	align-items: center;
 	flex-direction: row;
-	transition: transform 0.3s ease, right 0.3s ease; /* Added right transition */
 	padding: 10px;
 }
 
@@ -296,8 +299,8 @@ export default {
 
 .arrow-icon {
 	color: white;
-	font-size: 14px; /* Adjusted font size for thinner arrow */
-	margin-left: 2px; /* Adjusted margin for better alignment */
+	font-size: 14px;
+	margin-left: 2px;
 	margin-top: 25px;
 }
 
@@ -349,13 +352,48 @@ export default {
 	opacity: 0;
 }
 
-.slide-right-enter-active,
-.slide-right-leave-active {
-	transition: right 0.2s ease;
-}
+/* Media queries for responsiveness */
+@media (max-width: 1024px) and (orientation: portrait),
+	(max-width: 1366px) and (orientation: landscape) {
+	.chips-container {
+		top: 10px;
+		opacity: 1;
+	}
+	.main-card {
+		max-width: 100%;
+	}
+	.main-card .grayscale-image {
+		filter: none;
+	}
 
-.slide-right-enter,
-.slide-right-leave-to {
-	right: -100px;
+	.roles-toggle {
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		width: 50px;
+		height: 50px;
+		background-color: #0b579f;
+		color: white;
+		border-top-left-radius: 50px;
+		cursor: pointer;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: row;
+		padding: 10px;
+	}
+
+	.roles-text {
+		font-size: 10px;
+		margin-right: -2px;
+		margin-top: 15px;
+		margin-left: 10px;
+	}
+	.arrow-icon {
+		color: white;
+		font-size: 10px;
+		margin-left: 2px;
+		margin-top: 15px;
+	}
 }
 </style>
