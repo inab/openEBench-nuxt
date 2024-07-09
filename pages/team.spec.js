@@ -72,15 +72,11 @@ describe('TeamPage.vue', () => {
 		const leaders = wrapper.vm.leaders;
 		const teammates = wrapper.vm.teammates;
 
+		expect(leaders.every((member) => member.roles.includes('Leadership'))).toBe(
+			true
+		);
 		expect(
-			leaders.every((member) =>
-				member.roles.some((role) => role.name === 'Leadership')
-			)
-		).toBe(true);
-		expect(
-			teammates.every(
-				(member) => !member.roles.some((role) => role.name === 'Leadership')
-			)
+			teammates.every((member) => !member.roles.includes('Leadership'))
 		).toBe(true);
 	});
 
