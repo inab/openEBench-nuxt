@@ -217,4 +217,11 @@ export default {
 	margin-top: 0;
 	padding-left: 0;
 }
+
+@media (max-width: 1024px) and (orientation: portrait),
+	(max-width: 1366px) and (orientation: landscape) {
+	.link-hover {
+		color: black !important;
+	}
+}
 </style>
