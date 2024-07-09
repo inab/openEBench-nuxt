@@ -29,46 +29,46 @@ exports[`TeamPage.vue matches the snapshot 1`] = `
   <h2 class=\\"text--h3 section-title-border\\">Leaders</h2>
   <v-row-stub tag=\\"div\\">
     <v-col-stub cols=\\"12\\" sm=\\"6\\" md=\\"4\\" tag=\\"div\\">
-      <membercard-stub member=\\"[object Object]\\" items=\\"[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]\\" institutionmapping=\\"[object Object]\\"></membercard-stub>
+      <membercard-stub member=\\"[object Object]\\" institutionmapping=\\"[object Object]\\"></membercard-stub>
     </v-col-stub>
     <v-col-stub cols=\\"12\\" sm=\\"6\\" md=\\"4\\" tag=\\"div\\">
-      <membercard-stub member=\\"[object Object]\\" items=\\"[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]\\" institutionmapping=\\"[object Object]\\"></membercard-stub>
+      <membercard-stub member=\\"[object Object]\\" institutionmapping=\\"[object Object]\\"></membercard-stub>
     </v-col-stub>
     <v-col-stub cols=\\"12\\" sm=\\"6\\" md=\\"4\\" tag=\\"div\\">
-      <membercard-stub member=\\"[object Object]\\" items=\\"[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]\\" institutionmapping=\\"[object Object]\\"></membercard-stub>
+      <membercard-stub member=\\"[object Object]\\" institutionmapping=\\"[object Object]\\"></membercard-stub>
     </v-col-stub>
   </v-row-stub>
   <h2 class=\\"section-title-border mt-2\\">Group Members</h2>
   <v-row-stub tag=\\"div\\">
     <v-col-stub cols=\\"12\\" sm=\\"6\\" md=\\"4\\" tag=\\"div\\">
-      <membercard-stub member=\\"[object Object]\\" items=\\"[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]\\" institutionmapping=\\"[object Object]\\"></membercard-stub>
+      <membercard-stub member=\\"[object Object]\\" institutionmapping=\\"[object Object]\\"></membercard-stub>
     </v-col-stub>
     <v-col-stub cols=\\"12\\" sm=\\"6\\" md=\\"4\\" tag=\\"div\\">
-      <membercard-stub member=\\"[object Object]\\" items=\\"[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]\\" institutionmapping=\\"[object Object]\\"></membercard-stub>
+      <membercard-stub member=\\"[object Object]\\" institutionmapping=\\"[object Object]\\"></membercard-stub>
     </v-col-stub>
     <v-col-stub cols=\\"12\\" sm=\\"6\\" md=\\"4\\" tag=\\"div\\">
-      <membercard-stub member=\\"[object Object]\\" items=\\"[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]\\" institutionmapping=\\"[object Object]\\"></membercard-stub>
+      <membercard-stub member=\\"[object Object]\\" institutionmapping=\\"[object Object]\\"></membercard-stub>
     </v-col-stub>
     <v-col-stub cols=\\"12\\" sm=\\"6\\" md=\\"4\\" tag=\\"div\\">
-      <membercard-stub member=\\"[object Object]\\" items=\\"[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]\\" institutionmapping=\\"[object Object]\\"></membercard-stub>
+      <membercard-stub member=\\"[object Object]\\" institutionmapping=\\"[object Object]\\"></membercard-stub>
     </v-col-stub>
     <v-col-stub cols=\\"12\\" sm=\\"6\\" md=\\"4\\" tag=\\"div\\">
-      <membercard-stub member=\\"[object Object]\\" items=\\"[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]\\" institutionmapping=\\"[object Object]\\"></membercard-stub>
+      <membercard-stub member=\\"[object Object]\\" institutionmapping=\\"[object Object]\\"></membercard-stub>
     </v-col-stub>
     <v-col-stub cols=\\"12\\" sm=\\"6\\" md=\\"4\\" tag=\\"div\\">
-      <membercard-stub member=\\"[object Object]\\" items=\\"[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]\\" institutionmapping=\\"[object Object]\\"></membercard-stub>
+      <membercard-stub member=\\"[object Object]\\" institutionmapping=\\"[object Object]\\"></membercard-stub>
     </v-col-stub>
     <v-col-stub cols=\\"12\\" sm=\\"6\\" md=\\"4\\" tag=\\"div\\">
-      <membercard-stub member=\\"[object Object]\\" items=\\"[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]\\" institutionmapping=\\"[object Object]\\"></membercard-stub>
+      <membercard-stub member=\\"[object Object]\\" institutionmapping=\\"[object Object]\\"></membercard-stub>
     </v-col-stub>
     <v-col-stub cols=\\"12\\" sm=\\"6\\" md=\\"4\\" tag=\\"div\\">
-      <membercard-stub member=\\"[object Object]\\" items=\\"[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]\\" institutionmapping=\\"[object Object]\\"></membercard-stub>
+      <membercard-stub member=\\"[object Object]\\" institutionmapping=\\"[object Object]\\"></membercard-stub>
     </v-col-stub>
     <v-col-stub cols=\\"12\\" sm=\\"6\\" md=\\"4\\" tag=\\"div\\">
-      <membercard-stub member=\\"[object Object]\\" items=\\"[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]\\" institutionmapping=\\"[object Object]\\"></membercard-stub>
+      <membercard-stub member=\\"[object Object]\\" institutionmapping=\\"[object Object]\\"></membercard-stub>
     </v-col-stub>
     <v-col-stub cols=\\"12\\" sm=\\"6\\" md=\\"4\\" tag=\\"div\\">
-      <membercard-stub member=\\"[object Object]\\" items=\\"[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]\\" institutionmapping=\\"[object Object]\\"></membercard-stub>
+      <membercard-stub member=\\"[object Object]\\" institutionmapping=\\"[object Object]\\"></membercard-stub>
     </v-col-stub>
   </v-row-stub> <br> <br id=\\"alumni\\"> <br>
   <v-divider-stub></v-divider-stub>
@@ -81,29 +81,32 @@ exports[`TeamPage.vue matches the snapshot 1`] = `
   </p> <br>
   <v-row-stub tag=\\"div\\">
     <v-col-stub cols=\\"12\\" sm=\\"6\\" md=\\"4\\" tag=\\"div\\">
-      <alumnicard-stub alumni=\\"[object Object]\\" items=\\"[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]\\" institutionmapping=\\"[object Object]\\"></alumnicard-stub>
+      <alumnicard-stub alumni=\\"[object Object]\\" institution-mapping=\\"[object Object]\\"></alumnicard-stub>
     </v-col-stub>
     <v-col-stub cols=\\"12\\" sm=\\"6\\" md=\\"4\\" tag=\\"div\\">
-      <alumnicard-stub alumni=\\"[object Object]\\" items=\\"[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]\\" institutionmapping=\\"[object Object]\\"></alumnicard-stub>
+      <alumnicard-stub alumni=\\"[object Object]\\" institution-mapping=\\"[object Object]\\"></alumnicard-stub>
     </v-col-stub>
     <v-col-stub cols=\\"12\\" sm=\\"6\\" md=\\"4\\" tag=\\"div\\">
-      <alumnicard-stub alumni=\\"[object Object]\\" items=\\"[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]\\" institutionmapping=\\"[object Object]\\"></alumnicard-stub>
+      <alumnicard-stub alumni=\\"[object Object]\\" institution-mapping=\\"[object Object]\\"></alumnicard-stub>
     </v-col-stub>
     <v-col-stub cols=\\"12\\" sm=\\"6\\" md=\\"4\\" tag=\\"div\\">
-      <alumnicard-stub alumni=\\"[object Object]\\" items=\\"[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]\\" institutionmapping=\\"[object Object]\\"></alumnicard-stub>
+      <alumnicard-stub alumni=\\"[object Object]\\" institution-mapping=\\"[object Object]\\"></alumnicard-stub>
     </v-col-stub>
     <v-col-stub cols=\\"12\\" sm=\\"6\\" md=\\"4\\" tag=\\"div\\">
-      <alumnicard-stub alumni=\\"[object Object]\\" items=\\"[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]\\" institutionmapping=\\"[object Object]\\"></alumnicard-stub>
+      <alumnicard-stub alumni=\\"[object Object]\\" institution-mapping=\\"[object Object]\\"></alumnicard-stub>
     </v-col-stub>
     <v-col-stub cols=\\"12\\" sm=\\"6\\" md=\\"4\\" tag=\\"div\\">
-      <alumnicard-stub alumni=\\"[object Object]\\" items=\\"[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]\\" institutionmapping=\\"[object Object]\\"></alumnicard-stub>
+      <alumnicard-stub alumni=\\"[object Object]\\" institution-mapping=\\"[object Object]\\"></alumnicard-stub>
     </v-col-stub>
     <v-col-stub cols=\\"12\\" sm=\\"6\\" md=\\"4\\" tag=\\"div\\">
-      <alumnicard-stub alumni=\\"[object Object]\\" items=\\"[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]\\" institutionmapping=\\"[object Object]\\"></alumnicard-stub>
+      <alumnicard-stub alumni=\\"[object Object]\\" institution-mapping=\\"[object Object]\\"></alumnicard-stub>
     </v-col-stub>
     <v-col-stub cols=\\"12\\" sm=\\"6\\" md=\\"4\\" tag=\\"div\\">
-      <alumnicard-stub alumni=\\"[object Object]\\" items=\\"[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]\\" institutionmapping=\\"[object Object]\\"></alumnicard-stub>
+      <alumnicard-stub alumni=\\"[object Object]\\" institution-mapping=\\"[object Object]\\"></alumnicard-stub>
     </v-col-stub>
-  </v-row-stub>
+  </v-row-stub> <br>
+  <v-divider-stub class=\\"mt-5\\"></v-divider-stub>
+  <h4 class=\\"mt-5\\">Roles Legend</h4>
+  <v-simple-table-stub class=\\"mt-5\\"></v-simple-table-stub>
 </v-container-stub>"
 `;
