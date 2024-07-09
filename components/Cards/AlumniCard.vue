@@ -9,9 +9,12 @@
 			<v-card-subtitle class="subtitle-container">
 				{{ formattedYears }}
 				<div class="worked-on" @click="toggleExpand">
-					<span class="worked-on-text" :class="{ 'fade-in': isHovered }"
-						>worked on</span
+					<span
+						class="worked-on-text"
+						:class="{ 'fade-in': isHovered || isMobile }"
 					>
+						worked on
+					</span>
 					<v-icon class="arrow-icon">{{
 						showRoles ? 'mdi-chevron-up' : 'mdi-chevron-down'
 					}}</v-icon>
@@ -100,12 +103,12 @@ export default {
 }
 
 .worked-on-text {
-	font-size: 12px; /* Smaller font size */
-	font-weight: 300; /* Thinner font weight */
-	text-transform: lowercase; /* Lowercase text */
+	font-size: 12px;
+	font-weight: 300;
+	text-transform: lowercase;
 	margin-right: 4px;
 	opacity: 0;
-	transition: opacity 0.3s ease-in-out; /* Fade animation */
+	transition: opacity 0.3s ease-in-out;
 }
 
 .fade-in {
@@ -119,5 +122,12 @@ export default {
 
 .roles-text {
 	font-size: 14px !important;
+}
+
+/* Media query for mobile devices */
+@media (max-width: 1080px) {
+	.worked-on-text {
+		opacity: 1 !important;
+	}
 }
 </style>
