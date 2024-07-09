@@ -1,5 +1,5 @@
 <template>
-	<v-container fluid>
+	<v-container>
 		<v-skeleton-loader
 			v-if="$store.state.challenge.loading.challenge"
 			class="mb-5"
@@ -43,16 +43,18 @@
 				class="mx-3"
 			>
 				<v-chip v-for="item in datasets" :key="item._id">
-					<span v-if="item.datalink.inline_data.visualization.type == 'box-plot'">
+					<span
+						v-if="item.datalink.inline_data.visualization.type == 'box-plot'"
+					>
 						{{ item.datalink.inline_data.visualization.available_metrics[0] }}
 					</span>
 					<span v-else>
 						{{
-						item.datalink.inline_data.visualization.type == '2D-plot'
-							? item.datalink.inline_data.visualization.x_axis +
-							  ' + ' +
-							  item.datalink.inline_data.visualization.y_axis
-							: item.datalink.inline_data.visualization.metric
+							item.datalink.inline_data.visualization.type == '2D-plot'
+								? item.datalink.inline_data.visualization.x_axis +
+								  ' + ' +
+								  item.datalink.inline_data.visualization.y_axis
+								: item.datalink.inline_data.visualization.metric
 						}}
 					</span>
 				</v-chip>
@@ -183,3 +185,9 @@ export default {
 	},
 };
 </script>
+
+<style scoped>
+.container {
+	max-width: 1300px !important;
+}
+</style>
