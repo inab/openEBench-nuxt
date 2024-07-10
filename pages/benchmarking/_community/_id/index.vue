@@ -9,7 +9,7 @@
 			<h1 class="text-h4">
 				{{ challenge.challenge_label }} ({{ challenge._id }})
 			</h1>
-			<h2 class="text-subtitle-1 mb-5">
+			<h2 class="text-subtitle-1 font-italic mb-5">
 				{{ challenge.name }}
 			</h2>
 
@@ -85,12 +85,8 @@
 							align="center"
 							color="rgba(0, 0, 0, 0.6)"
 						>
-							<img
-								class="mb-4"
-								src="~/static/icons/chart.png"
-								alt=""
-								height="100px"
-							/>
+							<v-img :src="illustration" contain max-height="300" />
+
 							<h2>No chart available</h2>
 							<p class="text-h6">
 								We're working on adding a new visualization. Check back soon!
@@ -119,6 +115,7 @@ export default {
 			hostName: this.$config.OEB_LEGACY_ANGULAR_URI,
 			tab: 0,
 			m: [],
+			illustration: require('~/static/images/illustrations/empty-state.svg'),
 		};
 	},
 	computed: {

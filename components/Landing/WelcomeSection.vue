@@ -5,7 +5,7 @@
 				<h1 class="text-h3 mb-4 primary--text">Welcome to OpenEBench</h1>
 				<h2 class="text-subtitle-1 mb-5">
 					The ELIXIR gateway to benchmarking communities, software monitoring,
-					and quality metrics for life sciences tools and workflows.
+					and quality metrics for life sciences tools and workflows
 				</h2>
 				<v-row class="mt-0 mt-lg-10" align="end">
 					<v-col align="center">

@@ -8,7 +8,7 @@
 				class="responsive-img"
 				max-width="65%"
 			></v-img>
-			<v-img v-else :src="src" class="responsive-img" max-width="80%"></v-img>
+			<v-img :src="src" class="responsive-img" v-else max-width="80%"></v-img>
 		</div>
 		<v-divider></v-divider>
 		<h3 class="text-center mt-3">{{ title }}</h3>
