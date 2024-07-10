@@ -53,6 +53,8 @@ export default {
 		this.$store.dispatch('dashboard/getToolsCount');
 		this.$store.dispatch('dashboard/getResourcesCount');
 		this.$store.dispatch('dashboard/getCommunitiesCount');
+
+    console.log("Hello World");
 	},
 };
 </script>
