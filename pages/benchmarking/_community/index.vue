@@ -1,5 +1,5 @@
 <template>
-	<v-container>
+	<v-container class="height">
 		<v-container v-if="$store.state.community.loading.community">
 			<v-skeleton-loader class="mb-5" type="heading, list-item-three-line" />
 		</v-container>
@@ -243,5 +243,9 @@ export default {
 }
 .v-tab--min-width {
 	min-width: 160px;
+}
+
+.height {
+	height: calc(100% - 390px);
 }
 </style>
