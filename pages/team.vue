@@ -127,7 +127,7 @@
 </template>
 
 <script>
-import membersData from '@/static/members/members.json';
+import membersData from '@/static/members/membersPage.json';
 import MemberCard from '@/components/Cards/MemberCard.vue';
 import AlumniCard from '@/components/Cards/AlumniCard.vue';
 
@@ -157,83 +157,11 @@ export default {
 				},
 			],
 			members: [],
-			institutionMapping: {
-				'BSC-CNS': {
-					name: 'Barcelona Supercomputing Center',
-					link: 'https://www.bsc.es/',
-				},
-				UB: {
-					name: 'University of Barcelona',
-					link: 'https://www.ub.edu/',
-				},
-				'INB/ELIXIR-ES': {
-					name: 'Spanish National Bioinformatics Institute',
-					link: 'https://www.inb-elixir.es/',
-				},
-				ICREA: {
-					name: 'Catalan Institution for Research and Advanced Studies',
-					link: 'https://www.icrea.cat/',
-				},
-				// Add more mappings as needed
-			},
+			institutionMapping: {},
 			alumnis: [],
 			isMobile: false,
 			show: false,
-			rolesLegend: [
-				// Define your roles and descriptions here
-				{
-					name: 'Community Engagement',
-					description: 'Engagement with community stakeholders.',
-				},
-				{
-					name: 'Compute Backend',
-					description: 'Backend infrastructure management.',
-				},
-				{
-					name: 'Data Interfaces',
-					description: 'Development and maintenance of data interfaces.',
-				},
-				{
-					name: 'Scientific Benchmarking',
-					description: 'Implementation and oversight of scientific benchmarks.',
-				},
-				{
-					name: 'Technical Monitoring',
-					description: 'Monitoring and maintenance of technical aspects.',
-				},
-				{
-					name: 'Tooling (command line)',
-					description: 'Development of command-line tools.',
-				},
-				{
-					name: 'Web Front-end',
-					description: 'Development and maintenance of web interfaces.',
-				},
-				{
-					name: 'Data Visualization',
-					description: 'Visualization of data for user interaction.',
-				},
-				{
-					name: 'Back-office',
-					description: 'Administrative and internal tooling support.',
-				},
-				{
-					name: 'Software Observatory',
-					description: 'Monitoring and analysis of software ecosystem.',
-				},
-				{
-					name: 'Data Modelization',
-					description: 'Design and implementation of data models.',
-				},
-				{
-					name: 'Security',
-					description: 'Implementation and oversight of security measures.',
-				},
-				{
-					name: 'Leadership',
-					description: 'Strategic direction and team management.',
-				},
-			],
+			rolesLegend: [],
 		};
 	},
 	computed: {
@@ -255,6 +183,8 @@ export default {
 		// Initialize members data and store original institution names
 		this.members = membersData.Members;
 		this.alumnis = membersData.Alumni;
+		this.rolesLegend = membersData.Roles;
+		this.institutionMapping = membersData.Institutions;
 		// Initial check for mobile
 		this.checkMobile();
 		// Add event listener for window resize
