@@ -73,6 +73,9 @@
 						:event="currentEvent"
 					/>
 				</v-card>
+				<v-card outlined v-else class="pa-5" elevation="1">
+					<community-empty-state class="mt-10" />
+				</v-card>
 			</v-tab-item>
 			<v-tab-item class="ma-5 mt-5 mt-md-0" :transition="false">
 				<v-card outlined elevation="1">
@@ -104,6 +107,7 @@ import CommunityToolsTable from '~/components/Communities/CommunityToolsTable';
 import CommunityDatasetsTable from '~/components/Communities/CommunityDatasetsTable';
 import CommunityEventSelector from '~/components/Communities/CommunityEventSelector';
 import CommunityInfo from '~/components/Communities/CommunityInfo';
+import CommunityEmptyState from '~/components/Communities/CommunityEmptyState';
 
 export default {
 	name: 'ProjectPage',
@@ -114,6 +118,7 @@ export default {
 		CommunityDatasetsTable,
 		CommunityEventSelector,
 		CommunityInfo,
+		CommunityEmptyState,
 	},
 	computed: {
 		...mapGetters('community', {
