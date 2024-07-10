@@ -1,5 +1,5 @@
 <template>
-	<v-container fluid>
+	<v-container>
 		<v-container>
 			<h1 class="text-h4 mt-13 mb-5 hidden-md-and-up">Project Spaces</h1>
 			<info-slider class="mb-5 hidden-sm-and-down" :img="illustration">
