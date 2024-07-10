@@ -9,7 +9,7 @@
 			<h1 class="text-h4">
 				{{ challenge.challenge_label }} ({{ challenge._id }})
 			</h1>
-			<h2 class="text-subtitle-1 mb-5">
+			<h2 class="text-subtitle-1 font-italic mb-5">
 				{{ challenge.name }}
 			</h2>
 
