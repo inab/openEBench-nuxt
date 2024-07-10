@@ -93,6 +93,36 @@
 				/>
 			</v-col>
 		</v-row>
+		<br />
+		<!-- Roles Legend Expansion Panel -->
+		<v-divider class="mt-12"></v-divider>
+		<v-expansion-panels class="mt-8">
+			<v-expansion-panel>
+				<v-expansion-panel-header class="header-bg">
+					<b>Roles Legend</b>
+				</v-expansion-panel-header>
+				<v-expansion-panel-content>
+					<v-simple-table>
+						<template v-slot:default>
+							<thead>
+								<tr>
+									<th>Name</th>
+									<th>Description</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr v-for="(role, index) in rolesLegend" :key="index">
+									<td>
+										<strong>{{ role.name }}</strong>
+									</td>
+									<td>{{ role.description }}</td>
+								</tr>
+							</tbody>
+						</template>
+					</v-simple-table>
+				</v-expansion-panel-content>
+			</v-expansion-panel>
+		</v-expansion-panels>
 	</v-container>
 </template>
 
@@ -149,6 +179,61 @@ export default {
 			alumnis: [],
 			isMobile: false,
 			show: false,
+			rolesLegend: [
+				// Define your roles and descriptions here
+				{
+					name: 'Community Engagement',
+					description: 'Engagement with community stakeholders.',
+				},
+				{
+					name: 'Compute Backend',
+					description: 'Backend infrastructure management.',
+				},
+				{
+					name: 'Data Interfaces',
+					description: 'Development and maintenance of data interfaces.',
+				},
+				{
+					name: 'Scientific Benchmarking',
+					description: 'Implementation and oversight of scientific benchmarks.',
+				},
+				{
+					name: 'Technical Monitoring',
+					description: 'Monitoring and maintenance of technical aspects.',
+				},
+				{
+					name: 'Tooling (command line)',
+					description: 'Development of command-line tools.',
+				},
+				{
+					name: 'Web Front-end',
+					description: 'Development and maintenance of web interfaces.',
+				},
+				{
+					name: 'Data Visualization',
+					description: 'Visualization of data for user interaction.',
+				},
+				{
+					name: 'Back-office',
+					description: 'Administrative and internal tooling support.',
+				},
+				{
+					name: 'Software Observatory',
+					description: 'Monitoring and analysis of software ecosystem.',
+				},
+				{
+					name: 'Data Modelization',
+					description: 'Design and implementation of data models.',
+				},
+				{
+					name: 'Security',
+					description: 'Implementation and oversight of security measures.',
+				},
+				{
+					name: 'Leadership',
+					description: 'Strategic direction and team management.',
+				},
+			],
 		};
 	},
 	computed: {
@@ -174,6 +259,9 @@ export default {
 		this.checkMobile();
 		// Add event listener for window resize
 		window.addEventListener('resize', this.checkMobile);
+
+		// Sort roles legend alphabetically
+		this.rolesLegend.sort((a, b) => a.name.localeCompare(b.name));
 	},
 	beforeDestroy() {
 		window.removeEventListener('resize', this.checkMobile);
@@ -197,5 +285,26 @@ export default {
 	color: #0b579f;
 	font-weight: 400;
 	font-size: 1.5rem;
+}
+
+.header-bg {
+	font-weight: bold;
+}
+
+.v-expansion-panel-header {
+	transition: box-shadow 0.3s ease-in-out;
+}
+
+.v-expansion-panel:not(.v-expansion-panel--active)
+	.v-expansion-panel-header:hover {
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 20%);
+}
+
+.v-expansion-panel--active > .v-expansion-panel-header {
+	background-color: #f0f0f0;
+}
+
+.v-data-table > .v-data-table__wrapper > table > tbody > tr > td {
+	height: 25px;
 }
 </style>
