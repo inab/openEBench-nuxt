@@ -86,7 +86,7 @@ export default {
 				{
 					title: 'DataTools4Heart',
 					href: 'https://www.datatools4heart.eu/',
-					src: 'https://www.datatools4heart.eu/wp-content/themes/datatools/css/img/logo_color.svg',
+					src: 'https://www.datatools4heart.eu/wp-content/themes/datatools/img/og-dt4h.png',
 				},
 				{
 					title: 'DECIDER',

@@ -15,12 +15,6 @@
 				v-if="title == 'ELIXIR STEERS'"
 				max-width="65%"
 			></v-img>
-			<v-img
-				:src="src"
-				class="responsive-img"
-				v-else-if="title == 'DataTools4Heart'"
-				height="45px"
-			></v-img>
 			<v-img :src="src" class="responsive-img" v-else max-width="80%"></v-img>
 		</div>
 		<v-divider></v-divider>
