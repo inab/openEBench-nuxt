@@ -4,12 +4,12 @@
 		<br />
 		<p>
 			Here, you can find different scientific contributions, e.g. peer-reviewed
-			articles, conference posters and public pre-prints, reflecting the work
+			articles, conference posters, and public pre-prints, reflecting the work
 			carried out by the OpenEBench team and the multiple collaborations with
 			the scientific communities that use and support the platform.
 		</p>
 		<p>
-			These contributions are organised into two sections to reflect whether
+			These contributions are organized into two sections to reflect whether
 			they are core to the OpenEBench activities or contribute to the different
 			communities.
 		</p>
@@ -32,10 +32,32 @@
 						</v-tab>
 
 						<v-tab-item class="ma-5 mt-5 mt-md-0" :transition="false">
-							<Manuscripts :papers="papers.core" />
+							<div class="transition-container" key="core">
+								<transition name="slide">
+									<div v-if="loading" class="loader-container">
+										<img :src="loaderGif" alt="Loading..." class="loader" />
+									</div>
+									<Manuscripts
+										v-else
+										:papers="papers.core"
+										class="manuscripts-container"
+									/>
+								</transition>
+							</div>
 						</v-tab-item>
-						<v-tab-item class="ma-5 mt-5 mt-md-0" :transition="false">
-							<Manuscripts :papers="papers.collaboration" />
+						<v-tab-item class="ma-5 mt-5 mt-md-0">
+							<div class="transition-container" key="collaboration">
+								<transition name="slide">
+									<div v-if="loading" class="loader-container">
+										<img :src="loaderGif" alt="Loading..." class="loader" />
+									</div>
+									<Manuscripts
+										v-else
+										:papers="papers.collaboration"
+										class="manuscripts-container"
+									/>
+								</transition>
+							</div>
 						</v-tab-item>
 					</v-tabs>
 				</v-card>
@@ -58,40 +80,36 @@
 						<br />
 
 						<v-tab-item class="ma-5 mt-5 mt-md-0" :transition="false">
-							<Posters :posters="posters.OEB" />
+							<div class="transition-container" key="OEB">
+								<transition name="slide">
+									<div v-if="loading" class="loader-container">
+										<img :src="loaderGif" alt="Loading..." class="loader" />
+									</div>
+									<Posters
+										v-else
+										:posters="posters.OEB"
+										class="posters-container"
+									/>
+								</transition>
+							</div>
 						</v-tab-item>
 						<v-tab-item class="ma-5 mt-5 mt-md-0" :transition="false">
-							<Posters :posters="posters.MENTION" />
+							<div class="transition-container" key="MENTION">
+								<transition name="slide">
+									<div v-if="loading" class="loader-container">
+										<img :src="loaderGif" alt="Loading..." class="loader" />
+									</div>
+									<Posters
+										v-else
+										:posters="posters.MENTION"
+										class="posters-container"
+									/>
+								</transition>
+							</div>
 						</v-tab-item>
 					</v-tabs>
 				</v-card>
 			</v-tab-item>
-			<!-- <v-tab>
-				<v-icon left>mdi-school-outline</v-icon>
-				Training
-			</v-tab>
-			<v-tab-item>
-				<v-card
-					outlined
-					class="pa-5 d-flex align-center justify-center"
-					elevation="1"
-				>
-					Here will go the training content SOON
-				</v-card>
-			</v-tab-item>
-			<v-tab>
-				<v-icon left>mdi-video-outline</v-icon>
-				Videos
-			</v-tab>
-			<v-tab-item>
-				<v-card
-					outlined
-					class="pa-5 d-flex align-center justify-center"
-					elevation="1"
-				>
-					Here will go the videos content SOON
-				</v-card>
-			</v-tab-item> -->
 		</v-tabs>
 	</v-container>
 </template>
@@ -127,6 +145,7 @@ export default {
 				},
 			],
 			activeTab: null,
+			loading: true, // Add loading property
 			papers: {
 				core: [
 					{ doi: '10.1101/181677' },
@@ -144,6 +163,7 @@ export default {
 			posters: [],
 			selectedPoster: null,
 			basePath: '/posters/poster_list/',
+			loaderGif: require('@/static/201805.OpenEBench.logo.Animated.0050secs.gif'),
 		};
 	},
 	computed: {
@@ -157,6 +177,7 @@ export default {
 	},
 	async mounted() {
 		await this.fetchAllPaperDetails();
+		this.loading = false; // Set loading to false once data is fetched
 	},
 	methods: {
 		async fetchPaperInfo(doi) {
@@ -219,5 +240,44 @@ export default {
 	width: 100%;
 	padding: 10px;
 	box-sizing: border-box;
+}
+
+.loader-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 200px;
+}
+
+.loader {
+	width: 160px;
+	height: 100px;
+}
+
+.transition-container {
+	position: relative;
+	height: auto;
+	min-height: 200px;
+	overflow: hidden;
+}
+
+.slide-enter-from {
+	opacity: 0;
+	transform: translateX(100px);
+}
+.slide-enter-active {
+	transition: all 0.3s ease-out;
+}
+.slide-leave-to {
+	opacity: 0;
+	transform: translateX(-100px);
+}
+.slide-leave-active {
+	transition: all 0.3s ease-out;
+}
+
+.manuscripts-container,
+.posters-container {
+	width: 100%; /* Ensure full width */
 }
 </style>
