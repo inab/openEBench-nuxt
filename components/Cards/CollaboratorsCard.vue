@@ -1,27 +1,14 @@
 <template>
-	<v-card
-		class="mx-auto mb-5"
-		hover
-		:href="href"
-		target="_blank"
-		max-width="344"
-		min-height="250"
-		max-height="350"
-	>
+	<v-card class="mx-auto mb-5 main-card" hover :href="href" target="_blank">
 		<div class="image-container">
+			<!-- custom styles for ELIXIR STEERS -->
 			<v-img
+				v-if="title == 'ELIXIR STEERS'"
 				:src="src"
 				class="responsive-img"
-				v-if="title == 'ELIXIR STEERS'"
 				max-width="65%"
 			></v-img>
-			<v-img
-				:src="src"
-				class="responsive-img"
-				v-else-if="title == 'DataTools4Heart'"
-				height="45px"
-			></v-img>
-			<v-img :src="src" class="responsive-img" v-else max-width="80%"></v-img>
+			<v-img v-else :src="src" class="responsive-img" max-width="80%"></v-img>
 		</div>
 		<v-divider></v-divider>
 		<h3 class="text-center mt-3">{{ title }}</h3>
@@ -47,6 +34,13 @@ export default {
 </script>
 
 <style scoped>
+/* Main card styles */
+.main-card {
+	min-width: 344px; /* Add minimum width */
+	max-width: 350px; /* Adjust maximum width */
+	min-height: 250px;
+}
+
 .image-container {
 	height: 200px;
 	display: flex;

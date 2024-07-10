@@ -27,10 +27,31 @@
 		</p>
 		<br />
 
-		<!-- Cards for collaborators -->
+		<!-- Funding Section -->
+		<h2 class="text--h3 section-title-border">Fundings</h2>
 		<v-row>
 			<v-col
-				v-for="(collaborator, index) in sortedCollaborators"
+				v-for="(collaborator, index) in fundingCollaborators"
+				:key="index"
+				cols="12"
+				sm="6"
+				md="4"
+			>
+				<!-- Collaborators Card -->
+				<collaborators-card
+					:title="collaborator.title"
+					:href="collaborator.href"
+					:src="collaborator.src"
+				/>
+			</v-col>
+		</v-row>
+		<br />
+
+		<!-- Collaborators Section -->
+		<h2 class="text--h3 section-title-border">Collaborators</h2>
+		<v-row>
+			<v-col
+				v-for="(collaborator, index) in otherCollaborators"
 				:key="index"
 				cols="12"
 				sm="6"
@@ -77,55 +98,74 @@ export default {
 					title: 'EUCAIM',
 					href: 'https://cancerimage.eu/',
 					src: require('~/static/collaboration/eucaim.png'),
+					type: 'funding',
 				},
 				{
 					title: 'EuCanImage',
 					href: 'https://eucanimage.eu/',
 					src: require('~/static/collaboration/EUCANImage.png'),
+					type: 'funding',
 				},
 				{
 					title: 'DataTools4Heart',
 					href: 'https://www.datatools4heart.eu/',
-					src: 'https://www.datatools4heart.eu/wp-content/themes/datatools/css/img/logo_color.svg',
+					src: 'https://www.datatools4heart.eu/wp-content/themes/datatools/img/og-dt4h.png',
+					type: 'funding',
 				},
 				{
 					title: 'DECIDER',
 					href: 'https://www.deciderproject.eu/',
 					src: require('~/static/collaboration/decider.jpg'),
+					type: 'funding',
 				},
 				{
 					title: 'PerMedCoE',
 					href: 'https://permedcoe.eu/',
 					src: 'https://permedcoe.eu/wp-content/uploads/2020/11/logo_1.png',
+					type: 'funding',
 				},
 				{
 					title: 'EOSC-EVERSE',
 					href: 'https://everse.software/',
 					src: 'https://everse.software/images/logos/EOSCEverse_PosColour.svg',
+					type: 'funding',
 				},
 				{
 					title: 'ELIXIR STEERS',
 					href: 'https://elixir-europe.org/about-us/how-funded/eu-projects/steers',
 					src: 'https://elixir-europe.org/sites/default/files/styles/left-large/public/images/elixir-steers-logo.png',
+					type: 'funding',
 				},
 				{
 					title: 'Fujitsu AMetaPred',
 					href: 'https://dev-openebench.bsc.es/benchmarking/OEBC900?event=OEBE9000000000',
 					src: require('~/static/collaboration/AMetaPred.png'),
+					type: 'collaborator',
 				},
 				{
 					title: 'BAIHA',
 					href: 'https://bioinfo4women.bsc.es/research/',
 					src: require('~/static/collaboration/baiha.png'),
+					type: 'collaborator',
 				},
 			],
 		};
 	},
 	computed: {
 		sortedCollaborators() {
-			return this.collaborators.slice().sort((a, b) => {
-				return a.title.localeCompare(b.title);
-			});
+			return this.collaborators
+				.slice()
+				.sort((a, b) => a.title.localeCompare(b.title));
+		},
+		fundingCollaborators() {
+			return this.sortedCollaborators.filter(
+				(collaborator) => collaborator.type === 'funding'
+			);
+		},
+		otherCollaborators() {
+			return this.sortedCollaborators.filter(
+				(collaborator) => collaborator.type === 'collaborator'
+			);
 		},
 	},
 	beforeMount() {
@@ -133,3 +173,14 @@ export default {
 	},
 };
 </script>
+
+<style lang="scss" scoped>
+.section-title-border {
+	border-bottom: 2px solid black;
+	margin-bottom: 50px;
+	padding-bottom: 3px;
+	color: #0b579f;
+	font-weight: 400;
+	font-size: 1.5rem;
+}
+</style>
