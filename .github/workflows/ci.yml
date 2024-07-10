@@ -4,11 +4,11 @@ on:
   push:
     branches:
       - master
-      - develop-2
+      - oeb-widgets-dev
   pull_request:
     branches:
       - master
-      - develop-2
+      - oeb-widgets-dev
 
 jobs:
   ci:
