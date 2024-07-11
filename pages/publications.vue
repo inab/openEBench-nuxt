@@ -111,6 +111,24 @@
 				</v-card>
 			</v-tab-item>
 		</v-tabs>
+		<br />
+
+		<v-divider class="my-6" />
+		<!-- Cite Us -->
+		<div align="center">
+			<h2 class="text-h5">Cite Us</h2>
+			<p class="text--secondary">
+				If you use resources from OpenEBench in your research, please cite us as
+				follows:
+			</p>
+			<p class="text--secondary">
+				OpenEBench: A benchmarking infrastructure for bioinformatics methods,
+				tools, and web services. Part of the ELIXIR Tools platform. Developed by
+				the Barcelona Supercomputing Center (BSC) in collaboration with partners
+				within ELIXIR and beyond. Available at:
+				<a href="https://openebench.bsc.es">https://openebench.bsc.es.</a>
+			</p>
+		</div>
 	</v-container>
 </template>
 
@@ -229,6 +247,11 @@ export default {
 <style lang="scss" scoped>
 .v-tab {
 	text-transform: none !important;
+}
+
+.citeus {
+	border: 1px solid;
+	border-color: rgb(180, 177, 177);
 }
 
 .paper-container {
