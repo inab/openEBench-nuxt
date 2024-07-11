@@ -9,7 +9,7 @@
 			<h1 class="text-h4">
 				{{ challenge.challenge_label }} ({{ challenge._id }})
 			</h1>
-			<h2 class="text-subtitle-1 mb-5">
+			<h2 class="text-subtitle-1 font-italic mb-5">
 				{{ challenge.name }}
 			</h2>
 			<!-- TODO -->
@@ -50,6 +50,7 @@
 			</h2>
 			<!-- CHIPS -->
 			<v-data-table
+				v-if="participants.length > 15"
 				:items="participants"
 				:items-per-page="15"
 				hide-default-header
@@ -82,6 +83,21 @@
 				</template>
 			</v-data-table>
 
+			<!-- Chips for less than 15 participants -->
+			<div class="my-4" v-else :value="tab" column>
+				<v-chip
+					class="chip2 mx-1 my-1"
+					:class="{ 'accent--text': tab === participant._id }"
+					v-for="participant in participants"
+					:key="participant._id"
+					:input-value="tab === participant._id"
+					@click="selectParticipant(participant._id)"
+				>
+					{{ formatLabel(participant.participant_label) }}
+				</v-chip>
+			</div>
+
+			<!-- Chart or no visualization -->
 			<v-tabs-items v-if="tab" v-model="tab">
 				<v-tab-item
 					v-for="(item, index) in participants"
@@ -264,9 +280,12 @@ export default {
 		}
 	},
 	methods: {
-		// Formatear texto de participants label
+		// Format participants label text
 		formatLabel(text) {
-			return text.replace('Dataset_participant:', '');
+			if (text.startsWith('Dataset_participant:')) {
+				return text.replace('Dataset_participant:', '');
+			}
+			return text;
 		},
 		chunk(array, size) {
 			const chunkedArr = [];
@@ -275,6 +294,9 @@ export default {
 			}
 			return chunkedArr;
 		},
+		selectParticipant(id) {
+			this.tab = id;
+		},
 	},
 };
 </script>
@@ -282,6 +304,12 @@ export default {
 <style scoped>
 .chip {
 	width: 340px !important;
+	text-align: center;
+	justify-content: center;
+}
+
+.chip2 {
+	width: 260px !important;
 	text-align: center;
 	justify-content: center;
 }
