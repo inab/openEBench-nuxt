@@ -1,6 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
 import TeamPage from '@/pages/team.vue';
-import membersData from '@/static/members/members.json';
+import membersData from '@/static/members/membersPage.json';
 import MemberCard from '@/components/Cards/MemberCard.vue';
 import AlumniCard from '@/components/Cards/AlumniCard.vue';
 
@@ -19,17 +19,25 @@ describe('TeamPage.vue', () => {
 			},
 			data() {
 				return {
-					members: membersData.Members.map((member) => ({
-						...member,
-						roles: member.roles.map((role) => ({ name: role, hover: false })),
-					})),
-					alumnis: membersData.Alumni.map((alumni) => ({
-						...alumni,
-						roles: alumni.roles.map((role) => ({ name: role, hover: false })),
-					})),
+					members: [],
+					alumnis: [],
 					isMobile: false,
+					institutionMapping: {},
+					rolesLegend: [],
 				};
 			},
+			methods: {
+				fetchData: jest.fn(),
+			},
+		});
+		// Mock the mounted lifecycle hook to directly set the members data
+		wrapper.setData({
+			members: membersData.Members,
+			alumnis: membersData.Alumni,
+			institutionMapping: membersData.Institutions,
+			rolesLegend: membersData.Roles.sort((a, b) =>
+				a.name.localeCompare(b.name)
+			),
 		});
 	});
 
@@ -87,5 +95,27 @@ describe('TeamPage.vue', () => {
 
 	it('matches the snapshot', () => {
 		expect(wrapper.html()).toMatchSnapshot();
+	});
+
+	it('should initialize breadcrumbs correctly', () => {
+		const breadcrumbs = wrapper.vm.breadcrumbs;
+		expect(breadcrumbs).toEqual([
+			{ text: 'Home', disabled: false, exact: true, to: '/' },
+			{ text: 'About', disabled: true },
+			{ text: 'Team', disabled: true },
+		]);
+	});
+
+	it('should sort members by name', () => {
+		const sortedMembers = wrapper.vm.sortedByName([
+			{ name: 'Charlie' },
+			{ name: 'Alice' },
+			{ name: 'Bob' },
+		]);
+		expect(sortedMembers).toEqual([
+			{ name: 'Alice' },
+			{ name: 'Bob' },
+			{ name: 'Charlie' },
+		]);
 	});
 });
