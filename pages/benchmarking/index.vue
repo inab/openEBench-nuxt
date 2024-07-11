@@ -1,5 +1,5 @@
 <template>
-	<v-container >
+	<v-container>
 		<v-container>
 			<h1 class="text-h4 mt-13 mb-5 hidden-md-and-up">
 				Benchmarking Communities
