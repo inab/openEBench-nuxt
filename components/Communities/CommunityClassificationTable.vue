@@ -49,12 +49,9 @@
 			</template>
 			<!-- eslint-disable -->
 			<template #item.acronym="{ item }">
-				<!-- eslint-enable -->
-				<nuxt-link :to="item._id" append>
-					{{ item.acronym }}
-				</nuxt-link>
-				(<nuxt-link :to="item._id + '/participants'" append>
-					participants </nuxt-link
+				<nuxt-link :to="item._id" append>{{ item.acronym }}</nuxt-link>
+				(<nuxt-link :to="item._id + '/participants'" append class="smaller-text"
+					>participants</nuxt-link
 				>)
 			</template>
 		</v-data-table>
@@ -74,11 +71,7 @@ export default {
 			search: '',
 			selected: [],
 			headers: [
-				{
-					text: 'Acronym',
-					align: 'start',
-					value: 'acronym',
-				},
+				{ text: 'Acronym', align: 'start', value: 'acronym', width: '300' },
 				{ text: 'Name', value: 'name' },
 			],
 		};
@@ -93,3 +86,13 @@ export default {
 	},
 };
 </script>
+
+<style scoped>
+.smaller-text {
+	font-size: 12px !important; /* Adjust the font size as needed */
+}
+
+.v-data-table .v-data-table__wrapper {
+	overflow-x: auto;
+}
+</style>

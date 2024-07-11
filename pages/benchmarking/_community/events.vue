@@ -25,24 +25,39 @@
 				type="list-item"
 			></v-skeleton-loader>
 		</div>
-		<v-list v-else-if="events.length > 0">
-			<v-list-item
-				v-for="(event, index) in events"
+		<v-row v-else-if="events.length > 0" class="events-grid">
+			<v-col
+				v-for="(event, index) in paginatedEvents"
 				:key="index"
-				link
-				data-test="event"
-				@click="handleEventClick(event)"
+				cols="12"
+				sm="6"
+				md="4"
+				class="d-flex"
 			>
-				<v-list-item-content>
-					<v-list-item-title>{{ event.name }}</v-list-item-title>
-					<v-list-item-subtitle class="d-flex align-center">
-						<v-icon small class="mr-1"> mdi-flag-outline </v-icon>
+				<v-card
+					class="ma-3 d-flex flex-column event-card"
+					@click="handleEventClick(event)"
+					hover
+				>
+					<v-card-title class="event-title">{{ event.name }}</v-card-title>
+					<v-card-subtitle class="d-flex align-center">
+						<v-icon small class="mr-1">mdi-flag-outline</v-icon>
 						{{ event.challenges.length }}
 						{{ 'Challenges' | pluralize(event.challenges.length) }}
-					</v-list-item-subtitle>
-				</v-list-item-content>
-			</v-list-item>
-		</v-list>
+					</v-card-subtitle>
+				</v-card>
+			</v-col>
+			<v-col cols="12" class="d-flex justify-center">
+				<v-pagination
+					v-if="events.length > itemsPerPage"
+					v-model="currentPage"
+					:length="pageCount"
+					:total-visible="5"
+					size="small"
+					class="my-4"
+				></v-pagination>
+			</v-col>
+		</v-row>
 		<community-empty-state v-else class="mt-10" />
 	</v-container>
 </template>
@@ -59,6 +74,8 @@ export default {
 		return {
 			illustration: require('~/static/images/illustrations/lab_community.png'),
 			expand: true,
+			currentPage: 1,
+			itemsPerPage: 12,
 		};
 	},
 	computed: {
@@ -87,6 +104,14 @@ export default {
 					to: this.$route.params.community + '/events',
 				},
 			];
+		},
+		pageCount() {
+			return Math.ceil(this.events.length / this.itemsPerPage);
+		},
+		paginatedEvents() {
+			const start = (this.currentPage - 1) * this.itemsPerPage;
+			const end = start + this.itemsPerPage;
+			return this.events.slice(start, end);
 		},
 	},
 	watch: {
@@ -118,8 +143,37 @@ export default {
 	},
 };
 </script>
-<style lang="scss" scoped>
-.text--clickable {
+
+<style scoped>
+.container {
+	height: calc(100% - 390px);
+}
+
+.events-grid {
+	margin-top: 20px;
+}
+
+.v-card {
 	cursor: pointer;
+	width: 100%; /* Ensure cards take up the full width of their column */
+}
+
+.event-card {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 100%; /* Ensures all cards are the same height */
+}
+
+.event-title {
+	font-size: 0.9rem; /* Adjust this value to make the text tinier */
+	white-space: normal; /* Allow the text to wrap */
+	overflow-wrap: break-word; /* Ensure long words break properly */
+	word-break: break-word; /* Ensure words do not break in the middle */
+	hyphens: auto; /* Add hyphens where applicable */
+}
+
+.v-pagination {
+	margin-top: 20px;
 }
 </style>

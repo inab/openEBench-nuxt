@@ -19,8 +19,8 @@
 					</v-list-item-content>
 				</v-list-item>
 				<v-list-item
-					v-for="(item, index) in subMenuEntriesDocs"
-					:key="`sub` + index"
+					v-for="(item, index) in subMenuEntriesObservatory"
+					:key="`sub${index}`"
 					:to="item.to"
 					:href="item.href"
 					:target="item.external ? '_blank' : ''"
@@ -28,9 +28,17 @@
 					<v-list-item-title>{{ item.title_hide }}</v-list-item-title>
 					<v-icon v-if="item.external" right small>mdi-open-in-new</v-icon>
 				</v-list-item>
+				<v-list-item :href="subMenuEntriesDocs[1].href" target="_blank">
+					<v-list-item-title>{{
+						subMenuEntriesDocs[1].title_hide
+					}}</v-list-item-title>
+					<v-icon v-if="subMenuEntriesDocs[1].external" right small
+						>mdi-open-in-new</v-icon
+					>
+				</v-list-item>
 				<v-list-item
 					v-for="(item, index) in subMenuEntriesAbout"
-					:key="`sub` + index"
+					:key="`sub${index}`"
 					:to="item.to"
 					:href="item.href"
 					:target="item.external ? '_blank' : ''"
@@ -44,6 +52,7 @@
 				</v-list-item>
 			</v-list>
 		</v-navigation-drawer>
+
 		<v-app-bar fixed app>
 			<v-btn
 				v-if="$vuetify.breakpoint.smAndDown"
@@ -73,6 +82,7 @@
 					{{ item.title }}
 				</v-btn>
 			</div>
+
 			<v-menu v-if="$vuetify.breakpoint.mdAndUp" left offset-y>
 				<template #activator="{ on, attrs }">
 					<v-btn v-bind="attrs" text v-on="on">
@@ -83,7 +93,7 @@
 				<v-list>
 					<v-list-item
 						v-for="(item, index) in subMenuEntriesObservatory"
-						:key="`sub` + index"
+						:key="`sub${index}`"
 						:to="item.to"
 						:href="item.href"
 						:target="item.external ? '_blank' : ''"
@@ -95,36 +105,20 @@
 					</v-list-item>
 				</v-list>
 			</v-menu>
-			<v-menu v-if="$vuetify.breakpoint.mdAndUp" left offset-y>
-				<template #activator="{ on, attrs }">
-					<v-btn v-bind="attrs" text v-on="on">
-						<v-icon>mdi-chevron-down</v-icon>
-						Docs
-					</v-btn>
-				</template>
-				<v-list>
-					<v-list-item
-						v-for="(item, index) in subMenuEntriesDocs"
-						:key="`sub` + index"
-						:to="item.to"
-						:href="item.href"
-						:target="item.external ? '_blank' : ''"
-					>
-						<v-list-item-title class="text-subtitle-2">{{
-							item.title
-						}}</v-list-item-title>
-						<v-icon v-if="item.external" right small>mdi-open-in-new</v-icon>
-					</v-list-item>
-					<v-list-item
-						v-if="$vuetify.breakpoint.mdAndDown"
-						:href="vreHref"
-						target="_blank"
-					>
-						<v-list-item-title>Benchmark your Tool</v-list-item-title>
-						<v-icon right small>mdi-open-in-new</v-icon>
-					</v-list-item>
-				</v-list>
-			</v-menu>
+
+			<v-btn
+				v-if="$vuetify.breakpoint.mdAndUp"
+				:href="subMenuEntriesDocs[1].href"
+				target="_blank"
+				text
+			>
+				Docs
+				<v-icon right small v-if="subMenuEntriesDocs[1].external"
+					>mdi-open-in-new</v-icon
+				>
+			</v-btn>
+
+			<!-- About Menu -->
 			<v-menu v-if="$vuetify.breakpoint.mdAndUp" left offset-y>
 				<template #activator="{ on, attrs }">
 					<v-btn v-bind="attrs" text v-on="on">
@@ -135,7 +129,7 @@
 				<v-list>
 					<v-list-item
 						v-for="(item, index) in subMenuEntriesAbout"
-						:key="`sub` + index"
+						:key="`sub${index}`"
 						:to="item.to"
 						:href="item.href"
 						:target="item.external ? '_blank' : ''"
@@ -174,8 +168,9 @@
 				class="ml-2"
 				data-testid="btn-login"
 				@click="LoginHandler"
-				><v-icon left>mdi-login</v-icon> Login</v-btn
 			>
+				<v-icon left>mdi-login</v-icon> Login
+			</v-btn>
 			<v-btn
 				v-if="$store.state.auth.loggedIn"
 				color="secondary"
@@ -184,12 +179,11 @@
 				class="ml-2"
 				data-testid="btn-logout"
 				@click="LogoutHandler"
-				><v-icon left>mdi-logout</v-icon>Logout</v-btn
 			>
-			<!-- <v-btn v-if="$vuetify.breakpoint.mdAndUp" depressed color="ml-3 primary">
-				<v-icon left>mdi-login-variant</v-icon> Login
-			</v-btn> -->
+				<v-icon left>mdi-logout</v-icon> Logout
+			</v-btn>
 		</v-app-bar>
+
 		<cookie-law theme="dark-lime">
 			<div slot="message">
 				OpenEBench uses 🍪 to ensure you get the best experience on our website.
@@ -218,7 +212,6 @@ export default {
 	data() {
 		return {
 			openNavMobile: null,
-			fixed: false,
 			menuEntries,
 			subMenuEntriesDocs,
 			subMenuEntriesAbout,

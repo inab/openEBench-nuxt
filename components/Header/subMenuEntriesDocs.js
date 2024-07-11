@@ -10,7 +10,7 @@ const subMenuEntriesDocs = [
 	{
 		title: 'Project',
 		title_hide: 'Project Docs',
-		href: 'https://openebench.readthedocs.io/en/latest/',
+		href: 'https://openebench.readthedocs.io/en/latest/introduction/1_overview.html',
 		external: true,
 	},
 ];

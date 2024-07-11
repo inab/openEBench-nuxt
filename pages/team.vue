@@ -45,7 +45,6 @@
 					:member="leader"
 					:is-mobile="isMobile"
 					:institution-mapping="institutionMapping"
-					:items="items"
 				/>
 			</v-col>
 		</v-row>
@@ -64,7 +63,6 @@
 					:member="teammate"
 					:is-mobile="isMobile"
 					:institution-mapping="institutionMapping"
-					:items="items"
 				/>
 			</v-col>
 		</v-row>
@@ -92,15 +90,44 @@
 					:alumni="alumni"
 					:is-mobile="isMobile"
 					:institution-mapping="institutionMapping"
-					:items="items"
 				/>
 			</v-col>
 		</v-row>
+		<br />
+		<!-- Roles Legend Expansion Panel -->
+		<v-divider class="mt-12"></v-divider>
+		<v-expansion-panels class="mt-8">
+			<v-expansion-panel>
+				<v-expansion-panel-header class="header-bg">
+					<b>Roles Legend</b>
+				</v-expansion-panel-header>
+				<v-expansion-panel-content>
+					<v-simple-table>
+						<template v-slot:default>
+							<thead>
+								<tr>
+									<th>Name</th>
+									<th>Description</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr v-for="(role, index) in rolesLegend" :key="index">
+									<td>
+										<strong>{{ role.name }}</strong>
+									</td>
+									<td>{{ role.description }}</td>
+								</tr>
+							</tbody>
+						</template>
+					</v-simple-table>
+				</v-expansion-panel-content>
+			</v-expansion-panel>
+		</v-expansion-panels>
 	</v-container>
 </template>
 
 <script>
-import membersData from '@/static/members/members.json';
+import membersData from '@/static/members/membersPage.json';
 import MemberCard from '@/components/Cards/MemberCard.vue';
 import AlumniCard from '@/components/Cards/AlumniCard.vue';
 
@@ -129,120 +156,23 @@ export default {
 					disabled: true,
 				},
 			],
-			items: [
-				{
-					color: '#ffcc99',
-					icon: require('~/static/members/icons/tl.png'),
-					word: 'Tooling (command line)',
-					hover: false,
-				},
-				{
-					color: '#ccffcc',
-					icon: require('~/static/members/icons/ce.png'),
-					word: 'Community Engagement',
-					hover: false,
-				},
-				{
-					color: '#ff6666',
-					icon: require('~/static/members/icons/ld.png'),
-					word: 'Leadership',
-					hover: false,
-				},
-				{
-					color: '#ff99cc',
-					icon: require('~/static/members/icons/so.png'),
-					word: 'Software Observatory',
-					hover: false,
-				},
-				{
-					color: '#ccccff',
-					icon: require('~/static/members/icons/sb.png'),
-					word: 'Scientific Benchmarking',
-					hover: false,
-				},
-				{
-					color: '#ffcccc',
-					icon: require('~/static/members/icons/cb.png'),
-					word: 'Compute Back-end',
-					hover: false,
-				},
-				{
-					color: '#99ccff',
-					icon: require('~/static/members/icons/bo.png'),
-					word: 'Back-office',
-					hover: false,
-				},
-				{
-					color: '#ffffcc',
-					icon: require('~/static/members/icons/di.png'),
-					word: 'Data Interfaces',
-					hover: false,
-				},
-				{
-					color: '#cc99ff',
-					icon: require('~/static/members/icons/dm.png'),
-					word: 'Data Modelization',
-					hover: false,
-				},
-				{
-					color: '#ccff99',
-					icon: require('~/static/members/icons/dv.png'),
-					word: 'Data Visualization',
-					hover: false,
-				},
-				{
-					color: '#ffccff',
-					icon: require('~/static/members/icons/fd.png'),
-					word: 'Web Front-end',
-					hover: false,
-				},
-				{
-					color: '#ffcc66',
-					icon: require('~/static/members/icons/st.png'),
-					word: 'Security',
-					hover: false,
-				},
-				{
-					color: '#ccf2ff',
-					icon: require('~/static/members/icons/tm.png'),
-					word: 'Technical Monitoring',
-					hover: false,
-				},
-			],
 			members: [],
-			institutionMapping: {
-				'BSC-CNS': {
-					name: 'Barcelona Supercomputing Center',
-					link: 'https://www.bsc.es/',
-				},
-				UB: {
-					name: 'University of Barcelona',
-					link: 'https://www.ub.edu/',
-				},
-				'INB/ELIXIR-ES': {
-					name: 'Spanish National Bioinformatics Institute',
-					link: 'https://www.inb-elixir.es/',
-				},
-				ICREA: {
-					name: 'Catalan Institution for Research and Advanced Studies',
-					link: 'https://www.icrea.cat/',
-				},
-				// Add more mappings as needed
-			},
+			institutionMapping: {},
 			alumnis: [],
 			isMobile: false,
 			show: false,
+			rolesLegend: [],
 		};
 	},
 	computed: {
 		leaders() {
 			return this.members.filter((member) =>
-				member.roles.some((role) => role.name === 'Leadership')
+				member.roles.includes('Leadership')
 			);
 		},
 		teammates() {
 			return this.members.filter(
-				(member) => !member.roles.some((role) => role.name === 'Leadership')
+				(member) => !member.roles.includes('Leadership')
 			);
 		},
 	},
@@ -251,18 +181,17 @@ export default {
 	},
 	mounted() {
 		// Initialize members data and store original institution names
-		this.members = membersData.Members.map((member) => ({
-			...member,
-			roles: member.roles.map((role) => ({ name: role, hover: false })),
-		}));
-		this.alumnis = membersData.Alumni.map((alumni) => ({
-			...alumni,
-			roles: alumni.roles.map((role) => ({ name: role, hover: false })),
-		}));
+		this.members = membersData.Members;
+		this.alumnis = membersData.Alumni;
+		this.rolesLegend = membersData.Roles;
+		this.institutionMapping = membersData.Institutions;
 		// Initial check for mobile
 		this.checkMobile();
 		// Add event listener for window resize
 		window.addEventListener('resize', this.checkMobile);
+
+		// Sort roles legend alphabetically
+		this.rolesLegend.sort((a, b) => a.name.localeCompare(b.name));
 	},
 	beforeDestroy() {
 		window.removeEventListener('resize', this.checkMobile);
@@ -278,7 +207,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .section-title-border {
 	border-bottom: 2px solid black;
 	margin-bottom: 50px;
@@ -286,5 +215,26 @@ export default {
 	color: #0b579f;
 	font-weight: 400;
 	font-size: 1.5rem;
+}
+
+.header-bg {
+	font-weight: bold;
+}
+
+.v-expansion-panel-header {
+	transition: box-shadow 0.3s ease-in-out;
+}
+
+.v-expansion-panel:not(.v-expansion-panel--active)
+	.v-expansion-panel-header:hover {
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 20%);
+}
+
+.v-expansion-panel--active > .v-expansion-panel-header {
+	background-color: #f0f0f0;
+}
+
+.v-data-table > .v-data-table__wrapper > table > tbody > tr > td {
+	height: 25px;
 }
 </style>

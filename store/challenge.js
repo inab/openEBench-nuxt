@@ -199,10 +199,18 @@ export default {
 				const id = dataset._id;
 				// TODO remove if statement, once more visualizations are consuming the widget endpoint
 				const response =
-					dataset.datalink.inline_data.visualization.type === 'bar-plot'
+					dataset.datalink.inline_data.visualization.type === 'bar-plot' ||
+					dataset.datalink.inline_data.visualization.type === 'box-plot'
 						? await this.$graphql
 								.$get(
-									`/widget/${dataset.datalink.inline_data.visualization.type}/${dataset._id}`
+									`/widget/${dataset.datalink.inline_data.visualization.type}/${
+										dataset._id
+									}${
+										dataset.datalink.inline_data.visualization.type ===
+										'box-plot'
+											? '?log2=true'
+											: ''
+									}`
 								)
 								.catch(() => {
 									return [];

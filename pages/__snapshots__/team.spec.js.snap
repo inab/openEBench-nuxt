@@ -1,0 +1,118 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TeamPage.vue matches the snapshot 1`] = `
+"<v-container-stub tag=\\"div\\">
+  <h1 class=\\"text--h3\\">The Team of OpenEBench</h1>
+  <p>
+    Here, you can get to know the current and
+    <a href=\\"#alumni\\">past members</a> of the team behind the design,
+    development and operation of OpenEBench. OpenEBench is the ELIXIR Open
+    Data platform supporting community-driven scientific benchmarking
+    activities and the technical monitoring of research software in Life
+    Sciences.
+  </p>
+  <p>
+    The OpenEBench team is a committed group of professionals with different
+    roles and complementary expertise who work together to maintain OpenEBench
+    and add new functionality for a better user experience. The team is mainly
+    affiliated with the
+    <a href=\\"https://bsc.es/\\" target=\\"_blank\\">Barcelona Supercomputing Center (BSC).<v-icon-stub small=\\"\\" right=\\"\\">mdi-open-in-new</v-icon-stub></a>
+    However, we are open to collaborations worldwide as OpenEBench follows the
+    Open Science principles since its inception to facilitate working
+    together.
+  </p>
+  <p>
+    The overall objective is to automatise the interactions within the
+    platform as much as possible so users can become an integral part of its
+    operations by curating and updating existing information within it.
+  </p> <br>
+  <h2 class=\\"text--h3 section-title-border\\">Leaders</h2>
+  <v-row-stub tag=\\"div\\">
+    <v-col-stub cols=\\"12\\" sm=\\"6\\" md=\\"4\\" tag=\\"div\\">
+      <membercard-stub member=\\"[object Object]\\" institutionmapping=\\"[object Object]\\"></membercard-stub>
+    </v-col-stub>
+    <v-col-stub cols=\\"12\\" sm=\\"6\\" md=\\"4\\" tag=\\"div\\">
+      <membercard-stub member=\\"[object Object]\\" institutionmapping=\\"[object Object]\\"></membercard-stub>
+    </v-col-stub>
+    <v-col-stub cols=\\"12\\" sm=\\"6\\" md=\\"4\\" tag=\\"div\\">
+      <membercard-stub member=\\"[object Object]\\" institutionmapping=\\"[object Object]\\"></membercard-stub>
+    </v-col-stub>
+  </v-row-stub>
+  <h2 class=\\"section-title-border mt-2\\">Group Members</h2>
+  <v-row-stub tag=\\"div\\">
+    <v-col-stub cols=\\"12\\" sm=\\"6\\" md=\\"4\\" tag=\\"div\\">
+      <membercard-stub member=\\"[object Object]\\" institutionmapping=\\"[object Object]\\"></membercard-stub>
+    </v-col-stub>
+    <v-col-stub cols=\\"12\\" sm=\\"6\\" md=\\"4\\" tag=\\"div\\">
+      <membercard-stub member=\\"[object Object]\\" institutionmapping=\\"[object Object]\\"></membercard-stub>
+    </v-col-stub>
+    <v-col-stub cols=\\"12\\" sm=\\"6\\" md=\\"4\\" tag=\\"div\\">
+      <membercard-stub member=\\"[object Object]\\" institutionmapping=\\"[object Object]\\"></membercard-stub>
+    </v-col-stub>
+    <v-col-stub cols=\\"12\\" sm=\\"6\\" md=\\"4\\" tag=\\"div\\">
+      <membercard-stub member=\\"[object Object]\\" institutionmapping=\\"[object Object]\\"></membercard-stub>
+    </v-col-stub>
+    <v-col-stub cols=\\"12\\" sm=\\"6\\" md=\\"4\\" tag=\\"div\\">
+      <membercard-stub member=\\"[object Object]\\" institutionmapping=\\"[object Object]\\"></membercard-stub>
+    </v-col-stub>
+    <v-col-stub cols=\\"12\\" sm=\\"6\\" md=\\"4\\" tag=\\"div\\">
+      <membercard-stub member=\\"[object Object]\\" institutionmapping=\\"[object Object]\\"></membercard-stub>
+    </v-col-stub>
+    <v-col-stub cols=\\"12\\" sm=\\"6\\" md=\\"4\\" tag=\\"div\\">
+      <membercard-stub member=\\"[object Object]\\" institutionmapping=\\"[object Object]\\"></membercard-stub>
+    </v-col-stub>
+    <v-col-stub cols=\\"12\\" sm=\\"6\\" md=\\"4\\" tag=\\"div\\">
+      <membercard-stub member=\\"[object Object]\\" institutionmapping=\\"[object Object]\\"></membercard-stub>
+    </v-col-stub>
+    <v-col-stub cols=\\"12\\" sm=\\"6\\" md=\\"4\\" tag=\\"div\\">
+      <membercard-stub member=\\"[object Object]\\" institutionmapping=\\"[object Object]\\"></membercard-stub>
+    </v-col-stub>
+    <v-col-stub cols=\\"12\\" sm=\\"6\\" md=\\"4\\" tag=\\"div\\">
+      <membercard-stub member=\\"[object Object]\\" institutionmapping=\\"[object Object]\\"></membercard-stub>
+    </v-col-stub>
+  </v-row-stub> <br> <br id=\\"alumni\\"> <br>
+  <v-divider-stub></v-divider-stub>
+  <h2 class=\\"mt-2\\">The OpenEBench Alumni network</h2>
+  <p>
+    Different professionals have contributed to the development of OpenEBench
+    since its inception in 2017. In this section, you can find past members
+    and their main roles within the team. We are grateful for their
+    contributions to the platform and interactions with different communities.
+  </p> <br>
+  <v-row-stub tag=\\"div\\">
+    <v-col-stub cols=\\"12\\" sm=\\"6\\" md=\\"4\\" tag=\\"div\\">
+      <alumnicard-stub alumni=\\"[object Object]\\" institution-mapping=\\"[object Object]\\"></alumnicard-stub>
+    </v-col-stub>
+    <v-col-stub cols=\\"12\\" sm=\\"6\\" md=\\"4\\" tag=\\"div\\">
+      <alumnicard-stub alumni=\\"[object Object]\\" institution-mapping=\\"[object Object]\\"></alumnicard-stub>
+    </v-col-stub>
+    <v-col-stub cols=\\"12\\" sm=\\"6\\" md=\\"4\\" tag=\\"div\\">
+      <alumnicard-stub alumni=\\"[object Object]\\" institution-mapping=\\"[object Object]\\"></alumnicard-stub>
+    </v-col-stub>
+    <v-col-stub cols=\\"12\\" sm=\\"6\\" md=\\"4\\" tag=\\"div\\">
+      <alumnicard-stub alumni=\\"[object Object]\\" institution-mapping=\\"[object Object]\\"></alumnicard-stub>
+    </v-col-stub>
+    <v-col-stub cols=\\"12\\" sm=\\"6\\" md=\\"4\\" tag=\\"div\\">
+      <alumnicard-stub alumni=\\"[object Object]\\" institution-mapping=\\"[object Object]\\"></alumnicard-stub>
+    </v-col-stub>
+    <v-col-stub cols=\\"12\\" sm=\\"6\\" md=\\"4\\" tag=\\"div\\">
+      <alumnicard-stub alumni=\\"[object Object]\\" institution-mapping=\\"[object Object]\\"></alumnicard-stub>
+    </v-col-stub>
+    <v-col-stub cols=\\"12\\" sm=\\"6\\" md=\\"4\\" tag=\\"div\\">
+      <alumnicard-stub alumni=\\"[object Object]\\" institution-mapping=\\"[object Object]\\"></alumnicard-stub>
+    </v-col-stub>
+    <v-col-stub cols=\\"12\\" sm=\\"6\\" md=\\"4\\" tag=\\"div\\">
+      <alumnicard-stub alumni=\\"[object Object]\\" institution-mapping=\\"[object Object]\\"></alumnicard-stub>
+    </v-col-stub>
+  </v-row-stub> <br>
+  <v-divider-stub class=\\"mt-12\\"></v-divider-stub>
+  <v-expansion-panels-stub valuecomparator=\\"[Function]\\" activeclass=\\"v-item--active\\" tag=\\"div\\" class=\\"mt-8\\">
+    <v-expansion-panel-stub>
+      <v-expansion-panel-header-stub expandicon=\\"$expand\\" class=\\"header-bg\\"><b>Roles Legend</b></v-expansion-panel-header-stub>
+      <v-expansion-panel-content-stub>
+        <v-simple-table-stub></v-simple-table-stub>
+      </v-expansion-panel-content-stub>
+    </v-expansion-panel-stub>
+  </v-expansion-panels-stub>
+</v-container-stub>"
+`;
