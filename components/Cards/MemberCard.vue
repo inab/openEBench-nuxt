@@ -255,8 +255,6 @@ export default {
 /* Main card styles */
 .main-card {
 	cursor: default; /* Normal cursor for the entire card */
-	min-width: 300px; /* Add minimum width */
-	max-width: 350px; /* Adjust maximum width */
 }
 
 .main-card:hover {
@@ -359,9 +357,6 @@ export default {
 		top: 10px;
 		opacity: 1;
 	}
-	.main-card {
-		max-width: 100%;
-	}
 	.main-card .grayscale-image {
 		filter: none;
 	}
@@ -371,7 +366,7 @@ export default {
 		bottom: 0;
 		right: 0;
 		width: 50px;
-		height: 50px;
+		height: 40px;
 		background-color: #0b579f;
 		color: white;
 		border-top-left-radius: 50px;
@@ -386,14 +381,18 @@ export default {
 	.roles-text {
 		font-size: 10px;
 		margin-right: -2px;
-		margin-top: 15px;
+		margin-top: 10px;
 		margin-left: 10px;
 	}
 	.arrow-icon {
 		color: white;
 		font-size: 10px;
 		margin-left: 2px;
-		margin-top: 15px;
+		margin-top: 10px;
+	}
+
+	.v-card::before {
+		max-width: 120px;
 	}
 }
 </style>
