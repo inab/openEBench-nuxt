@@ -58,6 +58,10 @@
 							}}</v-icon>
 						</span>
 					</p>
+
+					<p>
+						<b>How to cite this poster:</b> <br />{{ selectedPoster.citation }}
+					</p>
 					<p>Presented at {{ selectedPoster.presented_loc }}</p>
 				</div>
 			</div>
@@ -74,7 +78,6 @@
 						:key="poster.title"
 						cols="12"
 						md="6"
-						@click="selectPoster(poster)"
 					>
 						<v-card class="poster-preview" outlined>
 							<embed
@@ -82,11 +85,32 @@
 								type="application/pdf"
 								class="embed-pdf"
 							/>
-							<v-card-title class="poster-title">
+							<v-card-title class="poster-title" @click="selectPoster(poster)">
 								<span
 									v-html="sanitizeHtml(formattedTitle(poster.title))"
 								></span>
+								<span> </span>
 							</v-card-title>
+							<div class="mx-2 chip">
+								<a
+									class="chip-icon"
+									target="_blank"
+									href="https://creativecommons.org/licenses/by/4.0/deed.en"
+								>
+									<img
+										src="@/static/posters/cc.png"
+										alt="CC"
+										class="logo chip-with-logo"
+									/>
+								</a>
+								<a target="_blank" :href="poster.link" class="chip-icon">
+									<img
+										src="@/static/posters/doi.svg"
+										alt="CC"
+										class="logo chip-with-logo"
+									/>
+								</a>
+							</div>
 							<v-card-subtitle class="publication-date">
 								{{ formatDate(poster.date) }}
 							</v-card-subtitle>
@@ -245,13 +269,39 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.logo {
+	width: 25px;
+	height: 25px;
+	border-radius: 50%;
+	opacity: 0.7;
+}
+
+.logo:hover {
+	width: 28px;
+	height: 28px;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 20%);
+	transition: box-shadow 0.3s ease-in-out;
+}
+
+.chip {
+	height: 35px;
+	text-align: center;
+	justify-content: center;
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	a:hover {
+		display: block;
+		height: 28px;
+	}
+}
+
 .poster-grid {
 	display: flex;
 	flex-wrap: wrap;
 }
 
 .poster-preview {
-	cursor: pointer;
 	margin-bottom: 16px;
 	display: flex;
 	flex-direction: column;
@@ -267,11 +317,16 @@ export default {
 }
 
 .poster-title {
+	cursor: pointer;
 	font-size: 14px; /* Smaller font size for titles */
 	margin: 8px 0; /* Ensure there is space between embed and title */
 	text-align: left;
 	word-break: break-word; /* Allow breaking long words */
 	overflow: hidden; /* Hide overflow text */
+}
+
+.poster-title:hover {
+	text-decoration: underline;
 }
 
 .poster-title span {

@@ -69,7 +69,7 @@
 			</p>
 			<ul>
 				<p>
-					the “minimum” and “lowerfence”, quartile (Q1), median, third quartile
+					The “minimum” and “lowerfence”, quartile (Q1), median, third quartile
 					(Q3), “maximum” and “upperfence” values.
 				</p>
 				<p>
