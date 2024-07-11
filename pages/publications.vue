@@ -17,7 +17,7 @@
 
 		<v-tabs :vertical="vertical" class="mt-10">
 			<!-- Manuscripts -->
-			<v-tab>
+			<v-tab class="tab-aligned">
 				<v-icon left>mdi-text-box-multiple-outline</v-icon>
 				Manuscripts
 			</v-tab>
@@ -64,7 +64,7 @@
 			</v-tab-item>
 
 			<!-- Posters -->
-			<v-tab>
+			<v-tab class="tab-aligned">
 				<v-icon left>mdi-file-table-outline</v-icon>
 				Posters
 			</v-tab>
@@ -302,5 +302,9 @@ export default {
 .manuscripts-container,
 .posters-container {
 	width: 100%; /* Ensure full width */
+}
+
+.tab-aligned {
+  justify-content: start;
 }
 </style>
