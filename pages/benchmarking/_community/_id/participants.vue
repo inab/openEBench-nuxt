@@ -119,8 +119,7 @@
 		<!-- No participants and metrics available. -->
 		<div v-else>
 			<div class="mt-8" align="center">
-				<v-img :src="illustration" contain max-height="300" />
-				<h2>No participants and metrics available.</h2>
+				<NoDataAvailable :item="'participants and metrics'" />
 			</div>
 		</div>
 	</v-container>
@@ -129,10 +128,11 @@
 <script>
 import { mapGetters } from 'vuex';
 import ChallengeParticipantMetricsTable from '~/components/Challenges/ChallengeParticipantMetricsTable';
+import NoDataAvailable from '~/layouts/noDataAvailable.vue';
 
 export default {
 	name: 'CommunityChallengeParticipantsPage',
-	components: { ChallengeParticipantMetricsTable },
+	components: { ChallengeParticipantMetricsTable, NoDataAvailable },
 	data() {
 		return {
 			hostName: this.$config.OEB_LEGACY_ANGULAR_URI,
