@@ -14,18 +14,13 @@
 			</h2>
 			<!-- TODO -->
 			<p class="text--secondary">
-				In this 2D plot two metrics from the challenge
-				{{ challenge.challenge_label }} are represented in the X and Y axis,
-				showing the results from the participating tools in this challenge. The
-				gray line represents the pareto frontier, which runs over the
-				participants tools, showing the best efficiency, while the arrow in the
-				plot represents the optimal corner.
+				List of tools participating in the challenge, together with a summary of
+				the metrics obtained.
 			</p>
-			<v-alert class="mt-8" border="left" dense text color="info" type="info">
-				The menu button above the diagram can be used to switch between the
-				different classification methods / visualization modes (Square
-				Quartiles; Diagonal Quartiles, and k-means Clustering).
-			</v-alert>
+		</div>
+
+		<!-- Participants and metrics available. -->
+		<div v-if="participants.length > 0">
 			<v-skeleton-loader
 				v-if="
 					$store.state.challenge.loading.participants ||
@@ -38,87 +33,95 @@
 				v-else
 				:metrics-table="metricsTable"
 			/>
-		</div>
-		<v-skeleton-loader
-			v-if="$store.state.challenge.loading.participants"
-			type="card-heading, image"
-		/>
-		<div v-else>
-			<h2 class="text-h6 mt-8">
-				Choose one of the {{ participants.length }} participants whose metrics
-				you want to visualize in the radar plot:
-			</h2>
-			<!-- CHIPS -->
-			<v-data-table
-				v-if="participants.length > 15"
-				:items="participants"
-				:items-per-page="15"
-				hide-default-header
-				disable-sort
-				class="no-hover my-4"
-			>
-				<template #body="{ items }">
-					<tbody>
-						<tr
-							v-for="(row, rowIndex) in chunk(items, 3)"
-							:key="rowIndex"
-							active-class="accent--text"
-						>
-							<td
-								v-for="participant in row"
-								:key="participant._id"
-								class="pa-2"
+
+			<v-skeleton-loader
+				v-if="$store.state.challenge.loading.participants"
+				type="card-heading, image"
+			/>
+			<div v-else>
+				<h2 class="text-h6 mt-8">
+					Choose one of the {{ participants.length }} participants whose metrics
+					you want to visualize in the radar plot:
+				</h2>
+				<!-- CHIPS -->
+				<v-data-table
+					v-if="participants.length > 15"
+					:items="participants"
+					:items-per-page="15"
+					hide-default-header
+					disable-sort
+					class="no-hover my-4"
+				>
+					<template #body="{ items }">
+						<tbody>
+							<tr
+								v-for="(row, rowIndex) in chunk(items, 3)"
+								:key="rowIndex"
+								active-class="accent--text"
 							>
-								<v-chip
-									class="chip"
-									:class="{ 'accent--text': tab === participant._id }"
-									:input-value="tab === participant._id"
-									@click="tab = participant._id"
+								<td
+									v-for="participant in row"
+									:key="participant._id"
+									class="pa-2"
 								>
-									{{ formatLabel(participant.participant_label) }}
-								</v-chip>
-							</td>
-						</tr>
-					</tbody>
-				</template>
-			</v-data-table>
+									<v-chip
+										class="chip"
+										:class="{ 'accent--text': tab === participant._id }"
+										:input-value="tab === participant._id"
+										@click="tab = participant._id"
+									>
+										{{ formatLabel(participant.participant_label) }}
+									</v-chip>
+								</td>
+							</tr>
+						</tbody>
+					</template>
+				</v-data-table>
 
-			<!-- Chips for less than 15 participants -->
-			<div class="my-4" v-else :value="tab" column>
-				<v-chip
-					class="chip2 mx-1 my-1"
-					:class="{ 'accent--text': tab === participant._id }"
-					v-for="participant in participants"
-					:key="participant._id"
-					:input-value="tab === participant._id"
-					@click="selectParticipant(participant._id)"
-				>
-					{{ formatLabel(participant.participant_label) }}
-				</v-chip>
-			</div>
-
-			<!-- Chart or no visualization -->
-			<v-tabs-items v-if="tab" v-model="tab">
-				<v-tab-item
-					v-for="(item, index) in participants"
-					:key="index"
-					:value="item._id"
-					:transition="false"
-				>
-					<!-- No Visualization -->
-					<div
-						class="text--secondary mt-6 mx-10"
-						align="center"
-						color="rgba(0, 0, 0, 0.6)"
+				<!-- Chips for less than 15 participants -->
+				<div class="my-4" v-else :value="tab" column>
+					<v-chip
+						class="chip2 mx-1 my-1"
+						:class="{ 'accent--text': tab === participant._id }"
+						v-for="participant in participants"
+						:key="participant._id"
+						:input-value="tab === participant._id"
+						@click="selectParticipant(participant._id)"
 					>
-						<v-img :src="illustration" contain max-height="300" />
-						<h2>No chart available.</h2>
-						<p class="text-h6">
-							No visual representation implemented yet. Check back soon!
-						</p>
-					</div>
-				</v-tab-item>
-			</v-tabs-items>
+						{{ formatLabel(participant.participant_label) }}
+					</v-chip>
+				</div>
+
+				<!-- Chart or no visualization -->
+				<v-tabs-items v-if="tab" v-model="tab">
+					<v-tab-item
+						v-for="(item, index) in participants"
+						:key="index"
+						:value="item._id"
+						:transition="false"
+					>
+						<!-- No Visualization -->
+						<div
+							class="text--secondary mt-6 mx-10"
+							align="center"
+							color="rgba(0, 0, 0, 0.6)"
+						>
+							<v-img :src="illustration" contain max-height="300" />
+							<h2>No chart available.</h2>
+							<p class="text-h6">
+								No visual representation implemented yet. Check back soon!
+							</p>
+						</div>
+					</v-tab-item>
+				</v-tabs-items>
+			</div>
+		</div>
+		<!-- No participants and metrics available. -->
+		<div v-else>
+			<div class="mt-8" align="center">
+				<v-img :src="illustration" contain max-height="300" />
+				<h2>No participants and metrics available.</h2>
+			</div>
 		</div>
 	</v-container>
 </template>
@@ -302,6 +305,10 @@ export default {
 </script>
 
 <style scoped>
+.container {
+	height: calc(100% - 390px);
+}
+
 .chip {
 	width: 340px !important;
 	text-align: center;
