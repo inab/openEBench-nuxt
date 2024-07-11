@@ -32,7 +32,7 @@
 						</v-tab>
 
 						<v-tab-item class="ma-5 mt-5 mt-md-0" :transition="false">
-							<div class="transition-container" key="core">
+							<div key="core" class="transition-container">
 								<transition name="slide">
 									<div v-if="loading" class="loader-container">
 										<img :src="loaderGif" alt="Loading..." class="loader" />
@@ -46,7 +46,7 @@
 							</div>
 						</v-tab-item>
 						<v-tab-item class="ma-5 mt-5 mt-md-0">
-							<div class="transition-container" key="collaboration">
+							<div key="collaboration" class="transition-container">
 								<transition name="slide">
 									<div v-if="loading" class="loader-container">
 										<img :src="loaderGif" alt="Loading..." class="loader" />
@@ -80,7 +80,7 @@
 						<br />
 
 						<v-tab-item class="ma-5 mt-5 mt-md-0" :transition="false">
-							<div class="transition-container" key="OEB">
+							<div key="OEB" class="transition-container">
 								<transition name="slide">
 									<div v-if="loading" class="loader-container">
 										<img :src="loaderGif" alt="Loading..." class="loader" />
@@ -94,7 +94,7 @@
 							</div>
 						</v-tab-item>
 						<v-tab-item class="ma-5 mt-5 mt-md-0" :transition="false">
-							<div class="transition-container" key="MENTION">
+							<div key="MENTION" class="transition-container">
 								<transition name="slide">
 									<div v-if="loading" class="loader-container">
 										<img :src="loaderGif" alt="Loading..." class="loader" />
@@ -305,6 +305,6 @@ export default {
 }
 
 .tab-aligned {
-  justify-content: start;
+	justify-content: start;
 }
 </style>
