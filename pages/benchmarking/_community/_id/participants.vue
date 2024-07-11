@@ -48,15 +48,45 @@
 				Choose one of the {{ participants.length }} participants whose metrics
 				you want to visualize in the radar plot:
 			</h2>
-			<v-chip-group v-model="tab" active-class="accent--text" column mandatory>
-				<v-chip v-for="participant in participants" :key="participant._id">
-					{{ participant.participant_label }}
-				</v-chip>
-			</v-chip-group>
-			<v-tabs-items v-model="tab">
+			<!-- CHIPS -->
+			<v-data-table
+				:items="participants"
+				:items-per-page="15"
+				hide-default-header
+				disable-sort
+				class="no-hover my-4"
+			>
+				<template #body="{ items }">
+					<tbody>
+						<tr
+							v-for="(row, rowIndex) in chunk(items, 3)"
+							:key="rowIndex"
+							active-class="accent--text"
+						>
+							<td
+								v-for="participant in row"
+								:key="participant._id"
+								class="pa-2"
+							>
+								<v-chip
+									class="chip"
+									:class="{ 'accent--text': tab === participant._id }"
+									:input-value="tab === participant._id"
+									@click="tab = participant._id"
+								>
+									{{ formatLabel(participant.participant_label) }}
+								</v-chip>
+							</td>
+						</tr>
+					</tbody>
+				</template>
+			</v-data-table>
+
+			<v-tabs-items v-if="tab" v-model="tab">
 				<v-tab-item
 					v-for="(item, index) in participants"
 					:key="index"
+					:value="item._id"
 					:transition="false"
 				>
 					<!-- No Visualization -->
@@ -66,7 +96,7 @@
 						color="rgba(0, 0, 0, 0.6)"
 					>
 						<v-img :src="illustration" contain max-height="300" />
-						<h2>No chart available</h2>
+						<h2>No chart available.</h2>
 						<p class="text-h6">
 							No visual representation implemented yet. Check back soon!
 						</p>
@@ -87,8 +117,12 @@ export default {
 	data() {
 		return {
 			hostName: this.$config.OEB_LEGACY_ANGULAR_URI,
-			tab: 0,
+			tab: null,
 			illustration: require('~/static/images/illustrations/empty-state.svg'),
+			pagination: {
+				page: 1,
+				itemsPerPage: 15,
+			},
 		};
 	},
 	computed: {
@@ -209,6 +243,13 @@ export default {
 		breadcrumbs() {
 			this.$parent.$emit('emitBreadcrumbs', this.breadcrumbs);
 		},
+		participants(newParticipants) {
+			if (newParticipants.length > 0) {
+				this.tab = newParticipants[0]._id;
+			} else {
+				this.tab = null;
+			}
+		},
 	},
 	mounted() {
 		this.$parent.$emit('emitBreadcrumbs', this.breadcrumbs);
@@ -217,6 +258,35 @@ export default {
 				id: this.$route.params.id,
 			});
 		}
+
+		if (this.participants.length > 0) {
+			this.tab = this.participants[0]._id;
+		}
+	},
+	methods: {
+		// Formatear texto de participants label
+		formatLabel(text) {
+			return text.replace('Dataset_participant:', '');
+		},
+		chunk(array, size) {
+			const chunkedArr = [];
+			for (let i = 0; i < array.length; i += size) {
+				chunkedArr.push(array.slice(i, i + size));
+			}
+			return chunkedArr;
+		},
 	},
 };
 </script>
+
+<style scoped>
+.chip {
+	width: 340px !important;
+	text-align: center;
+	justify-content: center;
+}
+
+.no-hover tbody tr:hover {
+	background-color: transparent !important;
+}
+</style>
