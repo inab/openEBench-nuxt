@@ -95,24 +95,26 @@
 								<a
 									class="chip-icon"
 									target="_blank"
-                  title="Creative Commons Attribution 4.0 International License"
+									title="Creative Commons Attribution 4.0 International License"
 									href="https://creativecommons.org/licenses/by/4.0/deed.en"
 								>
 									<img
 										src="@/static/posters/cc.png"
 										alt="Creative Commons Attribution 4.0 International License"
-                    title="Creative Commons Attribution 4.0 International License"
+										title="Creative Commons Attribution 4.0 International License"
 										class="logo chip-with-logo"
 									/>
 								</a>
-								<a target="_blank"
-                  :href="poster.link"
-                  class="chip-icon"
-                  title="doi">
+								<a
+									target="_blank"
+									:href="poster.link"
+									class="chip-icon"
+									title="doi"
+								>
 									<img
 										src="@/static/posters/doi.svg"
 										alt="doi"
-                    title="doi"
+										title="doi"
 										class="logo chip-with-logo"
 									/>
 								</a>
@@ -281,26 +283,26 @@ export default {
 	justify-content: center;
 	display: flex;
 	justify-content: center;
-  align-items: end;
+	align-items: end;
 	gap: 10px;
-  flex: 1;
-  padding-bottom: 10px;
-	.chip-icon{
-    height: 23px;
-    transition: all .3s ease-in-out;
-    display: block;
-    &:hover {
-      transform: scale(1.4);
-    }
-    img {
-      height: 100%;
-      border-radius: 50%;
-      opacity: 0.7;
-    }
-    &:focus {
-      outline: none;
-    }
-  }
+	flex: 1;
+	padding-bottom: 10px;
+	.chip-icon {
+		height: 23px;
+		transition: all 0.3s ease-in-out;
+		display: block;
+		&:hover {
+			transform: scale(1.4);
+		}
+		img {
+			height: 100%;
+			border-radius: 50%;
+			opacity: 0.7;
+		}
+		&:focus {
+			outline: none;
+		}
+	}
 }
 
 .poster-grid {
@@ -330,7 +332,7 @@ export default {
 	text-align: left;
 	word-break: break-word; /* Allow breaking long words */
 	overflow: hidden; /* Hide overflow text */
-  flex: 2;
+	flex: 2;
 }
 
 .poster-title:hover {
