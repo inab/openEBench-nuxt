@@ -95,18 +95,26 @@
 								<a
 									class="chip-icon"
 									target="_blank"
+									title="Creative Commons Attribution 4.0 International License"
 									href="https://creativecommons.org/licenses/by/4.0/deed.en"
 								>
 									<img
 										src="@/static/posters/cc.png"
-										alt="CC"
+										alt="Creative Commons Attribution 4.0 International License"
+										title="Creative Commons Attribution 4.0 International License"
 										class="logo chip-with-logo"
 									/>
 								</a>
-								<a target="_blank" :href="poster.link" class="chip-icon">
+								<a
+									target="_blank"
+									:href="poster.link"
+									class="chip-icon"
+									title="doi"
+								>
 									<img
 										src="@/static/posters/doi.svg"
-										alt="CC"
+										alt="doi"
+										title="doi"
 										class="logo chip-with-logo"
 									/>
 								</a>
@@ -269,30 +277,31 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.logo {
-	width: 25px;
-	height: 25px;
-	border-radius: 50%;
-	opacity: 0.7;
-}
-
-.logo:hover {
-	width: 28px;
-	height: 28px;
-	box-shadow: 0 4px 20px rgba(0, 0, 0, 20%);
-	transition: box-shadow 0.3s ease-in-out;
-}
-
 .chip {
 	height: 35px;
 	text-align: center;
 	justify-content: center;
 	display: flex;
 	justify-content: center;
+	align-items: end;
 	gap: 10px;
-	a:hover {
+	flex: 1;
+	padding-bottom: 10px;
+	.chip-icon {
+		height: 23px;
+		transition: all 0.3s ease-in-out;
 		display: block;
-		height: 28px;
+		&:hover {
+			transform: scale(1.4);
+		}
+		img {
+			height: 100%;
+			border-radius: 50%;
+			opacity: 0.7;
+		}
+		&:focus {
+			outline: none;
+		}
 	}
 }
 
@@ -323,6 +332,7 @@ export default {
 	text-align: left;
 	word-break: break-word; /* Allow breaking long words */
 	overflow: hidden; /* Hide overflow text */
+	flex: 2;
 }
 
 .poster-title:hover {

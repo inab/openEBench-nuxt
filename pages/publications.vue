@@ -17,7 +17,7 @@
 
 		<v-tabs :vertical="vertical" class="mt-10">
 			<!-- Manuscripts -->
-			<v-tab>
+			<v-tab class="tab-aligned">
 				<v-icon left>mdi-text-box-multiple-outline</v-icon>
 				Manuscripts
 			</v-tab>
@@ -32,7 +32,7 @@
 						</v-tab>
 
 						<v-tab-item class="ma-5 mt-5 mt-md-0" :transition="false">
-							<div class="transition-container" key="core">
+							<div key="core" class="transition-container">
 								<transition name="slide">
 									<div v-if="loading" class="loader-container">
 										<img :src="loaderGif" alt="Loading..." class="loader" />
@@ -46,7 +46,7 @@
 							</div>
 						</v-tab-item>
 						<v-tab-item class="ma-5 mt-5 mt-md-0">
-							<div class="transition-container" key="collaboration">
+							<div key="collaboration" class="transition-container">
 								<transition name="slide">
 									<div v-if="loading" class="loader-container">
 										<img :src="loaderGif" alt="Loading..." class="loader" />
@@ -64,7 +64,7 @@
 			</v-tab-item>
 
 			<!-- Posters -->
-			<v-tab>
+			<v-tab class="tab-aligned">
 				<v-icon left>mdi-file-table-outline</v-icon>
 				Posters
 			</v-tab>
@@ -80,7 +80,7 @@
 						<br />
 
 						<v-tab-item class="ma-5 mt-5 mt-md-0" :transition="false">
-							<div class="transition-container" key="OEB">
+							<div key="OEB" class="transition-container">
 								<transition name="slide">
 									<div v-if="loading" class="loader-container">
 										<img :src="loaderGif" alt="Loading..." class="loader" />
@@ -94,7 +94,7 @@
 							</div>
 						</v-tab-item>
 						<v-tab-item class="ma-5 mt-5 mt-md-0" :transition="false">
-							<div class="transition-container" key="MENTION">
+							<div key="MENTION" class="transition-container">
 								<transition name="slide">
 									<div v-if="loading" class="loader-container">
 										<img :src="loaderGif" alt="Loading..." class="loader" />
@@ -302,5 +302,9 @@ export default {
 .manuscripts-container,
 .posters-container {
 	width: 100%; /* Ensure full width */
+}
+
+.tab-aligned {
+	justify-content: start;
 }
 </style>
