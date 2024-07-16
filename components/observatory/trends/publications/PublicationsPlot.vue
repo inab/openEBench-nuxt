@@ -4,10 +4,39 @@
 
 <script>
 import Plotly from 'plotly.js-dist';
-import { mapGetters } from 'vuex';
 
 export default {
 	name: 'PublicationsPlot',
+	props: {
+		xValues: {
+			type: Array,
+			required: true,
+		},
+		yPercentageValues: {
+			type: Array,
+			required: true,
+		},
+		yIFValues: {
+			type: Array,
+			required: true,
+		},
+		textPercentageTools: {
+			type: Array,
+			required: true,
+		},
+		textPercentageJournals: {
+			type: Array,
+			required: true,
+		},
+		title: {
+			type: String,
+			default: '',
+		},
+		height: {
+			type: Number,
+			default: 275,
+		},
+	},
 	data() {
 		return {
 			layout: {
@@ -34,6 +63,13 @@ export default {
 				hoverlabel: {
 					bgcolor: '#FFF',
 				},
+				height: this.height,
+				title: {
+					text: this.title,
+					font: {
+						size: 16,
+					},
+				},
 			},
 			config: {
 				responsive: true,
@@ -41,15 +77,11 @@ export default {
 			},
 		};
 	},
-	computed: {
-		...mapGetters('observatory/trends', {
-			data_plot: 'Publications',
-		}),
-	},
+
 	mounted() {
 		const tracePercentage = {
-			x: this.data_plot.IF_tools.x,
-			y: this.data_plot.percentages.y,
+			x: this.xValues,
+			y: this.yPercentageValues,
 			type: 'scatter',
 			mode: 'lines+markers',
 			name: 'Percentage of publications',
@@ -63,8 +95,8 @@ export default {
 			},
 			hovertemplate:
 				'%{text} publications about tools out of %{customdata} total publications <extra></extra>',
-			text: this.data_plot.percentages.text_tools,
-			customdata: this.data_plot.percentages.text_journals,
+			text: this.textPercentageTools,
+			customdata: this.textPercentageJournals,
 			textposition: [
 				'center right',
 				'bottom left',
@@ -83,8 +115,8 @@ export default {
 		};
 
 		const traceIFTools = {
-			x: this.data_plot.IF_tools.x,
-			y: this.data_plot.IF_tools.y,
+			x: this.xValues,
+			y: this.yIFValues,
 			name: 'Tools publications',
 			marker: {
 				color: '#eb9b34',

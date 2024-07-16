@@ -51,7 +51,7 @@
 						type="card-avatar"
 					/>
 
-					<VersionControlPlot v-else />
+					<VersionControlPlot v-else :x-values="x" :y-values="y" />
 				</v-col>
 				<v-col xl="11" lg="11" md="10" sm="12" align-self="start">
 					<p class="mt-0 ml-8 mb-0">
@@ -78,14 +78,24 @@ export default {
 	computed: {
 		...mapGetters('observatory', {
 			control_counts: 'trends/VersionControlCount',
+			data_vc: 'trends/VersionControlRepositories',
 		}),
 
+		x() {
+			return Object.values(this.data_vc);
+		},
+
+		y() {
+			return Object.keys(this.data_vc);
+		},
+
 		percentage() {
-			const total =
-				this.control_counts['version control'] +
-				this.control_counts['no version control'];
-			const percentage = (this.control_counts['version control'] / total) * 100;
-			return percentage;
+			const {
+				'version control': versionControl,
+				'no version control': noVersionControl,
+			} = this.control_counts;
+			const total = versionControl + noVersionControl;
+			return (versionControl / total) * 100;
 		},
 	},
 	created() {

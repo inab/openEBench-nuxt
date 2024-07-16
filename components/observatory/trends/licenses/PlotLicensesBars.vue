@@ -1,13 +1,46 @@
 <template>
-	<div id="plot_2"></div>
+	<div :style="{ height: height + 'px', width: '100%' }" id="plot_2"></div>
 </template>
 
 <script>
 import Plotly from 'plotly.js-dist';
-import { mapGetters } from 'vuex';
 
 export default {
 	name: 'PlotLicensesBars',
+	props: {
+		counts_permissive: {
+			type: Array,
+			required: true,
+		},
+		licenses_permissive: {
+			type: Array,
+			required: true,
+		},
+		counts_copyleft: {
+			type: Array,
+			required: true,
+		},
+		licenses_copyleft: {
+			type: Array,
+			required: true,
+		},
+		counts_data: {
+			type: Array,
+			required: true,
+		},
+		licenses_data: {
+			type: Array,
+			required: true,
+		},
+		title: {
+			type: String,
+			default: '',
+		},
+		height: {
+			type: Number,
+			default: 300,
+		},
+	},
 	data() {
 		return {
 			labs: {
@@ -36,12 +69,14 @@ export default {
 				},
 				hoverlabel: { bgcolor: '#FFF' },
 				autosize: true,
-				height: 300,
+				height: this.height,
 				margin: {
-					autoexpand: true,
 					b: 70,
-					t: 20,
-					r: 50,
+					t: 40,
+					r: 0,
+				},
+				title: {
+					text: this.title,
 				},
 			},
 			config: {
@@ -51,14 +86,10 @@ export default {
 		};
 	},
 	computed: {
-		...mapGetters('observatory/trends', {
-			data_licenses: 'LicensesOpenSource',
-		}),
-
 		trace1() {
 			const trace1 = this.build_trace(
-				'licenses_copyleft',
-				'counts_copyleft',
+				this.licenses_copyleft,
+				this.counts_copyleft,
 				'Copyleft',
 				'#eb9b34',
 				'#ffffff',
@@ -69,8 +100,8 @@ export default {
 
 		trace2() {
 			const trace2 = this.build_trace(
-				'licenses_permissive',
-				'counts_permissive',
+				this.licenses_permissive,
+				this.counts_permissive,
 				'Permissive',
 				'#ffd299',
 				'#ffffff',
@@ -81,8 +112,8 @@ export default {
 
 		trace3() {
 			const trace3 = this.build_trace(
-				'licenses_data',
-				'counts_data',
+				this.licenses_data,
+				this.counts_data,
 				'Data',
 				'#bfbfbf',
 				'#ffffff',
@@ -93,15 +124,9 @@ export default {
 	},
 
 	mounted() {
-		const copyleft =
-			this.$store.state.observatory.trends._licensesOpenSource.licenses_copyleft
-				.length;
-		const permissive =
-			this.$store.state.observatory.trends._licensesOpenSource
-				.licenses_permissive.length;
-		const data =
-			this.$store.state.observatory.trends._licensesOpenSource.licenses_data
-				.length;
+		const copyleft = this.licenses_copyleft.length;
+		const permissive = this.licenses_permissive.length;
+		const data = this.licenses_data.length;
 
 		let traces;
 		if (copyleft === 0) {
@@ -122,17 +147,15 @@ export default {
 	},
 	methods: {
 		build_trace(x, y, name, color, border, labs) {
-			const X = this.data_licenses[x];
-			const Y = this.data_licenses[y];
 			const trace = {
 				type: 'bar',
-				x: X.map(function (a) {
+				x: x.map(function (a) {
 					return labs[a];
 				}),
-				y: Y,
+				y,
 				name,
-				customdata: Y.map((c) => {
-					return (c = (c / Y.reduce((a, b) => a + b)) * 100);
+				customdata: y.map((c) => {
+					return (c = (c / y.reduce((a, b) => a + b)) * 100);
 				}),
 				hovertemplate:
 					'%{x} <br> %{y:,d} instances <br> %{customdata:.1f}% of OpenSource <extra></extra>',

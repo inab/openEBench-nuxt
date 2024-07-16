@@ -13,7 +13,11 @@
 			class="mb-5 ml-10 mr-10"
 			type="card-avatar"
 		/>
-		<VersioningPlot v-else />
+		<VersioningPlot
+			v-else
+			:labels="data_versioning.labels"
+			:values="data_versioning.values"
+		/>
 		<p class="mt-2 mb-2 ml-8">
 			<span class="highlight"> Instances using semantics versionings</span>
 		</p>
@@ -35,12 +39,24 @@
 	</v-card>
 </template>
 <script>
+import { mapGetters } from 'vuex';
 import VersioningPlot from './VersioningPlot.vue';
+import { embedCodes } from '~/components/observatory/visualizations/embedCodes.js'; // Import the embed codes
 
 export default {
 	name: 'VersioningMain',
 	components: {
 		VersioningPlot,
+	},
+	computed: {
+		...mapGetters('observatory', {
+			data_versioning: 'trends/SemanticVersioning',
+		}),
+	},
+	data() {
+		return {
+			dialog_items: [embedCodes.versioning],
+		};
 	},
 };
 </script>

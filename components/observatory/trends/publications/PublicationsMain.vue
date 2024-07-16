@@ -22,7 +22,14 @@
 					class="mb-5 ml-10 mr-10"
 					type="card"
 				/>
-				<PublicationsPlot v-else />
+				<PublicationsPlot
+					v-else
+					:x-values="xValues"
+					:y-percentage-values="yPercentageValues"
+					:yIFValues="yIFValues"
+					:text-percentage-tools="textPercentageTools"
+					:text-percentage-journals="textPercentageJournals"
+				/>
 			</v-col>
 			<v-col xl="10" lg="10" md="10" sm="12" align-self="start">
 				<p class="mt-0 mb-2 ml-8">
@@ -37,12 +44,39 @@
 	</v-card>
 </template>
 <script>
+import { mapGetters } from 'vuex';
 import PublicationsPlot from './PublicationsPlot.vue';
 
 export default {
 	name: 'PublicationsMain',
 	components: {
 		PublicationsPlot,
+	},
+	computed: {
+		...mapGetters('observatory/trends', {
+			data_plot: 'Publications',
+		}),
+
+		// Journal can be taken either from data_plot.IF_tools.x or data_plot.percentages.x, they are the same
+		xValues() {
+			return this.data_plot.IF_tools.x;
+		},
+
+		yPercentageValues() {
+			return this.data_plot.percentages.y;
+		},
+
+		yIFValues() {
+			return this.data_plot.IF_tools.y;
+		},
+
+		textPercentageTools() {
+			return this.data_plot.percentages.text_tools;
+		},
+
+		textPercentageJournals() {
+			return this.data_plot.percentages.text_journals;
+		},
 	},
 };
 </script>

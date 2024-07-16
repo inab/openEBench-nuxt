@@ -4,22 +4,45 @@
 
 <script>
 import Plotly from 'plotly.js-dist';
-import { mapGetters } from 'vuex';
 
 export default {
 	name: 'VersioningPlot',
+	props: {
+		labels: {
+			type: Array,
+			required: true,
+		},
+		values: {
+			type: Array,
+			required: true,
+		},
+		title: {
+			type: String,
+			default: '',
+		},
+		height: {
+			type: Number,
+			default: 220,
+		},
+	},
 	data() {
 		return {
 			layout: {
 				showlegend: true,
 				hoverlabel: { bgcolor: '#FFF' },
-				height: 220,
+				height: this.height,
 				autosize: true,
 				margin: {
 					t: 20,
 					l: 0,
 					r: 0,
 					b: 20,
+				},
+				title: {
+					text: this.title,
+					x: 0.5,
+					xanchor: 'center',
+					yanchor: 'top',
 				},
 			},
 			config: {
@@ -28,15 +51,11 @@ export default {
 			},
 		};
 	},
-	computed: {
-		...mapGetters('observatory', {
-			data_versioning: 'trends/SemanticVersioning',
-		}),
-	},
+
 	mounted() {
 		const trace = {
-			labels: this.data_versioning.labels,
-			values: this.data_versioning.values,
+			labels: this.labels,
+			values: this.values,
 			type: 'pie',
 			hole: 0.4,
 			direction: 'clockwise',

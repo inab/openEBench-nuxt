@@ -235,6 +235,16 @@ export default {
 					'pages/observatory/PostGitHubInstall.vue'
 				),
 			});
+
+			routes.push({
+				name: 'visualizations',
+				path: '/visualizations/:domain/:visualization/:collection?',
+				component: resolve(
+					__dirname,
+					'pages/observatory/visualizations/_domain/_visualization'
+				),
+			});
+
 			routes.push({
 				name: 'scientific-community',
 				path: '/scientific/:community',
