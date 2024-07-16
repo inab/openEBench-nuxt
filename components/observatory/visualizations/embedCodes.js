@@ -6,12 +6,19 @@ export const embedCodes = {
 		url: `${BASE_URL}/visualizations/licenses/LicensesPie`,
 	},
 	licensesBar: {
-		title: 'Licenses Bar Chart',
+		title: 'Open Source Licenses Bar Chart',
 		url: `${BASE_URL}/visualizations/license/LicensesBar`,
 	},
-	versioning: {
-		title: 'Versioning',
-		url: `${BASE_URL}/visualizations/versioning/Versioning`,
+	versionControl: {
+		title: 'Version Control Repositories Bars Chart',
+		url: `${BASE_URL}/visualizations/versionControl/VersionControlBars`,
 	},
-	// Add more plots as needed
+	publications: {
+		title: 'Software Publications Percentage and Impact Factor Plot',
+		url: `${BASE_URL}/visualizations/publications/PublicationsScatters`,
+	},
+	versioningPie: {
+		title: 'Versioning Pie Chart',
+		url: `${BASE_URL}/visualizations/versioning/VersioningPie`,
+	},
 };

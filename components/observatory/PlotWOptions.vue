@@ -15,7 +15,7 @@
 			<span>{{ message }}</span>
 		</v-tooltip>
 
-		<v-dialog v-model="dialog" width="55%">
+		<v-dialog v-model="dialog" width="65%">
 			<v-card>
 				<v-card-title> Plots Iframe Code </v-card-title>
 				<v-card-text>

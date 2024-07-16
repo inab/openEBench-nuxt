@@ -1,5 +1,6 @@
 <template>
 	<v-card outlined elevation="2" class="pb-8 pr-4 pl-4 pt-1">
+		<PlotWOptions class="copy-icon" :items="dialogItems" />
 		<h6 class="text-center mt-6">Versioning</h6>
 		<p style="line-height: 1.8" class="mb-6 text-center card-content">
 			Following a specific set of rules for naming software releases allows its
@@ -41,25 +42,28 @@
 <script>
 import { mapGetters } from 'vuex';
 import VersioningPlot from './VersioningPlot.vue';
+import PlotWOptions from '~/components/observatory/PlotWOptions.vue';
 import { embedCodes } from '~/components/observatory/visualizations/embedCodes.js'; // Import the embed codes
 
 export default {
 	name: 'VersioningMain',
 	components: {
 		VersioningPlot,
+		PlotWOptions,
+	},
+	data() {
+		return {
+			dialogItems: [embedCodes.versioningPie],
+		};
 	},
 	computed: {
 		...mapGetters('observatory', {
 			data_versioning: 'trends/SemanticVersioning',
 		}),
 	},
-	data() {
-		return {
-			dialog_items: [embedCodes.versioning],
-		};
-	},
 };
 </script>
+
 <style scoped>
 #plot {
 	padding: 0%;
@@ -73,5 +77,11 @@ export default {
 .highlight {
 	color: #001752f8;
 	font-weight: 500;
+}
+
+.copy-icon {
+	position: absolute;
+	top: 5px;
+	right: 10px;
 }
 </style>

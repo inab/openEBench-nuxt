@@ -1,5 +1,6 @@
 <template>
 	<v-card outlined elevation="2">
+		<PlotWOptions class="copy-icon" :items="dialogItems" />
 		<v-container class="mb-3">
 			<v-row class="pt-0" justify="center">
 				<v-col xl="7" lg="7" md="12" sm="7" xs="12" cols="12" class="mt-0 pt-1">
@@ -68,13 +69,20 @@
 <script>
 import { mapGetters } from 'vuex';
 import VersionControlPlot from './VersionControlPlot.vue';
+import PlotWOptions from '~/components/observatory/PlotWOptions.vue';
+import { embedCodes } from '~/components/observatory/visualizations/embedCodes.js'; // Import the embed codes
 
 export default {
 	name: 'VersionControl',
 	components: {
 		VersionControlPlot,
+		PlotWOptions,
 	},
-
+	data() {
+		return {
+			dialogItems: [embedCodes.versionControl],
+		};
+	},
 	computed: {
 		...mapGetters('observatory', {
 			control_counts: 'trends/VersionControlCount',
@@ -169,5 +177,11 @@ export default {
 	font-size: 0.9em !important;
 	width: 95%;
 	margin: auto;
+}
+
+.copy-icon {
+	position: absolute;
+	top: 5px;
+	right: 10px;
 }
 </style>

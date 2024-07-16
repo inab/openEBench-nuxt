@@ -1,5 +1,6 @@
 <template>
 	<v-card outlined elevation="2" class="pr-8 pb-6">
+		<PlotWOptions class="copy-icon" :items="dialogItems" />
 		<v-row class="mb-0 pb-0" justify="center">
 			<v-col md="11" lg="11" sm="10" xs="12" class="ml-8 mt-5 mb-pd-0">
 				<h6 class="text-center mt-6 mb-2">Publications</h6>
@@ -46,11 +47,19 @@
 <script>
 import { mapGetters } from 'vuex';
 import PublicationsPlot from './PublicationsPlot.vue';
+import PlotWOptions from '~/components/observatory/PlotWOptions.vue';
+import { embedCodes } from '~/components/observatory/visualizations/embedCodes.js'; // Import the embed codes
 
 export default {
 	name: 'PublicationsMain',
 	components: {
 		PublicationsPlot,
+		PlotWOptions,
+	},
+	data() {
+		return {
+			dialogItems: [embedCodes.publications],
+		};
 	},
 	computed: {
 		...mapGetters('observatory/trends', {
@@ -80,3 +89,11 @@ export default {
 	},
 };
 </script>
+
+<style scoped>
+.copy-icon {
+	position: absolute;
+	top: 5px;
+	right: 10px;
+}
+</style>
