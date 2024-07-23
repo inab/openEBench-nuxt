@@ -74,7 +74,7 @@ export const getters = {
 
 export const actions = {
 	async fetchSPDXLicenses({ commit, _state }) {
-		const URL = 'SPDXLicenses';
+		const URL = 'spdx/SPDXLicenses';
 
 		const SPDXLicenses = await this.cache.dispatch(
 			'observatory/evaluation/metadata/GET_URL',
@@ -86,7 +86,7 @@ export const actions = {
 
 	// better generate once and read from json file or js file
 	async getVocabulariesItems({ commit, _state }) {
-		const URL = '/EDAMTerms';
+		const URL = 'edam//EDAMTerms';
 
 		const EDAMTerms = await this.cache.dispatch(
 			'observatory/evaluation/metadata/GET_URL',

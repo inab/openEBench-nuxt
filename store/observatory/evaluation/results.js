@@ -23,7 +23,7 @@ export const getters = {
 // actions
 export const actions = {
 	async evaluateToolById({ commit, _state }, tooId) {
-		const URL = '/tools/evaluateId';
+		const URL = '/fair/evaluateId';
 
 		commit('setLoading', { evaluation: true });
 
@@ -40,7 +40,7 @@ export const actions = {
 	},
 
 	async evaluateToolByMetadata({ commit, _state }, toolMetadata) {
-		const URL = '/tools/evaluate';
+		const URL = '/fair/evaluate';
 
 		commit('setLoading', { evaluation: true });
 
