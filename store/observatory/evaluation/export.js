@@ -45,6 +45,8 @@ export const actions = {
 			filename: payload.filename,
 			installationID: payload.installationID,
 			metadata: payload.metadata,
+			title: payload.title,
+			message: payload.message,
 		};
 		const response = await this.$githubapp.$post(URL, parameters);
 		console.log(response);

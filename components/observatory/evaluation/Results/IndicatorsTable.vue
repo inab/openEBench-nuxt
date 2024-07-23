@@ -11,7 +11,7 @@
 			class="elevation-0 text-body-2"
 		>
 			<!-----    INDICATOR COLUMN  ---------->
-			<template v-slot:[`item.indicator`]="{ item }">
+			<template #[`item.indicator`]="{ item }">
 				<tr>
 					<td>
 						<p
@@ -28,7 +28,7 @@
 			</template>
 
 			<!-----    STATUS COLUMN  ---------->
-			<template v-slot:[`item.status`]="{ item }">
+			<template #[`item.status`]="{ item }">
 				<!-- only chip on rows of low-level indicators-->
 				<tr>
 					<td>
@@ -200,13 +200,13 @@
 								</li>
 							</div>
 							<v-alert
-								text
-								dense
-								type="warning"
 								v-if="
 									!idsMainIndicators.includes(item.id) &&
 									indicatorsExplanation[item.id].note != ''
 								"
+								text
+								dense
+								type="warning"
 								class="mt-2 mb-3"
 								style="font-size: 0.8rem"
 							>

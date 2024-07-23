@@ -1,6 +1,6 @@
 <template>
 	<v-container>
-		<v-row justify="space-around" v-if="loadingStep">
+		<v-row v-if="loadingStep" justify="space-around">
 			<v-col cols="10">
 				<v-skeleton-loader
 					class="mx-auto"

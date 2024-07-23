@@ -27,7 +27,7 @@
 					v-else
 					:x-values="xValues"
 					:y-percentage-values="yPercentageValues"
-					:yIFValues="yIFValues"
+					:y-i-f-values="yIFValues"
 					:text-percentage-tools="textPercentageTools"
 					:text-percentage-journals="textPercentageJournals"
 				/>

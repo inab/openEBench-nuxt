@@ -38,6 +38,7 @@
 		"dompurify": "^2.3.8",
 		"file-loader": "^6.2.0",
 		"gsap": "^3.10.4",
+		"js-yaml": "^4.1.0",
 		"lodash": "^4.17.21",
 		"lodash.debounce": "^4.0.8",
 		"marked": "^4.0.16",

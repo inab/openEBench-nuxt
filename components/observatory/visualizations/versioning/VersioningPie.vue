@@ -1,5 +1,5 @@
 <template>
-	<CommonTemplate :isLoading="isLoading">
+	<CommonTemplate :is-loading="isLoading">
 		<VersioningPlot
 			v-if="!isLoading"
 			:labels="labels"
@@ -30,6 +30,9 @@ export default {
 			plotTitle: this.$route.query.title,
 		};
 	},
+	created() {
+		this.fetchData();
+	},
 	methods: {
 		async fetchData() {
 			const collection = this.collection || 'tools';
@@ -50,9 +53,6 @@ export default {
 				this.isLoading = false;
 			}
 		},
-	},
-	created() {
-		this.fetchData();
 	},
 };
 </script>

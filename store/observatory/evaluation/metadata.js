@@ -32,6 +32,7 @@
 export const state = () => ({
 	_toolMetadata: {},
 	_toolMetadataJSONLD: {},
+	_toolMetadataCFF: {},
 	_LoadedMetadata: false,
 	_SPDXLicenses: [],
 	_VocabulariesItems: {
@@ -46,6 +47,9 @@ export const state = () => ({
 
 // getters
 export const getters = {
+	getToolName(state) {
+		return state._toolMetadata.name;
+	},
 	getVocabulariesItems(state) {
 		return state._VocabulariesItems;
 	},
@@ -60,6 +64,9 @@ export const getters = {
 	},
 	getToolMetadataJSONLD(state) {
 		return state._toolMetadataJSONLD;
+	},
+	getToolMetadataCFF(state) {
+		return state._toolMetadataCFF;
 	},
 };
 
@@ -177,11 +184,36 @@ export const actions = {
 		commit('setMetadataJSONLD', result);
 	},
 
+	async transformToCFF({ commit, state }) {
+		// Transform the metadata to CFF
+
+		const payload = {
+			data: state._toolMetadata,
+			url: '/tools/cff',
+		};
+
+		const result = await this.dispatch(
+			'observatory/evaluation/metadata/POST_URL',
+			payload
+		);
+		console.log(result);
+
+		commit('setMetadataCFF', result);
+	},
+
 	async POST_URL({ _commit, _state }, payload) {
 		const result = await this.$observatory.post(payload.url, {
 			data: payload.data,
 		});
 		return result.data;
+	},
+
+	updateToolMetadataJSONLD({ commit }, payload) {
+		commit('setMetadataJSONLD', payload);
+	},
+
+	updateToolMetadataCFF({ commit }, payload) {
+		commit('setMetadataCFF', payload);
 	},
 
 	changeBooleanEntry({ commit }, payload) {
@@ -219,6 +251,10 @@ export const actions = {
 export const mutations = {
 	setMetadataJSONLD(state, payload) {
 		state._toolMetadataJSONLD = payload;
+	},
+
+	setMetadataCFF(state, payload) {
+		state._toolMetadataCFF = payload;
 	},
 
 	addField(state, payload) {

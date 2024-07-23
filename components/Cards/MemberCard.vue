@@ -131,6 +131,7 @@ import sharedMethodsMixin from '@/mixins/sharedMethodsMixin.js';
 
 export default {
 	name: 'MemberCard',
+	mixins: [sharedMethodsMixin],
 	props: {
 		member: {
 			type: Object,
@@ -146,7 +147,6 @@ export default {
 		},
 		institutionMapping: { type: Object, required: true },
 	},
-	mixins: [sharedMethodsMixin],
 	methods: {
 		getMemberAltText(member) {
 			return `Photo of ${member.name}`;

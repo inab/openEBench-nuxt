@@ -7,7 +7,7 @@
 			</v-card-text>
 			<v-card-actions>
 				<v-spacer></v-spacer>
-				<v-btn text @click="cancelParse" color="red"> close </v-btn>
+				<v-btn text color="red" @click="cancelParse"> close </v-btn>
 			</v-card-actions>
 		</v-card>
 	</v-dialog>

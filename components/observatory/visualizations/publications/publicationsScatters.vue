@@ -1,10 +1,10 @@
 <template>
-	<CommonTemplate :isLoading="isLoading">
+	<CommonTemplate :is-loading="isLoading">
 		<PublicationsPlot
 			v-if="!isLoading"
 			:x-values="xValues"
 			:y-percentage-values="yPercentageValues"
-			:yIFValues="yIFValues"
+			:y-i-f-values="yIFValues"
 			:text-percentage-tools="textPercentageTools"
 			:text-percentage-journals="textPercentageJournals"
 			:height="plotHeight"
@@ -34,6 +34,10 @@ export default {
 			collection: this.$route.params.collection,
 		};
 	},
+
+	created() {
+		this.fetchData();
+	},
 	methods: {
 		async fetchData() {
 			const collection = this.collection || 'tools';
@@ -55,10 +59,6 @@ export default {
 				this.isLoading = false;
 			}
 		},
-	},
-
-	created() {
-		this.fetchData();
 	},
 };
 </script>

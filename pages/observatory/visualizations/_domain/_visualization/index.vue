@@ -9,6 +9,13 @@ export default {
 		const { domain, visualization, collection } = params;
 		return { domain, visualization, collection };
 	},
+	data() {
+		return {
+			domain: this.$route.params.domain,
+			visualization: this.$route.params.visualization,
+			collection: this.$route.params.collection,
+		};
+	},
 	computed: {
 		componentName() {
 			const domain = this.domain;
@@ -23,13 +30,6 @@ export default {
 					.default;
 			}
 		},
-	},
-	data() {
-		return {
-			domain: this.$route.params.domain,
-			visualization: this.$route.params.visualization,
-			collection: this.$route.params.collection,
-		};
 	},
 };
 </script>

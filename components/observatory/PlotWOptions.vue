@@ -1,13 +1,13 @@
 <template>
 	<div class="mb-0 pb-0 ml-auto mr-0 pr-0 pt-2">
 		<v-tooltip bottom>
-			<template v-slot:activator="{ on, attrs }">
+			<template #activator="{ on, attrs }">
 				<v-btn
 					v-bind="attrs"
-					v-on="on"
-					@click="dialog = true"
 					icon
 					class="copy-icon"
+					v-on="on"
+					@click="dialog = true"
 				>
 					<v-icon small color="grey lighten-1">mdi-content-copy</v-icon>
 				</v-btn>

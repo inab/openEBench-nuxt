@@ -1,4 +1,4 @@
-const BASE_URL = process.env.OBSERVATORY_API_URL || 'http://localhost:3000/';
+const BASE_URL = process.env.OBSERVATORY_API_URL || 'http://localhost:3000';
 
 export const embedCodes = {
 	licensesPie: {
@@ -20,5 +20,21 @@ export const embedCodes = {
 	versioningPie: {
 		title: 'Versioning Pie Chart',
 		url: `${BASE_URL}/visualizations/versioning/VersioningPie`,
+	},
+	findabilityBubble: {
+		title: 'Findability Bubble Chart',
+		url: `${BASE_URL}/visualizations/FAIRness/FindabilityBubble`,
+	},
+	accessibilityBubble: {
+		title: 'Accessibility Bubble Chart',
+		url: `${BASE_URL}/visualizations/FAIRness/AccessibilityBubble`,
+	},
+	interoperabilityBubble: {
+		title: 'Interoperability Bubble Chart',
+		url: `${BASE_URL}/visualizations/FAIRness/InteroperabilityBubble`,
+	},
+	reusabilityBubble: {
+		title: 'Reusability Bubble Chart',
+		url: `${BASE_URL}/visualizations/FAIRness/ReusabilityBubble`,
 	},
 };

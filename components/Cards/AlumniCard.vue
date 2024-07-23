@@ -54,6 +54,7 @@ import sharedMethodsMixin from '@/mixins/sharedMethodsMixin.js';
 
 export default {
 	name: 'AlumniCard',
+	mixins: [sharedMethodsMixin],
 	props: {
 		alumni: {
 			type: Object,
@@ -69,7 +70,6 @@ export default {
 		},
 		institutionMapping: { type: Object, required: true },
 	},
-	mixins: [sharedMethodsMixin],
 	computed: {
 		formattedYears() {
 			return `${this.alumni.startYear} - ${this.alumni.endYear}`;

@@ -38,8 +38,8 @@
 				</v-card-title>
 				<v-card-text>
 					<v-textarea
-						v-model="jsonContent"
-						label="JSON Content"
+						v-model="yamlContent"
+						label="YAML Content"
 						rows="15"
 						outlined
 						style="line-height: 0.9; font-size: 0.75rem; font-family: monospace"
@@ -50,7 +50,7 @@
 					<v-btn color="red darken-1" text @click="discardChanges"
 						>Discard Changes</v-btn
 					>
-					<v-btn color="green darken-1" text @click="saveJson"
+					<v-btn color="green darken-1" text @click="saveYaml"
 						>Save and Close</v-btn
 					>
 				</v-card-actions>
@@ -60,10 +60,12 @@
 </template>
 
 <script>
+import yaml from 'js-yaml';
+
 export default {
-	name: 'ViewMetadata',
+	name: 'ViewCitation',
 	props: {
-		metadata: Object,
+		citation: Object,
 	},
 	data() {
 		return {
@@ -72,14 +74,15 @@ export default {
 				title: 'Preview and Edit',
 				id: 'preview',
 				icon: 'mdi-eye-check-outline',
-				description: 'Preview the metadata in JSON-LD format.',
+				description:
+					'You can review and make changes to the metadata before saving. Click "Preview" to see the current metadata in CFF format.',
 				iconText: 'Preview',
 			},
-			jsonContent: '',
+			yamlContent: '',
 		};
 	},
 	created() {
-		this.jsonContent = JSON.stringify(this.metadata, null, 2);
+		this.yamlContent = yaml.dump(this.citation);
 	},
 
 	methods: {
@@ -87,13 +90,13 @@ export default {
 			this.dialog = true;
 		},
 		discardChanges() {
-			this.jsonContent = JSON.stringify(this.metadata, null, 2);
+			this.yamlContent = yaml.dump(this.citation);
 			this.dialog = false;
 		},
-		saveJson() {
+		saveYaml() {
 			this.$store.dispatch(
-				'observatory/evaluation/metadata/updateToolMetadataJSONLD',
-				JSON.parse(this.jsonContent)
+				'observatory/evaluation/metadata/updateToolMetadataCFF',
+				yaml.load(this.yamlContent)
 			);
 			this.dialog = false;
 		},

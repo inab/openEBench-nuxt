@@ -1,5 +1,5 @@
 <template>
-	<div :style="{ height: height + 'px', width: '100%' }" id="plot_1"></div>
+	<div id="plot_1" :style="{ height: height + 'px', width: '100%' }"></div>
 </template>
 
 <script>
@@ -63,14 +63,14 @@ export default {
 			},
 		};
 	},
-	mounted() {
-		this.plotChart();
-	},
 	watch: {
 		height(newHeight) {
 			this.layout.height = newHeight;
 			this.plotChart();
 		},
+	},
+	mounted() {
+		this.plotChart();
 	},
 	methods: {
 		plotChart() {

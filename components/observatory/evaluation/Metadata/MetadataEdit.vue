@@ -665,6 +665,7 @@ export default {
 				this.toolMetadata
 			);
 			this.$store.dispatch('observatory/evaluation/metadata/transformToJSONLD');
+			this.$store.dispatch('observatory/evaluation/metadata/transformToCFF');
 			this.$store.dispatch('observatory/evaluation/changeStep', 4);
 		},
 

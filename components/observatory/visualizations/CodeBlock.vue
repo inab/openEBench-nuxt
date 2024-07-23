@@ -13,9 +13,9 @@
 					<template #activator="{ on }">
 						<v-btn
 							icon
-							v-on="on"
 							class="ml-2 mr-auto"
 							color="primary"
+							v-on="on"
 							@click="copyClipboard()"
 						>
 							<v-icon small> mdi-content-copy </v-icon>
@@ -28,7 +28,7 @@
 		<v-snackbar v-model="snackbar">
 			{{ text }}
 
-			<template v-slot:action="{ attrs }">
+			<template #action="{ attrs }">
 				<v-btn color="pink" text v-bind="attrs" @click="snackbar = false">
 					Close
 				</v-btn>

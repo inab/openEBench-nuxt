@@ -1,6 +1,6 @@
 <template>
 	<v-dialog v-model="dialogImportMetadata" max-width="500">
-		<v-card class="pt-3 pb-3 pl-2 pr-2" v-if="importError">
+		<v-card v-if="importError" class="pt-3 pb-3 pl-2 pr-2">
 			<v-card-title class="mt-0 pt-0 text-h6">
 				Importing metadata
 			</v-card-title>
@@ -18,7 +18,7 @@
 			</v-card-actions>
 		</v-card>
 
-		<v-card class="pt-3 pb-3 pl-2 pr-2" v-else>
+		<v-card v-else class="pt-3 pb-3 pl-2 pr-2">
 			<v-card-title class="mt-0 pt-0 text-h6">
 				Importing metadata
 			</v-card-title>

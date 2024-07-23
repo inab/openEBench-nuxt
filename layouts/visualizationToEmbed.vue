@@ -4,7 +4,7 @@
 			<div class="main-content">
 				<Nuxt />
 			</div>
-			<v-footer padless ref="footer" class="text-caption">
+			<v-footer ref="footer" padless class="text-caption">
 				<v-col class="text-caption" cols="12">
 					Provided by
 					<a href="https://openebench.bsc.es/" target="_blank">OpenEBench</a>

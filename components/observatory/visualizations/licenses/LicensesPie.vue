@@ -1,5 +1,5 @@
 <template>
-	<CommonTemplate :isLoading="isLoading">
+	<CommonTemplate :is-loading="isLoading">
 		<PlotLicensesPie
 			v-if="!isLoading"
 			:labels="labels"
@@ -7,6 +7,7 @@
 			:values="values"
 			:text="text"
 			:height="plotHeight"
+			:title="plotTitle"
 		/>
 	</CommonTemplate>
 </template>
@@ -31,7 +32,11 @@ export default {
 			text: [],
 			isLoading: true,
 			collection: this.$route.params.collection,
+			plotTitle: this.$route.query.title,
 		};
+	},
+	created() {
+		this.fetchData();
 	},
 	methods: {
 		async fetchData() {
@@ -53,9 +58,6 @@ export default {
 				this.isLoading = false;
 			}
 		},
-	},
-	created() {
-		this.fetchData();
 	},
 };
 </script>
