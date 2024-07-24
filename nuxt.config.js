@@ -171,10 +171,10 @@ export default {
 			'https://dev-openebench.bsc.es/rest/bench_event_api',
 		OBSERVATORY_API_URL:
 			process.env.OBSERVATORY_API_URL ||
-			'https://observatory.openebench.bsc.es/api',
+			'https://dev-observatory.openebench.bsc.es/api',
 		GITHUBAPP_API_URL:
 			process.env.GITHUBAPP_API_URL ||
-			'https://observatory.openebench.bsc.es/githubapp/api',
+			'https://dev-observatory.openebench.bsc.es/githubapp/api',
 		axios: {
 			// See https://github.com/nuxt-community/axios-module#options
 			baseURL:
