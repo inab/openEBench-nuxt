@@ -1,7 +1,4 @@
-export default function (
-	{ $axios, $config: { _OBSERVATORY_API_URL } },
-	inject
-) {
+export default function ({ $axios, $config: { OBSERVATORY_API_URL } }, inject) {
 	// Create a custom axios instance
 	const observatory = $axios.create({
 		headers: {
