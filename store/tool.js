@@ -219,7 +219,7 @@ export default {
 
 		async getEDAMTerms({ commit }) {
 			// This function gets the EDAM terms from the API
-			const response = await this.$observatory.$get('/EDAMTerms');
+			const response = await this.$observatory.$get('edam/EDAMTerms');
 
 			commit('updateEDAMTerms', response);
 		},
