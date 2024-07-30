@@ -97,7 +97,7 @@ export default {
 
 	methods: {
 		triggerSearch(value) {
-			this.$store.dispatch('tool/setSearchedTerm', value);
+			this.$store.dispatch('tool/updateSearchedTerm', value);
 			this.$router.push({
 				path: '/tool/search',
 				query: { q: value },
