@@ -1,6 +1,7 @@
 <template>
 	<div v-if="isMissageVisible" class="maintenance-notice">
 		<div class="maintenance-notice__box">
+			<v-icon right color="primary">mdi-alert</v-icon>
 			Please be aware that we will be performing routine server maintenance from
 			<b>August 5th to 7th</b>. <br />During this period, you may experience
 			temporary disruptions. We apologize for any inconvenience and appreciate
