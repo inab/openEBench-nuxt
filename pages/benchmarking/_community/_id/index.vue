@@ -1,37 +1,38 @@
 <template>
-	<v-container fluid>
+	<v-container>
 		<v-skeleton-loader
 			v-if="$store.state.challenge.loading.challenge"
 			class="mb-5"
 			type="heading, list-item-three-line"
 		/>
-		<div v-else class="mx-6">
+		<div v-else class="mx-3">
 			<h1 class="text-h4">
 				{{ challenge.challenge_label }} ({{ challenge._id }})
 			</h1>
-			<h2 class="text-subtitle-1 mb-5">
+			<h2 class="text-subtitle-1 font-italic mb-5">
 				{{ challenge.name }}
 			</h2>
-			<p class="text--secondary">
-				In this 2D plot two metrics from the challenge
-				{{ challenge.challenge_label }} are represented in the X and Y axis,
-				showing the results from the participating tools in this challenge. The
-				gray line represents the pareto frontier, which runs over the
-				participants tools, showing the best efficiency, while the arrow in the
-				plot represents the optimal corner.
-			</p>
-			<v-alert class="mt-8" border="left" dense text color="info" type="info">
-				The menu button above the diagram can be used to switch between the
-				different classification methods / visualization modes (Square
-				Quartiles; Diagonal Quartiles, and k-means Clustering).
-			</v-alert>
+
+			<!-- Description -->
+			<div v-if="!$store.state.challenge.loading.datasets">
+				<div v-for="(item, index) in datasets" :key="index">
+					<div v-if="index == tab">
+						<div v-if="item">
+							<ChartDescriptionCard
+								:data="item"
+								:challenge_label="challenge.challenge_label"
+							></ChartDescriptionCard>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 		<v-skeleton-loader
 			v-if="$store.state.challenge.loading.datasets"
 			type="card-heading, image"
 		/>
 		<div v-else>
-			<h2 class="text-h6 mt-8 mx-6">
+			<h2 class="text-h6 mt-8 mx-3">
 				Choose the metrics you want to visualize in the diagram:
 			</h2>
 			<v-chip-group
@@ -39,16 +40,23 @@
 				active-class="accent--text"
 				column
 				mandatory
-				class="mx-6"
+				class="mx-3"
 			>
 				<v-chip v-for="item in datasets" :key="item._id">
-					{{
-						item.datalink.inline_data.visualization.type == '2D-plot'
-							? item.datalink.inline_data.visualization.x_axis +
-							  ' + ' +
-							  item.datalink.inline_data.visualization.y_axis
-							: item.datalink.inline_data.visualization.metric
-					}}
+					<span
+						v-if="item.datalink.inline_data.visualization.type == 'box-plot'"
+					>
+						{{ item.datalink.inline_data.visualization.available_metrics[0] }}
+					</span>
+					<span v-else>
+						{{
+							item.datalink.inline_data.visualization.type == '2D-plot'
+								? item.datalink.inline_data.visualization.x_axis +
+								  ' + ' +
+								  item.datalink.inline_data.visualization.y_axis
+								: item.datalink.inline_data.visualization.metric
+						}}
+					</span>
 				</v-chip>
 			</v-chip-group>
 			<v-tabs-items v-model="tab" class="mx- 4">
@@ -77,12 +85,8 @@
 							align="center"
 							color="rgba(0, 0, 0, 0.6)"
 						>
-							<img
-								class="mb-4"
-								src="~/static/icons/chart.png"
-								alt=""
-								height="100px"
-							/>
+							<v-img :src="illustration" contain max-height="300" />
+
 							<h2>No chart available</h2>
 							<p class="text-h6">
 								We're working on adding a new visualization. Check back soon!
@@ -98,17 +102,20 @@
 <script>
 import { mapGetters } from 'vuex';
 import LoaderChartWidgets from '~/components/Widgets/LoaderChartWidgets';
+import ChartDescriptionCard from '~/components/Cards/ChartDescriptionCard';
 
 export default {
 	name: 'CommunityChallengePlotsPage',
 	components: {
 		LoaderChartWidgets,
+		ChartDescriptionCard,
 	},
 	data() {
 		return {
 			hostName: this.$config.OEB_LEGACY_ANGULAR_URI,
 			tab: 0,
 			m: [],
+			illustration: require('~/static/images/illustrations/empty-state.svg'),
 		};
 	},
 	computed: {
@@ -175,3 +182,9 @@ export default {
 	},
 };
 </script>
+
+<style scoped>
+.container {
+	max-width: 1300px !important;
+}
+</style>

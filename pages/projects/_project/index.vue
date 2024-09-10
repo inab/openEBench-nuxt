@@ -1,5 +1,5 @@
 <template>
-	<v-container fluid>
+	<v-container class="height">
 		<v-container>
 			<v-skeleton-loader
 				v-if="$store.state.community.loading.community"
@@ -9,17 +9,18 @@
 			<community-info v-else :community="project" />
 		</v-container>
 		<v-tabs :vertical="vertical" class="mt-10">
-			<v-tab class="justify-start">
+			<v-tab>
 				<v-icon left> mdi-information-outline </v-icon>
 				Summary
 			</v-tab>
-			<v-tab class="justify-start">
+			<v-tab>
 				<v-icon left> mdi-view-dashboard </v-icon>
 				Results
 			</v-tab>
-			<v-tab class="justify-start v-tab--min-width">
+			<v-tab>
 				<v-icon left> mdi-folder </v-icon>
 				<v-badge
+					class="badge-margin"
 					color="secondary"
 					:value="datasets.length"
 					:content="datasets.length"
@@ -28,9 +29,10 @@
 					Datasets
 				</v-badge>
 			</v-tab>
-			<v-tab class="justify-start">
+			<v-tab>
 				<v-icon left> mdi-cube-outline </v-icon>
 				<v-badge
+					class="badge-margin"
 					color="secondary"
 					:value="tools.length"
 					:content="tools.length"
@@ -71,6 +73,9 @@
 						:event="currentEvent"
 					/>
 				</v-card>
+				<v-card outlined v-else class="pa-5" elevation="1">
+					<community-empty-state class="mt-10" />
+				</v-card>
 			</v-tab-item>
 			<v-tab-item class="ma-5 mt-5 mt-md-0" :transition="false">
 				<v-card outlined elevation="1">
@@ -102,6 +107,7 @@ import CommunityToolsTable from '~/components/Communities/CommunityToolsTable';
 import CommunityDatasetsTable from '~/components/Communities/CommunityDatasetsTable';
 import CommunityEventSelector from '~/components/Communities/CommunityEventSelector';
 import CommunityInfo from '~/components/Communities/CommunityInfo';
+import CommunityEmptyState from '~/components/Communities/CommunityEmptyState';
 
 export default {
 	name: 'ProjectPage',
@@ -112,6 +118,7 @@ export default {
 		CommunityDatasetsTable,
 		CommunityEventSelector,
 		CommunityInfo,
+		CommunityEmptyState,
 	},
 	computed: {
 		...mapGetters('community', {
@@ -188,7 +195,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.height {
+	height: calc(100% - 390px);
+}
 .v-tab {
 	text-transform: none !important;
+}
+
+.badge-margin {
+	margin-right: 15px;
+	margin-left: -2px;
 }
 </style>

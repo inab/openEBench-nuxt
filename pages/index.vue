@@ -1,5 +1,6 @@
 <template>
 	<div>
+		<maintenance-notice />
 		<welcome-section class="mt-13" />
 		<hero-searchbar class="mt-16" />
 		<a
@@ -30,6 +31,7 @@ import WelcomeSection from '~/components/Landing/WelcomeSection';
 import HeroSearchbar from '~/components/Landing/HeroSearchbar';
 import HeroNumbers from '~/components/Landing/HeroNumbers';
 import KeyFeatures from '~/components/Landing/KeyFeatures';
+import MaintenanceNotice from '~/components/Molecules/MaintenanceNotice.vue';
 
 export default {
 	name: 'IndexPage',
@@ -40,6 +42,7 @@ export default {
 		HeroSearchbar,
 		HeroNumbers,
 		KeyFeatures,
+		MaintenanceNotice,
 	},
 	computed: {
 		...mapGetters('dashboard', {

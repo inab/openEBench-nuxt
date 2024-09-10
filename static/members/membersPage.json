@@ -1,0 +1,312 @@
+{
+	"Members": [
+		{
+			"image": "/amorales.jpeg",
+			"name": "Andrea Morales Mata",
+			"alias": "Andrea",
+			"institution": ["INB/ELIXIR-ES", "BSC-CNS"],
+			"roles": ["Web Front-end", "Data Visualization"],
+			"orcid": "https://orcid.org/0009-0008-7213-9577",
+			"github": "https://github.com/Androidbeingx ",
+			"show": false
+		},
+		{
+			"image": "/avalle.jpeg",
+			"name": "Ani Liseth Valle Banegas",
+			"alias": "Ani",
+			"institution": ["INB/ELIXIR-ES", "BSC-CNS"],
+			"roles": ["Web Front-end", "Data Visualization"],
+			"orcid": "https://orcid.org/0009-0009-6247-4475",
+			"github": "https://github.com/AniValle",
+			"show": false
+		},
+		{
+			"image": "/user.png",
+			"name": "Eva Martin del Pico",
+			"alias": "Eva",
+			"institution": ["INB/ELIXIR-ES", "BSC-CNS"],
+			"roles": [
+				"Software Observatory",
+				"Web Front-end",
+				"Data Visualization",
+				"Data Interfaces",
+				"Data Modelization"
+			],
+			"orcid": "https://orcid.org/0000-0001-8324-2897",
+			"github": "https://github.com/evamart ",
+			"show": false
+		},
+		{
+			"image": "/aredondo.jpeg",
+			"name": "Anna Redondo Guitarte",
+			"alias": "Anna",
+			"institution": ["INB/ELIXIR-ES", "BSC-CNS"],
+			"roles": [
+				"Community Engagement",
+				"Back-office",
+				"Tooling (command line)",
+				"Scientific Benchmarking"
+			],
+			"orcid": "https://orcid.org/0000-0003-0020-759X",
+			"github": "https://github.com/abredondo",
+			"show": false
+		},
+		{
+			"image": "/scapella.jpeg",
+			"name": "Salvador Capella-Gutierrez",
+			"alias": "Salva",
+			"institution": ["INB/ELIXIR-ES", "BSC-CNS"],
+			"roles": [
+				"Leadership",
+				"Scientific Benchmarking",
+				"Data Modelization",
+				"Software Observatory",
+				"Back-office",
+				"Data Visualization",
+				"Community Engagement",
+				"Technical Monitoring"
+			],
+			"orcid": "https://orcid.org/0000-0002-0309-604X ",
+			"github": "https://github.com/scapella",
+			"show": false
+		},
+		{
+			"image": "/laura-portell.jpg",
+			"name": "Laura Portell-Silva",
+			"alias": "Laura",
+			"institution": ["INB/ELIXIR-ES", "BSC-CNS"],
+			"roles": ["Community Engagement", "Back-office"],
+			"orcid": "https://orcid.org/0000-0003-0390-3208",
+			"github": "https://github.com/lauportell",
+			"show": false
+		},
+		{
+			"image": "/avalenci.jpeg",
+			"name": "Alfonso Valencia",
+			"alias": "Alfonso",
+			"institution": ["INB/ELIXIR-ES", "BSC-CNS", "ICREA"],
+			"roles": ["Leadership"],
+			"orcid": "https://orcid.org/0000-0002-8937-6789",
+			"github": null,
+			"show": false
+		},
+		{
+			"image": "/carles-hernandez.png",
+			"name": "Carles Hernandez-Ferrer",
+			"alias": "Carles",
+			"institution": ["INB/ELIXIR-ES", "BSC-CNS", "UB"],
+			"roles": [
+				"Community Engagement",
+				"Compute Back-end",
+				"Scientific Benchmarking",
+				"Tooling (command line)",
+				"Web Front-end",
+				"Data Visualization"
+			],
+			"orcid": "https://orcid.org/0000-0002-8029-7160",
+			"github": "https://github.com/carleshf/",
+			"show": false
+		},
+		{
+			"image": "/jm-fernandez.jpg",
+			"name": "José M. Fernández",
+			"alias": "JM",
+			"institution": ["INB/ELIXIR-ES", "BSC-CNS"],
+			"roles": [
+				"Community Engagement",
+				"Compute Back-end",
+				"Scientific Benchmarking",
+				"Web Front-end",
+				"Data Interfaces",
+				"Technical Monitoring",
+				"Tooling (command line)",
+				"Data Visualization",
+				"Data Modelization",
+				"Back-office"
+			],
+			"orcid": "https://orcid.org/0000-0002-4806-5140",
+			"github": "https://github.com/jmfernandez",
+			"show": false
+		},
+		{
+			"image": "/laia-codo.jpg",
+			"name": "Laia Codó",
+			"alias": "Laia",
+			"institution": ["INB/ELIXIR-ES", "BSC-CNS"],
+			"roles": [
+				"Community Engagement",
+				"Compute Back-end",
+				"Scientific Benchmarking",
+				"Web Front-end",
+				"Back-office"
+			],
+			"orcid": "https://orcid.org/0000-0002-6797-8746",
+			"github": "https://github.com/lcodo",
+			"show": false
+		},
+		{
+			"image": "/jl-gelpi.jpg",
+			"name": "Josep Lluís Gelpí",
+			"alias": "JL",
+			"institution": ["INB/ELIXIR-ES", "BSC-CNS", "UB"],
+			"roles": [
+				"Leadership",
+				"Data Modelization",
+				"Software Observatory",
+				"Compute Back-end",
+				"Back-office"
+			],
+			"orcid": "https://orcid.org/0000-0002-0566-7723",
+			"github": "https://github.com/jlgelpi",
+			"show": false
+		},
+		{
+			"image": "/dmitry.jpeg",
+			"name": "Dmitry Repchevsky ",
+			"alias": "Dmitry",
+			"institution": ["INB/ELIXIR-ES", "BSC-CNS"],
+			"roles": [
+				"Compute Back-end",
+				"Data Modelization",
+				"Data Interfaces",
+				"Technical Monitoring",
+				"Security"
+			],
+			"orcid": "https://orcid.org/0000-0001-6415-0532",
+			"github": "https://github.com/redmitry",
+			"show": false
+		},
+		{
+			"image": "/user.png",
+			"name": "Jessica Fernández Martínez",
+			"alias": "Jessica",
+			"institution": ["INB/ELIXIR-ES", "BSC-CNS"],
+			"roles": ["Web Front-end", "Data Visualization"],
+			"orcid": "https://orcid.org/0009-0004-2668-9077",
+			"github": "https://github.com/JessicaFM",
+			"show": false
+		}
+	],
+	"Alumni": [
+		{
+			"name": "Ester Vendrell",
+			"startYear": 2019,
+			"endYear": 2023,
+			"roles": ["Web Front-end", "Data Interfaces"]
+		},
+		{
+			"name": "Meritxell Ferret",
+			"startYear": 2020,
+			"endYear": 2022,
+			"roles": ["Web Front-end", "Data Interfaces"]
+		},
+		{
+			"name": "Asier Gonzalez Uriarte",
+			"startYear": 2020,
+			"endYear": 2022,
+			"roles": ["Community Engagement", "Back-office"]
+		},
+		{
+			"name": "Dominik Brüchner",
+			"startYear": 2021,
+			"endYear": 2022,
+			"roles": ["Web Front-end"]
+		},
+		{
+			"name": "Juergen Haas",
+			"startYear": 2016,
+			"endYear": 2019,
+			"roles": ["Data Modelization", "Scientific Benchmarking"]
+		},
+		{
+			"name": "Javier Garrayo",
+			"startYear": 2017,
+			"endYear": 2020,
+			"roles": ["Back-office", "Data Visualization", "Scientific Benchmarking"]
+		},
+		{
+			"name": "Vicky Sundesha",
+			"startYear": 2017,
+			"endYear": 2020,
+			"roles": ["Data Interfaces", "Web Front-end"]
+		},
+		{
+			"name": "Diana de la Iglesia",
+			"startYear": 2016,
+			"endYear": 2018,
+			"roles": ["Data Modelization"]
+		}
+	],
+	"Roles": [
+		{
+			"name": "Community Engagement",
+			"description": "Engagement with community stakeholders."
+		},
+		{
+			"name": "Compute Backend",
+			"description": "Backend infrastructure management."
+		},
+		{
+			"name": "Data Interfaces",
+			"description": "Development and maintenance of data interfaces."
+		},
+		{
+			"name": "Scientific Benchmarking",
+			"description": "Implementation and oversight of scientific benchmarks."
+		},
+		{
+			"name": "Technical Monitoring",
+			"description": "Monitoring and maintenance of technical aspects."
+		},
+		{
+			"name": "Tooling (command line)",
+			"description": "Development of command-line tools."
+		},
+		{
+			"name": "Web Front-end",
+			"description": "Development and maintenance of web interfaces."
+		},
+		{
+			"name": "Data Visualization",
+			"description": "Visualization of data for user interaction."
+		},
+		{
+			"name": "Back-office",
+			"description": "Administrative and internal tooling support."
+		},
+		{
+			"name": "Software Observatory",
+			"description": "Monitoring and analysis of software ecosystem."
+		},
+		{
+			"name": "Data Modelization",
+			"description": "Design and implementation of data models."
+		},
+		{
+			"name": "Security",
+			"description": "Implementation and oversight of security measures."
+		},
+		{
+			"name": "Leadership",
+			"description": "Strategic direction and team management."
+		}
+	],
+	"Institutions": {
+		"BSC-CNS": {
+			"name": "Barcelona Supercomputing Center",
+			"link": "https://www.bsc.es/"
+		},
+		"UB": {
+			"name": "University of Barcelona",
+			"link": "https://www.ub.edu/"
+		},
+		"INB/ELIXIR-ES": {
+			"name": "Spanish National Bioinformatics Institute",
+			"link": "https://www.inb-elixir.es/"
+		},
+		"ICREA": {
+			"name": "Catalan Institution for Research and Advanced Studies",
+			"link": "https://www.icrea.cat/"
+		}
+	}
+}

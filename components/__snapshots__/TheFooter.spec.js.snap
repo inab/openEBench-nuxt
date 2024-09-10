@@ -8,108 +8,84 @@ exports[`TheFooter should match snapshot 1`] = `
         <div aria-label=\\"logo\\" role=\\"img\\" class=\\"v-image v-responsive theme--light\\" style=\\"max-width: 150px;\\">
           <div class=\\"v-responsive__content\\"></div>
         </div>
-        <p class=\\"body-2\\">©&nbsp; BSC-CNS 2022</p>
+        <p class=\\"body-2\\">©&nbsp; BSC-CNS 2024</p>
       </div>
       <div class=\\"pa-4 col-md-6 col-12\\">
         <!---->
         <div class=\\"row justify-space-around\\">
           <div class=\\"pa-4 site-map-item col\\">
-            <h6 class=\\"title mb-4\\">
-              OpenEBench
-            </h6>
-            <ul>
-              <li><a dark=\\"\\" class=\\"white--text\\">
-                  Benchmarking
-                </a>
+            <h6 class=\\"title mb-4\\">OpenEBench</h6>
+            <ul class=\\"no-bullets aligned-list\\">
+              <li class=\\"list-item\\"><a dark=\\"\\" class=\\"white--text no-underline link-hover\\">Benchmarking</a>
                 <!---->
                 <!---->
               </li>
-              <li><a dark=\\"\\" class=\\"white--text\\">
-                  Observatory
-                </a>
+              <li class=\\"list-item\\"><a dark=\\"\\" class=\\"white--text no-underline link-hover\\">Projects</a>
                 <!---->
                 <!---->
               </li>
-              <li><a dark=\\"\\" class=\\"white--text\\">
-                  Projects
-                </a>
+              <li class=\\"list-item\\"><a dark=\\"\\" class=\\"white--text no-underline link-hover\\">Tools</a>
                 <!---->
                 <!---->
               </li>
-              <li><a dark=\\"\\" class=\\"white--text\\">
-                  Tools
-                </a>
+              <li class=\\"list-item\\">
+                <!----> <a href=\\"https://openebench.readthedocs.io/en/latest/introduction/1_overview.html\\" target=\\"_blank\\" dark=\\"\\" class=\\"white--text no-underline link-hover\\">Docs</a> <i aria-hidden=\\"true\\" class=\\"v-icon notranslate v-icon--right mdi mdi-open-in-new theme--dark\\" style=\\"font-size: 16px;\\"></i></li>
+            </ul>
+          </div>
+          <div class=\\"pa-4 site-map-item col\\">
+            <h6 class=\\"title mb-4\\">Observatory</h6>
+            <ul class=\\"no-bullets aligned-list\\">
+              <li class=\\"list-item\\"><a dark=\\"\\" class=\\"white--text no-underline link-hover\\">Trends</a>
+                <!---->
+                <!---->
+              </li>
+              <li class=\\"list-item\\"><a dark=\\"\\" class=\\"white--text no-underline link-hover\\">FAIRness Scoreboard</a>
+                <!---->
+                <!---->
+              </li>
+              <li class=\\"list-item\\"><a dark=\\"\\" class=\\"white--text no-underline link-hover\\">FAIR Evaluator</a>
+                <!---->
+                <!---->
+              </li>
+              <li class=\\"list-item\\"><a dark=\\"\\" class=\\"white--text no-underline link-hover\\">Data</a>
+                <!---->
+                <!---->
+              </li>
+              <li class=\\"list-item\\"><a dark=\\"\\" class=\\"white--text no-underline link-hover\\">About</a>
                 <!---->
                 <!---->
               </li>
             </ul>
           </div>
           <div class=\\"pa-4 site-map-item col\\">
-            <h6 class=\\"title mb-4\\">
-              Project
-            </h6>
-            <ul>
-              <li>
-                <!----> <a href=\\"https://docs.openebench.bsc.es/\\" target=\\"_blank\\" dark=\\"\\" class=\\"white--text\\">
-                  Github
-                </a> <i aria-hidden=\\"true\\" class=\\"v-icon notranslate v-icon--right mdi mdi-open-in-new theme--dark\\" style=\\"font-size: 16px;\\"></i></li>
-              <li>
-                <!----> <a href=\\"https://openebench.readthedocs.io/en/latest/\\" target=\\"_blank\\" dark=\\"\\" class=\\"white--text\\">
-                  Project
-                </a> <i aria-hidden=\\"true\\" class=\\"v-icon notranslate v-icon--right mdi mdi-open-in-new theme--dark\\" style=\\"font-size: 16px;\\"></i></li>
-            </ul>
-          </div>
-          <div class=\\"pa-4 site-map-item col\\">
-            <h6 class=\\"title mb-4\\">
-              About
-            </h6>
-            <ul>
-              <li><a dark=\\"\\" class=\\"white--text\\">
-                  OpenEBench
-                </a>
+            <h6 class=\\"title mb-4\\">About</h6>
+            <ul class=\\"no-bullets aligned-list\\">
+              <li class=\\"list-item\\"><a dark=\\"\\" class=\\"white--text no-underline link-hover\\">Publications</a>
                 <!---->
                 <!---->
               </li>
-              <li><a dark=\\"\\" class=\\"white--text\\">
-                  Publications
-                </a>
+              <li class=\\"list-item\\"><a dark=\\"\\" class=\\"white--text no-underline link-hover\\">Collaboration</a>
                 <!---->
                 <!---->
               </li>
-              <li><a dark=\\"\\" class=\\"white--text\\">
-                  Collaboration
-                </a>
-                <!---->
-                <!---->
-              </li>
-              <li><a dark=\\"\\" class=\\"white--text\\">
-                  The Team
-                </a>
+              <li class=\\"list-item\\"><a dark=\\"\\" class=\\"white--text no-underline link-hover\\">The Team</a>
                 <!---->
                 <!---->
               </li>
             </ul>
           </div>
           <div class=\\"pa-4 site-map-item col\\">
-            <h6 class=\\"title mb-4\\">
-              Legal
-            </h6>
-            <ul>
-              <li><a dark=\\"\\" class=\\"white--text\\">
-                  Legal Notice
-                </a>
+            <h6 class=\\"title mb-4\\">Legal</h6>
+            <ul class=\\"no-bullets aligned-list\\">
+              <li class=\\"list-item\\"><a dark=\\"\\" class=\\"white--text no-underline link-hover\\">Legal Notice</a>
                 <!---->
                 <!---->
               </li>
-              <li><a dark=\\"\\" class=\\"white--text\\">
-                  Disclaimer
-                </a>
+              <li class=\\"list-item\\"><a dark=\\"\\" class=\\"white--text no-underline link-hover\\">Disclaimer</a>
                 <!---->
                 <!---->
               </li>
-              <li><a dark=\\"\\" class=\\"white--text\\">
-                  Cookies Policy
-                </a>
+              <li class=\\"list-item\\"><a dark=\\"\\" class=\\"white--text no-underline link-hover\\">Cookies Policy</a>
                 <!---->
                 <!---->
               </li>
@@ -118,13 +94,14 @@ exports[`TheFooter should match snapshot 1`] = `
         </div>
       </div>
       <div class=\\"pa-4 col-md-3 col-12\\">
-        <div><a href=\\"mailto:openebench-support@bsc.es\\" class=\\"button v-btn v-btn--icon v-btn--round v-btn--text theme--dark v-size--default\\" aria-label=\\"Mail link for OpenEBench Support\\"><span class=\\"v-btn__content\\"><i aria-hidden=\\"true\\" class=\\"v-icon notranslate mdi mdi-email-outline theme--dark\\"></i></span></a> <a href=\\"https://twitter.com/openebench\\" target=\\"_blank\\" class=\\"button v-btn v-btn--icon v-btn--round v-btn--text theme--dark v-size--default\\" aria-label=\\"Link to Twitter Profile of OpenEBench\\"><span class=\\"v-btn__content\\"><i aria-hidden=\\"true\\" class=\\"v-icon notranslate mdi mdi-twitter theme--dark\\"></i></span></a></div>
+        <div><a href=\\"mailto:openebench-support@bsc.es\\" class=\\"button v-btn v-btn--icon v-btn--round v-btn--text theme--dark v-size--default\\" aria-label=\\"Mail link for OpenEBench Support\\"><span class=\\"v-btn__content\\"><i aria-hidden=\\"true\\" class=\\"v-icon notranslate mdi mdi-email-outline theme--dark\\"></i></span></a> <a href=\\"https://x.com/openebench\\" target=\\"_blank\\" class=\\"button v-btn v-btn--icon v-btn--round v-btn--text theme--dark v-size--default\\" aria-label=\\"Link to X Profile of OpenEBench\\"><span class=\\"v-btn__content\\"><div aria-label=\\"X icon\\" role=\\"img\\" class=\\"v-image v-responsive theme--dark\\" style=\\"max-height: 18px; max-width: 18px;\\"><transition-stub name=\\"fade-transition\\" mode=\\"in-out\\"><div class=\\"v-image__image v-image__image--preload v-image__image--cover\\" style=\\"background-position: center center;\\"></div></transition-stub><div class=\\"v-responsive__content\\"></div></div></span></a></div>
         <div class=\\"row mt-5 no-gutters\\">
           <div align=\\"left\\" class=\\"col col-9\\">
             <p class=\\"text-sm-body-2\\">
-              This project receives funding from the @EU_H2020 Research &amp;
-              Innovation programme.
-            </p>
+              OpenEBench receives funding from different EC funding Research &amp;
+              Innovation programmes.<br> <a href=\\"/collaboration\\" target=\\"_blank\\" aria-label=\\"Learn more about collaboration\\" class=\\"link-hover\\">
+                Learn more
+                <i aria-hidden=\\"true\\" class=\\"v-icon notranslate v-icon--right mdi mdi-open-in-new theme--dark\\" style=\\"font-size: 16px;\\"></i></a></p>
           </div>
           <div align=\\"center\\" class=\\"col col-3\\">
             <div aria-label=\\"logo\\" role=\\"img\\" class=\\"v-image v-responsive theme--light\\" style=\\"max-width: 70px;\\">

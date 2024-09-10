@@ -29,11 +29,6 @@ jobs:
           node-version: ${{ matrix.node }}
           check-latest: true
 
-      - name: Clear cache
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh cache delete --all
-
       - name: Cache node_modules 📦
         uses: actions/cache@v3
         with:

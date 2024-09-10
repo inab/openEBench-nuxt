@@ -1,5 +1,5 @@
 <template>
-	<v-container fluid>
+	<v-container>
 		<v-skeleton-loader
 			v-if="$store.state.challenge.loading.challenge"
 			class="mb-5"
@@ -9,22 +9,18 @@
 			<h1 class="text-h4">
 				{{ challenge.challenge_label }} ({{ challenge._id }})
 			</h1>
-			<h2 class="text-subtitle-1 mb-5">
+			<h2 class="text-subtitle-1 font-italic mb-5">
 				{{ challenge.name }}
 			</h2>
+			<!-- TODO -->
 			<p class="text--secondary">
-				In this 2D plot two metrics from the challenge
-				{{ challenge.challenge_label }} are represented in the X and Y axis,
-				showing the results from the participating tools in this challenge. The
-				gray line represents the pareto frontier, which runs over the
-				participants tools, showing the best efficiency, while the arrow in the
-				plot represents the optimal corner.
+				List of tools participating in the challenge, together with a summary of
+				the metrics obtained.
 			</p>
-			<v-alert class="mt-8" border="left" dense text color="info" type="info">
-				The menu button above the diagram can be used to switch between the
-				different classification methods / visualization modes (Square
-				Quartiles; Diagonal Quartiles, and k-means Clustering).
-			</v-alert>
+		</div>
+
+		<!-- Participants and metrics available. -->
+		<div v-if="participants.length > 0">
 			<v-skeleton-loader
 				v-if="
 					$store.state.challenge.loading.participants ||
@@ -37,46 +33,94 @@
 				v-else
 				:metrics-table="metricsTable"
 			/>
-		</div>
-		<v-skeleton-loader
-			v-if="$store.state.challenge.loading.participants"
-			type="card-heading, image"
-		/>
-		<div v-else>
-			<h2 class="text-h6 mt-8">
-				Choose one of the {{ participants.length }} participants whose metrics
-				you want to visualize in the radar plot:
-			</h2>
-			<v-chip-group v-model="tab" active-class="accent--text" column mandatory>
-				<v-chip v-for="participant in participants" :key="participant._id">
-					{{ participant.participant_label }}
-				</v-chip>
-			</v-chip-group>
-			<v-tabs-items v-model="tab">
-				<v-tab-item
-					v-for="(item, index) in participants"
-					:key="index"
-					:transition="false"
+
+			<v-skeleton-loader
+				v-if="$store.state.challenge.loading.participants"
+				type="card-heading, image"
+			/>
+			<div v-else>
+				<h2 class="text-h6 mt-8">
+					Choose one of the {{ participants.length }} participants whose metrics
+					you want to visualize in the radar plot:
+				</h2>
+				<!-- CHIPS -->
+				<v-data-table
+					v-if="participants.length > 15"
+					:items="participants"
+					:items-per-page="15"
+					hide-default-header
+					disable-sort
+					class="no-hover my-4"
 				>
-					<!-- No Visualization -->
-					<div
-						class="text--secondary mt-6 mx-10"
-						align="center"
-						color="rgba(0, 0, 0, 0.6)"
+					<template #body="{ items }">
+						<tbody>
+							<tr
+								v-for="(row, rowIndex) in chunk(items, 3)"
+								:key="rowIndex"
+								active-class="accent--text"
+							>
+								<td
+									v-for="participant in row"
+									:key="participant._id"
+									class="pa-2"
+								>
+									<v-chip
+										class="chip"
+										:class="{ 'accent--text': tab === participant._id }"
+										:input-value="tab === participant._id"
+										@click="tab = participant._id"
+									>
+										{{ formatLabel(participant.participant_label) }}
+									</v-chip>
+								</td>
+							</tr>
+						</tbody>
+					</template>
+				</v-data-table>
+
+				<!-- Chips for less than 15 participants -->
+				<div class="my-4" v-else :value="tab" column>
+					<v-chip
+						class="chip2 mx-1 my-1"
+						:class="{ 'accent--text': tab === participant._id }"
+						v-for="participant in participants"
+						:key="participant._id"
+						:input-value="tab === participant._id"
+						@click="selectParticipant(participant._id)"
 					>
-						<img
-							class="mb-4"
-							src="~/static/icons/chart.png"
-							alt=""
-							height="100px"
-						/>
-						<h2>No chart available</h2>
-						<p class="text-h6">
-							No visual representation implemented yet. Check back soon!
-						</p>
-					</div>
-				</v-tab-item>
-			</v-tabs-items>
+						{{ formatLabel(participant.participant_label) }}
+					</v-chip>
+				</div>
+
+				<!-- Chart or no visualization -->
+				<v-tabs-items v-if="tab" v-model="tab">
+					<v-tab-item
+						v-for="(item, index) in participants"
+						:key="index"
+						:value="item._id"
+						:transition="false"
+					>
+						<!-- No Visualization -->
+						<div
+							class="text--secondary mt-6 mx-10"
+							align="center"
+							color="rgba(0, 0, 0, 0.6)"
+						>
+							<v-img :src="illustration" contain max-height="300" />
+							<h2>No chart available.</h2>
+							<p class="text-h6">
+								No visual representation implemented yet. Check back soon!
+							</p>
+						</div>
+					</v-tab-item>
+				</v-tabs-items>
+			</div>
+		</div>
+		<!-- No participants and metrics available. -->
+		<div v-else>
+			<div class="mt-8" align="center">
+				<NoDataAvailable :item="'participants and metrics'" />
+			</div>
 		</div>
 	</v-container>
 </template>
@@ -84,19 +128,20 @@
 <script>
 import { mapGetters } from 'vuex';
 import ChallengeParticipantMetricsTable from '~/components/Challenges/ChallengeParticipantMetricsTable';
-/*
-import ChartBarplotVisualizerWrapper from '~/components/Widgets/ChartBarplotVisualizerWrapper';
-import ChartScatterVisualizerWrapper from '~/components/Widgets/ChartScatterVisualizerWrapper';
-*/
+import NoDataAvailable from '~/layouts/noDataAvailable.vue';
 
 export default {
 	name: 'CommunityChallengeParticipantsPage',
-	//	components: { ChartBarplotVisualizerWrapper, ChartScatterVisualizerWrapper },
-	components: { ChallengeParticipantMetricsTable },
+	components: { ChallengeParticipantMetricsTable, NoDataAvailable },
 	data() {
 		return {
 			hostName: this.$config.OEB_LEGACY_ANGULAR_URI,
-			tab: 0,
+			tab: null,
+			illustration: require('~/static/images/illustrations/empty-state.svg'),
+			pagination: {
+				page: 1,
+				itemsPerPage: 15,
+			},
 		};
 	},
 	computed: {
@@ -217,6 +262,13 @@ export default {
 		breadcrumbs() {
 			this.$parent.$emit('emitBreadcrumbs', this.breadcrumbs);
 		},
+		participants(newParticipants) {
+			if (newParticipants.length > 0) {
+				this.tab = newParticipants[0]._id;
+			} else {
+				this.tab = null;
+			}
+		},
 	},
 	mounted() {
 		this.$parent.$emit('emitBreadcrumbs', this.breadcrumbs);
@@ -225,6 +277,51 @@ export default {
 				id: this.$route.params.id,
 			});
 		}
+
+		if (this.participants.length > 0) {
+			this.tab = this.participants[0]._id;
+		}
+	},
+	methods: {
+		// Format participants label text
+		formatLabel(text) {
+			if (text.startsWith('Dataset_participant:')) {
+				return text.replace('Dataset_participant:', '');
+			}
+			return text;
+		},
+		chunk(array, size) {
+			const chunkedArr = [];
+			for (let i = 0; i < array.length; i += size) {
+				chunkedArr.push(array.slice(i, i + size));
+			}
+			return chunkedArr;
+		},
+		selectParticipant(id) {
+			this.tab = id;
+		},
 	},
 };
 </script>
+
+<style scoped>
+.container {
+	height: calc(100% - 390px);
+}
+
+.chip {
+	width: 340px !important;
+	text-align: center;
+	justify-content: center;
+}
+
+.chip2 {
+	width: 260px !important;
+	text-align: center;
+	justify-content: center;
+}
+
+.no-hover tbody tr:hover {
+	background-color: transparent !important;
+}
+</style>
