@@ -174,7 +174,7 @@ export default {
 			'https://observatory.openebench.bsc.es/api',
 		GITHUBAPP_API_URL:
 			process.env.GITHUBAPP_API_URL ||
-			'https://observatory.openebench.bsc.es/github_metadata_api',
+			'https://observatory.openebench.bsc.es/github-metadata-api',
 		axios: {
 			// See https://github.com/nuxt-community/axios-module#options
 			baseURL:
