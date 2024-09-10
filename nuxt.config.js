@@ -171,10 +171,10 @@ export default {
 			'https://dev-openebench.bsc.es/rest/bench_event_api',
 		OBSERVATORY_API_URL:
 			process.env.OBSERVATORY_API_URL ||
-			'https://observatory-dev.openebench.bsc.es/api',
+			'https://observatory.openebench.bsc.es/api',
 		GITHUBAPP_API_URL:
 			process.env.GITHUBAPP_API_URL ||
-			'https://observatory-dev.openebench.bsc.es/githubapp/api',
+			'https://observatory.openebench.bsc.es/github_metadata_api',
 		axios: {
 			// See https://github.com/nuxt-community/axios-module#options
 			baseURL:
@@ -235,7 +235,6 @@ export default {
 					'pages/observatory/PostGitHubInstall.vue'
 				),
 			});
-
 			routes.push({
 				name: 'visualizations',
 				path: '/visualizations/:domain/:visualization/:collection?',
@@ -244,7 +243,6 @@ export default {
 					'pages/observatory/visualizations/_domain/_visualization'
 				),
 			});
-
 			routes.push({
 				name: 'scientific-community',
 				path: '/scientific/:community',

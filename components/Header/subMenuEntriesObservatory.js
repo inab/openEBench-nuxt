@@ -14,8 +14,8 @@ const subMenuEntriesObservatory = [
 		icon: 'mdi-bullseye',
 	},
 	{
-		title: 'FAIR Evaluator',
-		title_hide: 'FAIR Evaluator',
+		title: 'FAIRsoft Evaluator',
+		title_hide: 'FAIRsoft Evaluator',
 		to: '/observatory/Evaluation',
 		icon: 'mdi-check-circle-outline',
 	},

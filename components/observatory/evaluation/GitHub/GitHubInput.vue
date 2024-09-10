@@ -81,13 +81,13 @@ export default {
 		},
 		exampleValues: [
 			{
-				title: 'FAIRsoft-indicators',
-				URL: 'https://github.com/EvaMart/FAIRsoft-indicators',
+				title: 'oeb-visualizations',
+				URL: 'https://github.com/inab/oeb-visualizations',
 			},
 		],
 		installDialogParameters: {
 			title: "Unable to access repository's metadata.",
-			text: 'Let the FAIRsoft Evaluator access the requested repositories metadata by grantting the <a>OpenEBench FAIRsoft Evaluator GitHub App</a> the necessary permissions.',
+			text: 'Let the FAIRsoft Evaluator access the requested repositories metadata by grantting the <a href="https://github.com/apps/metadata-extractor-for-fairsoft" target="_blank">Metadata Extractor for FAIRsoft GitHub App</a> the necessary permissions.',
 		},
 	}),
 	computed: {
@@ -99,7 +99,7 @@ export default {
 			}
 		},
 		...mapGetters('observatory/evaluation/github', {
-			installationID: 'getInstallationID',
+			installationID: 'getExtractorInstallationID',
 			repository: 'getRepository',
 			dialogAppInstall: 'getDialogAppInstall',
 		}),
@@ -157,7 +157,7 @@ export default {
 			);
 			// 1.2 Get installation ID
 			await this.$store.dispatch(
-				'observatory/evaluation/github/getInstallationID',
+				'observatory/evaluation/github/getExtractorInstallationID',
 				this.repository
 			);
 

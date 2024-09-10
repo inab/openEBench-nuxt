@@ -548,6 +548,7 @@ export default {
 	},
 	data() {
 		return {
+			versionControl: false,
 			open_panels: [],
 			selectedType: '',
 			selectedVersion: '',
@@ -572,6 +573,7 @@ export default {
 				accessibility: [
 					'license',
 					'registries',
+					'e-infrastructures',
 					'source code',
 					'other download links',
 					'registration not mandatory',
@@ -620,8 +622,40 @@ export default {
 		input() {
 			return this.buildItems(this.toolMetadata.input);
 		},
+	},
+	watch: {
+		versionControl(newVal) {
+			const payload = {
+				field: 'version_control',
+				value: newVal,
+			};
+			this.$store.dispatch(
+				'observatory/evaluation/metadata/changeBooleanEntry',
+				payload
+			);
+		},
+	},
+	mounted() {
+		// populate vocabularies.
+		this.$store.dispatch(
+			'observatory/evaluation/metadata/getVocabulariesItems'
+		);
 
-		versionControl() {
+		// dispatch getting SPDX licenses
+		this.$store.dispatch('observatory/evaluation/metadata/fetchSPDXLicenses');
+
+		// set version control
+		this.versionControl = this.initialVersionControl();
+	},
+	methods: {
+		visibleTicks(i) {
+			if (this.open_panels.includes(i)) {
+				return false;
+			} else {
+				return true;
+			}
+		},
+		initialVersionControl() {
 			if (this.toolMetadata.repository.length > 0) {
 				if (
 					this.toolMetadata.repository[0].term.match('github') !== null ||
@@ -634,24 +668,6 @@ export default {
 				}
 			} else {
 				return false;
-			}
-		},
-	},
-	mounted() {
-		// populate vocabularies.
-		this.$store.dispatch(
-			'observatory/evaluation/metadata/getVocabulariesItems'
-		);
-
-		// dispatch getting SPDX licenses
-		this.$store.dispatch('observatory/evaluation/metadata/fetchSPDXLicenses');
-	},
-	methods: {
-		visibleTicks(i) {
-			if (this.open_panels.includes(i)) {
-				return false;
-			} else {
-				return true;
 			}
 		},
 

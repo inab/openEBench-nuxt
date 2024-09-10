@@ -63,38 +63,6 @@ export default {
 		return {
 			mainMenuElevation: 0,
 			subMenuEntriesObservatory,
-			sections: [
-				{
-					label: 'Trends',
-					path: '/observatory',
-					icon: 'mdi-chart-line',
-					hover: 'Trends',
-				},
-				{
-					label: 'FAIRness',
-					path: '/observatory/FAIRness',
-					icon: 'mdi-bullseye',
-					hover: 'FAIRness',
-				},
-				{
-					label: 'Evaluate',
-					path: '/observatory/Evaluation',
-					icon: 'mdi-check-circle-outline',
-					hover: 'Evaluate',
-				},
-				{
-					label: 'Data',
-					path: '/observatory/Data',
-					icon: 'mdi-database',
-					hover: 'Data',
-				},
-				{
-					label: 'About',
-					path: '/observatory/About',
-					icon: 'mdi-lightbulb-outline',
-					hover: 'About',
-				},
-			],
 			bigDis: true,
 			breadcrumbs: [],
 		};

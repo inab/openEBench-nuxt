@@ -47,7 +47,6 @@
 				Go to the start of the process without saving any changes.
 			</v-tooltip>
 		</v-row>
-		<DialogParseMetadata />
 	</v-container>
 </template>
 <script>
@@ -79,20 +78,19 @@ export default {
 			},
 		],
 	}),
-
 	methods: {
 		goBack() {
 			this.$store.dispatch('observatory/evaluation/changeStep', 3);
 			this.$store.commit(
-				'observatory/evaluation/results/setFAIRIndicatorsTool',
-				null
+				'observatory/evaluation/results/setFAIRIndicatorsToolResult',
+				{ result: null, logs: null }
 			);
 		},
 		cancel() {
 			this.$store.dispatch('observatory/evaluation/changeStep', 1);
 			this.$store.commit(
-				'observatory/evaluation/results/setFAIRIndicatorsTool',
-				null
+				'observatory/evaluation/results/setFAIRIndicatorsToolResult',
+				{ result: null, logs: null }
 			);
 		},
 	},

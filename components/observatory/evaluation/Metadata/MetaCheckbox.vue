@@ -11,9 +11,9 @@
 			</span>
 		</v-row>
 		<v-checkbox
+			v-model="localItem"
 			:label="label"
 			:color="color"
-			:value="item"
 			class="mt-6"
 			@change="changeValue"
 		>
@@ -23,6 +23,7 @@
 		</v-checkbox>
 	</v-col>
 </template>
+
 <script>
 import HeaderAvatar from './HeaderAvatar.vue';
 
@@ -31,7 +32,28 @@ export default {
 	components: {
 		HeaderAvatar,
 	},
-	props: ['item', 'field', 'label', 'title', 'n_cols', 'color'],
+	props: {
+		item: {
+			type: Boolean,
+			required: true,
+		},
+		field: String,
+		label: String,
+		title: String,
+		n_cols: Number,
+		color: String,
+	},
+	data() {
+		return {
+			localItem: this.item, // Initialize localItem with the prop value
+		};
+	},
+	watch: {
+		// Watch for changes in the prop and update the local value accordingly
+		item(newVal) {
+			this.localItem = newVal;
+		},
+	},
 	methods: {
 		changeValue() {
 			const payload = {
@@ -41,10 +63,12 @@ export default {
 				'observatory/evaluation/metadata/changeBooleanEntry',
 				payload
 			);
+			this.$emit('update:item', this.localItem); // Emit event to parent
 		},
 	},
 };
 </script>
+
 <style scoped>
 #title {
 	font-size: 1rem;

@@ -10,7 +10,7 @@ export default function ({ $axios, $config: { OBSERVATORY_API_URL } }, inject) {
 
 	// Set baseURL to something different
 	observatory.setBaseURL(OBSERVATORY_API_URL);
-	// observatory.setBaseURL('https://dev-observatory.openebench.bsc.es/api');
+	// observatory.setBaseURL('http://0.0.0.0:3500');
 
 	// Inject to context as $api
 	inject('observatory', observatory);

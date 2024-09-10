@@ -86,7 +86,7 @@ export const actions = {
 
 	// better generate once and read from json file or js file
 	async getVocabulariesItems({ commit, _state }) {
-		const URL = 'edam//EDAMTerms';
+		const URL = 'edam/EDAMTerms';
 
 		const EDAMTerms = await this.cache.dispatch(
 			'observatory/evaluation/metadata/GET_URL',
@@ -116,9 +116,6 @@ export const actions = {
 
 		// New field registration as boolean
 		result.registration_not_mandatory = false; // Here we are missing the registrations that were equal to true
-
-		// New field api or ilcense as boolean
-		result.api_lib = false;
 
 		// New field registries as array of strings (starting with sources)
 		const sourcesLabels = {
@@ -196,7 +193,8 @@ export const actions = {
 			'observatory/evaluation/metadata/POST_URL',
 			payload
 		);
-		console.log(result);
+
+		console.debug(result);
 
 		commit('setMetadataCFF', result);
 	},

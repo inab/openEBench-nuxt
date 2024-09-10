@@ -40,7 +40,7 @@
 						<strong>Looking for a personalized analysis?</strong> 🤔 <br />
 						Head over to the
 						<NuxtLink to="./Evaluation"
-							><strong>FAIR Evaluator</strong></NuxtLink
+							><strong>FAIRsoft Evaluator</strong></NuxtLink
 						>, where you can assess individual tools and really drill down into
 						the specifics.
 					</p>

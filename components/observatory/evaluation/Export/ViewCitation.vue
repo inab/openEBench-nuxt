@@ -82,7 +82,7 @@ export default {
 		};
 	},
 	created() {
-		this.yamlContent = yaml.dump(this.citation);
+		this.yamlContent = this.citation;
 	},
 
 	methods: {
@@ -90,7 +90,7 @@ export default {
 			this.dialog = true;
 		},
 		discardChanges() {
-			this.yamlContent = yaml.dump(this.citation);
+			this.yamlContent = this.citation;
 			this.dialog = false;
 		},
 		saveYaml() {

@@ -29,11 +29,6 @@
 				<PublicationsMain />
 			</v-col>
 		</v-row>
-		<v-row justify="center">
-			<v-col md="12" sm="12" xs="12" lg="11" xl="11">
-				<FormatsMain />
-			</v-col>
-		</v-row>
 	</div>
 </template>
 <script>
@@ -41,7 +36,6 @@ import LicensesMain from '~/components/observatory/trends/licenses/LicensesMain.
 import VersioningMain from '~/components/observatory/trends/versioning/VersioningMain.vue';
 import VersionControl from '~/components/observatory/trends/versionControl/VersionControl.vue';
 import PublicationsMain from '~/components/observatory/trends/publications/PublicationsMain.vue';
-import FormatsMain from '~/components/observatory/trends/formats/FormatsMain.vue';
 import CollectionSelector from '~/components/observatory/CollectionSelector.vue';
 
 export default {
@@ -51,7 +45,6 @@ export default {
 		VersioningMain,
 		VersionControl,
 		PublicationsMain,
-		FormatsMain,
 		CollectionSelector,
 	},
 	layout: 'observatory',

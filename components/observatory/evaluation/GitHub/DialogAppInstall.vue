@@ -86,7 +86,7 @@ export default {
 
 			// 2. Open App installation in new window
 			window.open(
-				'https://github.com/apps/oeb-fairsoft-evaluator/installations/new',
+				'https://github.com/apps/metadata-extractor-for-fairsoft/installations/new',
 				'_blank'
 			);
 		},
