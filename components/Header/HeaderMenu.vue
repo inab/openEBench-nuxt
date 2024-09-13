@@ -113,7 +113,7 @@
 				text
 			>
 				Docs
-				<v-icon right small v-if="subMenuEntriesDocs[1].external"
+				<v-icon v-if="subMenuEntriesDocs[1].external" right small
 					>mdi-open-in-new</v-icon
 				>
 			</v-btn>

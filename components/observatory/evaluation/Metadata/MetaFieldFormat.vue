@@ -6,13 +6,9 @@
 				:field_name="title"
 				:disabled_tooltip="true"
 			/>
-
-			<span id="title" class="text-body">
-				{{ title }}
-			</span>
-
-			<v-btn v-if="increasable" icon @click="addEntry()">
-				<v-icon small color="grey lighten-1"> mdi-plus-circle </v-icon>
+			<span id="title" class="text-body">{{ title }}</span>
+			<v-btn v-if="increasable" icon @click="addEntry">
+				<v-icon small color="grey lighten-1">mdi-plus-circle</v-icon>
 			</v-btn>
 		</v-row>
 
@@ -20,19 +16,16 @@
 			<CategoryAndTextFieldFormat
 				:id="item.id"
 				:item="item.term"
-				:index="index"
 				:field="field"
-				vocabulary-label=""
-				:type-label="typeLabel"
-				text-label=""
+				:index="index"
 				:accepted-vocabularies="acceptedVocabularies"
 				class="mt-2 ml-3"
 				@remove="removeEntry(index)"
-				@change="changeEntry(index, newItem)"
 			/>
 		</v-row>
 	</v-col>
 </template>
+
 <script>
 import CategoryAndTextFieldFormat from './CategoryAndTextFieldFormat.vue';
 import HeaderAvatar from './HeaderAvatar.vue';
@@ -44,44 +37,15 @@ export default {
 		HeaderAvatar,
 	},
 	props: {
-		title: {
-			type: String,
-			required: true,
-		},
-		n_cols: {
-			type: String,
-			required: true,
-		},
-		field: {
-			type: String,
-			required: true,
-		},
-		value: {
-			type: Array,
-			required: true,
-		},
-		increasable: {
-			type: Boolean,
-			default: true,
-			required: false,
-		},
-		typeLabel: {
-			type: String,
-			default: 'topic',
-			required: false,
-		},
-		acceptedVocabularies: {
-			type: Array,
-			default: function () {
-				return ['EDAM'];
-			},
-			required: false,
-		},
+		title: { type: String, required: true },
+		n_cols: { type: String, required: true },
+		field: { type: String, required: true },
+		value: { type: Array, required: true },
+		increasable: { type: Boolean, default: true },
+		acceptedVocabularies: { type: Array, default: () => ['EDAM'] },
 	},
 	methods: {
 		addEntry() {
-			// addedvalue is the value of the input field, which is always empty
-			// sometimes it is an object, sometimes it is an array
 			const payload = {
 				field: this.field,
 				value: {
@@ -91,7 +55,6 @@ export default {
 				},
 			};
 			this.$store.dispatch('observatory/evaluation/metadata/addEntry', payload);
-			this.$forceUpdate();
 		},
 		removeEntry(index) {
 			const payload = {
@@ -102,23 +65,11 @@ export default {
 				'observatory/evaluation/metadata/removeEntry',
 				payload
 			);
-			this.$forceUpdate();
-		},
-		changeEntry(index, newItem) {
-			const payload = {
-				field: this.field,
-				index,
-				newItem,
-			};
-			this.$store.dispatch(
-				'observatory/evaluation/metadata/clearEntry',
-				payload
-			);
-			this.$forceUpdate();
 		},
 	},
 };
 </script>
+
 <style scoped>
 #title {
 	font-size: 1rem;

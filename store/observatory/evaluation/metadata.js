@@ -269,6 +269,7 @@ export const mutations = {
 		// remove item to force update of reactive properties depending on it
 		// state._toolMetadata[payload.field].splice(payload.index, 1);
 		// add the new value
+
 		state._toolMetadata[payload.field][payload.index] = payload.value;
 	},
 	changeSelectorEntry(state, payload) {

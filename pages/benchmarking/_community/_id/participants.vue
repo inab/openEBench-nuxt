@@ -79,12 +79,12 @@
 				</v-data-table>
 
 				<!-- Chips for less than 15 participants -->
-				<div class="my-4" v-else :value="tab" column>
+				<div v-else class="my-4" :value="tab" column>
 					<v-chip
-						class="chip2 mx-1 my-1"
-						:class="{ 'accent--text': tab === participant._id }"
 						v-for="participant in participants"
 						:key="participant._id"
+						class="chip2 mx-1 my-1"
+						:class="{ 'accent--text': tab === participant._id }"
 						:input-value="tab === participant._id"
 						@click="selectParticipant(participant._id)"
 					>

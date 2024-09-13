@@ -102,15 +102,15 @@
 						</v-col>
 
 						<!-- Webpage -->
-
-						<MetaFieldSimpleField
+						<MetaFieldURLField
 							title="Webpage"
 							:value="toolMetadata.webpage"
 							field="webpage"
-							value-type=""
+							value-type="string"
 							n_cols="8"
 							class="mr-auto"
 							label="URL"
+							increasable="true"
 						/>
 						<v-col
 							v-if="toolMetadata.webpage.length > 1 > 0"
@@ -526,6 +526,7 @@ import MetaFieldFormat from './MetaFieldFormat.vue';
 import MetaFieldPublication from './MetaFieldPublication.vue';
 import MetaFieldAuthors from './MetaFieldAuthors.vue';
 import MetaFieldLicense from './MetaFieldLicense.vue';
+import MetaFieldURLField from './MetaFieldURLField.vue';
 
 export default {
 	name: 'MetadataEdit',
@@ -545,6 +546,7 @@ export default {
 		MetaFieldPublication,
 		MetaFieldAuthors,
 		MetaFieldLicense,
+		MetaFieldURLField,
 	},
 	data() {
 		return {
