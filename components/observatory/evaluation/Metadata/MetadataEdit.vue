@@ -211,25 +211,27 @@
 						/>
 
 						<!-- Source Code -->
-						<MetaFieldSimpleField
+						<MetaFieldURLField
 							title="Source Code"
 							:value="toolMetadata.src"
 							field="src"
-							value-type=""
+							value-type="string"
 							n_cols="10"
 							class="mr-auto"
 							label="URL"
+							:increasable="true"
 						/>
 
 						<!-- Other Download Link -->
-						<MetaFieldSimpleField
+						<MetaFieldURLField
 							title="Other Download Link"
 							:value="toolMetadata.links"
 							field="links"
-							value-type=""
+							value-type="string"
 							n_cols="10"
 							class="mr-auto"
 							label="URL"
+							:increasable="true"
 						/>
 
 						<!-- Registration not mandatory -->
@@ -319,14 +321,15 @@
 					<v-divider></v-divider>
 					<v-row class="mt-2 ml-1" justify="space-between">
 						<!-- Test -->
-						<MetaFieldSimpleField
+						<MetaFieldURLField
 							title="Test Data"
 							:value="toolMetadata.test"
 							field="test"
-							value-type=""
+							value-type="string"
 							n_cols="10"
 							class="mr-auto"
 							label="URL"
+							increasable="true"
 						/>
 					</v-row>
 				</v-expansion-panel-content>
@@ -384,14 +387,15 @@
 					<v-divider></v-divider>
 					<v-row class="mt-2 ml-1" justify="space-between">
 						<!-- Repository -->
-						<MetaFieldSimpleField
+						<MetaFieldURLField
 							title="Repository"
 							:value="toolMetadata.repository"
 							field="repository"
-							value-type=""
+							value-type="string"
 							n_cols="10"
 							class="mr-auto"
 							label="URL"
+							:increasable="true"
 						/>
 
 						<!-- Version Control -->

@@ -1,7 +1,7 @@
 <!-- MetaFieldURLField.vue -->
 <template>
 	<v-col :cols="n_cols">
-		<v-row class="d-flex align-center mt-2">
+		<v-row class="d-flex align-center mt-2 mb-2">
 			<HeaderAvatar
 				:field="field"
 				:field_name="title"
@@ -23,6 +23,7 @@
 			:key="entry.id"
 			:value="entry.term"
 			:index="index"
+			:id="entry.id"
 			:field="field"
 			:label="label"
 			@update="updateEntry"

@@ -17,6 +17,10 @@
 					previous step. Below, you have several options to preview, download,
 					or directly integrate this file into your GitHub repository.
 				</p>
+				<p class="small">
+					Note that the authors are a required field of a CFF file. If you have
+					not provided this information, the CFF file will not be generated.
+				</p>
 			</v-row>
 		</v-container>
 

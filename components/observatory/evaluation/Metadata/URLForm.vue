@@ -6,7 +6,6 @@
 			:label="label"
 			class="mt-2 ml-3"
 			:error-messages="urlErrorMessage"
-			outlined
 			dense
 			@input="onURLChange"
 		>
@@ -39,6 +38,10 @@ export default {
 			type: Number,
 			required: true,
 		},
+		id: {
+			type: Number,
+			required: false,
+		},
 	},
 	data() {
 		return {
@@ -46,12 +49,7 @@ export default {
 			urlErrorMessage: '', // Error message for URL validation
 		};
 	},
-	watch: {
-		// Watch for changes in the value prop and update the local value accordingly
-		value(newValue) {
-			this.localValue = newValue;
-		},
-	},
+
 	methods: {
 		// Method to validate the URL format
 		validateURL(url) {
@@ -64,7 +62,10 @@ export default {
 			if (this.validateURL(this.localValue)) {
 				this.urlErrorMessage = ''; // Clear the error message if valid
 				// Emit the validated value to the parent component
-				this.$emit('update', { index: this.index, value: this.localValue });
+				this.$emit('update', {
+					index: this.index,
+					value: { id: this.id, term: this.localValue },
+				});
 			} else {
 				this.urlErrorMessage = 'Please enter a valid URL'; // Set error message if invalid
 			}
