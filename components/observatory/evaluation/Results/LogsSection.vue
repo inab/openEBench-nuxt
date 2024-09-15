@@ -4,7 +4,7 @@
 			<small>
 				<!-- Display the logs with styling applied -->
 				<pre
-					class="block language-html ml-3 pt-4 pb-0 pr-8 pl-5">{{ buildText(categorizedLogs.generic) }}<br><strong>Result: </strong>{{ buildText(categorizedLogs.result) }}<strong><br>Status: </strong>{{ buildText(categorizedLogs.status) }}
+					class="block language-html ml-3 pt-4 pb-0 pr-8 pl-5">{{ buildText(categorizedLogs.generic) }}<br><strong >Result: </strong>{{ buildText(categorizedLogs.result) }}
 				</pre>
 			</small>
 		</v-col>
