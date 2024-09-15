@@ -20,6 +20,9 @@
 				<p class="small">
 					Note that the authors are a required field of a CFF file. If you have
 					not provided this information, the CFF file will not be generated.
+					Additionally, please double-check that the given-names and
+					family-names are correct, as this file was created automatically. Make
+					any necessary adjustments to ensure accuracy.
 				</p>
 			</v-row>
 		</v-container>
