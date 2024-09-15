@@ -37,7 +37,6 @@ export const actions = {
 		commit('setDialogAppInstall', false);
 	},
 	async requestPull({ commit, _state }, payload) {
-		// var URL = 'http://localhost:3500/metadata/pull'
 		const URL = '/metadata/pull';
 		const parameters = {
 			repo: payload.repo,
@@ -45,9 +44,11 @@ export const actions = {
 			filename: payload.filename,
 			installationID: payload.installationID,
 			metadata: payload.metadata,
+			title: payload.title,
+			message: payload.message,
 		};
 		const response = await this.$githubapp.$post(URL, parameters);
-		console.log(response);
+		console.debug(response);
 		if (response.code === 200) {
 			commit('setOkURL', response.url);
 			commit('setDialogPRok', true);

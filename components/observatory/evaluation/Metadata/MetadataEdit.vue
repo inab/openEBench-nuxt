@@ -102,15 +102,15 @@
 						</v-col>
 
 						<!-- Webpage -->
-
-						<MetaFieldSimpleField
+						<MetaFieldURLField
 							title="Webpage"
 							:value="toolMetadata.webpage"
 							field="webpage"
-							value-type=""
+							value-type="string"
 							n_cols="8"
 							class="mr-auto"
 							label="URL"
+							increasable="true"
 						/>
 						<v-col
 							v-if="toolMetadata.webpage.length > 1 > 0"
@@ -211,25 +211,27 @@
 						/>
 
 						<!-- Source Code -->
-						<MetaFieldSimpleField
+						<MetaFieldURLField
 							title="Source Code"
 							:value="toolMetadata.src"
 							field="src"
-							value-type=""
+							value-type="string"
 							n_cols="10"
 							class="mr-auto"
 							label="URL"
+							:increasable="true"
 						/>
 
 						<!-- Other Download Link -->
-						<MetaFieldSimpleField
+						<MetaFieldURLField
 							title="Other Download Link"
 							:value="toolMetadata.links"
 							field="links"
-							value-type=""
+							value-type="string"
 							n_cols="10"
 							class="mr-auto"
 							label="URL"
+							:increasable="true"
 						/>
 
 						<!-- Registration not mandatory -->
@@ -319,14 +321,15 @@
 					<v-divider></v-divider>
 					<v-row class="mt-2 ml-1" justify="space-between">
 						<!-- Test -->
-						<MetaFieldSimpleField
+						<MetaFieldURLField
 							title="Test Data"
 							:value="toolMetadata.test"
 							field="test"
-							value-type=""
+							value-type="string"
 							n_cols="10"
 							class="mr-auto"
 							label="URL"
+							increasable="true"
 						/>
 					</v-row>
 				</v-expansion-panel-content>
@@ -384,14 +387,15 @@
 					<v-divider></v-divider>
 					<v-row class="mt-2 ml-1" justify="space-between">
 						<!-- Repository -->
-						<MetaFieldSimpleField
+						<MetaFieldURLField
 							title="Repository"
 							:value="toolMetadata.repository"
 							field="repository"
-							value-type=""
+							value-type="string"
 							n_cols="10"
 							class="mr-auto"
 							label="URL"
+							:increasable="true"
 						/>
 
 						<!-- Version Control -->
@@ -526,6 +530,7 @@ import MetaFieldFormat from './MetaFieldFormat.vue';
 import MetaFieldPublication from './MetaFieldPublication.vue';
 import MetaFieldAuthors from './MetaFieldAuthors.vue';
 import MetaFieldLicense from './MetaFieldLicense.vue';
+import MetaFieldURLField from './MetaFieldURLField.vue';
 
 export default {
 	name: 'MetadataEdit',
@@ -545,9 +550,11 @@ export default {
 		MetaFieldPublication,
 		MetaFieldAuthors,
 		MetaFieldLicense,
+		MetaFieldURLField,
 	},
 	data() {
 		return {
+			versionControl: false,
 			open_panels: [],
 			selectedType: '',
 			selectedVersion: '',
@@ -572,6 +579,7 @@ export default {
 				accessibility: [
 					'license',
 					'registries',
+					'e-infrastructures',
 					'source code',
 					'other download links',
 					'registration not mandatory',
@@ -620,8 +628,40 @@ export default {
 		input() {
 			return this.buildItems(this.toolMetadata.input);
 		},
+	},
+	watch: {
+		versionControl(newVal) {
+			const payload = {
+				field: 'version_control',
+				value: newVal,
+			};
+			this.$store.dispatch(
+				'observatory/evaluation/metadata/changeBooleanEntry',
+				payload
+			);
+		},
+	},
+	mounted() {
+		// populate vocabularies.
+		this.$store.dispatch(
+			'observatory/evaluation/metadata/getVocabulariesItems'
+		);
 
-		versionControl() {
+		// dispatch getting SPDX licenses
+		this.$store.dispatch('observatory/evaluation/metadata/fetchSPDXLicenses');
+
+		// set version control
+		this.versionControl = this.initialVersionControl();
+	},
+	methods: {
+		visibleTicks(i) {
+			if (this.open_panels.includes(i)) {
+				return false;
+			} else {
+				return true;
+			}
+		},
+		initialVersionControl() {
 			if (this.toolMetadata.repository.length > 0) {
 				if (
 					this.toolMetadata.repository[0].term.match('github') !== null ||
@@ -636,24 +676,6 @@ export default {
 				return false;
 			}
 		},
-	},
-	mounted() {
-		// populate vocabularies.
-		this.$store.dispatch(
-			'observatory/evaluation/metadata/getVocabulariesItems'
-		);
-
-		// dispatch getting SPDX licenses
-		this.$store.dispatch('observatory/evaluation/metadata/fetchSPDXLicenses');
-	},
-	methods: {
-		visibleTicks(i) {
-			if (this.open_panels.includes(i)) {
-				return false;
-			} else {
-				return true;
-			}
-		},
 
 		SumbitMetadata() {
 			this.$store.dispatch(
@@ -665,6 +687,7 @@ export default {
 				this.toolMetadata
 			);
 			this.$store.dispatch('observatory/evaluation/metadata/transformToJSONLD');
+			this.$store.dispatch('observatory/evaluation/metadata/transformToCFF');
 			this.$store.dispatch('observatory/evaluation/changeStep', 4);
 		},
 

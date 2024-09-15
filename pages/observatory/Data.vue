@@ -11,14 +11,13 @@
 					Our system periodically pulls metadata from
 					<strong>eight diverse sources</strong>, enriched further with dynamic
 					data on repository activity, website availability, and trends in
-					publication citations. As each piece of metadata flows into our
-					system, it undergoes a meticulous harmonization process, ensuring
-					uniformity and relevance across varying data types and sources.
-					<br /><br />
-					On this page, you can <strong>Visualize the Integration</strong>: dive
-					into our enriched database and see firsthand the scope of each
-					source's contribution, the comprehensive depth of metadata, and the
-					overlaps that characterize our dataset.
+					publication citations. Each piece of metadata entering our system
+					undergoes a harmonization process, ensuring consistency across diverse
+					data types and sources. <br /><br />
+					On this page, you can <strong>visualize the integration</strong>: dive
+					into our database and see firsthand the scope of each source's
+					contribution, the comprehensive depth of metadata, and the overlaps
+					that characterize our dataset.
 				</p>
 			</v-col>
 

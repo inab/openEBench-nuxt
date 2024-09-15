@@ -103,7 +103,7 @@
 				</v-expansion-panel-header>
 				<v-expansion-panel-content>
 					<v-simple-table>
-						<template v-slot:default>
+						<template #default>
 							<thead>
 								<tr>
 									<th>Name</th>

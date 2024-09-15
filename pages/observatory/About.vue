@@ -12,11 +12,22 @@
 					within the Life Sciences community.
 				</p>
 
-				<h6>Data Availability</h6>
+				<h6>Observatory API</h6>
 				<p class="mb-6">
-					Software Metadata and statistics are made available through the
+					Software Metadata, statistics and FAIRsoft evaluation are made
+					available through the
 					<a href="https://observatory.openebench.bsc.es/docs/api/"
 						>Software Observatory API</a
+					>.
+				</p>
+
+				<h6>GitHub Metadata API</h6>
+				<p class="mb-6">
+					Extraction of metadata from GitHub repositories and the addition of
+					files to GitHub repositories is done through the
+					<a
+						href="https://observatory.openebench.bsc.es/github-metadata-api/api-docs/"
+						>GitHub Metadata API</a
 					>.
 				</p>
 
@@ -63,10 +74,9 @@
 						research software </span
 					><br />
 					Eva Martín del Pico, Josep Lluís Gelpí, Salvador Capella-Gutiérrez<br />
-					bioRxiv 2022.05.04.490563; doi:<a
-						href="https://doi.org/10.1101/2022.05.04.490563"
-					>
-						https://doi.org/10.1101/2022.05.04.490563</a
+					<i>Bioinformatics</i>, Volume 40, Issue 8, August 2024, btae464;
+					doi:<a href=" https://doi.org/10.1093/bioinformatics/btae464"
+						>10.1093/bioinformatics/btae464</a
 					>
 				</p>
 

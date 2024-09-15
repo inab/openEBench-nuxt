@@ -16,9 +16,6 @@
 export default {
 	name: 'MetaRegistriesCombo',
 	props: ['initialSelectedVersion', 'versions', 'field'],
-	mounted() {
-		this.changeValue();
-	},
 	data() {
 		return {
 			selectedVersion: this.initialSelectedVersion,
@@ -28,6 +25,9 @@ export default {
 		initialSelectedVersion() {
 			this.selectedVersion = this.initialSelectedVersion;
 		},
+	},
+	mounted() {
+		this.changeValue();
 	},
 	methods: {
 		changeValue() {

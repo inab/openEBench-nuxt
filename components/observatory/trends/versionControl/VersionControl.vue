@@ -1,5 +1,6 @@
 <template>
 	<v-card outlined elevation="2">
+		<PlotWOptions class="copy-icon" :items="dialogItems" />
 		<v-container class="mb-3">
 			<v-row class="pt-0" justify="center">
 				<v-col xl="7" lg="7" md="12" sm="7" xs="12" cols="12" class="mt-0 pt-1">
@@ -51,7 +52,7 @@
 						type="card-avatar"
 					/>
 
-					<VersionControlPlot v-else />
+					<VersionControlPlot v-else :x-values="x" :y-values="y" />
 				</v-col>
 				<v-col xl="11" lg="11" md="10" sm="12" align-self="start">
 					<p class="mt-0 ml-8 mb-0">
@@ -68,24 +69,41 @@
 <script>
 import { mapGetters } from 'vuex';
 import VersionControlPlot from './VersionControlPlot.vue';
+import PlotWOptions from '~/components/observatory/PlotWOptions.vue';
+import { embedCodes } from '~/components/observatory/visualizations/embedCodes.js'; // Import the embed codes
 
 export default {
 	name: 'VersionControl',
 	components: {
 		VersionControlPlot,
+		PlotWOptions,
 	},
-
+	data() {
+		return {
+			dialogItems: [embedCodes.versionControl],
+		};
+	},
 	computed: {
 		...mapGetters('observatory', {
 			control_counts: 'trends/VersionControlCount',
+			data_vc: 'trends/VersionControlRepositories',
 		}),
 
+		x() {
+			return Object.values(this.data_vc);
+		},
+
+		y() {
+			return Object.keys(this.data_vc);
+		},
+
 		percentage() {
-			const total =
-				this.control_counts['version control'] +
-				this.control_counts['no version control'];
-			const percentage = (this.control_counts['version control'] / total) * 100;
-			return percentage;
+			const {
+				'version control': versionControl,
+				'no version control': noVersionControl,
+			} = this.control_counts;
+			const total = versionControl + noVersionControl;
+			return (versionControl / total) * 100;
 		},
 	},
 	created() {
@@ -159,5 +177,11 @@ export default {
 	font-size: 0.9em !important;
 	width: 95%;
 	margin: auto;
+}
+
+.copy-icon {
+	position: absolute;
+	top: 5px;
+	right: 10px;
 }
 </style>

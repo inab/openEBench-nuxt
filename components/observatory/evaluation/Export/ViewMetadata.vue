@@ -91,6 +91,10 @@ export default {
 			this.dialog = false;
 		},
 		saveJson() {
+			this.$store.dispatch(
+				'observatory/evaluation/metadata/updateToolMetadataJSONLD',
+				JSON.parse(this.jsonContent)
+			);
 			this.dialog = false;
 		},
 	},

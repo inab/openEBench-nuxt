@@ -4,10 +4,27 @@
 
 <script>
 import Plotly from 'plotly.js-dist';
-import { mapGetters } from 'vuex';
 
 export default {
 	name: 'VersionControlPlot',
+	props: {
+		xValues: {
+			type: Array,
+			required: true,
+		},
+		yValues: {
+			type: Array,
+			required: true,
+		},
+		title: {
+			type: String,
+			default: '',
+		},
+		height: {
+			type: Number,
+			default: 275,
+		},
+	},
 	data() {
 		return {
 			labels: {
@@ -34,7 +51,13 @@ export default {
 					b: 50,
 				},
 				autosize: true,
-				height: 275,
+				height: this.height,
+				title: {
+					text: this.title,
+					font: {
+						size: 16,
+					},
+				},
 				hoverlabel: { bgcolor: '#FFF' },
 			},
 			config: {
@@ -43,13 +66,9 @@ export default {
 			},
 		};
 	},
-	computed: {
-		...mapGetters('observatory', {
-			data_vc: 'trends/VersionControlRepositories',
-		}),
-	},
+
 	mounted() {
-		const trace = this.build_trace(this.data_vc, this.labels);
+		const trace = this.build_trace(this.xValues, this.yValues, this.labels);
 		Plotly.newPlot('plot_4', {
 			data: [trace],
 			layout: this.layout,
@@ -57,13 +76,7 @@ export default {
 		});
 	},
 	methods: {
-		build_trace(data, labs) {
-			const x = [];
-			const y = [];
-			for (const [key, value] of Object.entries(data)) {
-				x.push(value);
-				y.push(key);
-			}
+		build_trace(x, y, labs) {
 			const trace = {
 				type: 'bar',
 				y: y.map(function (a) {

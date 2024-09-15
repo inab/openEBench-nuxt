@@ -61,10 +61,7 @@
 			<GitHubInput />
 		</v-stepper-content>
 
-		<v-stepper-content
-			v-else-if="this.source === 'software_observatory'"
-			step="2"
-		>
+		<v-stepper-content v-else-if="source === 'software_observatory'" step="2">
 			<ObservatoryInput />
 		</v-stepper-content>
 

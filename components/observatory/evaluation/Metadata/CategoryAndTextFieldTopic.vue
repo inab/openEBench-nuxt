@@ -43,10 +43,12 @@
 		<v-col v-if="!customVocabulary" cols="6">
 			<v-text-field
 				v-model="modelURI"
+				:error-messages="uriErrorMessage"
 				class="grey--text ml-1 text-body-2"
 				label="URI"
 				outlined
 				dense
+				@input="onURIChange"
 			>
 				<template #append-outer>
 					<v-btn icon @click="$emit('remove')">
@@ -72,12 +74,14 @@
 		</v-col>
 		<v-col v-if="customVocabulary" cols="6">
 			<v-text-field
-				v-model="modelURICustom"
+				v-model="modelURI"
+				:error-messages="uriErrorMessage"
 				class="grey--text ml-1 text-body-2"
 				label="URI"
 				:disabled="!customVocabulary"
 				outlined
 				dense
+				@input="onURIChange"
 			>
 				<template #append-outer>
 					<v-btn icon @click="$emit('remove')">
@@ -89,6 +93,7 @@
 		<!----------------------------->
 	</v-row>
 </template>
+
 <script>
 import { mapGetters } from 'vuex';
 import { EDAMreversed } from './EDAM_forFE_reversed.js';
@@ -113,6 +118,7 @@ export default {
 			selectVocabulary: '',
 			modelURICustom: '',
 			EDAMreversed,
+			uriErrorMessage: '',
 		};
 	},
 	mounted() {
@@ -143,6 +149,21 @@ export default {
 	},
 
 	methods: {
+		// URI validation method
+		validateURI(uri) {
+			// Regular expression to validate URI format
+			const uriPattern =
+				/^(https?:\/\/)?([a-z\d.-]+)\.([a-z]{2,6})([/\w .-]*)*\/?$/;
+			return uriPattern.test(uri);
+		},
+		onURIChange() {
+			if (this.validateURI(this.modelURI)) {
+				this.uriErrorMessage = ''; // Clear error message if URI is valid
+				this.changeValue();
+			} else {
+				this.uriErrorMessage = 'Please enter a valid URI';
+			}
+		},
 		clearTerm() {
 			this.model = '';
 			this.modelURI = '';
@@ -151,19 +172,18 @@ export default {
 		},
 		changeValue() {
 			console.log('changeValue');
-			let newValue; // Declare newValue with `let` at the top
+			let newValue;
 
 			if (this.customVocabulary) {
 				newValue = {
 					id: this.id,
 					term: {
 						term: this.model,
-						uri: this.modelURICustom,
+						uri: this.modelURI,
 						vocabulary: this.selectVocabulary,
 					},
 				};
 			} else if (this.selectVocabulary === 'EDAM') {
-				// Direct handling of 'EDAM' case without an additional `else`
 				this.modelURI = this.EDAMreversed[this.typeLabel][this.model];
 				newValue = {
 					id: this.id,
@@ -184,14 +204,12 @@ export default {
 				};
 			}
 
-			// Check if newValue is defined before emitting
 			if (newValue) {
 				this.$emit('change', { index: this.index, value: newValue });
 				console.log('emitting change');
 				console.log({ index: this.index, value: newValue });
 			}
 
-			// Force update to ensure reactivity
 			this.$forceUpdate();
 		},
 	},

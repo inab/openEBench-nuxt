@@ -36,8 +36,8 @@
 			>
 				<v-card
 					class="ma-3 d-flex flex-column event-card"
-					@click="handleEventClick(event)"
 					hover
+					@click="handleEventClick(event)"
 				>
 					<v-card-title class="event-title">{{ event.name }}</v-card-title>
 					<v-card-subtitle class="d-flex align-center">

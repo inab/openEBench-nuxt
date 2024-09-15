@@ -1,8 +1,10 @@
 <template>
 	<v-card outlined elevation="2" class="pr-8 pb-6">
-		<v-row class="mb-0 pb-0" justify="center">
-			<v-col md="11" lg="11" sm="10" xs="12" class="ml-8 mt-6 mb-pd-0">
+		<PlotWOptions class="copy-icon" :items="dialogItems" />
+		<v-row class="mt-2 pt-0" justify="center">
+			<v-col md="11" lg="11" sm="10" xs="12" class="mt-0 pt-1">
 				<h6 class="text-center mt-2">Licensing</h6>
+
 				<p class="text-center card-content mb-0">
 					Licensing is one of the most crucial features of a piece of software,
 					determining both its <span class="highlight">Accessibility</span> and
@@ -18,7 +20,13 @@
 					class="mb-5 ml-10 mr-10"
 					type="card-avatar"
 				/>
-				<PlotLicensesPie v-else />
+				<PlotLicensesPie
+					v-else
+					:labels="sunburstLabels"
+					:parents="sunburstParents"
+					:values="sunburstValues"
+					:text="sunburstText"
+				/>
 			</v-col>
 			<v-col
 				style="position: relative ml-10"
@@ -34,37 +42,85 @@
 					type="actions, card-avatar, list-item"
 				/>
 
-				<tabs-plot-info
+				<PlotLicensesBars
 					v-else
-					:plot-component="PlotLicensesBars"
-					:info-component="LicensesTable"
-					caption="Distribution of main Open Source License families"
-				>
-				</tabs-plot-info>
+					:counts_permissive="countsPermissive"
+					:licenses_permissive="licensesPermissive"
+					:counts_copyleft="countsCopyleft"
+					:licenses_copyleft="licensesCopyleft"
+					:counts_data="countsData"
+					:licenses_data="licensesData"
+				/>
 			</v-col>
 		</v-row>
 	</v-card>
 </template>
 <script>
+import { mapGetters } from 'vuex';
 import PlotLicensesPie from './PlotLicensesPie.vue';
 import PlotLicensesBars from './PlotLicensesBars.vue';
-import LicensesTable from './LicensesTable.vue';
-import TabsPlotInfo from '~/components/observatory/TabsPlotInfo.vue';
+import PlotWOptions from '~/components/observatory/PlotWOptions.vue';
+import { embedCodes } from '~/components/observatory/visualizations/embedCodes.js'; // Import the embed codes
 
 export default {
 	name: 'LicensesMain',
 	components: {
+		PlotWOptions,
 		PlotLicensesPie,
-		TabsPlotInfo,
+		PlotLicensesBars,
 	},
 	data: () => ({
-		PlotLicensesBars,
-		LicensesTable,
+		dialogItems: [embedCodes.licensesPie, embedCodes.licensesBar],
 	}),
+	computed: {
+		...mapGetters('observatory/trends', {
+			data_licenses_sunburst: 'LicensesSunburst',
+			data_licenses_open: 'LicensesOpenSource',
+		}),
+		// Sunburst data
+		sunburstLabels() {
+			return this.data_licenses_sunburst.ids;
+		},
+		sunburstParents() {
+			return this.data_licenses_sunburst.parents;
+		},
+		sunburstValues() {
+			return this.data_licenses_sunburst.v;
+		},
+		sunburstText() {
+			return this.data_licenses_sunburst.text;
+		},
+
+		// Bar data
+		countsPermissive() {
+			return this.data_licenses_open.counts_permissive;
+		},
+		licensesPermissive() {
+			return this.data_licenses_open.licenses_permissive;
+		},
+		countsCopyleft() {
+			return this.data_licenses_open.counts_copyleft;
+		},
+		licensesCopyleft() {
+			return this.data_licenses_open.licenses_copyleft;
+		},
+		countsData() {
+			return this.data_licenses_open.counts_data;
+		},
+		licensesData() {
+			return this.data_licenses_open.licenses_data;
+		},
+	},
 };
 </script>
 <style scoped>
 .card-content {
 	font-size: 0.9em !important;
+}
+
+.copy-icon {
+	position: absolute;
+	top: 5px;
+	right: 10px;
 }
 </style>

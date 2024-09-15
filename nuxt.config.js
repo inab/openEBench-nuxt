@@ -174,7 +174,7 @@ export default {
 			'https://observatory.openebench.bsc.es/api',
 		GITHUBAPP_API_URL:
 			process.env.GITHUBAPP_API_URL ||
-			'https://observatory.openebench.bsc.es/githubapp/api',
+			'https://observatory.openebench.bsc.es/github-metadata-api',
 		axios: {
 			// See https://github.com/nuxt-community/axios-module#options
 			baseURL:
@@ -241,6 +241,14 @@ export default {
 				component: resolve(
 					__dirname,
 					'pages/observatory/PostGitHubInstall.vue'
+				),
+			});
+			routes.push({
+				name: 'visualizations',
+				path: '/visualizations/:domain/:visualization/:collection?',
+				component: resolve(
+					__dirname,
+					'pages/observatory/visualizations/_domain/_visualization'
 				),
 			});
 			routes.push({

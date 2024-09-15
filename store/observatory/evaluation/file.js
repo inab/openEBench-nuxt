@@ -41,7 +41,6 @@ function removeEmptyValues(d) {
 }
 
 function buildFeTopicsOperations(topics) {
-	console.log('building topics');
 	if (topics) {
 		const items = [];
 		for (let i = 0; i < topics.length; i++) {
@@ -62,16 +61,19 @@ function buildFeTopicsOperations(topics) {
 }
 
 function buildFeDescription(description) {
-	console.log('building description');
-	if (description) {
+	// If description is a string, it will return the string in an array
+	if (typeof description === 'string') {
 		return [description];
-	} else {
-		return [];
 	}
+	// If description is an array, it will return the array
+	else if (Array.isArray(description)) {
+		return description;
+	}
+	// If description is not present or any other type, it will return an empty array
+	return [];
 }
 
 function buildFeLicense(licenses) {
-	console.log('building license');
 	const newLicenses = [];
 	if (licenses) {
 		for (let i = 0; i < licenses.length; i++) {
@@ -89,7 +91,6 @@ function buildFeLicense(licenses) {
 }
 
 function buildFeAuthors(authors) {
-	console.log('building authors');
 	const newAuthors = [];
 	if (authors) {
 		for (let i = 0; i < authors.length; i++) {
@@ -105,7 +106,7 @@ function buildFeAuthors(authors) {
 				};
 				newAuthors.push(removeEmptyValues(newAuthor));
 			} catch (error) {
-				console.log('Author type not found, skipping author');
+				console.debug('Author type not found, skipping author');
 			}
 		}
 	}
@@ -113,7 +114,7 @@ function buildFeAuthors(authors) {
 }
 
 function buildFeVersion(version) {
-	console.log('building version');
+	console.debug('building version');
 	if (version) {
 		return version;
 	} else {
@@ -122,7 +123,7 @@ function buildFeVersion(version) {
 }
 
 function buildFeInputOutput(inputOutput) {
-	console.log('building input output');
+	console.debug('building input output');
 	if (inputOutput) {
 		const items = [];
 		for (let i = 0; i < inputOutput.length; i++) {
@@ -148,7 +149,7 @@ function buildFeInputOutput(inputOutput) {
 }
 
 function buildFeHelp(help) {
-	console.log('building help');
+	console.debug('building help');
 	const newItems = [];
 
 	if (help) {
@@ -171,12 +172,12 @@ function buildFeHelp(help) {
 
 /*
 function buildFePublication(publication) {
-	console.log('building publication');
+	console.debug('building publication');
 	const newPublications = [];
 
 	if (publication) {
 		for (const item of publication) {
-			console.log(item);
+			console.debug(item);
 
 			for (const pub of item) {
 				const newPub = {};
@@ -201,7 +202,7 @@ function buildFePublication(publication) {
 								newPub.pmcid = pub.pmcid.split(':')[1];
 							}
 						} catch {
-							console.log(
+							console.debug(
 								`Publication ${pub} could not be parsed, skipping publication`
 							);
 						}
@@ -209,7 +210,7 @@ function buildFePublication(publication) {
 						newPub.doi = pub['@id'];
 					}
 				} else {
-					console.log(
+					console.debug(
 						`Publication ${pub} could not be parsed. Unknown type. Skipping publication`
 					);
 				}
@@ -225,8 +226,8 @@ function buildFePublication(publication) {
 }
 */
 function buildFeEdamTopicsOperations(topics) {
-	console.log('building edam topics operations');
-	console.log(topics);
+	console.debug('building edam topics operations');
+	console.debug(topics);
 	if (topics) {
 		const items = [];
 		for (let i = 0; i < topics.length; i++) {
@@ -242,7 +243,7 @@ function buildFeEdamTopicsOperations(topics) {
 }
 
 function buildFeLinks(meta) {
-	console.log('building links');
+	console.debug('building links');
 	let newLinks = [];
 	if (meta['schema:codeRepository']) {
 		newLinks = newLinks.concat(meta['schema:codeRepository']);
@@ -275,19 +276,27 @@ function prepareListsIds(metadata) {
 	];
 
 	for (const field of fields) {
-		console.log('Adding ids to field:', field);
+		console.debug('Adding ids to field:', field);
 		const items = metadata[field];
-		if (items) {
+		// Check if the field is an array before using map
+		if (Array.isArray(items)) {
 			const newList = items.map((item, index) => ({
 				term: item,
 				id: index,
 			}));
 			metadata[field] = newList;
+		} else if (typeof items === 'string') {
+			// If it's a string, convert it into an array of one item
+			metadata[field] = [{ term: items, id: 0 }];
+		} else if (items) {
+			// If it is something else and exists, wrap it in an array
+			metadata[field] = [{ term: items, id: 0 }];
 		}
 	}
 
 	return metadata;
 }
+
 export const actions = {
 	// For testing purposes
 	sleep({ _commit, _dispatch, _state }, ms) {
@@ -335,7 +344,7 @@ export const actions = {
 			const response = await axiosInstance.get('');
 
 			const fileContent = response.data;
-			console.log('Downloaded file content:', fileContent);
+			console.debug('Downloaded file content:', fileContent);
 			await dispatch('parseMetadataFile', JSON.stringify(fileContent));
 		} catch (error) {
 			console.error('Error fetching or parsing file from URL:', error);
@@ -356,13 +365,13 @@ export const actions = {
 			} else {
 				const reader = new FileReader();
 
-				console.log('file', file);
+				console.debug('file', file);
 
 				reader.readAsText(file);
 
 				reader.onload = () => {
 					const data = reader.result;
-					console.log('data', data);
+					console.debug('data', data);
 					resolve(data);
 				};
 
@@ -429,33 +438,37 @@ export const actions = {
 		// Transform file fields into the UI metadata model fields
 		let metadata = {
 			topics: buildFeTopicsOperations(
-				parsedContent['schema:applicationSubcategory']
+				parsedContent?.['schema:applicationSubcategory'] || []
 			),
-			name: parsedContent['schema:name'] || '',
-			webpage: parsedContent['schema:url'] || '',
-			description: buildFeDescription(parsedContent['schema:description']),
-			os: parsedContent['schema:operatingSystem'] || [],
-			license: buildFeLicense(parsedContent['schema:license']),
-			authors: buildFeAuthors(parsedContent['schema:author']),
-			version: buildFeVersion(parsedContent['schema:softwareVersion']),
-			repository: parsedContent['schema:codeRepository'] || [],
-			operations: buildFeTopicsOperations(parsedContent['schema:featureList']),
-			input: buildFeInputOutput(parsedContent['bioschemas:input']),
-			output: buildFeInputOutput(parsedContent['bioschemas:output']),
-			download: parsedContent['schema:downloadURL'] || [],
-			documentation: buildFeHelp(parsedContent['schema:softwareHelp']),
-			dependencies: parsedContent['schema:requirements'] || [],
+			name: parsedContent?.['schema:name'] || '',
+			webpage: parsedContent?.['schema:url'] || [],
+			description: buildFeDescription(
+				parsedContent?.['schema:description'] || []
+			),
+			os: parsedContent?.['schema:operatingSystem'] || [],
+			license: buildFeLicense(parsedContent?.['schema:license'] || []),
+			authors: buildFeAuthors(parsedContent?.['schema:author'] || []),
+			version: buildFeVersion(parsedContent?.['schema:softwareVersion'] || ''),
+			repository: parsedContent?.['schema:codeRepository'] || [],
+			operations: buildFeTopicsOperations(
+				parsedContent?.['schema:featureList'] || []
+			),
+			input: buildFeInputOutput(parsedContent?.['bioschemas:input'] || []),
+			output: buildFeInputOutput(parsedContent?.['bioschemas:output'] || []),
+			download: parsedContent?.['schema:downloadURL'] || [],
+			documentation: buildFeHelp(parsedContent?.['schema:softwareHelp'] || []),
+			dependencies: parsedContent?.['schema:requirements'] || [],
 			registration_not_mandatory:
-				parsedContent['schema:isAccessibleForFree'] || false,
+				parsedContent?.['schema:isAccessibleForFree'] === 'true' || false,
 			edam_topics: buildFeEdamTopicsOperations(
-				parsedContent['schema:applicationSubcategory']
+				parsedContent?.['schema:applicationSubcategory'] || []
 			),
 			edam_operations: buildFeEdamTopicsOperations(
-				parsedContent['schema:featureList']
+				parsedContent?.['schema:featureList'] || []
 			),
-			label: [parsedContent['schema:name']] || [],
-			src: parsedContent['schema:codeRepository'] || [],
-			links: buildFeLinks(parsedContent),
+			label: [parsedContent?.['schema:name']] || [],
+			src: parsedContent?.['schema:codeRepository'] || [],
+			links: buildFeLinks(parsedContent || {}),
 			api_lib: false,
 			type: '',
 			test: [],

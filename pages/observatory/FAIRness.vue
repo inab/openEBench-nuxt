@@ -40,7 +40,7 @@
 						<strong>Looking for a personalized analysis?</strong> 🤔 <br />
 						Head over to the
 						<NuxtLink to="./Evaluation"
-							><strong>FAIR Evaluator</strong></NuxtLink
+							><strong>FAIRsoft Evaluator</strong></NuxtLink
 						>, where you can assess individual tools and really drill down into
 						the specifics.
 					</p>
@@ -58,7 +58,7 @@
 		<v-row justify="center">
 			<v-col md="11" sm="11" cols="11" lg="11" xl="11">
 				<v-card outlined elevation="1" class="mt-3 pt-4 pl-6 pb-4">
-					<!--card-title text="Findability"></card-title-->
+					<PlotWOptions class="copy-icon" :items="dialogItemsFindability" />
 					<h6 class="text-center mt-2">Findability</h6>
 
 					<v-skeleton-loader
@@ -67,21 +67,22 @@
 						type="card"
 					/>
 
-					<tabs-plot-info
+					<BubbleChart
 						v-else
-						class="pr-3"
-						:info-component="FTable"
-						:plot-component="BubbleChartFindability"
-						properties=""
-						caption=""
-					>
-					</tabs-plot-info>
+						div-id="findability"
+						:collection="current_collection"
+						:collection-scores="fair_scores.F.fair_scores"
+						:indicators-labels="fair_scores.F.labels"
+						:control-scores="control_fair_scores.F.fair_scores"
+						:collection-colors="colors"
+						:collection-colors-lines="colors_lines"
+					/>
 				</v-card>
 			</v-col>
 
 			<v-col md="11" sm="11" cols="11" lg="11" xl="11">
 				<v-card outlined elevation="1" class="mt-3 pt-4 pl-6 pb-4">
-					<!--card-title text="Accessibility"></card-title-->
+					<PlotWOptions class="copy-icon" :items="dialogItemsAccessibility" />
 					<h6 class="text-center mt-2">Accessibility</h6>
 
 					<v-skeleton-loader
@@ -90,21 +91,22 @@
 						type="card"
 					/>
 
-					<tabs-plot-info
+					<BubbleChart
 						v-else
-						class="pr-3"
-						:info-component="ATable"
-						:plot-component="BubbleChartAccessibility"
-						properties=""
-						caption=""
-					>
-					</tabs-plot-info>
+						div-id="accessibility"
+						:collection="current_collection"
+						:collection-scores="fair_scores.A.fair_scores"
+						:indicators-labels="fair_scores.A.labels"
+						:control-scores="control_fair_scores.A.fair_scores"
+						:collection-colors="colors"
+						:collection-colors-lines="colors_lines"
+					/>
 				</v-card>
 			</v-col>
 
 			<v-col md="11" sm="11" cols="11" lg="11" xl="11">
 				<v-card outlined elevation="1" class="mt-3 pt-4 pl-6 pb-4">
-					<!--card-title text="Interoperability"></card-title-->
+					<PlotWOptions class="copy-icon" :items="dialogItemsInterperability" />
 					<h6 class="text-center mt-2">Interoperability</h6>
 
 					<v-skeleton-loader
@@ -113,21 +115,23 @@
 						type="card"
 					/>
 
-					<tabs-plot-info
+					<BubbleChart
 						v-else
-						class="pr-3"
-						:info-component="ITable"
-						:plot-component="BubbleChartInteroperability"
-						properties=""
-						caption=""
-					>
-					</tabs-plot-info>
+						div-id="interoperability"
+						:collection="current_collection"
+						:collection-scores="fair_scores.I.fair_scores"
+						:indicators-labels="fair_scores.I.labels"
+						:control-scores="control_fair_scores.I.fair_scores"
+						:collection-colors="colors"
+						:collection-colors-lines="colors_lines"
+					/>
 				</v-card>
 			</v-col>
+
 			<v-col md="11" sm="11" cols="11" lg="11" xl="11">
 				<v-card outlined elevation="1" class="mt-3 pt-4 pl-6 pb-4">
-					<!--card-title text="(Re)Usability"></card-title-->
-					<h6 class="text-center mt-2">(Re)Usability</h6>
+					<PlotWOptions class="copy-icon" :items="dialogItemsReusability" />
+					<h6 class="text-center mt-2">Reusability</h6>
 
 					<v-skeleton-loader
 						v-if="$store.state.observatory.fairness._unLoaded.FAIRscores"
@@ -135,51 +139,62 @@
 						type="card"
 					/>
 
-					<tabs-plot-info
+					<BubbleChart
 						v-else
-						class="pr-3"
-						:info-component="RTable"
-						:plot-component="BubbleChartReusability"
-						properties=""
-						caption=""
-					>
-					</tabs-plot-info>
+						div-id="reusability"
+						:collection="current_collection"
+						:collection-scores="fair_scores.R.fair_scores"
+						:indicators-labels="fair_scores.R.labels"
+						:control-scores="control_fair_scores.R.fair_scores"
+						:collection-colors="colors"
+						:collection-colors-lines="colors_lines"
+					/>
 				</v-card>
 			</v-col>
 		</v-row>
 	</div>
 </template>
 <script>
+import { mapGetters } from 'vuex';
 import CollectionSelector from '~/components/observatory/CollectionSelector.vue';
-import TabsPlotInfo from '~/components/observatory/TabsPlotInfo.vue';
-import BubbleChartFindability from '~/components/observatory/fairness/BubbleChartFindability.vue';
-import BubbleChartAccessibility from '~/components/observatory/fairness/BubbleChartAccessibility.vue';
-import BubbleChartInteroperability from '~/components/observatory/fairness/BubbleChartInteroperability.vue';
-import BubbleChartReusability from '~/components/observatory/fairness/BubbleChartReusability.vue';
+import BubbleChart from '~/components/observatory/fairness/BubbleChart.vue';
 import FTable from '~/components/observatory/fairness/FTable.vue';
 import ATable from '~/components/observatory/fairness/ATable.vue';
 import ITable from '~/components/observatory/fairness/ITable.vue';
 import RTable from '~/components/observatory/fairness/RTable.vue';
+import PlotWOptions from '~/components/observatory/PlotWOptions.vue';
+
+import { embedCodes } from '~/components/observatory/visualizations/embedCodes.js'; // Import the embed codes
 
 export default {
 	name: 'FAIRness',
 	components: {
 		CollectionSelector,
-		TabsPlotInfo,
+		BubbleChart,
+		PlotWOptions,
 	},
 	layout: 'observatory',
+	computed: {
+		...mapGetters('observatory', {
+			fair_scores: 'fairness/FAIRscores',
+			control_fair_scores: 'fairness/ControlFAIRscores',
+			current_collection: 'getCurrentCollection',
+		}),
+	},
 
 	data() {
 		return {
-			BubbleChartAccessibility,
-			BubbleChartFindability,
-			BubbleChartInteroperability,
-			BubbleChartReusability,
+			colors: ['#5da4d6', '#ff900e', '#2ca065', '#bd86f0'],
+			colors_lines: ['#0075c7', '#995302', '#046b37', '#5e3d7d'],
 			FTable,
 			ATable,
 			ITable,
 			RTable,
 			alertVisible: true,
+			dialogItemsFindability: [embedCodes.findabilityBubble],
+			dialogItemsAccessibility: [embedCodes.accessibilityBubble],
+			dialogItemsInteroperability: [embedCodes.interoperabilityBubble],
+			dialogItemsReusability: [embedCodes.reusabilityBubble],
 			breadcrumbs: [
 				{
 					text: 'Home',
@@ -207,3 +222,10 @@ export default {
 	},
 };
 </script>
+<style scoped>
+.copy-icon {
+	position: absolute;
+	top: 5px;
+	right: 10px;
+}
+</style>

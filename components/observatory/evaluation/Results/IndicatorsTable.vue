@@ -11,7 +11,7 @@
 			class="elevation-0 text-body-2"
 		>
 			<!-----    INDICATOR COLUMN  ---------->
-			<template v-slot:[`item.indicator`]="{ item }">
+			<template #[`item.indicator`]="{ item }">
 				<tr>
 					<td>
 						<p
@@ -28,7 +28,7 @@
 			</template>
 
 			<!-----    STATUS COLUMN  ---------->
-			<template v-slot:[`item.status`]="{ item }">
+			<template #[`item.status`]="{ item }">
 				<!-- only chip on rows of low-level indicators-->
 				<tr>
 					<td>
@@ -110,7 +110,11 @@
 			<template #expanded-item="{ headers, item }">
 				<td :colspan="headers.length">
 					<v-row justify="center">
-						<v-col cols="11">
+						<!------  ABOUT THIS INDICATOR  -------->
+						<v-col cols="12" class="mb-0 pb-0 mt-5 pt-2">
+							<span class="text-subtitle-2">About this indicator:</span>
+						</v-col>
+						<v-col cols="11" class="mt-0 pt-0">
 							<!------ For high-level indicators  ------->
 							<div
 								v-if="idsMainIndicators.includes(item.id)"
@@ -124,6 +128,7 @@
 							</div>
 
 							<!------ For low-level indicators  ------->
+
 							<div
 								v-if="!idsMainIndicators.includes(item.id)"
 								class="mt-3 mb-2"
@@ -155,7 +160,7 @@
 							>
 								<li>
 									<span class="font-weight-bold mt-2">
-										How it is meadured:
+										How it is measured:
 									</span>
 									<span>
 										{{ indicatorsExplanation[item.id].how }}
@@ -175,13 +180,13 @@
 							</div>
 							<div
 								v-if="!idsMainIndicators.includes(item.id)"
-								class="mt-2 mb-3"
+								class="mt-2 mb-1"
 								style="font-size: 0.8rem"
 							>
 								<li>
-									<span class="font-weight-bold"
-										>Types of software it applies to:</span
-									>
+									<span class="font-weight-bold">
+										Types of software it applies to:
+									</span>
 									<span
 										v-if="indicatorsExplanation[item.id].types.length === 2"
 									>
@@ -199,14 +204,55 @@
 									>
 								</li>
 							</div>
+						</v-col>
+						<!------  ASSESSMENT SUMMARY  -------->
+						<!------ Only for low-level indicators  ------->
+
+						<v-col
+							v-if="!idsMainIndicators.includes(item.id)"
+							cols="12"
+							class="mb-0 pb-0 mt-0"
+						>
+							<span class="text-subtitle-2">Assessment summary:</span>
+						</v-col>
+						<v-col v-if="!idsMainIndicators.includes(item.id)" cols="11">
+							<div
+								v-if="!idsMainIndicators.includes(item.id)"
+								class="mt-1 mb-3"
+								style="font-size: 0.8rem"
+							>
+								<logsSection :logs="item.logs" />
+							</div>
+						</v-col>
+
+						<!------  RECOMMENDATION  -------->
+						<!------ Only for low-level indicators  ------->
+						<!--v-col
+							cols="11"
+							class="mb-0 pb-0 mt-0"
+							v-if="!idsMainIndicators.includes(item.id)"
+						>
+							<span class="text-subtitle-2">Recomendation:</span>
+						</v-col>
+						<v-col cols="10" v-if="!idsMainIndicators.includes(item.id)">
+							<div
+								v-if="!idsMainIndicators.includes(item.id)"
+								class="mt-1 mb-3"
+								style="font-size: 0.8rem"
+							>
+								- This is a recomendation to pass this indicator.
+							</div>
+						</v-col-->
+						<!------  NOTE  -------->
+						<v-col cols="11">
 							<v-alert
-								text
-								dense
-								type="warning"
 								v-if="
 									!idsMainIndicators.includes(item.id) &&
 									indicatorsExplanation[item.id].note != ''
 								"
+								text
+								dense
+								type="warning"
 								class="mt-2 mb-3"
 								style="font-size: 0.8rem"
 							>
@@ -224,9 +270,13 @@
 <script>
 import { mapGetters } from 'vuex';
 import { indicatorsExplanation } from './IndicatorsExplanation.js';
+import logsSection from './LogsSection.vue';
 
 export default {
 	name: 'IndicatorsTable',
+	components: {
+		logsSection,
+	},
 	props: ['indicators', 'idsMainIndicators'],
 	data() {
 		return {
@@ -258,7 +308,7 @@ export default {
 				id: indicator.id,
 				avatar: indicator.avatar,
 				status: this.indicatorFullfilled(indicator),
-				log: indicator.info,
+				logs: this.indicatorLogs(indicator),
 			};
 		});
 	},
@@ -266,13 +316,15 @@ export default {
 		...mapGetters({
 			FAIRIndicatorsTool:
 				'observatory/evaluation/results/getFAIRIndicatorsTool',
+			FAIRIndicatorsLogs:
+				'observatory/evaluation/results/getFAIRIndicatorsLogs',
 		}),
 	},
 	methods: {
 		indicatorFullfilled(indicator) {
 			// low-level indicators are boolean
 			// high-level indicators are floats or integers
-			switch (this.FAIRIndicatorsTool[0][indicator.id]) {
+			switch (this.FAIRIndicatorsTool[indicator.id]) {
 				case 1:
 					return true;
 				case 1.0:
@@ -282,6 +334,9 @@ export default {
 				default:
 					return false;
 			}
+		},
+		indicatorLogs(indicator) {
+			return this.FAIRIndicatorsLogs[indicator.id];
 		},
 		metaType(indicator) {
 			if (this.webTypes.includes(indicator.type)) {

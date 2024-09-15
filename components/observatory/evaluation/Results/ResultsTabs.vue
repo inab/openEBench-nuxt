@@ -16,26 +16,50 @@
 			</v-tabs-items>
 		</v-tabs>
 		<v-row class="d-flex mb-3">
-			<v-btn class="mt-4 ml-4" color="primary" @click="nextStep">
-				Continue
-			</v-btn>
-			<v-btn text class="mt-4 ml-4" @click="goBack"> Back </v-btn>
-			<v-btn text class="mt-4 ml-auto" color="error" @click="cancel">
-				Cancel
-			</v-btn>
+			<v-tooltip bottom>
+				<template #activator="{ on, attrs }">
+					<v-btn
+						text
+						class="mt-4 ml-4"
+						v-bind="attrs"
+						@click="goBack"
+						v-on="on"
+					>
+						Back
+					</v-btn>
+				</template>
+				Go to the previous step.
+			</v-tooltip>
+
+			<v-tooltip bottom>
+				<template #activator="{ on, attrs }">
+					<v-btn
+						text
+						color="error"
+						class="mt-4 ml-auto mr-4"
+						v-bind="attrs"
+						@click="cancel"
+						v-on="on"
+					>
+						Cancel
+					</v-btn>
+				</template>
+				Go to the start of the process without saving any changes.
+			</v-tooltip>
 		</v-row>
-		<DialogParseMetadata />
 	</v-container>
 </template>
 <script>
 import FAIRresults from './FAIRresults.vue';
 import MetadataActions from './MetadataActions.vue';
+import CitationActions from './CitationActions.vue';
 
 export default {
 	name: 'ResultsTabs',
 	components: {
 		FAIRresults,
 		MetadataActions,
+		CitationActions,
 	},
 	data: () => ({
 		tab: 'Upload File',
@@ -48,25 +72,25 @@ export default {
 				text: 'Metadata',
 				component: 'MetadataActions',
 			},
+			{
+				text: 'Citation',
+				component: 'CitationActions',
+			},
 		],
 	}),
-
 	methods: {
-		nextStep() {
-			this.$store.dispatch('observatory/evaluation/changeStep', 5);
-		},
 		goBack() {
 			this.$store.dispatch('observatory/evaluation/changeStep', 3);
 			this.$store.commit(
-				'observatory/evaluation/results/setFAIRIndicatorsTool',
-				null
+				'observatory/evaluation/results/setFAIRIndicatorsToolResult',
+				{ result: null, logs: null }
 			);
 		},
 		cancel() {
 			this.$store.dispatch('observatory/evaluation/changeStep', 1);
 			this.$store.commit(
-				'observatory/evaluation/results/setFAIRIndicatorsTool',
-				null
+				'observatory/evaluation/results/setFAIRIndicatorsToolResult',
+				{ result: null, logs: null }
 			);
 		},
 	},

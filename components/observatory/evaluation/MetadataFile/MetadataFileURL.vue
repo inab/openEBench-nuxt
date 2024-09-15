@@ -8,8 +8,8 @@
 		<v-row justify="space-around" class="mb-0 mt-0 d-flex align-center">
 			<v-col cols="10">
 				<v-text-field
-					class="ml-1 text-body-2"
 					v-model="URL"
+					class="ml-1 text-body-2"
 					label="Link to metadata file"
 					:rules="[rules.required]"
 					outlined
@@ -34,13 +34,13 @@
 				<v-btn color="primary" :disabled="invalid" @click="submitURL">
 					Continue
 				</v-btn>
-				<v-btn @click="goBack" text> Back </v-btn>
+				<v-btn text @click="goBack"> Back </v-btn>
 			</v-col>
 		</v-row>
 
 		<DialogAppInstall
 			:dialog-app-install="
-				this.$store.getters['observatory/evaluation/file/getDialogInstallApp']
+				$store.getters['observatory/evaluation/file/getDialogInstallApp']
 			"
 			:title="installDialogParameters.title"
 			:text="installDialogParameters.text"

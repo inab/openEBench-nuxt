@@ -62,7 +62,7 @@ export default {
 	methods: {
 		buildTraces() {
 			const traces = [];
-			const data = [this.data_control.data, this.data_tool[0]];
+			const data = [this.data_control.data, this.data_tool];
 			const names = ['Average of all tools', this.toolName];
 			const colors = ['#b8b8b8', this.colorFill];
 			for (let i = 0; i < data.length; i++) {

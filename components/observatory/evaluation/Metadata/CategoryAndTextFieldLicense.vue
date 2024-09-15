@@ -55,7 +55,7 @@ export default {
 		changeValueName() {
 			if (this.SPDXLicenses.includes(this.selectLicense)) {
 				this.$observatory
-					.get('/SPDXLicenses/url/' + this.selectLicense)
+					.get('/spdx/SPDXLicenses/url/' + this.selectLicense)
 					.then((response) => {
 						// console.log(response.data)
 						this.URL = response.data.URL;
@@ -71,7 +71,7 @@ export default {
 		},
 		findMatchingLicense(license) {
 			this.$observatory
-				.get('/SPDXLicenses/match/' + license)
+				.get('/spdx/SPDXLicenses/match/' + license)
 				.then((response) => {
 					// console.log(response.data)
 					if (response.data.match === '') {

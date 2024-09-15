@@ -2,12 +2,11 @@
 	<div class="mt-0 pt-0">
 		<v-row justify="center">
 			<v-col md="11" sm="11" cols="11" lg="11" xl="11">
-				<div class="mb-3 text-h5">Welcome to the FAIR Evaluator!</div>
+				<div class="mb-3 text-h5">Welcome to the FAIRsoft Evaluator!</div>
 
 				<p style="line-height: 2" class="mb-0 mt-0">
-					Enhance the FAIRness of your software.
-					<br />
-					Here’s how you can use our tool:
+					Enhance the FAIRness of your software. Here’s how you can use our
+					tool:
 				</p>
 
 				<ul style="line-height: 2; font-size: 0.9rem">
@@ -21,14 +20,14 @@
 						adjust and verify the metadata to ensure accuracy.
 					</li>
 					<li>
-						<strong style="color: #0b579f">Evaluate:</strong> Get instant scores
-						and see pass/fail results for each criterion to measure your
-						software’s compliance.
+						<strong style="color: #0b579f">Evaluate:</strong> Get instant
+						FAIRsoft scores and see pass/fail results for each criterion to
+						measure your software’s compliance.
 					</li>
 					<li>
-						<strong style="color: #0b579f">Act:</strong> Export the metadata for
-						your records or directly improve the project by making a pull
-						request on GitHub.
+						<strong style="color: #0b579f">Act:</strong> Export the metadata or
+						citation for your software or directly improve the project by making
+						a pull request on GitHub.
 					</li>
 				</ul>
 

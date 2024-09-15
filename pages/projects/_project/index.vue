@@ -73,7 +73,7 @@
 						:event="currentEvent"
 					/>
 				</v-card>
-				<v-card outlined v-else class="pa-5" elevation="1">
+				<v-card v-else outlined class="pa-5" elevation="1">
 					<community-empty-state class="mt-10" />
 				</v-card>
 			</v-tab-item>

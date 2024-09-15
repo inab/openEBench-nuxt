@@ -1,18 +1,20 @@
 // state
 export const state = () => ({
-	_FAIRIndicatorsTool: null, // to results.js
-	_FAIRIndicatorsControl: null, // to results.js
-	_LoadingEvaluation: false, // remains in index.js
+	_FAIRIndicatorsTool: null,
+	_FAIRIndicatorsLogs: null,
+	_FAIRIndicatorsControl: null,
+	_LoadingEvaluation: false,
 });
 
 // getters
 export const getters = {
 	getFAIRIndicatorsTool(state) {
-		// to results.js
 		return state._FAIRIndicatorsTool;
 	},
+	getFAIRIndicatorsLogs(state) {
+		return state._FAIRIndicatorsLogs;
+	},
 	getFAIRIndicatorsControl(state) {
-		// to results.js
 		return state._FAIRIndicatorsControl;
 	},
 	getLoadingEvaluation(state) {
@@ -23,7 +25,7 @@ export const getters = {
 // actions
 export const actions = {
 	async evaluateToolById({ commit, _state }, tooId) {
-		const URL = '/tools/evaluateId';
+		const URL = '/fair/evaluateId';
 
 		commit('setLoading', { evaluation: true });
 
@@ -34,13 +36,13 @@ export const actions = {
 			{ url: URL, data }
 		);
 
-		commit('setFAIRIndicatorsTool', result);
-		console.log(result);
+		commit('setFAIRIndicatorsToolResult', result);
+		console.debug(result);
 		commit('setLoading', { evaluation: false });
 	},
 
 	async evaluateToolByMetadata({ commit, _state }, toolMetadata) {
-		const URL = '/tools/evaluate';
+		const URL = '/fair/evaluate';
 
 		commit('setLoading', { evaluation: true });
 
@@ -56,7 +58,9 @@ export const actions = {
 			payload
 		);
 
-		commit('setFAIRIndicatorsTool', result);
+		console.debug(result);
+
+		commit('setFAIRIndicatorsToolResult', result);
 		commit('setLoading', { evaluation: false });
 	},
 
@@ -92,13 +96,16 @@ export const actions = {
 
 // mutations
 export const mutations = {
-	setFAIRIndicatorsTool(state, result) {
+	setFAIRIndicatorsToolResult(state, payload) {
+		const result = payload.result;
+		const logs = payload.logs;
+
 		state._FAIRIndicatorsTool = result;
+		state._FAIRIndicatorsLogs = logs;
 	},
 	setFAIRIndicatorsControl(state, result) {
 		state._FAIRIndicatorsControl = result;
 	},
-
 	setLoading(state, payload) {
 		state._LoadingEvaluation = payload.evaluation;
 	},

@@ -18,7 +18,8 @@ export const state = () => ({
 	// opens/closes the dialog for installing the app in the requester's github account
 	_dialogAppInstall: false,
 	// the installation ID of the app in the requester's github account
-	_installationID: null,
+	_extractorInstallationID: null,
+	_updaterInstallationID: null,
 	// socket
 	_socket: null,
 });
@@ -40,8 +41,11 @@ export const getters = {
 	getDialogAppInstall(state) {
 		return state._dialogAppInstall;
 	},
-	getInstallationID(state) {
-		return state._installationID;
+	getExtractorInstallationID(state) {
+		return state._extractorInstallationID;
+	},
+	getUpdaterInstallationID(state) {
+		return state._updaterInstallationID;
 	},
 	getSocket(state) {
 		return state._socket;
@@ -50,9 +54,9 @@ export const getters = {
 
 // actions
 export const actions = {
-	async getInstallationID({ commit, _state }, repository) {
+	async getExtractorInstallationID({ commit, _state }, repository) {
 		/*
-        This function makes a request to the API to check the installation
+        This function makes a request to the API to check the installation of Metadata Extractor for FAIRsoft in the repository.
         ID of the repository that the user requested to import metadata from.
         This function is called from the component GitHubInput.vue
         */
@@ -63,8 +67,7 @@ export const actions = {
 		);
 
 		try {
-			// var URL = 'http://localhost:3500/installation/id' // temporary. Move to config file
-			const URL = 'installation/id';
+			const URL = '/metadata-extractor-for-fairsoft/installation/id';
 
 			const response = await this.$githubapp.$get(URL, {
 				params: { owner: repository.owner, repo: repository.repo },
@@ -75,21 +78,62 @@ export const actions = {
 				installationID = response.data.data.id;
 			}
 
-			console.log('obtained installation ID: ' + installationID);
-			commit('setInstallationID', installationID);
+			console.debug('obtained installation ID: ' + installationID);
+			commit('setExtractorInstallationID', installationID);
 		} catch (error) {
-			console.log('Error while getting installation ID: ' + error);
+			console.debug('Error while getting installation ID: ' + error);
 			commit(
 				'setImportProgressText',
-				"error while fetching the repositorie's installation ID"
+				"error while fetching the repositorie's installation ID for app metadata extractor for FAIRsoft"
 			);
 			commit('setImportError', true);
 		}
 	},
 
-	updateInstallationID({ commit }, installationID) {
+	async getUpdaterInstallationID({ commit, _state }, repository) {
+		/*
+        This function makes a request to the API to check the installation of Metadata Updater for FAIRsoft in the repository.
+        ID of the repository that the user requested to pull file to
+        This function is called from the component GitHubInput.vue
+        */
+
+		commit(
+			'setImportProgressText',
+			'Checking the permissions to read the repository ...'
+		);
+
+		try {
+			const URL = '/metadata-updater-for-fairsoft/installation/id';
+
+			const response = await this.$githubapp.$get(URL, {
+				params: { owner: repository.owner, repo: repository.repo },
+			});
+
+			let installationID = null;
+			if (response.status === 200) {
+				installationID = response.data.data.id;
+			}
+
+			console.debug('obtained installation ID: ' + installationID);
+			commit('setUpdaterInstallationID', installationID);
+		} catch (error) {
+			console.debug('Error while getting installation ID: ' + error);
+			commit(
+				'setImportProgressText',
+				"error while fetching the repositorie's installation ID for app Metadata Updater for FAIRsoft"
+			);
+			commit('setImportError', true);
+		}
+	},
+
+	updateExtractorInstallationID({ commit }, installationID) {
 		// This function updates the value of _installationID
-		commit('setInstallationID', installationID);
+		commit('setExtractorInstallationID', installationID);
+	},
+
+	updateUpdaterInstallationID({ commit }, installationID) {
+		// This function updates the value of _installationID
+		commit('setUpdaterInstallationID', installationID);
 	},
 
 	updateImportError({ commit }, value) {
@@ -118,13 +162,12 @@ export const actions = {
 		commit('setDialogImportMetadata', true);
 		commit('setImportProgressText', 'Fetching repository metadata ...');
 
-		console.log('Installation ID: ' + state._installationID);
-		// var URL = 'http://localhost:3500/metadata'
+		console.debug('Installation ID: ' + state._installationID);
 		const URL = 'metadata';
 		const payload = {
 			repo: state._repository.repo,
 			owner: state._repository.owner,
-			installationID: state._installationID,
+			installationID: state._extractorInstallationID,
 		};
 
 		try {
@@ -150,7 +193,7 @@ export const actions = {
 			// change step to 3 after importing metadata
 			dispatch('observatory/evaluation/changeStep', 3, { root: true });
 		} catch (error) {
-			console.log('Error while fetching metadata: ' + error);
+			console.debug('Error while fetching metadata: ' + error);
 			commit('setImportProgressText', 'Error while fetching metadata');
 			commit('setImportError', true);
 		}
@@ -184,13 +227,14 @@ export const mutations = {
 	setDialogImportMetadata(state, value) {
 		state._dialogImportMetadata = value;
 	},
-
 	setDialogAppInstall(state, value) {
 		state._dialogAppInstall = value;
 	},
-
-	setInstallationID(state, installationID) {
-		state._installationID = installationID;
+	setExtractorInstallationID(state, installationID) {
+		state._extractorInstallationID = installationID;
+	},
+	setUpdaterInstallationID(state, installationID) {
+		state._updaterInstallationID = installationID;
 	},
 	setSocket(state, socket) {
 		state._socket = socket;

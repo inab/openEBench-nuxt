@@ -32,6 +32,7 @@
 export const state = () => ({
 	_toolMetadata: {},
 	_toolMetadataJSONLD: {},
+	_toolMetadataCFF: {},
 	_LoadedMetadata: false,
 	_SPDXLicenses: [],
 	_VocabulariesItems: {
@@ -46,6 +47,9 @@ export const state = () => ({
 
 // getters
 export const getters = {
+	getToolName(state) {
+		return state._toolMetadata.name;
+	},
 	getVocabulariesItems(state) {
 		return state._VocabulariesItems;
 	},
@@ -61,13 +65,16 @@ export const getters = {
 	getToolMetadataJSONLD(state) {
 		return state._toolMetadataJSONLD;
 	},
+	getToolMetadataCFF(state) {
+		return state._toolMetadataCFF;
+	},
 };
 
 // actions
 
 export const actions = {
 	async fetchSPDXLicenses({ commit, _state }) {
-		const URL = 'SPDXLicenses';
+		const URL = 'spdx/SPDXLicenses';
 
 		const SPDXLicenses = await this.cache.dispatch(
 			'observatory/evaluation/metadata/GET_URL',
@@ -79,7 +86,7 @@ export const actions = {
 
 	// better generate once and read from json file or js file
 	async getVocabulariesItems({ commit, _state }) {
-		const URL = '/EDAMTerms';
+		const URL = 'edam/EDAMTerms';
 
 		const EDAMTerms = await this.cache.dispatch(
 			'observatory/evaluation/metadata/GET_URL',
@@ -109,9 +116,6 @@ export const actions = {
 
 		// New field registration as boolean
 		result.registration_not_mandatory = false; // Here we are missing the registrations that were equal to true
-
-		// New field api or ilcense as boolean
-		result.api_lib = false;
 
 		// New field registries as array of strings (starting with sources)
 		const sourcesLabels = {
@@ -177,11 +181,37 @@ export const actions = {
 		commit('setMetadataJSONLD', result);
 	},
 
+	async transformToCFF({ commit, state }) {
+		// Transform the metadata to CFF
+
+		const payload = {
+			data: state._toolMetadata,
+			url: '/tools/cff',
+		};
+
+		const result = await this.dispatch(
+			'observatory/evaluation/metadata/POST_URL',
+			payload
+		);
+
+		console.debug(result);
+
+		commit('setMetadataCFF', result);
+	},
+
 	async POST_URL({ _commit, _state }, payload) {
 		const result = await this.$observatory.post(payload.url, {
 			data: payload.data,
 		});
 		return result.data;
+	},
+
+	updateToolMetadataJSONLD({ commit }, payload) {
+		commit('setMetadataJSONLD', payload);
+	},
+
+	updateToolMetadataCFF({ commit }, payload) {
+		commit('setMetadataCFF', payload);
 	},
 
 	changeBooleanEntry({ commit }, payload) {
@@ -221,6 +251,10 @@ export const mutations = {
 		state._toolMetadataJSONLD = payload;
 	},
 
+	setMetadataCFF(state, payload) {
+		state._toolMetadataCFF = payload;
+	},
+
 	addField(state, payload) {
 		state._toolMetadata[payload.field] = payload.value;
 	},
@@ -235,6 +269,7 @@ export const mutations = {
 		// remove item to force update of reactive properties depending on it
 		// state._toolMetadata[payload.field].splice(payload.index, 1);
 		// add the new value
+
 		state._toolMetadata[payload.field][payload.index] = payload.value;
 	},
 	changeSelectorEntry(state, payload) {

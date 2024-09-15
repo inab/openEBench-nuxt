@@ -15,7 +15,7 @@
 					:show-size="1000"
 					:rules="[rules.required]"
 				>
-					<template v-slot:selection="{ index, text }">
+					<template #selection="{ index, text }">
 						<v-chip v-if="index < 2" label color="grey lighten-3">
 							{{ text }}
 						</v-chip>
@@ -28,7 +28,7 @@
 				<v-btn color="primary" :disabled="invalid" @click="submitFile">
 					Continue
 				</v-btn>
-				<v-btn @click="goBack" text> Back </v-btn>
+				<v-btn text @click="goBack"> Back </v-btn>
 
 				<span class="error--text">{{ message }}</span>
 			</v-col>
@@ -46,6 +46,12 @@ export default {
 		},
 		message: '',
 	}),
+	computed: {
+		// Check if the file is valid
+		invalid() {
+			return !this.file;
+		},
+	},
 	methods: {
 		goBack() {
 			this.$store.dispatch('observatory/evaluation/changeStep', 1);
@@ -60,12 +66,6 @@ export default {
 			} catch (error) {
 				console.error('Error submitting file:', error);
 			}
-		},
-	},
-	computed: {
-		// Check if the file is valid
-		invalid() {
-			return !this.file;
 		},
 	},
 };
