@@ -99,6 +99,7 @@
 			:initial-dialog-app-install="dialogAppInstall"
 			:title="installDialogParameters.title"
 			:text="installDialogParameters.text"
+			:installation-url="installDialogParameters.installationURL"
 			@cancel="cancel"
 			@ready="createPR"
 		/>
@@ -177,6 +178,8 @@ export default {
 				},
 			},
 			installDialogParameters: {
+				installationURL:
+					'https://github.com/apps/metadata-updater-for-fairsoft/installations/select_target',
 				title: 'Unable to create a pull request',
 				text: 'Let the FAIRsoft Evaluator create a branch, create a citation file and make a pull request in the repository by grantting the <a href="https://github.com/apps/metadata-updater-for-fairsoft" target="_blank">Metadata Updater for FAIRsoft GitHub App</a> the necessary permissions.',
 			},
