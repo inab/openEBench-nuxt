@@ -34,7 +34,7 @@
 </template>
 <script>
 import { mapGetters } from 'vuex';
-import ExportCitationCardDownload from '~/components/observatory/evaluation/Export/ExportMetadataCardDownload.vue';
+import ExportCitationCardDownload from '~/components/observatory/evaluation/Export/ExportCitationCardDownload.vue';
 import ExportContentCardPull from '~/components/observatory/evaluation/Export/ExportContentCardPull.vue';
 import ViewCitation from '~/components/observatory/evaluation/Export/ViewCitation.vue';
 

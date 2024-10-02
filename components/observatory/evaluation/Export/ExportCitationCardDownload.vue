@@ -35,31 +35,30 @@
 </template>
 <script>
 import { mapGetters } from 'vuex';
-import jsyaml from 'js-yaml';
 
 export default {
 	name: 'ExportCitationCardDownload',
 	data() {
 		return {
-			file_name: 'tool_citation.cff',
+			file_name: 'CITATION.cff',
 			alert: {
 				title: 'Download Citation',
 				id: 'download',
 				icon: 'mdi-download',
 				description:
-					'Click "Download" to save the metadata file in JSON-LD format to your device.',
+					'Click "Download" to save the citation file in JSON-LD format to your device.',
 				iconText: 'Download',
 			},
 		};
 	},
 	computed: {
 		...mapGetters({
-			toolMetadataCFF: 'observatory/evaluation/metadata/getToolCitationCFF',
+			toolMetadataCFF: 'observatory/evaluation/metadata/getToolMetadataCFF',
 		}),
 	},
 	methods: {
 		download() {
-			const yaml = jsyaml.dump(this.toolMetadataCFF);
+			const yaml = this.toolMetadataCFF;
 			const url = window.URL.createObjectURL(
 				new Blob([yaml], { type: 'text/yaml' })
 			);

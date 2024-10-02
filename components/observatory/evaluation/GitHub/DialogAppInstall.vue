@@ -23,7 +23,7 @@ import { mapGetters } from 'vuex';
 
 export default {
 	name: 'DialogAppInstall',
-	props: ['title', 'text', 'initialDialogAppInstall'],
+	props: ['title', 'text', 'initialDialogAppInstall', 'installationURL'],
 	computed: {
 		...mapGetters('observatory/evaluation/github/', {
 			importProgressText: 'getImportProgressText',

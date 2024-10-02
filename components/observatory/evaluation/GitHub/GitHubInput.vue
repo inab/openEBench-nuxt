@@ -47,6 +47,7 @@
 				:initial-dialog-app-install="dialogAppInstall"
 				:title="installDialogParameters.title"
 				:text="installDialogParameters.text"
+				:installation-url="installDialogParameters.installationURL"
 				@cancel="cancel"
 				@ready="fetchMetadata"
 			/>
@@ -86,6 +87,8 @@ export default {
 			},
 		],
 		installDialogParameters: {
+			installationURL:
+				'https://github.com/apps/metadata-extractor-for-fairsoft/installations/select_target',
 			title: "Unable to access repository's metadata.",
 			text: 'Let the FAIRsoft Evaluator access the requested repositories metadata by grantting the <a href="https://github.com/apps/metadata-extractor-for-fairsoft" target="_blank">Metadata Extractor for FAIRsoft GitHub App</a> the necessary permissions.',
 		},
