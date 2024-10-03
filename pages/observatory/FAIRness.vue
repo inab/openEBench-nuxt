@@ -1,34 +1,26 @@
 <template>
 	<div>
 		<v-row justify="center">
-			<v-col md="8" sm="8" cols="8" lg="8" xl="8">
+			<v-col md="7" sm="7" cols="7" lg="7" xl="7">
 				<div class="mb-3 text-h5">FAIRsoft Indicator Scoreboard</div>
 				<p style="line-height: 2.1" class="mb-1 mt-0">
 					This page brings to light the
 					<strong>collective insights</strong> from our FAIRsoft indicators,
 					providing a clear snapshot of trends and scores across various
 					software. <br />
-					Dive into the details:
 				</p>
-				<ul style="line-height: 2.1; font-size: 0.9rem">
-					<li>
-						<strong>Aggregated Scores:</strong> Get a quick overview of how
-						different tools stack up in terms of their FAIRness.
-					</li>
-					<li>
-						<strong>Deep Dive:</strong> Interested in the nitty-gritty? Each
-						indicator used here is detailed
-						<a
-							href="https://inab.github.io/FAIRsoft_indicators/"
-							target="_blank"
-							>here.</a
-						>
-					</li>
-				</ul>
+				<p style="line-height: 1.5" class="mb-0 mt-0 ml-0">
+					<strong>Deep Dive:</strong>
+					Each FAIRsoft indicator is explained in detail
+					<a href="https://inab.github.io/FAIRsoft_indicators/" target="_blank"
+						>here.</a
+					>
+				</p>
+
 				<p></p>
 				<p></p>
 			</v-col>
-			<v-col cols="3">
+			<v-col cols="4">
 				<v-alert
 					v-model="alertVisible"
 					dismissible

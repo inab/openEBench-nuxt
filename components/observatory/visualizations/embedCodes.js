@@ -1,4 +1,4 @@
-const BASE_URL = process.env.OBSERVATORY_API_URL || 'http://localhost:3000';
+const BASE_URL = 'http://openebench.bsc.es';
 
 export const embedCodes = {
 	licensesPie: {
