@@ -82,6 +82,7 @@ export const actions = {
 			commit('setExtractorInstallationID', installationID);
 		} catch (error) {
 			console.debug('Error while getting installation ID: ' + error);
+			commit('setExtractorInstallationID', null);
 			commit(
 				'setImportProgressText',
 				"error while fetching the repositorie's installation ID for app metadata extractor for FAIRsoft"

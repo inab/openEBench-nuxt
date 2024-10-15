@@ -84,8 +84,8 @@ export default {
 		},
 		exampleValues: [
 			{
-				title: 'FAIRsoft-indicators',
-				URL: 'https://raw.githubusercontent.com/EvaMart/FAIRsoft-indicators/master/FAIRsoft-indicators.metadata.jsonld',
+				title: 'oeb-visualizations',
+				URL: 'https://raw.githubusercontent.com/inab/oeb-visualizations/refs/heads/main/metadata.jsonld',
 			},
 		],
 		installDialogParameters: {
@@ -96,40 +96,12 @@ export default {
 
 	methods: {
 		submitURL() {
-			this.payload = this.ParseGitHubURL(this.URL);
-			if (this.payload) {
-				this.submitGitHubLink();
-			} else {
-				this.$store.dispatch(
-					'observatory/evaluation/file/parseFromURL',
-					this.URL
-				);
-			}
+			this.$store.dispatch('observatory/evaluation/file/downloadFile', {
+				url: this.URL,
+			});
 
 			this.$store.dispatch('observatory/evaluation/changeStep', 3);
 		},
-		ParseGitHubURL(url) {
-			/*
-            Check if the URL is a raw GitHub URL:
-                raw.githubusercontent.com/${user}/${repo}/${branch}/${path}
-            If it is, return the payload to fetch the file content.
-            Else, return null.
-            */
-			const pattern = /^(http(s?):\/\/)?raw\.githubusercontent\.com\/(.*)$/i;
-			if (pattern.test(url)) {
-				const payload = {
-					repo: url.split('/')[4],
-					owner: url.split('/')[3],
-					branch: url.split('/')[5],
-					path: url.split('/').slice(6).join('/'),
-				};
-
-				return payload;
-			} else {
-				return null;
-			}
-		},
-
 		cancel() {
 			this.$store.dispatch(
 				'observatory/evaluation/file/updateDialogInstallApp',
@@ -139,69 +111,6 @@ export default {
 				'observatory/evaluation/file/updateDialogParseMetadata',
 				false
 			);
-		},
-
-		async submitGitHubLink() {
-			/*
-            This function is called when the URL introduced by the user is a github one.
-            It checks if the app is installed in the repository and, if it is, fetches the metadata.
-            If it is not installed, it opens a dialog to install it.
-            */
-
-			// 1.1 Open dialog to show progress
-
-			this.$store.dispatch('observatory/evaluation/github/updateRepository', {
-				owner: this.payload.owner,
-				repo: this.payload.repo,
-			});
-
-			this.$store.dispatch(
-				'observatory/evaluation/file/updateDialogParseMetadata',
-				true
-			);
-			console.log('open dialog');
-
-			// 1.2 Get installation ID
-			console.log('Get installation ID');
-			await this.$store.dispatch(
-				'observatory/evaluation/github/getInstallationID',
-				{
-					owner: this.payload.owner,
-					repo: this.payload.repo,
-				}
-			);
-
-			const installationID =
-				this.$store.getters['observatory/evaluation/github/getInstallationID'];
-			console.log('installation ID: ' + installationID);
-
-			// 2. If it is installed, fetch file content
-			if (installationID) {
-				const payload = {
-					installationID,
-					repo: this.payload.repo,
-					owner: this.payload.owner,
-					path: this.payload.path,
-				};
-
-				this.$store.dispatch(
-					'observatory/evaluation/file/parseFromGitHubURL',
-					payload
-				);
-			} else {
-				// 3. If it is not installed, open dialog to install it
-				this.$store.dispatch(
-					'observatory/evaluation/file/updateDialogParseMetadata',
-					false
-				);
-				this.$store.dispatch(
-					'observatory/evaluation/file/updateDialogInstallApp',
-					true
-				);
-
-				// this.$store.dispatch('evaluation/changeLoading', { github : false}) // close loading dialog
-				// this.dialogAppNotInstalled = true // open "app installation" dialog
-			}
 		},
 
 		goBack() {

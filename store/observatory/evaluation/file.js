@@ -322,7 +322,7 @@ export const actions = {
 		if (response) {
 			const fileContent = response.content;
 
-			dispatch('parseMetadataFile', fileContent);
+			dispatch('mapMetadata', fileContent);
 		} else {
 			commit('setErrorDialogParseMetadata', true);
 			commit(
@@ -345,7 +345,8 @@ export const actions = {
 
 			const fileContent = response.data;
 			console.debug('Downloaded file content:', fileContent);
-			await dispatch('parseMetadataFile', JSON.stringify(fileContent));
+			parsedContent = JSON.parse(fileContent);
+			dispatch('mapMetadata', parsedContent);
 		} catch (error) {
 			console.error('Error fetching or parsing file from URL:', error);
 			commit('setErrorDialogParseMetadata', true);
@@ -395,6 +396,42 @@ export const actions = {
 		});
 	},
 
+	async downloadFile({ commit, dispatch }, payload) {
+		commit('setParseProgressText', 'Downloading file from URL...');
+		commit('setDialogParseMetadata', true);
+
+		try {
+			const URL = '/downloads/download-content/';
+
+			const data = {
+				url: payload.url,
+			};
+
+			console.log(data);
+
+			const response = await this.$observatory.post(URL, data, {
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			});
+
+			let fileContent = response.data.content;
+			fileContent = fileContent.trim();
+			fileContent = JSON.parse(fileContent);
+
+			console.log('name', fileContent['schema:name']);
+			await dispatch('mapMetadata', fileContent);
+			console.debug('Downloaded file content:', fileContent);
+		} catch (error) {
+			console.error('Error fetching or parsing file from URL:', error);
+			commit('setErrorDialogParseMetadata', true);
+			commit(
+				'setErrorProgressText',
+				`Error fetching file from URL: ${error.message}`
+			);
+		}
+	},
+
 	async parseMetadataFile({ commit, dispatch }, file) {
 		commit('setParseProgressText', 'Parsing metadata file content...');
 		commit('setDialogParseMetadata', true);
@@ -419,8 +456,10 @@ export const actions = {
 		fileContent = fileContent.trim();
 
 		let parsedContent;
+
 		try {
 			parsedContent = JSON.parse(fileContent);
+			dispatch('mapMetadata', parsedContent);
 		} catch (error) {
 			console.error('Error parsing JSON:', error);
 			commit('setDialogParseMetadata', false);
@@ -432,9 +471,10 @@ export const actions = {
 				'</pre>';
 			commit('setErrorProgressText', errorMessage);
 			dispatch('observatory/evaluation/changeStep', 2, { root: true });
-			return;
 		}
+	},
 
+	mapMetadata({ commit, dispatch }, parsedContent) {
 		// Transform file fields into the UI metadata model fields
 		let metadata = {
 			topics: buildFeTopicsOperations(
