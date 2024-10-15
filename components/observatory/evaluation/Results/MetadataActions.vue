@@ -8,10 +8,20 @@
 					previous step. It is in JSON-LD format and incorporates
 					<a href="https://schema.org/" target="_blank">Schema.org</a>,
 					<a href="https://bioschemas.org/" target="_blank">Bioschemas</a>, and
-					<a href="" target="_blank">maSMP</a>
+					<a href="https://zbmed-semtec.github.io/maSMPs/" target="_blank"
+						>maSMP</a
+					>
 					entities. This ensures your metadata is highly interoperable on the
 					internet, making it easy to be understood and utilized by a wide range
-					of systems and services.
+					of systems and services. Additionally, this metadata can be used to
+					pre-fill an
+					<a href="https://osf.io/preprints/biohackrxiv/k8znb" target="_blank"
+						>ELIXIR software management plan</a
+					>
+					for your software in the
+					<a href="https://smw.dsw.elixir-europe.org/wizard/" target="_blank"
+						>Software Management Wizard (SMW)</a
+					>.
 				</p>
 				<p>
 					Below, you have several options to preview, download, or directly
