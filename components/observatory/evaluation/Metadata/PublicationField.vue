@@ -63,7 +63,7 @@ export default {
 	data() {
 		return {
 			title: '',
-			year: '',
+			year: null,
 			doi: '',
 			pmid: '',
 			pmcid: '',

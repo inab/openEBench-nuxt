@@ -78,7 +78,7 @@ export default {
 				value: {
 					title: '',
 					journal: '',
-					year: '',
+					year: null,
 					doi: '',
 					pmid: '',
 					pmcid: '',
