@@ -1,5 +1,5 @@
 <template>
-	<div v-if="isMissageVisible" class="maintenance-notice">
+	<div v-if="isMessageVisible" class="maintenance-notice">
 		<div class="maintenance-notice__box">
 			<v-icon right color="primary">mdi-alert</v-icon>
 			Please be aware that we will be performing routine server maintenance from
@@ -15,7 +15,7 @@ export default {
 	computed: {
 		isMessageVisible() {
 			const dateRange = {
-				start: new Date('2024-10-17'),
+				start: new Date('2024-10-18'),
 				end: new Date('2024-10-24'),
 			};
 
