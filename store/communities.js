@@ -6,6 +6,7 @@ export default {
 		return {
 			list: [],
 			loading: false,
+			error: false,
 		};
 	},
 
@@ -13,32 +14,38 @@ export default {
 		async getCommunities({ commit }) {
 			commit('setLoading', true);
 
-			const response = await this.$graphql.$post('/graphql', {
-				query: `
-				{
-					getCommunities {
-						_id
-						name
-						acronym
-						description
-						status
-						keywords
-						links {
-							uri
-							comment
-							label
-						}
-						benchmarkingEvents {
-							_id
-						}
-						_metadata
-					}
-				  }
-				`,
-			});
+			try {
+				const response = await this.$graphql.$post('/graphql', {
+					query: `
+          {
+            getCommunities {
+              _id
+              name
+              acronym
+              description
+              status
+              keywords
+              links {
+                uri
+                comment
+                label
+              }
+              benchmarkingEvents {
+                _id
+              }
+              _metadata
+            }
+            }
+          `,
+				});
 
-			commit('setCommunities', response.data);
-			commit('setLoading', false);
+				commit('setCommunities', response.data);
+				commit('setLoading', false);
+				commit('setError', false);
+			} catch (error) {
+				commit('setLoading', false);
+				commit('setError', true);
+			}
 		},
 	},
 
@@ -69,6 +76,9 @@ export default {
 		},
 		setLoading(state, loading) {
 			state.loading = loading;
+		},
+		setError(state, error) {
+			state.error = error;
 		},
 	},
 
