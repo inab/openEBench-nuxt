@@ -5,6 +5,7 @@
 			class="mb-5"
 			type="heading, list-item-three-line"
 		/>
+		<div v-else-if="$store.state.challenge.error"></div>
 		<div v-else class="mx-3">
 			<h1 class="text-h4">
 				{{ challenge.challenge_label }} ({{ challenge._id }})
@@ -31,6 +32,9 @@
 			v-if="$store.state.challenge.loading.datasets"
 			type="card-heading, image"
 		/>
+		<div v-else-if="$store.state.challenge.error" class="block-error">
+			<ApiError />
+		</div>
 		<div v-else>
 			<h2 class="text-h6 mt-8 mx-3">
 				Choose the metrics you want to visualize in the diagram:
@@ -103,12 +107,14 @@
 import { mapGetters } from 'vuex';
 import LoaderChartWidgets from '~/components/Widgets/LoaderChartWidgets';
 import ChartDescriptionCard from '~/components/Cards/ChartDescriptionCard';
+import ApiError from '~/components/Molecules/ApiError';
 
 export default {
 	name: 'CommunityChallengePlotsPage',
 	components: {
 		LoaderChartWidgets,
 		ChartDescriptionCard,
+		ApiError,
 	},
 	data() {
 		return {
@@ -186,5 +192,13 @@ export default {
 <style scoped>
 .container {
 	max-width: 1300px !important;
+}
+
+.block-error {
+	height: calc(100% - 390px);
+	min-height: 500px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 </style>

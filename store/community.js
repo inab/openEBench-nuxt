@@ -16,6 +16,7 @@ export default {
 				datasets: false,
 				community: false,
 			},
+			error: false,
 		};
 	},
 
@@ -26,80 +27,82 @@ export default {
 			commit('setLoading', { tools: true });
 			commit('setLoading', { datasets: true });
 
-			const response = await this.$graphql.$post('/graphql', {
-				query: `
-					query ($community_id: String!) {
-						getCommunities(communityFilters: {id: $community_id}) {
-						_id
-						name
-						acronym
-						description
-						status
-						keywords
-						references
-						community_contact_ids
-						links {
-							uri
-							comment
-							label
-						}
-						_metadata
-						__typename
-						}
-
-						getBenchmarkingEvents(benchmarkingEventFilters: {community_id: $community_id}) {
-							_id
-							dates {
-								creation
-								__typename
-							}
-							name
-							url
-							challenges {
-								_id
-								name
-								acronym
-								url
-								__typename
-							}
-							__typename
-						}
-
-						getDatasets(datasetFilters: {community_id: $community_id, visibility: "public"}) {
-							name
-							type
-							datalink {
-								uri
-								__typename
-							}
-							__typename
-						}
-
-						getTools(toolFilters: {community_id: $community_id}) {
-							_id
-							name
-							status
-							description
-							registry_tool_id
-							__typename
-						}
-					}
-				`,
-				variables: {
-					community_id: params.id,
-				},
-			});
-			commit('setCommunity', response.data);
-			commit('setLoading', { community: false });
-
-			commit('setEvents', response.data);
-			commit('setLoading', { events: false });
-
-			commit('setDatasets', response.data);
-			commit('setLoading', { datasets: false });
-
-			commit('setTools', response.data);
-			commit('setLoading', { tools: false });
+			try {
+				const response = await this.$graphql.$post('/graphql', {
+					query: `
+            query ($community_id: String!) {
+              getCommunities(communityFilters: {id: $community_id}) {
+              _id
+              name
+              acronym
+              description
+              status
+              keywords
+              references
+              community_contact_ids
+              links {
+                uri
+                comment
+                label
+              }
+              _metadata
+              __typename
+              }
+              getBenchmarkingEvents(benchmarkingEventFilters: {community_id: $community_id}) {
+                _id
+                dates {
+                  creation
+                  __typename
+                }
+                name
+                url
+                challenges {
+                  _id
+                  name
+                  acronym
+                  url
+                  __typename
+                }
+                __typename
+              }
+              getDatasets(datasetFilters: {community_id: $community_id, visibility: "public"}) {
+                name
+                type
+                datalink {
+                  uri
+                  __typename
+                }
+                __typename
+              }
+              getTools(toolFilters: {community_id: $community_id}) {
+                _id
+                name
+                status
+                description
+                registry_tool_id
+                __typename
+              }
+            }
+          `,
+					variables: {
+						community_id: params.id,
+					},
+				});
+				commit('setCommunity', response.data);
+				commit('setLoading', { community: false });
+				commit('setEvents', response.data);
+				commit('setLoading', { events: false });
+				commit('setDatasets', response.data);
+				commit('setLoading', { datasets: false });
+				commit('setTools', response.data);
+				commit('setLoading', { tools: false });
+			} catch (error) {
+				commit('setLoading', { community: false });
+				commit('setLoading', { events: false });
+				commit('setLoading', { datasets: false });
+				commit('setLoading', { tools: false });
+				commit('setError', true);
+			}
 		},
 	},
 
@@ -150,6 +153,9 @@ export default {
 		},
 		setLoading(state, loading) {
 			state.loading[Object.keys(loading)[0]] = loading[Object.keys(loading)[0]];
+		},
+		setError(state, error) {
+			state.error = error;
 		},
 	},
 
