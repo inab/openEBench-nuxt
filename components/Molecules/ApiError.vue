@@ -2,7 +2,8 @@
 	<div>
 		<v-img :src="illustration" contain max-height="150" />
 		<h3 class="api-error-msg">
-			Looks like the server is taking to long to respond, please try again later.
+			Looks like the server is taking to long to respond, please try again
+			later.
 		</h3>
 	</div>
 </template>
