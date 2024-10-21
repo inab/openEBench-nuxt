@@ -36,8 +36,7 @@ describe('ApiError.vue', () => {
 
 		const errorMsg = wrapper.find('.api-error-msg');
 		expect(errorMsg.exists()).toBe(true);
-		expect(errorMsg.text()).toBe(
-			'Looks like the server is taking to long to respond, please try again later.'
-		);
+		expect(errorMsg.text())
+      .toBe('Looks like the server is taking to long to respond, please try again later.');
 	});
 });
