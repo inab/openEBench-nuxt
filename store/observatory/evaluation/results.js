@@ -53,26 +53,45 @@ export const actions = {
 			},
 		};
 
-		const result = await this.dispatch(
-			'observatory/evaluation/results/POST_DATA',
-			payload
-		);
+		try {
+			const result = await this.dispatch(
+				'observatory/evaluation/results/POST_DATA',
+				payload
+			);
 
-		console.debug(result);
+			console.debug(result);
 
-		commit('setFAIRIndicatorsToolResult', result);
-		commit('setLoading', { evaluation: false });
+			commit('setFAIRIndicatorsToolResult', result);
+			commit('setLoading', { evaluation: false });
+		} catch (error) {
+			const emptyResult = {};
+			commit('setFAIRIndicatorsToolResult', emptyResult);
+
+			console.error('Error evaluating tool:', error);
+			commit('setLoading', { evaluation: false });
+		}
 	},
 
 	async getFAIRIndicatorsControl({ commit, _state }) {
 		const URL = '/stats/tools/fair_scores_means';
 
-		const result = await this.cache.dispatch(
-			'observatory/evaluation/results/GET_URL',
-			URL
-		);
+		try {
+			// Attempt to fetch data from the server
+			const result = await this.cache.dispatch(
+				'observatory/evaluation/results/GET_URL',
+				URL
+			);
 
-		commit('setFAIRIndicatorsControl', result);
+			// If the request is successful, commit the result
+			commit('setFAIRIndicatorsControl', result);
+		} catch (error) {
+			// If an error occurs (e.g., server down), return an empty object
+			console.error('Error fetching FAIR indicators:', error);
+
+			// Commit an empty scores object to the store
+			const emptyScores = { data: {} };
+			commit('setFAIRIndicatorsControl', emptyScores);
+		}
 	},
 
 	async GET_URL({ _commit, _state }, URL) {
