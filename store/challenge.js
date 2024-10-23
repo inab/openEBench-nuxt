@@ -16,6 +16,7 @@ export default {
 				metrics: false,
 				challenge: false,
 			},
+			error: false,
 		};
 	},
 
@@ -26,172 +27,179 @@ export default {
 			commit('setLoading', { participants: true });
 			commit('setLoading', { metrics: true });
 
-			const response = await this.$graphql.$post('/graphql', {
-				query: `
-					query ($id: String!) {
-						getChallenges(challengeFilters: { id: $id }) {
-							_id
-							name
-							acronym
-							metrics_categories {
-								metrics {
-									metrics_id
-									tool_id
-								}
-							}
-							participant_datasets: datasets(datasetFilters: {type: "participant"}) {
-								_id
-								orig_id
-								datalink {
-									inline_data
-									schema_url
-									uri
-									schema_uri
-								}
+			try {
+				const response = await this.$graphql.$post('/graphql', {
+					query: `
+            query ($id: String!) {
+              getChallenges(challengeFilters: { id: $id }) {
+                _id
+                name
+                acronym
+                metrics_categories {
+                  metrics {
+                    metrics_id
+                    tool_id
+                  }
+                }
+                participant_datasets: datasets(datasetFilters: {type: "participant"}) {
+                  _id
+                  orig_id
+                  datalink {
+                    inline_data
+                    schema_url
+                    uri
+                    schema_uri
+                  }
 
-								depends_on {
-									tool_id
-									metrics_id
-									rel_dataset_ids {
-										dataset_id
-									}
-								}
- 								_metadata
-							}
-							assessment_datasets: datasets(datasetFilters: {type: "assessment"}) {
-								_id
-								orig_id
-								datalink {
-									inline_data
-									schema_url
-									uri
-									schema_uri
-								}
-								dates {
-									modification
-								}
-								depends_on {
-									tool_id
-									metrics_id
-									rel_dataset_ids {
-										dataset_id
-									}
-								}
- 								_metadata
-							}
-						}
+                  depends_on {
+                    tool_id
+                    metrics_id
+                    rel_dataset_ids {
+                      dataset_id
+                    }
+                  }
+                   _metadata
+                }
+                assessment_datasets: datasets(datasetFilters: {type: "assessment"}) {
+                  _id
+                  orig_id
+                  datalink {
+                    inline_data
+                    schema_url
+                    uri
+                    schema_uri
+                  }
+                  dates {
+                    modification
+                  }
+                  depends_on {
+                    tool_id
+                    metrics_id
+                    rel_dataset_ids {
+                      dataset_id
+                    }
+                  }
+                   _metadata
+                }
+              }
 
-						getDatasets(
-							datasetFilters: { challenge_id: $id, type: "aggregation" }
+              getDatasets(
+                datasetFilters: { challenge_id: $id, type: "aggregation" }
+              ) {
+                datalink {
+                  inline_data
+                }
+                dates {
+                  modification
+                }
+                _id
+              }
+
+              getMetrics {
+                _id
+                title
+                orig_id
+                representation_hints
+                _metadata
+              }
+            }
+          `,
+					variables: {
+						id: params.id,
+					},
+				});
+
+				// Tidying up _metadata
+				response.data.getChallenges.forEach((challenge) => {
+					if (
+						typeof challenge._metadata === 'string' ||
+						challenge._metadata instanceof String
+					) {
+						challenge._metadata = JSON.parse(challenge._metadata);
+					}
+
+					challenge.participant_datasets.forEach((participant) => {
+						if (
+							typeof participant.datalink.inline_data === 'string' ||
+							participant.datalink.inline_data instanceof String
 						) {
-							datalink {
-								inline_data
-							}
-							dates {
-								modification
-							}
-							_id
+							participant.datalink.inline_data = JSON.parse(
+								participant.datalink.inline_data
+							);
 						}
-
-						getMetrics {
-							_id
-							title
-							orig_id
-							representation_hints
-							_metadata
+						if (
+							typeof participant._metadata === 'string' ||
+							participant._metadata instanceof String
+						) {
+							participant._metadata = JSON.parse(participant._metadata);
 						}
-					}
-				`,
-				variables: {
-					id: params.id,
-				},
-			});
+					});
+					challenge.assessment_datasets.forEach((assessment) => {
+						if (
+							typeof assessment.datalink.inline_data === 'string' ||
+							assessment.datalink.inline_data instanceof String
+						) {
+							assessment.datalink.inline_data = JSON.parse(
+								assessment.datalink.inline_data
+							);
+						}
+						if (
+							typeof assessment._metadata === 'string' ||
+							assessment._metadata instanceof String
+						) {
+							assessment._metadata = JSON.parse(assessment._metadata);
+						}
+					});
+				});
 
-			// Tidying up _metadata
-			response.data.getChallenges.forEach((challenge) => {
-				if (
-					typeof challenge._metadata === 'string' ||
-					challenge._metadata instanceof String
-				) {
-					challenge._metadata = JSON.parse(challenge._metadata);
-				}
-
-				challenge.participant_datasets.forEach((participant) => {
+				response.data.getDatasets.forEach((aggregation) => {
 					if (
-						typeof participant.datalink.inline_data === 'string' ||
-						participant.datalink.inline_data instanceof String
+						typeof aggregation.datalink.inline_data === 'string' ||
+						aggregation.datalink.inline_data instanceof String
 					) {
-						participant.datalink.inline_data = JSON.parse(
-							participant.datalink.inline_data
+						aggregation.datalink.inline_data = JSON.parse(
+							aggregation.datalink.inline_data
 						);
 					}
 					if (
-						typeof participant._metadata === 'string' ||
-						participant._metadata instanceof String
+						typeof aggregation._metadata === 'string' ||
+						aggregation._metadata instanceof String
 					) {
-						participant._metadata = JSON.parse(participant._metadata);
+						aggregation._metadata = JSON.parse(aggregation._metadata);
 					}
 				});
 
-				challenge.assessment_datasets.forEach((assessment) => {
+				response.data.getMetrics.forEach((metric) => {
 					if (
-						typeof assessment.datalink.inline_data === 'string' ||
-						assessment.datalink.inline_data instanceof String
+						typeof metric.representation_hints === 'string' ||
+						metric.representation_hints instanceof String
 					) {
-						assessment.datalink.inline_data = JSON.parse(
-							assessment.datalink.inline_data
+						metric.representation_hints = JSON.parse(
+							metric.representation_hints
 						);
 					}
 					if (
-						typeof assessment._metadata === 'string' ||
-						assessment._metadata instanceof String
+						typeof metric._metadata === 'string' ||
+						metric._metadata instanceof String
 					) {
-						assessment._metadata = JSON.parse(assessment._metadata);
+						metric._metadata = JSON.parse(metric._metadata);
 					}
 				});
-			});
-			response.data.getDatasets.forEach((aggregation) => {
-				if (
-					typeof aggregation.datalink.inline_data === 'string' ||
-					aggregation.datalink.inline_data instanceof String
-				) {
-					aggregation.datalink.inline_data = JSON.parse(
-						aggregation.datalink.inline_data
-					);
-				}
-				if (
-					typeof aggregation._metadata === 'string' ||
-					aggregation._metadata instanceof String
-				) {
-					aggregation._metadata = JSON.parse(aggregation._metadata);
-				}
-			});
-			response.data.getMetrics.forEach((metric) => {
-				if (
-					typeof metric.representation_hints === 'string' ||
-					metric.representation_hints instanceof String
-				) {
-					metric.representation_hints = JSON.parse(metric.representation_hints);
-				}
-				if (
-					typeof metric._metadata === 'string' ||
-					metric._metadata instanceof String
-				) {
-					metric._metadata = JSON.parse(metric._metadata);
-				}
-			});
-
-			commit('setChallenge', response.data);
-			commit('setLoading', { challenge: false });
-
-			commit('setDatasets', response.data.getDatasets);
-			commit('setParticipants', response.data.getChallenges[0]);
-			commit('setLoading', { participants: false });
-
-			commit('setMetrics', response.data.getMetrics);
-			commit('setLoading', { metrics: false });
-
-			dispatch('getGraphData');
+				commit('setChallenge', response.data);
+				commit('setLoading', { challenge: false });
+				commit('setDatasets', response.data.getDatasets);
+				commit('setParticipants', response.data.getChallenges[0]);
+				commit('setLoading', { participants: false });
+				commit('setMetrics', response.data.getMetrics);
+				commit('setLoading', { metrics: false });
+				dispatch('getGraphData');
+			} catch (error) {
+				commit('setLoading', { challenge: false });
+				commit('setLoading', { datasets: false });
+				commit('setLoading', { participants: false });
+				commit('setLoading', { metrics: false });
+				commit('setError', true);
+			}
 		},
 
 		getGraphData({ state, commit }) {
@@ -347,6 +355,9 @@ export default {
 		},
 		setLoading(state, loading) {
 			state.loading[Object.keys(loading)[0]] = loading[Object.keys(loading)[0]];
+		},
+		setError(state, error) {
+			state.error = error;
 		},
 	},
 

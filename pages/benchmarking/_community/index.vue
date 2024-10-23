@@ -3,13 +3,20 @@
 		<v-container v-if="$store.state.community.loading.community">
 			<v-skeleton-loader class="mb-5" type="heading, list-item-three-line" />
 		</v-container>
+		<div v-else-if="$store.state.community.error" class="block-error">
+			<ApiError />
+		</div>
 		<v-container v-else>
 			<community-info
 				:community="community"
 				:community-references="communityReferences"
 			/>
 		</v-container>
-		<v-tabs :vertical="vertical" class="mt-10">
+		<v-tabs
+			v-if="!$store.state.community.error"
+			:vertical="vertical"
+			class="mt-10"
+		>
 			<v-tab class="justify-start">
 				<v-icon left> mdi-view-dashboard </v-icon>
 				Results
@@ -138,6 +145,7 @@ import CommunityDatasetsTable from '~/components/Communities/CommunityDatasetsTa
 import CommunityEventSelector from '~/components/Communities/CommunityEventSelector';
 import CommunityInfo from '~/components/Communities/CommunityInfo';
 import MarkedWrapper from '~/components/Molecules/MarkedWrapper.vue';
+import ApiError from '~/components/Molecules/ApiError';
 
 export default {
 	name: 'CommunityPage',
@@ -148,6 +156,7 @@ export default {
 		CommunityEventSelector,
 		CommunityInfo,
 		MarkedWrapper,
+		ApiError,
 	},
 	data() {
 		return {
