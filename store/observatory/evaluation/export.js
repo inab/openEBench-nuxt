@@ -36,14 +36,16 @@ export const actions = {
 		commit('setDialogPR', false);
 		commit('setDialogAppInstall', false);
 	},
-	async requestPull({ commit, _state }, payload) {
+	async makePullRequest({ commit, _state }, payload) {
 		const URL = '/metadata/pull';
+		console.log('taget_brach: ', payload.branch);
 		const parameters = {
 			repo: payload.repo,
 			owner: payload.owner,
+			branch: payload.branch,
 			filename: payload.filename,
 			installationID: payload.installationID,
-			metadata: payload.metadata,
+			metadata: payload.content,
 			title: payload.title,
 			message: payload.message,
 		};
