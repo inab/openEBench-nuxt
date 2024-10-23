@@ -26,7 +26,11 @@
 					the fields of the bioinformatics methods they need to use.
 				</p>
 			</info-slider>
-			<v-row v-if="$store.state.communities.loading">
+			<v-row
+				v-if="
+					$store.state.communities.loading && !$store.state.communities.error
+				"
+			>
 				<v-col
 					v-for="(c, i) in [1, 2, 3, 4, 5, 6, 7, 8]"
 					:key="i"
@@ -42,6 +46,9 @@
 					></v-skeleton-loader>
 				</v-col>
 			</v-row>
+			<div v-else-if="$store.state.communities.error" class="block-error">
+				<ApiError />
+			</div>
 			<v-row v-else>
 				<v-col
 					v-for="(community, index) in communities"
@@ -73,12 +80,14 @@
 import { mapGetters } from 'vuex';
 import CommunityCard from '~/components/Cards/CommunityCard';
 import InfoSlider from '~/components/Molecules/InfoSlider';
+import ApiError from '~/components/Molecules/ApiError';
 
 export default {
 	name: 'CommunitiesIndexPage',
 	components: {
 		CommunityCard,
 		InfoSlider,
+		ApiError,
 	},
 	data() {
 		return {
