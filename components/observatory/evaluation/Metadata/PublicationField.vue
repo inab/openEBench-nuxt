@@ -63,7 +63,7 @@ export default {
 	data() {
 		return {
 			title: '',
-			year: '',
+			year: null,
 			doi: '',
 			pmid: '',
 			pmcid: '',
@@ -118,7 +118,10 @@ export default {
 				index: this.index,
 				value: newItem,
 			};
-			this.$store.dispatch('observatory/evaluation/changeEntry', payload);
+			this.$store.dispatch(
+				'observatory/evaluation/metadata/changeEntry',
+				payload
+			);
 		},
 	},
 };
