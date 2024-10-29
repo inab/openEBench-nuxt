@@ -8,6 +8,9 @@ export default function (
 			common: {
 				Accept: 'text/plain, */*',
 			},
+			post: {
+				'Content-Type': 'application/json',
+			},
 		},
 		timeout: 5000,
 	});
