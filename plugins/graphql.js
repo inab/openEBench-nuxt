@@ -6,8 +6,7 @@ export default function (
 	const graphql = $axios.create({
 		headers: {
 			common: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json',
+				Accept: 'text/plain, */*',
 			},
 		},
 		timeout: 5000,
