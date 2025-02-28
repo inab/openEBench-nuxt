@@ -5,6 +5,7 @@
 			class="mb-5"
 			type="heading, list-item-three-line"
 		/>
+		<div v-else-if="challengeNotFound"></div>
 		<div v-else-if="$store.state.challenge.error"></div>
 		<div v-else class="mx-3">
 			<h1 class="text-h4">
@@ -32,6 +33,9 @@
 			v-if="$store.state.challenge.loading.datasets"
 			type="card-heading, image"
 		/>
+		<div v-else-if="challengeNotFound" class="block-error">
+			<ItemNotFound text="Community not found" />
+		</div>
 		<div v-else-if="$store.state.challenge.error" class="block-error">
 			<ApiError />
 		</div>
@@ -108,6 +112,7 @@ import { mapGetters } from 'vuex';
 import LoaderChartWidgets from '~/components/Widgets/LoaderChartWidgets';
 import ChartDescriptionCard from '~/components/Cards/ChartDescriptionCard';
 import ApiError from '~/components/Molecules/ApiError';
+import ItemNotFound from '~/components/Molecules/ItemNotFound';
 
 export default {
 	name: 'CommunityChallengePlotsPage',
@@ -115,12 +120,14 @@ export default {
 		LoaderChartWidgets,
 		ChartDescriptionCard,
 		ApiError,
+		ItemNotFound,
 	},
 	data() {
 		return {
 			hostName: this.$config.OEB_LEGACY_ANGULAR_URI,
 			tab: 0,
 			m: [],
+			challengeNotFound: false,
 			illustration: require('~/static/images/illustrations/empty-state.svg'),
 		};
 	},
@@ -180,7 +187,11 @@ export default {
 	},
 	mounted() {
 		this.$parent.$emit('emitBreadcrumbs', this.breadcrumbs);
-		if (this.$store.state.challenge.challenge._id !== this.$route.params.id) {
+		if (this.$route.params.id === 'events') {
+			this.challengeNotFound = true;
+		} else if (
+			this.$store.state.challenge.challenge._id !== this.$route.params.id
+		) {
 			this.$store.dispatch('challenge/getChallenge', {
 				id: this.$route.params.id,
 			});
