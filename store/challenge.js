@@ -206,24 +206,30 @@ export default {
 			state.datasets.forEach(async (dataset, i, datasets) => {
 				const id = dataset._id;
 				// TODO remove if statement, once more visualizations are consuming the widget endpoint
+
+				let graphUrl = '';
+				if (dataset.datalink.inline_data.visualization.type === 'bar-plot') {
+					graphUrl = `/widget/${dataset.datalink.inline_data.visualization.type}/${dataset._id}`;
+				} else if (
+					dataset.datalink.inline_data.visualization.type === 'box-plot'
+				) {
+					if (
+						dataset.datalink.inline_data.visualization.axes_scale === 'linear'
+					) {
+						graphUrl = `/widget/${dataset.datalink.inline_data.visualization.type}/${dataset._id}`;
+					} else {
+						graphUrl = `/widget/${dataset.datalink.inline_data.visualization.type}/${dataset._id}?log2=true`;
+					}
+				}
+
 				const response =
 					dataset.datalink.inline_data.visualization.type === 'bar-plot' ||
 					dataset.datalink.inline_data.visualization.type === 'box-plot'
-						? await this.$graphql
-								.$get(
-									`/widget/${dataset.datalink.inline_data.visualization.type}/${
-										dataset._id
-									}${
-										dataset.datalink.inline_data.visualization.type ===
-										'box-plot'
-											? '?log2=true'
-											: ''
-									}`
-								)
-								.catch(() => {
-									return [];
-								})
+						? await this.$graphql.$get(graphUrl).catch(() => {
+								return [];
+						  })
 						: [];
+
 				await commit('setDatasetGraphData', { id, response });
 
 				if (i + 1 === datasets.length)
