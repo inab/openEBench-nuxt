@@ -9,7 +9,7 @@ export default function (
 				Accept: 'text/plain, */*',
 			},
 		},
-		timeout: 5000,
+		timeout: 9000,
 	});
 
 	// Set baseURL to something different
