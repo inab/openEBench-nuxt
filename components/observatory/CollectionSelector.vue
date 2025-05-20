@@ -42,7 +42,12 @@
 					>
 						<v-col cols="10">
 							<h6 class="text-subtitle mb-0 pb-0 text-left collection-title">
-								{{ collections[model].title }}
+								<a
+									class="link"
+									:href="collections[model].homepage"
+									target="_blank"
+									>{{ collections[model].title }}</a
+								>
 							</h6>
 							<p class="text-subtitle-2 mt-0 pt-0 mb-2 text-left">
 								{{ collections[model].subtitle }}
@@ -167,6 +172,10 @@ export default {
 	color: #0b579f;
 	font-size: 1.8rem;
 	font-weight: 500;
+}
+
+.link {
+	text-decoration: none;
 }
 
 .collection-description {

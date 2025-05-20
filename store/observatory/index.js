@@ -8,6 +8,15 @@ export const state = () => ({
 	_uniqueCollection: null,
 	_collections: [
 		{
+			id: 'Proteomics',
+			title: 'Proteomics',
+			subtitle: 'ELIXIR Proteomics Community',
+			description:
+				'The goal of the ELIXIR Proteomics Community is to develop and maintain sustainable proteomics tools and data resources. An essential part of the development will also be the ‘FAIRification’ of the resources (i.e. making the resources FAIR - Findable, Accessible, Interoperable, and Reusable).',
+			homepage: 'https://elixir-europe.org/communities/proteomics',
+			image: 'proteomics_logo.png',
+		},
+		{
 			id: 'RIS3CAT VEIS',
 			title: 'VEIS',
 			subtitle: 'Value of the EGA for Industry and Society',

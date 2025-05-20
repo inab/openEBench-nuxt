@@ -80,25 +80,26 @@
 				</p>
 				<v-row justify="center" class="my-4 mt-0 mb-0">
 					<v-chip-group
+						class="mb-0 mt-0 pb-0 pt-0"
 						v-model="selected"
 						active-class="primary--text"
 						mandatory
 						column
 						center
 					>
-						<v-chip outlined class="mr-2" value="findability">
+						<v-chip outlined large class="mr-2" value="findability">
 							Findability
 						</v-chip>
 
-						<v-chip outlined class="ml-2 mr-2" value="accessibility">
+						<v-chip outlined large class="ml-2 mr-2" value="accessibility">
 							Accessibility
 						</v-chip>
 
-						<v-chip outlined class="ml-2 mr-2" value="interoperability">
+						<v-chip outlined large class="ml-2 mr-2" value="interoperability">
 							Interoperability
 						</v-chip>
 
-						<v-chip outlined class="ml-2 mr-2" value="reusability">
+						<v-chip outlined large class="ml-2 mr-2" value="reusability">
 							Reusability
 						</v-chip>
 					</v-chip-group>
