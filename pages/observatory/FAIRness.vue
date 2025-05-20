@@ -49,12 +49,6 @@
 											indicators (e.g., “F1” for Identity Uniqueness).
 										</li>
 										<li>
-											<strong>Bubble Charts</strong>: Each chart compares
-											average scores of <strong>all tools</strong> (grey
-											bubbles) and the selected
-											<strong>collection</strong> (colored bubbles).
-										</li>
-										<li>
 											<strong>Size of bubbles</strong>: Indicates the percentage
 											of tools that meet the indicator.
 										</li>
