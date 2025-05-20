@@ -27,7 +27,7 @@
 						<v-card-actions class="mt-0">
 							<v-spacer></v-spacer>
 							<span class="ml-3 subtitle-2 grey--text">
-								How to read this page
+								<v-icon small>info</v-icon> How to read this page
 							</span>
 
 							<v-btn icon @click="show = !show">
