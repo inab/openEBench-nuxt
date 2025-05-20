@@ -60,7 +60,7 @@ export default {
 		const traces = this.build_control_colllection_traces();
 		const layout = {
 			yaxis: {
-				title: 'Indicator',
+				title: '',
 				showline: false,
 			},
 			xaxis: {
