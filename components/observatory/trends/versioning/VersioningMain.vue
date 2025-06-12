@@ -20,7 +20,7 @@
 			:values="data_versioning.values"
 		/>
 		<p class="mt-2 mb-2 ml-8">
-			<span class="highlight"> Instances using semantics versionings</span>
+			<span class="highlight"> Software using semantic versioning</span>
 		</p>
 		<v-alert
 			elevation="0"

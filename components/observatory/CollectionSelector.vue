@@ -2,12 +2,8 @@
 	<v-sheet class="mx-auto mb-4" elevation="0" max-width="900">
 		<v-card outlined class="pa-2">
 			<h6 class="overline text-center collections-header mt-4 mb-2">
-				collections
+				Filter by Project or Community
 			</h6>
-			<p class="mb-1 text-body-2 text-center">
-				Select a collection below to view the trends of the software associated
-				to a specific project/organization
-			</p>
 			<v-slide-group
 				v-model="model"
 				class="pa-4 mb-4"
@@ -53,7 +49,7 @@
 								{{ collections[model].subtitle }}
 							</p>
 							<p
-								class="text--secondary text-left collection-description mb-0 mt-0"
+								class="text--secondary text-left collection-description mb-2 mt-0"
 							>
 								{{ collections[model].description }}
 							</p>

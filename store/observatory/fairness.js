@@ -68,9 +68,9 @@ const BASE_URL = '/stats/tools/';
 // Actions
 const labels = {
 	F: {
-		F3: 'F3. Discoverability',
-		F2: 'F2. Existence <br> of metadata',
 		F1: 'F1. Identity <br> uniqueness',
+		F2: 'F2. Existence <br> of metadata',
+		F3: 'F3. Discoverability',
 	},
 	A: {
 		A1: 'A1. Availability of<br>working version',

@@ -135,7 +135,7 @@
 						<v-card-text class="black--text">
 							<ul>
 								<li class="mb-2">
-									<strong class="green_marker">F1 – Identity uniqueness</strong>
+									<strong class="blue_marker">F1 – Identity uniqueness</strong>
 									<br />
 									<strong
 										>Does the software have a persistent and unique
@@ -174,7 +174,7 @@
 								</li>
 
 								<li>
-									<strong class="blue_marker">F3 – Discoverability</strong>
+									<strong class="green_marker">F3 – Discoverability</strong>
 									<br />
 									<strong
 										>Can the software be found using external resources?
@@ -232,7 +232,7 @@
 						<v-card-text class="black--text">
 							<ul>
 								<li class="mb-2">
-									<strong class="orange_marker"
+									<strong class="blue_marker"
 										>A1 – Availability of working version</strong
 									>
 									<br />
@@ -264,16 +264,12 @@
 								</li>
 
 								<li>
-									<strong class="blue_marker">A3 – Unrestricted Access</strong>
+									<strong class="orange_marker"
+										>A3 – Unrestricted Access</strong
+									>
 									<br />
-									<strong
-										>Can the software be used without technical or registration
-										barriers?
-									</strong>
+									<strong>Can the software be used without barriers? </strong>
 									<ul>
-										<li>
-											The software can be used without creating an account.
-										</li>
 										<li>The software works on free OSes like GNU/Linux.</li>
 										<li>
 											The software runs on at least two operating systems.
@@ -330,7 +326,7 @@
 						<v-card-text class="black--text">
 							<ul>
 								<li class="mb-2">
-									<strong class="green_marker"
+									<strong class="blue_marker"
 										>I1 – Data format standards and practices</strong
 									>: <br />
 									<strong>
@@ -342,7 +338,6 @@
 											Input/output formats follow accepted standards (e.g., EDAM
 											ontology).
 										</li>
-										<li>APIs are described using standard frameworks.</li>
 										<li>
 											Input/output formats can be validated using schemas (e.g.,
 											JSON, XML, RDF).
@@ -350,10 +345,6 @@
 										<li>
 											Multiple input/output formats are supported or
 											convertible.
-										</li>
-										<li>
-											The software can generate standard provenance metadata for
-											traceability.
 										</li>
 									</ul>
 								</li>
@@ -380,7 +371,7 @@
 								</li>
 
 								<li>
-									<strong class="blue_marker"
+									<strong class="green_marker"
 										>I3 – Dependencies availability</strong
 									>
 									<br />
@@ -436,9 +427,7 @@
 						<v-card-text class="black--text">
 							<ul>
 								<li class="mb-2">
-									<strong class="purple_marker"
-										>R1 – Usage Documentation</strong
-									>
+									<strong class="blue_marker">R1 – Usage Documentation</strong>
 									<br />
 									<strong
 										>Does the software provide documentation to help users
@@ -449,15 +438,15 @@
 										<li>
 											User manuals or tutorials explain how to use the software.
 										</li>
-										<li>
+										<!--li>
 											Real use cases or examples illustrate practical
 											application.
-										</li>
+										</li-->
 									</ul>
 								</li>
 
 								<li class="mb-2">
-									<strong class="green_marker">R2 – License</strong>
+									<strong class="orange_marker">R2 – License</strong>
 									<br />
 									<strong
 										>Are there clear legal conditions for using the
@@ -474,7 +463,7 @@
 								</li>
 
 								<li class="mb-2">
-									<strong class="orange_marker"
+									<strong class="green_marker"
 										>R3 – Recognition and governance</strong
 									>
 									<br />
@@ -483,9 +472,9 @@
 										defined?</strong
 									>
 									<ul>
-										<li>
+										<!--li>
 											Guidelines for external contributions are documented.
-										</li>
+										</li-->
 										<li>
 											Developers and contributors receive appropriate
 											recognition.
@@ -494,7 +483,7 @@
 								</li>
 
 								<li>
-									<strong class="blue_marker"
+									<strong class="purple_marker"
 										>R4 – Versioning and historical traceability</strong
 									><br />
 									<strong
@@ -505,13 +494,13 @@
 										<li>
 											The software uses systems like Git to track changes.
 										</li>
-										<li>
+										<!--li>
 											There is a documented policy describing how and when new
 											versions are released.
 										</li>
 										<li>
 											Metadata for older versions is maintained in repositories.
-										</li>
+										</li-->
 									</ul>
 								</li>
 							</ul>

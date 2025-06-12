@@ -5,7 +5,7 @@
 			<v-row class="pt-0" justify="center">
 				<v-col xl="7" lg="7" md="12" sm="7" xs="12" cols="12" class="mt-0 pt-1">
 					<h6 class="text-center mt-6 mb-2">
-						Repositories and Version Control
+						Repositories and version control
 					</h6>
 					<p style="line-height: 1.8" class="mt-0 text-center card-content-vs">
 						Making software available through any of the main software
@@ -28,14 +28,14 @@
 					<v-card
 						v-else
 						class="mt-2 mr-2 number-card"
-						color="#f5971b"
+						color="#fff0e6"
 						elevation="0"
 					>
 						<v-card-text class="text-center number"
 							>{{ percentage.toFixed(1) }}%
 						</v-card-text>
 						<v-card-text class="text-center number-text"
-							>of instances use
+							>of software use
 							<span class="number-highlight">version control</span></v-card-text
 						>
 					</v-card>
@@ -57,8 +57,8 @@
 				<v-col xl="11" lg="11" md="10" sm="12" align-self="start">
 					<p class="mt-0 ml-8 mb-0">
 						<span class="highlight"
-							>Number of instances in four widely used platforms for software
-							distribution and development</span
+							>Software available on four major platforms for distribution and
+							development.</span
 						>
 					</p>
 				</v-col>
@@ -144,11 +144,11 @@ export default {
 	font-size: 2.7rem;
 	padding-top: 0.6em;
 	padding-bottom: 0.2em;
-	color: white !important;
+	color: rgb(0, 0, 0) !important;
 }
 
 .number-text {
-	color: white !important;
+	color: rgb(0, 0, 0) !important;
 	font-family: Roboto, sans-serif;
 	font-size: 1.1em;
 	font-weight: 300;

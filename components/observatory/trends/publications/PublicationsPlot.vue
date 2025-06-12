@@ -8,24 +8,16 @@ import Plotly from 'plotly.js-dist';
 export default {
 	name: 'PublicationsPlot',
 	props: {
-		xValues: {
-			type: Array,
+		tools: {
+			type: Object,
 			required: true,
 		},
-		yPercentageValues: {
-			type: Array,
+		publications: {
+			type: Object,
 			required: true,
 		},
-		yIFValues: {
-			type: Array,
-			required: true,
-		},
-		textPercentageTools: {
-			type: Array,
-			required: true,
-		},
-		textPercentageJournals: {
-			type: Array,
+		citations: {
+			type: Object,
 			required: true,
 		},
 		title: {
@@ -46,19 +38,23 @@ export default {
 					roworder: 'top to bottom',
 				},
 				yaxis: {
-					title: 'Percentage',
-					tickformat: '.2%',
+					title: 'Number of publications',
+				},
+
+				yaxis2: {
+					title: 'Citations (last 3 years)',
+					side: 'left',
+					showgrid: false,
+					range: [0, this.citations.y[0] * 1.2],
 				},
 				xaxis: {
-					title: '',
-				},
-				yaxis2: {
-					title: 'Impact Factor (five years)',
+					title: 'journal',
 				},
 				autosize: true,
 				margin: {
 					autoexpand: true,
 					t: 10,
+					b: 90,
 				},
 				hoverlabel: {
 					bgcolor: '#FFF',
@@ -79,61 +75,46 @@ export default {
 	},
 
 	mounted() {
-		const tracePercentage = {
-			x: this.xValues,
-			y: this.yPercentageValues,
+		const tracePublications = {
+			x: this.publications.x,
+			y: this.publications.y,
 			type: 'scatter',
 			mode: 'lines+markers',
-			name: 'Percentage of publications',
+			name: 'Publications',
 			marker: {
-				color: '#15264a',
+				color: '#0e3487',
 				size: 6,
 			},
 			line: {
-				color: '#15264a',
+				color: '#0e3487',
 				width: 1,
+				dash: 'dash',
 			},
-			hovertemplate:
-				'%{text} publications about tools out of %{customdata} total publications <extra></extra>',
-			text: this.textPercentageTools,
-			customdata: this.textPercentageJournals,
-			textposition: [
-				'center right',
-				'bottom left',
-				'bottom left',
-				'bottom center',
-				'top center',
-				'bottom center',
-				'top center',
-				'bottom center',
-				'top center',
-				'top center',
-			],
+			hovertemplate: '%{y} publications<extra></extra>',
 			xaxis: 'x',
-			yaxis: 'y1',
+			yaxis: 'y',
 			showlegend: false,
 		};
 
-		const traceIFTools = {
-			x: this.xValues,
-			y: this.yIFValues,
-			name: 'Tools publications',
+		const traceCitations = {
+			x: this.citations.x,
+			y: this.citations.y,
+			name: 'Citation',
 			marker: {
-				color: '#eb9b34',
+				color: '#ff213f',
 				size: 6,
 			},
 			line: {
-				color: '#eb9b34',
+				color: '#ff213f',
 				width: 1,
 			},
-			hovertemplate:
-				'Tool publications in %{x} <br> Impact factor: %{y:.2f} <extra></extra>',
+			hovertemplate: '%{y} citations in the last 3 years <extra></extra>',
 			xaxis: 'x',
 			yaxis: 'y2',
 			showlegend: false,
 		};
 
-		const data = [tracePercentage, traceIFTools];
+		const data = [tracePublications, traceCitations];
 		Plotly.newPlot('plot_5', {
 			data,
 			layout: this.layout,
