@@ -16,7 +16,7 @@ export default {
 	computed: {
 		isMessageVisible() {
 			const dateRange = {
-				start: new Date('2025-08-01T10:00:00+02:00'),
+				start: new Date('2025-07-24T10:00:00+02:00'),
 				end: new Date('2025-08-07T22:00:00+02:00'),
 			};
 
