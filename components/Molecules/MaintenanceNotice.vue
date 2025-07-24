@@ -9,6 +9,7 @@
 		</div>
 	</div>
 </template>
+
 <script>
 export default {
 	name: 'MaintenanceNotice',
@@ -27,6 +28,7 @@ export default {
 	},
 };
 </script>
+
 <style scoped>
 .maintenance-notice {
 	padding: 50px 30px 0;
