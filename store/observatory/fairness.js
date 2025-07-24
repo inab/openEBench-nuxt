@@ -68,24 +68,24 @@ const BASE_URL = '/stats/tools/';
 // Actions
 const labels = {
 	F: {
-		F3: 'F3.<br> Searchability',
-		F2: 'F2.<br> Existence <br> of Metadata',
-		F1: 'F1.<br> Identity <br> uniqueness',
+		F1: 'F1. Identity <br> uniqueness',
+		F2: 'F2. Existence <br> of metadata',
+		F3: 'F3. Discoverability',
 	},
 	A: {
-		A1: 'A1.<br> Existence of <br>downloadable, buildable <br>or accessible <br>working version',
-		A3: 'A3.<br> Un-restricted Access <br> of Software',
+		A1: 'A1. Availability of<br>working version',
+		A3: 'A3. Unrestricted Access',
 	},
 	I: {
-		I1: 'I1.<br> Documentation on <br>Input/Output datatypes <br>and formats',
-		I2: 'I2.<br> Workflow <br> compatibility',
-		I3: 'I3.<br> Dependencies <br> availability',
+		I1: 'I1. Data format <br> standards and<br>practices',
+		I2: 'I2. Software <br> integration',
+		I3: 'I3. Dependencies <br> availability',
 	},
 	R: {
-		R1: 'R1.<br> Existence of <br> documentation',
-		R2: 'R2.<br> Existence of <br> License',
-		R3: 'R3.<br> Contributors <br> recognition',
-		R4: 'R4.<br> Provenance <br> availability',
+		R1: 'R1. Usage <br> documentation',
+		R2: 'R2. License',
+		R3: 'R3. Recognition <br> and governance',
+		R4: 'R4. Versioning and<br>  historical traceability',
 	},
 };
 

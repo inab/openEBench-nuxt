@@ -9,7 +9,7 @@ export default function ({ $axios, $config: { OBSERVATORY_API_URL } }, inject) {
 	});
 
 	// Set baseURL to something different
-	// observatory.setBaseURL('http://0.0.0.0:3500');
+	// observatory.setBaseURL('http://127.0.0.1:3500');
 
 	observatory.setBaseURL(OBSERVATORY_API_URL);
 

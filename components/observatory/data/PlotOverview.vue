@@ -16,48 +16,40 @@ export default {
 				'description',
 				'version',
 				'type',
-				'links',
+				'webpage',
 				'publication',
 				'download',
-				'inst_instr',
-				'test',
-				'src',
-				'os',
+				'source_code',
+				'operating_system',
 				'input',
 				'output',
 				'dependencies',
+				'test',
 				'documentation',
 				'license',
 				'authors',
 				'repository',
-				'citations',
-				'bioschemas',
-				'ssl',
-				'operational',
+				'topics',
 			],
 			feat_labels: {
 				name: 'Name',
 				description: 'Description',
 				version: 'Version',
 				type: 'Type',
-				links: 'Links',
+				webpage: 'Webpage',
 				publication: 'Publication',
 				download: 'Download',
-				inst_instr: 'Installation instructions',
-				test: 'Test',
-				src: 'Source code',
-				os: 'Operating system',
+				source_code: 'Source code',
+				operating_system: 'Operating system',
 				input: 'Input format',
 				output: 'Output format',
 				dependencies: 'Dependencies',
+				test: 'Testing',
 				documentation: 'Documentation',
 				license: 'License',
 				authors: 'Authors',
 				repository: 'Repository',
-				citations: 'Historical number of citations',
-				bioschemas: 'Bioschemas',
-				ssl: 'SSL',
-				operational: 'Historical homepage accessibility',
+				topics: 'Topics',
 			},
 			fps: {
 				sources: [
@@ -67,68 +59,44 @@ export default {
 					'Galaxy Toolshed',
 					'Galaxy Europe',
 					'SourceForge',
-					'Bitbucket',
-					'Github',
-					'OpenEBench',
+					'GitHub',
 				],
-				data: {
-					Name: [1, 1, 1, 1, 1, 1, 1, 1, 0],
-					Description: [2, 2, 2, 2, 2, 2, 2, 2, 0],
-					Version: [3, 3, 3, 3, 3, 3, 3, 3, 0],
-					Type: [4, 4, 4, 4, 4, 0, 0, 0, 0],
-					Links: [5, 5, 5, 5, 5, 5, 5, 5, 0],
-					Publication: [6, 6, 6, 6, 6, 0, 0, 0, 0],
-					Download: [7, 7, 7, 7, 0, 7, 7, 7, 0],
-					'Installation instructions': [8, 8, 8, 8, 0, 8, 8, 8, 0],
-					Test: [0, 0, 0, 9, 0, 0, 0, 0, 0],
-					'Source code': [10, 10, 10, 10, 0, 10, 10, 10, 0],
-					'Operating system': [0, 11, 11, 11, 11, 11, 0, 0, 0],
-					'Input format': [0, 0, 12, 12, 0, 0, 0, 0, 0],
-					'Output format': [0, 0, 13, 13, 0, 0, 0, 0, 0],
-					Dependencies: [0, 14, 0, 14, 0, 0, 0, 0, 0],
-					Documentation: [0, 15, 15, 15, 0, 0, 15, 15, 0],
-					License: [16, 16, 16, 16, 16, 0, 16, 16, 0],
-					Authors: [0, 17, 17, 17, 0, 0, 17, 17, 0],
-					Repository: [18, 18, 18, 18, 18, 18, 18, 18, 0],
-					'Historical number of citations': [0, 0, 0, 0, 0, 0, 0, 0, 19],
-					Bioschemas: [0, 0, 0, 0, 0, 0, 0, 0, 20],
-					SSL: [0, 0, 0, 0, 0, 0, 0, 0, 21],
-					'Historical homepage accessibility': [0, 0, 0, 0, 0, 0, 0, 0, 22],
-				},
 			},
 			colors: [
-				'#7DC370',
-				'#7DC370',
-				'#7DC370',
-				'#7DC370',
-				'#7DC370',
-				'#7DC370',
-				'#ff6641',
-				'#ff6641',
-				'#5a81a6',
+				'#fab370',
+				'#fab370',
+				'#fab370',
+				'#fab370',
+				'#fab370',
+				'#fab370',
+				'#fab370',
 			],
 			colors_l: [
-				'#4D9243',
-				'#4D9243',
-				'#4D9243',
-				'#4D9243',
-				'#4D9243',
-				'#4D9243',
-				'#B7482D',
-				'#B7482D',
-				'#0A589F',
+				'#ed8828',
+				'#ed8828',
+				'#ed8828',
+				'#ed8828',
+				'#ed8828',
+				'#ed8828',
+				'#ed8828',
 			],
 		};
 	},
 	computed: {
 		...mapGetters('observatory/data', {
 			features: 'Features',
+			sources: 'FeaturesLabels',
+			featuresControl: 'FeaturesControl',
+		}),
+		...mapGetters('observatory', {
+			currentCollection: 'getCurrentCollection',
 		}),
 	},
 	mounted() {
 		const scatterData = {
 			source: this.fps.sources,
 			values: this.features_names.map(this.map_feat_names),
+			xaxis: 'x2',
 		};
 
 		const data = this.build_scatter_traces(scatterData);
@@ -145,13 +113,44 @@ export default {
 			yaxis: 'y1',
 			type: 'bar',
 			marker: {
-				color: '#0A3364',
-				opacity: 0.8,
+				color: '#77A7D4',
+				opacity: 1,
 			},
-			hovertemplate: '%{x} <extra></extra>',
+			hovertemplate:
+				'"%{x}" information available <br> for %{y} software<extra></extra>',
+			name:
+				this.currentCollection === 'tools'
+					? 'All tools'
+					: this.currentCollection,
+			showlegend: this.currentCollection !== 'tools',
 		};
 
 		data.push(barsPlot);
+
+		const barsDataControl = this.bar_plot_data_restruct(this.featuresControl);
+		const barsPlotControl = {
+			x: barsDataControl.map(function (item) {
+				return item[0];
+			}),
+			y: barsDataControl.map(function (item) {
+				return item[1];
+			}),
+			xaxis: 'x1',
+			yaxis: 'y1',
+			type: 'bar',
+			marker: {
+				color: '#E4E4E4',
+				opacity: 1,
+			},
+			hovertemplate:
+				'"%{x}" information available <br> for %{y} software<extra></extra>',
+			name: 'All tools',
+			showlegend: true,
+		};
+
+		if (this.currentCollection !== 'tools') {
+			data.push(barsPlotControl);
+		}
 
 		const config = {
 			responsive: true,
@@ -169,16 +168,17 @@ export default {
 				automargin: true,
 			},
 			yaxis: {
-				title: 'Number of instances',
+				title: 'Software',
 				automargin: true,
+				tickformat: ',.0%',
 			},
 			yaxis2: {
 				automargin: true,
 			},
 			xaxis2: {
 				showticklabels: false,
-				range: [0.5, 22.5],
 				automargin: true,
+				match: 'x',
 			},
 			autosize: true,
 			margin: {
@@ -188,13 +188,19 @@ export default {
 				l: 0,
 			},
 			height: 550,
-			showlegend: false,
+			showlegend: true,
+			legend: {
+				x: 0.1,
+				y: -0.4,
+				xanchor: 'center',
+				yanchor: 'bottom',
+				orientation: 'h',
+			},
 			font_size: 12,
 			font_color: 'black',
 			font_family: 'Balto, sans-serif',
 			bargap: 0.1,
 			bargroupgap: 0.0,
-			hovermode: 'y unified',
 			hoverdistance: 1,
 		};
 
@@ -208,8 +214,8 @@ export default {
 		);
 	},
 	methods: {
-		map_feat_names(lab) {
-			return this.fps.data[this.feat_labels[lab]];
+		map_feat_names(featureKey) {
+			return this.sources.map((src) => src.features[featureKey] || 0);
 		},
 		build_scatter_traces(scatterData) {
 			const scatterPlot = [];
@@ -222,7 +228,7 @@ export default {
 				const labels = [];
 				for (let i = 0; i < arr.length; ++i) {
 					if (arr[i] !== 0) {
-						newX.push(arr[i]);
+						newX.push(this.feat_labels[this.features_names[index]]);
 						newY.push(scatterData.source[i]);
 						newCol.push(this.colors[i]);
 						newColL.push(this.colors_l[i]);
@@ -232,7 +238,8 @@ export default {
 				const trace = {
 					x: newX,
 					y: newY,
-					xaxis: 'x2',
+					name: this.getTraceName(index),
+					xaxis: 'x',
 					yaxis: 'y2',
 					type: 'scatter',
 					mode: 'markers',
@@ -241,13 +248,18 @@ export default {
 						color: newCol,
 						line: { width: 2, color: newColL },
 					},
-					hovertemplate: '%{text} <extra></extra>',
+					hovertemplate: '%{text}  <extra></extra>',
 					text: labels,
+					showlegend: false,
 				};
 				scatterPlot.push(trace);
 			}
 
 			return scatterPlot;
+		},
+		getTraceName(index) {
+			if (index === 17) return 'All tools';
+			return null;
 		},
 		bar_plot_data_restruct(features) {
 			const newValues = [];
