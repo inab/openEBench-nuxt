@@ -94,3 +94,6 @@ sw.*
 
 # Vim swap files
 *.swp
+
+# CFF files
+CITATION.cff
