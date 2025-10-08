@@ -15,6 +15,6 @@ preferred-citation:
   authors:
     - name: "OpenEBench Development Team"
   institution: "Barcelona Supercomputing Center (BSC) – INB"
-  license: "MIT"
+  license: "Apache-2.0"
   repository-code: "https://github.com/inab/openEBench-nuxt"
   notes: "Front-end component of the OpenEBench ecosystem."
