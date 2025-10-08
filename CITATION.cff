@@ -9,9 +9,11 @@ authors:
 repository-code: "https://github.com/inab/openEBench-nuxt"
 url: "https://github.com/inab/openEBench-nuxt"
 license: "Apache-2.0"
+version: "1.0.4"
 preferred-citation:
   type: software
   title: "OpenEBench Nuxt"
+  version: "1.0.4"
   authors:
     - name: "OpenEBench Development Team"
   institution: "Barcelona Supercomputing Center (BSC) – INB"
