@@ -177,13 +177,13 @@
 			"show": false
 		},
 		{
-			"image": "/user.png",
-			"name": "Jessica Fernández Martínez",
-			"alias": "Jessica",
+			"image": "/kvizcarr.jpg",
+			"name": "Karla Vizcarra Loayza",
+			"alias": "Karla",
 			"institution": ["INB/ELIXIR-ES", "BSC-CNS"],
 			"roles": ["Web Front-end", "Data Visualization"],
-			"orcid": "https://orcid.org/0009-0004-2668-9077",
-			"github": "https://github.com/JessicaFM",
+			"orcid": "",
+			"github": "",
 			"show": false
 		}
 	],
@@ -235,6 +235,12 @@
 			"startYear": 2016,
 			"endYear": 2018,
 			"roles": ["Data Modelization"]
+		},
+		{
+			"name": "Jessica Fernández Martínez",
+			"startYear": 2024,
+			"endYear": 2025,
+			"roles": ["Data Visualization", "Web Front-end"]
 		}
 	],
 	"Roles": [
