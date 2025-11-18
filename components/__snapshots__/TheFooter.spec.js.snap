@@ -8,7 +8,7 @@ exports[`TheFooter should match snapshot 1`] = `
         <div aria-label=\\"logo\\" role=\\"img\\" class=\\"v-image v-responsive theme--light\\" style=\\"max-width: 150px;\\">
           <div class=\\"v-responsive__content\\"></div>
         </div>
-        <p class=\\"body-2\\">©&nbsp; BSC-CNS 2024</p>
+        <p class=\\"body-2\\">©&nbsp; BSC-CNS 2025</p>
       </div>
       <div class=\\"pa-4 col-md-6 col-12\\">
         <!---->
@@ -43,7 +43,7 @@ exports[`TheFooter should match snapshot 1`] = `
                 <!---->
                 <!---->
               </li>
-              <li class=\\"list-item\\"><a dark=\\"\\" class=\\"white--text no-underline link-hover\\">FAIR Evaluator</a>
+              <li class=\\"list-item\\"><a dark=\\"\\" class=\\"white--text no-underline link-hover\\">FAIRsoft Evaluator</a>
                 <!---->
                 <!---->
               </li>
