@@ -8,16 +8,16 @@
 			/>
 			<community-info v-else :community="project" />
 		</v-container>
-		<v-tabs :vertical="vertical" class="mt-8">
-			<v-tab class="justify-start">
+		<v-tabs :vertical="vertical" class="mt-10">
+			<v-tab>
 				<v-icon left> mdi-information-outline </v-icon>
 				Summary
 			</v-tab>
-			<v-tab class="justify-start">
+			<v-tab>
 				<v-icon left> mdi-view-dashboard </v-icon>
 				Results
 			</v-tab>
-			<v-tab class="justify-start">
+			<v-tab>
 				<v-icon left> mdi-folder </v-icon>
 				<v-badge
 					class="badge-margin"
@@ -29,7 +29,7 @@
 					Datasets
 				</v-badge>
 			</v-tab>
-			<v-tab class="justify-start">
+			<v-tab>
 				<v-icon left> mdi-cube-outline </v-icon>
 				<v-badge
 					class="badge-margin"
@@ -203,7 +203,7 @@ export default {
 }
 
 .badge-margin {
-	margin-right: 25px;
+	margin-right: 15px;
 	margin-left: -2px;
 }
 </style>
