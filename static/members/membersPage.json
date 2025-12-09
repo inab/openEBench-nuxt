@@ -181,14 +181,9 @@
 			"name": "Karla Vizcarra Loayza",
 			"alias": "Karla",
 			"institution": ["INB/ELIXIR-ES", "BSC-CNS"],
-			"roles": [
-				"Community Engagement",
-				"Data Modelization",
-				"Scientific Benchmarking",
-				"ML Operativization"
-			],
-			"orcid": "https://orcid.org/0009-0004-8756-0576",
-			"github": "https://github.com/karlavizcarrabsc",
+			"roles": ["Web Front-end", "Data Visualization"],
+			"orcid": "",
+			"github": "",
 			"show": false
 		}
 	],
@@ -300,10 +295,6 @@
 		{
 			"name": "Leadership",
 			"description": "Strategic direction and team management."
-		},
-		{
-			"name": "ML Operativization",
-			"description": "Deploys, monitors, and maintains machine-learning models in production."
 		}
 	],
 	"Institutions": {
