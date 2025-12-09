@@ -104,9 +104,6 @@ exports[`TeamPage.vue matches the snapshot 1`] = `
     <v-col-stub cols=\\"12\\" sm=\\"6\\" md=\\"4\\" tag=\\"div\\">
       <alumnicard-stub alumni=\\"[object Object]\\" institution-mapping=\\"[object Object]\\"></alumnicard-stub>
     </v-col-stub>
-    <v-col-stub cols=\\"12\\" sm=\\"6\\" md=\\"4\\" tag=\\"div\\">
-      <alumnicard-stub alumni=\\"[object Object]\\" institution-mapping=\\"[object Object]\\"></alumnicard-stub>
-    </v-col-stub>
   </v-row-stub> <br>
   <v-divider-stub class=\\"mt-12\\"></v-divider-stub>
   <v-expansion-panels-stub valuecomparator=\\"[Function]\\" activeclass=\\"v-item--active\\" tag=\\"div\\" class=\\"mt-8\\">
