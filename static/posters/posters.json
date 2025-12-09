@@ -299,58 +299,6 @@
 			"citation": "Codó L, Redondo Guitarte A, Fernández JM et al. OpenEBench: advancing AI benchmarking [version 1; not peer reviewed]. F1000Research 2024, 13(ELIXIR):570 (poster) (https://doi.org/10.7490/f1000research.1119729.1)",
 			"poster": "f1000research-652243.pdf",
 			"abstract": "Systematic, quantitative, and publicly accessible benchmarks are crucial drivers of progress in artificial intelligence (AI) applied to Life Sciences. In the context of the clinical care, establishing objective and transparent benchmarking methodologies becomes increasingly vital to ensure that AI datasets, algorithms, and technologies meet the standards for effectiveness and reliability demanded by the field.\nOpenEBench is being extended to accommodate new benchmarking efforts within this comprehensive open-access platform driven by scientific communities needs. Beyond facilitating the development, management, and application of standardized evaluation challenges, OpenEBench now provides access to computational resources required for evaluating AI models.\nIn the context of EuCanImage, a pan-European platform for AI application to Cancer imaging, OpenEBench supports the evaluation of the inference performance of AI models on oncological images. OpenEBench offers the necessary infrastructure, technical support, and organizational coordination to support an end-to-end benchmarking process. This includes a testing phase, where AI developers can test trained models against a given test dataset in the platform’s playground; a validation phase, where accepted models are validated against a validation dataset; a benchmarking phase, which computes assessment metrics from resulting predictions; and a final publication phase that makes metrics open to the public for comparison and further analysis.\nOpenEBench conducts these tasks transparently and collaboratively, enabling the sharing of datasets, registering and annotating participants' trained models, and leveraging state-of-the-art technologies to build secure and reproducible processing environments. Through these endeavors, OpenEBench promotes best practices in the domain, encouraging the adoption of FAIR principles and fostering progress and innovation in AI research in Life Sciences."
-		},
-		{
-			"title": "OpenEBench4AI: Integrating Execution, Metrics, and Resource Flexibility for Benchmarking AI models",
-			"date": "30 May 2025",
-			"authors": [
-				"Karla Vizcarra Loayza",
-				"Anna Redondo Guitarte",
-				"Jose María Fernández",
-				"The OpenEBench Team",
-				"Josep Lluís Gelpí",
-				"Salvador Capella-Gutiérrez"
-			],
-			"presented_loc": "ELIXIR All Hands 2025",
-			"link": "https://doi.org/10.7490/f1000research.1120192.1",
-			"citation": "Vizcarra Loayza K, Redondo Guitarte A, María Fernández J et al. OpenEBench4AI: Integrating Execution, Metrics, and Resource Flexibility for Benchmarking AI models [version 1; not peer reviewed]. F1000Research 2025, 14(ELIXIR):536 (poster) (https://doi.org/10.7490/f1000research.1120192.1)",
-			"poster": "f1000research-729678.pdf",
-			"abstract": "OpenEBench4AI expands the capabilities of OpenEBench by introducing a fully automated and scalable framework for executing submitted AI model predictions as part of the benchmarking process. This new functionality enables seamless integration of computational resources (both CPU and GPU based), allowing for efficient and flexible execution across different computing environments. Additionally, it supports both internal and external datasets (public or tokenized), increasing accessibility and adaptability for a broader range of challenges.\n Key enhancements include a seamless web interface, improved metrics calculation integrated from the challenge configuration, and a streamlined user journey for communities, challenge organizers, and participants. These improvements simplify participation, enhance reproducibility, and provide a more comprehensive evaluation process. By automating execution and incorporating advanced resource management, OpenEBench4AI ensures a robust and transparent benchmarking ecosystem that supports cutting-edge AI research and innovation."
-		},
-		{
-			"title": "Next-gen OpenEBench: A technical overhaul for the ELIXIR benchmarking platform. The power of modularity, TypeScript and enhanced UI",
-			"date": "28 May 2025",
-			"authors": [
-				"Andrea Morales-Mata",
-				"Ani Valle-Banegas",
-				"Jessica Férnandez-Martínez",
-				"The OpenEBench Team",
-				"Josep Lluís Gelpí",
-				"Salvador Capella-Gutiérrez",
-				"José Maria Fernández-González"
-			],
-			"presented_loc": "ELIXIR All Hands 2025",
-			"link": "https://doi.org/10.7490/f1000research.1120188.1",
-			"citation": "Morales-Mata A, Valle-Banegas A, Férnandez-Martínez J et al. Next-gen OpenEBench: A technical overhaul for the ELIXIR benchmarking platform. The power of modularity, TypeScript and enhanced UI [version 1; not peer reviewed]. F1000Research 2025, 14(ELIXIR):529 (poster) (https://doi.org/10.7490/f1000research.1120188.1) ",
-			"poster": "f1000research-729243.pdf",
-			"abstract": "Technology is moving faster than ever. Keeping systems up to date is key to staying relevant and making sure they last in the long run. OpenEBench, ELIXIR's gateway to the community-driven benchmarking efforts and research , software monitoring for Life Science tools, workflows and other complex systems, is also part of this ongoing transformation.\n\nTo improve maintainability, scalability, and performance, we are refactoring OpenEBench by integrating modern libraries, transitioning to TypeScript, and adopting a modular UI architecture. These changes make development more efficient, improve code reliability, and ensure the platform remains flexible for future updates. However, technology alone is not enough—keeping documentation updated is just as important. Clear and up-to-date documentation improves and facilitates the contribution of developers. It also facilitates engaging with the platform’s users.\n\nThis poster will outline our approach to modernizing OpenEBench, covering the technical improvements and the role of documentation in sustaining an evolving platform. We’ll share the key challenges we faced, the benefits of these changes, and why regular updates—both in code and documentation—are essential to keeping OpenEBench reliable and accessible for the community."
-		},
-		{
-			"title": "Empowering openEBench with OEB Widgets Graphs: web components for interactive data exploration",
-			"date": "27 May 2025",
-			"authors": [
-				"Jessica Férnandez-Martínez",
-				"Andrea Morales-Mata",
-				"Ani Valle-Banegas",
-				"The OpenEBench Team",
-				"Josep Lluís Gelpí",
-				"Salvador Capella-Gutiérrez"
-			],
-			"presented_loc": "ELIXIR All Hands 2025",
-			"link": "https://doi.org/10.7490/f1000research.1120180.1",
-			"citation": "Fernandez Martínez J, Morales-Mata A, Valle Banegas AL et al. Empowering openEBench with OEB Widgets Graphs: web components for interactive data exploration [version 1; not peer reviewed]. F1000Research 2025, 14(ELIXIR):520 (poster) (https://doi.org/10.7490/f1000research.1120180.1) ",
-			"poster": "f1000research-728720.pdf",
-			"abstract": "OpenEBench (OEB) is a platform designed to support the community-driven scientific benchmark of research software, analytical workflows and other complex systems across different domains in the Life Sciences.  One of the main challenge in benchmarking is the effective visualization of complex composition of metric results by different specialized and non-specialized audiences. The ultimate goal is to improve the interpret ability and accessibility of results to facilitate the informed decision-making process.\n\nOEB Widgets is a collection of web components designed to provide modular, reusable, and interactive elements within OpenEBench services. While OEB Widgets Graphs currently focus on graphical data representation, the library allows for development of other types of web components, expanding its capabilities beyond visualization. These components can be seamlessly integrated into various Front-End environments, ensuring flexibility and adaptability across different platforms and workflows, even beyond OEB ecosystem itself.\n\nThis work highlights the advantages of using OEB Widgets Graphs for dynamic and customizable results exploration and interpretation. By leveraging web components, we enable a more accessible, interoperable, ans scalable approach of data representation, reducing technical barriers for researchers and developers.\n\nOverall, the modularity and re-usability of OEB Widgets contribute to a more open and transparent bio informatics ecosystem, fostering reproducibility and enhancing the usability of benchmarking results."
 		}
 	],
 	"MENTION": [
@@ -568,39 +516,6 @@
 			"citation": "Alloza E, Golobardes A, Rambla J et al. The Spanish National Bioinformatics Institute (INB/ELIXIR-ES) [version 1; not peer reviewed]. F1000Research 2024, 13(ELIXIR):546 (poster) (https://doi.org/10.7490/f1000research.1119722.1)",
 			"poster": "f1000research-650665.pdf",
 			"abstract": "The Spanish National Bioinformatics Institute (INB) is the ELIXIR Node in Spain (ELIXIR-ES) since 2015. The INB was founded in 2003 as a distributed network of nodes with a central coordination hub. At present, INB counts with 27 research groups distributed across 15 institutions in Spain. Currently, the two main overarching objectives are: 1) deepen its involvement and leadership within ELIXIR and broaden the resources provided as part of ELIXIR infrastructure to the Life Sciences community, 2) increase its impact within the Spanish National Health System regarding the secondary use of health-related data for research. At the national level, the INB/ELIXIR-ES leads the Translational Bioinformatics Network (TransBioNet) and coordinates IMPaCT-Data, the Data Science pillar of the Spanish National Infrastructure for Precision Medicine. Indeed, IMPaCT-Data is closely related to major European efforts like GDI and EUCAIM while implementing GA4GH standards in its products.\n\nFrom the ELIXIR perspective, the new Service Delivery Plan has increased its reach with 40 resources, which are offered by 24 groups belonging to 12 institutions, and scope of its activities going beyond its traditional focus on biomedical data related activities. The European Genome-phenome Archive (EGA), an ELIXIR CDR, is co-developed and maintained by CRG and EMBL-EBI with BSC’s infrastructure support. Four resources are recognised as ELIXIR RIRs: 3DBIONOTES API, FAIRtracks, FAIR Cookbook and OpenEBench. Interestingly, OpenEBench has been adopted by various ELIXIR Communities as its community-driven benchmarking platform.\n\nThe node has a strong engagement within the 4 Tiers of the ELIXIR 2024-2028 Work Programme. This includes the co-leadership of the Tools and Training Platforms, and the ELIXIR Beacon Network Infrastructure Service in the Technology Tier; Biodiversity, Food Security and Pathogens, and Cellular and Molecular Research Science priority areas in the Science Tier; and Rare Diseases, Federated Human Data, Cancer Data and Biodiversity Communities. ELIXIR-ES groups also have an active role in the People and Nodes’ Tiers, 4 Platforms, 13 Communities, and 6 Focus Groups. The node also co-leads the ELIXIR Leadership And Diversity mentoring programme (ELEAD Pilot), built on the experience of the Bioinfo4Women programme.\n\nINB/ELIXIR-ES https://inb-elixir.es"
-		},
-		{
-			"title": "The Spanish National Bioinformatics Institute (INB/ELIXIR-ES)",
-			"date": "29 May 2025",
-			"authors": [
-				"Eva Alloza",
-				"Anna Golobardes",
-				"Jordi Rambla",
-				"Sergi Beltran",
-				"José María Fernández",
-				"Celia Alvarez Romero",
-				"Alba Jene-Sanz",
-				"INB/ELIXIR-ES members",
-				"Ana Conesa",
-				"Javier De Las Rivas",
-				"Ferran Sanz",
-				"Carlos Luís Parra-Calderón",
-				"Jose María Carazo",
-				"Isabel Cuesta",
-				"Toni Gabaldón",
-				"Fátima Al-Shahrour",
-				" Ivo Gut",
-				"Patrick Aloy",
-				"Josep Lluís Gelpi",
-				"Arcadi Navarro",
-				"Alfonso Valencia",
-				"Salvador Capella-Gutierrez"
-			],
-			"presented_loc": "ELIXIR All Hands 2025",
-			"link": "https://doi.org/10.7490/f1000research.1120195.1",
-			"citation": "Alloza E, Golobardes A, Rambla J et al. The Spanish National Bioinformatics Institute (INB/ELIXIR-ES)  [version 1; not peer reviewed]. F1000Research 2025, 14(ELIXIR):534 (poster) (https://doi.org/10.7490/f1000research.1120195.1)",
-			"poster": "f1000research-729583.pdf",
-			"abstract": "The Spanish National Bioinformatics Institute (INB), founded in 2003 as a distributed network, is the ELIXIR Node in Spain and has two objectives: 1) deepen its involvement and leadership within ELIXIR and broaden the resources provided as part of ELIXIR infrastructure to the Life Sciences community; and 2) increase its impact within the Spanish National Health System.\n\nFrom the ELIXIR perspective, the Service Delivery Plan maintains 40 resources offered by 27 research groups distributed across 15 institutions in Spain. Regarding national activities, the INB/ELIXIR-ES leads TransBioNet and coordinates IMPaCT-Data, the Data Science pillar of the Spanish National Infrastructure for Precision Medicine. These efforts align with major European data projects such as GDI, EUCAIM, FEGA, while implementing GA4GH standards in its technological developments.\n\nThe node strongly engages within the 4 Tiers of the ELIXIR 2024-28 Work Programme:\n   • TechnologyTier: co-leadership of Tools and Training Platforms and ELIXIR Beacon Network Infrastructure Service\n   • PeopleTier: leadership of the leadership programme ELEAD2.0, a People Tier CoS built on the experiences of Bioinfo4Women\n   • ScienceTier: co-leadership of CMR and HDTR Science priority areas; co-leadership of Rare Diseases, FHD, Cancer Data and Biodiversity   Communities, and Pathogens Data Focus Group.\n   • People-Nodes’Tiers active role, together with 5 Platforms, 13 Communities, and 8 Focus Groups.\n\nRegarding the INB/ELIXIR-ES portfolio, EGA, an ELIXIR Core Data Resource (CDR), is co-developed and maintained by CRG and EMBL-EBI with BSC’s infrastructure support, with the current focus on its extension through Federated EGA. Additionally, four resources are recognised as ELIXIR Recommended Interoperability Resources (RIR): 3DBIONOTES API, FAIRtracks, FAIRCookbook and OpenEBench. Various ELIXIR Communities have adopted OpenEBench as their community-driven benchmarking platform. The node also co-leads the leadership programme ELEAD2.0, a People Tier CoS built on the experiences of Bioinfo4Women."
 		}
 	]
 }
