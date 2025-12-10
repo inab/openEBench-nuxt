@@ -177,13 +177,18 @@
 			"show": false
 		},
 		{
-			"image": "/user.png",
-			"name": "Jessica Fernández Martínez",
-			"alias": "Jessica",
+			"image": "/kvizcarr.jpg",
+			"name": "Karla Vizcarra Loayza",
+			"alias": "Karla",
 			"institution": ["INB/ELIXIR-ES", "BSC-CNS"],
-			"roles": ["Web Front-end", "Data Visualization"],
-			"orcid": "https://orcid.org/0009-0004-2668-9077",
-			"github": "https://github.com/JessicaFM",
+			"roles": [
+				"Community Engagement",
+				"Data Modelization",
+				"Scientific Benchmarking",
+				"ML Operativization"
+			],
+			"orcid": "https://orcid.org/0009-0004-8756-0576",
+			"github": "https://github.com/karlavizcarrabsc",
 			"show": false
 		}
 	],
@@ -235,6 +240,12 @@
 			"startYear": 2016,
 			"endYear": 2018,
 			"roles": ["Data Modelization"]
+		},
+		{
+			"name": "Jessica Fernández Martínez",
+			"startYear": 2024,
+			"endYear": 2025,
+			"roles": ["Data Visualization", "Web Front-end"]
 		}
 	],
 	"Roles": [
@@ -289,6 +300,10 @@
 		{
 			"name": "Leadership",
 			"description": "Strategic direction and team management."
+		},
+		{
+			"name": "ML Operativization",
+			"description": "Deploys, monitors, and maintains machine-learning models in production."
 		}
 	],
 	"Institutions": {
