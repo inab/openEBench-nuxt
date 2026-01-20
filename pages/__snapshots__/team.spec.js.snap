@@ -104,13 +104,81 @@ exports[`TeamPage.vue matches the snapshot 1`] = `
     <v-col-stub cols=\\"12\\" sm=\\"6\\" md=\\"4\\" tag=\\"div\\">
       <alumnicard-stub alumni=\\"[object Object]\\" institution-mapping=\\"[object Object]\\"></alumnicard-stub>
     </v-col-stub>
+    <v-col-stub cols=\\"12\\" sm=\\"6\\" md=\\"4\\" tag=\\"div\\">
+      <alumnicard-stub alumni=\\"[object Object]\\" institution-mapping=\\"[object Object]\\"></alumnicard-stub>
+    </v-col-stub>
   </v-row-stub> <br>
   <v-divider-stub class=\\"mt-12\\"></v-divider-stub>
   <v-expansion-panels-stub valuecomparator=\\"[Function]\\" activeclass=\\"v-item--active\\" tag=\\"div\\" class=\\"mt-8\\">
     <v-expansion-panel-stub>
       <v-expansion-panel-header-stub expandicon=\\"$expand\\" class=\\"header-bg\\"><b>Roles Legend</b></v-expansion-panel-header-stub>
       <v-expansion-panel-content-stub>
-        <v-simple-table-stub></v-simple-table-stub>
+        <v-simple-table-stub>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Back-office</strong></td>
+              <td>Administrative and internal tooling support.</td>
+            </tr>
+            <tr>
+              <td><strong>Community Engagement</strong></td>
+              <td>Engagement with community stakeholders.</td>
+            </tr>
+            <tr>
+              <td><strong>Compute Backend</strong></td>
+              <td>Backend infrastructure management.</td>
+            </tr>
+            <tr>
+              <td><strong>Data Interfaces</strong></td>
+              <td>Development and maintenance of data interfaces.</td>
+            </tr>
+            <tr>
+              <td><strong>Data Modelization</strong></td>
+              <td>Design and implementation of data models.</td>
+            </tr>
+            <tr>
+              <td><strong>Data Visualization</strong></td>
+              <td>Visualization of data for user interaction.</td>
+            </tr>
+            <tr>
+              <td><strong>Leadership</strong></td>
+              <td>Strategic direction and team management.</td>
+            </tr>
+            <tr>
+              <td><strong>ML Operativization</strong></td>
+              <td>Deploys, monitors, and maintains machine-learning models in production.</td>
+            </tr>
+            <tr>
+              <td><strong>Scientific Benchmarking</strong></td>
+              <td>Implementation and oversight of scientific benchmarks.</td>
+            </tr>
+            <tr>
+              <td><strong>Security</strong></td>
+              <td>Implementation and oversight of security measures.</td>
+            </tr>
+            <tr>
+              <td><strong>Software Observatory</strong></td>
+              <td>Monitoring and analysis of software ecosystem.</td>
+            </tr>
+            <tr>
+              <td><strong>Technical Monitoring</strong></td>
+              <td>Monitoring and maintenance of technical aspects.</td>
+            </tr>
+            <tr>
+              <td><strong>Tooling (command line)</strong></td>
+              <td>Development of command-line tools.</td>
+            </tr>
+            <tr>
+              <td><strong>Web Front-end</strong></td>
+              <td>Development and maintenance of web interfaces.</td>
+            </tr>
+          </tbody>
+        </v-simple-table-stub>
       </v-expansion-panel-content-stub>
     </v-expansion-panel-stub>
   </v-expansion-panels-stub>
