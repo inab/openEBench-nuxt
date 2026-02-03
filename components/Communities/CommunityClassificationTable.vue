@@ -94,7 +94,15 @@ export default {
 				'/projects/',
 				'/scientific/'
 			);
-			return `${currentPath}/${challengePath}`;
+
+			// Only add the query parameter if we're actually in the projects section
+			const fromProjects = this.$route.path.includes('/projects/');
+
+			if (fromProjects) {
+				return `${currentPath}/${challengePath}?from=projects`;
+			} else {
+				return `${currentPath}/${challengePath}`;
+			}
 		},
 	},
 };
