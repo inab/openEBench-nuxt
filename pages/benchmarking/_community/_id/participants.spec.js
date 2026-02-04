@@ -9,11 +9,14 @@ import ChartBarplotVisualizerWrapper from '~/components/Widgets/ChartBarplotVisu
 import ChartScatterVisualizerWrapper from '~/components/Widgets/ChartScatterVisualizerWrapper';
 */
 
-const factory = (mockStore) => {
+const factory = (mockStore, routeQuery = {}) => {
 	return mount(Challenge, {
 		...createComponentMocks({ store: mockStore }),
 		mocks: {
-			$route: { params: { community: 'TESTCOMMUNITY', id: 'TESTID' } },
+			$route: {
+				params: { community: 'TESTCOMMUNITY', id: 'TESTID' },
+				query: routeQuery,
+			},
 			$config: { OEB_LEGACY_ANGULAR_URI: 'https://jest-openebench.bsc.es/' },
 		},
 	});

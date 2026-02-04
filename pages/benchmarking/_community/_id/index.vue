@@ -35,7 +35,8 @@
 		<div v-else-if="$store.state.challenge.error" class="block-error">
 			<ApiError />
 		</div>
-		<div v-else>
+		<!-- Check if datasets exist and have items -->
+		<div v-else-if="datasets && datasets.length > 0">
 			<h2 class="text-h6 mt-8 mx-3">
 				Choose the metrics you want to visualize in the diagram:
 			</h2>
@@ -63,7 +64,7 @@
 					</span>
 				</v-chip>
 			</v-chip-group>
-			<v-tabs-items v-model="tab" class="mx- 4">
+			<v-tabs-items v-model="tab" class="mx-4">
 				<v-tab-item
 					v-for="(item, index) in datasets"
 					:key="index"
@@ -83,22 +84,16 @@
 							></v-progress-circular>
 						</div>
 					</div>
-					<div v-else>
-						<div
-							class="text--secondary mt-6 mx-10"
-							align="center"
-							color="rgba(0, 0, 0, 0.6)"
-						>
-							<v-img :src="illustration" contain max-height="300" />
-
-							<h2>No chart available</h2>
-							<p class="text-h6">
-								We're working on adding a new visualization. Check back soon!
-							</p>
-						</div>
-					</div>
 				</v-tab-item>
 			</v-tabs-items>
+		</div>
+		<!-- Empty state when no datasets -->
+		<div v-else class="text--secondary mt-6 mx-10" align="center">
+			<v-img :src="illustration" contain max-height="300" />
+			<h2 class="text-h5 mt-4">No visualization available</h2>
+			<p class="text-body-1">
+				There are no datasets or metrics available for this challenge yet.
+			</p>
 		</div>
 	</v-container>
 </template>
@@ -135,42 +130,75 @@ export default {
 			community: 'community',
 		}),
 		breadcrumbs() {
-			return [
-				{
-					text: 'Home',
-					disabled: false,
-					exact: true,
-					to: '/',
-				},
-				{
-					text: 'Benchmarking Communities',
-					disabled: false,
-					exact: true,
-					to: '/benchmarking',
-				},
-				{
-					text:
-						(this.community.acronym
-							? this.community.acronym
-							: this.$route.params.community) + ' Events',
-					disabled: false,
-					exact: true,
-					to: './events',
-				},
-				{
-					text: this.currentEvent
-						? this.currentEvent.name
-						: this.$route.params.community + ' Results',
-					disabled: false,
-					exact: true,
-					to: './?event=' + this.$route.params.id,
-				},
-				{
-					text: this.challenge ? this.challenge.challenge_label : '',
-					disabled: true,
-					to: this.$route.params.id,
-				},
-			];
+			// Check if user came from projects page
+			const fromProjects = this.$route.query.from === 'projects';
+			const projectId = this.$route.params.community; // This is OEBC015
+
+			if (fromProjects) {
+				// Breadcrumbs when coming from projects
+				return [
+					{
+						text: 'Home',
+						disabled: false,
+						exact: true,
+						to: '/',
+					},
+					{
+						text: 'Project Spaces',
+						disabled: false,
+						exact: true,
+						to: '/projects',
+					},
+					{
+						text: this.community.acronym || projectId,
+						disabled: false,
+						exact: true,
+						to: `/projects/${projectId}`,
+					},
+					{
+						text: this.challenge ? this.challenge.challenge_label : 'Challenge',
+						disabled: true,
+					},
+				];
+			} else {
+				// Original breadcrumbs when coming from benchmarking
+				return [
+					{
+						text: 'Home',
+						disabled: false,
+						exact: true,
+						to: '/',
+					},
+					{
+						text: 'Benchmarking Communities',
+						disabled: false,
+						exact: true,
+						to: '/benchmarking',
+					},
+					{
+						text:
+							(this.community.acronym
+								? this.community.acronym
+								: this.$route.params.community) + ' Events',
+						disabled: false,
+						exact: true,
+						to: './events',
+					},
+					{
+						text: this.currentEvent
+							? this.currentEvent.name
+							: this.$route.params.community + ' Results',
+						disabled: false,
+						exact: true,
+						to: './?event=' + this.$route.params.id,
+					},
+					{
+						text: this.challenge ? this.challenge.challenge_label : '',
+						disabled: true,
+						to: this.$route.params.id,
+					},
+				];
+			}
 		},
 	},
 	watch: {
