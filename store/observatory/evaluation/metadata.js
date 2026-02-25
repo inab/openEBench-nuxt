@@ -29,6 +29,9 @@
     */
 
 // state
+
+import Vue from 'vue';
+
 export const state = () => ({
 	_toolMetadata: {},
 	_toolMetadataJSONLD: {},
@@ -287,17 +290,22 @@ export const mutations = {
 	addEntry(state, payload) {
 		const field = payload.field;
 		const value = payload.value;
-		let id = 0;
-		// the id is needed for v-for loops to keep proper track of items
-		if (state._toolMetadata[field].length > 0) {
-			const lastIndex = state._toolMetadata[field].length - 1;
-			id = state._toolMetadata[field][lastIndex].id + 1;
+
+		// Asegúrate de que el array exista
+		if (!Array.isArray(state._toolMetadata[field])) {
+			Vue.set(state._toolMetadata, field, []);
 		}
-		const newItem = {
-			term: value,
-			id,
-		};
-		state._toolMetadata[field].push(newItem);
+
+		let id = 0;
+		const arr = state._toolMetadata[field];
+
+		if (arr.length > 0) {
+			const lastIndex = arr.length - 1;
+			id = arr[lastIndex].id + 1;
+		}
+
+		const newItem = { term: value, id };
+		arr.push(newItem);
 	},
 
 	setVocabulariesItems(state, payload) {

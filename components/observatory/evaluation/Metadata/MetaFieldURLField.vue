@@ -99,6 +99,7 @@ export default {
 			return '';
 		},
 		addEntry() {
+			console.log(this.field);
 			const payload = {
 				field: this.field,
 				value: '',
