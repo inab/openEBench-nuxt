@@ -2,12 +2,15 @@
 	<v-select
 		v-model="selectedType"
 		:items="typeItems"
+		multiple
 		dense
 		class="text-body mt-6"
 		@change="changeValue"
 	>
 		<template #selection="{ item }">
-			{{ item.toUpperCase() }}
+			<v-chip small color="gray" text-color="black" class="mr-1">
+				{{ item.toUpperCase() }}
+			</v-chip>
 		</template>
 		<template #item="{ item }">
 			<v-list-item-content>
@@ -21,10 +24,23 @@
 <script>
 export default {
 	name: 'SelectorType',
-	props: ['initialSelectedType', 'field'],
+	props: {
+		initialSelectedType: {
+			type: [Array, String],
+			default: () => [],
+		},
+		field: {
+			type: String,
+			required: true,
+		},
+	},
 	data() {
 		return {
-			selectedType: this.initialSelectedType,
+			selectedType: Array.isArray(this.initialSelectedType)
+				? this.initialSelectedType
+				: this.initialSelectedType
+				? [this.initialSelectedType]
+				: [],
 			typeItems: [
 				'cmd',
 				'web',

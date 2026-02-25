@@ -78,7 +78,7 @@ export default {
 						this.selectLicense = license;
 					} else {
 						this.selectLicense = response.data.match;
-						changeValueName();
+						this.changeValueName();
 					}
 				})
 				.catch((error) => {

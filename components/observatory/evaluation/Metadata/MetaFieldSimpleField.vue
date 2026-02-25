@@ -63,8 +63,10 @@ export default {
 		},
 		value: {
 			type: [String, Array, Object],
-			required: true,
+			required: false,
+			default: () => [],
 		},
+
 		label: {
 			type: String,
 			required: false,

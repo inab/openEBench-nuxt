@@ -20,8 +20,8 @@
 		<!-- Iterate through the entries and pass them to URLForm component -->
 		<URLForm
 			v-for="(entry, index) in localValue"
-			:key="entry.id"
-			:value="entry.term"
+			:key="entry.id || index"
+			:value="extractURL(entry)"
 			:index="index"
 			:id="entry.id"
 			:field="field"
@@ -65,8 +65,8 @@ export default {
 			required: false,
 		},
 		value: {
-			type: Array, // Assuming value is an array of entries
-			required: true,
+			type: Array,
+			default: () => [],
 		},
 		label: {
 			type: String,
@@ -75,16 +75,29 @@ export default {
 	},
 	data() {
 		return {
-			localValue: JSON.parse(JSON.stringify(this.value)), // Local copy of the value prop
+			localValue: [],
 		};
 	},
 	watch: {
-		// Watch for changes in the value prop and update localValue accordingly
-		value(newValue) {
-			this.localValue = JSON.parse(JSON.stringify(newValue));
+		value: {
+			immediate: true,
+			deep: true,
+			handler(newValue) {
+				this.localValue = Array.isArray(newValue)
+					? JSON.parse(JSON.stringify(newValue))
+					: [];
+			},
 		},
 	},
 	methods: {
+		// Extrae la URL de cada entry
+		extractURL(entry) {
+			if (!entry) return '';
+			if (typeof entry.term === 'string') return entry.term;
+			if (entry.term && typeof entry.term === 'object' && entry.term.url)
+				return entry.term.url;
+			return '';
+		},
 		addEntry() {
 			const payload = {
 				field: this.field,
@@ -102,18 +115,28 @@ export default {
 				payload
 			);
 		},
-		// Handle the update event from URLForm component
+		// Maneja la actualización desde URLForm
 		updateEntry({ index, value }) {
+			const entry = this.localValue[index];
+			if (!entry) return;
+
+			// Si term es objeto, solo actualizamos url
+			if (entry.term && typeof entry.term === 'object') {
+				entry.term.url = value;
+			} else {
+				entry.term = value;
+			}
+
 			const payload = {
 				field: this.field,
 				index,
-				value,
+				value: entry.term, // lo que se guardará en Vuex
 			};
-			this.localValue[index].term = value; // Update local value
+
 			this.$store.dispatch(
 				'observatory/evaluation/metadata/changeEntry',
 				payload
-			); // Update Vuex store
+			);
 		},
 	},
 };

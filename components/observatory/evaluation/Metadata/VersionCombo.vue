@@ -17,6 +17,7 @@ export default {
 	name: 'MetaRegistriesCombo',
 	props: ['initialSelectedVersion', 'versions', 'field'],
 	data() {
+		console.log(this.initialSelectedVersion);
 		return {
 			selectedVersion: this.initialSelectedVersion,
 		};

@@ -49,7 +49,11 @@ export default {
 			urlErrorMessage: '', // Error message for URL validation
 		};
 	},
-
+	watch: {
+		value(newVal) {
+			this.localValue = newVal || '';
+		},
+	},
 	methods: {
 		// Method to validate the URL format
 		validateURL(url) {
@@ -64,7 +68,7 @@ export default {
 				// Emit the validated value to the parent component
 				this.$emit('update', {
 					index: this.index,
-					value: { id: this.id, term: this.localValue },
+					value: this.localValue,
 				});
 			} else {
 				this.urlErrorMessage = 'Please enter a valid URL'; // Set error message if invalid

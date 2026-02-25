@@ -35,7 +35,8 @@ export default {
 	props: {
 		item: {
 			type: Boolean,
-			required: true,
+			required: false,
+			default: false,
 		},
 		field: String,
 		label: String,

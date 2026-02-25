@@ -115,6 +115,7 @@ export default {
 	data() {
 		return {
 			model: '',
+			modelURI: '',
 			selectVocabulary: '',
 			modelURICustom: '',
 			EDAMreversed,

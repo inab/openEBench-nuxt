@@ -110,7 +110,7 @@
 							n_cols="8"
 							class="mr-auto"
 							label="URL"
-							increasable="true"
+							:increasable="true"
 						/>
 						<v-col
 							v-if="toolMetadata.webpage.length > 1 > 0"
@@ -241,7 +241,7 @@
 							color="primary"
 							field="registration_not_mandatory"
 							title="Registration Not Mandatory"
-							n_cols="12"
+							:n_cols="12"
 						/>
 
 						<!-- Availility as library or API -->
@@ -252,7 +252,7 @@
 							color="primary"
 							field="api_lib"
 							title="Availability as library or API"
-							n_cols="12"
+							:n_cols="12"
 						/>
 					</v-row>
 				</v-expansion-panel-content>
@@ -329,7 +329,7 @@
 							n_cols="10"
 							class="mr-auto"
 							label="URL"
-							increasable="true"
+							:increasable="true"
 						/>
 					</v-row>
 				</v-expansion-panel-content>
@@ -662,19 +662,26 @@ export default {
 			}
 		},
 		initialVersionControl() {
-			if (this.toolMetadata.repository.length > 0) {
-				if (
-					this.toolMetadata.repository[0].term.match('github') !== null ||
-					this.toolMetadata.repository[0].term.match('gitlab') !== null ||
-					this.toolMetadata.repository[0].term.match('bitbucket') !== null
-				) {
-					return true;
-				} else {
-					return false;
+			console.log(this.toolMetadata);
+
+			if (
+				Array.isArray(this.toolMetadata.repository) &&
+				this.toolMetadata.repository.length > 0
+			) {
+				const term = this.toolMetadata.repository[0].term;
+
+				if (typeof term === 'string') {
+					const lowerTerm = term.toLowerCase();
+
+					return (
+						lowerTerm.includes('github') ||
+						lowerTerm.includes('gitlab') ||
+						lowerTerm.includes('bitbucket')
+					);
 				}
-			} else {
-				return false;
 			}
+
+			return false;
 		},
 
 		SumbitMetadata() {
