@@ -112,9 +112,9 @@ export default {
 			);
 		},
 		async sumbitObservatoryTool() {
+			// Ahora solo es necesario name, type ya no lo usamos.
 			const payload = {
 				name: this.value.name,
-				type: this.value.type,
 			};
 			await this.$store.dispatch(
 				'observatory/evaluation/observatory/fetchToolMetadata',

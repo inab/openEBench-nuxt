@@ -45,7 +45,7 @@ export const actions = {
 	},
 
 	async fetchToolMetadata({ commit, dispatch }, payload) {
-		const URL = '/tools?name=' + payload.name + '&type=' + payload.type;
+		const URL = '/tools?name=' + payload.name;
 
 		commit('setLoading', true); // set loading to true to show the loading bar
 
