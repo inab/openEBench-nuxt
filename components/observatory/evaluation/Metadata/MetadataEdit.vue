@@ -1,7 +1,7 @@
 <template>
 	<v-container>
 		<v-expansion-panels v-model="open_panels" multiple>
-			<v-expansion-panel>
+			<v-expansion-panel class="flex-grow-0">
 				<v-expansion-panel-header>
 					<PanelHeader
 						title="0. Identity"
@@ -47,7 +47,6 @@
 								/>
 							</template>
 						</MetaField>
-
 						<!-- Version -->
 						<MetaField
 							title="Version"
@@ -59,7 +58,7 @@
 							<template #inputField>
 								<VersionCombo
 									field="version"
-									:selected-version="toolMetadata.version"
+									:initial-selected-version="toolMetadata.version"
 									:versions="toolMetadata.other_versions"
 								/>
 							</template>

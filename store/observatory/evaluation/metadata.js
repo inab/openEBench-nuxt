@@ -140,10 +140,6 @@ export const actions = {
 			return el != null;
 		});
 
-		// version as one string
-		result.other_versions = result.version.filter((val) => val != null);
-		result.version = result.version[0];
-
 		// New filed e_infrastructures as array of strings
 		const eInfrastructures = {
 			galaxy: 'usegalaxy',
@@ -193,8 +189,6 @@ export const actions = {
 			'observatory/evaluation/metadata/POST_URL',
 			payload
 		);
-
-		console.debug(result);
 
 		commit('setMetadataCFF', result);
 	},
