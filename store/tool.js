@@ -66,11 +66,16 @@ export default {
 
 		async initialSearch({ commit }, q) {
 			commit('updateLoadingInitialSearch', true);
-			const result = await this.$observatory.$get('/search?page=0&q=' + q, {
-				headers: {
-					'ngrok-skip-browser-warning': '69420',
-				},
-			});
+			const result = await this.$observatory.$get(
+				'/search?page=0&q=' +
+					q +
+					'&searchIn=name,label,description,topics,operations,publication_title,publication_abstract',
+				{
+					headers: {
+						'ngrok-skip-browser-warning': '69420',
+					},
+				}
+			);
 
 			commit('updateTools', result.tools);
 			commit('updateCounts', result.counts);
@@ -88,10 +93,7 @@ export default {
 			// Add filters to query
 
 			// 'Search In' Categories
-			if (
-				state.visibleCategories.length > 0 &&
-				state.visibleCategories.length < 7
-			) {
+			if (state.visibleCategories.length > 0) {
 				query += '&searchIn=';
 				for (const category of state.visibleCategories) {
 					query += category + ',';
