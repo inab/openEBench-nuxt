@@ -289,6 +289,21 @@ export default {
 			//	path: '/benchmarking/:community/:id/participants',
 			//	component: resolve(__dirname, 'pages/benchmarking/_community/_id/participants'),
 			// });
+			routes.push({
+				name: 'search-results',
+				path: '/tool/search',
+				component: resolve(__dirname, 'pages/tool/search'),
+			});
+			routes.push({
+				name: 'tool',
+				path: '/tool',
+				component: resolve(__dirname, 'pages/tool/index'),
+			});
+			routes.push({
+				name: 'tool-entry',
+				path: '/tool/:name/:type',
+				component: resolve(__dirname, 'pages/tool/_id.vue'),
+			});
 		},
 	},
 };
