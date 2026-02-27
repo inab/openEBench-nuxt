@@ -9,9 +9,10 @@ export default {
 	},
 	actions: {
 		async retrieveTool({ commit }, payload) {
+			console.log(payload.name);
 			commit('updateLoading', true);
 			const { data } = await this.$observatory.get(
-				`/tools?name=${payload.name}&type=${payload.type}`
+				`/tools?name=${payload.name}`
 			);
 
 			commit('updateTool', data);

@@ -33,21 +33,18 @@
 						</MetaField>
 
 						<!-- Type -->
-						<MetaField
+
+						<MetaTypesCombo
 							title="Type of Software"
 							field="type"
-							value-type=""
-							n_cols="3"
-							:increasable="false"
-						>
-							<template #inputField>
-								<SelectorType
-									field="type"
-									:initial-selected-type="toolMetadata.type"
-								/>
-							</template>
-						</MetaField>
+							:selected="toolMetadata.type"
+							:types="types"
+							n_cols="5"
+							class="mr-auto"
+						/>
+
 						<!-- Version -->
+
 						<MetaField
 							title="Version"
 							field="version"
@@ -517,7 +514,6 @@ import { mapGetters } from 'vuex';
 import MetaCheckbox from './MetaCheckbox.vue';
 import MetaField from './MetaField.vue';
 import FormField from './FormField.vue';
-import SelectorType from './SelectorType.vue';
 import VersionCombo from './VersionCombo.vue';
 import MetaRegistriesCombo from './MetaRegistriesCombo.vue';
 import MetaTextArea from './MetaTextArea.vue';
@@ -530,13 +526,14 @@ import MetaFieldPublication from './MetaFieldPublication.vue';
 import MetaFieldAuthors from './MetaFieldAuthors.vue';
 import MetaFieldLicense from './MetaFieldLicense.vue';
 import MetaFieldURLField from './MetaFieldURLField.vue';
+import MetaTypesCombo from './MetaTypesCombo.vue';
 
 export default {
 	name: 'MetadataEdit',
 	components: {
 		MetaField,
 		FormField,
-		SelectorType,
+		MetaTypesCombo,
 		VersionCombo,
 		MetaRegistriesCombo,
 		MetaCheckbox,
@@ -557,6 +554,23 @@ export default {
 			open_panels: [],
 			selectedType: '',
 			selectedVersion: '',
+			types: [
+				'cmd',
+				'web',
+				'db',
+				'app',
+				'lib',
+				'ontology',
+				'workflow',
+				'plugin',
+				'sparql',
+				'soap',
+				'script',
+				'rest',
+				'workbench',
+				'suite',
+				'undefined',
+			],
 			registries: [
 				'Conda',
 				'DockerHub',

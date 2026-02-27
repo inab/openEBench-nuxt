@@ -247,7 +247,7 @@ export default {
 			});
 			routes.push({
 				name: 'tool-entry',
-				path: '/tool/:name/:type',
+				path: '/tool/:name',
 				component: resolve(__dirname, 'pages/tool/_id.vue'),
 			});
 			routes.push({

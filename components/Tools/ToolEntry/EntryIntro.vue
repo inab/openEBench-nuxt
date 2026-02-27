@@ -6,8 +6,14 @@
 					{{ name }}
 				</span>
 			</v-col>
-			<v-col ref="Intro" cols="6" class="d-flex align-center">
-				<ChipType :type="type" big class="ml-auto font-weight-bold" />
+			<v-col ref="Intro" cols="6" class="d-flex justify-end align-end">
+				<ChipType
+					v-for="item in type"
+					:key="item"
+					:type="item"
+					big
+					class="font-weight-bold ml-3"
+				/>
 			</v-col>
 		</v-row>
 		<v-row class="mt-0 pt-0">

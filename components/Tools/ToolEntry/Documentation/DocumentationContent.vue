@@ -10,17 +10,18 @@
 				</span>
 			</v-col>
 			<v-col cols="12" class="mt-0 pt-0 pl-8 ml-4">
-				<v-list-item
+				<v-chip
 					v-for="(item, i) in tool.documentation"
 					:key="i"
-					class="pl-2 pt-0 mt-0"
+					label
+					text-color="blue darken-4"
+					color="blue lighten-4"
+					class="mr-3"
 				>
-					<v-chip label text-color="blue darken-4" color="blue lighten-4">
-						<span class="text-overline font-weight-medium">{{
-							item.term.type.toUpperCase()
-						}}</span>
-					</v-chip>
-				</v-list-item>
+					<span class="text-overline font-weight-medium">{{
+						item.term.type.toUpperCase()
+					}}</span>
+				</v-chip>
 			</v-col>
 		</v-row>
 		<v-row class="mt-0 pt-0 mb-3">

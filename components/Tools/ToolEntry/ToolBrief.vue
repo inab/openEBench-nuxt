@@ -45,8 +45,13 @@
 								minimal
 							/>
 						</div>
-						<div>
-							<ChipType :type="type" class="ml-5 mr-5 mt-2 font-weight-bold" />
+						<div class="ml-3">
+							<ChipType
+								v-for="item in type"
+								:key="item"
+								:type="item"
+								class="mr-1 mt-2 font-weight-bold"
+							/>
 						</div>
 					</div>
 				</v-row>

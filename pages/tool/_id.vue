@@ -27,7 +27,7 @@
 
 		<v-container id="main-container" ref="Main" fluid class="pt-6">
 			<v-row justify="center">
-				<v-col v-if="!loading" cols="8">
+				<v-col v-if="!loading" cols="7">
 					<EntryIntro
 						ref="Intro"
 						:name="tool.label[0]"
@@ -162,8 +162,7 @@ export default {
 		// Get name and type from URL
 		// this.$store.dispatch('tool/setToolName', this.$route.params.name)
 		const payload = {
-			name: this.$route.params.name,
-			type: this.$route.params.type,
+			name: this.$route.params.id,
 		};
 
 		this.$store.dispatch('tool_entry/retrieveTool', payload);
