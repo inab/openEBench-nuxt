@@ -15,7 +15,12 @@
 						{{ subname }}</span
 					>
 					<v-spacer></v-spacer>
-					<ChipType :type="type" />
+					<ChipType
+						v-for="item in type"
+						:type="item"
+						:key="item"
+						class="ml-1"
+					/>
 				</v-card-title>
 
 				<v-card-text class="mb-0 mt-0 pt-1">
