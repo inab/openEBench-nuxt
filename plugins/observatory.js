@@ -12,8 +12,8 @@ export default function (
 	});
 
 	// Set baseURL to something different
-	// observatory.setBaseURL('http://localhost:3500');
-	observatory.setBaseURL('https://observatory.openebench.bsc.es/api/');
+	observatory.setBaseURL('http://localhost:3500');
+	// observatory.setBaseURL('https://observatory.openebench.bsc.es/api/');
 
 	// Inject to context as $api
 	inject('observatory', observatory);

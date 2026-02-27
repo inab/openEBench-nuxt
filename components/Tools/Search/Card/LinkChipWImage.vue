@@ -1,22 +1,35 @@
 <template>
-	<v-chip
-		v-if="type != 'other'"
-		:small="!big"
-		light
-		color="grey lighten-4"
-		class="pl-1 mt-1"
-		:class="style()"
-		@click="openLink(link)"
+	<v-tooltip
+		nudge-left
+		bottom
+		attach
+		color="#EAF1F7"
+		max-width="450px"
+		allow-overflow
 	>
-		<v-img
-			height="20px"
-			width="20px"
-			contain
-			class="ma-0"
-			:src="icons[type]"
-		></v-img>
-		<span v-if="!minimal">{{ labels[text] }}</span>
-	</v-chip>
+		<template #activator="{ on }">
+			<v-chip
+				v-if="type != 'other'"
+				:small="!big"
+				light
+				color="grey lighten-4"
+				class="pl-1 mt-1"
+				:class="style()"
+				@click="openLink(link)"
+				v-on="on"
+			>
+				<v-img
+					height="20px"
+					width="20px"
+					contain
+					class="ma-0"
+					:src="icons[type]"
+				></v-img>
+				<span v-if="!minimal">{{ labels[text] }}</span>
+			</v-chip>
+		</template>
+		<span class="text-caption black--text"> {{ link }} </span>
+	</v-tooltip>
 </template>
 <script>
 export default {
