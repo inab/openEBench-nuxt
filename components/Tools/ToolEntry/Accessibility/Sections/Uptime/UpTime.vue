@@ -27,7 +27,6 @@
 					<v-tab class="tab">Week</v-tab>
 					<v-tab class="tab">Month</v-tab>
 					<v-tab class="tab">6 months</v-tab>
-					<v-tab class="tab">year</v-tab>
 				</v-tabs>
 			</v-col>
 			<!--Status-->
