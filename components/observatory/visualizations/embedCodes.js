@@ -31,7 +31,7 @@ export const embedCodes = {
 	},
 	formats: {
 		title: 'Formats Plot',
-		url: `${BASE_URL}/visualizations/documentation/FormatsPlot`,
+		url: `${BASE_URL}/visualizations/formats/FormatsPlot`,
 	},
 	findabilityBubble: {
 		title: 'Findability Bubble Chart',
