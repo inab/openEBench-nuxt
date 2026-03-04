@@ -25,6 +25,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import HeaderMenu from '~/components/Header/HeaderMenu.vue';
 import Footer from '~/components/TheFooter';
 
@@ -46,6 +47,13 @@ export default {
 				'OpenEBench - The ELIXIR gateway to benchmarking communities, software monitoring, and quality metrics',
 		};
 	},
+	computed: {
+		...mapGetters('tool', {
+			loading: 'loading',
+			visibleTools: 'tools',
+			totalTools: 'totalTools',
+		}),
+	},
 	mounted() {
 		// Detect when scrolled to bottom.
 		const listElm = document.querySelector('#layout-container');
@@ -60,10 +68,17 @@ export default {
 	},
 	methods: {
 		async loadMore() {
-			await this.$store.dispatch('tool/updateLoadingLoadMore', true);
-			this.page = this.page + 1;
-			await this.$store.dispatch('tool/loadMoreTools', this.page);
-			await this.$store.dispatch('tool/updateLoadingLoadMore', false);
+			if (!this.loading.search) {
+				console.log(this.totalTools);
+				console.log(this.visibleTools.length);
+
+				if (this.totalTools > this.visibleTools.length) {
+					await this.$store.dispatch('tool/updateLoadingLoadMore', true);
+					this.page = this.page + 1;
+					await this.$store.dispatch('tool/loadMoreTools', this.page);
+					await this.$store.dispatch('tool/updateLoadingLoadMore', false);
+				}
+			}
 		},
 		scrollToTop() {
 			document.getElementById('layout-container').scrollTo({

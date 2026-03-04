@@ -7,32 +7,52 @@
 		active-class="primary--text"
 	>
 		<v-chip filter outlined>
-			Tool Name (<b>{{ counts.name }}</b
-			>)
+			Tool Name
+			<span class="ml-1" v-if="visibleTools.length > 0">
+				(<b>{{ counts.name }}</b
+				>)</span
+			>
 		</v-chip>
 		<v-chip filter outlined>
-			Tool Description (<b>{{ counts.description }}</b
-			>)
+			Tool Description
+			<span class="ml-1" v-if="visibleTools.length > 0">
+				(<b>{{ counts.description }}</b
+				>)</span
+			>
 		</v-chip>
 		<v-chip filter outlined>
-			Associated Topics (<b>{{ counts.topics }}</b
-			>)
+			Associated Topics
+			<span class="ml-1" v-if="visibleTools.length > 0">
+				(<b>{{ counts.topics }}</b
+				>)</span
+			>
 		</v-chip>
 		<v-chip filter outlined>
-			Associated Operations (<b>{{ counts.operations }}</b
-			>)
+			Associated Operations
+			<span class="ml-1" v-if="visibleTools.length > 0">
+				(<b>{{ counts.operations }}</b
+				>)</span
+			>
 		</v-chip>
 		<v-chip filter outlined>
-			Publication Title (<b>{{ counts.publication_title }}</b
-			>)
+			Publication Title
+			<span class="ml-1" v-if="visibleTools.length > 0">
+				(<b>{{ counts.publication_title }}</b
+				>)</span
+			>
 		</v-chip>
 		<v-chip filter outlined>
-			Publication Abstract (<b>{{ counts.publication_abstract }}</b
-			>)
+			Publication Abstract
+			<span class="ml-1" v-if="visibleTools.length > 0">
+				(<b>{{ counts.publication_abstract }}</b
+				>)</span
+			>
 		</v-chip>
 	</v-chip-group>
 </template>
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
 	name: 'SearchCategories',
 	props: {
@@ -53,6 +73,11 @@ export default {
 				5: 'publication_abstract',
 			},
 		};
+	},
+	computed: {
+		...mapGetters('tool', {
+			visibleTools: 'tools',
+		}),
 	},
 	watch: {
 		searchingIn(newVal) {

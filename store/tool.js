@@ -87,6 +87,7 @@ export default {
 
 		async searchTools({ commit, state }) {
 			commit('updateLoadingSearch', true);
+			commit('updateTools', []);
 
 			let query = '';
 
@@ -186,7 +187,7 @@ export default {
 			commit('updateTools', result.tools);
 			commit('updateCounts', result.counts);
 			commit('updateStatsAfterFilter', result.stats);
-			// commit('updateTotalTools', result.total_tools);
+			commit('updateTotalTools', result.total_tools);
 
 			commit('updateLoadingSearch', false);
 		},
@@ -252,6 +253,9 @@ export default {
 		updateQuery(state, value) {
 			state.query = value;
 		},
+		updatePage(state, value) {
+			state.page = value;
+		},
 		updateLoadingSearch(state, value) {
 			state.loading.search = value;
 		},
@@ -302,6 +306,7 @@ export default {
 		loading: (state) => state.loading,
 		tools: (state) => state.tools,
 		stats: (state) => state.stats,
+		page: (state) => state.page,
 		counts: (state) => state.counts,
 		totalTools: (state) => state.totalTools,
 		filters: (state) => state.filters,

@@ -18,7 +18,7 @@
 							></v-skeleton-loader>
 						</v-col>
 					</v-row>
-					<v-row v-else class="mt-1">
+					<v-row v-else class="mt-1 scroll-box" ref="scrollBox">
 						<ResultCards />
 
 						<v-col cols="11" align="center">
@@ -50,7 +50,7 @@ export default {
 		ResultCards,
 	},
 	mixins: [SearchTools],
-	layout: 'DefaultLayoutWOBreadcrumbs',
+	layout: 'SearchTools',
 	data() {
 		return {
 			// q value from url
@@ -85,7 +85,7 @@ export default {
 		// search for tools
 		search(q) {
 			this.$store.dispatch('tool/updateSearchedTerm', q);
-			this.$store.dispatch('tool/initialSearch', q);
+			this.$store.dispatch('tool/searchTools');
 		},
 	},
 };
