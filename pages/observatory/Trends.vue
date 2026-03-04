@@ -29,6 +29,11 @@
 				<PublicationsMain />
 			</v-col>
 		</v-row>
+		<v-row justify="center" class="items-center justify-center">
+			<v-col class="mt-2" md="12" sm="12" xs="12" lg="11" xl="11">
+				<DependenciesMain />
+			</v-col>
+		</v-row>
 	</div>
 </template>
 <script>
@@ -36,6 +41,7 @@ import LicensesMain from '~/components/observatory/trends/licenses/LicensesMain.
 import VersioningMain from '~/components/observatory/trends/versioning/VersioningMain.vue';
 import VersionControl from '~/components/observatory/trends/versionControl/VersionControl.vue';
 import PublicationsMain from '~/components/observatory/trends/publications/PublicationsMain.vue';
+import DependenciesMain from '~/components/observatory/trends/dependencies/DependenciesMain.vue';
 import CollectionSelector from '~/components/observatory/CollectionSelector.vue';
 
 export default {
@@ -45,6 +51,7 @@ export default {
 		VersioningMain,
 		VersionControl,
 		PublicationsMain,
+		DependenciesMain,
 		CollectionSelector,
 	},
 	layout: 'observatory',
@@ -74,6 +81,8 @@ export default {
 		this.$store.dispatch('observatory/trends/getVersionControlCount');
 		this.$store.dispatch('observatory/trends/getVersionControlRepositories');
 		this.$store.dispatch('observatory/trends/getPublications');
+		this.$store.dispatch('observatory/trends/getDependencies');
+		this.$store.dispatch('observatory/trends/getDependenciesCount');
 	},
 
 	mounted() {

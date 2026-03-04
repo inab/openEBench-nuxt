@@ -21,6 +21,14 @@ export const embedCodes = {
 		title: 'Versioning Pie Chart',
 		url: `${BASE_URL}/visualizations/versioning/VersioningPie`,
 	},
+	dependencies: {
+		title: 'Dependencies Plot',
+		url: `${BASE_URL}/visualizations/dependencies/DependenciesPlot`,
+	},
+	documentation: {
+		title: 'Documentation Plot',
+		url: `${BASE_URL}/visualizations/documentation/DocumentationPlot`,
+	},
 	findabilityBubble: {
 		title: 'Findability Bubble Chart',
 		url: `${BASE_URL}/visualizations/FAIRness/FindabilityBubble`,
