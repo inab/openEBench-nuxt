@@ -39,6 +39,11 @@
 				<DependenciesMain />
 			</v-col>
 		</v-row>
+		<v-row justify="center">
+			<v-col class="mt-2" md="12" sm="12" xs="12" lg="11" xl="11">
+				<FormatsMain />
+			</v-col>
+		</v-row>
 	</div>
 </template>
 <script>
@@ -49,6 +54,7 @@ import PublicationsMain from '~/components/observatory/trends/publications/Publi
 import DependenciesMain from '~/components/observatory/trends/dependencies/DependenciesMain.vue';
 import CollectionSelector from '~/components/observatory/CollectionSelector.vue';
 import DocumentationMain from '~/components/observatory/trends/documentation/DocumentationMain.vue';
+import FormatsMain from '~/components/observatory/trends/formats/FormatsMain.vue';
 
 export default {
 	name: 'Trends',
@@ -60,6 +66,7 @@ export default {
 		DocumentationMain,
 		DependenciesMain,
 		CollectionSelector,
+		FormatsMain,
 	},
 	layout: 'observatory',
 	data() {

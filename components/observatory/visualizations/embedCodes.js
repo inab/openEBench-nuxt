@@ -29,6 +29,10 @@ export const embedCodes = {
 		title: 'Documentation Plot',
 		url: `${BASE_URL}/visualizations/documentation/DocumentationPlot`,
 	},
+	formats: {
+		title: 'Formats Plot',
+		url: `${BASE_URL}/visualizations/documentation/FormatsPlot`,
+	},
 	findabilityBubble: {
 		title: 'Findability Bubble Chart',
 		url: `${BASE_URL}/visualizations/FAIRness/FindabilityBubble`,
