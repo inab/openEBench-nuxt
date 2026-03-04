@@ -29,6 +29,11 @@
 				<PublicationsMain />
 			</v-col>
 		</v-row>
+		<v-row justify="center">
+			<v-col class="mt-2" md="12" sm="12" xs="12" lg="11" xl="11">
+				<DocumentationMain />
+			</v-col>
+		</v-row>
 		<v-row justify="center" class="items-center justify-center">
 			<v-col class="mt-2" md="12" sm="12" xs="12" lg="11" xl="11">
 				<DependenciesMain />
@@ -43,6 +48,7 @@ import VersionControl from '~/components/observatory/trends/versionControl/Versi
 import PublicationsMain from '~/components/observatory/trends/publications/PublicationsMain.vue';
 import DependenciesMain from '~/components/observatory/trends/dependencies/DependenciesMain.vue';
 import CollectionSelector from '~/components/observatory/CollectionSelector.vue';
+import DocumentationMain from '~/components/observatory/trends/documentation/DocumentationMain.vue';
 
 export default {
 	name: 'Trends',
@@ -51,6 +57,7 @@ export default {
 		VersioningMain,
 		VersionControl,
 		PublicationsMain,
+		DocumentationMain,
 		DependenciesMain,
 		CollectionSelector,
 	},

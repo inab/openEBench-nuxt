@@ -175,11 +175,11 @@ export default {
 	background: #ffe8cc; /* similar to orange-100 */
 	border-radius: 6px;
 	padding: 14px;
-	font-size: 1em !important;
+	font-size: 1.2em !important;
 }
 
 .deps-percentage {
-	font-size: 2em;
+	font-size: 2.4em;
 	line-height: 1;
 }
 </style>
