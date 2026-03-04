@@ -136,7 +136,7 @@ export default {
 	data() {
 		return {
 			// NOTE: your v3 has embedCodes.dependencies (copy/paste). For formats it should be embedCodes.formats.
-			dialogItems: [embedCodes.formats],
+			dialogItems: [embedCodes.inputFormats, embedCodes.outputFormats],
 		};
 	},
 	computed: {

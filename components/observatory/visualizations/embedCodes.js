@@ -23,15 +23,19 @@ export const embedCodes = {
 	},
 	dependencies: {
 		title: 'Dependencies Plot',
-		url: `${BASE_URL}/visualizations/dependencies/DependenciesPlot`,
+		url: `${BASE_URL}/visualizations/dependencies/DependenciesLollipop`,
 	},
 	documentation: {
 		title: 'Documentation Plot',
-		url: `${BASE_URL}/visualizations/documentation/DocumentationPlot`,
+		url: `${BASE_URL}/visualizations/documentation/DocumentationBars`,
 	},
-	formats: {
-		title: 'Formats Plot',
-		url: `${BASE_URL}/visualizations/formats/FormatsPlot`,
+	inputFormats: {
+		title: 'Input Formats Plot',
+		url: `${BASE_URL}/visualizations/formats/FormatsInput`,
+	},
+	outputFormats: {
+		title: 'Output Formats Plot',
+		url: `${BASE_URL}/visualizations/formats/FormatsOutput`,
 	},
 	findabilityBubble: {
 		title: 'Findability Bubble Chart',
