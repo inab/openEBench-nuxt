@@ -51,7 +51,7 @@
 					</div>
 				</v-card>
 
-				<ul class="mt-4 mb-4">
+				<ul class="mt-4 mb-4 text-body-2">
 					<li>
 						<span class="font-weight-bold">Ingest</span> metadata from multiple
 						registries and repositories.
