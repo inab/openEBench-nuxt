@@ -67,7 +67,7 @@
 
 				<div v-else>
 					<DocumentationPlot v-if="checkData" :data="documentationPlotData" />
-					<noDataAvailable v-else info="documentation" />
+					<minimalNoDataAvailable v-else />
 				</div>
 			</v-col>
 
@@ -75,7 +75,7 @@
 				<p class="mt-0 mb-2 ml-8">
 					<span class="highlight">
 						Overview of documentation types and their availability in different
-						formats across the collection.
+						formats across the collection
 					</span>
 				</p>
 			</v-col>
@@ -87,7 +87,7 @@
 import { mapGetters } from 'vuex';
 import DocumentationPlot from './DocumentationPlot.vue';
 import PlotWOptions from '~/components/observatory/PlotWOptions.vue';
-import noDataAvailable from '~/layouts/noDataAvailable.vue';
+import minimalNoDataAvailable from '~/layouts/minimalNoDataAvailable.vue';
 import { embedCodes } from '~/components/observatory/visualizations/embedCodes.js';
 
 export default {
@@ -95,7 +95,7 @@ export default {
 	components: {
 		DocumentationPlot,
 		PlotWOptions,
-		noDataAvailable,
+		minimalNoDataAvailable,
 	},
 	data() {
 		return {

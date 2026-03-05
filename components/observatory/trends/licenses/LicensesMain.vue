@@ -41,16 +41,24 @@
 					class="mb-5 ml-10 mr-10"
 					type="actions, card-avatar, list-item"
 				/>
-
-				<PlotLicensesBars
-					v-else
-					:counts_permissive="countsPermissive"
-					:licenses_permissive="licensesPermissive"
-					:counts_copyleft="countsCopyleft"
-					:licenses_copyleft="licensesCopyleft"
-					:counts_data="countsData"
-					:licenses_data="licensesData"
-				/>
+				<div>
+					<PlotLicensesBars
+						v-if="hasBarsData"
+						:counts_permissive="countsPermissive"
+						:licenses_permissive="licensesPermissive"
+						:counts_copyleft="countsCopyleft"
+						:licenses_copyleft="licensesCopyleft"
+						:counts_data="countsData"
+						:licenses_data="licensesData"
+					/>
+					<minimalNoDataAvailable v-else />
+					<p class="mt-0 mb-2 ml-8">
+						<span class="highlight"
+							>Distribution of the most common open-source licenses used by
+							research software tools</span
+						>
+					</p>
+				</div>
 			</v-col>
 		</v-row>
 	</v-card>
@@ -61,6 +69,7 @@ import PlotLicensesPie from './PlotLicensesPie.vue';
 import PlotLicensesBars from './PlotLicensesBars.vue';
 import PlotWOptions from '~/components/observatory/PlotWOptions.vue';
 import { embedCodes } from '~/components/observatory/visualizations/embedCodes.js'; // Import the embed codes
+import minimalNoDataAvailable from '~/layouts/minimalNoDataAvailable.vue';
 
 export default {
 	name: 'LicensesMain',
@@ -68,6 +77,7 @@ export default {
 		PlotWOptions,
 		PlotLicensesPie,
 		PlotLicensesBars,
+		minimalNoDataAvailable,
 	},
 	data: () => ({
 		dialogItems: [embedCodes.licensesPie, embedCodes.licensesBar],
@@ -109,6 +119,23 @@ export default {
 		},
 		licensesData() {
 			return this.data_licenses_open.licenses_data;
+		},
+	},
+	methods: {
+		hasBarsData() {
+			const groups = [
+				{ counts: this.countsPermissive, labels: this.licensesPermissive },
+				{ counts: this.countsCopyleft, labels: this.licensesCopyleft },
+				{ counts: this.countsData, labels: this.licensesData },
+			];
+
+			// at least one group has valid arrays and at least one positive count
+			return groups.some(({ counts, labels }) => {
+				if (!Array.isArray(counts) || !Array.isArray(labels)) return false;
+				if (counts.length === 0 || labels.length === 0) return false;
+
+				return false;
+			});
 		},
 	},
 };

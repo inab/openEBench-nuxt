@@ -71,18 +71,19 @@
 						:data="inputFormatsPlotData"
 						color="#F7B55E"
 					/>
+					<minimalNoDataAvailable v-else />
 
-					<p class="mt-2 text-center mb-2 ml-8" v-if="checkData">
+					<p class="mt-2 text-center mb-2 ml-8">
 						<span
 							class="text-sm highlight"
 							v-if="currentCollection === 'tools'"
 						>
 							Input formats most frequently supported by tools in the Life
-							Sciences, showing common standards.
+							Sciences, showing common standards
 						</span>
 						<span class="text-sm highlight" v-else>
 							Input formats most frequently supported by tools in
-							{{ currentCollection }}, showing common standards.
+							{{ currentCollection }}, showing common standards
 						</span>
 					</p>
 				</div>
@@ -101,18 +102,19 @@
 						:data="outputFormatsPlotData"
 						color="#6FAD6F"
 					/>
+					<minimalNoDataAvailable v-else />
 
-					<p class="mt-2 text-center mb-2 ml-8" v-if="checkData">
+					<p class="mt-2 text-center mb-2 ml-8">
 						<span
 							class="text-sm highlight"
 							v-if="currentCollection === 'tools'"
 						>
 							Output formats most frequently supported by tools in the Life
-							Sciences, showing common standards.
+							Sciences, showing common standards
 						</span>
 						<span class="text-sm highlight" v-else>
 							Output formats most frequently supported by tools in
-							{{ currentCollection }}, showing common standards.
+							{{ currentCollection }}, showing common standards
 						</span>
 					</p>
 				</div>

@@ -66,14 +66,15 @@
 
 				<div v-else>
 					<DependenciesPlot v-if="checkData" :data="dependenciesPlotData" />
+					<minimalNoDataAvailable v-else />
 				</div>
 			</v-col>
 
 			<v-col xl="10" lg="10" md="10" sm="12" align-self="start">
-				<p class="mt-0 mb-2 ml-8" v-if="checkData">
+				<p class="mt-0 mb-2 ml-8">
 					<span class="highlight">
 						Top dependencies used in research software tools in the Life
-						Sciences.
+						Sciences
 					</span>
 				</p>
 			</v-col>
@@ -93,12 +94,14 @@ import { mapGetters } from 'vuex';
 import DependenciesPlot from './DependenciesPlot.vue';
 import PlotWOptions from '~/components/observatory/PlotWOptions.vue';
 import { embedCodes } from '~/components/observatory/visualizations/embedCodes.js';
+import minimalNoDataAvailable from '~/layouts/minimalNoDataAvailable.vue';
 
 export default {
 	name: 'DependenciesMain',
 	components: {
 		DependenciesPlot,
 		PlotWOptions,
+		minimalNoDataAvailable,
 	},
 	data() {
 		return {

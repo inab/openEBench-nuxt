@@ -53,7 +53,7 @@
 					<p class="mt-0 ml-8 mb-0">
 						<span class="highlight"
 							>Software available on four major platforms for distribution and
-							development.</span
+							development</span
 						>
 					</p>
 				</v-col>
