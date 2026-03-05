@@ -66,17 +66,23 @@
 
 				<div v-else>
 					<DependenciesPlot v-if="checkData" :data="dependenciesPlotData" />
-					<noDataAvailable v-else info="dependencies" />
 				</div>
 			</v-col>
 
 			<v-col xl="10" lg="10" md="10" sm="12" align-self="start">
-				<p class="mt-0 mb-2 ml-8">
+				<p class="mt-0 mb-2 ml-8" v-if="checkData">
 					<span class="highlight">
 						Top dependencies used in research software tools in the Life
 						Sciences.
 					</span>
 				</p>
+			</v-col>
+			<v-col xl="10" lg="10" md="10" sm="12" align-self="start">
+				<v-alert dense text class="text-caption" type="warning">
+					Most upstream sources we aggregate do not provide dependency fields.
+					Missing values reflect source limitations, not developer practices or
+					lack of dependencies.
+				</v-alert>
 			</v-col>
 		</v-row>
 	</v-card>
@@ -86,7 +92,6 @@
 import { mapGetters } from 'vuex';
 import DependenciesPlot from './DependenciesPlot.vue';
 import PlotWOptions from '~/components/observatory/PlotWOptions.vue';
-import noDataAvailable from '@/layouts/noDataAvailable.vue';
 import { embedCodes } from '~/components/observatory/visualizations/embedCodes.js';
 
 export default {
@@ -94,7 +99,6 @@ export default {
 	components: {
 		DependenciesPlot,
 		PlotWOptions,
-		noDataAvailable,
 	},
 	data() {
 		return {
@@ -172,7 +176,7 @@ export default {
 /* Percentage card styling (Vuetify-friendly) */
 .deps-percentage-card {
 	width: 100%;
-	background: #ffe8cc; /* similar to orange-100 */
+	background: #e4e9f2; /* similar to orange-100 */
 	border-radius: 6px;
 	padding: 14px;
 	font-size: 1.2em !important;

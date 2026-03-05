@@ -33,7 +33,7 @@
 					</v-col>
 
 					<!-- Percentage card -->
-					<v-col cols="12" lg="3" class="d-flex">
+					<v-col cols="10" lg="3" class="d-flex">
 						<v-skeleton-loader
 							v-if="isFormatsCountLoading"
 							class="flex-grow-1"
@@ -72,7 +72,7 @@
 						color="#F7B55E"
 					/>
 
-					<p class="mt-2 text-center mb-2 ml-8">
+					<p class="mt-2 text-center mb-2 ml-8" v-if="checkData">
 						<span
 							class="text-sm highlight"
 							v-if="currentCollection === 'tools'"
@@ -102,7 +102,7 @@
 						color="#6FAD6F"
 					/>
 
-					<p class="mt-2 text-center mb-2 ml-8">
+					<p class="mt-2 text-center mb-2 ml-8" v-if="checkData">
 						<span
 							class="text-sm highlight"
 							v-if="currentCollection === 'tools'"
@@ -116,6 +116,13 @@
 						</span>
 					</p>
 				</div>
+			</v-col>
+			<v-col xl="10" lg="10" md="10" sm="12" align-self="start">
+				<v-alert dense text class="text-caption" type="warning">
+					Most upstream sources we aggregate do not provide formats fields.
+					Missing values reflect source limitations, not developer practices or
+					lack of dependencies.
+				</v-alert>
 			</v-col>
 		</v-row>
 	</v-card>
@@ -224,7 +231,7 @@ export default {
 /* Percentage card styling similar to indigo-50 */
 .formats-percentage-card {
 	width: 100%;
-	background: #eef2ff; /* light indigo-ish */
+	background: #e4e9f2; /* light indigo-ish */
 	border-radius: 6px;
 	padding: 14px;
 	font-size: 1.2em;

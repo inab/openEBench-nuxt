@@ -33,7 +33,7 @@
 					</v-col>
 
 					<!-- Percentage card (right / small) -->
-					<v-col cols="12" lg="3" class="d-flex">
+					<v-col cols="10" lg="3" class="d-flex">
 						<v-skeleton-loader
 							v-if="isDocumentationCountLoading"
 							class="flex-grow-1"
@@ -170,10 +170,10 @@ export default {
 /* Percentage card styling (Vuetify-friendly) */
 .doc-percentage-card {
 	width: 100%;
-	background: #e8eaf6; /* similar to indigo-100 */
 	border-radius: 6px;
 	padding: 14px;
 	font-size: 1.2em !important;
+	background: #e4e9f2;
 }
 
 .doc-percentage {
