@@ -82,7 +82,7 @@ export default {
 					text: 'Observatory',
 					disabled: true,
 					exact: true,
-					to: '/observatory',
+					to: '/observatory/Trends',
 				},
 			],
 		};
