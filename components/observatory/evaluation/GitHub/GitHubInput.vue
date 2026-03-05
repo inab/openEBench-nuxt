@@ -42,7 +42,6 @@
 					<v-btn text @click="goBack"> Back </v-btn>
 				</v-col>
 			</v-row>
-
 			<DialogAppInstall
 				:initial-dialog-app-install="dialogAppInstall"
 				:title="installDialogParameters.title"
@@ -89,7 +88,7 @@ export default {
 		installDialogParameters: {
 			installationURL:
 				'https://github.com/apps/metadata-extractor-for-fairsoft/installations/select_target',
-			title: "Unable to access repository's metadata.",
+			title: "Unable to access repository's metadata",
 			text: 'Let the FAIRsoft Evaluator access the requested repositories metadata by grantting the <a href="https://github.com/apps/metadata-extractor-for-fairsoft" target="_blank">Metadata Extractor for FAIRsoft GitHub App</a> the necessary permissions.',
 		},
 	}),

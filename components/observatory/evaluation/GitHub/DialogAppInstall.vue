@@ -23,7 +23,7 @@ import { mapGetters } from 'vuex';
 
 export default {
 	name: 'DialogAppInstall',
-	props: ['title', 'text', 'initialDialogAppInstall', 'installationURL'],
+	props: ['title', 'text', 'initialDialogAppInstall', 'installationUrl'],
 	computed: {
 		...mapGetters('observatory/evaluation/github/', {
 			importProgressText: 'getImportProgressText',
@@ -85,10 +85,8 @@ export default {
 			// })
 
 			// 2. Open App installation in new window
-			window.open(
-				'https://github.com/apps/metadata-extractor-for-fairsoft/installations/new',
-				'_blank'
-			);
+			console.log(this.installationUrl);
+			window.open(this.installationUrl, '_blank');
 		},
 	},
 };
