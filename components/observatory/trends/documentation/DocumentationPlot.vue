@@ -122,10 +122,10 @@ export default {
 					l: 250,
 					r: 40,
 					t: 60,
-					b: 100,
+					b: 60,
 				},
 
-				height: 50 + docTypes.length * 40,
+				height: 90 + docTypes.length * 50,
 				hoverlabel: { bgcolor: '#FFF' },
 			};
 
