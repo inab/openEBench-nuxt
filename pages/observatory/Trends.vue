@@ -3,7 +3,7 @@
 		<v-row justify="center">
 			<v-col md="11" sm="11" cols="11" lg="11" xl="11">
 				<div class="mb-3 text-h4">FAIRness Trends Analysis</div>
-				<p style="line-height: 1.9" class="mb-2 mt-0">
+				<p style="line-height: 1.9" class="mb-2 mt-0 text-body-1">
 					Explore trends in key aspects to the FAIRness of research software.
 				</p>
 			</v-col>
