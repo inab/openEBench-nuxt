@@ -1,15 +1,12 @@
 <template>
 	<v-container>
 		<v-form>
-			<v-row justify="space-around">
-				<v-col cols="10">
-					<p class="text-body-2">
-						Introduce the URL of the GitHub repository of the software:
-					</p>
-				</v-col>
-			</v-row>
+			<p class="text-body-2">
+				Introduce the URL of the GitHub repository of the software:
+			</p>
+
 			<v-row justify="space-around" class="mb-0 mt-0 d-flex align-center">
-				<v-col cols="10">
+				<v-col cols="12">
 					<v-text-field
 						v-model="value"
 						class="ml-1"

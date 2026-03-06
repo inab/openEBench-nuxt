@@ -2,7 +2,7 @@
 	<div>
 		<v-row justify="center">
 			<v-col md="11" sm="11" cols="11" lg="11" xl="11">
-				<div class="mb-3 text-h5">FAIRsoft Indicator Scoreboard</div>
+				<div class="mb-3 text-h4">FAIRsoft Indicator Scoreboard</div>
 			</v-col>
 		</v-row>
 		<v-row>

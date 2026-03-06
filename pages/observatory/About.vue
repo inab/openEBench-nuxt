@@ -25,6 +25,8 @@
 				</div>
 			</v-card>
 
+			<!--v-divider class="mt-6"></v-divider-->
+
 			<!-- Methodology -->
 			<section id="methodology" class="section">
 				<div class="section-title">Methodology</div>
@@ -36,20 +38,18 @@
 					dashboards and evaluations.
 				</p>
 
-				<v-card outlined elevation="0" rounded="lg" class="pa-4">
-					<v-img
-						:src="pipelineIllustration"
-						contain
-						max-height="520"
-						class="mb-3 mt-2"
-						alt="Overview of the Software Observatory data pipeline: ingestion, normalisation, blocking, identity resolution, merging, and FAIRsoft/statistics computation."
-					/>
-					<div class="text-body-2 grey--text">
-						Overview of the main and auxiliary pipelines that consolidate and
-						enrich software metadata into the dataset used by the Software
-						Observatory.
-					</div>
-				</v-card>
+				<v-img
+					:src="pipelineIllustration"
+					contain
+					max-height="520"
+					class="mb-3 mt-2"
+					alt="Overview of the Software Observatory data pipeline: ingestion, normalisation, blocking, identity resolution, merging, and FAIRsoft/statistics computation."
+				/>
+				<div class="text-body-2 grey--text">
+					Overview of the main and auxiliary pipelines that consolidate and
+					enrich software metadata into the dataset used by the Software
+					Observatory.
+				</div>
 
 				<ul class="mt-4 mb-4 text-body-2">
 					<li>
@@ -76,16 +76,16 @@
 					</li>
 				</ul>
 
-				<p class="text-body-2 mb-0 minor-link">
+				<p class="text-body-2 mb-0">
 					Find more details on the methodology in the preprint
 					<a
 						href="https://arxiv.org/abs/2510.05705"
 						target="_blank"
 						rel="noopener noreferrer"
-						class="minor-link"
 						>arXiv:2510.05705</a
 					>.
 				</p>
+				<!--v-divider class="mt-6"></v-divider-->
 			</section>
 
 			<!-- FAIRsoft -->
@@ -100,13 +100,12 @@
 					assessments through the FAIRsoft Evaluator.
 				</p>
 
-				<p class="text-body-2 grey--text mb-0 minor-link">
+				<p class="text-body-2 mb-0 minor-link">
 					More information is available in the
 					<a
 						href="/observatory/fairsoft"
 						target="_blank"
 						rel="noopener noreferrer"
-						class="minor-link"
 						>FAIRsoft documentation</a
 					>
 					and in the publication
@@ -122,6 +121,7 @@
 						> </a
 					>.
 				</p>
+				<!--v-divider class="my-6"></v-divider-->
 			</section>
 
 			<!-- Developers -->
@@ -129,23 +129,57 @@
 				<div class="section-title">For developers</div>
 
 				<p class="text-body-2 mb-4">
-					If you want to integrate the Observatory in your own workflows, you
+					If you want to integrate the Observatory into your own workflows, you
 					can access metadata and evaluation results via the REST APIs and
-					follow the programmatic tutorial for FAIRsoft indicator calculation.
+					follow the programmatic evaluation documentation for computing
+					FAIRsoft indicators.
 				</p>
 
 				<v-row dense class="mb-4">
-					<v-col cols="12" md="6">
-						<v-card outlined elevation="0" rounded="lg" class="pa-4 h-100">
+					<v-col cols="12" md="4">
+						<v-card
+							elevation="0"
+							rounded="lg"
+							class="grey-card pa-4 h-100 dev-card"
+						>
+							<div class="d-flex align-center mb-2">
+								<v-icon class="mr-2 icon">mdi-source-repository</v-icon>
+								<div class="text-body-2 font-weight-bold">
+									GitHub Metadata API
+								</div>
+							</div>
+							<div class="text-body-2 mb-3">
+								Extract rich metadata from GitHub repositories.
+							</div>
+							<div class="text-body-2 dev-card-link">
+								<a
+									href="https://observatory.openebench.bsc.es/github-metadata-api/api-docs/"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									API documentation
+								</a>
+							</div>
+						</v-card>
+					</v-col>
+
+					<v-col cols="12" md="4">
+						<v-card
+							elevation="0"
+							rounded="lg"
+							class="grey-card pa-4 h-100 dev-card"
+						>
 							<div class="d-flex align-center mb-2">
 								<v-icon class="mr-2 icon">mdi-api</v-icon>
-								<div class="font-weight-bold">Software Observatory API</div>
+								<div class="text-body-2 font-weight-bold">
+									Software Observatory API
+								</div>
 							</div>
 							<div class="text-body-2 mb-3">
 								Access integrated software metadata, statistics, and FAIRsoft
 								evaluation results.
 							</div>
-							<div class="text-body-2">
+							<div class="text-body-2 dev-card-link">
 								<a
 									href="https://observatory.openebench.bsc.es/docs/api/"
 									target="_blank"
@@ -157,47 +191,37 @@
 						</v-card>
 					</v-col>
 
-					<v-col cols="12" md="6">
-						<v-card outlined elevation="0" rounded="lg" class="pa-4 h-100">
+					<v-col cols="12" md="4">
+						<v-card
+							elevation="0"
+							rounded="lg"
+							class="grey-card pa-4 h-100 dev-card"
+						>
 							<div class="d-flex align-center mb-2">
-								<v-icon class="mr-2 icon">mdi-source-repository</v-icon>
-								<div class="font-weight-bold">GitHub Metadata API</div>
+								<v-icon class="mr-2 icon">mdi-code-tags</v-icon>
+								<div class="text-body-2 font-weight-bold">
+									Programmatic FAIRsoft evaluation
+								</div>
 							</div>
 							<div class="text-body-2 mb-3">
-								Extract rich metadata from GitHub repositories.
+								Learn how to compute FAIRsoft indicators programmatically using
+								the Observatory APIs. Includes guides for evaluating GitHub
+								repositories and existing metadata.
 							</div>
-							<div class="text-body-2">
+							<div class="text-body-2 dev-card-link">
 								<a
-									href="https://observatory.openebench.bsc.es/github-metadata-api/api-docs/"
+									href="/observatory/fairsoft/tutorial"
 									target="_blank"
 									rel="noopener noreferrer"
 								>
-									API documentation
+									View the documentation
 								</a>
 							</div>
 						</v-card>
 					</v-col>
 				</v-row>
 
-				<v-card outlined elevation="0" rounded="lg" class="pa-4">
-					<div class="d-flex align-center mb-2">
-						<v-icon class="mr-2 icon">mdi-code-tags</v-icon>
-						<div class="font-weight-bold">Programmatic FAIRsoft evaluation</div>
-					</div>
-					<div class="text-body-2 mb-2">
-						Learn how to compute FAIRsoft indicators for GitHub repositories
-						using the Observatory APIs.
-					</div>
-					<div class="text-body-2">
-						<a
-							href="/observatory/fairsoft/tutorial"
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							View the notebook
-						</a>
-					</div>
-				</v-card>
+				<!--v-divider class="my-6"></v-divider-->
 			</section>
 
 			<!-- Citation -->
@@ -228,6 +252,7 @@
 						>
 					</div>
 				</v-card>
+				<!--v-divider class="my-6"></v-divider-->
 			</section>
 
 			<!-- Terms -->
@@ -286,7 +311,7 @@ export default {
 
 <style scoped>
 .about-wrap {
-	max-width: 980px; /* narrower = clearer reading column */
+	max-width: 980px !important;
 }
 
 .title-about {
@@ -294,18 +319,15 @@ export default {
 }
 
 .section {
-	padding-top: 18px;
-	margin-top: 18px;
-}
-
-.section + .section {
-	border-top: 1px solid rgba(0, 0, 0, 8%);
+	padding-top: 10px;
+	margin-top: 10px;
+	margin-bottom: 22px;
 }
 
 .section-title {
-	font-size: 1.1rem;
-	font-weight: 700;
-	margin-bottom: 10px;
+	font-size: 1.3rem;
+	font-weight: 600;
+	margin-bottom: 8px;
 }
 
 .toc {
@@ -333,7 +355,25 @@ export default {
 	font-weight: 600;
 }
 
-.minor-link {
-	color: grey !important;
+.grey-card {
+	background-color: #e6e6e6;
+}
+
+.v-card {
+	transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.v-card:hover {
+	box-shadow: 0 6px 18px rgba(0, 0, 0, 10%);
+	transform: translateY(-1px);
+}
+
+.dev-card {
+	display: flex;
+	flex-direction: column;
+}
+
+.dev-card-link {
+	margin-top: auto;
 }
 </style>
