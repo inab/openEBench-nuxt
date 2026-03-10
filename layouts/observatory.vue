@@ -19,6 +19,7 @@
 									:key="i"
 									link
 									:to="item.to"
+									:exact="item.exact || false"
 								>
 									<v-list-item-icon class="mr-1">
 										<v-icon>{{ item.icon }}</v-icon>

@@ -25,12 +25,7 @@
 						class="pt-10 pr-4 pl-4 pb-10 number-card-loader"
 						type="image"
 					/>
-					<v-card
-						v-else
-						class="mt-2 mr-2 number-card"
-						color="#fff0e6"
-						elevation="0"
-					>
+					<v-card v-else class="mt-2 mr-2 number-card" elevation="0">
 						<v-card-text class="text-center number"
 							>{{ percentage.toFixed(1) }}%
 						</v-card-text>
@@ -58,7 +53,7 @@
 					<p class="mt-0 ml-8 mb-0">
 						<span class="highlight"
 							>Software available on four major platforms for distribution and
-							development.</span
+							development</span
 						>
 					</p>
 				</v-col>
@@ -138,6 +133,7 @@ export default {
 .number-card {
 	word-break: break-all;
 	opacity: 0.9;
+	background: #e4e9f2;
 }
 
 .number {

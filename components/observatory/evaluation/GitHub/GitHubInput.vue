@@ -1,15 +1,12 @@
 <template>
 	<v-container>
 		<v-form>
-			<v-row justify="space-around">
-				<v-col cols="10">
-					<p class="text-body-2">
-						Introduce the URL of the GitHub repository of the software:
-					</p>
-				</v-col>
-			</v-row>
+			<p class="text-body-2">
+				Introduce the URL of the GitHub repository of the software:
+			</p>
+
 			<v-row justify="space-around" class="mb-0 mt-0 d-flex align-center">
-				<v-col cols="10">
+				<v-col cols="12">
 					<v-text-field
 						v-model="value"
 						class="ml-1"
@@ -42,7 +39,6 @@
 					<v-btn text @click="goBack"> Back </v-btn>
 				</v-col>
 			</v-row>
-
 			<DialogAppInstall
 				:initial-dialog-app-install="dialogAppInstall"
 				:title="installDialogParameters.title"
@@ -89,7 +85,7 @@ export default {
 		installDialogParameters: {
 			installationURL:
 				'https://github.com/apps/metadata-extractor-for-fairsoft/installations/select_target',
-			title: "Unable to access repository's metadata.",
+			title: "Unable to access repository's metadata",
 			text: 'Let the FAIRsoft Evaluator access the requested repositories metadata by grantting the <a href="https://github.com/apps/metadata-extractor-for-fairsoft" target="_blank">Metadata Extractor for FAIRsoft GitHub App</a> the necessary permissions.',
 		},
 	}),
