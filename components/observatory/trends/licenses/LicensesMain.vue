@@ -129,12 +129,12 @@ export default {
 				{ counts: this.countsData, labels: this.licensesData },
 			];
 
-			// at least one group has valid arrays and at least one positive count
 			return groups.some(({ counts, labels }) => {
 				if (!Array.isArray(counts) || !Array.isArray(labels)) return false;
 				if (counts.length === 0 || labels.length === 0) return false;
+				if (counts.length !== labels.length) return false;
 
-				return false;
+				return counts.some((n) => Number(n) > 0);
 			});
 		},
 	},
