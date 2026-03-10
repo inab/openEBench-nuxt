@@ -48,8 +48,8 @@
 			<v-card-actions class="pa-0 pt-2">
 				<v-spacer />
 				<v-btn text color="primary" class="expandBtn" @click="openDialog">
-					Detailed
-					<v-icon class="ml-2">mdi-arrow-expand-all</v-icon>
+					More details
+					<v-icon class="ml-2">mdi-table</v-icon>
 				</v-btn>
 			</v-card-actions>
 		</v-card>

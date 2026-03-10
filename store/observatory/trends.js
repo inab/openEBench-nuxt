@@ -122,7 +122,7 @@ export const actions = {
 		commit('setLoaded', { licensesOpenSource: true });
 
 		const result = await this.cache.dispatch('observatory/trends/GET_URL', URL);
-
+		console.log(result);
 		commit('setLicensesOpenSource', result);
 		commit('setLoaded', { licensesOpenSource: false });
 	},

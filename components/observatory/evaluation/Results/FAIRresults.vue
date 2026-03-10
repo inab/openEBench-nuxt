@@ -1,5 +1,5 @@
 <template>
-	<v-container class="my-5">
+	<v-container class="my-0 pa-1 pt-3">
 		<!-- Loading -->
 		<v-container v-if="!hasData">
 			<v-row class="d-flex flex-wrap" justify="space-around">
@@ -19,7 +19,7 @@
 		</v-container>
 
 		<!-- Results -->
-		<v-container v-else>
+		<v-container v-else class="ma-0 pa-0 mb-4 pb-2">
 			<v-row class="d-flex flex-wrap" justify="space-around">
 				<v-col cols="12" md="6" class="py-3 px-4">
 					<ResultsCardExpansible

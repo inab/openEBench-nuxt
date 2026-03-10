@@ -13,6 +13,10 @@ const menuEntries = [
 		title: 'Tools',
 		to: '/tool',
 	},
+	{
+		title: 'Sw Observatory',
+		to: '/observatory',
+	},
 ];
 
 export default menuEntries;

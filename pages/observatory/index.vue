@@ -27,37 +27,6 @@
 			</div>
 
 			<v-row class="mt-1" dense>
-				<!-- Evaluator -->
-				<v-col cols="12" sm="6" md="3">
-					<router-link to="/observatory/Evaluator" class="router-l">
-						<v-card
-							height="100%"
-							class="pt-2 pb-4 d-flex flex-column card-hover"
-							outlined
-							rounded="lg"
-							elevation="0"
-						>
-							<div class="icon-wrap">
-								<v-icon large class="icon">mdi-flask-outline</v-icon>
-							</div>
-
-							<v-card-title class="card-title mb-0 pb-0 mt-1 pt-1">
-								FAIRsoft Evaluator
-							</v-card-title>
-							<v-card-text class="mt-1 pt-0 mb-0 pb-0">
-								Assess an individual tool, review its metadata, and export
-								improvements in standard formats.
-							</v-card-text>
-
-							<div class="mt-auto pt-3 px-4">
-								<span class="linkish">
-									Open Evaluator <v-icon small>mdi-arrow-right</v-icon>
-								</span>
-							</div>
-						</v-card>
-					</router-link>
-				</v-col>
-
 				<!-- Trends -->
 				<v-col cols="12" sm="6" md="3">
 					<router-link to="/observatory/Trends" class="router-l">
@@ -114,6 +83,37 @@
 							<div class="mt-auto pt-3 px-4">
 								<span class="linkish">
 									Open Scoreboard <v-icon small>mdi-arrow-right</v-icon>
+								</span>
+							</div>
+						</v-card>
+					</router-link>
+				</v-col>
+
+				<!-- Evaluator -->
+				<v-col cols="12" sm="6" md="3">
+					<router-link to="/observatory/Evaluation" class="router-l">
+						<v-card
+							height="100%"
+							class="pt-2 pb-4 d-flex flex-column card-hover"
+							outlined
+							rounded="lg"
+							elevation="0"
+						>
+							<div class="icon-wrap">
+								<v-icon large class="icon">mdi-flask-outline</v-icon>
+							</div>
+
+							<v-card-title class="card-title mb-0 pb-0 mt-1 pt-1">
+								FAIRsoft Evaluator
+							</v-card-title>
+							<v-card-text class="mt-1 pt-0 mb-0 pb-0">
+								Assess an individual tool, review its metadata, and export
+								improvements in standard formats.
+							</v-card-text>
+
+							<div class="mt-auto pt-3 px-4">
+								<span class="linkish">
+									Open Evaluator <v-icon small>mdi-arrow-right</v-icon>
 								</span>
 							</div>
 						</v-card>
