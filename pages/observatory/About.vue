@@ -103,7 +103,7 @@
 				<p class="text-body-2 mb-0 minor-link">
 					More information is available in the
 					<a
-						href="/observatory/fairsoft"
+						href="https://inab.github.io/FAIRsoft_indicators/"
 						target="_blank"
 						rel="noopener noreferrer"
 						>FAIRsoft documentation</a
