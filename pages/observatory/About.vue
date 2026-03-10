@@ -103,7 +103,7 @@
 				<p class="text-body-2 mb-0 minor-link">
 					More information is available in the
 					<a
-						href="/observatory/fairsoft"
+						href="https://inab.github.io/FAIRsoft_indicators/"
 						target="_blank"
 						rel="noopener noreferrer"
 						>FAIRsoft documentation</a
@@ -181,7 +181,7 @@
 							</div>
 							<div class="text-body-2 dev-card-link">
 								<a
-									href="https://observatory.openebench.bsc.es/docs/api/"
+									href="https://observatory.openebench.bsc.es/api/docs/"
 									target="_blank"
 									rel="noopener noreferrer"
 								>
@@ -210,7 +210,7 @@
 							</div>
 							<div class="text-body-2 dev-card-link">
 								<a
-									href="/observatory/fairsoft/tutorial"
+									href="https://inab.github.io/FAIRsoft_indicators/calculating_fairsoft_scores/programmatic_evaluation/overview/"
 									target="_blank"
 									rel="noopener noreferrer"
 								>
