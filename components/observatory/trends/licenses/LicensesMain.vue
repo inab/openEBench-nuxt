@@ -41,7 +41,7 @@
 					class="mb-5 ml-10 mr-10"
 					type="actions, card-avatar, list-item"
 				/>
-				<div>
+				<div v-else>
 					<PlotLicensesBars
 						v-if="hasBarsData"
 						:counts_permissive="countsPermissive"
