@@ -123,7 +123,7 @@
 				<v-alert dense text class="text-caption" type="warning">
 					Most upstream sources we aggregate do not provide formats fields.
 					Missing values reflect source limitations, not developer practices or
-					lack of dependencies.
+					lack of standard data formats.
 				</v-alert>
 			</v-col>
 		</v-row>

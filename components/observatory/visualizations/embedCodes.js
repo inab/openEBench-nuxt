@@ -7,7 +7,7 @@ export const embedCodes = {
 	},
 	licensesBar: {
 		title: 'Open Source Licenses Bar Chart',
-		url: `${BASE_URL}/visualizations/license/LicensesBar`,
+		url: `${BASE_URL}/visualizations/licenses/LicensesBars`,
 	},
 	versionControl: {
 		title: 'Version Control Repositories Bars Chart',
