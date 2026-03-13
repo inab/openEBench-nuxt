@@ -7,7 +7,11 @@
 				outlined
 				elevation="1"
 			>
-				<v-card-title class="mb-0 pb-0">
+				<v-card-title
+					class="mb-0 pb-0"
+					style="cursor: pointer"
+					@click="goToTool"
+				>
 					<h3 class="text-subtitle-1">
 						<a id="title">{{ name }}</a>
 					</h3>
@@ -247,6 +251,9 @@ export default {
 		},
 	},
 	methods: {
+		goToTool() {
+			this.$router.push({ path: `/tool/${this.subname}` });
+		},
 		extendDescription() {
 			this.descriptionCollapsed = !this.descriptionCollapsed;
 		},

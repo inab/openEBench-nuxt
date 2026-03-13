@@ -1,5 +1,6 @@
 <template>
 	<div>
+		<MainCard :breadcrumbs="breadcrumbs" />
 		<ToolBrief
 			v-if="!introVisible && !loading"
 			:name="tool.label[0]"
@@ -83,7 +84,7 @@
 <script>
 import { mapGetters } from 'vuex';
 import VueFixedScrollBreak from 'vue-fixed-scroll-break';
-import SearchBar from '~/components/Tools/ToolEntry/SearchBar.vue';
+import MainCard from '~/components/Tools/MainCard.vue';
 import EntryIntro from '~/components/Tools/ToolEntry/EntryIntro.vue';
 import ToolBrief from '~/components/Tools/ToolEntry/ToolBrief.vue';
 import CitationContent from '~/components/Tools/ToolEntry/Citation/CitationContent.vue';
@@ -93,7 +94,7 @@ import AccessibilityContent from '~/components/Tools/ToolEntry/Accessibility/Acc
 export default {
 	name: 'ToolEntry',
 	components: {
-		SearchBar,
+		MainCard,
 		EntryIntro,
 		ToolBrief,
 		CitationContent,
@@ -156,6 +157,29 @@ export default {
 			tool: 'tool',
 			loading: 'loading',
 		}),
+		// Breadcrumbs: Home > Tools > Search (clickable) > Tool Name
+		breadcrumbs() {
+			const searchedTerm = this.$store.getters['tool/searchedTerm'];
+			const crumbs = [
+				{ text: 'Home', disabled: false, exact: true, to: '/' },
+				{ text: 'Tools', disabled: false, exact: true, to: '/tool' },
+			];
+			if (searchedTerm) {
+				crumbs.push({
+					text: `Search: ${searchedTerm}`,
+					disabled: false,
+					exact: true,
+					to: `/tool/search?q=${searchedTerm}`,
+				});
+			}
+			crumbs.push({
+				text: this.loading
+					? '...'
+					: this.tool.label?.[0] || this.$route.params.id,
+				disabled: true,
+			});
+			return crumbs;
+		},
 	},
 
 	beforeMount() {

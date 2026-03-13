@@ -1,68 +1,72 @@
 <template>
-	<v-container fluid class="pa-0 ma-0">
-		<breadcrumbs-bar
-			v-if="breadcrumbs.length > 0"
-			:items="breadcrumbs"
-			dark
-			class-disabled="{ white--text }"
-			class-active="{ white--text text-decoration-underline }"
-		/>
-		<MainCard />
-		<v-row>
-			<v-col justify="center" cols="7" class="mx-auto">
-				<SearchCarousel class="mt-2" />
-			</v-col>
-		</v-row>
+	<v-container fluid class="pa-0">
+		<MainCard :breadcrumbs="breadcrumbs" />
+		<v-container fluid class="px-12 px-xl-16">
+			<v-row>
+				<v-col cols="12" md="4" lg="3" xl="3">
+					<!-- filters a bit wider -->
+					<CardsFilter />
+				</v-col>
+				<v-col cols="12" md="8" lg="9" xl="9">
+					<v-row v-if="loading.initialSearch" justify="center" class="mt-5">
+						<v-col cols="12">
+							<v-skeleton-loader type="list-item-two-line"></v-skeleton-loader>
+						</v-col>
+						<v-col v-for="n in 9" :key="n" cols="12">
+							<v-skeleton-loader
+								v-bind="attrs"
+								type="article"
+							></v-skeleton-loader>
+						</v-col>
+					</v-row>
+					<v-row v-else class="mt-1" ref="scrollBox">
+						<v-col cols="12">
+							<ResultCards />
+						</v-col>
+						<v-col cols="12" align="center">
+							<v-progress-circular
+								v-show="loading.loadMore"
+								indeterminate
+								color="primary"
+								transition="scroll-y-transition"
+							></v-progress-circular>
+						</v-col>
+					</v-row>
+				</v-col>
+			</v-row>
+		</v-container>
 	</v-container>
 </template>
 
 <script>
-import BreadcrumbsBar from '~/components/Molecules/BreadcrumbsBar';
+import { mapGetters } from 'vuex';
 import MainCard from '~/components/Tools/MainCard.vue';
-import SearchCarousel from '~/components/Tools/SearchCarousel.vue';
+import CardsFilter from '~/components/Tools/Search/CardsFilter.vue';
+import ResultCards from '~/components/Tools/Search/ResultCards.vue';
+import { SearchTools } from '~/mixins/SearchTools.js';
 
 export default {
-	name: 'ToolsMonitoringPage',
-	components: {
-		BreadcrumbsBar,
-		MainCard,
-		SearchCarousel,
-	},
-	layout: 'mainWOBreadcrumbs',
+	name: 'ToolsLandingPage',
+	components: { MainCard, CardsFilter, ResultCards },
+	mixins: [SearchTools],
+	layout: 'SearchTools',
 	data() {
 		return {
 			breadcrumbs: [
-				{
-					text: 'Home',
-					disabled: false,
-					exact: true,
-					to: '/',
-				},
-				{
-					text: 'Tools',
-					disabled: true,
-				},
+				{ text: 'Home', disabled: false, exact: true, to: '/' },
+				{ text: 'Tools', disabled: true },
 			],
+			attrs: { class: 'mb-6', boilerplate: true, elevation: 2 },
 		};
 	},
-	watch: {
-		$route(newRoute, oldRoute) {
-			if (newRoute.path !== oldRoute.path) this.breadcrumbs = [];
-		},
+	computed: {
+		...mapGetters({ loading: 'tool/loading' }),
+	},
+	async mounted() {
+		this.$store.dispatch('tool/updateSearchedTerm', '');
+		await this.$store.dispatch('tool/fetchRandomTools');
+		const randomTools = this.$store.getters['tool/randomTools'];
+		this.$store.commit('tool/updateTools', randomTools);
 	},
 };
 </script>
-<style scoped>
-.blue-background {
-	background-color: #396fba !important;
-}
-
-.v-breadcrumbs {
-	background-color: #396fba !important;
-	color: white !important;
-}
-
-.v-breadcrumbs >>> v-breadcrumbs__item {
-	color: white !important;
-}
-</style>
