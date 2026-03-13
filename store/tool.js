@@ -34,6 +34,8 @@ export default {
 			},
 			stats: {},
 			totalTools: 0,
+			randomTools: [],
+			loadingRandom: false,
 		};
 	},
 	actions: {
@@ -226,6 +228,23 @@ export default {
 
 			commit('updateEDAMTerms', response);
 		},
+		async fetchRandomTools({ commit }) {
+			commit('updateLoadingRandom', true);
+			try {
+				const result = await this.$observatory.$get('/initial-search', {
+					headers: {
+						'ngrok-skip-browser-warning': '69420',
+					},
+				});
+				commit('updateRandomTools', result.tools);
+				console.log('✅ Random tools fetched:', result.tools);
+				console.log('🔢 Total count:', result.totalTools);
+			} catch (error) {
+				console.error('❌ Error fetching random tools:', error);
+			} finally {
+				commit('updateLoadingRandom', false);
+			}
+		},
 	},
 	mutations: {
 		restoreFilters(state) {
@@ -299,6 +318,12 @@ export default {
 		updateEDAMTerms(state, value) {
 			state.EDAMTerms = value;
 		},
+		updateRandomTools(state, value) {
+			state.randomTools = value;
+		},
+		updateLoadingRandom(state, value) {
+			state.loadingRandom = value;
+		},
 	},
 	getters: {
 		searchedTerm: (state) => state.searchedTerm,
@@ -315,5 +340,7 @@ export default {
 		EDAMOperations: (state) => state.EDAMTerms.operation,
 		EDAMTopics: (state) => state.EDAMTerms.topic,
 		EDAMTypes: (state) => state.EDAMTerms.datatype,
+		randomTools: (state) => state.randomTools,
+		loadingRandom: (state) => state.loadingRandom,
 	},
 };
