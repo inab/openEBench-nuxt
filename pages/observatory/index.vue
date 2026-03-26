@@ -60,7 +60,7 @@
 
 				<!-- Scoreboard -->
 				<v-col cols="12" sm="6" md="3">
-					<router-link to="/observatory/Scoreboard" class="router-l">
+					<router-link to="/observatory/FAIRness" class="router-l">
 						<v-card
 							height="100%"
 							class="pt-2 pb-4 d-flex flex-column card-hover"
