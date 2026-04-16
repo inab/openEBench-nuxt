@@ -1,3 +1,43 @@
+// store/tool/index.js
+
+const API_HEADERS = {
+	headers: { 'ngrok-skip-browser-warning': '69420' },
+};
+
+function buildQuery(state) {
+	let query = '';
+
+	if (state.visibleCategories.length > 0) {
+		query += '&searchIn=' + state.visibleCategories.join(',');
+	}
+	if (state.filters.source.length > 0 && state.filters.source.length < 8) {
+		query += '&source=' + state.filters.source.join(',');
+	}
+	if (state.filters.type.length > 0 && state.filters.type.length < 9) {
+		query += '&type=' + state.filters.type.join(',');
+	}
+	if (state.filters.license.length > 0) {
+		query += '&license=' + state.filters.license.join(',');
+	}
+	if (state.filters.tags.length > 0) {
+		query += '&tags=' + state.filters.tags.join(',');
+	}
+	if (state.filters.topics.length > 0) {
+		query += '&topics=' + state.filters.topics.join(',');
+	}
+	if (state.filters.operations.length > 0) {
+		query += '&operations=' + state.filters.operations.join(',');
+	}
+	if (state.filters.inputFormat.length > 0) {
+		query += '&input_format=' + state.filters.inputFormat.join(',');
+	}
+	if (state.filters.outputFormat.length > 0) {
+		query += '&output_format=' + state.filters.outputFormat.join(',');
+	}
+
+	return query;
+}
+
 export default {
 	namespaced: true,
 	state: () => {
@@ -22,7 +62,6 @@ export default {
 			],
 			EDAMTerms: [],
 			filters: {
-				// This object is used to filter the tools
 				source: [],
 				type: [],
 				topics: [],
@@ -34,8 +73,6 @@ export default {
 			},
 			stats: {},
 			totalTools: 0,
-			randomTools: [],
-			loadingRandom: false,
 		};
 	},
 	actions: {
@@ -54,202 +91,97 @@ export default {
 		updateLoadingLoadMore({ commit }, value) {
 			commit('updateLoadingLoadMore', value);
 		},
-
 		updateFilters({ commit }, payload) {
-			// This function is called whenever the user clicks on a checkbox in Filters
-			// component to add/remove a filter.
-			// The payload is an object with the filter property and values.
 			commit('updateFilters', payload);
 		},
-
 		restoreFilters({ commit }) {
 			commit('restoreFilters');
 		},
 
 		async initialSearch({ commit }, q) {
 			commit('updateLoadingInitialSearch', true);
-			const result = await this.$observatory.$get(
-				'/search?page=0&q=' +
-					q +
-					'&searchIn=name,label,description,topics,operations,publication_title,publication_abstract',
-				{
-					headers: {
-						'ngrok-skip-browser-warning': '69420',
-					},
+			commit('updateTools', []);
+
+			try {
+				let result;
+				if (!q) {
+					result = await this.$observatory.$get('/initial-search', API_HEADERS);
+				} else {
+					result = await this.$observatory.$get(
+						`/search?page=0&q=${q}&searchIn=name,label,description,topics,operations,publication_title,publication_abstract`,
+						API_HEADERS
+					);
 				}
-			);
 
-			commit('updateTools', result.tools);
-			commit('updateCounts', result.counts);
-			commit('updateStats', result.stats);
-			commit('updateTotalTools', result.total_tools);
-
-			commit('updateLoadingInitialSearch', false);
+				commit('updateTools', result.tools);
+				if (result.counts) commit('updateCounts', result.counts);
+				if (result.stats) commit('updateStats', result.stats);
+				if (result.total_tools) commit('updateTotalTools', result.total_tools);
+			} catch (error) {
+				console.error('❌ initialSearch error:', error);
+			} finally {
+				commit('updateLoadingInitialSearch', false);
+			}
 		},
 
 		async searchTools({ commit, state }) {
 			commit('updateLoadingSearch', true);
 			commit('updateTools', []);
 
-			let query = '';
+			try {
+				const query = buildQuery(state);
+				commit('updateQuery', query);
 
-			// Add filters to query
+				const result = await this.$observatory.$get(
+					`/search?page=0&q=${state.searchedTerm}${query}`,
+					API_HEADERS
+				);
 
-			// 'Search In' Categories
-			if (state.visibleCategories.length > 0) {
-				query += '&searchIn=';
-				for (const category of state.visibleCategories) {
-					query += category + ',';
-				}
-				query = query.slice(0, -1);
+				commit('updateTools', result.tools);
+				commit('updateCounts', result.counts);
+				commit('updateStatsAfterFilter', result.stats);
+				commit('updateTotalTools', result.total_tools);
+			} catch (error) {
+				console.error('❌ searchTools error:', error);
+			} finally {
+				commit('updateLoadingSearch', false);
 			}
-
-			// 'Source' Filters
-			if (state.filters.source.length > 0 && state.filters.source.length < 8) {
-				query += '&source=';
-				for (const source of state.filters.source) {
-					query += source + ',';
-				}
-				query = query.slice(0, -1);
-			}
-
-			// 'Type' Filters
-			if (state.filters.type.length > 0 && state.filters.type.length < 9) {
-				query += '&type=';
-				for (const type of state.filters.type) {
-					query += type + ',';
-				}
-				query = query.slice(0, -1);
-			}
-
-			// 'License' Filters
-			if (state.filters.license.length > 0) {
-				query += '&license=';
-				for (const license of state.filters.license) {
-					query += license + ',';
-				}
-				query = query.slice(0, -1);
-			}
-			// 'Tags' Filters
-			if (state.filters.tags.length > 0) {
-				query += '&tags=';
-				for (const tag of state.filters.tags) {
-					query += tag + ',';
-				}
-				query = query.slice(0, -1);
-			}
-
-			// 'Topics' Filters
-			if (state.filters.topics.length > 0) {
-				query += '&topics=';
-				for (const topic of state.filters.topics) {
-					query += topic + ',';
-				}
-				query = query.slice(0, -1);
-			}
-
-			// 'Operation' Filters
-			if (state.filters.operations.length > 0) {
-				query += '&operations=';
-				for (const operations of state.filters.operations) {
-					query += operations + ',';
-				}
-				query = query.slice(0, -1);
-			}
-
-			// 'Input Format' Filters
-			if (state.filters.inputFormat.length > 0) {
-				query += '&input_format=';
-				for (const inputFormat of state.filters.inputFormat) {
-					query += inputFormat + ',';
-				}
-				query = query.slice(0, -1);
-			}
-
-			// 'Output Format' Filters
-			if (state.filters.outputFormat.length > 0) {
-				query += '&output_format=';
-				for (const outputFormat of state.filters.outputFormat) {
-					query += outputFormat + ',';
-				}
-				query = query.slice(0, -1);
-			}
-
-			commit('updateQuery', query);
-
-			const result = await this.$observatory.$get(
-				'/search?page=0&q=' + state.searchedTerm + query,
-				{
-					headers: {
-						'ngrok-skip-browser-warning': '69420',
-					},
-				}
-			);
-
-			commit('updateTools', result.tools);
-			commit('updateCounts', result.counts);
-			commit('updateStatsAfterFilter', result.stats);
-			commit('updateTotalTools', result.total_tools);
-
-			commit('updateLoadingSearch', false);
 		},
 
 		updateVisibleCategories({ commit }, value) {
-			/* This function is called whenever the user clicks on a chip in SearchCategory
-			/  component to hide/show tools found in that category.
-			/  The value is the visible categories.
-			*/
-
 			commit('updateVisibleCategories', value);
 		},
 
 		async loadMoreTools({ commit, state }, page) {
-			// This function loads more tools from the API
-			const q = state.searchedTerm;
-			const result = await this.$observatory.$get(
-				'/search?page=' + page + '&q=' + q + state.query,
-				{
-					headers: {
-						'ngrok-skip-browser-warning': '69420',
-					},
-				}
-			);
+			commit('updateLoadingLoadMore', true);
 
-			const newTools = state.tools.concat(result.tools);
+			try {
+				const result = await this.$observatory.$get(
+					`/search?page=${page}&q=${state.searchedTerm}${state.query}`,
+					API_HEADERS
+				);
 
-			commit('updateTools', newTools);
-
-			commit('updateTotalTools', result.total_tools);
+				commit('updateTools', state.tools.concat(result.tools));
+				commit('updateTotalTools', result.total_tools);
+			} catch (error) {
+				console.error('❌ loadMoreTools error:', error);
+			} finally {
+				commit('updateLoadingLoadMore', false);
+			}
 		},
 
 		async getEDAMTerms({ commit }) {
-			// This function gets the EDAM terms from the API
-			const response = await this.$observatory.$get('edam/EDAMTerms');
-
-			commit('updateEDAMTerms', response);
-		},
-		async fetchRandomTools({ commit }) {
-			commit('updateLoadingRandom', true);
 			try {
-				const result = await this.$observatory.$get('/initial-search', {
-					headers: {
-						'ngrok-skip-browser-warning': '69420',
-					},
-				});
-				commit('updateRandomTools', result.tools);
-				console.log('✅ Random tools fetched:', result.tools);
-				console.log('🔢 Total count:', result.totalTools);
+				const response = await this.$observatory.$get('edam/EDAMTerms');
+				commit('updateEDAMTerms', response);
 			} catch (error) {
-				console.error('❌ Error fetching random tools:', error);
-			} finally {
-				commit('updateLoadingRandom', false);
+				console.error('❌ getEDAMTerms error:', error);
 			}
 		},
 	},
 	mutations: {
 		restoreFilters(state) {
 			state.filters = {
-				// This object is used to filter the tools
 				source: [],
 				type: [],
 				topics: [],
@@ -291,16 +223,11 @@ export default {
 			state.stats = value;
 		},
 		updateStatsAfterFilter(state, value) {
-			// for each stat key
 			for (const key in state.stats) {
-				// for each field in the value[key] (topic, collection, etc)
 				for (const field in state.stats[key]) {
-					// if field exists in value[key]
-					if (value[key][field]) {
-						// for each value in the field
+					if (value[key] && value[key][field]) {
 						state.stats[key][field] = value[key][field];
 					} else {
-						// if field does not exist in value[key], set it to 0
 						state.stats[key][field] = 0;
 					}
 				}
@@ -318,12 +245,6 @@ export default {
 		updateEDAMTerms(state, value) {
 			state.EDAMTerms = value;
 		},
-		updateRandomTools(state, value) {
-			state.randomTools = value;
-		},
-		updateLoadingRandom(state, value) {
-			state.loadingRandom = value;
-		},
 	},
 	getters: {
 		searchedTerm: (state) => state.searchedTerm,
@@ -340,7 +261,5 @@ export default {
 		EDAMOperations: (state) => state.EDAMTerms.operation,
 		EDAMTopics: (state) => state.EDAMTerms.topic,
 		EDAMTypes: (state) => state.EDAMTerms.datatype,
-		randomTools: (state) => state.randomTools,
-		loadingRandom: (state) => state.loadingRandom,
 	},
 };
