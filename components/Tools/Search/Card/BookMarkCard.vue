@@ -96,19 +96,19 @@ export default {
 	name: 'BookMarkCard',
 	props: {
 		findability: {
-			type: Number,
+			type: [Number, String],
 			required: true,
 		},
 		accessibility: {
-			type: Number,
+			type: [Number, String],
 			required: true,
 		},
 		interoperability: {
-			type: Number,
+			type: [Number, String],
 			required: true,
 		},
 		reusability: {
-			type: Number,
+			type: [Number, String],
 			required: true,
 		},
 	},
