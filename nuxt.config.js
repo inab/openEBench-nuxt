@@ -233,7 +233,7 @@ export default {
 			routes.push({
 				name: 'observatory',
 				path: '/observatory',
-				component: resolve(__dirname, 'pages/observatory/Trends.vue'),
+				component: resolve(__dirname, 'pages/observatory/index.vue'),
 			});
 			routes.push({
 				name: 'tools',

@@ -33,7 +33,6 @@
 						</MetaField>
 
 						<!-- Type -->
-
 						<MetaTypesCombo
 							title="Type of Software"
 							field="type"
@@ -44,22 +43,14 @@
 						/>
 
 						<!-- Version -->
-
-						<MetaField
-							title="Version"
+						<MetaVersionCombo
+							title="Version of Software"
 							field="version"
-							value-type=""
-							n_cols="4"
-							:increasable="false"
-						>
-							<template #inputField>
-								<VersionCombo
-									field="version"
-									:initial-selected-version="toolMetadata.version"
-									:versions="toolMetadata.other_versions"
-								/>
-							</template>
-						</MetaField>
+							:selected="version"
+							:version="toolMetadata.version"
+							n_cols="5"
+							class="mr-auto"
+						/>
 
 						<!-- Description -->
 						<!-- "class=mr-auto" pushes component to the left-->
@@ -514,7 +505,6 @@ import { mapGetters } from 'vuex';
 import MetaCheckbox from './MetaCheckbox.vue';
 import MetaField from './MetaField.vue';
 import FormField from './FormField.vue';
-import VersionCombo from './VersionCombo.vue';
 import MetaRegistriesCombo from './MetaRegistriesCombo.vue';
 import MetaTextArea from './MetaTextArea.vue';
 import PanelHeader from './PanelHeader.vue';
@@ -527,6 +517,7 @@ import MetaFieldAuthors from './MetaFieldAuthors.vue';
 import MetaFieldLicense from './MetaFieldLicense.vue';
 import MetaFieldURLField from './MetaFieldURLField.vue';
 import MetaTypesCombo from './MetaTypesCombo.vue';
+import MetaVersionCombo from './MetaVersionCombo.vue';
 
 export default {
 	name: 'MetadataEdit',
@@ -534,7 +525,7 @@ export default {
 		MetaField,
 		FormField,
 		MetaTypesCombo,
-		VersionCombo,
+		MetaVersionCombo,
 		MetaRegistriesCombo,
 		MetaCheckbox,
 		MetaTextArea,
@@ -665,6 +656,8 @@ export default {
 
 		// set version control
 		this.versionControl = this.initialVersionControl();
+
+		this.version = this.initialVersion();
 	},
 	methods: {
 		visibleTicks(i) {
@@ -672,6 +665,13 @@ export default {
 				return false;
 			} else {
 				return true;
+			}
+		},
+		initialVersion() {
+			if (this.toolMetadata.version.length > 0) {
+				return [this.toolMetadata.version[0]];
+			} else {
+				return [];
 			}
 		},
 		initialVersionControl() {

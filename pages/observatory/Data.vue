@@ -2,7 +2,7 @@
 	<div>
 		<v-row justify="center" class="mb-4">
 			<v-col md="11" sm="11" cols="11" lg="11" xl="11">
-				<div class="mb-2 text-h5">
+				<div class="mb-2 text-h4">
 					Data integration at the Software Observatory
 				</div>
 			</v-col>
