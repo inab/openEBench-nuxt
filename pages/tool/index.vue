@@ -4,22 +4,16 @@
 		<v-container fluid class="px-12 px-xl-16">
 			<v-row>
 				<v-col cols="12" md="4" lg="3" xl="3">
-					<!-- filters a bit wider -->
 					<CardsFilter />
 				</v-col>
 				<v-col cols="12" md="8" lg="9" xl="9">
 					<v-row v-if="loading.initialSearch" justify="center" class="mt-5">
-						<v-col cols="12">
-							<v-skeleton-loader type="list-item-two-line"></v-skeleton-loader>
-						</v-col>
 						<v-col v-for="n in 9" :key="n" cols="12">
-							<v-skeleton-loader
-								v-bind="attrs"
-								type="article"
-							></v-skeleton-loader>
+							<v-skeleton-loader v-bind="attrs" type="article" />
 						</v-col>
 					</v-row>
-					<v-row v-else class="mt-1" ref="scrollBox">
+
+					<v-row v-else ref="scrollBox" class="mt-1">
 						<v-col cols="12">
 							<ResultCards />
 						</v-col>
@@ -29,7 +23,7 @@
 								indeterminate
 								color="primary"
 								transition="scroll-y-transition"
-							></v-progress-circular>
+							/>
 						</v-col>
 					</v-row>
 				</v-col>
@@ -63,10 +57,7 @@ export default {
 		...mapGetters({ loading: 'tool/loading' }),
 	},
 	async mounted() {
-		this.$store.dispatch('tool/updateSearchedTerm', '');
-		await this.$store.dispatch('tool/fetchRandomTools');
-		const randomTools = this.$store.getters['tool/randomTools'];
-		this.$store.commit('tool/updateTools', randomTools);
+		await this.loadLanding();
 	},
 };
 </script>

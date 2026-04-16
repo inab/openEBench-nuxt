@@ -67,7 +67,7 @@
 						<LinkChipWIcon
 							v-for="[key, value] in Object.entries(license)"
 							:key="key"
-							:link="value.url"
+							:link="value.url || ''"
 							icon="mdi-scale-balance"
 							:text="value.name"
 							light
@@ -92,7 +92,7 @@
 						/>
 						<LinkChipWIcon
 							v-if="webpage"
-							:link="webpage"
+							:link="webpage || ''"
 							icon="mdi-web"
 							text="Homepage"
 							class="mr-1"
@@ -163,7 +163,7 @@ export default {
 			required: true,
 		},
 		type: {
-			type: String,
+			type: Array,
 			required: true,
 		},
 		description: {
@@ -196,19 +196,19 @@ export default {
 			default: '',
 		},
 		findability: {
-			type: Number,
+			type: [Number, String],
 			required: true,
 		},
 		accessibility: {
-			type: Number,
+			type: [Number, String],
 			required: true,
 		},
 		interoperability: {
-			type: Number,
+			type: [Number, String],
 			required: true,
 		},
 		reusability: {
-			type: Number,
+			type: [Number, String],
 			required: true,
 		},
 		order: {

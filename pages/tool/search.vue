@@ -18,7 +18,7 @@
 							></v-skeleton-loader>
 						</v-col>
 					</v-row>
-					<v-row v-else class="mt-1" ref="scrollBox">
+					<v-row v-else ref="scrollBox" class="mt-1">
 						<v-col cols="12">
 							<ResultCards />
 						</v-col>
@@ -73,18 +73,10 @@ export default {
 	},
 	watch: {
 		q: {
-			handler(newVal, oldVal) {
-				if (newVal !== oldVal) {
-					this.search(newVal);
-				}
+			handler(newVal, _oldVal) {
+				this.search(newVal);
 			},
 			immediate: true,
-		},
-	},
-	methods: {
-		search(q) {
-			this.$store.dispatch('tool/updateSearchedTerm', q);
-			this.$store.dispatch('tool/searchTools');
 		},
 	},
 };

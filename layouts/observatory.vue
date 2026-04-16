@@ -19,8 +19,12 @@
 									:key="i"
 									link
 									:to="item.to"
+									:exact="item.exact || false"
 								>
-									<v-list-item-icon class="mr-1">
+									<v-list-item-icon
+										v-if="$vuetify.breakpoint.lgAndUp"
+										class="mr-1"
+									>
 										<v-icon>{{ item.icon }}</v-icon>
 									</v-list-item-icon>
 									<v-list-item-title class="ml-1">{{

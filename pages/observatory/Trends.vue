@@ -2,8 +2,8 @@
 	<div class="mt-0 pt-0">
 		<v-row justify="center">
 			<v-col md="11" sm="11" cols="11" lg="11" xl="11">
-				<div class="mb-3 text-h5">FAIRness Trends Analysis</div>
-				<p style="line-height: 1.9" class="mb-2 mt-0">
+				<div class="mb-3 text-h4">FAIRness Trends Analysis</div>
+				<p style="line-height: 1.9" class="mb-2 mt-0 text-body-1">
 					Explore trends in key aspects to the FAIRness of research software.
 				</p>
 			</v-col>
@@ -29,6 +29,21 @@
 				<PublicationsMain />
 			</v-col>
 		</v-row>
+		<v-row justify="center">
+			<v-col class="mt-2" md="12" sm="12" xs="12" lg="11" xl="11">
+				<DocumentationMain />
+			</v-col>
+		</v-row>
+		<v-row justify="center" class="items-center justify-center">
+			<v-col class="mt-2" md="12" sm="12" xs="12" lg="11" xl="11">
+				<DependenciesMain />
+			</v-col>
+		</v-row>
+		<v-row justify="center">
+			<v-col class="mt-2" md="12" sm="12" xs="12" lg="11" xl="11">
+				<FormatsMain />
+			</v-col>
+		</v-row>
 	</div>
 </template>
 <script>
@@ -36,7 +51,10 @@ import LicensesMain from '~/components/observatory/trends/licenses/LicensesMain.
 import VersioningMain from '~/components/observatory/trends/versioning/VersioningMain.vue';
 import VersionControl from '~/components/observatory/trends/versionControl/VersionControl.vue';
 import PublicationsMain from '~/components/observatory/trends/publications/PublicationsMain.vue';
+import DependenciesMain from '~/components/observatory/trends/dependencies/DependenciesMain.vue';
 import CollectionSelector from '~/components/observatory/CollectionSelector.vue';
+import DocumentationMain from '~/components/observatory/trends/documentation/DocumentationMain.vue';
+import FormatsMain from '~/components/observatory/trends/formats/FormatsMain.vue';
 
 export default {
 	name: 'Trends',
@@ -45,7 +63,10 @@ export default {
 		VersioningMain,
 		VersionControl,
 		PublicationsMain,
+		DocumentationMain,
+		DependenciesMain,
 		CollectionSelector,
+		FormatsMain,
 	},
 	layout: 'observatory',
 	data() {
@@ -61,7 +82,7 @@ export default {
 					text: 'Observatory',
 					disabled: true,
 					exact: true,
-					to: '/observatory',
+					to: '/observatory/Trends',
 				},
 			],
 		};
@@ -74,6 +95,8 @@ export default {
 		this.$store.dispatch('observatory/trends/getVersionControlCount');
 		this.$store.dispatch('observatory/trends/getVersionControlRepositories');
 		this.$store.dispatch('observatory/trends/getPublications');
+		this.$store.dispatch('observatory/trends/getDependencies');
+		this.$store.dispatch('observatory/trends/getDependenciesCount');
 	},
 
 	mounted() {
