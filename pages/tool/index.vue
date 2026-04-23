@@ -1,7 +1,7 @@
 <template>
-	<v-container fluid class="pa-0">
+	<div class="pa-0">
 		<MainCard :breadcrumbs="breadcrumbs" />
-		<v-container fluid class="px-12 px-xl-16">
+		<div class="px-12 px-xl-16">
 			<v-row>
 				<v-col cols="12" md="4" lg="3" xl="3">
 					<CardsFilter />
@@ -28,8 +28,8 @@
 					</v-row>
 				</v-col>
 			</v-row>
-		</v-container>
-	</v-container>
+		</div>
+	</div>
 </template>
 
 <script>
