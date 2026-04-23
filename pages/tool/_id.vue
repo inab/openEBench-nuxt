@@ -10,6 +10,7 @@
 			:webpage="tool.webpage"
 		/>
 
+		<!-- SideBar -->
 		<v-card class="fixed-card ml-6" max-width="500" elevation="0">
 			<v-list class="pt-0 pb-0">
 				<v-list-item-group v-model="activeItem" active-class="primary--text">
@@ -26,7 +27,7 @@
 			</v-list>
 		</v-card>
 
-		<v-container id="main-container" ref="Main" fluid class="pt-6">
+		<div id="main-container" ref="Main" class="pt-6">
 			<v-row justify="center">
 				<v-col v-if="!loading" cols="7">
 					<EntryIntro
@@ -78,7 +79,7 @@
 					<v-icon dark> mdi-arrow-up </v-icon>
 				</v-btn>
 			</VueFixedScrollBreak>
-		</v-container>
+		</div>
 	</div>
 </template>
 <script>
@@ -257,7 +258,7 @@ export default {
 .fixed-card {
 	width: 180px;
 	position: fixed;
-	top: 130px;
+	top: 150px;
 }
 
 #tool-brief {
