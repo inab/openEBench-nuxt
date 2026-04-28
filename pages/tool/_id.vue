@@ -1,6 +1,24 @@
 <template>
 	<div>
-		<MainCard :breadcrumbs="breadcrumbs" />
+		<!-- Breadcrumbs inside tool -->
+		<div class="pb-0 breadcrumbs" v-if="breadcrumbs.length > 0">
+			<v-breadcrumbs :items="breadcrumbs" dark class="v-breadcrumbs">
+				<template #divider>
+					<v-icon class="v-breadcrumbs-divider">mdi-chevron-right</v-icon>
+				</template>
+				<template #item="{ item }">
+					<v-breadcrumbs-item
+						:to="item.to"
+						:disabled="item.disabled"
+						exact
+						class="white--text"
+					>
+						{{ item.text }}
+					</v-breadcrumbs-item>
+				</template>
+			</v-breadcrumbs>
+		</div>
+
 		<ToolBrief
 			v-if="!introVisible && !loading"
 			:name="tool.label[0]"
@@ -11,8 +29,15 @@
 		/>
 
 		<!-- SideBar -->
-		<v-card class="fixed-card ml-6" max-width="500" elevation="0">
-			<v-list class="pt-0 pb-0">
+		<v-card
+			:class="[
+				'fixed-card ml-6',
+				{ 'fixed-card--sticky': !introVisible && !loading },
+			]"
+			max-width="500"
+			elevation="0"
+		>
+			<v-list nav dense class="pt-0 pb-0">
 				<v-list-item-group v-model="activeItem" active-class="primary--text">
 					<v-list-item v-for="(item, i) in items" :key="i">
 						<v-list-item-content
@@ -40,6 +65,7 @@
 						:sources-labels="tool.sources_labels"
 					/>
 
+					<!-- Cards seciones. -->
 					<v-card
 						v-for="(item, i) in items"
 						:id="item.id"
@@ -256,9 +282,17 @@ export default {
 </script>
 <style scoped>
 .fixed-card {
-	width: 180px;
+	width: 200px;
+	margin-top: 24px;
+	margin-left: 150px !important;
+	position: absolute;
+	z-index: 50px;
+}
+
+.fixed-card--sticky {
 	position: fixed;
-	top: 150px;
+	top: 100px;
+	z-index: 50px;
 }
 
 #tool-brief {
@@ -280,5 +314,26 @@ export default {
 	top: 85px;
 	width: 260px;
 	word-wrap: normal;
+}
+
+.v-breadcrumbs {
+	align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	flex: 0 1 auto;
+	list-style-type: none;
+	margin: 0;
+}
+
+::v-deep .v-breadcrumbs__item {
+	color: var(--v-anchor-base) !important;
+}
+
+::v-deep .v-breadcrumbs__item--disabled {
+	color: rgba(0, 0, 0, 38%) !important;
+}
+
+.v-breadcrumbs-divider {
+	color: rgba(0, 0, 0, 38%) !important;
 }
 </style>
