@@ -42,7 +42,7 @@
 					<v-list-item v-for="(item, i) in items" :key="i">
 						<v-list-item-content
 							:active="activeItem === i"
-							@click="$vuetify.goTo('#' + item.id)"
+							@click="$vuetify.goTo('#' + item.id, { offset: 60 })"
 						>
 							<v-list-item-title class="text-subtitle-2" v-text="item.title">
 							</v-list-item-title>
@@ -291,7 +291,7 @@ export default {
 
 .fixed-card--sticky {
 	position: fixed;
-	top: 100px;
+	top: 97px;
 	z-index: 50px;
 }
 

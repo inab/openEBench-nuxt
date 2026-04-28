@@ -5,7 +5,7 @@
 				<v-row align="center" justify="space-between">
 					<div class="d-flex align-left">
 						<div>
-							<v-toolbar-title class="ml-5 pl-2 mr-5 mt-1">
+							<v-toolbar-title class="text-h5 ml-5 pl-2 mr-5 mt-1">
 								<!-- Barra desplazada -->
 								{{ name }}
 							</v-toolbar-title>
