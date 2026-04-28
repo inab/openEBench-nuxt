@@ -1,15 +1,16 @@
 <template>
 	<div class="fixed">
-		<v-app-bar color="white" dense flat outlined>
-			<v-container fluid>
+		<v-app-bar color="white" dense flat outlined style="height: 56px">
+			<v-container>
 				<v-row align="center" justify="space-between">
 					<div class="d-flex align-left">
 						<div>
-							<v-toolbar-title class="ml-5 mr-5 mt-1">
+							<v-toolbar-title class="ml-5 pl-2 mr-5 mt-1">
+								<!-- Barra desplazada -->
 								{{ name }}
 							</v-toolbar-title>
 						</div>
-						<div class="mt-1">
+						<!-- <div class="mt-1">
 							<v-chip
 								v-for="(item, i) in cleanVersion(version)"
 								:key="i"
@@ -20,7 +21,7 @@
 							>
 								<span class="font-weight-bold caption">{{ item }}</span>
 							</v-chip>
-						</div>
+						</div> -->
 					</div>
 					<div class="d-flex align-left">
 						<div>
@@ -104,6 +105,7 @@ export default {
 <style scoped>
 .fixed {
 	position: fixed;
+	top: 64px;
 	width: 100%;
 	z-index: 100;
 }
