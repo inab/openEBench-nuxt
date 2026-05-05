@@ -36,7 +36,7 @@
 						justify="center"
 						align="center"
 					>
-						<v-col cols="10">
+						<v-col cols="9">
 							<h6 class="text-subtitle mb-0 pb-0 text-left collection-title">
 								<a
 									class="link"
@@ -54,7 +54,7 @@
 								{{ collections[model].description }}
 							</p>
 						</v-col>
-						<v-col cols="2">
+						<v-col cols="3">
 							<div class="container">
 								<img
 									class="responsive-image"
@@ -156,8 +156,7 @@ export default {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: 110px;
-	height: 130px;
+	width: 90%;
 }
 
 .responsive-image {
