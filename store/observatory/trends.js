@@ -13,6 +13,15 @@ export const state = () => ({
 	_versionControlCount: [],
 	_versionControlRepositories: [],
 	_publications: [],
+
+	_dependencies: [],
+	_dependenciesCount: {},
+	_documentation: [],
+	_documentationCount: {},
+	_inputFormats: {},
+	_outputFormats: {},
+	_formatsCount: {},
+
 	_unLoaded: {
 		licensesSunburst: true,
 		licensesOpenSource: true,
@@ -20,6 +29,15 @@ export const state = () => ({
 		versionControlCount: true,
 		versionControlRepositories: true,
 		publications: true,
+
+		dependencies: true,
+		dependenciesCount: true,
+		documentation: true,
+		documentationCount: true,
+		inputFormats: true,
+		outputFormats: true,
+		formatsCount: true,
+
 		FAIRscores: true,
 	},
 });
@@ -44,6 +62,29 @@ export const getters = {
 	Publications(state) {
 		return state._publications;
 	},
+
+	Dependencies(state) {
+		return state._dependencies;
+	},
+	DependenciesCount(state) {
+		return state._dependenciesCount;
+	},
+	Documentation(state) {
+		return state._documentation;
+	},
+	DocumentationCount(state) {
+		return state._documentationCount;
+	},
+	InputFormats(state) {
+		return state._inputFormats;
+	},
+	OutputFormats(state) {
+		return state._outputFormats;
+	},
+	FormatsCount(state) {
+		return state._formatsCount;
+	},
+
 	Loaded(state) {
 		return state._unLoaded;
 	},
@@ -81,7 +122,7 @@ export const actions = {
 		commit('setLoaded', { licensesOpenSource: true });
 
 		const result = await this.cache.dispatch('observatory/trends/GET_URL', URL);
-
+		console.log(result);
 		commit('setLicensesOpenSource', result);
 		commit('setLoaded', { licensesOpenSource: false });
 	},
@@ -141,13 +182,112 @@ export const actions = {
 		commit('setPublications', result);
 		commit('setLoaded', { publications: false });
 	},
+
+	async getDependencies({ commit, _state, rootState }) {
+		const URL =
+			BASE_URL +
+			'dependencies_count?collection=' +
+			rootState.observatory._currentCollection;
+
+		commit('setLoaded', { dependencies: true });
+
+		const result = await this.cache.dispatch('observatory/trends/GET_URL', URL);
+
+		commit('setDependencies', result);
+		commit('setLoaded', { dependencies: false });
+	},
+
+	async getDependenciesCount({ commit, _state, rootState }) {
+		const URL =
+			BASE_URL +
+			'dependencies_coverage?collection=' +
+			rootState.observatory._currentCollection;
+
+		commit('setLoaded', { dependenciesCount: true });
+
+		const result = await this.cache.dispatch('observatory/trends/GET_URL', URL);
+
+		commit('setDependenciesCount', result);
+		commit('setLoaded', { dependenciesCount: false });
+	},
+
+	async getDocumentation({ commit, _state, rootState }) {
+		const URL =
+			BASE_URL +
+			'documentation?collection=' +
+			rootState.observatory._currentCollection;
+
+		commit('setLoaded', { documentation: true });
+
+		const result = await this.cache.dispatch('observatory/trends/GET_URL', URL);
+
+		commit('setDocumentation', result);
+		commit('setLoaded', { documentation: false });
+	},
+
+	async getDocumentationCount({ commit, _state, rootState }) {
+		const URL =
+			BASE_URL +
+			'documentation_coverage?collection=' +
+			rootState.observatory._currentCollection;
+
+		commit('setLoaded', { documentationCount: true });
+
+		const result = await this.cache.dispatch('observatory/trends/GET_URL', URL);
+
+		commit('setDocumentationCount', result);
+		commit('setLoaded', { documentationCount: false });
+	},
+
+	async getInputFormats({ commit, _state, rootState }) {
+		const URL =
+			BASE_URL +
+			'input_formats?collection=' +
+			rootState.observatory._currentCollection;
+
+		commit('setLoaded', { inputFormats: true });
+
+		const result = await this.cache.dispatch('observatory/trends/GET_URL', URL);
+
+		commit('setInputFormats', result);
+		commit('setLoaded', { inputFormats: false });
+	},
+
+	async getOutputFormats({ commit, _state, rootState }) {
+		const URL =
+			BASE_URL +
+			'output_formats?collection=' +
+			rootState.observatory._currentCollection;
+
+		commit('setLoaded', { outputFormats: true });
+
+		const result = await this.cache.dispatch('observatory/trends/GET_URL', URL);
+
+		commit('setOutputFormats', result);
+		commit('setLoaded', { outputFormats: false });
+	},
+
+	async getFormatsCount({ commit, _state, rootState }) {
+		const URL =
+			BASE_URL +
+			'formats_coverage?collection=' +
+			rootState.observatory._currentCollection;
+
+		commit('setLoaded', { formatsCount: true });
+
+		const result = await this.cache.dispatch('observatory/trends/GET_URL', URL);
+
+		commit('setFormatsCount', result);
+		commit('setLoaded', { formatsCount: false });
+	},
 };
 
-// Mutaciones
+// Mutations
 export const mutations = {
 	setLoaded(state, loading) {
 		state._unLoaded[Object.keys(loading)[0]] = loading[Object.keys(loading)[0]];
 	},
+
 	setLicensesSunburst(state, sunburst) {
 		state._licensesSunburst = sunburst;
 	},
@@ -165,5 +305,27 @@ export const mutations = {
 	},
 	setPublications(state, publications) {
 		state._publications = publications;
+	},
+
+	setDependencies(state, dependencies) {
+		state._dependencies = dependencies;
+	},
+	setDependenciesCount(state, dependenciesCount) {
+		state._dependenciesCount = dependenciesCount;
+	},
+	setDocumentation(state, documentation) {
+		state._documentation = documentation;
+	},
+	setDocumentationCount(state, documentationCount) {
+		state._documentationCount = documentationCount;
+	},
+	setInputFormats(state, inputFormats) {
+		state._inputFormats = inputFormats;
+	},
+	setOutputFormats(state, outputFormats) {
+		state._outputFormats = outputFormats;
+	},
+	setFormatsCount(state, formatsCount) {
+		state._formatsCount = formatsCount;
 	},
 };

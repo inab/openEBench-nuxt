@@ -132,6 +132,12 @@ export default {
 			this.$store.dispatch('observatory/trends/getVersionControlCount');
 			this.$store.dispatch('observatory/trends/getVersionControlRepositories');
 			this.$store.dispatch('observatory/trends/getPublications');
+			this.$store.dispatch('observatory/trends/getDependencies');
+			this.$store.dispatch('observatory/trends/getDependenciesCount');
+			this.$store.dispatch('observatory/trends/getDocumentation');
+			this.$store.dispatch('observatory/trends/getDocumentationCount');
+			this.$store.dispatch('observatory/trends/getInputFormats');
+			this.$store.dispatch('observatory/trends/getOutputFormats');
 
 			// data for data page <- data store
 			this.$store.dispatch('observatory/data/getCountsPerSource');

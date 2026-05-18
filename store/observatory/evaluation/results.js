@@ -2,6 +2,7 @@
 export const state = () => ({
 	_FAIRIndicatorsTool: null,
 	_FAIRIndicatorsLogs: null,
+	_FAIRIndicatorsFeedback: null,
 	_FAIRIndicatorsControl: null,
 	_LoadingEvaluation: false,
 });
@@ -13,6 +14,9 @@ export const getters = {
 	},
 	getFAIRIndicatorsLogs(state) {
 		return state._FAIRIndicatorsLogs;
+	},
+	getFAIRIndicatorsFeedback(state) {
+		return state._FAIRIndicatorsFeedback;
 	},
 	getFAIRIndicatorsControl(state) {
 		return state._FAIRIndicatorsControl;
@@ -118,9 +122,11 @@ export const mutations = {
 	setFAIRIndicatorsToolResult(state, payload) {
 		const result = payload.result;
 		const logs = payload.logs;
+		const feedback = payload.feedback;
 
 		state._FAIRIndicatorsTool = result;
 		state._FAIRIndicatorsLogs = logs;
+		state._FAIRIndicatorsFeedback = feedback;
 	},
 	setFAIRIndicatorsControl(state, result) {
 		state._FAIRIndicatorsControl = result;

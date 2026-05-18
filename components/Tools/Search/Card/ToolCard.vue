@@ -7,7 +7,11 @@
 				outlined
 				elevation="1"
 			>
-				<v-card-title class="mb-0 pb-0">
+				<v-card-title
+					class="mb-0 pb-0"
+					style="cursor: pointer"
+					@click="goToTool"
+				>
 					<h3 class="text-subtitle-1">
 						<a id="title">{{ name }}</a>
 					</h3>
@@ -63,7 +67,7 @@
 						<LinkChipWIcon
 							v-for="[key, value] in Object.entries(license)"
 							:key="key"
-							:link="value.url"
+							:link="value.url || ''"
 							icon="mdi-scale-balance"
 							:text="value.name"
 							light
@@ -88,7 +92,7 @@
 						/>
 						<LinkChipWIcon
 							v-if="webpage"
-							:link="webpage"
+							:link="webpage || ''"
 							icon="mdi-web"
 							text="Homepage"
 							class="mr-1"
@@ -159,7 +163,7 @@ export default {
 			required: true,
 		},
 		type: {
-			type: String,
+			type: Array,
 			required: true,
 		},
 		description: {
@@ -192,19 +196,19 @@ export default {
 			default: '',
 		},
 		findability: {
-			type: Number,
+			type: [Number, String],
 			required: true,
 		},
 		accessibility: {
-			type: Number,
+			type: [Number, String],
 			required: true,
 		},
 		interoperability: {
-			type: Number,
+			type: [Number, String],
 			required: true,
 		},
 		reusability: {
-			type: Number,
+			type: [Number, String],
 			required: true,
 		},
 		order: {
@@ -247,6 +251,9 @@ export default {
 		},
 	},
 	methods: {
+		goToTool() {
+			this.$router.push({ path: `/tool/${this.subname}` });
+		},
 		extendDescription() {
 			this.descriptionCollapsed = !this.descriptionCollapsed;
 		},

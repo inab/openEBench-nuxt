@@ -2,21 +2,14 @@
 	<div>
 		<v-row justify="center">
 			<v-col md="11" sm="11" cols="11" lg="11" xl="11">
-				<div class="mb-3 text-h5">FAIRsoft Indicator Scoreboard</div>
-			</v-col>
-		</v-row>
-		<v-row>
-			<CollectionSelector />
-		</v-row>
-		<v-row justify="center">
-			<v-col md="9" sm="9" cols="9" lg="9" xl="9">
+				<div class="mb-3 text-h4">FAIRsoft Indicator Scoreboard</div>
 				<p style="line-height: 2.1" class="mb-1 mt-0">
 					<v-card class="mx-auto" elevation="0">
 						<!--v-card-subtitle>
 							<span class="text-subtitle">What this view shows</span>
 						</v-card-subtitle-->
 						<v-card-text class="mb-0 pb-0">
-							<span class="text-body-2 black--text">
+							<span class="text-body-1 black--text">
 								This scoreboard provides a visual summary of FAIRness scores for
 								research software, based on the FAIRsoft indicators. Explore how
 								different software collections perform across the four FAIR
@@ -72,6 +65,13 @@
 						</v-expand-transition>
 					</v-card>
 				</p>
+			</v-col>
+		</v-row>
+		<v-row>
+			<CollectionSelector />
+		</v-row>
+		<v-row justify="center">
+			<v-col md="9" sm="9" cols="9" lg="9" xl="9">
 				<v-row justify="center" class="my-4 mt-0 mb-0">
 					<v-chip-group
 						class="mb-0 mt-0 pb-0 pt-0"

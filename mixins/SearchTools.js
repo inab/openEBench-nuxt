@@ -1,8 +1,7 @@
 export const SearchTools = {
 	methods: {
 		triggerSearch(value) {
-			this.$store.dispatch('initialSearch', value);
-
+			this.$store.dispatch('tool/initialSearch', value);
 			this.$router.push({
 				path: 'tool/search',
 				query: {
@@ -14,12 +13,12 @@ export const SearchTools = {
 			});
 		},
 		search(q) {
-			// Cleaning results?
-			// Set searched term
 			this.$store.dispatch('tool/updateSearchedTerm', q);
-
-			// Make request to API
-			this.$store.dispatch('tool/searchTools', q);
+			this.$store.dispatch('tool/searchTools');
+		},
+		async loadLanding() {
+			this.$store.dispatch('tool/updateSearchedTerm', '');
+			await this.$store.dispatch('tool/initialSearch', '');
 		},
 	},
 };

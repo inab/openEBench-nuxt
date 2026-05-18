@@ -39,7 +39,7 @@ export default {
 			default: '',
 		},
 		year: {
-			type: Number,
+			type: [Number, String],
 			required: false,
 			default: 0,
 		},

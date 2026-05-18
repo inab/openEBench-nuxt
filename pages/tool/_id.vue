@@ -1,5 +1,24 @@
 <template>
 	<div>
+		<!-- Breadcrumbs inside tool -->
+		<div class="pb-0 breadcrumbs" v-if="breadcrumbs.length > 0">
+			<v-breadcrumbs :items="breadcrumbs" dark class="v-breadcrumbs">
+				<template #divider>
+					<v-icon class="v-breadcrumbs-divider">mdi-chevron-right</v-icon>
+				</template>
+				<template #item="{ item }">
+					<v-breadcrumbs-item
+						:to="item.to"
+						:disabled="item.disabled"
+						exact
+						class="white--text"
+					>
+						{{ item.text }}
+					</v-breadcrumbs-item>
+				</template>
+			</v-breadcrumbs>
+		</div>
+
 		<ToolBrief
 			v-if="!introVisible && !loading"
 			:name="tool.label[0]"
@@ -9,13 +28,21 @@
 			:webpage="tool.webpage"
 		/>
 
-		<v-card class="fixed-card ml-6" max-width="500" elevation="0">
-			<v-list class="pt-0 pb-0">
+		<!-- SideBar -->
+		<v-card
+			:class="[
+				'fixed-card ml-6',
+				{ 'fixed-card--sticky': !introVisible && !loading },
+			]"
+			max-width="500"
+			elevation="0"
+		>
+			<v-list nav dense class="pt-0 pb-0">
 				<v-list-item-group v-model="activeItem" active-class="primary--text">
 					<v-list-item v-for="(item, i) in items" :key="i">
 						<v-list-item-content
 							:active="activeItem === i"
-							@click="$vuetify.goTo('#' + item.id)"
+							@click="$vuetify.goTo('#' + item.id, { offset: 60 })"
 						>
 							<v-list-item-title class="text-subtitle-2" v-text="item.title">
 							</v-list-item-title>
@@ -25,7 +52,7 @@
 			</v-list>
 		</v-card>
 
-		<v-container id="main-container" ref="Main" fluid class="pt-6">
+		<div id="main-container" ref="Main" class="pt-6">
 			<v-row justify="center">
 				<v-col v-if="!loading" cols="7">
 					<EntryIntro
@@ -38,6 +65,7 @@
 						:sources-labels="tool.sources_labels"
 					/>
 
+					<!-- Cards seciones. -->
 					<v-card
 						v-for="(item, i) in items"
 						:id="item.id"
@@ -77,13 +105,13 @@
 					<v-icon dark> mdi-arrow-up </v-icon>
 				</v-btn>
 			</VueFixedScrollBreak>
-		</v-container>
+		</div>
 	</div>
 </template>
 <script>
 import { mapGetters } from 'vuex';
 import VueFixedScrollBreak from 'vue-fixed-scroll-break';
-import SearchBar from '~/components/Tools/ToolEntry/SearchBar.vue';
+import MainCard from '~/components/Tools/MainCard.vue';
 import EntryIntro from '~/components/Tools/ToolEntry/EntryIntro.vue';
 import ToolBrief from '~/components/Tools/ToolEntry/ToolBrief.vue';
 import CitationContent from '~/components/Tools/ToolEntry/Citation/CitationContent.vue';
@@ -93,7 +121,7 @@ import AccessibilityContent from '~/components/Tools/ToolEntry/Accessibility/Acc
 export default {
 	name: 'ToolEntry',
 	components: {
-		SearchBar,
+		MainCard,
 		EntryIntro,
 		ToolBrief,
 		CitationContent,
@@ -156,6 +184,29 @@ export default {
 			tool: 'tool',
 			loading: 'loading',
 		}),
+		// Breadcrumbs: Home > Tools > Search (clickable) > Tool Name
+		breadcrumbs() {
+			const searchedTerm = this.$store.getters['tool/searchedTerm'];
+			const crumbs = [
+				{ text: 'Home', disabled: false, exact: true, to: '/' },
+				{ text: 'Tools', disabled: false, exact: true, to: '/tool' },
+			];
+			if (searchedTerm) {
+				crumbs.push({
+					text: `Search: ${searchedTerm}`,
+					disabled: false,
+					exact: true,
+					to: `/tool/search?q=${searchedTerm}`,
+				});
+			}
+			crumbs.push({
+				text: this.loading
+					? '...'
+					: this.tool.label?.[0] || this.$route.params.id,
+				disabled: true,
+			});
+			return crumbs;
+		},
 	},
 
 	beforeMount() {
@@ -231,9 +282,17 @@ export default {
 </script>
 <style scoped>
 .fixed-card {
-	width: 180px;
+	width: 200px;
+	margin-top: 24px;
+	margin-left: 150px !important;
+	position: absolute;
+	z-index: 50px;
+}
+
+.fixed-card--sticky {
 	position: fixed;
-	top: 130px;
+	top: 97px;
+	z-index: 50px;
 }
 
 #tool-brief {
@@ -255,5 +314,26 @@ export default {
 	top: 85px;
 	width: 260px;
 	word-wrap: normal;
+}
+
+.v-breadcrumbs {
+	align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	flex: 0 1 auto;
+	list-style-type: none;
+	margin: 0;
+}
+
+::v-deep .v-breadcrumbs__item {
+	color: var(--v-anchor-base) !important;
+}
+
+::v-deep .v-breadcrumbs__item--disabled {
+	color: rgba(0, 0, 0, 38%) !important;
+}
+
+.v-breadcrumbs-divider {
+	color: rgba(0, 0, 0, 38%) !important;
 }
 </style>
