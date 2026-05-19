@@ -26,6 +26,8 @@ export default {
 			webAvailabilityLoading: false,
 			webAvailabilityError: null,
 			webAvailabilityNoData: false,
+			citations: {},
+			loadingCitations: {},
 		};
 	},
 	actions: {
@@ -35,7 +37,6 @@ export default {
 			const { data } = await this.$observatory.get(
 				`/tools?name=${payload.name}`
 			);
-
 			commit('updateTool', data);
 			commit('updateLoading', false);
 		},
@@ -123,6 +124,29 @@ export default {
 		updateEdamDialog({ commit }, payload) {
 			commit('updateEdamDialog', payload);
 		},
+
+		async fetchCitations({ commit, state }, { doi, pmid, title }) {
+			// Determinar qué identificador usar y cuál es la clave para el estado
+			const key = doi || pmid || title;
+			if (!key) return;
+			if (key in state.citations) return; // ya lo tenemos
+
+			// Construir el body con solo el identificador disponible
+			const body = doi ? { doi } : pmid ? { pmid } : { title };
+
+			commit('updateLoadingCitations', { doi: key, value: true });
+			try {
+				const { data } = await this.$observatory.post(
+					'/publication/citations',
+					body
+				);
+				commit('updateCitations', { doi: key, data });
+			} catch (e) {
+				commit('updateCitations', { doi: key, data: null });
+			} finally {
+				commit('updateLoadingCitations', { doi: key, value: false });
+			}
+		},
 	},
 	mutations: {
 		updateTool(state, payload) {
@@ -164,6 +188,12 @@ export default {
 			state.webAvailabilityError = null;
 			state.webAvailabilityNoData = false;
 		},
+		updateCitations(state, { doi, data }) {
+			state.citations = { ...state.citations, [doi]: data };
+		},
+		updateLoadingCitations(state, { doi, value }) {
+			state.loadingCitations = { ...state.loadingCitations, [doi]: value };
+		},
 	},
 	getters: {
 		tool(state) {
@@ -189,6 +219,12 @@ export default {
 		},
 		webAvailabilityNoData(state) {
 			return state.webAvailabilityNoData;
+		},
+		citations(state) {
+			return state.citations;
+		},
+		loadingCitations(state) {
+			return state.loadingCitations;
 		},
 	},
 };
