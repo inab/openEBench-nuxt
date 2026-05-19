@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<!-- Breadcrumbs inside tool -->
-		<div class="pb-0 breadcrumbs" v-if="breadcrumbs.length > 0">
+		<div v-if="breadcrumbs.length > 0" class="pb-0 breadcrumbs">
 			<v-breadcrumbs :items="breadcrumbs" dark class="v-breadcrumbs">
 				<template #divider>
 					<v-icon class="v-breadcrumbs-divider">mdi-chevron-right</v-icon>
@@ -148,21 +148,21 @@ export default {
 					id: 'citation',
 					component: 'CitationContent',
 				},
-				{
-					title: 'Licensing',
-					id: 'licensing',
-					component: '',
-				},
-				{
-					title: 'Recognition',
-					id: 'recognition',
-					component: '',
-				},
-				{
-					title: 'Similar Software',
-					id: 'similar',
-					component: '',
-				},
+				// {
+				// 	title: 'Licensing',
+				// 	id: 'licensing',
+				// 	component: '',
+				// },
+				// {
+				// 	title: 'Recognition',
+				// 	id: 'recognition',
+				// 	component: '',
+				// },
+				// {
+				// 	title: 'Similar Software',
+				// 	id: 'similar',
+				// 	component: '',
+				// },
 			],
 			selected: 0,
 			visible: false,
@@ -209,14 +209,16 @@ export default {
 		},
 	},
 
+	watch: {
+		'$route.params.id'(toolId) {
+			this.loadTool(toolId);
+		},
+	},
+
 	beforeMount() {
 		// Get name and type from URL
 		// this.$store.dispatch('tool/setToolName', this.$route.params.name)
-		const payload = {
-			name: this.$route.params.id,
-		};
-
-		this.$store.dispatch('tool_entry/retrieveTool', payload);
+		this.loadTool(this.$route.params.id);
 		window.addEventListener('scroll', this.handleScroll);
 	},
 
@@ -225,6 +227,13 @@ export default {
 	},
 
 	methods: {
+		loadTool(toolId) {
+			const payload = {
+				name: toolId,
+			};
+
+			this.$store.dispatch('tool_entry/retrieveTool', payload);
+		},
 		elementIsVisibleInViewport(ref, partiallyVisible = true) {
 			if (this.visible) {
 				const { top, left, bottom, right } = ref.getBoundingClientRect();

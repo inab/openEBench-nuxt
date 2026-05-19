@@ -26,9 +26,10 @@ export default {
 	},
 	methods: {
 		accessibilitySection() {
-			return 'REST API';
-			// keep the rest
-			/*
+			if (!this.tool.webpage?.[0]?.term) {
+				return '';
+			}
+
 			switch (this.tool.type) {
 				case 'rest':
 					return 'REST API';
@@ -39,20 +40,8 @@ export default {
 				case 'workbench':
 					return 'Workbench';
 				default:
-					return '';
+					return 'Webpage';
 			}
-			*/
-		},
-		urlFormatter() {
-			// TODO: this way of getting id will break the ap for some tools.
-
-			const version = this.tool.version[0];
-			// get domain of first webpage in tool.webpage
-			const domain = this.tool.webpage[0].term.split('/')[2];
-
-			const url = `biotools:${this.tool.name}:${version}/${this.tool.type}/${domain}`;
-
-			return url;
 		},
 		galaxyAvailable() {
 			// return 'galaxy' in this.tool.sources_labels;
