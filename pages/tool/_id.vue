@@ -300,7 +300,6 @@ export default {
 
 .fixed-card--sticky {
 	position: fixed;
-	top: 97px;
 	z-index: 50px;
 }
 
