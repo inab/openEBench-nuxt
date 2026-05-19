@@ -1,10 +1,5 @@
 <template>
-	<v-chip
-		class="ml-3 mr-2 pr-0 mt-0"
-		:color="color"
-		:text-color="textColor"
-		label
-	>
+	<v-chip class="ml-3 pr-0 mt-0" :color="color" :text-color="textColor" label>
 		<span class="text-body-2 font-weight-medium">{{ text }}</span>
 		<v-menu offset-x offset-y right>
 			<template #activator="{ on, attrs }">

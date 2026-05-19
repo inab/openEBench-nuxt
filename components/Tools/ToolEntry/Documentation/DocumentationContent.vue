@@ -9,14 +9,14 @@
 					Documents
 				</span>
 			</v-col>
-			<v-col cols="12" class="mt-0 pt-0 pl-8 ml-4">
+			<v-col cols="12" class="mt-0 pt-0 pl-8 ml-3">
 				<v-chip
 					v-for="(item, i) in tool.documentation"
 					:key="i"
 					label
 					text-color="blue darken-4"
 					color="blue lighten-4"
-					class="mr-3"
+					class="mr-4"
 				>
 					<span class="text-overline font-weight-medium">{{
 						item.term.type.toUpperCase()
@@ -31,7 +31,7 @@
 					Related topics
 				</span>
 			</v-col>
-			<v-col cols="12" class="ml-3 pl-8">
+			<v-col cols="12" class="mt-0 pt-0 pl-8">
 				<ItemChipMenu
 					v-for="item in tool.topics"
 					:key="item.id"
@@ -39,6 +39,7 @@
 					:edam-id="item.term.uri"
 					:color="colorTopic"
 					:text-color="textColorTopic"
+					class="mb-3 mr-1"
 				/>
 			</v-col>
 		</v-row>
@@ -49,7 +50,7 @@
 					Operations performed by the software
 				</span>
 			</v-col>
-			<v-col cols="12" class="mt-0 pt-0 pl-8 ml-3">
+			<v-col cols="12" class="mt-0 pt-0 pl-8 mr-4">
 				<ItemChipMenu
 					v-for="item in tool.operations"
 					:key="item.id"
@@ -57,6 +58,7 @@
 					:edam-id="item.term.uri"
 					:color="colorOperation"
 					:text-color="textColorOperation"
+					class="mb-3 mr-1"
 				/>
 			</v-col>
 		</v-row>
