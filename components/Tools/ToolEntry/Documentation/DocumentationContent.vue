@@ -6,9 +6,8 @@
 		>
 			<v-col cols="12" class="pt-0 mt-0 mb-0 pb-1">
 				<span class="text-subtitle d-flex align-center">
-					<v-icon small color="black" class="mr-1">
-						mdi-text-box-multiple-outline
-					</v-icon>
+					<div class="pub-line mr-3 flex-shrink-0 dot-black"></div>
+
 					Documents
 				</span>
 			</v-col>
@@ -30,7 +29,7 @@
 		<v-row v-if="tool.topics && tool.topics.length" class="mt-0 pt-0 mb-3">
 			<v-col cols="12" class="mt-0 pt-0 pb-0 mb-0">
 				<span class="text-subtitle d-flex align-center">
-					<v-icon small color="black" class="mr-1"> mdi-label-multiple</v-icon>
+					<div class="pub-line mr-3 flex-shrink-0 dot-black"></div>
 					Related topics
 				</span>
 			</v-col>
@@ -49,7 +48,7 @@
 		<v-row v-if="tool.operations && tool.operations.length" class="mt-0 mb-3">
 			<v-col cols="12" class="pt-1">
 				<span class="text-subtitle d-flex align-center">
-					<v-icon small color="black" class="mr-1"> mdi-cog</v-icon>
+					<div class="pub-line mr-3 flex-shrink-0 dot-black"></div>
 					Operations performed by the software
 				</span>
 			</v-col>
@@ -97,5 +96,15 @@ export default {
 .v-dialog {
 	width: 75%;
 	height: 70%;
+}
+
+.pub-line {
+	width: 2px;
+	height: 20px;
+	flex-shrink: 0;
+}
+
+.dot-black {
+	background-color: rgba(17, 16, 16, 95%);
 }
 </style>

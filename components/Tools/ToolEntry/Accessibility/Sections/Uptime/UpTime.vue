@@ -4,7 +4,7 @@
 		<v-row class="mt-0 pt-0 mb-2">
 			<v-col cols="12" class="pt-0 mt-0 mb-0 pb-1">
 				<span class="text-subtitle d-flex align-center">
-					<v-icon small color="black" class="mr-1"> mdi-console </v-icon>
+					<div class="pub-line mr-3 flex-shrink-0 dot-black"></div>
 					{{ type }}
 				</span>
 			</v-col>
@@ -100,3 +100,14 @@ export default {
 	},
 };
 </script>
+<style scoped>
+.pub-line {
+	width: 2px;
+	height: 20px;
+	flex-shrink: 0;
+}
+
+.dot-black {
+	background-color: rgba(17, 16, 16, 95%);
+}
+</style>
