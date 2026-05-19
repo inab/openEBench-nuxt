@@ -1,6 +1,9 @@
 <template>
 	<v-container class="mt-0 pt-0 pl-8">
-		<v-row class="mt-0 pt-0 mb-3">
+		<v-row
+			v-if="tool.documentation && tool.documentation.length"
+			class="mt-0 pt-0 mb-3"
+		>
 			<v-col cols="12" class="pt-0 mt-0 mb-0 pb-1">
 				<span class="text-subtitle d-flex align-center">
 					<v-icon small color="black" class="mr-1">
@@ -16,7 +19,7 @@
 					label
 					text-color="blue darken-4"
 					color="blue lighten-4"
-					class="mr-4"
+					class="mr-4 mb-3"
 				>
 					<span class="text-overline font-weight-medium">{{
 						item.term.type.toUpperCase()
@@ -24,7 +27,7 @@
 				</v-chip>
 			</v-col>
 		</v-row>
-		<v-row class="mt-0 pt-0 mb-3">
+		<v-row v-if="tool.topics && tool.topics.length" class="mt-0 pt-0 mb-3">
 			<v-col cols="12" class="mt-0 pt-0 pb-0 mb-0">
 				<span class="text-subtitle d-flex align-center">
 					<v-icon small color="black" class="mr-1"> mdi-label-multiple</v-icon>
@@ -43,7 +46,7 @@
 				/>
 			</v-col>
 		</v-row>
-		<v-row class="mt-0 mb-3">
+		<v-row v-if="tool.operations && tool.operations.length" class="mt-0 mb-3">
 			<v-col cols="12" class="pt-1">
 				<span class="text-subtitle d-flex align-center">
 					<v-icon small color="black" class="mr-1"> mdi-cog</v-icon>
