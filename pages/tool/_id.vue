@@ -89,28 +89,11 @@
 					</v-skeleton-loader>
 				</v-col>
 			</v-row>
-			<VueFixedScrollBreak
-				v-if="offset"
-				id="to-top"
-				:top-of-stop-element="offset"
-			>
-				<v-btn
-					class="mx-2"
-					fab
-					dark
-					small
-					color="#f48f43"
-					@click="$vuetify.goTo('#main-container')"
-				>
-					<v-icon dark> mdi-arrow-up </v-icon>
-				</v-btn>
-			</VueFixedScrollBreak>
 		</div>
 	</div>
 </template>
 <script>
 import { mapGetters } from 'vuex';
-import VueFixedScrollBreak from 'vue-fixed-scroll-break';
 import MainCard from '~/components/Tools/MainCard.vue';
 import EntryIntro from '~/components/Tools/ToolEntry/EntryIntro.vue';
 import ToolBrief from '~/components/Tools/ToolEntry/ToolBrief.vue';
@@ -127,7 +110,6 @@ export default {
 		CitationContent,
 		DocumentationContent,
 		AccessibilityContent,
-		VueFixedScrollBreak,
 	},
 	layout: 'DefaultLayoutWOBreadcrumbs',
 	data() {
@@ -280,8 +262,6 @@ export default {
 			this.visible = true;
 			this.menuSections(); // Menu sections activiation
 			this.entryBriefVisibility(); // first visibleItem is activeItem
-
-			this.offset = this.$root.$children[2].$refs.Footer.$el.offsetTop; // GoToTop button position -> stop at footer
 
 			// 500 the height of the fixed menu + tool brief + nav bar
 			this.offsetMenu = window.innerHeight - 500; // Menu position -> stop at footer
