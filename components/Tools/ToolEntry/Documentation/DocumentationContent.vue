@@ -2,12 +2,11 @@
 	<v-container class="mt-0 pt-0 pl-8">
 		<v-row
 			v-if="tool.documentation && tool.documentation.length"
-			class="mt-0 pt-0 mb-3"
+			class="mt-0 pt-0 mb-1"
 		>
-			<v-col cols="12" class="pt-0 mt-0 mb-0 pb-1">
+			<v-col cols="12" class="pt-0 mt-0 mb-0">
 				<span class="text-subtitle d-flex align-center">
 					<div class="pub-line mr-3 flex-shrink-0 dot-black"></div>
-
 					Documents
 				</span>
 			</v-col>
@@ -17,7 +16,7 @@
 					:key="i"
 					label
 					text-color="blue darken-4"
-					color="blue lighten-4"
+					color="blue lighten-5"
 					class="mr-4 mb-3"
 				>
 					<span class="text-overline font-weight-medium">{{
@@ -26,8 +25,8 @@
 				</v-chip>
 			</v-col>
 		</v-row>
-		<v-row v-if="tool.topics && tool.topics.length" class="mt-0 pt-0 mb-3">
-			<v-col cols="12" class="mt-0 pt-0 pb-0 mb-0">
+		<v-row v-if="tool.topics && tool.topics.length" class="mt-0 pt-0 mb-0">
+			<v-col cols="12" class="mt-0 pt-0">
 				<span class="text-subtitle d-flex align-center">
 					<div class="pub-line mr-3 flex-shrink-0 dot-black"></div>
 					Related topics
@@ -45,14 +44,17 @@
 				/>
 			</v-col>
 		</v-row>
-		<v-row v-if="tool.operations && tool.operations.length" class="mt-0 mb-3">
-			<v-col cols="12" class="pt-1">
+		<v-row
+			v-if="tool.operations && tool.operations.length"
+			class="mt-0 pt-0 mb-0"
+		>
+			<v-col cols="12" class="mt-0 pt-0">
 				<span class="text-subtitle d-flex align-center">
 					<div class="pub-line mr-3 flex-shrink-0 dot-black"></div>
 					Operations performed by the software
 				</span>
 			</v-col>
-			<v-col cols="12" class="mt-0 pt-0 pl-8 mr-4">
+			<v-col cols="12" class="mt-0 pt-0 pl-8">
 				<ItemChipMenu
 					v-for="item in tool.operations"
 					:key="item.id"
@@ -77,7 +79,7 @@ export default {
 	},
 	data() {
 		return {
-			colorTopic: 'green lighten-4',
+			colorTopic: 'green lighten-5',
 			textColorTopic: 'green darken-4',
 			colorOperation: 'orange lighten-5',
 			textColorOperation: 'orange darken-3',
