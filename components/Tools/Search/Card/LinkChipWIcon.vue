@@ -1,45 +1,41 @@
 <template>
-	<span>
-		<v-tooltip
-			v-if="!minimal"
-			nudge-left
-			bottom
-			attach
-			color="#EAF1F7"
-			max-width="450px"
-			allow-overflow
-		>
-			<template #activator="{ on }">
-				<v-chip
-					:small="!big"
-					:label="label"
-					light
-					color="grey lighten-4"
-					class="pl-1 mt-1"
-					:class="style()"
-					@click="openLink(link)"
-					v-on="on"
-				>
-					<v-icon small class="pa-1">{{ icon }}</v-icon>
-					<span>{{ text }}</span>
-				</v-chip>
-			</template>
-			<span class="text-caption black--text"> {{ link }} </span>
-		</v-tooltip>
-		<v-chip
-			v-else
-			:small="!big"
-			:label="label"
-			light
-			color="grey lighten-4"
-			class="pl-1 mt-1"
-			:class="style()"
-			@click="openLink(link)"
-			v-on="on"
-		>
-			<v-icon x-small class="pa-1">{{ icon }}</v-icon>
-		</v-chip>
-	</span>
+	<v-tooltip
+		v-if="!minimal"
+		nudge-left
+		bottom
+		attach
+		color="#EAF1F7"
+		max-width="450px"
+		allow-overflow
+	>
+		<template #activator="{ on }">
+			<v-chip
+				:small="!big"
+				:label="label"
+				light
+				color="grey lighten-4"
+				class="px-2 mt-1"
+				@click="openLink(link)"
+				v-on="on"
+			>
+				<v-icon small class="pa-1">{{ icon }}</v-icon>
+				<span>{{ text }}</span>
+			</v-chip>
+		</template>
+		<span class="text-caption black--text"> {{ link }} </span>
+	</v-tooltip>
+	<v-chip
+		v-else
+		:small="!big"
+		:label="label"
+		light
+		color="grey lighten-4"
+		class="px-2 mt-1"
+		@click="openLink(link)"
+		v-on="on"
+	>
+		<v-icon x-small class="px-1">{{ icon }}</v-icon>
+	</v-chip>
 </template>
 <script>
 export default {
