@@ -9,7 +9,6 @@
 				<v-skeleton-loader type="article"></v-skeleton-loader>
 			</v-col>
 		</v-row>
-
 		<v-row v-else>
 			<div v-if="visibleTools.length > 0">
 				<v-col
@@ -31,28 +30,38 @@
 						:publications="tool.publication"
 						:license="tool.license"
 						:webpage="tool.webpage[0]"
-						findability="1"
-						accessibility="1"
-						interoperability="1"
+						findability="0.2"
+						accessibility="0.5"
+						interoperability="0.8"
 						reusability="1"
 						:order="i"
 					/>
 				</v-col>
 			</div>
-			<v-alert
-				v-else
-				class="pa-4 mt-6 grey--text text-body-2"
-				elevation="0"
-				dense
-				text
-				type="info"
-				color="grey"
-			>
-				No tools found.
-			</v-alert>
+			<v-col v-else cols="12" class="d-flex justify-center">
+				<v-alert
+					class="pa-4 mt-6 grey--text text-body-2"
+					elevation="0"
+					dense
+					text
+					type="info"
+					color="grey"
+				>
+					No tools found.
+				</v-alert>
+			</v-col>
 			<div class="text-caption text--grey" v-if="visibleTools.length > 0">
-				Showing {{ visibleTools.length.toLocaleString() }} of
-				{{ totalTools.toLocaleString() }} results
+				<span v-if="!searchedTerm">
+					Showing {{ visibleTools.length.toLocaleString() }} example tools out
+					of {{ totalToolsGlobal.toLocaleString() }} total
+				</span>
+				<span v-else>
+					Showing {{ visibleTools.length.toLocaleString() }} of
+					{{ totalTools.toLocaleString() }} results for "<b>{{
+						searchedTerm
+					}}</b
+					>"
+				</span>
 			</div>
 		</v-row>
 		<v-row class="mt-6" justify="center"> </v-row>
@@ -62,7 +71,6 @@
 import { mapGetters } from 'vuex';
 import ToolCard from '~/components/Tools/Search/Card/ToolCard.vue';
 import SearchCategories from '~/components/Tools/Search/SearchCategories.vue';
-
 export default {
 	name: 'ResultCards',
 	components: {
@@ -81,6 +89,8 @@ export default {
 			visibleTools: 'tools',
 			loading: 'loading',
 			totalTools: 'totalTools',
+			totalToolsGlobal: 'totalToolsGlobal',
+			searchedTerm: 'searchedTerm',
 		}),
 	},
 };
