@@ -52,16 +52,15 @@
 					<upTimeStatus :status="status" :time="statusDays" />
 				</v-col>
 				<!--Plot-->
-				<v-col cols="12">
+				<v-col cols="12" class="pa-0">
 					<v-tabs-items v-model="tabUptime">
 						<v-tab-item v-for="range in availableRanges" :key="range.key">
-							<div class="d-flex justify-center">
-								<UptimePlot
-									class="mb-2"
-									:data-items="availabilityItemsByRange(range.key)"
-									:dtick="rangeDtick(range.key)"
-								/>
-							</div>
+							<UptimePlot
+								class="mb-2"
+								style="width: 100%"
+								:data-items="availabilityItemsByRange(range.key)"
+								:dtick="rangeDtick(range.key)"
+							/>
 						</v-tab-item>
 					</v-tabs-items>
 				</v-col>
