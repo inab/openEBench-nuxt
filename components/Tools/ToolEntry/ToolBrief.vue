@@ -23,14 +23,14 @@
 							</v-chip>
 						</div> -->
 					</div>
-					<div class="d-flex align-left">
+					<div class="d-flex align-left mr-5">
 						<div>
 							<LinkChipWIcon
 								v-if="webpage"
 								:link="webpage[0].term"
 								text=""
 								icon="mdi-web"
-								class="ml-1"
+								class="mx-0"
 								big
 								minimal
 							/>
@@ -41,12 +41,12 @@
 								:type="key"
 								text=""
 								light
-								class="ml-1 mr-2"
+								class="mx-1"
 								big
 								minimal
 							/>
 						</div>
-						<div class="ml-3">
+						<div class="ml-3 mr-1">
 							<ChipType
 								v-for="item in type"
 								:key="item"

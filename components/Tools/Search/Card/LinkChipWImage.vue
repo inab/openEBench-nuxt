@@ -13,8 +13,7 @@
 				:small="!big"
 				light
 				color="grey lighten-4"
-				class="pl-1 mt-1"
-				:class="style()"
+				class="px-2 mt-1"
 				@click="openLink(link)"
 				v-on="on"
 			>
