@@ -1,14 +1,5 @@
 <template>
 	<div v-if="!webAvailabilityNoData">
-		<!--Title of section-->
-		<v-row class="mt-0 pt-0 mb-2">
-			<v-col cols="12" class="pt-0 mt-0 mb-0 pb-1">
-				<span class="text-subtitle d-flex align-center">
-					<div class="pub-line mr-3 flex-shrink-0 dot-black"></div>
-					{{ type }}
-				</span>
-			</v-col>
-		</v-row>
 		<!--Webpage-->
 		<v-row class="mt-0 pt-0 mb-2">
 			<v-col cols="12" class="mt-0 pt-0 pb-0 mb-0 d-flex justify-center">
