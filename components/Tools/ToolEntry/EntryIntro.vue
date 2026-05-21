@@ -81,7 +81,7 @@ export default {
 			required: true,
 		},
 		type: {
-			type: String,
+			type: [String, Array],
 			required: true,
 		},
 		version: {
