@@ -79,7 +79,12 @@
 			</v-btn>
 
 			<!-- About Menu -->
-			<v-menu v-if="$vuetify.breakpoint.mdAndUp" left offset-y>
+			<v-menu
+				v-if="$vuetify.breakpoint.mdAndUp"
+				left
+				offset-y
+				content-class="about-menu-content"
+			>
 				<template #activator="{ on, attrs }">
 					<v-btn v-bind="attrs" text v-on="on">
 						<v-icon>mdi-chevron-down</v-icon>
@@ -192,3 +197,8 @@ export default {
 	},
 };
 </script>
+<style>
+.about-menu-content {
+	z-index: 9998 !important;
+}
+</style>
