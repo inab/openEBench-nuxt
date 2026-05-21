@@ -3,24 +3,13 @@
 		<main-header :vre-href="$config.VRE_URI" />
 		<v-main>
 			<Nuxt />
-
+			<back-to-top />
 			<Footer class="mt-16" />
 		</v-main>
 		<v-footer class="justify-center" app style="z-index: 9999">
 			Made with <v-icon color="red">mdi-heart</v-icon>
 			in Barcelona.
 		</v-footer>
-		<v-btn
-			id="to-top"
-			class="mx-2"
-			fab
-			dark
-			small
-			color="#f48f43"
-			@click="scrollToTop"
-		>
-			<v-icon dark> mdi-arrow-up </v-icon>
-		</v-btn>
 	</v-app>
 </template>
 
@@ -28,11 +17,13 @@
 import { mapGetters } from 'vuex';
 import HeaderMenu from '~/components/Header/HeaderMenu.vue';
 import Footer from '~/components/TheFooter';
+import BackToTop from '~/components/Molecules/BackToTop.vue';
 
 export default {
 	name: 'SearchTools',
 	components: {
 		'main-header': HeaderMenu,
+		'back-to-top': BackToTop,
 		Footer,
 	},
 	data() {
@@ -69,9 +60,6 @@ export default {
 	methods: {
 		async loadMore() {
 			if (!this.loading.search) {
-				console.log(this.totalTools);
-				console.log(this.visibleTools.length);
-
 				if (this.totalTools > this.visibleTools.length) {
 					await this.$store.dispatch('tool/updateLoadingLoadMore', true);
 					this.page = this.page + 1;
@@ -79,12 +67,6 @@ export default {
 					await this.$store.dispatch('tool/updateLoadingLoadMore', false);
 				}
 			}
-		},
-		scrollToTop() {
-			document.getElementById('layout-container').scrollTo({
-				top: 0,
-				behavior: 'smooth',
-			});
 		},
 	},
 };
@@ -95,11 +77,5 @@ export default {
 	padding-top: 0 !important;
 	overflow: auto;
 	height: 100vh;
-}
-
-#to-top {
-	position: fixed;
-	bottom: 100px;
-	right: 20px;
 }
 </style>

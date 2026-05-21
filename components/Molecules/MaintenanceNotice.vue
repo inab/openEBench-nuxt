@@ -3,7 +3,7 @@
 		<div class="maintenance-notice__box">
 			<v-icon right color="primary">mdi-alert</v-icon>
 			Please be aware that we will be performing routine server maintenance from
-			<b>August 4th to 7th</b>. <br />During this period, you may experience
+			<b>April 24th to 26th</b>. <br />During this period, you may experience
 			temporary disruptions. We apologize for any inconvenience and appreciate
 			your understanding.
 		</div>
@@ -16,8 +16,8 @@ export default {
 	computed: {
 		isMessageVisible() {
 			const dateRange = {
-				start: new Date('2025-07-24T10:00:00+02:00'),
-				end: new Date('2025-08-07T22:00:00+02:00'),
+				start: new Date('2026-04-21T10:00:00+02:00'),
+				end: new Date('2026-04-26T22:00:00+02:00'),
 			};
 
 			if (new Date() >= dateRange.start && new Date() <= dateRange.end) {
