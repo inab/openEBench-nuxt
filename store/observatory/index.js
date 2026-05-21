@@ -42,7 +42,7 @@ export const state = () => ({
 			description:
 				'The Spanish Precision Medicine Infrastructure associated with Science and Technology (IMPaCT), aims to impulse precision medicine within the Spanish National Health System. IMPaCT-Data, the Data Science pillar of this infrastructure, has been tasked to design, deploy and extend a Biomedical Cloud taking as reference similar efforts across Europe.',
 			homepage: 'https://impact-data.bsc.es/',
-			image: 'Logo_IMPaCT-Data-Vertical.png',
+			image: 'Logo_IMPaCT-Data.png',
 		},
 		{
 			id: 'PerMedCoE',
