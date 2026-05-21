@@ -99,7 +99,7 @@ import EntryIntro from '~/components/Tools/ToolEntry/EntryIntro.vue';
 import ToolBrief from '~/components/Tools/ToolEntry/ToolBrief.vue';
 import CitationContent from '~/components/Tools/ToolEntry/Citation/CitationContent.vue';
 import DocumentationContent from '~/components/Tools/ToolEntry/Documentation/DocumentationContent.vue';
-import AccessibilityContent from '~/components/Tools/ToolEntry/Accessibility/AccessibilityContent.vue';
+import AvailabilityContent from '~/components/Tools/ToolEntry/Availability/AvailabilityContent.vue';
 
 export default {
 	name: 'ToolEntry',
@@ -109,7 +109,7 @@ export default {
 		ToolBrief,
 		CitationContent,
 		DocumentationContent,
-		AccessibilityContent,
+		AvailabilityContent,
 	},
 	layout: 'DefaultLayoutWOBreadcrumbs',
 	data() {
@@ -121,9 +121,9 @@ export default {
 					component: 'DocumentationContent',
 				},
 				{
-					title: 'Accessibility',
-					id: 'accessibility',
-					component: 'AccessibilityContent',
+					title: 'Availability',
+					id: 'availability',
+					component: 'AvailabilityContent',
 				},
 				{
 					title: 'Citation',
