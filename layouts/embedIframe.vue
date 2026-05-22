@@ -6,6 +6,7 @@
 			<v-container class="v-container-custom">
 				<Nuxt @emitBreadcrumbs="handleBreadcrumbs" />
 			</v-container>
+			<back-to-top />
 			<Footer class="mt-16" />
 		</v-main>
 		<v-footer class="justify-center" app>
@@ -18,6 +19,7 @@
 <script>
 import HeaderMenu from '~/components/Header/HeaderMenu.vue';
 import BreadcrumbsBar from '~/components/Molecules/BreadcrumbsBar';
+import BackToTop from '~/components/Molecules/BackToTop.vue';
 import Footer from '~/components/TheFooter';
 
 export default {
@@ -25,6 +27,7 @@ export default {
 	components: {
 		'main-header': HeaderMenu,
 		BreadcrumbsBar,
+		'back-to-top': BackToTop,
 		Footer,
 	},
 	data() {
