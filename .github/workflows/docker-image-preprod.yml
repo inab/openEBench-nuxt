@@ -23,6 +23,6 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
-          file: ./Dockerfile.producion
+          file: ./Dockerfile.production
           push: true
           tags: ${{ secrets.DOCKER_HUB_USER_NAME }}/openebench-nuxt-preprod:latest
