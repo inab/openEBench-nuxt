@@ -1,69 +1,67 @@
 <template>
 	<div class="license-table">
 		<v-row class="license-table__header">
-			<v-col cols="12" md="6"></v-col>
-			<v-col cols="6" md="2">OSI approved</v-col>
-			<v-col cols="6" md="4">See also</v-col>
+			<v-col cols="10" md="5"></v-col>
+			<v-col cols="5" md="2">OSI approved</v-col>
+			<v-col cols="5" md="4">See also</v-col>
 		</v-row>
 
-		<v-row
-			v-for="license in enrichedLicenses"
-			:key="licenseKey(license)"
-			class="license-table__row"
-			align="center"
-		>
-			<v-col cols="12" md="6">
-				<v-btn
-					v-if="license.reference || license.url"
-					:href="license.reference || license.url"
-					target="_blank"
-					rel="noopener noreferrer"
-					text
-					class="license-table__license"
-				>
-					{{ license.displayName }}
-				</v-btn>
-
-				<div
-					v-else
-					class="license-table__license license-table__license--plain"
-				>
-					{{ license.displayName }}
-				</div>
-			</v-col>
-
-			<v-col cols="6" md="2" class="license-table__osi">
-				<span v-if="license.loading">Checking...</span>
-				<span v-else-if="license.isOsiApproved === true"
-					><v-chip color="green" outlined>Yes</v-chip></span
-				>
-				<span v-else-if="license.isOsiApproved === false"
-					><v-chip color="orange" outlined>No</v-chip></span
-				>
-				<span v-else class="license-table__muted"
-					><v-chip color="grey" outlined>Unknown</v-chip></span
-				>
-			</v-col>
-
-			<v-col cols="6" md="4">
-				<template v-if="license.seeAlso && license.seeAlso.length">
-					<v-chip
-						v-for="url in license.seeAlso"
-						:key="url"
-						class="license-table__chip mr-2 my-1"
-						small
-						pill
-						:href="url"
+		<template v-for="(license, index) in enrichedLicenses">
+			<v-divider :key="`divider-${index}`" class="divider" />
+			<v-row
+				:key="licenseKey(license)"
+				class="license-table__row"
+				align="center"
+			>
+				<v-col cols="10" md="5">
+					<v-btn
+						v-if="license.reference || license.url"
+						:href="license.reference || license.url"
 						target="_blank"
 						rel="noopener noreferrer"
+						text
+						class="license-table__license"
 					>
-						{{ extractDomain(url) }}
-					</v-chip>
-				</template>
+						{{ license.displayName }}
+					</v-btn>
 
-				<span v-else class="license-table__muted">—</span>
-			</v-col>
-		</v-row>
+					<div
+						v-else
+						class="license-table__license license-table__license--plain"
+					>
+						{{ license.displayName }}
+					</div>
+				</v-col>
+
+				<v-col cols="5" md="2" class="license-table__osi">
+					<span v-if="license.loading" class="license-table__muted"
+						>Checking...</span
+					>
+					<span v-else-if="license.isOsiApproved === true">Yes</span>
+					<span v-else-if="license.isOsiApproved === false">No</span>
+					<span v-else class="license-table__muted">—</span>
+				</v-col>
+
+				<v-col cols="5" md="4">
+					<template v-if="license.seeAlso && license.seeAlso.length">
+						<v-chip
+							v-for="url in license.seeAlso"
+							:key="url"
+							class="license-table__chip mr-2 my-1"
+							small
+							pill
+							:href="url"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							{{ extractDomain(url) }}
+						</v-chip>
+					</template>
+
+					<span v-else class="license-table__muted">—</span>
+				</v-col>
+			</v-row>
+		</template>
 
 		<div v-if="!enrichedLicenses.length" class="license-table__muted">
 			No licensing information available.
@@ -213,12 +211,14 @@ export default {
 }
 
 .license-table__header {
-	font-size: 20px;
-	color: rgba(0, 0, 0, 65%);
+	font-size: 14px;
+	padding-bottom: 0.2em;
+	color: rgba(0, 0, 0, 55%);
 }
 
 .license-table__row {
-	margin-bottom: 12px;
+	margin-bottom: 0;
+	padding-top: 0.2em;
 }
 
 .license-table__license {
@@ -227,24 +227,25 @@ export default {
 	color: #005aa8;
 	width: auto;
 	max-width: 100%;
-	min-width: 420px;
-	min-height: 48px;
-	padding: 0 22px;
+	min-width: 0;
+	min-height: 32px;
+	height: 32px;
+	padding: 0 12px;
 	font-weight: 600;
-	font-size: 16px;
+	font-size: 14px;
 	letter-spacing: normal;
 	text-transform: none;
 	border-radius: 6px;
 }
 
 .license-table__osi {
-	font-size: 16px;
+	font-size: 13px;
 }
 
 .license-table__chip {
-	font-size: 18px;
-	height: 34px;
-	padding: 0 14px;
+	font-size: 12px;
+	height: 24px;
+	padding: 0 10px;
 }
 
 .license-table__license ::v-deep .v-btn__content {
@@ -255,6 +256,7 @@ export default {
 .license-table__license--plain {
 	display: flex;
 	align-items: center;
+	font-size: 13px;
 }
 
 .license-table__license:hover {
@@ -267,6 +269,10 @@ export default {
 
 .v-chip {
 	background-color: #f5f5f5 !important;
-	font-size: 15px;
+	font-size: 12px;
+}
+
+.divider {
+	width: 90%;
 }
 </style>
