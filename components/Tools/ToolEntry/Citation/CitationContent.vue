@@ -119,6 +119,7 @@ export default {
 			return this.tool.publication.filter((item) => {
 				const doi = item.term && item.term.doi;
 				if (!doi || seen.has(doi)) return false;
+				if (item.term.error) return false;
 				seen.add(doi);
 				return true;
 			});
