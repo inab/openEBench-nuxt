@@ -27,7 +27,7 @@
 							<!-- Círculo decorativo -->
 							<div
 								class="pub-dot mr-3 flex-shrink-0"
-								:class="dotColor(i)"
+								:style="{ backgroundColor: dotColors[i % dotColors.length] }"
 							></div>
 
 							<div class="flex-grow-1">
@@ -96,15 +96,34 @@
 				</v-col>
 			</v-row>
 		</div>
+		<!-- Plot -->
+		<div>
+			<v-row class="mt-0 pt-0 mb-2">
+				<v-col cols="12" class="mt-0 pt-0 pl-8 ml-4">
+					<div>
+						<!-- Plot -->
+						<CitationPlot
+							v-if="citationPlotData.length > 0"
+							:key="citationPlotData.length"
+							:dataTraces="citationPlotData"
+							:colors="citationPlotColors"
+						/>
+					</div>
+				</v-col>
+			</v-row>
+		</div>
 	</v-container>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
+import CitationPlot from './CitationPlot.vue';
 
 export default {
 	name: 'CitationContent',
-
+	components: {
+		CitationPlot,
+	},
 	computed: {
 		...mapGetters('tool_entry', {
 			tool: 'tool',
@@ -112,6 +131,24 @@ export default {
 			citations: 'citations',
 			loadingCitations: 'loadingCitations',
 		}),
+
+		// Paleta centralizada
+		dotColors() {
+			return [
+				'#4caf50',
+				'#ff9800',
+				'#2196f3',
+				'#009688',
+				'#9467bd',
+				'#795548',
+				'#f44336',
+				'#ffc107',
+				'#8bc34a',
+				'#607d8b',
+				'#3f51b5',
+				'#e91e63',
+			];
+		},
 
 		uniquePublications() {
 			if (!this.tool || !this.tool.publication) return [];
@@ -123,6 +160,51 @@ export default {
 				seen.add(doi);
 				return true;
 			});
+		},
+
+		citationPlotData() {
+			if (!this.citations || !this.uniquePublications.length) return [];
+
+			const result = [];
+
+			this.uniquePublications.forEach((item, index) => {
+				const key = this.getKey(item);
+				const entry = this.citations[key];
+				if (!entry || !entry.item) return;
+
+				const europePmc = entry.item.find((s) => s.source === 'Europe PMC');
+				if (!europePmc || !europePmc.count) return;
+
+				const dataByYear = Object.entries(europePmc.count)
+					.filter(([year]) => !isNaN(year))
+					.map(([year, citations]) => ({
+						year: parseInt(year),
+						citations,
+					}))
+					.sort((a, b) => a.year - b.year);
+
+				if (dataByYear.length === 0) return;
+
+				const id = item.term.doi || item.term.pmid || `pub-${index}`;
+
+				result.push({
+					id,
+					label: item.term.title,
+					title: item.term.title,
+					year: item.term.year,
+					url: item.term.doi ? `https://doi.org/${item.term.doi}` : null,
+					data: dataByYear,
+					// El color se asigna por el índice en uniquePublications, no en result
+					color: this.dotColors[index % this.dotColors.length],
+				});
+			});
+
+			return result;
+		},
+
+		// Colores solo de las publicaciones que SÍ están en el gráfico, en el mismo orden
+		citationPlotColors() {
+			return this.citationPlotData.map((item) => item.color);
 		},
 	},
 
@@ -146,11 +228,6 @@ export default {
 
 		openLink(url) {
 			window.open(url, '_blank');
-		},
-
-		dotColor(index) {
-			const colors = ['dot-green', 'dot-orange', 'dot-blue', 'dot-teal'];
-			return colors[index % colors.length];
 		},
 
 		getKey(item) {
@@ -226,21 +303,5 @@ export default {
 
 .dot-black {
 	background-color: rgba(17, 16, 16, 95%);
-}
-
-.dot-green {
-	background-color: #4caf50;
-}
-
-.dot-orange {
-	background-color: #ff9800;
-}
-
-.dot-blue {
-	background-color: #2196f3;
-}
-
-.dot-teal {
-	background-color: #009688;
 }
 </style>
