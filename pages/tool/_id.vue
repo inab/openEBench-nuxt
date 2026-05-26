@@ -99,7 +99,8 @@ import EntryIntro from '~/components/Tools/ToolEntry/EntryIntro.vue';
 import ToolBrief from '~/components/Tools/ToolEntry/ToolBrief.vue';
 import CitationContent from '~/components/Tools/ToolEntry/Citation/CitationContent.vue';
 import DocumentationContent from '~/components/Tools/ToolEntry/Documentation/DocumentationContent.vue';
-import AccessibilityContent from '~/components/Tools/ToolEntry/Accessibility/AccessibilityContent.vue';
+import AvailabilityContent from '~/components/Tools/ToolEntry/Availability/AvailabilityContent.vue';
+import LicenseContent from '~/components/Tools/ToolEntry/License/LicenseContent.vue';
 
 export default {
 	name: 'ToolEntry',
@@ -109,7 +110,8 @@ export default {
 		ToolBrief,
 		CitationContent,
 		DocumentationContent,
-		AccessibilityContent,
+		AvailabilityContent,
+		LicenseContent,
 	},
 	layout: 'DefaultLayoutWOBreadcrumbs',
 	data() {
@@ -121,30 +123,20 @@ export default {
 					component: 'DocumentationContent',
 				},
 				{
-					title: 'Accessibility',
-					id: 'accessibility',
-					component: 'AccessibilityContent',
+					title: 'Availability',
+					id: 'availability',
+					component: 'AvailabilityContent',
 				},
 				{
 					title: 'Citation',
 					id: 'citation',
 					component: 'CitationContent',
 				},
-				// {
-				// 	title: 'Licensing',
-				// 	id: 'licensing',
-				// 	component: '',
-				// },
-				// {
-				// 	title: 'Recognition',
-				// 	id: 'recognition',
-				// 	component: '',
-				// },
-				// {
-				// 	title: 'Similar Software',
-				// 	id: 'similar',
-				// 	component: '',
-				// },
+				{
+					title: 'Licensing',
+					id: 'licensing',
+					component: 'LicenseContent',
+				},
 			],
 			selected: 0,
 			visible: false,
@@ -289,7 +281,7 @@ export default {
 }
 
 .content-cards {
-	min-height: 300px;
+	min-height: 200px;
 }
 
 #to-top {

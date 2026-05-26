@@ -1,15 +1,17 @@
 <template>
-	<v-btn
-		v-show="visible"
-		class="back-to-top"
-		fab
-		dark
-		small
-		color="#f48f43"
-		@click="scrollToTop"
-	>
-		<v-icon dark>mdi-arrow-up</v-icon>
-	</v-btn>
+	<transition name="fade">
+		<v-btn
+			v-if="visible"
+			class="back-to-top"
+			fab
+			dark
+			small
+			color="#f48f43"
+			@click="scrollToTop"
+		>
+			<v-icon dark>mdi-arrow-up</v-icon>
+		</v-btn>
+	</transition>
 </template>
 
 <script>
@@ -51,5 +53,15 @@ export default {
 	bottom: 410px;
 	right: 80px;
 	z-index: 100;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+	transition: opacity 0.4s ease;
+}
+
+.fade-enter,
+.fade-leave-to {
+	opacity: 0;
 }
 </style>

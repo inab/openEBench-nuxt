@@ -13,7 +13,7 @@ import GalaxyInstances from './Sections/Galaxy/GalaxyInstances.vue';
 import InstallationInstructions from './Sections/Installation/InstallationInstructions.vue';
 
 export default {
-	name: 'AccessibilityContent',
+	name: 'AvailabilityContent',
 	components: {
 		UpTime,
 		GalaxyInstances,
