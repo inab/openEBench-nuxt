@@ -18,22 +18,21 @@
 					cols="12"
 					sm="12"
 					md="12"
-				>
-					<ToolCard
-						:name="tool.label[0]"
+					><ToolCard
+						:name="tool.label"
 						:subname="tool.name"
-						:description="tool.description[0]"
+						:description="tool.description"
 						:type="tool.type"
 						:topics="tool.topics"
 						:operations="tool.operations"
-						:sources-labels="tool.sources_labels"
-						:publications="tool.publication"
+						:sources-labels="tool.sourcesLabels"
+						:publications="tool.publications"
 						:license="tool.license"
-						:webpage="tool.webpage[0]"
-						findability="0.2"
-						accessibility="0.5"
-						interoperability="0.8"
-						reusability="1"
+						:webpage="tool.webpage"
+						:findability="tool.findability"
+						:accessibility="tool.accessibility"
+						:interoperability="tool.interoperability"
+						:reusability="tool.reusability"
 						:order="i"
 					/>
 				</v-col>

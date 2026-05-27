@@ -161,34 +161,42 @@ export default {
 		subname: {
 			type: String,
 			required: true,
+			default: '',
 		},
 		type: {
 			type: Array,
 			required: true,
+			default: () => [],
 		},
 		description: {
 			type: String,
 			required: true,
+			default: '',
 		},
 		topics: {
 			type: Array,
 			required: true,
+			default: () => [],
 		},
 		operations: {
 			type: Array,
 			required: true,
+			default: () => [],
 		},
 		sourcesLabels: {
 			type: Object,
 			required: true,
+			default: () => ({}),
 		},
 		publications: {
 			type: Array,
 			required: true,
+			default: () => [],
 		},
 		license: {
 			type: Array,
 			required: true,
+			default: () => [],
 		},
 		webpage: {
 			type: String,

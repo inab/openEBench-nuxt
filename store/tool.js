@@ -38,6 +38,40 @@ function buildQuery(state) {
 	return query;
 }
 
+function normalizeTool(tool) {
+	// handles arrays, null, undefined — but preserves 0
+	const pick = (val) => {
+		const v = Array.isArray(val) ? val[0] : val;
+		return v != null ? v : '';
+	};
+
+	const fairsoft = tool.fairsoft || {};
+
+	// safely parse a score — handles undefined, null, NaN, strings
+	const score = (val) => {
+		const n = parseFloat(val);
+		return isNaN(n) ? 0 : n;
+	};
+
+	return {
+		name: pick(tool.name) || '',
+		subname: pick(tool.name) || '',
+		label: pick(tool.label) || pick(tool.name) || '',
+		type: tool.type || [],
+		description: pick(tool.description) || '',
+		topics: tool.topics || [],
+		operations: tool.operations || [],
+		sourcesLabels: tool.sources_labels || {},
+		publications: tool.publication || [],
+		license: tool.license || [],
+		webpage: pick(tool.webpage) || pick(tool.homepage) || '',
+		findability: score(fairsoft.F),
+		accessibility: score(fairsoft.A),
+		interoperability: score(fairsoft.I),
+		reusability: score(fairsoft.R),
+	};
+}
+
 export default {
 	namespaced: true,
 	state: () => {
@@ -114,7 +148,16 @@ export default {
 					);
 				}
 
-				commit('updateTools', result.tools);
+				// ✅ normalize regardless of which branch was taken
+				const tools = result.tools || result.data || [];
+				console.log(
+					'normalizing',
+					tools.length,
+					'tools, first label:',
+					tools[0]?.label
+				);
+				commit('updateTools', tools.map(normalizeTool));
+
 				if (result.counts) commit('updateCounts', result.counts);
 				if (result.stats) commit('updateStats', result.stats);
 
@@ -152,7 +195,8 @@ export default {
 					API_HEADERS
 				);
 
-				commit('updateTools', result.tools);
+				const normalized = (result.tools || []).map(normalizeTool);
+				commit('updateTools', normalized);
 				commit('updateCounts', result.counts);
 				commit('updateStatsAfterFilter', result.stats);
 				commit('updateTotalTools', result.total_tools);
@@ -175,8 +219,8 @@ export default {
 					`/search?page=${page}&q=${state.searchedTerm}${state.query}`,
 					API_HEADERS
 				);
-
-				commit('updateTools', state.tools.concat(result.tools));
+				const normalized = (result.tools || []).map(normalizeTool);
+				commit('updateTools', state.tools.concat(normalized));
 				commit('updateTotalTools', result.total_tools);
 			} catch (error) {
 				console.error('❌ loadMoreTools error:', error);
@@ -232,7 +276,7 @@ export default {
 			state.loading.loadMore = value;
 		},
 		updateTools(state, value) {
-			state.tools = value;
+			state.tools = value || [];
 		},
 		updateStats(state, value) {
 			state.stats = value;
