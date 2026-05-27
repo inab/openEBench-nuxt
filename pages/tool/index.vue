@@ -4,19 +4,7 @@
 		<div class="px-12 px-xl-16">
 			<v-row>
 				<v-col cols="12" md="4" lg="3" xl="3" style="position: relative">
-					<div
-						v-if="!isSearchActive"
-						style="
-							position: absolute;
-							top: 0;
-							left: 0;
-							width: 100%;
-							height: 100%;
-							z-index: 10;
-							cursor: not-allowed;
-						"
-					/>
-					<div :class="{ 'disabled-chip': !isSearchActive }">
+					<div>
 						<CardsFilter />
 					</div>
 				</v-col>
@@ -64,9 +52,6 @@ export default {
 			loading: 'tool/loading',
 			searchedTerm: 'tool/searchedTerm',
 		}),
-		isSearchActive() {
-			return this.searchedTerm && this.searchedTerm.length > 0;
-		},
 	},
 	async mounted() {
 		await this.loadLanding();

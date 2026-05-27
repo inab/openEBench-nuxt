@@ -39,6 +39,18 @@ export default {
 			return newItems;
 		},
 	},
+	mounted() {
+		this.$emit('has-active-filters', this.items.length > 0);
+	},
+	watch: {
+		'stats.operations': {
+			deep: true,
+			handler() {
+				const hasItems = this.items.length > 0;
+				this.$emit('has-active-filters', hasItems);
+			},
+		},
+	},
 	methods: {
 		percentage(count) {
 			return count / this.totalTools;

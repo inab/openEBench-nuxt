@@ -16,14 +16,18 @@
 			<v-expansion-panels v-model="expanded" accordion multiple flat>
 				<!--ViewSelector /-->
 
-				<SourcesFilter />
-				<TypeFilter />
-				<TopicsFilter />
-				<OperationsFilter />
-				<LicenseFilter />
-				<InputDataFormatFilter />
-				<OutputDataFormatFilter />
-				<CollectionFilter />
+				<SourcesFilter @has-active-filters="onFilterActive(0, $event)" />
+				<TypeFilter @has-active-filters="onFilterActive(1, $event)" />
+				<TopicsFilter @has-active-filters="onFilterActive(2, $event)" />
+				<OperationsFilter @has-active-filters="onFilterActive(3, $event)" />
+				<LicenseFilter @has-active-filters="onFilterActive(4, $event)" />
+				<InputDataFormatFilter
+					@has-active-filters="onFilterActive(5, $event)"
+				/>
+				<OutputDataFormatFilter
+					@has-active-filters="onFilterActive(6, $event)"
+				/>
+				<CollectionFilter @has-active-filters="onFilterActive(7, $event)" />
 			</v-expansion-panels>
 		</v-col>
 	</v-row>
@@ -59,6 +63,20 @@ export default {
 		this.$store.dispatch('tool/getEDAMTerms');
 	},
 	methods: {
+		onFilterActive(index, isActive) {
+			console.log(
+				'[CardsFilter] onFilterActive called, index:',
+				index,
+				'isActive:',
+				isActive
+			);
+			if (isActive && !this.expanded.includes(index)) {
+				this.expanded.push(index);
+			} else if (!isActive) {
+				this.expanded = this.expanded.filter((i) => i !== index);
+			}
+			console.log('[CardsFilter] expanded is now:', this.expanded);
+		},
 		filterRestore() {
 			this.$store.dispatch('tool/restoreFilters');
 			this.$store.dispatch('tool/initialSearch', this.$route.query.q);
