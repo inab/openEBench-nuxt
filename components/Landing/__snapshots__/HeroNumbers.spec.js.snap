@@ -2,51 +2,51 @@
 
 exports[`HeroNumbers should match snapshot 1`] = `
 "<v-parallax-stub height=\\"170\\" alt=\\"\\" src=\\"\\">
-  <v-container-stub tag=\\"div\\">
-    <v-row-stub tag=\\"div\\" align=\\"center\\" justify=\\"center\\" class=\\"root\\">
+  <v-container-stub tag=\\"div\\" class=\\"hero-numbers__container\\">
+    <v-row-stub tag=\\"div\\" align=\\"center\\" justify=\\"center\\" class=\\"hero-numbers__row\\">
       <v-col-stub cols=\\"12\\" sm=\\"3\\" tag=\\"div\\" align=\\"center\\">
-        <div class=\\"counter-item\\"><span class=\\"icon ion-leaf\\"></span>
-          <div class=\\"text\\">
-            <h4 class=\\"text-h3\\">
+        <div class=\\"hero-numbers__item\\"><span class=\\"hero-numbers__icon ion-leaf\\"></span>
+          <div class=\\"hero-numbers__text\\">
+            <h4 class=\\"hero-numbers__count text-h3\\">
               <animated-number-stub value=\\"5\\"></animated-number-stub>
             </h4>
-            <h6 class=\\"title\\">
+            <h6 class=\\"hero-numbers__title\\">
               Community
             </h6>
           </div>
         </div>
       </v-col-stub>
       <v-col-stub cols=\\"12\\" sm=\\"3\\" tag=\\"div\\" align=\\"center\\">
-        <div class=\\"counter-item\\"><span class=\\"icon ion-ios-lightbulb-outline\\"></span>
-          <div class=\\"text\\">
-            <h4 class=\\"text-h3\\">
+        <div class=\\"hero-numbers__item\\"><span class=\\"hero-numbers__icon ion-ios-lightbulb-outline\\"></span>
+          <div class=\\"hero-numbers__text\\">
+            <h4 class=\\"hero-numbers__count text-h3\\">
               <animated-number-stub value=\\"10\\"></animated-number-stub>
             </h4>
-            <h6 class=\\"title\\">
+            <h6 class=\\"hero-numbers__title\\">
               Tool
             </h6>
           </div>
         </div>
       </v-col-stub>
       <v-col-stub cols=\\"12\\" sm=\\"3\\" tag=\\"div\\" align=\\"center\\">
-        <div class=\\"counter-item\\"><span class=\\"icon ion-ios-world-outline\\"></span>
-          <div class=\\"text\\">
-            <h4 class=\\"text-h3 font-weight-normal\\">
+        <div class=\\"hero-numbers__item\\"><span class=\\"hero-numbers__icon ion-ios-world-outline\\"></span>
+          <div class=\\"hero-numbers__text\\">
+            <h4 class=\\"hero-numbers__count text-h3 font-weight-normal\\">
               <animated-number-stub value=\\"20\\"></animated-number-stub>
             </h4>
-            <h6 class=\\"title\\">
+            <h6 class=\\"hero-numbers__title\\">
               Resource
             </h6>
           </div>
         </div>
       </v-col-stub>
       <v-col-stub cols=\\"12\\" sm=\\"3\\" tag=\\"div\\" align=\\"center\\">
-        <div class=\\"counter-item\\"><span class=\\"icon ion-ios-world-outline\\"></span>
-          <div class=\\"text\\">
-            <h4 class=\\"text-h3 font-weight-normal\\">
-              <animated-number-stub value=\\"0\\"></animated-number-stub>
+        <div class=\\"hero-numbers__item\\"><span class=\\"hero-numbers__icon ion-ios-world-outline\\"></span>
+          <div class=\\"hero-numbers__text\\">
+            <h4 class=\\"hero-numbers__count text-h3 font-weight-normal\\">
+              <animated-number-stub value=\\"8\\"></animated-number-stub>
             </h4>
-            <h6 class=\\"title\\">
+            <h6 class=\\"hero-numbers__title\\">
               Project Space
             </h6>
           </div>

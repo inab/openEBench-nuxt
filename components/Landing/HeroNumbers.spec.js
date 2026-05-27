@@ -15,6 +15,7 @@ const propsData = {
 	toolsCount: 10,
 	communityCount: 5,
 	resourcesCount: 20,
+	projectsCount: 8,
 };
 
 describe('HeroNumbers', () => {

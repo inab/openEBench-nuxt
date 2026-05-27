@@ -25,6 +25,9 @@ describe('Index.vue', () => {
 				communitiesCount: () => {
 					return 10;
 				},
+				projectsCount: () => {
+					return 8;
+				},
 			},
 			actions: {
 				getCommunitiesCount: jest.fn(),
