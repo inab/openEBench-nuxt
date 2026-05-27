@@ -22,14 +22,6 @@
 						<v-col cols="12">
 							<ResultCards />
 						</v-col>
-						<v-col cols="12" align="center">
-							<v-progress-circular
-								v-show="loading.loadMore"
-								indeterminate
-								color="primary"
-								transition="scroll-y-transition"
-							></v-progress-circular>
-						</v-col>
 					</v-row>
 				</v-col>
 			</v-row>

@@ -6,22 +6,30 @@
 					<v-card v-if="!expand" class="sec pa-1 rounded-lg" elevation="1">
 						<v-row justify="end" class="mb-0 pb-0">
 							<v-col cols="8" class="mt-1 pb-0 mr-1">
-								<div class="circle" :style="opacity(findability)"></div>
+								<div class="circle" :style="opacity(findability)">
+									<span class="fair-letter">F</span>
+								</div>
 							</v-col>
 						</v-row>
 						<v-row justify="end" class="mt-0 mb-0 pb-0">
 							<v-col cols="8" class="justify-end pb-0 pt-2 mr-1">
-								<div class="circle" :style="opacity(accessibility)"></div>
+								<div class="circle" :style="opacity(accessibility)">
+									<span class="fair-letter">A</span>
+								</div>
 							</v-col>
 						</v-row>
 						<v-row justify="end" class="mt-0 mb-0 pb-0">
 							<v-col cols="8" class="justify-end pb-0 pt-2 mr-1">
-								<div class="circle" :style="opacity(interoperability)"></div>
+								<div class="circle" :style="opacity(interoperability)">
+									<span class="fair-letter">I</span>
+								</div>
 							</v-col>
 						</v-row>
 						<v-row justify="end" class="mt-0 mb-0 pb-0">
 							<v-col cols="8" class="justify-end pb-0 mb-1 pt-2 mr-1">
-								<div class="circle" :style="opacity(reusability)"></div>
+								<div class="circle" :style="opacity(reusability)">
+									<span class="fair-letter">R</span>
+								</div>
 							</v-col>
 						</v-row>
 					</v-card>
@@ -181,6 +189,19 @@ export default {
 	height: 18px;
 	border-radius: 50%;
 	background-color: #396fba;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: white;
+	font-size: 0.68rem;
+	font-weight: 700;
+	line-height: 1;
+	box-shadow: inset 0 0 0 1px rgba(11, 87, 159, 28%);
+}
+
+.fair-letter {
+	color: white;
+	text-shadow: 0 1px 2px rgba(11, 87, 159, 90%), 0 0 1px rgba(11, 87, 159, 70%);
 }
 
 .inner-chip {

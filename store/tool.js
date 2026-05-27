@@ -78,6 +78,7 @@ export default {
 		return {
 			searchedTerm: '',
 			query: '',
+			page: 0,
 			toolsDisplayCards: false,
 			loading: {
 				initialSearch: false,
@@ -136,6 +137,7 @@ export default {
 		async initialSearch({ commit }, q) {
 			commit('updateLoadingInitialSearch', true);
 			commit('updateTools', []);
+			commit('updatePage', 0);
 
 			try {
 				let result;
@@ -185,6 +187,7 @@ export default {
 		async searchTools({ commit, state }) {
 			commit('updateLoadingSearch', true);
 			commit('updateTools', []);
+			commit('updatePage', 0);
 
 			try {
 				const query = buildQuery(state);
@@ -212,16 +215,19 @@ export default {
 		},
 
 		async loadMoreTools({ commit, state }, page) {
+			if (state.loading.loadMore) return;
 			commit('updateLoadingLoadMore', true);
+			const nextPage = page || state.page + 1;
 
 			try {
 				const result = await this.$observatory.$get(
-					`/search?page=${page}&q=${state.searchedTerm}${state.query}`,
+					`/search?page=${nextPage}&q=${state.searchedTerm}${state.query}`,
 					API_HEADERS
 				);
 				const normalized = (result.tools || []).map(normalizeTool);
 				commit('updateTools', state.tools.concat(normalized));
 				commit('updateTotalTools', result.total_tools);
+				commit('updatePage', nextPage);
 			} catch (error) {
 				console.error('❌ loadMoreTools error:', error);
 			} finally {

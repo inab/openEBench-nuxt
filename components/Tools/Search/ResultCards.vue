@@ -10,7 +10,7 @@
 			</v-col>
 		</v-row>
 		<v-row v-else>
-			<div v-if="visibleTools.length > 0">
+			<div v-if="visibleTools.length > 0" class="result-cards__list">
 				<v-col
 					v-for="(tool, i) in visibleTools"
 					:key="i"
@@ -49,19 +49,28 @@
 					No tools found.
 				</v-alert>
 			</v-col>
-			<div class="text-caption text--grey" v-if="visibleTools.length > 0">
-				<span v-if="!searchedTerm">
-					Showing {{ visibleTools.length.toLocaleString() }} example tools out
-					of {{ totalToolsGlobal.toLocaleString() }} total
-				</span>
-				<span v-else>
-					Showing {{ visibleTools.length.toLocaleString() }} of
-					{{ totalTools.toLocaleString() }} results for "<b>{{
-						searchedTerm
-					}}</b
-					>"
-				</span>
-			</div>
+			<v-col
+				v-if="visibleTools.length > 0"
+				cols="11"
+				class="result-cards__summary pt-0 pb-0 text-caption text--grey"
+			>
+				<div>
+					<span v-if="!searchedTerm">
+						Showing {{ visibleTools.length.toLocaleString() }} example tools out
+						of {{ totalToolsGlobal.toLocaleString() }} total
+					</span>
+					<span v-else>
+						Showing {{ visibleTools.length.toLocaleString() }} of
+						{{ totalTools.toLocaleString() }} results for "<b>{{
+							searchedTerm
+						}}</b
+						>"
+					</span>
+				</div>
+			</v-col>
+			<v-col cols="11" class="pt-0">
+				<LoadMoreTools />
+			</v-col>
 		</v-row>
 		<v-row class="mt-6" justify="center"> </v-row>
 	</v-card>
@@ -69,11 +78,13 @@
 <script>
 import { mapGetters } from 'vuex';
 import ToolCard from '~/components/Tools/Search/Card/ToolCard.vue';
+import LoadMoreTools from '~/components/Tools/Search/LoadMoreTools.vue';
 import SearchCategories from '~/components/Tools/Search/SearchCategories.vue';
 export default {
 	name: 'ResultCards',
 	components: {
 		ToolCard,
+		LoadMoreTools,
 		SearchCategories,
 	},
 	data() {
@@ -94,3 +105,12 @@ export default {
 	},
 };
 </script>
+<style scoped>
+.result-cards__list {
+	width: 100%;
+}
+
+.result-cards__summary {
+	margin-top: -4px;
+}
+</style>
