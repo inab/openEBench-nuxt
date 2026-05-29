@@ -130,10 +130,10 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapGetters } from 'vuex';
 import LinkChipWImage from '~/components/Tools/Search/Card/LinkChipWImage.vue';
 
-const HIGH_MATCH_THRESHOLD = 0.8;
+const HIGH_MATCH_THRESHOLD = 0.85;
 
 export default {
 	name: 'SimilarSoftwareContent',
@@ -166,23 +166,12 @@ export default {
 	},
 
 	watch: {
-		'tool.id': {
-			immediate: true,
-			handler(toolId) {
-				if (toolId) {
-					this.retrieveSimilarTools(toolId);
-				}
-			},
-		},
-
 		similarTools() {
 			this.page = 1;
 		},
 	},
 
 	methods: {
-		...mapActions('tool_entry', ['retrieveSimilarTools']),
-
 		isStrongMatch(score) {
 			return typeof score === 'number' && score >= HIGH_MATCH_THRESHOLD;
 		},

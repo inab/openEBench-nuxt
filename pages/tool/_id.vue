@@ -93,7 +93,7 @@
 	</div>
 </template>
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import MainCard from '~/components/Tools/MainCard.vue';
 import EntryIntro from '~/components/Tools/ToolEntry/EntryIntro.vue';
 import ToolBrief from '~/components/Tools/ToolEntry/ToolBrief.vue';
@@ -118,7 +118,7 @@ export default {
 	layout: 'DefaultLayoutWOBreadcrumbs',
 	data() {
 		return {
-			items: [
+			sections: [
 				{
 					title: 'Documentation',
 					id: 'documentation',
@@ -164,7 +164,31 @@ export default {
 		...mapGetters('tool_entry', {
 			tool: 'tool',
 			loading: 'loading',
+			similarTools: 'similarTools',
+			loadingSimilar: 'loadingSimilar',
 		}),
+		// Whether the tool has any usable licensing information
+		hasLicenseInfo() {
+			return (this.tool?.license || []).some(
+				(item) => item.term?.name || item.term?.url
+			);
+		},
+		// Whether the similar software section should be shown
+		hasSimilarSoftware() {
+			return this.loadingSimilar || this.similarTools.length > 0;
+		},
+		// Sections to render, hiding cards that have no information
+		items() {
+			return this.sections.filter((section) => {
+				if (section.id === 'licensing') {
+					return this.hasLicenseInfo;
+				}
+				if (section.id === 'similar-software') {
+					return this.hasSimilarSoftware;
+				}
+				return true;
+			});
+		},
 		// Breadcrumbs: Home > Tools > Search (clickable) > Tool Name
 		breadcrumbs() {
 			const searchedTerm = this.$store.getters['tool/searchedTerm'];
@@ -194,6 +218,17 @@ export default {
 		'$route.params.id'(toolId) {
 			this.loadTool(toolId);
 		},
+
+		// Fetch similar tools at the page level so the card's visibility can be
+		// determined even when the (conditionally rendered) child isn't mounted.
+		'tool.id': {
+			immediate: true,
+			handler(toolId) {
+				if (toolId) {
+					this.retrieveSimilarTools(toolId);
+				}
+			},
+		},
 	},
 
 	beforeMount() {
@@ -208,6 +243,8 @@ export default {
 	},
 
 	methods: {
+		...mapActions('tool_entry', ['retrieveSimilarTools']),
+
 		loadTool(toolId) {
 			const payload = {
 				name: toolId,
