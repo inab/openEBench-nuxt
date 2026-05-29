@@ -47,7 +47,16 @@ export default {
 	},
 	watch: {
 		searchingIn(newVal) {
+			// Prevent deselecting all chips — keep at least one active
+			if (newVal.length === 0) {
+				this.$nextTick(() => {
+					this.searchingIn = [0]; // fallback to Tool Name
+				});
+				return;
+			}
+
 			if (!this.searchedTerm) return;
+
 			this.$store.dispatch(
 				'tool/updateVisibleCategories',
 				this.searchingInCategories(newVal)
@@ -66,7 +75,6 @@ export default {
 </script>
 
 <style scoped>
-/* Force chips to be white/visible on the blue hero background */
 ::v-deep .v-chip {
 	border-color: rgba(255, 255, 255, 70%) !important;
 	color: white !important;

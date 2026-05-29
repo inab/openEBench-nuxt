@@ -94,6 +94,7 @@ export default {
 		return {
 			value: '',
 			exampleValues: [{ name: 'trimAl' }, { name: 'PyMut' }],
+			searchingIn: [0, 1, 2, 3],
 		};
 	},
 	computed: {

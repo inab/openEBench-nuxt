@@ -87,14 +87,7 @@ export default {
 			},
 			tools: [],
 			counts: {},
-			visibleCategories: [
-				'name',
-				'description',
-				'topics',
-				'operations',
-				'publication_title',
-				'publication_abstract',
-			],
+			visibleCategories: ['name', 'description', 'topics', 'operations'],
 			EDAMTerms: [],
 			filters: {
 				source: [],
