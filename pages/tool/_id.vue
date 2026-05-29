@@ -101,6 +101,7 @@ import CitationContent from '~/components/Tools/ToolEntry/Citation/CitationConte
 import DocumentationContent from '~/components/Tools/ToolEntry/Documentation/DocumentationContent.vue';
 import AvailabilityContent from '~/components/Tools/ToolEntry/Availability/AvailabilityContent.vue';
 import LicenseContent from '~/components/Tools/ToolEntry/License/LicenseContent.vue';
+import SimilarSoftwareContent from '~/components/Tools/ToolEntry/SimilarSoftware/SimilarSoftwareContent.vue';
 
 export default {
 	name: 'ToolEntry',
@@ -112,6 +113,7 @@ export default {
 		DocumentationContent,
 		AvailabilityContent,
 		LicenseContent,
+		SimilarSoftwareContent,
 	},
 	layout: 'DefaultLayoutWOBreadcrumbs',
 	data() {
@@ -136,6 +138,11 @@ export default {
 					title: 'Licensing',
 					id: 'licensing',
 					component: 'LicenseContent',
+				},
+				{
+					title: 'Similar Software',
+					id: 'similar-software',
+					component: 'SimilarSoftwareContent',
 				},
 			],
 			selected: 0,
