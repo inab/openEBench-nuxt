@@ -62,12 +62,12 @@
 												</div>
 
 												<!-- Description -->
+												<!-- eslint-disable-next-line vue/no-v-html -->
 												<div
-													v-if="item.description"
+													v-if="displayDescription(item)"
 													class="text-body-2 text--secondary mt-1 similar-description"
-												>
-													{{ item.description }}
-												</div>
+													v-html="renderMarkdown(displayDescription(item))"
+												></div>
 
 												<v-spacer></v-spacer>
 
@@ -131,6 +131,8 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import { marked } from 'marked';
+import DOMPurify from 'dompurify';
 import LinkChipWImage from '~/components/Tools/Search/Card/LinkChipWImage.vue';
 
 const HIGH_MATCH_THRESHOLD = 0.85;
@@ -142,6 +144,9 @@ export default {
 		return {
 			page: 1,
 			perPage: 3,
+			// Fallback descriptions (from "help" documentation) keyed by tool_id,
+			// used for similar tools that have no description of their own.
+			fallbackDescriptions: {},
 		};
 	},
 
@@ -166,12 +171,63 @@ export default {
 	},
 
 	watch: {
-		similarTools() {
-			this.page = 1;
+		similarTools: {
+			immediate: true,
+			handler() {
+				this.page = 1;
+				this.fetchMissingDescriptions();
+			},
 		},
 	},
 
 	methods: {
+		// Description shown on the card: the tool's own, or a "help" doc fallback.
+		displayDescription(item) {
+			const text =
+				item.description || this.fallbackDescriptions[item.tool_id] || '';
+			// Drop a leading "What it does" heading (optionally bold / colon).
+			return text
+				.replace(/^\s*(\*\*)?\s*what it does\s*(\*\*)?\s*:?\s*/i, '')
+				.trimStart();
+		},
+
+		// Render inline markdown (bold, italics, links, …) as sanitized HTML.
+		renderMarkdown(text) {
+			if (!text) return '';
+			return DOMPurify.sanitize(marked.parseInline(text));
+		},
+
+		// For similar tools without a description, fetch their record and use the
+		// content of a "help" documentation element instead.
+		async fetchMissingDescriptions() {
+			await Promise.all(
+				this.similarTools
+					.filter(
+						(item) =>
+							item.tool_name &&
+							!item.description &&
+							!(item.tool_id in this.fallbackDescriptions)
+					)
+					.map(async (item) => {
+						try {
+							const { data } = await this.$observatory.get(
+								`/tools?name=${encodeURIComponent(item.tool_name)}`
+							);
+							const help = (data?.documentation || []).find(
+								(doc) => doc.term?.type === 'help' && doc.term?.content
+							);
+							this.$set(
+								this.fallbackDescriptions,
+								item.tool_id,
+								help ? help.term.content : ''
+							);
+						} catch (e) {
+							this.$set(this.fallbackDescriptions, item.tool_id, '');
+						}
+					})
+			);
+		},
+
 		isStrongMatch(score) {
 			return typeof score === 'number' && score >= HIGH_MATCH_THRESHOLD;
 		},
