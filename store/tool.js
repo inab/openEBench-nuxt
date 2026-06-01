@@ -158,6 +158,7 @@ export default {
 
 				const total = result.totalTools || result.total_tools;
 				if (total) commit('updateTotalTools', total);
+				console.log('total tools raw:', result.totalTools, result.total_tools);
 			} catch (error) {
 				console.error('❌ initialSearch error:', error);
 			} finally {
@@ -213,13 +214,24 @@ export default {
 			const nextPage = page || state.page + 1;
 
 			try {
-				const result = await this.$observatory.$get(
-					`/search?page=${nextPage}&q=${state.searchedTerm}${state.query}`,
-					API_HEADERS
+				// ✅ use the same endpoint initialSearch used when there's no search term
+				const url = state.searchedTerm
+					? `/search?page=${nextPage}&q=${state.searchedTerm}${state.query}`
+					: `/initial-search?page=${nextPage}`;
+
+				const result = await this.$observatory.$get(url, API_HEADERS);
+				console.log(
+					'loadMore result:',
+					Object.keys(result),
+					result.tools?.length,
+					result.data?.length
 				);
-				const normalized = (result.tools || []).map(normalizeTool);
+
+				const tools = result.tools || result.data || [];
+				const normalized = tools.map(normalizeTool);
+
 				commit('updateTools', state.tools.concat(normalized));
-				commit('updateTotalTools', result.total_tools);
+				commit('updateTotalTools', result.total_tools || result.totalTools);
 				commit('updatePage', nextPage);
 			} catch (error) {
 				console.error('❌ loadMoreTools error:', error);

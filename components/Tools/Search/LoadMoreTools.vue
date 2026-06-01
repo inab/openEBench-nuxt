@@ -46,8 +46,15 @@ export default {
 	},
 	methods: {
 		loadMore() {
-			if (this.isDisabled) return;
-			this.$store.dispatch('tool/loadMoreTools');
+			console.log('dispatching...');
+			this.$store
+				.dispatch('tool/loadMoreTools')
+				.then(() => {
+					console.log('dispatch resolved');
+				})
+				.catch((err) => {
+					console.error('dispatch error', err);
+				});
 		},
 	},
 };
