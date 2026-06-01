@@ -145,12 +145,6 @@ export default {
 
 				// ✅ normalize regardless of which branch was taken
 				const tools = result.tools || result.data || [];
-				console.log(
-					'normalizing',
-					tools.length,
-					'tools, first label:',
-					tools[0]?.label
-				);
 				commit('updateTools', tools.map(normalizeTool));
 
 				if (result.counts) commit('updateCounts', result.counts);
@@ -158,7 +152,6 @@ export default {
 
 				const total = result.totalTools || result.total_tools;
 				if (total) commit('updateTotalTools', total);
-				console.log('total tools raw:', result.totalTools, result.total_tools);
 			} catch (error) {
 				console.error('❌ initialSearch error:', error);
 			} finally {
@@ -220,12 +213,6 @@ export default {
 					: `/initial-search?page=${nextPage}`;
 
 				const result = await this.$observatory.$get(url, API_HEADERS);
-				console.log(
-					'loadMore result:',
-					Object.keys(result),
-					result.tools?.length,
-					result.data?.length
-				);
 
 				const tools = result.tools || result.data || [];
 				const normalized = tools.map(normalizeTool);
