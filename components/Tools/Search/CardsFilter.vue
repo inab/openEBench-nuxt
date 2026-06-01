@@ -64,18 +64,18 @@ export default {
 	},
 	methods: {
 		onFilterActive(index, isActive) {
-			console.log(
-				'[CardsFilter] onFilterActive called, index:',
-				index,
-				'isActive:',
-				isActive
-			);
+			// console.log(
+			// 	'[CardsFilter] onFilterActive called, index:',
+			// 	index,
+			// 	'isActive:',
+			// 	isActive
+			// );
 			if (isActive && !this.expanded.includes(index)) {
 				this.expanded.push(index);
 			} else if (!isActive) {
 				this.expanded = this.expanded.filter((i) => i !== index);
 			}
-			console.log('[CardsFilter] expanded is now:', this.expanded);
+			// console.log('[CardsFilter] expanded is now:', this.expanded);
 		},
 		filterRestore() {
 			this.$store.dispatch('tool/restoreFilters');
