@@ -55,22 +55,25 @@
 		<div id="main-container" ref="Main" class="pt-6">
 			<v-row justify="center">
 				<v-col v-if="!loading" cols="7">
-					<EntryIntro
-						ref="Intro"
-						:name="tool.label[0]"
-						:description="tool.description[0].term"
-						:type="tool.type"
-						:version="tool.version"
-						:webpage="tool.webpage"
-						:sources-labels="tool.sources_labels"
-					/>
+					<!-- Card principal -->
+					<v-card elevation="1" class="mt-6 mb-6 pa-5 content-cards">
+						<EntryIntro
+							ref="Intro"
+							:name="tool.label[0]"
+							:description="tool.description[0].term"
+							:type="tool.type"
+							:version="tool.version"
+							:webpage="tool.webpage"
+							:sources-labels="tool.sources_labels"
+						/>
+					</v-card>
 
 					<!-- Cards seciones. -->
 					<v-card
 						v-for="(item, i) in items"
 						:id="item.id"
 						:key="i"
-						elevation="2"
+						elevation="1"
 						class="mt-6 mb-6 pa-5 content-cards"
 					>
 						<v-card-title
