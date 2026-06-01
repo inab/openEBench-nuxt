@@ -29,12 +29,13 @@ export default {
 			for (const key in this.stats.topics) {
 				newItems.push({
 					value: key,
-					label: EDAMDict(key),
+					label:
+						EDAMDict(key) ||
+						key.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase()),
 					count: this.stats.topics[key],
 					percent: this.percentage(this.stats.topics[key]),
 				});
 			}
-			// sort by count
 			newItems.sort((a, b) => b.count - a.count);
 			return newItems;
 		},

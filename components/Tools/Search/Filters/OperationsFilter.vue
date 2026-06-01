@@ -29,7 +29,9 @@ export default {
 			for (const key in this.stats.operations) {
 				newItems.push({
 					value: key,
-					label: EDAMDict(key),
+					label:
+						EDAMDict(key) ||
+						key.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase()),
 					count: this.stats.operations[key],
 					percent: this.percentage(this.stats.operations[key]),
 				});
