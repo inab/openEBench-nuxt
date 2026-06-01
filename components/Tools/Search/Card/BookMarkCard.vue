@@ -4,32 +4,31 @@
 			<v-col cols="9" class="mr-0 mt-0 mb-0 pb-0">
 				<div @mouseover="expand = true">
 					<v-card v-if="!expand" class="sec pa-1 rounded-lg" elevation="1">
-						<v-row justify="end" class="mb-0 pb-0">
-							<v-col cols="8" class="mt-1 pb-0 mr-1">
-								<div class="circle" :style="opacity(findability)">
-									<span class="fair-letter">F</span>
-								</div>
+						<v-row class="mb-0 pb-0">
+							<v-col cols="12" class="mt-1 pb-0 d-flex align-center fair-col">
+								<span class="fair-lbl">F</span>
+								<div class="circle" :style="opacity(findability)"></div>
 							</v-col>
 						</v-row>
-						<v-row justify="end" class="mt-0 mb-0 pb-0">
-							<v-col cols="8" class="justify-end pb-0 pt-2 mr-1">
-								<div class="circle" :style="opacity(accessibility)">
-									<span class="fair-letter">A</span>
-								</div>
+						<v-row class="mt-0 mb-0 pb-0">
+							<v-col cols="12" class="pb-0 pt-2 d-flex align-center fair-col">
+								<span class="fair-lbl">A</span>
+								<div class="circle" :style="opacity(accessibility)"></div>
 							</v-col>
 						</v-row>
-						<v-row justify="end" class="mt-0 mb-0 pb-0">
-							<v-col cols="8" class="justify-end pb-0 pt-2 mr-1">
-								<div class="circle" :style="opacity(interoperability)">
-									<span class="fair-letter">I</span>
-								</div>
+						<v-row class="mt-0 mb-0 pb-0">
+							<v-col cols="12" class="pb-0 pt-2 d-flex align-center fair-col">
+								<span class="fair-lbl">I</span>
+								<div class="circle" :style="opacity(interoperability)"></div>
 							</v-col>
 						</v-row>
-						<v-row justify="end" class="mt-0 mb-0 pb-0">
-							<v-col cols="8" class="justify-end pb-0 mb-1 pt-2 mr-1">
-								<div class="circle" :style="opacity(reusability)">
-									<span class="fair-letter">R</span>
-								</div>
+						<v-row class="mt-0 mb-0 pb-0">
+							<v-col
+								cols="12"
+								class="pb-0 mb-1 pt-2 d-flex align-center fair-col"
+							>
+								<span class="fair-lbl">R</span>
+								<div class="circle" :style="opacity(reusability)"></div>
 							</v-col>
 						</v-row>
 					</v-card>
@@ -99,6 +98,7 @@
 		</v-row>
 	</div>
 </template>
+
 <script>
 export default {
 	name: 'BookMarkCard',
@@ -127,26 +127,18 @@ export default {
 	},
 	methods: {
 		score(score) {
-			// return the score of the letter from 0 to 100
-			// Math.ceil to round up to the nearest integer
 			return Math.ceil(score * 100);
 		},
 		opacity(score) {
-			// return the opacity of the circle from 0 to 1
 			return {
 				background: 'rgba(57, 111, 186,' + score + ')',
 			};
 		},
 		color(score) {
-			// return the color of the circle from 0 to 1
 			if (score < 0.4) {
-				return {
-					color: '#0B579F',
-				};
+				return { color: '#0B579F' };
 			} else {
-				return {
-					color: 'white',
-				};
+				return { color: 'white' };
 			}
 		},
 		close() {
@@ -155,6 +147,7 @@ export default {
 	},
 };
 </script>
+
 <style>
 .main {
 	width: 250px;
@@ -165,7 +158,7 @@ export default {
 }
 
 .sec {
-	width: 47px;
+	width: 70px;
 }
 
 .fairchip {
@@ -184,6 +177,23 @@ export default {
 	color: #0b579f;
 }
 
+.fair-col {
+	padding-left: 30px !important;
+	padding-right: 4px !important;
+}
+
+.fair-lbl {
+	font-size: 0.68rem;
+	font-weight: 900;
+	color: #0b579f;
+	width: 10px;
+	min-width: 10px;
+	text-align: center;
+	margin-right: 6px;
+	line-height: 1;
+	flex-shrink: 0;
+}
+
 .circle {
 	width: 18px;
 	height: 18px;
@@ -192,16 +202,8 @@ export default {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	color: white;
-	font-size: 0.68rem;
-	font-weight: 700;
-	line-height: 1;
+	flex-shrink: 0;
 	box-shadow: inset 0 0 0 1px rgba(11, 87, 159, 28%);
-}
-
-.fair-letter {
-	color: white;
-	text-shadow: 0 1px 2px rgba(11, 87, 159, 90%), 0 0 1px rgba(11, 87, 159, 70%);
 }
 
 .inner-chip {
