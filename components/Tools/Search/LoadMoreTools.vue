@@ -64,8 +64,8 @@ export default {
 .load-more-tools {
 	display: flex;
 	justify-content: center;
-	width: 100%;
 	margin-top: 12px;
+	margin-right: 70px;
 }
 
 .load-more-tools__button {

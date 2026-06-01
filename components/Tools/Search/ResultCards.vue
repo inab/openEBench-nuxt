@@ -65,7 +65,7 @@
 					</span>
 				</div>
 			</v-col>
-			<v-col cols="11" md="11" class="pt-0">
+			<v-col cols="11" class="pt-0 d-flex justify-center">
 				<LoadMoreTools />
 			</v-col>
 		</v-row>
