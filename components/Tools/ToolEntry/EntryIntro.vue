@@ -2,7 +2,7 @@
 	<v-card elevation="0" class="pr-5 mb-4 pl-3">
 		<v-row justify="space-between">
 			<v-col cols="6">
-				<span class="text-h4">
+				<span class="text-h4 font-weight-bold">
 					{{ name }}
 				</span>
 			</v-col>
@@ -32,7 +32,7 @@
 		</v-row>
 		<v-row>
 			<v-col>
-				<p class="text-body-2">{{ description }}</p>
+				<p class="text-body-1">{{ description }}</p>
 
 				<div class="d-flex justify-center">
 					<LinkChipWIcon

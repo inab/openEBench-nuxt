@@ -78,7 +78,7 @@
 					>
 						<v-card-title
 							ref="Items"
-							class="text-h5 card-titles"
+							class="text-h5 card-titles font-weight-bold mb-2"
 							v-text="item.title"
 						></v-card-title>
 						<component :is="item.component"></component>
