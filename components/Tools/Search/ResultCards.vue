@@ -1,5 +1,5 @@
 <template>
-	<v-card id="main-container" class="mt-2 pa-4 mr-8" elevation="0">
+	<v-card id="main-container" class="mt-2 pa-4 mr-12" elevation="0">
 		<v-row v-if="loading.search" justify="center" class="mt-5">
 			<v-col v-for="n in 9" :key="n" cols="11">
 				<v-skeleton-loader type="article"></v-skeleton-loader>
@@ -11,9 +11,9 @@
 					v-for="(tool, i) in visibleTools"
 					:key="i"
 					justify="center"
-					cols="12"
-					sm="12"
-					md="12"
+					cols="11"
+					sm="11"
+					md="11"
 					><ToolCard
 						:name="tool.label"
 						:subname="tool.name"
@@ -48,6 +48,7 @@
 			<v-col
 				v-if="visibleTools.length > 0"
 				cols="11"
+				md="11"
 				class="result-cards__summary pt-0 pb-0 text-caption text--grey"
 			>
 				<div>
@@ -64,7 +65,7 @@
 					</span>
 				</div>
 			</v-col>
-			<v-col cols="11" class="pt-0">
+			<v-col cols="11" md="11" class="pt-0">
 				<LoadMoreTools />
 			</v-col>
 		</v-row>
