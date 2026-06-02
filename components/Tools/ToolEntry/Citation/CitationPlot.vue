@@ -1,36 +1,37 @@
 <template>
-	<!-- Falta el banner de carga -->
 	<div>
-		<!-- Botones -->
-		<div class="d-flex justify-center mb-2 mt-3" style="gap: 30px">
-			<v-btn
-				small
-				rounded
-				tonal
-				:color="mode === 'cumulative' ? 'primary' : ''"
-				@click="mode = mode === 'cumulative' ? 'normal' : 'cumulative'"
-			>
-				Cumulative
-			</v-btn>
-			<v-btn
-				small
-				rounded
-				tonal
-				:color="mode === 'merge' ? 'primary' : ''"
-				@click="mode = mode === 'merge' ? 'normal' : 'merge'"
-			>
-				Merge all publication counts
-			</v-btn>
-		</div>
+		<template>
+			<!-- Botones -->
+			<div class="d-flex justify-center mb-2 mt-3" style="gap: 30px">
+				<v-btn
+					small
+					rounded
+					tonal
+					:color="mode === 'cumulative' ? 'primary' : ''"
+					@click="mode = mode === 'cumulative' ? 'normal' : 'cumulative'"
+				>
+					Cumulative
+				</v-btn>
+				<v-btn
+					v-if="dataTraces.length > 1"
+					small
+					rounded
+					tonal
+					:color="mode === 'merge' ? 'primary' : ''"
+					@click="mode = mode === 'merge' ? 'normal' : 'merge'"
+				>
+					Merge all publication counts
+				</v-btn>
+			</div>
 
-		<!-- Plot -->
-		<citationsPlot
-			v-if="computedTraces.length > 0"
-			:key="mode"
-			:dataTraces="computedTraces"
-			:colors="computedColors"
-			:showlegend="mode === 'merge' ? false : showlegend"
-		/>
+			<!-- Plot -->
+			<citationsPlot
+				:key="mode"
+				:dataTraces="computedTraces"
+				:colors="computedColors"
+				:showlegend="mode === 'merge' ? false : showlegend"
+			/>
+		</template>
 	</div>
 </template>
 
@@ -58,7 +59,7 @@ export default {
 	},
 	data() {
 		return {
-			mode: 'normal', // 'normal' | 'cumulative' | 'merge'
+			mode: 'normal',
 		};
 	},
 	computed: {
@@ -85,7 +86,6 @@ export default {
 		},
 
 		buildMerge() {
-			// Agrupa todas las citas por año sumando todas las publicaciones
 			const yearMap = {};
 			this.dataTraces.forEach((trace) => {
 				trace.data.forEach((d) => {
