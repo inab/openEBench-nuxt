@@ -1,6 +1,6 @@
 <template>
 	<v-card elevation="0" class="pr-5 mb-4 pl-3">
-		<v-row justify="space-between">
+		<v-row justify="space-between mb-1">
 			<v-col cols="6">
 				<span class="text-h4 font-weight-bold">
 					{{ name }}
