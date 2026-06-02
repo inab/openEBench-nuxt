@@ -48,26 +48,9 @@ export default {
 				.join(', ');
 		},
 	},
-	// watch: {
-	// 	'tool.type': {
-	// 		immediate: true,
-	// 		handler() {
-	// 			const webpages =
-	// 				this.tool.webpage?.map((w) => w?.term).filter(Boolean) || [];
-	// 			// const uniqueDomains = [
-	// 			// 	...new Set(webpages.map((url) => new URL(url).hostname)),
-	// 			// ];
-	// 			// console.log('tool.type:', this.tool.type);
-	// 			// console.log('accessibilityLabel:', this.accessibilityLabel);
-	// 			// console.log('webpage URLs found:', webpages);
-	// 			// console.log('unique domains:', uniqueDomains);
-	// 			// console.log('same domain?:', uniqueDomains.length === 1);
-	// 		},
-	// 	},
-	// },
 	methods: {
 		galaxyAvailable() {
-			// todo: check if galaxy instances are available for this tool
+			if (!this.tool.source.includes('galaxy')) return false;
 			return true;
 		},
 		installationAvailable() {
