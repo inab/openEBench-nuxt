@@ -1,7 +1,14 @@
 <template>
-	<v-chip class="pr-0 mt-0" :color="color" :text-color="textColor" label>
+	<v-chip
+		class="mt-0"
+		:color="color"
+		:text-color="textColor"
+		label
+		:class="{ 'pr-0': vocabulary === 'EDAM' }"
+	>
 		<span class="text-body-2 font-weight-medium">{{ text }}</span>
-		<v-menu offset-x offset-y right>
+
+		<v-menu offset-x offset-y right v-if="vocabulary === 'EDAM'">
 			<template #activator="{ on, attrs }">
 				<v-btn :color="textColor" icon v-bind="attrs" v-on="on">
 					<v-icon small>mdi-dots-vertical</v-icon>
@@ -33,6 +40,10 @@ export default {
 			type: String,
 			required: true,
 			default: 'topic_0160',
+		},
+		vocabulary: {
+			type: String,
+			required: true,
 		},
 		color: {
 			type: String,
