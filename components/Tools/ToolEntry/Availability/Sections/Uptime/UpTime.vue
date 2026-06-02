@@ -1,90 +1,105 @@
 <template>
-	<div v-if="!webAvailabilityNoData">
-		<!--Webpage-->
-		<v-row class="mt-0 pt-0 mb-2">
-			<v-col cols="12" class="mt-0 pt-0 pb-0 mb-0 d-flex justify-center">
-				<v-chip color="indigo lighten-5" class="pl-5 pr-5">
-					<a
-						:href="displayedWebpage"
-						target="_blank"
-						rel="noopener noreferrer"
-						class="text-body font-weight-medium"
-					>
-						{{ displayedWebpage }}
-					</a>
-				</v-chip>
-			</v-col>
-		</v-row>
-		<!--Tabs with status and plot-->
-		<v-row class="mt-0 pt-0 mb-2" justify="center">
-			<!--Tabs-->
-			<v-col
-				v-if="webAvailabilityLoading || availableRanges.length"
-				cols="12"
-				class="d-flex justify-center"
+	<div v-if="filteredWebpageTerms.length">
+		<p class="urls-label">Monitored URLs</p>
+
+		<!-- Chips -->
+		<div class="chip-row">
+			<button
+				v-for="url in filteredWebpageTerms"
+				:key="url"
+				class="url-chip"
+				:class="{ active: selectedUrl === url }"
+				@click="selectUrl(url)"
 			>
-				<v-tabs v-model="tabUptime" centered>
-					<v-tab v-for="range in availableRanges" :key="range.key" class="tab">
-						{{ range.label }}
-					</v-tab>
-				</v-tabs>
-			</v-col>
-			<v-col v-if="webAvailabilityError && !webAvailabilityNoData" cols="12">
-				<v-alert dense text type="warning">
-					Uptime data is not available for this webpage right now.
-				</v-alert>
-			</v-col>
-			<v-col v-else-if="webAvailabilityLoading" cols="12">
-				<v-skeleton-loader type="list-item-two-line, image" />
-			</v-col>
+				<span class="dot" :class="dotClass(url)" />
+				{{ shortUrl(url) }}
+			</button>
+		</div>
+
+		<!-- Panel — always visible -->
+		<div class="uptime-panel">
+			<v-skeleton-loader
+				v-if="webAvailabilityLoading"
+				type="list-item-two-line, image"
+			/>
 			<template v-else>
-				<!--Status-->
-				<v-col cols="8">
-					<upTimeStatus :status="status" :time="statusDays" />
-				</v-col>
-				<!--Plot-->
-				<v-col cols="12" class="pa-0">
+				<div v-if="webAvailabilityError" class="no-data-notice notice-error">
+					<v-icon small color="red darken-2">mdi-alert-circle-outline</v-icon>
+					Could not reach the uptime service for this URL.
+				</div>
+				<div
+					v-else-if="webAvailabilityNoData"
+					class="no-data-notice notice-nodata"
+				>
+					<v-icon small color="orange darken-2"
+						>mdi-chart-timeline-variant-shimmer</v-icon
+					>
+					No uptime data recorded for this URL yet.
+				</div>
+				<template v-else>
+					<upTimeStatus
+						:status="status"
+						:time="statusDays"
+						:url="selectedUrl"
+					/>
+					<v-tabs
+						v-if="availableRanges.length"
+						v-model="tabUptime"
+						dense
+						class="mt-2"
+					>
+						<v-tab v-for="range in availableRanges" :key="range.key">
+							{{ range.label }}
+						</v-tab>
+					</v-tabs>
 					<v-tabs-items v-model="tabUptime">
 						<v-tab-item v-for="range in availableRanges" :key="range.key">
 							<UptimePlot
-								class="mb-2"
 								style="width: 100%"
 								:data-items="availabilityItemsByRange(range.key)"
 								:dtick="rangeDtick(range.key)"
 							/>
 						</v-tab-item>
 					</v-tabs-items>
-				</v-col>
+				</template>
 			</template>
-		</v-row>
+		</div>
 	</div>
 </template>
+
 <script>
 import { mapGetters } from 'vuex';
 import UptimePlot from './UptimePlot.vue';
 import upTimeStatus from './upTimeStatus.vue';
 
+const EXCLUDED_DOMAINS = ['github.com', 'gitlab.com'];
+
+function isExcludedUrl(url) {
+	if (!url) return true;
+	try {
+		const hostname = new URL(url).hostname.toLowerCase();
+		return EXCLUDED_DOMAINS.some(
+			(domain) => hostname === domain || hostname.endsWith(`.${domain}`)
+		);
+	} catch {
+		return EXCLUDED_DOMAINS.some((domain) =>
+			url.toLowerCase().includes(domain)
+		);
+	}
+}
+
 export default {
 	name: 'UpTime',
-	components: {
-		UptimePlot,
-		upTimeStatus,
-	},
-	props: {
-		type: {
-			type: String,
-			default: 'tool',
-		},
-	},
+	components: { UptimePlot, upTimeStatus },
 	data() {
 		return {
 			tabUptime: 0,
+			selectedUrl: null,
 		};
 	},
 	computed: {
 		...mapGetters('tool_entry', {
 			tool: 'tool',
-			loading: 'loading',
 			webAvailability: 'webAvailability',
 			webAvailabilityUrl: 'webAvailabilityUrl',
 			webAvailabilityLoading: 'webAvailabilityLoading',
@@ -92,15 +107,17 @@ export default {
 			webAvailabilityNoData: 'webAvailabilityNoData',
 		}),
 		webpageTerms() {
-			return (
-				this.tool.webpage?.map((webpage) => webpage?.term).filter(Boolean) || []
-			);
+			return this.tool.webpage?.map((w) => w?.term).filter(Boolean) || [];
 		},
-		webpageTerm() {
-			return this.webpageTerms[0] || '';
-		},
-		displayedWebpage() {
-			return this.webAvailabilityUrl || this.webpageTerm;
+		filteredWebpageTerms() {
+			return this.webpageTerms.filter((url) => {
+				try {
+					const parsedUrl = new URL(url);
+					return !isExcludedUrl(parsedUrl.href);
+				} catch {
+					return false;
+				}
+			});
 		},
 		ranges() {
 			return [
@@ -110,20 +127,17 @@ export default {
 			];
 		},
 		availableRanges() {
-			return this.ranges.filter(({ key }) => {
-				return this.availabilityItemsByRange(key).length > 0;
-			});
+			return this.ranges.filter(
+				({ key }) => this.availabilityItemsByRange(key).length > 0
+			);
 		},
 		activeRange() {
 			return this.availableRanges[this.tabUptime]?.key || '';
 		},
-		availabilityItems() {
-			return this.availabilityItemsByRange(this.activeRange);
-		},
 		sortedAvailabilityItems() {
-			return [...this.availabilityItems].sort((a, b) => {
-				return new Date(a.date) - new Date(b.date);
-			});
+			return [...this.availabilityItemsByRange(this.activeRange)].sort(
+				(a, b) => new Date(a.date) - new Date(b.date)
+			);
 		},
 		latestAvailabilityItem() {
 			return (
@@ -132,51 +146,68 @@ export default {
 			);
 		},
 		status() {
-			if (!this.latestAvailabilityItem) {
-				return 'UNKNOWN';
-			}
-
-			return this.statusForItem(this.latestAvailabilityItem);
+			return this.latestAvailabilityItem
+				? this.statusForItem(this.latestAvailabilityItem)
+				: 'UNKNOWN';
 		},
 		statusDays() {
-			if (!this.latestAvailabilityItem) {
-				return 0;
-			}
-
+			if (!this.latestAvailabilityItem) return 0;
 			let days = 0;
 			const latestStatus = this.statusForItem(this.latestAvailabilityItem);
-
 			for (let i = this.sortedAvailabilityItems.length - 1; i >= 0; i--) {
 				if (
 					this.statusForItem(this.sortedAvailabilityItems[i]) !== latestStatus
-				) {
+				)
 					break;
-				}
 				days += 1;
 			}
-
 			return days;
 		},
 	},
 	watch: {
-		webpageTerms: {
+		filteredWebpageTerms: {
 			immediate: true,
-			handler(webpages) {
-				if (webpages.length) {
-					this.tabUptime = 0;
-					this.$store.dispatch('tool_entry/retrieveWebAvailability', webpages);
+			handler(urls) {
+				if (urls.length) {
+					this.selectedUrl = urls[0];
+					this.$store.dispatch('tool_entry/retrieveWebAvailability', [
+						this.selectedUrl,
+					]);
 				} else {
 					this.$store.commit('tool_entry/resetWebAvailability');
 				}
 			},
 		},
 		availableRanges() {
-			if (this.tabUptime >= this.availableRanges.length) {
-				this.tabUptime = 0;
-			}
+			if (this.tabUptime >= this.availableRanges.length) this.tabUptime = 0;
+		},
+		webAvailabilityNoData(val) {
+			console.log('webAvailabilityNoData changed to:', val);
 		},
 	},
 	methods: {
+		shortUrl(url) {
+			return url.replace(/^https?:\/\//, '');
+		},
+		selectUrl(url) {
+			if (this.selectedUrl === url) return;
+			this.selectedUrl = url;
+			this.tabUptime = 0;
+			console.log('before dispatch — noData:', this.webAvailabilityNoData);
+			this.$store.commit('tool_entry/resetWebAvailability');
+			this.$store.dispatch('tool_entry/retrieveWebAvailability', [url]);
+		},
+		dotClass(url) {
+			if (this.selectedUrl !== url) return 'dot-unknown';
+			if (this.webAvailabilityLoading) return 'dot-loading';
+			if (this.webAvailabilityError) return 'dot-error';
+			if (this.webAvailabilityNoData) return 'dot-nodata';
+			return this.status === 'UP'
+				? 'dot-up'
+				: this.status === 'DOWN'
+				? 'dot-down'
+				: 'dot-unknown';
+		},
 		availabilityItemsByRange(range) {
 			const payload = this.webAvailability?.[range] || [];
 			const items =
@@ -185,40 +216,128 @@ export default {
 				payload?.items ||
 				payload?.availability ||
 				payload;
-
 			return Array.isArray(items) ? items : [];
 		},
 		rangeDtick(range) {
 			const day = 86400000;
-
-			if (range === 'sixMonths') {
-				return String(day * 15);
-			}
-
-			if (range === 'month') {
-				return String(day * 7);
-			}
-
+			if (range === 'sixMonths') return String(day * 15);
+			if (range === 'month') return String(day * 7);
 			return String(day);
 		},
 		statusForItem(item) {
-			if (!item || item.code === null || item.code === undefined) {
-				return 'UNKNOWN';
-			}
-
+			if (!item || item.code == null) return 'UNKNOWN';
 			return item.code >= 200 && item.code < 400 ? 'UP' : 'DOWN';
 		},
 	},
 };
 </script>
+
 <style scoped>
-.pub-line {
-	width: 2px;
-	height: 20px;
+.urls-label {
+	font-size: 11px;
+	font-weight: 500;
+	letter-spacing: 0.05em;
+	text-transform: uppercase;
+	color: rgba(0, 0, 0, 45%);
+	margin-bottom: 8px;
+}
+
+.chip-row {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-bottom: 16px;
+}
+
+.url-chip {
+	display: inline-flex;
+	align-items: center;
+	gap: 7px;
+	padding: 5px 13px;
+	border-radius: 999px;
+	border: 1px solid rgba(0, 0, 0, 15%);
+	background: #f5f5f5;
+	cursor: pointer;
+	font-size: 13px;
+	font-weight: 500;
+	color: #555;
+	transition: all 0.15s;
+}
+
+.url-chip:hover {
+	border-color: rgba(0, 0, 0, 30%);
+	color: #222;
+}
+
+.url-chip.active {
+	background: #e8eaf6;
+	border-color: #5c6bc0;
+	color: #283593;
+}
+
+.dot {
+	width: 7px;
+	height: 7px;
+	border-radius: 50%;
 	flex-shrink: 0;
 }
 
-.dot-black {
-	background-color: rgba(17, 16, 16, 95%);
+.dot-up {
+	background: #558b2f;
+}
+
+.dot-down {
+	background: #c62828;
+}
+
+.dot-error {
+	background: #c62828;
+}
+
+.dot-nodata {
+	background: #ef6c00;
+}
+
+.dot-unknown {
+	background: #9e9e9e;
+}
+
+.dot-loading {
+	background: #9e9e9e;
+	animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+	0%,
+	100% {
+		opacity: 1;
+	}
+
+	50% {
+		opacity: 0.3;
+	}
+}
+
+.uptime-panel {
+	border: 1px solid rgba(0, 0, 0, 10%);
+	border-radius: 12px;
+	padding: 16px 20px;
+}
+
+.no-data-notice {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 24px 0;
+	font-size: 13px;
+	font-weight: 500;
+}
+
+.notice-error {
+	color: #c62828;
+}
+
+.notice-nodata {
+	color: #ef6c00;
 }
 </style>

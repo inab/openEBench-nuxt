@@ -38,12 +38,47 @@ function buildQuery(state) {
 	return query;
 }
 
+function normalizeTool(tool) {
+	// handles arrays, null, undefined — but preserves 0
+	const pick = (val) => {
+		const v = Array.isArray(val) ? val[0] : val;
+		return v != null ? v : '';
+	};
+
+	const fairsoft = tool.fairsoft || {};
+
+	// safely parse a score — handles undefined, null, NaN, strings
+	const score = (val) => {
+		const n = parseFloat(val);
+		return isNaN(n) ? 0 : n;
+	};
+
+	return {
+		name: pick(tool.name) || '',
+		subname: pick(tool.name) || '',
+		label: pick(tool.label) || pick(tool.name) || '',
+		type: tool.type || [],
+		description: pick(tool.description) || '',
+		topics: tool.topics || [],
+		operations: tool.operations || [],
+		sourcesLabels: tool.sources_labels || {},
+		publications: tool.publication || [],
+		license: tool.license || [],
+		webpage: pick(tool.webpage) || pick(tool.homepage) || '',
+		findability: score(fairsoft.F),
+		accessibility: score(fairsoft.A),
+		interoperability: score(fairsoft.I),
+		reusability: score(fairsoft.R),
+	};
+}
+
 export default {
 	namespaced: true,
 	state: () => {
 		return {
 			searchedTerm: '',
 			query: '',
+			page: 0,
 			toolsDisplayCards: false,
 			loading: {
 				initialSearch: false,
@@ -52,14 +87,7 @@ export default {
 			},
 			tools: [],
 			counts: {},
-			visibleCategories: [
-				'name',
-				'description',
-				'topics',
-				'operations',
-				'publication_title',
-				'publication_abstract',
-			],
+			visibleCategories: ['name', 'description', 'topics', 'operations'],
 			EDAMTerms: [],
 			filters: {
 				source: [],
@@ -102,6 +130,7 @@ export default {
 		async initialSearch({ commit }, q) {
 			commit('updateLoadingInitialSearch', true);
 			commit('updateTools', []);
+			commit('updatePage', 0);
 
 			try {
 				let result;
@@ -114,7 +143,10 @@ export default {
 					);
 				}
 
-				commit('updateTools', result.tools);
+				// ✅ normalize regardless of which branch was taken
+				const tools = result.tools || result.data || [];
+				commit('updateTools', tools.map(normalizeTool));
+
 				if (result.counts) commit('updateCounts', result.counts);
 				if (result.stats) commit('updateStats', result.stats);
 
@@ -142,6 +174,7 @@ export default {
 		async searchTools({ commit, state }) {
 			commit('updateLoadingSearch', true);
 			commit('updateTools', []);
+			commit('updatePage', 0);
 
 			try {
 				const query = buildQuery(state);
@@ -152,7 +185,8 @@ export default {
 					API_HEADERS
 				);
 
-				commit('updateTools', result.tools);
+				const normalized = (result.tools || []).map(normalizeTool);
+				commit('updateTools', normalized);
 				commit('updateCounts', result.counts);
 				commit('updateStatsAfterFilter', result.stats);
 				commit('updateTotalTools', result.total_tools);
@@ -168,16 +202,24 @@ export default {
 		},
 
 		async loadMoreTools({ commit, state }, page) {
+			if (state.loading.loadMore) return;
 			commit('updateLoadingLoadMore', true);
+			const nextPage = page || state.page + 1;
 
 			try {
-				const result = await this.$observatory.$get(
-					`/search?page=${page}&q=${state.searchedTerm}${state.query}`,
-					API_HEADERS
-				);
+				// ✅ use the same endpoint initialSearch used when there's no search term
+				const url = state.searchedTerm
+					? `/search?page=${nextPage}&q=${state.searchedTerm}${state.query}`
+					: `/initial-search?page=${nextPage}`;
 
-				commit('updateTools', state.tools.concat(result.tools));
-				commit('updateTotalTools', result.total_tools);
+				const result = await this.$observatory.$get(url, API_HEADERS);
+
+				const tools = result.tools || result.data || [];
+				const normalized = tools.map(normalizeTool);
+
+				commit('updateTools', state.tools.concat(normalized));
+				commit('updateTotalTools', result.total_tools || result.totalTools);
+				commit('updatePage', nextPage);
 			} catch (error) {
 				console.error('❌ loadMoreTools error:', error);
 			} finally {
@@ -232,7 +274,7 @@ export default {
 			state.loading.loadMore = value;
 		},
 		updateTools(state, value) {
-			state.tools = value;
+			state.tools = value || [];
 		},
 		updateStats(state, value) {
 			state.stats = value;

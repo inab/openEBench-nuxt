@@ -3,124 +3,94 @@
 		v-model="searchingIn"
 		column
 		multiple
-		class="ml-4"
-		active-class="primary--text"
-		:disabled="!isSearchActive"
-		:class="{ 'disabled-chip': !isSearchActive }"
+		class="ml-2"
+		active-class="white--text"
 	>
-		<v-chip filter outlined>
-			Tool Name
-			<span class="ml-1" v-if="showCounts">
-				(<b>{{ counts.name }}</b
-				>)</span
-			>
-		</v-chip>
-		<v-chip filter outlined>
-			Tool Description
-			<span class="ml-1" v-if="showCounts">
-				(<b>{{ counts.description }}</b
-				>)</span
-			>
-		</v-chip>
-		<v-chip filter outlined>
-			Associated Topics
-			<span class="ml-1" v-if="showCounts">
-				(<b>{{ counts.topics }}</b
-				>)</span
-			>
-		</v-chip>
-		<v-chip filter outlined>
-			Associated Operations
-			<span class="ml-1" v-if="showCounts">
-				(<b>{{ counts.operations }}</b
-				>)</span
-			>
-		</v-chip>
-		<v-chip filter outlined>
-			Publication Title
-			<span class="ml-1" v-if="showCounts">
-				(<b>{{ counts.publication_title }}</b
-				>)</span
-			>
-		</v-chip>
-		<v-chip filter outlined>
-			Publication Abstract
-			<span class="ml-1" v-if="showCounts">
-				(<b>{{ counts.publication_abstract }}</b
-				>)</span
-			>
+		<v-chip
+			v-for="(label, i) in categories"
+			:key="i"
+			filter
+			outlined
+			class="search-chip"
+		>
+			{{ label }}
 		</v-chip>
 	</v-chip-group>
 </template>
+
 <script>
 import { mapGetters } from 'vuex';
 
 export default {
 	name: 'SearchCategories',
-	props: {
-		counts: {
-			type: Object,
-			required: true,
-		},
-	},
 	data() {
 		return {
-			searchingIn: [0, 1, 2, 3, 4, 5],
+			searchingIn: [0, 1, 2, 3],
+			categories: [
+				'Tool Name',
+				'Tool Description',
+				'Associated Topics',
+				'Associated Operations',
+			],
 			equivalencies: {
 				0: 'name',
 				1: 'description',
 				2: 'topics',
 				3: 'operations',
-				4: 'publication_title',
-				5: 'publication_abstract',
 			},
 		};
 	},
 	computed: {
 		...mapGetters('tool', {
-			visibleTools: 'tools',
 			searchedTerm: 'searchedTerm',
 		}),
-		showCounts() {
-			return (
-				this.searchedTerm && this.counts && Object.keys(this.counts).length > 0
-			);
-		},
-		isSearchActive() {
-			return this.searchedTerm && this.searchedTerm.length > 0;
-		},
 	},
 	watch: {
 		searchingIn(newVal) {
-			if (!this.isSearchActive) return;
-			// Update the visible categories in store
+			// Prevent deselecting all chips — keep at least one active
+			if (newVal.length === 0) {
+				this.$nextTick(() => {
+					this.searchingIn = [0]; // fallback to Tool Name
+				});
+				return;
+			}
+
+			if (!this.searchedTerm) return;
+
 			this.$store.dispatch(
 				'tool/updateVisibleCategories',
 				this.searchingInCategories(newVal)
 			);
-
-			// Update the visible tools in store
 			this.$store.dispatch('tool/searchTools');
 		},
 	},
 	methods: {
-		searchingInCategories() {
-			const searchingInCatgs = [];
-			for (const key in this.equivalencies) {
-				if (this.searchingIn.includes(parseInt(key))) {
-					searchingInCatgs.push(this.equivalencies[key]);
-				}
-			}
-			return searchingInCatgs;
+		searchingInCategories(newVal) {
+			return Object.entries(this.equivalencies)
+				.filter(([key]) => newVal.includes(parseInt(key)))
+				.map(([, val]) => val);
 		},
 	},
 };
 </script>
 
-<style>
-.disabled-chip {
-	opacity: 0.5;
-	pointer-events: none;
-	cursor: not-allowed !important;
+<style scoped>
+::v-deep .v-chip {
+	border-color: rgba(255, 255, 255, 70%) !important;
+	color: white !important;
+	background: transparent !important;
+}
+
+::v-deep .v-chip--active {
+	border-color: white !important;
+	background: rgba(255, 255, 255, 15%) !important;
+}
+
+::v-deep .v-chip .v-chip__filter {
+	color: white !important;
+}
+
+::v-deep .v-icon {
+	color: white !important;
 }
 </style>

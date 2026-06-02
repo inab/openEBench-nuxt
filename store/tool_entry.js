@@ -28,17 +28,38 @@ export default {
 			webAvailabilityNoData: false,
 			citations: {},
 			loadingCitations: {},
+			similarTools: [],
+			loadingSimilar: false,
 		};
 	},
 	actions: {
 		async retrieveTool({ commit }, payload) {
 			commit('updateLoading', true);
 			commit('resetWebAvailability');
+			commit('updateSimilarTools', []);
 			const { data } = await this.$observatory.get(
 				`/tools?name=${payload.name}`
 			);
 			commit('updateTool', data);
 			commit('updateLoading', false);
+		},
+
+		async retrieveSimilarTools({ commit }, toolId) {
+			if (!toolId) {
+				commit('updateSimilarTools', []);
+				return;
+			}
+			commit('updateLoadingSimilar', true);
+			try {
+				const { data } = await this.$observatory.get(
+					`/similarity?tool_id=${toolId}`
+				);
+				commit('updateSimilarTools', data.similar || []);
+			} catch (e) {
+				commit('updateSimilarTools', []);
+			} finally {
+				commit('updateLoadingSimilar', false);
+			}
 		},
 
 		async retrieveWebAvailability({ state, commit }, webpages) {
@@ -67,14 +88,32 @@ export default {
 					webpageList.map(async (webpage) => {
 						const results = await Promise.all(
 							ranges.map(async ({ key, endpoint }) => {
+								// In the store — inside ranges.map
 								try {
 									const { data } = await this.$observatory.post(endpoint, {
 										url: webpage,
 									});
-
+									console.log(
+										`[availability] ✅ ${endpoint} | ${webpage}`,
+										data
+									);
 									return { key, data, error: null };
 								} catch (error) {
-									return { key, data: [], error };
+									const is404 = error?.response?.status === 404;
+									if (!is404) {
+										console.error(
+											`[availability] ❌ ${endpoint} | ${webpage}`,
+											error?.response?.status,
+											error?.response?.data,
+											error?.message
+										);
+									} else {
+										console.log(
+											`[availability] ⚪ ${endpoint} | ${webpage} — not monitored`
+										);
+									}
+									// 404 = not in collection = no data, not an error
+									return { key, data: [], error: is404 ? null : error };
 								}
 							})
 						);
@@ -194,6 +233,12 @@ export default {
 		updateLoadingCitations(state, { doi, value }) {
 			state.loadingCitations = { ...state.loadingCitations, [doi]: value };
 		},
+		updateSimilarTools(state, payload) {
+			state.similarTools = payload;
+		},
+		updateLoadingSimilar(state, payload) {
+			state.loadingSimilar = payload;
+		},
 	},
 	getters: {
 		tool(state) {
@@ -225,6 +270,12 @@ export default {
 		},
 		loadingCitations(state) {
 			return state.loadingCitations;
+		},
+		similarTools(state) {
+			return state.similarTools;
+		},
+		loadingSimilar(state) {
+			return state.loadingSimilar;
 		},
 	},
 };

@@ -98,19 +98,25 @@ export default {
 		},
 
 		enrichedLicenses() {
-			return this.licenses.map((license) => {
-				const key = this.licenseKey(license);
-				const apiData = this.licensesApiData[key] || {};
+			return this.licenses
+				.map((license) => {
+					const key = this.licenseKey(license);
+					const apiData = this.licensesApiData[key] || {};
 
-				return {
-					...license,
-					loading: apiData.loading || false,
-					displayName: apiData.name || license.name || 'Unknown license',
-					reference: apiData.reference || license.url || null,
-					isOsiApproved: apiData.isOsiApproved,
-					seeAlso: apiData.seeAlso || this.getFallbackSeeAlso(license),
-				};
-			});
+					return {
+						...license,
+						loading: apiData.loading || false,
+						displayName: apiData.name || license.name || 'Unknown license',
+						reference: apiData.reference || license.url || null,
+						isOsiApproved: apiData.isOsiApproved,
+						seeAlso: apiData.seeAlso || this.getFallbackSeeAlso(license),
+					};
+				})
+				.sort((a, b) => {
+					const aHasLink = Boolean(a.reference || a.url);
+					const bHasLink = Boolean(b.reference || b.url);
+					return Number(bHasLink) - Number(aHasLink);
+				});
 		},
 	},
 
@@ -212,13 +218,13 @@ export default {
 
 .license-table__header {
 	font-size: 14px;
-	padding-bottom: 0.2em;
+	padding-bottom: 0.1em;
 	color: rgba(0, 0, 0, 55%);
 }
 
 .license-table__row {
 	margin-bottom: 0;
-	padding-top: 0.2em;
+	padding-top: 0.5em;
 }
 
 .license-table__license {
@@ -231,6 +237,7 @@ export default {
 	min-height: 32px;
 	height: 32px;
 	padding: 0 12px;
+	margin-bottom: 0;
 	font-weight: 600;
 	font-size: 14px;
 	letter-spacing: normal;

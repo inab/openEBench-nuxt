@@ -1,39 +1,34 @@
 <template>
-	<v-card id="main-container" class="mt-2 pa-4 mr-8" elevation="0">
-		<v-row justify="start" align="center">
-			<span class="text-subtitle-2 ml-4 mt-1">Search in:</span>
-			<SearchCategories :counts="counts" class="pr-3" />
-		</v-row>
+	<v-card id="main-container" class="mt-2 pa-4 mr-12" elevation="0">
 		<v-row v-if="loading.search" justify="center" class="mt-5">
 			<v-col v-for="n in 9" :key="n" cols="11">
 				<v-skeleton-loader type="article"></v-skeleton-loader>
 			</v-col>
 		</v-row>
 		<v-row v-else>
-			<div v-if="visibleTools.length > 0">
+			<div v-if="visibleTools.length > 0" class="result-cards__list">
 				<v-col
 					v-for="(tool, i) in visibleTools"
 					:key="i"
 					justify="center"
-					cols="12"
-					sm="12"
-					md="12"
-				>
-					<ToolCard
-						:name="tool.label[0]"
+					cols="11"
+					sm="11"
+					md="11"
+					><ToolCard
+						:name="tool.label"
 						:subname="tool.name"
-						:description="tool.description[0]"
+						:description="tool.description"
 						:type="tool.type"
 						:topics="tool.topics"
 						:operations="tool.operations"
-						:sources-labels="tool.sources_labels"
-						:publications="tool.publication"
+						:sources-labels="tool.sourcesLabels"
+						:publications="tool.publications"
 						:license="tool.license"
-						:webpage="tool.webpage[0]"
-						findability="0.2"
-						accessibility="0.5"
-						interoperability="0.8"
-						reusability="1"
+						:webpage="tool.webpage"
+						:findability="tool.findability"
+						:accessibility="tool.accessibility"
+						:interoperability="tool.interoperability"
+						:reusability="tool.reusability"
 						:order="i"
 					/>
 				</v-col>
@@ -50,19 +45,29 @@
 					No tools found.
 				</v-alert>
 			</v-col>
-			<div class="text-caption text--grey" v-if="visibleTools.length > 0">
-				<span v-if="!searchedTerm">
-					Showing {{ visibleTools.length.toLocaleString() }} example tools out
-					of {{ totalToolsGlobal.toLocaleString() }} total
-				</span>
-				<span v-else>
-					Showing {{ visibleTools.length.toLocaleString() }} of
-					{{ totalTools.toLocaleString() }} results for "<b>{{
-						searchedTerm
-					}}</b
-					>"
-				</span>
-			</div>
+			<v-col
+				v-if="visibleTools.length > 0"
+				cols="11"
+				md="11"
+				class="result-cards__summary pt-0 pb-0 text-caption text--grey"
+			>
+				<div>
+					<span v-if="!searchedTerm">
+						Showing {{ visibleTools.length.toLocaleString() }} of
+						{{ totalToolsGlobal.toLocaleString() }} total tools
+					</span>
+					<span v-else>
+						Showing {{ visibleTools.length.toLocaleString() }} of
+						{{ totalTools.toLocaleString() }} results for "<b>{{
+							searchedTerm
+						}}</b
+						>"
+					</span>
+				</div>
+			</v-col>
+			<v-col cols="11" class="pt-0 d-flex justify-center">
+				<LoadMoreTools />
+			</v-col>
 		</v-row>
 		<v-row class="mt-6" justify="center"> </v-row>
 	</v-card>
@@ -70,22 +75,17 @@
 <script>
 import { mapGetters } from 'vuex';
 import ToolCard from '~/components/Tools/Search/Card/ToolCard.vue';
-import SearchCategories from '~/components/Tools/Search/SearchCategories.vue';
+import LoadMoreTools from '~/components/Tools/Search/LoadMoreTools.vue';
+
 export default {
 	name: 'ResultCards',
 	components: {
 		ToolCard,
-		SearchCategories,
-	},
-	data() {
-		return {
-			searchingIn: [0, 1, 2, 3, 4, 5],
-		};
+		LoadMoreTools,
 	},
 	computed: {
 		...mapGetters('tool', {
 			displayCards: 'toolsDisplayCards',
-			counts: 'counts',
 			visibleTools: 'tools',
 			loading: 'loading',
 			totalTools: 'totalTools',
@@ -95,3 +95,12 @@ export default {
 	},
 };
 </script>
+<style scoped>
+.result-cards__list {
+	width: 100%;
+}
+
+.result-cards__summary {
+	margin-top: -4px;
+}
+</style>
