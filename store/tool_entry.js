@@ -67,14 +67,32 @@ export default {
 					webpageList.map(async (webpage) => {
 						const results = await Promise.all(
 							ranges.map(async ({ key, endpoint }) => {
+								// In the store — inside ranges.map
 								try {
 									const { data } = await this.$observatory.post(endpoint, {
 										url: webpage,
 									});
-
+									console.log(
+										`[availability] ✅ ${endpoint} | ${webpage}`,
+										data
+									);
 									return { key, data, error: null };
 								} catch (error) {
-									return { key, data: [], error };
+									const is404 = error?.response?.status === 404;
+									if (!is404) {
+										console.error(
+											`[availability] ❌ ${endpoint} | ${webpage}`,
+											error?.response?.status,
+											error?.response?.data,
+											error?.message
+										);
+									} else {
+										console.log(
+											`[availability] ⚪ ${endpoint} | ${webpage} — not monitored`
+										);
+									}
+									// 404 = not in collection = no data, not an error
+									return { key, data: [], error: is404 ? null : error };
 								}
 							})
 						);
