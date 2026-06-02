@@ -3,9 +3,9 @@
 		<div>
 			<v-row class="mt-0 pt-0 mb-2">
 				<v-col cols="12" class="pt-0 mt-0 mb-0 pb-1">
-					<span class="text-subtitle d-flex align-center">
-						<div class="pub-line mr-3 flex-shrink-0 dot-black"></div>
+					<span class="section-label d-flex align-center">
 						Associated publications
+						<!-- Añadir journal a las publicaciones, y si no tiene citas en europe PMC poner no citas available. poner un banner para dar explicacion de que sino sale una publicacion es porque no hay en PMC -->
 					</span>
 				</v-col>
 
@@ -100,15 +100,13 @@
 		<div>
 			<v-row class="mt-0 pt-0 mb-2">
 				<v-col cols="12" class="mt-0 pt-0 pl-8 ml-4">
-					<div>
-						<!-- Plot -->
-						<CitationPlot
-							v-if="citationPlotData.length > 0"
-							:key="citationPlotData.length"
-							:dataTraces="citationPlotData"
-							:colors="citationPlotColors"
-						/>
-					</div>
+					<v-skeleton-loader v-if="isLoadingAnyCitation" type="image" />
+					<CitationPlot
+						v-else-if="citationPlotData.length > 0"
+						:key="citationPlotData.length"
+						:dataTraces="citationPlotData"
+						:colors="citationPlotColors"
+					/>
 				</v-col>
 			</v-row>
 		</div>
@@ -138,9 +136,9 @@ export default {
 				'#4caf50',
 				'#ff9800',
 				'#2196f3',
-				'#009688',
 				'#9467bd',
 				'#795548',
+				'#009688',
 				'#f44336',
 				'#ffc107',
 				'#8bc34a',
@@ -205,6 +203,11 @@ export default {
 		// Colores solo de las publicaciones que SÍ están en el gráfico, en el mismo orden
 		citationPlotColors() {
 			return this.citationPlotData.map((item) => item.color);
+		},
+
+		isLoadingAnyCitation() {
+			if (!this.loadingCitations) return false;
+			return Object.values(this.loadingCitations).includes((v) => v === true);
 		},
 	},
 
@@ -295,13 +298,9 @@ export default {
 	flex-shrink: 0;
 }
 
-.pub-line {
-	width: 2px;
-	height: 20px;
-	flex-shrink: 0;
-}
-
-.dot-black {
-	background-color: rgba(17, 16, 16, 95%);
+.section-label {
+	font-size: 1.2rem !important;
+	color: #6f6c6c;
+	font-weight: bold;
 }
 </style>
