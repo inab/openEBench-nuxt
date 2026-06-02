@@ -234,11 +234,9 @@ export default {
 
 <style scoped>
 .urls-label {
-	font-size: 11px;
+	font-size: 1.2rem !important;
+	color: rgba(0, 0, 0, 50%);
 	font-weight: 500;
-	letter-spacing: 0.05em;
-	text-transform: uppercase;
-	color: rgba(0, 0, 0, 45%);
 	margin-bottom: 8px;
 }
 
