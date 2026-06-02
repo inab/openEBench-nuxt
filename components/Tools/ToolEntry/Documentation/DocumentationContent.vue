@@ -9,7 +9,7 @@
 			<v-col cols="3" class="pt-3 pb-3">
 				<span class="section-label">Documents</span>
 			</v-col>
-			<v-col cols="9" class="pt-3 pb-3 d-flex flex-wrap" style="gap: 16px">
+			<v-col cols="9" class="pt-3 pb-3 d-flex flex-wrap" style="gap: 14px">
 				<v-chip
 					v-for="(item, i) in tool.documentation"
 					:key="i"
@@ -26,6 +26,7 @@
 		<v-divider v-if="tool.documentation && tool.documentation.length" />
 
 		<!-- Related topics -->
+		<!-- Vocabulary EDAM si lleva los 3 puntitos sino no. -->
 		<v-row
 			v-if="tool.topics && tool.topics.length"
 			class="mt-0 pt-0 mb-0 section-row"
@@ -34,7 +35,7 @@
 			<v-col cols="3" class="pt-3 pb-3">
 				<span class="section-label">Related topics</span>
 			</v-col>
-			<v-col cols="9" class="pt-3 pb-3 d-flex flex-wrap" style="gap: 16px">
+			<v-col cols="9" class="pt-3 pb-3 d-flex flex-wrap" style="gap: 14px">
 				<ItemChipMenu
 					v-for="item in tool.topics"
 					:key="item.id"
@@ -57,7 +58,7 @@
 			<v-col cols="3" class="pt-3 pb-3">
 				<span class="section-label">Function</span>
 			</v-col>
-			<v-col cols="9" class="pt-3 pb-3 d-flex flex-wrap" style="gap: 16px">
+			<v-col cols="9" class="pt-3 pb-3 d-flex flex-wrap" style="gap: 14px">
 				<ItemChipMenu
 					v-for="item in tool.operations"
 					:key="item.id"
