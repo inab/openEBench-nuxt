@@ -73,6 +73,7 @@ export default {
 			},
 			stats: {},
 			totalTools: 0,
+			totalToolsGlobal: 0,
 		};
 	},
 	actions: {
@@ -116,11 +117,25 @@ export default {
 				commit('updateTools', result.tools);
 				if (result.counts) commit('updateCounts', result.counts);
 				if (result.stats) commit('updateStats', result.stats);
-				if (result.total_tools) commit('updateTotalTools', result.total_tools);
+
+				const total = result.totalTools || result.total_tools;
+				if (total) commit('updateTotalTools', total);
 			} catch (error) {
 				console.error('❌ initialSearch error:', error);
 			} finally {
 				commit('updateLoadingInitialSearch', false);
+			}
+		},
+
+		async fetchTotalTools({ commit }) {
+			try {
+				const result = await this.$observatory.$get(
+					'/stats/tools/count_total',
+					API_HEADERS
+				);
+				if (result?.[0]?.data) commit('updateTotalToolsGlobal', result[0].data);
+			} catch (error) {
+				console.error('❌ fetchTotalTools error:', error);
 			}
 		},
 
@@ -239,6 +254,9 @@ export default {
 		updateTotalTools(state, value) {
 			state.totalTools = value;
 		},
+		updateTotalToolsGlobal(state, value) {
+			state.totalToolsGlobal = value;
+		},
 		updateVisibleCategories(state, value) {
 			state.visibleCategories = value;
 		},
@@ -255,6 +273,7 @@ export default {
 		page: (state) => state.page,
 		counts: (state) => state.counts,
 		totalTools: (state) => state.totalTools,
+		totalToolsGlobal: (state) => state.totalToolsGlobal,
 		filters: (state) => state.filters,
 		visibleCategories: (state) => state.visibleCategories,
 		EDAMFormats: (state) => state.EDAMTerms.format,

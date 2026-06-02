@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<!-- Breadcrumbs inside tool -->
-		<div class="pb-0 breadcrumbs" v-if="breadcrumbs.length > 0">
+		<div v-if="breadcrumbs.length > 0" class="pb-0 breadcrumbs">
 			<v-breadcrumbs :items="breadcrumbs" dark class="v-breadcrumbs">
 				<template #divider>
 					<v-icon class="v-breadcrumbs-divider">mdi-chevron-right</v-icon>
@@ -55,27 +55,30 @@
 		<div id="main-container" ref="Main" class="pt-6">
 			<v-row justify="center">
 				<v-col v-if="!loading" cols="7">
-					<EntryIntro
-						ref="Intro"
-						:name="tool.label[0]"
-						:description="tool.description[0].term"
-						:type="tool.type"
-						:version="tool.version"
-						:webpage="tool.webpage"
-						:sources-labels="tool.sources_labels"
-					/>
+					<!-- Card principal -->
+					<v-card elevation="1" class="mt-6 mb-6 pa-5 content-cards">
+						<EntryIntro
+							ref="Intro"
+							:name="tool.label[0]"
+							:description="tool.description[0].term"
+							:type="tool.type"
+							:version="tool.version"
+							:webpage="tool.webpage"
+							:sources-labels="tool.sources_labels"
+						/>
+					</v-card>
 
 					<!-- Cards seciones. -->
 					<v-card
 						v-for="(item, i) in items"
 						:id="item.id"
 						:key="i"
-						elevation="2"
+						elevation="1"
 						class="mt-6 mb-6 pa-5 content-cards"
 					>
 						<v-card-title
 							ref="Items"
-							class="text-h5 card-titles"
+							class="text-h5 card-titles font-weight-bold mb-2"
 							v-text="item.title"
 						></v-card-title>
 						<component :is="item.component"></component>
@@ -89,34 +92,18 @@
 					</v-skeleton-loader>
 				</v-col>
 			</v-row>
-			<VueFixedScrollBreak
-				v-if="offset"
-				id="to-top"
-				:top-of-stop-element="offset"
-			>
-				<v-btn
-					class="mx-2"
-					fab
-					dark
-					small
-					color="#f48f43"
-					@click="$vuetify.goTo('#main-container')"
-				>
-					<v-icon dark> mdi-arrow-up </v-icon>
-				</v-btn>
-			</VueFixedScrollBreak>
 		</div>
 	</div>
 </template>
 <script>
 import { mapGetters } from 'vuex';
-import VueFixedScrollBreak from 'vue-fixed-scroll-break';
 import MainCard from '~/components/Tools/MainCard.vue';
 import EntryIntro from '~/components/Tools/ToolEntry/EntryIntro.vue';
 import ToolBrief from '~/components/Tools/ToolEntry/ToolBrief.vue';
 import CitationContent from '~/components/Tools/ToolEntry/Citation/CitationContent.vue';
 import DocumentationContent from '~/components/Tools/ToolEntry/Documentation/DocumentationContent.vue';
-import AccessibilityContent from '~/components/Tools/ToolEntry/Accessibility/AccessibilityContent.vue';
+import AvailabilityContent from '~/components/Tools/ToolEntry/Availability/AvailabilityContent.vue';
+import LicenseContent from '~/components/Tools/ToolEntry/License/LicenseContent.vue';
 
 export default {
 	name: 'ToolEntry',
@@ -126,8 +113,8 @@ export default {
 		ToolBrief,
 		CitationContent,
 		DocumentationContent,
-		AccessibilityContent,
-		VueFixedScrollBreak,
+		AvailabilityContent,
+		LicenseContent,
 	},
 	layout: 'DefaultLayoutWOBreadcrumbs',
 	data() {
@@ -139,9 +126,9 @@ export default {
 					component: 'DocumentationContent',
 				},
 				{
-					title: 'Accessibility',
-					id: 'accessibility',
-					component: 'AccessibilityContent',
+					title: 'Availability',
+					id: 'availability',
+					component: 'AvailabilityContent',
 				},
 				{
 					title: 'Citation',
@@ -151,17 +138,7 @@ export default {
 				{
 					title: 'Licensing',
 					id: 'licensing',
-					component: '',
-				},
-				{
-					title: 'Recognition',
-					id: 'recognition',
-					component: '',
-				},
-				{
-					title: 'Similar Software',
-					id: 'similar',
-					component: '',
+					component: 'LicenseContent',
 				},
 			],
 			selected: 0,
@@ -209,14 +186,16 @@ export default {
 		},
 	},
 
+	watch: {
+		'$route.params.id'(toolId) {
+			this.loadTool(toolId);
+		},
+	},
+
 	beforeMount() {
 		// Get name and type from URL
 		// this.$store.dispatch('tool/setToolName', this.$route.params.name)
-		const payload = {
-			name: this.$route.params.id,
-		};
-
-		this.$store.dispatch('tool_entry/retrieveTool', payload);
+		this.loadTool(this.$route.params.id);
 		window.addEventListener('scroll', this.handleScroll);
 	},
 
@@ -225,6 +204,13 @@ export default {
 	},
 
 	methods: {
+		loadTool(toolId) {
+			const payload = {
+				name: toolId,
+			};
+
+			this.$store.dispatch('tool_entry/retrieveTool', payload);
+		},
 		elementIsVisibleInViewport(ref, partiallyVisible = true) {
 			if (this.visible) {
 				const { top, left, bottom, right } = ref.getBoundingClientRect();
@@ -272,8 +258,6 @@ export default {
 			this.menuSections(); // Menu sections activiation
 			this.entryBriefVisibility(); // first visibleItem is activeItem
 
-			this.offset = this.$root.$children[2].$refs.Footer.$el.offsetTop; // GoToTop button position -> stop at footer
-
 			// 500 the height of the fixed menu + tool brief + nav bar
 			this.offsetMenu = window.innerHeight - 500; // Menu position -> stop at footer
 		},
@@ -291,7 +275,6 @@ export default {
 
 .fixed-card--sticky {
 	position: fixed;
-	top: 97px;
 	z-index: 50px;
 }
 
@@ -301,7 +284,7 @@ export default {
 }
 
 .content-cards {
-	min-height: 300px;
+	min-height: 200px;
 }
 
 #to-top {

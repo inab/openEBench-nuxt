@@ -1,37 +1,41 @@
 <template>
 	<v-container class="mt-0 pt-0 pl-8">
-		<v-row class="mt-0 pt-0 mb-3">
-			<v-col cols="12" class="pt-0 mt-0 mb-0 pb-1">
-				<span class="text-subtitle d-flex align-center">
-					<v-icon small color="black" class="mr-1">
-						mdi-text-box-multiple-outline
-					</v-icon>
-					Documents
-				</span>
+		<!-- Documents -->
+		<v-row
+			v-if="tool.documentation && tool.documentation.length"
+			class="mt-0 pt-0 mb-0 section-row"
+			align="center"
+		>
+			<v-col cols="3" class="pt-3 pb-3">
+				<span class="section-label">Documents</span>
 			</v-col>
-			<v-col cols="12" class="mt-0 pt-0 pl-8 ml-4">
+			<v-col cols="9" class="pt-3 pb-3 d-flex flex-wrap" style="gap: 14px">
 				<v-chip
 					v-for="(item, i) in tool.documentation"
 					:key="i"
 					label
-					text-color="blue darken-4"
-					color="blue lighten-4"
-					class="mr-3"
+					color="grey lighten-3"
+					text-color="grey darken-3"
+					class="font-weight-medium"
 				>
-					<span class="text-overline font-weight-medium">{{
-						item.term.type.toUpperCase()
-					}}</span>
+					{{ item.term.type.charAt(0).toUpperCase() + item.term.type.slice(1) }}
 				</v-chip>
 			</v-col>
 		</v-row>
-		<v-row class="mt-0 pt-0 mb-3">
-			<v-col cols="12" class="mt-0 pt-0 pb-0 mb-0">
-				<span class="text-subtitle d-flex align-center">
-					<v-icon small color="black" class="mr-1"> mdi-label-multiple</v-icon>
-					Related topics
-				</span>
+
+		<v-divider v-if="tool.documentation && tool.documentation.length" />
+
+		<!-- Related topics -->
+		<!-- Vocabulary EDAM si lleva los 3 puntitos sino no. -->
+		<v-row
+			v-if="tool.topics && tool.topics.length"
+			class="mt-0 pt-0 mb-0 section-row"
+			align="center"
+		>
+			<v-col cols="3" class="pt-3 pb-3">
+				<span class="section-label">Related topics</span>
 			</v-col>
-			<v-col cols="12" class="ml-3 pl-8">
+			<v-col cols="9" class="pt-3 pb-3 d-flex flex-wrap" style="gap: 14px">
 				<ItemChipMenu
 					v-for="item in tool.topics"
 					:key="item.id"
@@ -42,14 +46,19 @@
 				/>
 			</v-col>
 		</v-row>
-		<v-row class="mt-0 mb-3">
-			<v-col cols="12" class="pt-1">
-				<span class="text-subtitle d-flex align-center">
-					<v-icon small color="black" class="mr-1"> mdi-cog</v-icon>
-					Operations performed by the software
-				</span>
+
+		<v-divider v-if="tool.topics && tool.topics.length" />
+
+		<!-- Operations -->
+		<v-row
+			v-if="tool.operations && tool.operations.length"
+			class="mt-0 pt-0 mb-0 section-row"
+			align="center"
+		>
+			<v-col cols="3" class="pt-3 pb-3">
+				<span class="section-label">Function</span>
 			</v-col>
-			<v-col cols="12" class="mt-0 pt-0 pl-8 ml-3">
+			<v-col cols="9" class="pt-3 pb-3 d-flex flex-wrap" style="gap: 14px">
 				<ItemChipMenu
 					v-for="item in tool.operations"
 					:key="item.id"
@@ -62,6 +71,7 @@
 		</v-row>
 	</v-container>
 </template>
+
 <script>
 import { mapGetters } from 'vuex';
 import ItemChipMenu from './ItemChipMenu.vue';
@@ -73,10 +83,10 @@ export default {
 	},
 	data() {
 		return {
-			colorTopic: 'green lighten-4',
-			textColorTopic: 'green darken-4',
-			colorOperation: 'orange lighten-5',
-			textColorOperation: 'orange darken-3',
+			colorTopic: '#396FBA26',
+			textColorTopic: '#0B579F',
+			colorOperation: '#396FBA26',
+			textColorOperation: '#0B579F',
 		};
 	},
 	computed: {
@@ -88,7 +98,16 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.section-label {
+	font-size: 1rem;
+	color: rgb(0, 0, 0);
+}
+
+.section-row {
+	min-height: 64px;
+}
+
 .v-dialog {
 	width: 75%;
 	height: 70%;

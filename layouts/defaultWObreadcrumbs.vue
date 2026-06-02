@@ -4,6 +4,7 @@
 		<v-main>
 			<Nuxt @emitBreadcrumbs="handleBreadcrumbs" />
 		</v-main>
+		<back-to-top />
 		<Footer ref="Footer" class="mt-16" />
 
 		<v-footer class="justify-center" app>
@@ -16,12 +17,14 @@
 <script>
 import HeaderMenu from '~/components/Header/HeaderMenu.vue';
 import Footer from '~/components/TheFooter';
+import BackToTop from '~/components/Molecules/BackToTop.vue';
 
 export default {
 	name: 'DefaultLayoutWOBreadcrumbs',
 	components: {
 		'main-header': HeaderMenu,
 		Footer,
+		'back-to-top': BackToTop,
 	},
 	head() {
 		return {

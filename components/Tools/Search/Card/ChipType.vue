@@ -1,5 +1,5 @@
 <template>
-	<v-chip :small="!big" label text-color="#F48F43" color="#F48F43" outlined>
+	<v-chip :small="!big" label text-color="#0B579F" color="#0B579F" outlined>
 		{{ text }}
 	</v-chip>
 </template>

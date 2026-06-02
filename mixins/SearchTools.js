@@ -3,7 +3,7 @@ export const SearchTools = {
 		triggerSearch(value) {
 			this.$store.dispatch('tool/initialSearch', value);
 			this.$router.push({
-				path: 'tool/search',
+				path: '/tool/search',
 				query: {
 					q: value,
 					searchIn:

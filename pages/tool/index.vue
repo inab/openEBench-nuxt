@@ -3,8 +3,22 @@
 		<MainCard :breadcrumbs="breadcrumbs" />
 		<div class="px-12 px-xl-16">
 			<v-row>
-				<v-col cols="12" md="4" lg="3" xl="3">
-					<CardsFilter />
+				<v-col cols="12" md="4" lg="3" xl="3" style="position: relative">
+					<div
+						v-if="!isSearchActive"
+						style="
+							position: absolute;
+							top: 0;
+							left: 0;
+							width: 100%;
+							height: 100%;
+							z-index: 10;
+							cursor: not-allowed;
+						"
+					/>
+					<div :class="{ 'disabled-chip': !isSearchActive }">
+						<CardsFilter />
+					</div>
 				</v-col>
 				<v-col cols="12" md="8" lg="9" xl="9">
 					<v-row v-if="loading.initialSearch" justify="center" class="mt-5">
@@ -54,10 +68,17 @@ export default {
 		};
 	},
 	computed: {
-		...mapGetters({ loading: 'tool/loading' }),
+		...mapGetters({
+			loading: 'tool/loading',
+			searchedTerm: 'tool/searchedTerm',
+		}),
+		isSearchActive() {
+			return this.searchedTerm && this.searchedTerm.length > 0;
+		},
 	},
 	async mounted() {
 		await this.loadLanding();
+		this.$store.dispatch('tool/fetchTotalTools');
 	},
 };
 </script>
