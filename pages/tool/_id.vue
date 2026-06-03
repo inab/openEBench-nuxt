@@ -338,7 +338,7 @@ export default {
 .fixed-card {
 	width: 200px;
 	margin-top: 24px;
-	margin-left: 150px !important;
+	margin-left: 64px !important;
 	position: absolute;
 	z-index: 50px;
 }
@@ -379,7 +379,7 @@ export default {
    and let them fill the available width instead of centering. */
 @media (min-width: 1264px) {
 	#main-container {
-		padding-left: 380px; /* clear the fixed left nav (150px + 200px width) */
+		padding-left: 300px; /* clear the fixed left nav (64px margin + 200px width + gap) */
 		padding-right: 48px;
 	}
 }
