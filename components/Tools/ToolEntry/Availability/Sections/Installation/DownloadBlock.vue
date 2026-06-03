@@ -19,10 +19,6 @@
 				>
 					{{ formatFileName(url) }}
 				</a>
-
-				<v-btn icon x-small class="copy-btn" @click="copy(url)">
-					<v-icon small>mdi-content-copy</v-icon>
-				</v-btn>
 			</div>
 		</div>
 
@@ -146,15 +142,6 @@ export default {
 	text-decoration: underline;
 }
 
-.copy-btn {
-	opacity: 0.6;
-}
-
-.copy-btn:hover {
-	opacity: 1;
-}
-
-/* empty state */
 .empty {
 	padding: 8px;
 	color: rgba(0, 0, 0, 45%);
