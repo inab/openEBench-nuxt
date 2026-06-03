@@ -37,9 +37,13 @@ export default {
 			commit('updateLoading', true);
 			commit('resetWebAvailability');
 			commit('updateSimilarTools', []);
-			const { data } = await this.$observatory.get(
-				`/tools?name=${payload.name}`
-			);
+
+			// Prefer fetching by id if available, fall back to name
+			const query = payload.id
+				? `/tools?id=${payload.id}`
+				: `/tools?name=${payload.name}`;
+
+			const { data } = await this.$observatory.get(query);
 			commit('updateTool', data);
 			commit('updateLoading', false);
 		},

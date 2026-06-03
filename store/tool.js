@@ -54,6 +54,7 @@ function normalizeTool(tool) {
 	};
 
 	return {
+		id: tool.id || '',
 		name: pick(tool.name) || '',
 		subname: pick(tool.name) || '',
 		label: pick(tool.label) || pick(tool.name) || '',

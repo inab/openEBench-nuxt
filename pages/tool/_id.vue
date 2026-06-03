@@ -85,10 +85,7 @@
 					</v-card>
 				</v-col>
 				<v-col v-else cols="8">
-					<v-skeleton-loader
-						v-bind="attrs"
-						type="article, list-item-three-line, image"
-					>
+					<v-skeleton-loader type="article, list-item-three-line, image">
 					</v-skeleton-loader>
 				</v-col>
 			</v-row>
@@ -238,8 +235,8 @@ export default {
 	},
 
 	watch: {
-		'$route.params.id'(toolId) {
-			this.loadTool(toolId);
+		'$route.params.id'(toolParam) {
+			this.loadTool(toolParam); // already calls loadTool, no change needed
 		},
 
 		// Fetch similar tools at the page level so the card's visibility can be
@@ -268,12 +265,18 @@ export default {
 	methods: {
 		...mapActions('tool_entry', ['retrieveSimilarTools']),
 
-		loadTool(toolId) {
-			const payload = {
-				name: toolId,
-			};
+		loadTool(toolParam) {
+			// Split "name-id" → extract the id (last segment after final dash)
+			const lastDash = toolParam.lastIndexOf('-');
+			const toolId =
+				lastDash !== -1 ? toolParam.slice(lastDash + 1) : toolParam;
+			const toolName =
+				lastDash !== -1 ? toolParam.slice(0, lastDash) : toolParam;
 
-			this.$store.dispatch('tool_entry/retrieveTool', payload);
+			this.$store.dispatch('tool_entry/retrieveTool', {
+				name: toolName,
+				id: toolId,
+			});
 		},
 		elementIsVisibleInViewport(ref, partiallyVisible = true) {
 			if (this.visible) {
