@@ -1,7 +1,7 @@
 <template>
 	<div class="license-table">
 		<v-row class="license-table__header">
-			<v-col cols="10" md="5"></v-col>
+			<v-col cols="11" md="6"></v-col>
 			<v-col cols="5" md="2">OSI approved</v-col>
 			<v-col cols="5" md="4">See also</v-col>
 		</v-row>
@@ -13,7 +13,7 @@
 				class="license-table__row"
 				align="center"
 			>
-				<v-col cols="10" md="5">
+				<v-col cols="11" md="6">
 					<v-btn
 						v-if="license.reference || license.url"
 						:href="license.reference || license.url"
@@ -210,7 +210,7 @@ export default {
 
 <style scoped>
 .license-table {
-	max-width: 90%;
+	max-width: 100%;
 	margin-left: 5%;
 	margin-right: 5%;
 	margin-bottom: 3%;
@@ -280,6 +280,6 @@ export default {
 }
 
 .divider {
-	width: 90%;
+	width: 100%;
 }
 </style>
