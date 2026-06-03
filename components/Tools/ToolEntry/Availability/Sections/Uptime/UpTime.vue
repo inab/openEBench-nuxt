@@ -1,5 +1,5 @@
 <template>
-	<div v-if="filteredWebpageTerms.length">
+	<div v-if="filteredWebpageTerms.length" class="mb-8">
 		<p class="urls-label">Monitored URLs</p>
 
 		<!-- Chips -->

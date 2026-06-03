@@ -54,8 +54,14 @@ export default {
 			return true;
 		},
 		installationAvailable() {
-			// todo: check if installation instructions are available for this tool
-			return true;
+			if (
+				this.tool.source.includes('bioconda_recipes') ||
+				this.tool.source.includes('bioconductor') ||
+				this.tool.repository ||
+				this.tool.download
+			)
+				return true;
+			return false;
 		},
 	},
 };

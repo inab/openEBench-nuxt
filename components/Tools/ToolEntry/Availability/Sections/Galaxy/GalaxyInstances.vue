@@ -1,5 +1,5 @@
 <template>
-	<v-row class="mt-8 pt-0 mb-2">
+	<v-row class="mt-0 pt-0 mb-2">
 		<v-col cols="12" class="mt-0 pt-0 pb-0 mb-0">
 			<div class="text-subtitle d-flex justify-start align-center">
 				<div class="title-label">Galaxy</div>
