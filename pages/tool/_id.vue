@@ -20,7 +20,7 @@
 		</div>
 
 		<ToolBrief
-			v-if="!introVisible && !loading"
+			v-if="!introVisible && hasToolData"
 			:name="tool.label[0]"
 			:type="tool.type"
 			:version="tool.version"
@@ -55,13 +55,13 @@
 		<!-- FAIRsoft scores: fixed in the right gutter, mirroring the left nav.
 			 Shown only from 1500px up; below that it is hidden and the content
 			 cards reclaim the freed space (see #main-container / .fair-fixed rules). -->
-		<div v-if="!loading" class="fair-fixed">
+		<div v-if="hasToolData" class="fair-fixed">
 			<FAIRScores />
 		</div>
 
 		<div id="main-container" ref="Main" class="pt-6">
 			<v-row justify="center">
-				<v-col v-if="!loading" cols="7" lg="12">
+				<v-col v-if="hasToolData" cols="7" lg="12">
 					<!-- Card principal -->
 					<v-card elevation="1" class="mt-6 mb-6 pa-5 content-cards">
 						<EntryIntro
@@ -179,6 +179,14 @@ export default {
 			similarTools: 'similarTools',
 			loadingSimilar: 'loadingSimilar',
 		}),
+		// Whether the tool has loaded with renderable data. The template reads
+		// tool.label[0] / tool.description[0].term directly, so we must not render
+		// the content (or flip out of the skeleton) until those fields exist —
+		// otherwise an empty tool (e.g. a 404) crashes the render before the error
+		// page can take over.
+		hasToolData() {
+			return !this.loading && !!this.tool?.label?.length;
+		},
 		// Whether the tool has any usable licensing information
 		hasLicenseInfo() {
 			return (this.tool?.license || []).some(
@@ -257,12 +265,21 @@ export default {
 	methods: {
 		...mapActions('tool_entry', ['retrieveSimilarTools']),
 
-		loadTool(toolId) {
-			const payload = {
-				name: toolId,
-			};
-
-			this.$store.dispatch('tool_entry/retrieveTool', payload);
+		async loadTool(toolId) {
+			try {
+				const found = await this.$store.dispatch('tool_entry/retrieveTool', {
+					name: toolId,
+				});
+				if (found === false) {
+					this.$nuxt.error({ statusCode: 404, message: 'Tool not found' });
+				}
+			} catch (e) {
+				// Surface genuine (non-404) failures on the error page too.
+				this.$nuxt.error({
+					statusCode: e?.response?.status || 500,
+					message: 'Unable to load this tool',
+				});
+			}
 		},
 		elementIsVisibleInViewport(ref, partiallyVisible = true) {
 			if (this.visible) {

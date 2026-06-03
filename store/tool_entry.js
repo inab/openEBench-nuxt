@@ -37,11 +37,29 @@ export default {
 			commit('updateLoading', true);
 			commit('resetWebAvailability');
 			commit('updateSimilarTools', []);
-			const { data } = await this.$observatory.get(
-				`/tools?name=${payload.name}`
-			);
-			commit('updateTool', data);
-			commit('updateLoading', false);
+			try {
+				const { data } = await this.$observatory.get(
+					`/tools?name=${payload.name}`
+				);
+				// Treat an empty array / missing payload / object lacking a label
+				// (the field the entry page relies on) as "tool not found".
+				const tool = Array.isArray(data) ? data[0] : data;
+				if (!tool || !tool.label) {
+					commit('updateTool', {});
+					return false;
+				}
+				commit('updateTool', data);
+				return true;
+			} catch (error) {
+				commit('updateTool', {});
+				if (error?.response?.status === 404) {
+					return false;
+				}
+				// Surface genuine (non-404) errors instead of swallowing them.
+				throw error;
+			} finally {
+				commit('updateLoading', false);
+			}
 		},
 
 		async retrieveSimilarTools({ commit }, toolId) {
