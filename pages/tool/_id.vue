@@ -167,6 +167,28 @@ export default {
 			similarTools: 'similarTools',
 			loadingSimilar: 'loadingSimilar',
 		}),
+		// Whether the availability section should be shown (has uptime, galaxy, or installation info)
+		hasAvailability() {
+			const allowedTypes = [
+				'web',
+				'rest',
+				'sparql',
+				'soap',
+				'workbench',
+				'suite',
+			];
+			const hasUptime = (this.tool?.type || []).some((t) =>
+				allowedTypes.includes(t)
+			);
+			const source = this.tool?.source || [];
+			const hasGalaxy = source.includes('galaxy');
+			const hasInstallation =
+				source.includes('bioconda_recipes') ||
+				source.includes('bioconductor') ||
+				this.tool?.repository?.length > 0 ||
+				this.tool?.download?.length > 0;
+			return hasUptime || hasGalaxy || hasInstallation;
+		},
 		// Whether the tool has any usable licensing information
 		hasLicenseInfo() {
 			return (this.tool?.license || []).some(
@@ -186,6 +208,7 @@ export default {
 				if (section.id === 'similar-software') {
 					return this.hasSimilarSoftware;
 				}
+				if (section.id === 'availability') return this.hasAvailability;
 				return true;
 			});
 		},

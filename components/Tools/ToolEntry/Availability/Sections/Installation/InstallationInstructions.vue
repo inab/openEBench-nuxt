@@ -1,5 +1,5 @@
 <template>
-	<v-row class="mt-2 pt-0 mb-2">
+	<v-row v-if="hasAnyInstallation" class="mt-2 pt-0 mb-2">
 		<v-col cols="12" class="mt-0 pt-0 pb-0 mb-0">
 			<span class="text-subtitle d-flex align-center">
 				<div class="title-label">Installation</div>
@@ -61,6 +61,14 @@ export default {
 			tool: 'tool',
 			loading: 'loading',
 		}),
+		hasAnyInstallation() {
+			return (
+				this.isThereBioconda() ||
+				this.isThereBioconductor() ||
+				this.isThereSourceCode() ||
+				this.isThereDownload()
+			);
+		},
 	},
 
 	methods: {
