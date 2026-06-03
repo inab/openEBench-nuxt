@@ -88,6 +88,45 @@
 														minimal
 													/>
 												</div>
+
+												<!-- Topics & operations -->
+												<div
+													v-if="allTags(item).length > 0"
+													class="similar-tags d-flex align-center flex-wrap mt-2"
+												>
+													<LinkChipTopicOperation
+														v-for="(tag, t) in visibleTags(item)"
+														:key="tag.uri || t"
+														:uri="tag.uri"
+														:text="cleanString(tag.term)"
+														:icon="tag.icon"
+														:attach="false"
+													/>
+													<v-chip
+														v-if="hiddenTagCount(item) > 0"
+														label
+														small
+														light
+														color="grey lighten-4"
+														class="mr-1 mt-1"
+														@click="expandTags(item)"
+													>
+														+{{ hiddenTagCount(item) }} more
+													</v-chip>
+													<v-chip
+														v-else-if="
+															isExpanded(item) && isTagsCollapsible(item)
+														"
+														label
+														small
+														light
+														color="grey lighten-4"
+														class="mr-1 mt-1"
+														@click="collapseTags(item)"
+													>
+														show less
+													</v-chip>
+												</div>
 											</div>
 										</v-col>
 									</v-row>
@@ -134,12 +173,14 @@ import { mapGetters } from 'vuex';
 import { marked } from 'marked';
 import DOMPurify from 'dompurify';
 import LinkChipWImage from '~/components/Tools/Search/Card/LinkChipWImage.vue';
+import LinkChipTopicOperation from '~/components/Tools/Search/Card/LinkChipTopicOperation.vue';
 
 const HIGH_MATCH_THRESHOLD = 0.85;
+const MAX_VISIBLE_TAGS = 3;
 
 export default {
 	name: 'SimilarSoftwareContent',
-	components: { LinkChipWImage },
+	components: { LinkChipWImage, LinkChipTopicOperation },
 	data() {
 		return {
 			page: 1,
@@ -147,6 +188,9 @@ export default {
 			// Fallback descriptions (from "help" documentation) keyed by tool_id,
 			// used for similar tools that have no description of their own.
 			fallbackDescriptions: {},
+			// Per-card expansion state for the topics/operations chips,
+			// keyed by tool_id.
+			expandedTags: {},
 		};
 	},
 
@@ -234,6 +278,53 @@ export default {
 
 		hasSources(item) {
 			return item.sources_labels && Object.keys(item.sources_labels).length > 0;
+		},
+
+		// Strip surrounding quotes from a term label.
+		cleanString(str) {
+			if (!str) return '';
+			return str.replace(/^"|"$/g, '');
+		},
+
+		// Topics and operations merged into a single chip list, each tagged
+		// with its own icon. (The similarity API currently returns topics only,
+		// but operations are handled too in case they appear.)
+		allTags(item) {
+			const topics = (item.topics || []).map((t) => ({
+				...t,
+				icon: 'mdi-label-multiple',
+			}));
+			const operations = (item.operations || []).map((o) => ({
+				...o,
+				icon: 'mdi-cog',
+			}));
+			return [...topics, ...operations];
+		},
+
+		isExpanded(item) {
+			return !!this.expandedTags[item.tool_id];
+		},
+
+		visibleTags(item) {
+			const tags = this.allTags(item);
+			return this.isExpanded(item) ? tags : tags.slice(0, MAX_VISIBLE_TAGS);
+		},
+
+		hiddenTagCount(item) {
+			if (this.isExpanded(item)) return 0;
+			return Math.max(this.allTags(item).length - MAX_VISIBLE_TAGS, 0);
+		},
+
+		isTagsCollapsible(item) {
+			return this.allTags(item).length > MAX_VISIBLE_TAGS;
+		},
+
+		expandTags(item) {
+			this.$set(this.expandedTags, item.tool_id, true);
+		},
+
+		collapseTags(item) {
+			this.$set(this.expandedTags, item.tool_id, false);
 		},
 
 		prevPage() {

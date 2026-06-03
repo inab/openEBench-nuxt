@@ -1,5 +1,11 @@
 <template>
-	<v-tooltip bottom attach color="#EAF1F7" max-width="450px" allow-overflow>
+	<v-tooltip
+		bottom
+		:attach="attach"
+		color="#EAF1F7"
+		max-width="450px"
+		allow-overflow
+	>
 		<template #activator="{ on, attrs }">
 			<v-chip
 				label
@@ -43,6 +49,15 @@ export default {
 			type: Boolean,
 			required: false,
 			default: false,
+		},
+		// Render the tooltip attached to the activator's parent (true) or in the
+		// document body (false). Detach it when the chip lives inside a container
+		// that clips overflow (e.g. the similar-software carousel), so the
+		// tooltip isn't hidden behind neighbouring content.
+		attach: {
+			type: Boolean,
+			required: false,
+			default: true,
 		},
 	},
 };
