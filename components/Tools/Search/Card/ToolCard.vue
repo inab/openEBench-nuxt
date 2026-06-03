@@ -29,18 +29,19 @@
 
 				<v-card-text class="mb-0 mt-0 pt-1">
 					<!-- DESCRIPTION -->
-					<p class="text-caption black--text mb-2">
-						<span v-if="description.length > 300"
-							>{{ cutDescription(description)
-							}}<a
-								v-if="descriptionCollapsed"
-								class="text-decoration-underline"
-								@click="extendDescription()"
-								>more</a
-							>
-						</span>
-						<span v-else>{{ description }}</span>
-					</p>
+					<span v-if="resolvedDescription.length > 300">
+						<span v-html="cutDescription(resolvedDescription)"></span>
+
+						<a
+							v-if="descriptionCollapsed"
+							class="text-decoration-underline"
+							@click="extendDescription()"
+						>
+							more
+						</a>
+					</span>
+
+					<span v-else v-html="resolvedDescription"></span>
 					<!-- TOPICS -->
 					<div v-if="topics.length > 0" justify="center" class="mt-1">
 						<LinkChipTopicOperation
@@ -134,6 +135,7 @@
 	</v-row>
 </template>
 <script>
+import { marked } from 'marked';
 import ChipType from './ChipType.vue';
 import LinkMorePublications from './LinkMorePublications.vue';
 import LinkChipTopicOperation from './LinkChipTopicOperation.vue';
@@ -172,6 +174,11 @@ export default {
 			type: String,
 			required: true,
 			default: '',
+		},
+		documentation: {
+			type: Array,
+			required: false,
+			default: () => [],
 		},
 		topics: {
 			type: Array,
@@ -257,6 +264,17 @@ export default {
 				return latestPublication;
 			}
 		},
+		resolvedDescription() {
+			if (this.description && this.description.length > 0) {
+				return marked(this.description);
+			}
+
+			const help = this.documentation?.find(
+				(doc) => doc.type === 'help'
+			)?.content;
+			if (!help) return '';
+			return marked(this.extractFirstLine(help));
+		},
 	},
 	methods: {
 		goToTool() {
@@ -266,11 +284,13 @@ export default {
 			this.descriptionCollapsed = !this.descriptionCollapsed;
 		},
 		cutDescription(description) {
-			if (this.descriptionCollapsed === true) {
+			if (!description) return '';
+
+			if (this.descriptionCollapsed) {
 				return description.substring(0, 300) + '... ';
-			} else {
-				return description;
 			}
+
+			return description;
 		},
 		cleanString(str) {
 			if (!str) {
@@ -293,6 +313,22 @@ export default {
 				'z-index': 9998 - order,
 			};
 		},
+		extractFirstLine(content) {
+			if (!content) return '';
+
+			return (
+				content
+					.split('\n')
+					.map((l) => l.trim())
+					.find(
+						(l) =>
+							l &&
+							!l.startsWith('**') &&
+							!l.startsWith('..') &&
+							!l.startsWith('---')
+					) || ''
+			);
+		},
 	},
 };
 </script>
@@ -307,5 +343,13 @@ export default {
 
 .v-card {
 	min-height: 130px;
+}
+
+::v-deep p {
+	display: inline;
+	margin: 0;
+	color: rgb(0, 0, 0);
+	font-size: 12px;
+	line-height: 20px;
 }
 </style>

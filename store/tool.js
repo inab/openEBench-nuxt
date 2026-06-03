@@ -65,6 +65,7 @@ function normalizeTool(tool) {
 		publications: tool.publication || [],
 		license: tool.license || [],
 		webpage: pick(tool.webpage) || pick(tool.homepage) || '',
+		documentation: tool.documentation || [],
 		findability: score(fairsoft.F),
 		accessibility: score(fairsoft.A),
 		interoperability: score(fairsoft.I),

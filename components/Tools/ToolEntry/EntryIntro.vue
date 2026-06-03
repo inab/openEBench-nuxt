@@ -32,7 +32,7 @@
 		</v-row>
 		<v-row>
 			<v-col>
-				<p class="text-body-1">{{ description }}</p>
+				<p class="text-body-1" v-html="renderedDescription"></p>
 
 				<div class="d-flex justify-center">
 					<LinkChipWIcon
@@ -59,6 +59,7 @@
 	</v-card>
 </template>
 <script>
+import { marked } from 'marked';
 import LinkChipWImage from '../Search/Card/LinkChipWImage.vue';
 import LinkChipWIcon from '../Search/Card/LinkChipWIcon.vue';
 import ChipType from '~/components/Tools/Search/Card/ChipType.vue';
@@ -101,6 +102,13 @@ export default {
 		return {
 			typeText: getSoftwareTypeDescription(this.type),
 		};
+	},
+
+	computed: {
+		renderedDescription() {
+			if (!this.description) return '';
+			return marked(this.description);
+		},
 	},
 
 	methods: {

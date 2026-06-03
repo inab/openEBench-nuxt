@@ -300,7 +300,8 @@ export default {
 
 .section-label {
 	font-size: 1.2rem !important;
-	color: #6f6c6c;
-	font-weight: bold;
+	color: rgba(0, 0, 0, 50%);
+	font-weight: 500;
+	margin-bottom: 8px;
 }
 </style>

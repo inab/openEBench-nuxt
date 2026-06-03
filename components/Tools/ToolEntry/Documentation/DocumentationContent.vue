@@ -41,6 +41,7 @@
 					:key="item.id"
 					:text="item.term.term"
 					:edam-id="item.term.uri"
+					:vocabulary="item.term.vocabulary"
 					:color="colorTopic"
 					:text-color="textColorTopic"
 				/>
