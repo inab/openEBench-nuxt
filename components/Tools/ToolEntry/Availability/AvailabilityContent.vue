@@ -54,14 +54,23 @@ export default {
 			return true;
 		},
 		installationAvailable() {
-			if (
+			const hasSource =
 				this.tool.source.includes('bioconda_recipes') ||
-				this.tool.source.includes('bioconductor') ||
-				this.tool.repository ||
-				this.tool.download
-			)
-				return true;
-			return false;
+				this.tool.source.includes('bioconductor');
+
+			const hasRepository =
+				this.tool.repository &&
+				(Array.isArray(this.tool.repository)
+					? this.tool.repository.length > 0
+					: Object.keys(this.tool.repository).length > 0);
+
+			const hasDownload =
+				this.tool.download &&
+				(Array.isArray(this.tool.download)
+					? this.tool.download.length > 0
+					: Object.keys(this.tool.download).length > 0);
+
+			return hasSource || hasRepository || hasDownload;
 		},
 	},
 };
