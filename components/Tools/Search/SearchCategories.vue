@@ -26,12 +26,7 @@ export default {
 	data() {
 		return {
 			searchingIn: [0, 1, 2, 3],
-			categories: [
-				'Tool Name',
-				'Tool Description',
-				'Associated Topics',
-				'Associated Operations',
-			],
+			categories: ['Name', 'Description', 'Topics', 'Operations'],
 			equivalencies: {
 				0: 'name',
 				1: 'description',
@@ -55,6 +50,8 @@ export default {
 				return;
 			}
 
+			this.$emit('selection-change', this.searchingInLabels(newVal));
+
 			if (!this.searchedTerm) return;
 
 			this.$store.dispatch(
@@ -64,11 +61,17 @@ export default {
 			this.$store.dispatch('tool/searchTools');
 		},
 	},
+	mounted() {
+		this.$emit('selection-change', this.searchingInLabels(this.searchingIn));
+	},
 	methods: {
 		searchingInCategories(newVal) {
 			return Object.entries(this.equivalencies)
 				.filter(([key]) => newVal.includes(parseInt(key)))
 				.map(([, val]) => val);
+		},
+		searchingInLabels(newVal) {
+			return this.categories.filter((_, index) => newVal.includes(index));
 		},
 	},
 };

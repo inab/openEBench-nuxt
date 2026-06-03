@@ -5,7 +5,7 @@
 		justify="center"
 		class="mr-0 ml-0"
 	>
-		<v-col cols="12" class="pb-0 pt-3" v-if="breadcrumbs.length > 0">
+		<v-col v-if="breadcrumbs.length > 0" cols="12" class="pb-0 pt-3">
 			<v-breadcrumbs :items="breadcrumbs" dark class="py-0">
 				<template #divider>
 					<v-icon color="white">mdi-chevron-right</v-icon>
@@ -36,7 +36,7 @@
 						v-model="value"
 						class="search-input"
 						type="text"
-						:placeholder="`Search ${totalToolsGlobal} tools...`"
+						:placeholder="searchPlaceholder"
 						@keydown.enter="triggerSearch(value)"
 					/>
 					<v-icon
@@ -53,24 +53,37 @@
 				</v-btn>
 			</div>
 
-			<!-- Meta row -->
-			<div class="meta-row">
-				<span class="search-in-label">Search in:</span>
+			<div class="examples-row">
 				<span class="examples-text">
-					Examples:
-					<span v-for="(item, i) in exampleValues" :key="i">
-						<b
-							><a class="white--text" @click="inputExample(item.name)">{{
-								item.name
-							}}</a></b
+					Try:
+					<span v-for="(item, i) in exampleValues" :key="item.name">
+						<a
+							class="example-link white--text"
+							@click="inputExample(item.name)"
 						>
+							{{ item.name }}
+						</a>
 						<span v-if="i < exampleValues.length - 1">, </span>
 					</span>
 				</span>
 			</div>
-			<!-- Chips row -->
-			<div class="chips-row" :class="{ 'chips-disabled': !value }">
-				<search-categories />
+			<div class="search-options-row">
+				<button
+					type="button"
+					class="search-options-trigger"
+					@click="searchOptionsOpen = !searchOptionsOpen"
+				>
+					<v-icon small color="white">
+						{{ searchOptionsOpen ? 'mdi-chevron-up' : 'mdi-chevron-down' }}
+					</v-icon>
+					<span
+						>Search in <strong>{{ searchOptionsLabel }}</strong></span
+					>
+				</button>
+			</div>
+
+			<div class="chips-panel" :class="{ 'is-open': searchOptionsOpen }">
+				<search-categories @selection-change="updateSearchCategoryLabels" />
 			</div>
 		</v-col>
 	</v-row>
@@ -93,13 +106,32 @@ export default {
 	data() {
 		return {
 			value: '',
-			exampleValues: [{ name: 'trimAl' }, { name: 'PyMut' }],
+			searchOptionsOpen: false,
+			selectedSearchCategoryLabels: [],
+			exampleValues: [
+				{ name: 'trimAl' },
+				{ name: 'cell barcode' },
+				{ name: 'differential protein abundance' },
+			],
 			searchingIn: [0, 1, 2, 3],
 		};
 	},
 	computed: {
 		totalToolsGlobal() {
-			return this.$store.getters['tool/totalTools'];
+			return this.$store.getters['tool/totalToolsGlobal'];
+		},
+		searchPlaceholder() {
+			if (!this.totalToolsGlobal) return 'Search tools...';
+			return `Search ${this.totalToolsGlobal.toLocaleString()} tools...`;
+		},
+		searchOptionsLabel() {
+			if (
+				!this.searchOptionsOpen ||
+				this.selectedSearchCategoryLabels.length === 0
+			) {
+				return 'all fields';
+			}
+			return this.selectedSearchCategoryLabels.join(', ');
 		},
 		searchedTerm() {
 			return this.$store.getters['tool/searchedTerm'];
@@ -117,6 +149,9 @@ export default {
 		inputExample(value) {
 			this.value = value;
 		},
+		updateSearchCategoryLabels(labels) {
+			this.selectedSearchCategoryLabels = labels;
+		},
 		clearSearch() {
 			this.value = '';
 			this.$store.dispatch('tool/updateSearchedTerm', '');
@@ -131,7 +166,7 @@ export default {
 	background-color: #396fba !important;
 	color: white;
 	width: 100vw;
-	min-height: 220px;
+	min-height: 290px;
 	margin: 0 !important;
 	margin-left: calc(-50vw + 50%) !important;
 }
@@ -195,35 +230,57 @@ export default {
 	background: rgba(255, 255, 255, 12%) !important;
 }
 
-/* Chips row wrapper */
-.chips-row {
-	padding-left: 36px;
-	transition: opacity 0.25s;
+.examples-row {
+	display: flex;
+	justify-content: flex-start;
+	padding-left: 45px;
+	margin-top: 6px;
+	margin-bottom: 10px;
 }
-
-.chips-disabled {
-	opacity: 0.45;
-	pointer-events: none;
-}
-
-.search-in-label {
-	color: rgba(255, 255, 255, 85%);
-	font-size: 12px;
-	white-space: nowrap;
-}
-
-/* .examples-text {
-	color: rgba(255, 255, 255, 65%);
-	font-size: 12px;
-	text-align: right;
-} */
 
 .examples-text {
 	color: rgba(255, 255, 255, 65%);
 	font-size: 12px;
-	text-align: right;
-	padding-right: 98px;
 	white-space: nowrap;
+}
+
+.example-link {
+	font-weight: 700;
+	text-decoration: underline;
+	text-underline-offset: 2px;
+	cursor: pointer;
+}
+
+.search-options-row {
+	display: flex;
+	justify-content: flex-start;
+	padding-left: 45px;
+}
+
+.search-options-trigger {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	color: rgba(255, 255, 255, 85%);
+	font-size: 12px;
+	line-height: 1.2;
+	background: transparent;
+	border: 0;
+	padding: 0;
+	cursor: pointer;
+}
+
+.chips-panel {
+	min-height: 46px;
+	padding-left: 36px;
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.25s;
+}
+
+.chips-panel.is-open {
+	opacity: 1;
+	pointer-events: auto;
 }
 
 ::v-deep .v-breadcrumbs__item {
@@ -232,16 +289,5 @@ export default {
 
 ::v-deep .v-breadcrumbs__item--disabled {
 	color: rgba(255, 255, 255, 60%) !important;
-}
-
-/* Row with "Search in:" on left and Examples on right */
-.meta-row {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	padding-left: 45px;
-	padding-right: 2px;
-	margin-top: 6px;
-	margin-bottom: 2px;
 }
 </style>
