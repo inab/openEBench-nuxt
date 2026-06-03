@@ -2,7 +2,8 @@
 	"compilerOptions": {
 		"target": "ES2018",
 		"module": "ESNext",
-		"moduleResolution": "Node",
+		"ignoreDeprecations": "6.0",
+		"moduleResolution": "node",
 		"lib": ["ESNext", "ESNext.AsyncIterable", "DOM"],
 		"esModuleInterop": true,
 		"allowJs": true,

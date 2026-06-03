@@ -255,10 +255,13 @@ export default {
 		// Get name and type from URL
 		// this.$store.dispatch('tool/setToolName', this.$route.params.name)
 		this.loadTool(this.$route.params.id);
+	},
+
+	mounted() {
 		window.addEventListener('scroll', this.handleScroll);
 	},
 
-	unmounted() {
+	beforeDestroy() {
 		window.removeEventListener('scroll', this.handleScroll);
 	},
 
@@ -297,14 +300,17 @@ export default {
 		},
 
 		menuSections() {
-			for (let i = 0; i < this.items.length; i++) {
-				const ref = this.$refs.Items[i];
-				if (ref !== undefined) {
+			const refs = this.$refs.Items;
+			if (!refs || !Array.isArray(refs) || refs.length === 0) return;
+
+			for (let i = 0; i < refs.length; i++) {
+				const ref = refs[i];
+				if (ref) {
 					this.visibleItems[i] = this.elementIsVisibleInViewport(ref);
 				}
 			}
-			// activeItem is the first visibleItem
-			for (let i = 0; i < this.items.length; i++) {
+
+			for (let i = 0; i < refs.length; i++) {
 				if (this.visibleItems[i]) {
 					this.activeItem = i;
 					break;
