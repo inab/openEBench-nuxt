@@ -59,11 +59,11 @@
 			<FAIRScores />
 		</div>
 
-		<div id="main-container" ref="Main" class="pt-6">
+		<div id="main-container" ref="Main" class="pt-2">
 			<v-row justify="center">
 				<v-col v-if="hasToolData" cols="7" lg="12">
 					<!-- Card principal -->
-					<v-card elevation="1" class="mt-6 mb-6 pa-5 content-cards">
+					<v-card elevation="1" class="mt-0 mb-6 pa-5 content-cards">
 						<EntryIntro
 							ref="Intro"
 							:name="tool.label[0]"
