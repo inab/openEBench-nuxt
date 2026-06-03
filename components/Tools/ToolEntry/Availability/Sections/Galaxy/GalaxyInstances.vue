@@ -1,9 +1,7 @@
 <template>
 	<v-row class="mt-0 pt-0 mb-2">
 		<v-col cols="12" class="mt-0 pt-0 pb-0 mb-0">
-			<div class="text-subtitle d-flex justify-start align-center">
-				<div class="pub-line mr-3 flex-shrink-0 dot-black"></div>
-
+			<div class="section-label d-flex justify-start align-center">
 				<span>Galaxy</span>
 			</div>
 		</v-col>
@@ -45,13 +43,9 @@ export default {
 </script>
 
 <style scoped>
-.pub-line {
-	width: 2px;
-	height: 20px;
-	flex-shrink: 0;
-}
-
-.dot-black {
-	background-color: rgba(17, 16, 16, 95%);
+.section-label {
+	font-size: 1.2rem !important;
+	color: #6f6c6c;
+	font-weight: bold;
 }
 </style>
