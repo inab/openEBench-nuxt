@@ -52,9 +52,16 @@
 			</v-list>
 		</v-card>
 
+		<!-- FAIRsoft scores: fixed in the right gutter, mirroring the left nav.
+			 Shown only from 1500px up; below that it is hidden and the content
+			 cards reclaim the freed space (see #main-container / .fair-fixed rules). -->
+		<div v-if="!loading" class="fair-fixed">
+			<FAIRScores />
+		</div>
+
 		<div id="main-container" ref="Main" class="pt-6">
 			<v-row justify="center">
-				<v-col v-if="!loading" cols="7">
+				<v-col v-if="!loading" cols="7" lg="12">
 					<!-- Card principal -->
 					<v-card elevation="1" class="mt-6 mb-6 pa-5 content-cards">
 						<EntryIntro
@@ -84,7 +91,7 @@
 						<component :is="item.component"></component>
 					</v-card>
 				</v-col>
-				<v-col v-else cols="8">
+				<v-col v-else cols="8" lg="12">
 					<v-skeleton-loader
 						v-bind="attrs"
 						type="article, list-item-three-line, image"
@@ -105,6 +112,7 @@ import DocumentationContent from '~/components/Tools/ToolEntry/Documentation/Doc
 import AvailabilityContent from '~/components/Tools/ToolEntry/Availability/AvailabilityContent.vue';
 import LicenseContent from '~/components/Tools/ToolEntry/License/LicenseContent.vue';
 import SimilarSoftwareContent from '~/components/Tools/ToolEntry/SimilarSoftware/SimilarSoftwareContent.vue';
+import FAIRScores from '~/components/Tools/ToolEntry/FAIR/FAIRScores.vue';
 
 export default {
 	name: 'ToolEntry',
@@ -117,6 +125,7 @@ export default {
 		AvailabilityContent,
 		LicenseContent,
 		SimilarSoftwareContent,
+		FAIRScores,
 	},
 	layout: 'DefaultLayoutWOBreadcrumbs',
 	data() {
@@ -329,6 +338,9 @@ export default {
 
 .content-cards {
 	min-height: 200px;
+	max-width: 960px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 #to-top {
@@ -336,11 +348,36 @@ export default {
 	right: 80px;
 }
 
-#fixed-fair {
+.fair-fixed {
+	display: none; /* shown only on wide screens (see media query below) */
 	position: fixed;
-	top: 85px;
-	width: 260px;
+	top: 130px; /* clears the app header + breadcrumbs, aligns near the main card top */
+	right: 24px;
+	width: 280px;
 	word-wrap: normal;
+	z-index: 50;
+}
+
+/* From lg up, anchor the content cards to the left (clear of the fixed left nav)
+   and let them fill the available width instead of centering. */
+@media (min-width: 1264px) {
+	#main-container {
+		padding-left: 380px; /* clear the fixed left nav (150px + 200px width) */
+		padding-right: 48px;
+	}
+}
+
+/* Only show the FAIR menu once the viewport is wide enough to fit it beside the
+   cards; at that point reserve the right padding for it. Below 1500px the menu is
+   hidden and the cards reclaim the space (padding-right drops to 48px above). */
+@media (min-width: 1500px) {
+	.fair-fixed {
+		display: block;
+	}
+
+	#main-container {
+		padding-right: 340px; /* reserve room for the FAIR menu */
+	}
 }
 
 .v-breadcrumbs {
