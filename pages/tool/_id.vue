@@ -60,7 +60,7 @@
 						<EntryIntro
 							ref="Intro"
 							:name="tool.label[0]"
-							:description="tool.description[0].term"
+							:description="toolDescription"
 							:type="tool.type"
 							:version="tool.version"
 							:webpage="tool.webpage"
@@ -215,6 +215,26 @@ export default {
 			});
 			return crumbs;
 		},
+		// Get other description in documentation Help.
+		toolDescription() {
+			// Caso normal
+			const description = this.tool?.description?.[0]?.term;
+
+			if (description) {
+				return description;
+			}
+
+			// Fallback a documentation
+			const content = this.tool?.documentation?.find(
+				(doc) => doc.term?.type === 'help'
+			)?.term?.content;
+
+			if (!content) {
+				return '';
+			}
+
+			return this.extractDescription(content);
+		},
 	},
 
 	watch: {
@@ -304,6 +324,21 @@ export default {
 
 			// 500 the height of the fixed menu + tool brief + nav bar
 			this.offsetMenu = window.innerHeight - 500; // Menu position -> stop at footer
+		},
+
+		extractDescription(content) {
+			const firstLine = content
+				.split('\n')
+				.map((line) => line.trim())
+				.find(
+					(line) =>
+						line &&
+						!line.startsWith('**') &&
+						!line.startsWith('..') &&
+						!line.startsWith('---')
+				);
+
+			return firstLine || '';
 		},
 	},
 };
