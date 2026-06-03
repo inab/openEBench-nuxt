@@ -3,7 +3,9 @@
 		This software is available in
 		<a href="https://bioconda.github.io/" target="_black">Bioconda</a>. Install
 		it with:
-		<Code-block :code="code"></Code-block>
+		<div style="display: flex; justify-content: center">
+			<Code-block :code="code"></Code-block>
+		</div>
 		Detailed installation instructions and how to set an environment
 		<a href="https://mamba.readthedocs.io/en/latest/" target="_blank">here</a>.
 	</div>

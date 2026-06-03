@@ -2,9 +2,7 @@
 	<v-row class="mt-0 pt-0 mb-2">
 		<v-col cols="12" class="mt-0 pt-0 pb-0 mb-0">
 			<div class="text-subtitle d-flex justify-start align-center">
-				<div class="pub-line mr-3 flex-shrink-0 dot-black"></div>
-
-				<span>Galaxy</span>
+				<div class="title-label">Galaxy</div>
 			</div>
 		</v-col>
 		<v-col
@@ -24,12 +22,6 @@ import { mapGetters } from 'vuex';
 export default {
 	name: 'GalaxyInstances',
 	components: {},
-	props: {
-		tool: {
-			type: Object,
-			default: () => {},
-		},
-	},
 	data() {
 		return {
 			galaxyIcon: require('@/static/icons/galaxy-logo-black.png'),
@@ -45,13 +37,10 @@ export default {
 </script>
 
 <style scoped>
-.pub-line {
-	width: 2px;
-	height: 20px;
-	flex-shrink: 0;
-}
-
-.dot-black {
-	background-color: rgba(17, 16, 16, 95%);
+.title-label {
+	font-size: 1.2rem !important;
+	color: rgba(0, 0, 0, 50%);
+	font-weight: 500;
+	margin-bottom: 8px;
 }
 </style>
