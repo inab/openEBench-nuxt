@@ -310,7 +310,7 @@ export default {
 	methods: {
 		...mapActions('tool_entry', ['retrieveSimilarTools']),
 
-		loadTool(toolParam) {
+		async loadTool(toolParam) {
 			// Split "name-id" → extract the id (last segment after final dash)
 			const lastDash = toolParam.lastIndexOf('-');
 			const toolId =
@@ -318,10 +318,21 @@ export default {
 			const toolName =
 				lastDash !== -1 ? toolParam.slice(0, lastDash) : toolParam;
 
-			this.$store.dispatch('tool_entry/retrieveTool', {
-				name: toolName,
-				id: toolId,
-			});
+			try {
+				const found = await this.$store.dispatch('tool_entry/retrieveTool', {
+					name: toolName,
+					id: toolId,
+				});
+				if (found === false) {
+					this.$nuxt.error({ statusCode: 404, message: 'Tool not found' });
+				}
+			} catch (e) {
+				// Surface genuine (non-404) failures on the error page too.
+				this.$nuxt.error({
+					statusCode: e?.response?.status || 500,
+					message: 'Unable to load this tool',
+				});
+			}
 		},
 		elementIsVisibleInViewport(ref, partiallyVisible = true) {
 			if (this.visible) {
