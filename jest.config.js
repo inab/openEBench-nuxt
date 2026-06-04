@@ -4,6 +4,7 @@ module.exports = {
 		'^@/(.*)$': '<rootDir>/$1',
 		'^~/(.*)$': '<rootDir>/$1',
 		'^vue$': 'vue/dist/vue.common.js',
+		'@inb/oeb_visualizations': '<rootDir>/__mocks__/@inb/oeb_visualizations.js',
 	},
 	moduleFileExtensions: ['ts', 'js', 'vue', 'json'],
 	transformIgnorePatterns: ['/node_modules/(?!@inb/oeb-widgets)'],

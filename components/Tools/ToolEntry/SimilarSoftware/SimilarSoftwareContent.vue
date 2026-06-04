@@ -45,7 +45,7 @@
 													style="gap: 6px"
 												>
 													<nuxt-link
-														:to="'/tool/' + item.tool_name"
+														:to="'/tool/' + item.tool_name + '-' + item.tool_id"
 														class="similar-title text-truncate"
 														>{{ item.tool_name }}</nuxt-link
 													>

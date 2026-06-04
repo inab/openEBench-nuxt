@@ -67,7 +67,7 @@
 						<EntryIntro
 							ref="Intro"
 							:name="tool.label[0]"
-							:description="tool.description[0].term"
+							:description="toolDescription"
 							:type="tool.type"
 							:version="tool.version"
 							:webpage="tool.webpage"
@@ -91,11 +91,9 @@
 						<component :is="item.component"></component>
 					</v-card>
 				</v-col>
-				<v-col v-else cols="8" lg="12">
-					<v-skeleton-loader
-						v-bind="attrs"
-						type="article, list-item-three-line, image"
-					>
+
+				<v-col v-else cols="8">
+					<v-skeleton-loader type="article, list-item-three-line, image">
 					</v-skeleton-loader>
 				</v-col>
 			</v-row>
@@ -186,6 +184,29 @@ export default {
 		// page can take over.
 		hasToolData() {
 			return !this.loading && !!this.tool?.label?.length;
+			// Whether the availability section should be shown (has uptime, galaxy, or installation info)
+		},
+
+		hasAvailability() {
+			const allowedTypes = [
+				'web',
+				'rest',
+				'sparql',
+				'soap',
+				'workbench',
+				'suite',
+			];
+			const hasUptime = (this.tool?.type || []).some((t) =>
+				allowedTypes.includes(t)
+			);
+			const source = this.tool?.source || [];
+			const hasGalaxy = source.includes('galaxy');
+			const hasInstallation =
+				source.includes('bioconda_recipes') ||
+				source.includes('bioconductor') ||
+				this.tool?.repository?.length > 0 ||
+				this.tool?.download?.length > 0;
+			return hasUptime || hasGalaxy || hasInstallation;
 		},
 		// Whether the tool has any usable licensing information
 		hasLicenseInfo() {
@@ -206,6 +227,7 @@ export default {
 				if (section.id === 'similar-software') {
 					return this.hasSimilarSoftware;
 				}
+				if (section.id === 'availability') return this.hasAvailability;
 				return true;
 			});
 		},
@@ -232,11 +254,31 @@ export default {
 			});
 			return crumbs;
 		},
+		// Get other description in documentation Help.
+		toolDescription() {
+			// Caso normal
+			const description = this.tool?.description?.[0]?.term;
+
+			if (description) {
+				return description;
+			}
+
+			// Fallback a documentation
+			const content = this.tool?.documentation?.find(
+				(doc) => doc.term?.type === 'help'
+			)?.term?.content;
+
+			if (!content) {
+				return '';
+			}
+
+			return this.extractDescription(content);
+		},
 	},
 
 	watch: {
-		'$route.params.id'(toolId) {
-			this.loadTool(toolId);
+		'$route.params.id'(toolParam) {
+			this.loadTool(toolParam); // already calls loadTool, no change needed
 		},
 
 		// Fetch similar tools at the page level so the card's visibility can be
@@ -255,31 +297,31 @@ export default {
 		// Get name and type from URL
 		// this.$store.dispatch('tool/setToolName', this.$route.params.name)
 		this.loadTool(this.$route.params.id);
+	},
+
+	mounted() {
 		window.addEventListener('scroll', this.handleScroll);
 	},
 
-	unmounted() {
+	beforeDestroy() {
 		window.removeEventListener('scroll', this.handleScroll);
 	},
 
 	methods: {
 		...mapActions('tool_entry', ['retrieveSimilarTools']),
 
-		async loadTool(toolId) {
-			try {
-				const found = await this.$store.dispatch('tool_entry/retrieveTool', {
-					name: toolId,
-				});
-				if (found === false) {
-					this.$nuxt.error({ statusCode: 404, message: 'Tool not found' });
-				}
-			} catch (e) {
-				// Surface genuine (non-404) failures on the error page too.
-				this.$nuxt.error({
-					statusCode: e?.response?.status || 500,
-					message: 'Unable to load this tool',
-				});
-			}
+		loadTool(toolParam) {
+			// Split "name-id" → extract the id (last segment after final dash)
+			const lastDash = toolParam.lastIndexOf('-');
+			const toolId =
+				lastDash !== -1 ? toolParam.slice(lastDash + 1) : toolParam;
+			const toolName =
+				lastDash !== -1 ? toolParam.slice(0, lastDash) : toolParam;
+
+			this.$store.dispatch('tool_entry/retrieveTool', {
+				name: toolName,
+				id: toolId,
+			});
 		},
 		elementIsVisibleInViewport(ref, partiallyVisible = true) {
 			if (this.visible) {
@@ -300,14 +342,17 @@ export default {
 		},
 
 		menuSections() {
-			for (let i = 0; i < this.items.length; i++) {
-				const ref = this.$refs.Items[i];
-				if (ref !== undefined) {
+			const refs = this.$refs.Items;
+			if (!refs || !Array.isArray(refs) || refs.length === 0) return;
+
+			for (let i = 0; i < refs.length; i++) {
+				const ref = refs[i];
+				if (ref) {
 					this.visibleItems[i] = this.elementIsVisibleInViewport(ref);
 				}
 			}
-			// activeItem is the first visibleItem
-			for (let i = 0; i < this.items.length; i++) {
+
+			for (let i = 0; i < refs.length; i++) {
 				if (this.visibleItems[i]) {
 					this.activeItem = i;
 					break;
@@ -330,6 +375,21 @@ export default {
 
 			// 500 the height of the fixed menu + tool brief + nav bar
 			this.offsetMenu = window.innerHeight - 500; // Menu position -> stop at footer
+		},
+
+		extractDescription(content) {
+			const firstLine = content
+				.split('\n')
+				.map((line) => line.trim())
+				.find(
+					(line) =>
+						line &&
+						!line.startsWith('**') &&
+						!line.startsWith('..') &&
+						!line.startsWith('---')
+				);
+
+			return firstLine || '';
 		},
 	},
 };

@@ -1,5 +1,5 @@
 <template>
-	<accessibilityPlot :data-items="dataItems" :dtick="dtick" />
+	<accessibilityPlot :data-items="dataItems" :dtick="Number(dtick)" />
 </template>
 <script>
 import { accessibilityPlot } from '@inb/oeb_visualizations';
