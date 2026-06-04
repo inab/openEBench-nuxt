@@ -349,8 +349,10 @@ export default {
 	overflow-y: visible;
 	width: 100%;
 
-	/* breathing room so card borders/shadows aren't clipped */
-	padding: 4px 2px 12px;
+	/* No horizontal padding: overflow:hidden clips at the padding box, so any
+	   horizontal padding would reveal a sliver of the adjacent page's edge card.
+	   Vertical padding gives top/bottom breathing room for the cards' shadows. */
+	padding: 4px 0 12px;
 }
 
 .carousel-track {

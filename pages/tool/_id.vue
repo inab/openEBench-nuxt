@@ -44,7 +44,7 @@
 							:active="activeItem === i"
 							@click="$vuetify.goTo('#' + item.id, { offset: 60 })"
 						>
-							<v-list-item-title class="text-subtitle-2" v-text="item.title">
+							<v-list-item-title class="text-subtitle-1" v-text="item.title">
 							</v-list-item-title>
 						</v-list-item-content>
 					</v-list-item>
@@ -414,6 +414,10 @@ export default {
 	z-index: 50px;
 }
 
+.fixed-card ::v-deep .v-list--dense .v-list-item .v-list-item__title {
+	font-size: 1.05rem;
+}
+
 .fixed-card--sticky {
 	position: fixed;
 	z-index: 50px;
@@ -440,14 +444,15 @@ export default {
 	display: none; /* shown only on wide screens (see media query below) */
 	position: fixed;
 	top: 130px; /* clears the app header + breadcrumbs, aligns near the main card top */
-	right: 24px;
-	width: 280px;
+	right: 0;
+	width: 340px; /* spans the reserved right gutter (see padding-right below) */
+	justify-content: center; /* center the card within the gutter, not flush right */
 	word-wrap: normal;
 	z-index: 50;
 }
 
-/* From lg up, anchor the content cards to the left (clear of the fixed left nav)
-   and let them fill the available width instead of centering. */
+/* lg–wide: not yet enough room to center the 960px card beside the edge-pinned
+   nav, so push the content right to clear the fixed left nav. */
 @media (min-width: 1264px) {
 	#main-container {
 		padding-left: 300px; /* clear the fixed left nav (64px margin + 200px width + gap) */
@@ -455,16 +460,28 @@ export default {
 	}
 }
 
-/* Only show the FAIR menu once the viewport is wide enough to fit it beside the
-   cards; at that point reserve the right padding for it. Below 1500px the menu is
-   hidden and the cards reclaim the space (padding-right drops to 48px above). */
-@media (min-width: 1500px) {
-	.fair-fixed {
-		display: block;
+/* Wide: enough room to center the 960px card in the viewport and tuck the left
+   nav right beside it (anchored to the card's left edge: 50% - 480 - 24 - 200). */
+@media (min-width: 1450px) {
+	#main-container {
+		padding-left: 48px;
+		padding-right: 48px;
 	}
 
-	#main-container {
-		padding-right: 340px; /* reserve room for the FAIR menu */
+	.fixed-card {
+		left: calc(50% - 704px);
+		margin-left: 0 !important;
+	}
+}
+
+/* Extra-wide: room to also show the FAIR panel hugging the card's right edge
+   (anchored at 50% + 480 + 24), with the card still centered. */
+@media (min-width: 1600px) {
+	.fair-fixed {
+		display: flex;
+		left: calc(50% + 504px);
+		right: auto;
+		width: 280px;
 	}
 }
 
