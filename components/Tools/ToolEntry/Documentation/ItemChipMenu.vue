@@ -38,7 +38,7 @@ export default {
 		},
 		edamId: {
 			type: String,
-			required: true,
+			required: false,
 			default: 'topic_0160',
 		},
 		vocabulary: {

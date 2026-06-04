@@ -16,6 +16,7 @@
 					md="11"
 				>
 					<ToolCard
+						:id="tool.id"
 						:name="tool.label"
 						:subname="tool.name"
 						:description="tool.description"

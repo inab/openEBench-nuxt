@@ -20,7 +20,7 @@
 		</div>
 
 		<ToolBrief
-			v-if="!introVisible && !loading"
+			v-if="!introVisible && hasToolData"
 			:name="tool.label[0]"
 			:type="tool.type"
 			:version="tool.version"
@@ -52,11 +52,18 @@
 			</v-list>
 		</v-card>
 
-		<div id="main-container" ref="Main" class="pt-6">
+		<!-- FAIRsoft scores: fixed in the right gutter, mirroring the left nav.
+			 Shown only from 1500px up; below that it is hidden and the content
+			 cards reclaim the freed space (see #main-container / .fair-fixed rules). -->
+		<div v-if="hasToolData" class="fair-fixed">
+			<FAIRScores />
+		</div>
+
+		<div id="main-container" ref="Main" class="pt-2">
 			<v-row justify="center">
-				<v-col v-if="!loading" cols="7">
+				<v-col v-if="hasToolData" cols="7" lg="12">
 					<!-- Card principal -->
-					<v-card elevation="1" class="mt-6 mb-6 pa-5 content-cards">
+					<v-card elevation="1" class="mt-0 mb-6 pa-5 content-cards">
 						<EntryIntro
 							ref="Intro"
 							:name="tool.label[0]"
@@ -84,11 +91,9 @@
 						<component :is="item.component"></component>
 					</v-card>
 				</v-col>
+
 				<v-col v-else cols="8">
-					<v-skeleton-loader
-						v-bind="attrs"
-						type="article, list-item-three-line, image"
-					>
+					<v-skeleton-loader type="article, list-item-three-line, image">
 					</v-skeleton-loader>
 				</v-col>
 			</v-row>
@@ -105,6 +110,7 @@ import DocumentationContent from '~/components/Tools/ToolEntry/Documentation/Doc
 import AvailabilityContent from '~/components/Tools/ToolEntry/Availability/AvailabilityContent.vue';
 import LicenseContent from '~/components/Tools/ToolEntry/License/LicenseContent.vue';
 import SimilarSoftwareContent from '~/components/Tools/ToolEntry/SimilarSoftware/SimilarSoftwareContent.vue';
+import FAIRScores from '~/components/Tools/ToolEntry/FAIR/FAIRScores.vue';
 
 export default {
 	name: 'ToolEntry',
@@ -117,6 +123,7 @@ export default {
 		AvailabilityContent,
 		LicenseContent,
 		SimilarSoftwareContent,
+		FAIRScores,
 	},
 	layout: 'DefaultLayoutWOBreadcrumbs',
 	data() {
@@ -170,6 +177,37 @@ export default {
 			similarTools: 'similarTools',
 			loadingSimilar: 'loadingSimilar',
 		}),
+		// Whether the tool has loaded with renderable data. The template reads
+		// tool.label[0] / tool.description[0].term directly, so we must not render
+		// the content (or flip out of the skeleton) until those fields exist —
+		// otherwise an empty tool (e.g. a 404) crashes the render before the error
+		// page can take over.
+		hasToolData() {
+			return !this.loading && !!this.tool?.label?.length;
+			// Whether the availability section should be shown (has uptime, galaxy, or installation info)
+		},
+
+		hasAvailability() {
+			const allowedTypes = [
+				'web',
+				'rest',
+				'sparql',
+				'soap',
+				'workbench',
+				'suite',
+			];
+			const hasUptime = (this.tool?.type || []).some((t) =>
+				allowedTypes.includes(t)
+			);
+			const source = this.tool?.source || [];
+			const hasGalaxy = source.includes('galaxy');
+			const hasInstallation =
+				source.includes('bioconda_recipes') ||
+				source.includes('bioconductor') ||
+				this.tool?.repository?.length > 0 ||
+				this.tool?.download?.length > 0;
+			return hasUptime || hasGalaxy || hasInstallation;
+		},
 		// Whether the tool has any usable licensing information
 		hasLicenseInfo() {
 			return (this.tool?.license || []).some(
@@ -189,6 +227,7 @@ export default {
 				if (section.id === 'similar-software') {
 					return this.hasSimilarSoftware;
 				}
+				if (section.id === 'availability') return this.hasAvailability;
 				return true;
 			});
 		},
@@ -238,8 +277,8 @@ export default {
 	},
 
 	watch: {
-		'$route.params.id'(toolId) {
-			this.loadTool(toolId);
+		'$route.params.id'(toolParam) {
+			this.loadTool(toolParam); // already calls loadTool, no change needed
 		},
 
 		// Fetch similar tools at the page level so the card's visibility can be
@@ -258,22 +297,42 @@ export default {
 		// Get name and type from URL
 		// this.$store.dispatch('tool/setToolName', this.$route.params.name)
 		this.loadTool(this.$route.params.id);
+	},
+
+	mounted() {
 		window.addEventListener('scroll', this.handleScroll);
 	},
 
-	unmounted() {
+	beforeDestroy() {
 		window.removeEventListener('scroll', this.handleScroll);
 	},
 
 	methods: {
 		...mapActions('tool_entry', ['retrieveSimilarTools']),
 
-		loadTool(toolId) {
-			const payload = {
-				name: toolId,
-			};
+		async loadTool(toolParam) {
+			// Split "name-id" → extract the id (last segment after final dash)
+			const lastDash = toolParam.lastIndexOf('-');
+			const toolId =
+				lastDash !== -1 ? toolParam.slice(lastDash + 1) : toolParam;
+			const toolName =
+				lastDash !== -1 ? toolParam.slice(0, lastDash) : toolParam;
 
-			this.$store.dispatch('tool_entry/retrieveTool', payload);
+			try {
+				const found = await this.$store.dispatch('tool_entry/retrieveTool', {
+					name: toolName,
+					id: toolId,
+				});
+				if (found === false) {
+					this.$nuxt.error({ statusCode: 404, message: 'Tool not found' });
+				}
+			} catch (e) {
+				// Surface genuine (non-404) failures on the error page too.
+				this.$nuxt.error({
+					statusCode: e?.response?.status || 500,
+					message: 'Unable to load this tool',
+				});
+			}
 		},
 		elementIsVisibleInViewport(ref, partiallyVisible = true) {
 			if (this.visible) {
@@ -294,14 +353,17 @@ export default {
 		},
 
 		menuSections() {
-			for (let i = 0; i < this.items.length; i++) {
-				const ref = this.$refs.Items[i];
-				if (ref !== undefined) {
+			const refs = this.$refs.Items;
+			if (!refs || !Array.isArray(refs) || refs.length === 0) return;
+
+			for (let i = 0; i < refs.length; i++) {
+				const ref = refs[i];
+				if (ref) {
 					this.visibleItems[i] = this.elementIsVisibleInViewport(ref);
 				}
 			}
-			// activeItem is the first visibleItem
-			for (let i = 0; i < this.items.length; i++) {
+
+			for (let i = 0; i < refs.length; i++) {
 				if (this.visibleItems[i]) {
 					this.activeItem = i;
 					break;
@@ -347,7 +409,7 @@ export default {
 .fixed-card {
 	width: 200px;
 	margin-top: 24px;
-	margin-left: 150px !important;
+	margin-left: 64px !important;
 	position: absolute;
 	z-index: 50px;
 }
@@ -364,6 +426,9 @@ export default {
 
 .content-cards {
 	min-height: 200px;
+	max-width: 960px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 #to-top {
@@ -371,11 +436,36 @@ export default {
 	right: 80px;
 }
 
-#fixed-fair {
+.fair-fixed {
+	display: none; /* shown only on wide screens (see media query below) */
 	position: fixed;
-	top: 85px;
-	width: 260px;
+	top: 130px; /* clears the app header + breadcrumbs, aligns near the main card top */
+	right: 24px;
+	width: 280px;
 	word-wrap: normal;
+	z-index: 50;
+}
+
+/* From lg up, anchor the content cards to the left (clear of the fixed left nav)
+   and let them fill the available width instead of centering. */
+@media (min-width: 1264px) {
+	#main-container {
+		padding-left: 300px; /* clear the fixed left nav (64px margin + 200px width + gap) */
+		padding-right: 48px;
+	}
+}
+
+/* Only show the FAIR menu once the viewport is wide enough to fit it beside the
+   cards; at that point reserve the right padding for it. Below 1500px the menu is
+   hidden and the cards reclaim the space (padding-right drops to 48px above). */
+@media (min-width: 1500px) {
+	.fair-fixed {
+		display: block;
+	}
+
+	#main-container {
+		padding-right: 340px; /* reserve room for the FAIR menu */
+	}
 }
 
 .v-breadcrumbs {

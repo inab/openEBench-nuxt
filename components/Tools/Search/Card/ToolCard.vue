@@ -156,6 +156,11 @@ export default {
 		BookMarkCard,
 	},
 	props: {
+		id: {
+			type: String,
+			required: true,
+			default: '',
+		},
 		name: {
 			type: String,
 			required: true,
@@ -278,7 +283,7 @@ export default {
 	},
 	methods: {
 		goToTool() {
-			this.$router.push({ path: `/tool/${this.subname}` });
+			this.$router.push({ path: `/tool/${this.subname}-${this.id}` });
 		},
 		extendDescription() {
 			this.descriptionCollapsed = !this.descriptionCollapsed;

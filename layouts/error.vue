@@ -11,13 +11,22 @@
 								</h1>
 								<h2 class="text-h5 mt-5 font-weight-black">Whoops!</h2>
 								<p v-if="error.statusCode === 404" class="mt-3">
-									{{ pageNotFound }}
+									{{ notFoundMessage }}
 								</p>
 								<p v-else class="mt-3">
 									{{ otherError }}
 								</p>
 								<v-btn class="mt-5" color="primary" to="/">
 									Go back home
+								</v-btn>
+								<v-btn
+									v-if="isToolRoute"
+									class="mt-5 ml-3"
+									color="primary"
+									outlined
+									to="/tool"
+								>
+									Browse all tools
 								</v-btn>
 							</div>
 						</v-col>
@@ -54,7 +63,19 @@ export default {
 			errorSvg,
 			otherError: 'An error occurred',
 			pageNotFound: 'Sorry to say, but it looks like this page does not exist.',
+			toolNotFound:
+				'It seems you are trying to reach a software entry that does not exist.',
 		};
+	},
+	computed: {
+		// Show the catalogue shortcut only for tool routes (e.g. /tool/<unknown-id>).
+		isToolRoute() {
+			return this.$route.path.startsWith('/tool');
+		},
+		// Tailor the 404 message for tool routes.
+		notFoundMessage() {
+			return this.isToolRoute ? this.toolNotFound : this.pageNotFound;
+		},
 	},
 	head() {
 		const title =

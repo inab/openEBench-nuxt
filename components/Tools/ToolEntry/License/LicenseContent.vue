@@ -1,7 +1,7 @@
 <template>
 	<div class="license-table">
 		<v-row class="license-table__header">
-			<v-col cols="10" md="5"></v-col>
+			<v-col cols="11" md="6"></v-col>
 			<v-col cols="5" md="2">OSI approved</v-col>
 			<v-col cols="5" md="4">See also</v-col>
 		</v-row>
@@ -13,7 +13,7 @@
 				class="license-table__row"
 				align="center"
 			>
-				<v-col cols="10" md="5">
+				<v-col cols="11" md="6">
 					<v-btn
 						v-if="license.reference || license.url"
 						:href="license.reference || license.url"
@@ -21,6 +21,7 @@
 						rel="noopener noreferrer"
 						text
 						class="license-table__license"
+						:class="{ 'license-table__license--grey': !license.isSpdx }"
 					>
 						{{ license.displayName }}
 					</v-btn>
@@ -28,6 +29,7 @@
 					<div
 						v-else
 						class="license-table__license license-table__license--plain"
+						:class="{ 'license-table__license--grey': !license.isSpdx }"
 					>
 						{{ license.displayName }}
 					</div>
@@ -88,13 +90,19 @@ export default {
 
 		licenses() {
 			const rawLicenses = this.tool?.license || [];
+			const hiddenNames = ['other', 'undefined'];
 			return rawLicenses
 				.map((item) => ({
 					id: item.id,
 					name: item.term?.name || null,
 					url: item.term?.url || null,
 				}))
-				.filter((license) => license.name || license.url);
+				.filter((license) => license.name || license.url)
+				.filter(
+					(license) =>
+						!license.name ||
+						!hiddenNames.includes(license.name.trim().toLowerCase())
+				);
 		},
 
 		enrichedLicenses() {
@@ -109,6 +117,7 @@ export default {
 						displayName: apiData.name || license.name || 'Unknown license',
 						reference: apiData.reference || license.url || null,
 						isOsiApproved: apiData.isOsiApproved,
+						isSpdx: apiData.isSpdx || false,
 						seeAlso: apiData.seeAlso || this.getFallbackSeeAlso(license),
 					};
 				})
@@ -166,6 +175,7 @@ export default {
 						this.$set(this.licensesApiData, key, {
 							loading: false,
 							licenseId: response.licenseId,
+							isSpdx: true,
 							name: response.name || response.licenseId,
 							reference: response.reference || license.url || null,
 							isOsiApproved: response.isOsiApproved,
@@ -181,6 +191,7 @@ export default {
 		setUnknownLicenseData(key, license) {
 			this.$set(this.licensesApiData, key, {
 				loading: false,
+				isSpdx: false,
 				name: license.name || 'Unknown license',
 				reference: license.url || null,
 				isOsiApproved: null,
@@ -210,7 +221,7 @@ export default {
 
 <style scoped>
 .license-table {
-	max-width: 90%;
+	max-width: 100%;
 	margin-left: 5%;
 	margin-right: 5%;
 	margin-bottom: 3%;
@@ -270,6 +281,15 @@ export default {
 	background-color: #e3edf8;
 }
 
+.license-table__license--grey {
+	background-color: #f0f0f0;
+	color: rgba(0, 0, 0, 70%);
+}
+
+.license-table__license--grey:hover {
+	background-color: #e6e6e6;
+}
+
 .license-table__muted {
 	color: rgba(0, 0, 0, 45%);
 }
@@ -280,6 +300,6 @@ export default {
 }
 
 .divider {
-	width: 90%;
+	width: 100%;
 }
 </style>

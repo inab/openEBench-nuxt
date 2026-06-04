@@ -1,6 +1,6 @@
 <template>
 	<v-card elevation="0" class="pr-5 mb-4 pl-3">
-		<v-row justify="space-between mb-1">
+		<v-row justify="space-between" class="mb-1">
 			<v-col cols="6">
 				<span class="text-h4 font-weight-bold">
 					{{ name }}
@@ -19,7 +19,7 @@
 		<v-row class="mt-0 pt-0">
 			<v-col>
 				<v-chip
-					v-for="(item, i) in cleanVersion(version)"
+					v-for="(item, i) in visibleVersions"
 					:key="i"
 					color="primary lighten-2"
 					small
@@ -27,6 +27,26 @@
 					class="pa-2 mt-0 mr-1"
 				>
 					<span class="font-weight-bold text-body-2">{{ item }}</span>
+				</v-chip>
+				<v-chip
+					v-if="hiddenVersionCount > 0"
+					color="primary lighten-2"
+					small
+					class="pa-2 mt-0 mr-1"
+					@click="showAllVersions = true"
+				>
+					<span class="font-weight-bold text-body-2">
+						+{{ hiddenVersionCount }} more
+					</span>
+				</v-chip>
+				<v-chip
+					v-else-if="showAllVersions && isVersionsCollapsible"
+					color="primary lighten-2"
+					small
+					class="pa-2 mt-0 mr-1"
+					@click="showAllVersions = false"
+				>
+					<span class="font-weight-bold text-body-2">show less</span>
 				</v-chip>
 			</v-col>
 		</v-row>
@@ -101,10 +121,30 @@ export default {
 	data() {
 		return {
 			typeText: getSoftwareTypeDescription(this.type),
+			showAllVersions: false,
+			maxVisibleVersions: 3,
 		};
 	},
-
 	computed: {
+		cleanVersions() {
+			// remove null in version array
+			return this.version.filter((item) => item);
+		},
+		visibleVersions() {
+			if (this.showAllVersions) {
+				return this.cleanVersions;
+			}
+			return this.cleanVersions.slice(0, this.maxVisibleVersions);
+		},
+		hiddenVersionCount() {
+			if (this.showAllVersions) {
+				return 0;
+			}
+			return Math.max(this.cleanVersions.length - this.maxVisibleVersions, 0);
+		},
+		isVersionsCollapsible() {
+			return this.cleanVersions.length > this.maxVisibleVersions;
+		},
 		renderedDescription() {
 			if (!this.description) return '';
 			return marked(this.description);
@@ -126,10 +166,6 @@ export default {
 				}
 				return str;
 			}
-		},
-		cleanVersion(version) {
-			// remove null in version array
-			return version.filter((item) => item);
 		},
 	},
 };

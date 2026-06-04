@@ -67,6 +67,7 @@
 					:edam-id="item.term.uri"
 					:color="colorOperation"
 					:text-color="textColorOperation"
+					:vocabulary="item.term.vocabulary"
 				/>
 			</v-col>
 		</v-row>
