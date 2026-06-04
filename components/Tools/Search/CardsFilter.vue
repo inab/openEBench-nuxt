@@ -1,6 +1,7 @@
 <template>
-	<v-row justify="start" class="ml-5 mt-2">
+	<v-row justify="start" class="ml-5 mt-3">
 		<v-col cols="12">
+			<v-divider class="mt-4 mb-4"></v-divider>
 			<v-btn
 				small
 				color="grey"
