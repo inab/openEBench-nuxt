@@ -1,27 +1,45 @@
 <template>
-	<div>
+	<div style="border-top: 1px solid rgba(0, 0, 0, 8%); padding-top: 12px">
 		<template>
 			<!-- Botones -->
-			<div class="d-flex justify-center mb-2 mt-3" style="gap: 30px">
-				<v-btn
-					small
-					rounded
-					tonal
-					:color="mode === 'cumulative' ? 'primary' : ''"
-					@click="mode = mode === 'cumulative' ? 'normal' : 'cumulative'"
+			<!-- Botones + Mensaje -->
+			<div class="d-flex align-center justify-space-between mb-2 mt-5 mx-5">
+				<div class="d-flex" style="gap: 30px">
+					<v-btn
+						small
+						rounded
+						tonal
+						:color="mode === 'cumulative' ? 'primary' : ''"
+						@click="mode = mode === 'cumulative' ? 'normal' : 'cumulative'"
+					>
+						Cumulative
+					</v-btn>
+					<v-btn
+						v-if="dataTraces.length > 1"
+						small
+						rounded
+						tonal
+						:color="mode === 'merge' ? 'primary' : ''"
+						@click="mode = mode === 'merge' ? 'normal' : 'merge'"
+					>
+						Merge all publication counts
+					</v-btn>
+				</div>
+
+				<div
+					v-if="message"
+					class="d-flex align-center"
+					style="
+						gap: 6px;
+						font-size: 0.9rem;
+						color: rgba(0, 0, 0, 45%);
+						margin-top: 8px;
+						margin-right: 35px;
+					"
 				>
-					Cumulative
-				</v-btn>
-				<v-btn
-					v-if="dataTraces.length > 1"
-					small
-					rounded
-					tonal
-					:color="mode === 'merge' ? 'primary' : ''"
-					@click="mode = mode === 'merge' ? 'normal' : 'merge'"
-				>
-					Merge all publication counts
-				</v-btn>
+					<i class="fas fa-info-circle" style="font-size: 12px"></i>
+					{{ message }}
+				</div>
 			</div>
 
 			<!-- Plot -->
@@ -55,6 +73,11 @@ export default {
 			type: Boolean,
 			required: false,
 			default: false,
+		},
+		message: {
+			type: String,
+			required: false,
+			default: null,
 		},
 	},
 	data() {
