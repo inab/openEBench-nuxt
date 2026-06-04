@@ -5,7 +5,7 @@
 			<template #activator="{ on }">
 				<div>
 					<v-icon
-						class="mr-0 ml-auto"
+						class="mr-0 ml-3"
 						small
 						color="black"
 						v-on="on"
@@ -45,3 +45,21 @@ export default {
 	},
 };
 </script>
+<style scoped>
+pre {
+	margin: 0;
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code {
+	background-color: #f5f5f5;
+	border: 1px solid #e0e0e0;
+	border-radius: 6px;
+	font-family: 'Courier New', Courier, monospace;
+	font-size: 0.875rem;
+	color: #333;
+	display: inline-flex !important;
+	min-width: 300px;
+}
+</style>

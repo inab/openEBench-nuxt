@@ -3,11 +3,13 @@
 		This software is available in
 		<a href="https://bioconductor.org/" target="_black">Bioconductor</a>. To
 		install it, start R and enter:
-		<Code-block :code="code"></Code-block>
+		<div style="display: flex; justify-content: center">
+			<Code-block :code="code"></Code-block>
+		</div>
 
 		Detailed installation instructions can be found
-		<a :href="biocUrl" target="_blank">here</a>. <br /><br />
-		Instructions on how to install Bioconductor can be found
+		<a :href="biocUrl" target="_blank">here</a>. Instructions on how to install
+		Bioconductor can be found
 		<a href="https://bioconductor.org/install/" target="_blank">here</a>.
 	</div>
 </template>

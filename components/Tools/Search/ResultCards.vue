@@ -14,10 +14,13 @@
 					cols="11"
 					sm="11"
 					md="11"
-					><ToolCard
+				>
+					<ToolCard
+						:id="tool.id"
 						:name="tool.label"
 						:subname="tool.name"
 						:description="tool.description"
+						:documentation="tool.documentation"
 						:type="tool.type"
 						:topics="tool.topics"
 						:operations="tool.operations"

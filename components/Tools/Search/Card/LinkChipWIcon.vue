@@ -32,7 +32,6 @@
 		color="grey lighten-4"
 		class="px-2 mt-1"
 		@click="openLink(link)"
-		v-on="on"
 	>
 		<v-icon x-small class="px-1">{{ icon }}</v-icon>
 	</v-chip>

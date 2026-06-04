@@ -1,6 +1,6 @@
 <template>
 	<v-card elevation="0" class="pr-5 mb-4 pl-3">
-		<v-row justify="space-between mb-1">
+		<v-row justify="space-between" class="mb-1">
 			<v-col cols="6">
 				<span class="text-h4 font-weight-bold">
 					{{ name }}
@@ -52,7 +52,7 @@
 		</v-row>
 		<v-row>
 			<v-col>
-				<p class="text-body-1">{{ description }}</p>
+				<p class="text-body-1" v-html="renderedDescription"></p>
 
 				<div class="d-flex justify-center">
 					<LinkChipWIcon
@@ -79,6 +79,7 @@
 	</v-card>
 </template>
 <script>
+import { marked } from 'marked';
 import LinkChipWImage from '../Search/Card/LinkChipWImage.vue';
 import LinkChipWIcon from '../Search/Card/LinkChipWIcon.vue';
 import ChipType from '~/components/Tools/Search/Card/ChipType.vue';
@@ -143,6 +144,10 @@ export default {
 		},
 		isVersionsCollapsible() {
 			return this.cleanVersions.length > this.maxVisibleVersions;
+		},
+		renderedDescription() {
+			if (!this.description) return '';
+			return marked(this.description);
 		},
 	},
 

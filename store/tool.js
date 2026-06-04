@@ -54,6 +54,7 @@ function normalizeTool(tool) {
 	};
 
 	return {
+		id: tool.id || '',
 		name: pick(tool.name) || '',
 		subname: pick(tool.name) || '',
 		label: pick(tool.label) || pick(tool.name) || '',
@@ -65,6 +66,7 @@ function normalizeTool(tool) {
 		publications: tool.publication || [],
 		license: tool.license || [],
 		webpage: pick(tool.webpage) || pick(tool.homepage) || '',
+		documentation: tool.documentation || [],
 		findability: score(fairsoft.F),
 		accessibility: score(fairsoft.A),
 		interoperability: score(fairsoft.I),
