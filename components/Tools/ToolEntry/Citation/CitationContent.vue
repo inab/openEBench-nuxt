@@ -139,6 +139,7 @@
 						:key="citationPlotData.length"
 						:dataTraces="citationPlotData"
 						:colors="citationPlotColors"
+						:message="plotMessage"
 					/>
 				</v-col>
 			</v-row>
@@ -188,8 +189,7 @@ export default {
 				const doi = item.term && item.term.doi;
 				if (!doi || seen.has(doi)) return false;
 				if (item.term.error) return false;
-				if (!item.term.title || !item.term.journal || !item.term.authors)
-					return false;
+				if (!item.term.title || !item.term.authors) return false;
 				seen.add(doi);
 				return true;
 			});
@@ -233,6 +233,13 @@ export default {
 			});
 
 			return result;
+		},
+
+		plotMessage() {
+			const total = this.uniquePublications.length;
+			const shown = this.citationPlotData.length;
+			if (shown === 0 || shown === total) return null;
+			return `Showing ${shown} of ${total} publications — only those with per-year data`;
 		},
 
 		// Colores solo de las publicaciones que SÍ están en el gráfico, en el mismo orden
