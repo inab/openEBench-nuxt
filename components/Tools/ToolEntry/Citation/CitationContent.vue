@@ -89,6 +89,17 @@
 									<v-chip v-if="item.term.year" small outlined color="">
 										{{ item.term.year }}
 									</v-chip>
+									<!-- Journal -->
+									<v-chip
+										v-if="item.term.journal"
+										small
+										outlined
+										color=""
+										:href="'https://doi.org/' + item.term.doi"
+										target="_blank"
+									>
+										{{ item.term.journal }}
+									</v-chip>
 								</div>
 							</div>
 						</div>
@@ -155,6 +166,8 @@ export default {
 				const doi = item.term && item.term.doi;
 				if (!doi || seen.has(doi)) return false;
 				if (item.term.error) return false;
+				if (!item.term.title || !item.term.journal || !item.term.authors)
+					return false;
 				seen.add(doi);
 				return true;
 			});
