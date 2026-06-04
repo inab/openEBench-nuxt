@@ -165,26 +165,34 @@ export default {
 		},
 
 		async fetchCitations({ commit, state }, { doi, pmid, title }) {
-			// Determinar qué identificador usar y cuál es la clave para el estado
 			const key = doi || pmid || title;
 			if (!key) return;
-			if (key in state.citations) return; // ya lo tenemos
-
-			// Construir el body con solo el identificador disponible
-			const body = doi ? { doi } : pmid ? { pmid } : { title };
+			if (key in state.citations) return;
 
 			commit('updateLoadingCitations', { doi: key, value: true });
-			try {
-				const { data } = await this.$observatory.post(
-					'/publication/citations',
-					body
-				);
-				commit('updateCitations', { doi: key, data });
-			} catch (e) {
-				commit('updateCitations', { doi: key, data: null });
-			} finally {
-				commit('updateLoadingCitations', { doi: key, value: false });
+
+			const attempts = [
+				doi ? { doi } : null,
+				pmid ? { pmid } : null,
+				title ? { title } : null,
+			].filter(Boolean);
+
+			let data = null;
+			for (const body of attempts) {
+				try {
+					const response = await this.$observatory.post(
+						'/publication/citations',
+						body
+					);
+					data = response.data;
+					break; // éxito, no seguir intentando
+				} catch (e) {
+					// este identificador falló, probar el siguiente
+				}
 			}
+
+			commit('updateCitations', { doi: key, data });
+			commit('updateLoadingCitations', { doi: key, value: false });
 		},
 	},
 	mutations: {
