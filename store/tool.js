@@ -23,10 +23,10 @@ function buildQuery(state) {
 		query += '&tags=' + state.filters.tags.join(',');
 	}
 	if (state.filters.topics.length > 0) {
-		query += '&topics=' + state.filters.topics.join(',');
+		query += '&topic=' + state.filters.topics.join(',');
 	}
 	if (state.filters.operations.length > 0) {
-		query += '&operations=' + state.filters.operations.join(',');
+		query += '&operation=' + state.filters.operations.join(',');
 	}
 	if (state.filters.inputFormat.length > 0) {
 		query += '&input_format=' + state.filters.inputFormat.join(',');
