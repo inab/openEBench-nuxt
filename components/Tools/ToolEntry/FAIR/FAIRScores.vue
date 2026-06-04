@@ -180,11 +180,13 @@ export default {
 			if (status === 'partial') return 'mdi-circle-half-full';
 			return 'mdi-close-circle';
 		},
+		// Color banded by score (green from 70%); independent of the icon shape,
+		// which stays a full circle only at 100% (see statusIcon/statusOf).
 		statusColor(key) {
-			const status = this.statusOf(key);
-			if (status === 'pass') return '#1d9e75';
-			if (status === 'partial') return '#ffb236';
-			return 'grey';
+			const value = this.rawScore(key);
+			if (value === null || value === 0) return 'grey';
+			if (value >= 0.7) return '#1d9e75';
+			return '#ffb236';
 		},
 	},
 };

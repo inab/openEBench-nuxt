@@ -7,19 +7,19 @@
 						<v-row class="mb-0 pb-0">
 							<v-col cols="12" class="mt-1 pb-0 d-flex align-center fair-col">
 								<span class="fair-lbl">F</span>
-								<div class="circle" :style="opacity(findability)"></div>
+								<div class="circle" :style="fillColor(findability)"></div>
 							</v-col>
 						</v-row>
 						<v-row class="mt-0 mb-0 pb-0">
 							<v-col cols="12" class="pb-0 pt-2 d-flex align-center fair-col">
 								<span class="fair-lbl">A</span>
-								<div class="circle" :style="opacity(accessibility)"></div>
+								<div class="circle" :style="fillColor(accessibility)"></div>
 							</v-col>
 						</v-row>
 						<v-row class="mt-0 mb-0 pb-0">
 							<v-col cols="12" class="pb-0 pt-2 d-flex align-center fair-col">
 								<span class="fair-lbl">I</span>
-								<div class="circle" :style="opacity(interoperability)"></div>
+								<div class="circle" :style="fillColor(interoperability)"></div>
 							</v-col>
 						</v-row>
 						<v-row class="mt-0 mb-0 pb-0">
@@ -28,7 +28,7 @@
 								class="pb-0 mb-1 pt-2 d-flex align-center fair-col"
 							>
 								<span class="fair-lbl">R</span>
-								<div class="circle" :style="opacity(reusability)"></div>
+								<div class="circle" :style="fillColor(reusability)"></div>
 							</v-col>
 						</v-row>
 					</v-card>
@@ -46,7 +46,7 @@
 									<span class="fair-text pl-2 text-caption">Findability</span>
 									<v-chip
 										class="inner-chip text-caption"
-										:style="opacity(findability)"
+										:style="fillColor(findability)"
 										><span :style="color(findability)">{{
 											score(findability)
 										}}</span></v-chip
@@ -58,7 +58,7 @@
 									<span class="fair-text pl-2 text-caption">Accessibility</span>
 									<v-chip
 										class="inner-chip text-caption"
-										:style="opacity(accessibility)"
+										:style="fillColor(accessibility)"
 										><span :style="color(accessibility)">{{
 											score(accessibility)
 										}}</span></v-chip
@@ -72,7 +72,7 @@
 									>
 									<v-chip
 										class="inner-chip text-caption"
-										:style="opacity(interoperability)"
+										:style="fillColor(interoperability)"
 										><span :style="color(interoperability)">{{
 											score(interoperability)
 										}}</span></v-chip
@@ -84,7 +84,7 @@
 									<span class="fair-text pl-2 text-caption">Reusability</span>
 									<v-chip
 										class="inner-chip text-caption"
-										:style="opacity(reusability)"
+										:style="fillColor(reusability)"
 										><span :style="color(reusability)">{{
 											score(reusability)
 										}}</span></v-chip
@@ -129,17 +129,18 @@ export default {
 		score(score) {
 			return Math.ceil(score * 100);
 		},
-		opacity(score) {
-			return {
-				background: 'rgba(57, 111, 186,' + score + ')',
-			};
-		},
-		color(score) {
-			if (score < 0.4) {
-				return { color: '#0B579F' };
-			} else {
-				return { color: 'white' };
+		// Solid band fill matching the FAIRscore table: grey for missing/zero,
+		// green for high (>= 0.7), orange for partial.
+		fillColor(score) {
+			const n = parseFloat(score);
+			let bg = '#d0d0d0';
+			if (!isNaN(n) && n > 0) {
+				bg = n >= 0.7 ? '#1d9e75' : '#ffb236';
 			}
+			return { background: bg };
+		},
+		color() {
+			return { color: 'black' };
 		},
 		close() {
 			this.expand = false;
@@ -174,7 +175,7 @@ export default {
 	display: inline-block;
 	margin-left: 15px;
 	margin-right: 20px;
-	color: #0b579f;
+	color: black;
 }
 
 .fair-col {
@@ -184,8 +185,8 @@ export default {
 
 .fair-lbl {
 	font-size: 0.68rem;
-	font-weight: 900;
-	color: #0b579f;
+	font-weight: 700;
+	color: black;
 	width: 10px;
 	min-width: 10px;
 	text-align: center;
@@ -198,18 +199,17 @@ export default {
 	width: 18px;
 	height: 18px;
 	border-radius: 50%;
-	background-color: #396fba;
+	background-color: #d0d0d0;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	flex-shrink: 0;
-	box-shadow: inset 0 0 0 1px rgba(11, 87, 159, 28%);
+	box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 12%);
 }
 
 .inner-chip {
 	height: 18px !important;
-	background-color: #396fba;
-	color: white !important;
+	background-color: #d0d0d0;
 	position: absolute;
 	right: 8px;
 }
