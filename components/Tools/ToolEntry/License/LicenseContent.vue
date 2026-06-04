@@ -21,6 +21,7 @@
 						rel="noopener noreferrer"
 						text
 						class="license-table__license"
+						:class="{ 'license-table__license--grey': !license.isSpdx }"
 					>
 						{{ license.displayName }}
 					</v-btn>
@@ -28,6 +29,7 @@
 					<div
 						v-else
 						class="license-table__license license-table__license--plain"
+						:class="{ 'license-table__license--grey': !license.isSpdx }"
 					>
 						{{ license.displayName }}
 					</div>
@@ -88,13 +90,19 @@ export default {
 
 		licenses() {
 			const rawLicenses = this.tool?.license || [];
+			const hiddenNames = ['other', 'undefined'];
 			return rawLicenses
 				.map((item) => ({
 					id: item.id,
 					name: item.term?.name || null,
 					url: item.term?.url || null,
 				}))
-				.filter((license) => license.name || license.url);
+				.filter((license) => license.name || license.url)
+				.filter(
+					(license) =>
+						!license.name ||
+						!hiddenNames.includes(license.name.trim().toLowerCase())
+				);
 		},
 
 		enrichedLicenses() {
@@ -109,6 +117,7 @@ export default {
 						displayName: apiData.name || license.name || 'Unknown license',
 						reference: apiData.reference || license.url || null,
 						isOsiApproved: apiData.isOsiApproved,
+						isSpdx: apiData.isSpdx || false,
 						seeAlso: apiData.seeAlso || this.getFallbackSeeAlso(license),
 					};
 				})
@@ -166,6 +175,7 @@ export default {
 						this.$set(this.licensesApiData, key, {
 							loading: false,
 							licenseId: response.licenseId,
+							isSpdx: true,
 							name: response.name || response.licenseId,
 							reference: response.reference || license.url || null,
 							isOsiApproved: response.isOsiApproved,
@@ -181,6 +191,7 @@ export default {
 		setUnknownLicenseData(key, license) {
 			this.$set(this.licensesApiData, key, {
 				loading: false,
+				isSpdx: false,
 				name: license.name || 'Unknown license',
 				reference: license.url || null,
 				isOsiApproved: null,
@@ -268,6 +279,15 @@ export default {
 
 .license-table__license:hover {
 	background-color: #e3edf8;
+}
+
+.license-table__license--grey {
+	background-color: #f0f0f0;
+	color: rgba(0, 0, 0, 70%);
+}
+
+.license-table__license--grey:hover {
+	background-color: #e6e6e6;
 }
 
 .license-table__muted {
