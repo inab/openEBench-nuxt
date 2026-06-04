@@ -53,41 +53,74 @@
 									class="d-flex align-center flex-wrap mt-2"
 									style="gap: 8px"
 								>
-									<v-chip
-										v-if="item.term.pmid"
-										small
-										outlined
-										class="citation-chip px-3 py-3"
-										@click="
-											openLink(
-												'https://europepmc.org/article/MED/' + item.term.pmid
-											)
+									<template v-if="isLoadingCitations(item)">
+										<v-chip small outlined class="citation-chip px-3 py-3">
+											...
+										</v-chip>
+									</template>
+
+									<template
+										v-else-if="
+											getCitationCount(item) !== null && item.term.pmid
 										"
-										style="cursor: pointer"
 									>
-										<template v-if="isLoadingCitations(item)">...</template>
-										<template v-else-if="getCitationCount(item) !== null">
-											{{ getCitationCount(item).toLocaleString() }} citations
-										</template>
-										<template v-else>0 citations</template>
-
-										<span class="mx-2 text--disabled"></span>
-
-										<img
-											src="https://europepmc.org/favicon.ico"
-											alt="Europe PMC"
-											style="
-												width: 14px;
-												height: 14px;
-												margin-right: 5px;
-												vertical-align: middle;
+										<v-chip
+											small
+											outlined
+											class="citation-chip px-3 py-3"
+											@click="
+												openLink(
+													'https://europepmc.org/article/MED/' + item.term.pmid
+												)
 											"
-										/>
-										Europe PMC
-									</v-chip>
+											style="cursor: pointer"
+										>
+											{{ getCitationCount(item).toLocaleString() }} citations
+
+											<span class="mx-2 text--disabled"></span>
+
+											<img
+												src="https://europepmc.org/favicon.ico"
+												alt="Europe PMC"
+												style="
+													width: 14px;
+													height: 14px;
+													margin-right: 5px;
+													vertical-align: middle;
+												"
+											/>
+											Europe PMC
+										</v-chip>
+									</template>
+
+									<template v-else>
+										<v-chip
+											small
+											outlined
+											class="citation-chip px-3 py-3"
+											color="grey"
+										>
+											<i
+												class="fas fa-exclamation-circle mr-2"
+												style="font-size: 12px"
+											></i>
+											No citation data — not indexed by Europe PMC
+										</v-chip>
+									</template>
 									<!-- Year -->
 									<v-chip v-if="item.term.year" small outlined color="">
 										{{ item.term.year }}
+									</v-chip>
+									<!-- Journal -->
+									<v-chip
+										v-if="item.term.journal"
+										small
+										outlined
+										color=""
+										:href="'https://doi.org/' + item.term.doi"
+										target="_blank"
+									>
+										{{ item.term.journal }}
 									</v-chip>
 								</div>
 							</div>
@@ -106,6 +139,7 @@
 						:key="citationPlotData.length"
 						:dataTraces="citationPlotData"
 						:colors="citationPlotColors"
+						:message="plotMessage"
 					/>
 				</v-col>
 			</v-row>
@@ -155,6 +189,7 @@ export default {
 				const doi = item.term && item.term.doi;
 				if (!doi || seen.has(doi)) return false;
 				if (item.term.error) return false;
+				if (!item.term.title || !item.term.authors) return false;
 				seen.add(doi);
 				return true;
 			});
@@ -198,6 +233,13 @@ export default {
 			});
 
 			return result;
+		},
+
+		plotMessage() {
+			const total = this.uniquePublications.length;
+			const shown = this.citationPlotData.length;
+			if (shown === 0 || shown === total) return null;
+			return `Showing ${shown} of ${total} publications — only those with per-year data`;
 		},
 
 		// Colores solo de las publicaciones que SÍ están en el gráfico, en el mismo orden
