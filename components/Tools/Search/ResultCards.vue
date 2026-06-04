@@ -55,16 +55,9 @@
 				class="result-cards__summary pt-0 pb-0 text-caption text--grey"
 			>
 				<div>
-					<span v-if="!searchedTerm">
+					<span>
 						Showing {{ visibleTools.length.toLocaleString() }} of
-						{{ totalToolsGlobal.toLocaleString() }} total tools
-					</span>
-					<span v-else>
-						Showing {{ visibleTools.length.toLocaleString() }} of
-						{{ totalTools.toLocaleString() }} results for "<b>{{
-							searchedTerm
-						}}</b
-						>"
+						{{ totalTools.toLocaleString() }} tools
 					</span>
 				</div>
 			</v-col>
