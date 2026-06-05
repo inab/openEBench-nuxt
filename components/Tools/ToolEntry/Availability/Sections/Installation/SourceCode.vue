@@ -3,7 +3,13 @@
 		Repositories where you can browse, clone, or contribute to this tool's
 		source code.
 
-		<div class="repo-grid mt-2">
+		<div
+			:class="[
+				'repo-grid',
+				'mt-2',
+				`repo-grid--count-${mergedRepositories.length}`,
+			]"
+		>
 			<div v-for="repo in mergedRepositories" :key="repo.url" class="repo-item">
 				<span class="repo-badge" :style="badgeStyle(repo.url)">
 					{{ repoMeta(repo.url).platform }}
@@ -165,6 +171,16 @@ export default {
 	width: 100%;
 }
 
+/* 1 item → full width */
+.repo-grid--count-1 {
+	grid-template-columns: 1fr;
+}
+
+/* 2 items → each takes half */
+.repo-grid--count-2 {
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .repo-item {
 	display: flex;
 	flex-direction: column;
@@ -195,7 +211,7 @@ export default {
 	border-top: 1px solid #ececec;
 	font-size: 0.8rem;
 	font-family: monospace;
-	color: #283593;
+	color: #0b579f;
 	text-decoration: none;
 	line-height: 1.4;
 	word-break: break-all;

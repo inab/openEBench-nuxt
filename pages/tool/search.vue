@@ -7,18 +7,7 @@
 					<CardsFilter />
 				</v-col>
 				<v-col cols="12" md="8" lg="9" xl="9">
-					<v-row v-if="loading.initialSearch" justify="center" class="mt-5">
-						<v-col cols="12">
-							<v-skeleton-loader type="list-item-two-line"></v-skeleton-loader>
-						</v-col>
-						<v-col v-for="n in 9" :key="n" cols="12">
-							<v-skeleton-loader
-								v-bind="attrs"
-								type="article"
-							></v-skeleton-loader>
-						</v-col>
-					</v-row>
-					<v-row v-else ref="scrollBox" class="mt-1">
+					<v-row ref="scrollBox" class="mt-1">
 						<v-col cols="12">
 							<ResultCards />
 						</v-col>
@@ -66,6 +55,7 @@ export default {
 	watch: {
 		q: {
 			handler(newVal, _oldVal) {
+				this.$store.dispatch('tool/restoreFilters');
 				this.search(newVal);
 			},
 			immediate: true,

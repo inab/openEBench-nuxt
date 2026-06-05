@@ -1,8 +1,8 @@
 <template>
 	<v-card id="main-container" class="mt-2 pa-4 mr-12" elevation="0">
-		<v-row v-if="loading.search" justify="center" class="mt-5">
-			<v-col v-for="n in 9" :key="n" cols="11">
-				<v-skeleton-loader type="article"></v-skeleton-loader>
+		<v-row v-if="loading.search || loading.initialSearch" justify="center">
+			<v-col v-for="n in 9" :key="n" cols="11" sm="11" md="11">
+				<v-skeleton-loader :elevation="1" type="article" />
 			</v-col>
 		</v-row>
 		<v-row v-else>
@@ -92,10 +92,6 @@ export default {
 };
 </script>
 <style scoped>
-.result-cards__list {
-	width: 100%;
-}
-
 .result-cards__summary {
 	margin-top: -4px;
 }
