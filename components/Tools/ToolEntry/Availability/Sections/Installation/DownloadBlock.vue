@@ -131,7 +131,7 @@ export default {
 
 .download-link {
 	font-size: 0.85rem;
-	color: #283593;
+	color: #0b579f;
 	text-decoration: none;
 	overflow: hidden;
 	text-overflow: ellipsis;

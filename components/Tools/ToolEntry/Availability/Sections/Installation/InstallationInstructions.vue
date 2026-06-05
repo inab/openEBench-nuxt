@@ -105,4 +105,8 @@ export default {
 	letter-spacing: normal !important;
 	color: rgb(180, 175, 175) !important;
 }
+
+::v-deep .v-tab--active {
+	color: #0b579f !important;
+}
 </style>
