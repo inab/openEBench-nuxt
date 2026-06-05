@@ -56,7 +56,7 @@
 
 				<div class="d-flex justify-center">
 					<LinkChipWIcon
-						v-if="webpage"
+						v-if="webpage && webpage.length > 0 && webpage[0].term"
 						:link="webpage[0].term"
 						text="Homepage"
 						icon="mdi-web"
