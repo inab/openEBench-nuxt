@@ -94,8 +94,10 @@
 					</v-card>
 				</v-col>
 
-				<v-col v-else cols="8">
-					<v-skeleton-loader type="article, list-item-three-line, image">
+				<v-col v-else cols="7">
+					<v-skeleton-loader
+						type="article, list-item-three-line, article, list-item-three-line, image"
+					>
 					</v-skeleton-loader>
 				</v-col>
 			</v-row>
