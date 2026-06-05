@@ -19,14 +19,16 @@
 			</v-breadcrumbs>
 		</div>
 
-		<ToolBrief
-			v-if="!introVisible && hasToolData"
-			:name="tool.label[0]"
-			:type="tool.type"
-			:version="tool.version"
-			:sources-labels="tool.sources_labels"
-			:webpage="tool.webpage"
-		/>
+		<div class="tool-brief-wrapper">
+			<ToolBrief
+				v-if="!introVisible && hasToolData"
+				:name="tool.label[0]"
+				:type="tool.type"
+				:version="tool.version"
+				:sources-labels="tool.sources_labels"
+				:webpage="tool.webpage"
+			/>
+		</div>
 
 		<!-- SideBar -->
 		<v-card
@@ -504,5 +506,21 @@ export default {
 
 .v-breadcrumbs-divider {
 	color: rgba(0, 0, 0, 38%) !important;
+}
+
+/* Por defecto, alineado con el fixed-card que tiene margin-left: 64px */
+.tool-brief-wrapper {
+	position: fixed;
+	top: 64px;
+	left: 0; /* ocupa todo el ancho */
+	width: 100%;
+	z-index: 100;
+}
+
+@media (min-width: 1450px) {
+	.tool-brief-wrapper {
+		left: calc(50% - 704px); /* mismo que .fixed-card en wide */
+		width: calc(100% - (50% - 704px));
+	}
 }
 </style>
