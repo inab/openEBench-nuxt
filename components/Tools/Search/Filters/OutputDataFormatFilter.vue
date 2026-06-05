@@ -58,11 +58,15 @@ export default {
 		keyToLabel(key) {
 			// Some keys are EDAM URIs, so we need to convert them to labels
 			// Some keys are free text, and are returned as they are
-			if (key.includes('http://edamontology.org/')) {
-				return EDAMDict(key);
-			} else {
-				return key;
+			try {
+				const parsedUrl = new URL(key);
+				if (parsedUrl.hostname === 'edamontology.org') {
+					return EDAMDict(key);
+				}
+			} catch (e) {
+				// Not a valid absolute URL; keep original key as free text
 			}
+			return key;
 		},
 	},
 };
