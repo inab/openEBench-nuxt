@@ -16,7 +16,7 @@
 				/>
 			</v-col>
 		</v-row>
-		<v-row class="mt-0 pt-0">
+		<v-row v-if="cleanVersions.length" class="mt-0 pt-0">
 			<v-col>
 				<v-chip
 					v-for="(item, i) in visibleVersions"
