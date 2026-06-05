@@ -127,8 +127,10 @@ export default {
 	},
 	computed: {
 		cleanVersions() {
-			// remove null in version array
-			return this.version.filter((item) => item);
+			// remove null and "None" entries from the version array
+			return this.version.filter(
+				(item) => item && String(item).trim().toLowerCase() !== 'none'
+			);
 		},
 		visibleVersions() {
 			if (this.showAllVersions) {

@@ -90,7 +90,7 @@ export default {
 
 		licenses() {
 			const rawLicenses = this.tool?.license || [];
-			const hiddenNames = ['other', 'undefined'];
+			const hiddenNames = ['undefined'];
 			return rawLicenses
 				.map((item) => ({
 					id: item.id,
