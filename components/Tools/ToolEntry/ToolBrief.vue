@@ -13,7 +13,7 @@
 				<div class="d-flex align-left ml-5">
 					<div>
 						<LinkChipWIcon
-							v-if="webpage"
+							v-if="webpage && webpage.length > 0 && webpage[0].term"
 							:link="webpage[0].term"
 							text=""
 							icon="mdi-web"
@@ -83,7 +83,9 @@ export default {
 	},
 	methods: {
 		cleanVersion(version) {
-			return version.filter((item) => item);
+			return version.filter(
+				(item) => item && String(item).trim().toLowerCase() !== 'none'
+			);
 		},
 	},
 };

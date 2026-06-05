@@ -9,7 +9,7 @@
 			cols="12"
 			class="mt-0 pt-1 pb-0 mb-2 pl-4 d-flex justify-left text-body-2"
 		>
-			<v-tabs v-model="tabInstall" fixed-tabs color="#283593">
+			<v-tabs v-model="tabInstall" fixed-tabs color="#0b579f">
 				<v-tab v-if="isThereBioconda()" class="tab">Bioconda</v-tab>
 				<v-tab v-if="isThereBioconductor()" class="tab">Bioconductor</v-tab>
 				<v-tab v-if="isThereSourceCode()" class="tab">Source Code</v-tab>
@@ -104,5 +104,9 @@ export default {
 	font-size: 1rem !important;
 	letter-spacing: normal !important;
 	color: rgb(180, 175, 175) !important;
+}
+
+::v-deep .v-tab--active {
+	color: #0b579f !important;
 }
 </style>

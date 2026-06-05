@@ -54,7 +54,6 @@ pre {
 
 .code {
 	background-color: #f5f5f5;
-	border: 1px solid #e0e0e0;
 	border-radius: 6px;
 	font-family: 'Courier New', Courier, monospace;
 	font-size: 0.875rem;

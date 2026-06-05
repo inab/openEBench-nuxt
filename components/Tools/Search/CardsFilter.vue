@@ -15,28 +15,50 @@
 			</v-btn>
 			<!-- Active filters display -->
 			<div
-				v-if="activeFilterChips.length > 0"
+				v-if="activeFilterGroups.length > 0"
 				class="ml-4 mb-2 mt-1 d-flex align-center flex-wrap"
 			>
 				<div
 					class="filters-label text-body-2 grey--text text--darken-1 mr-2 ml-2"
 				>
-					Filters selected:
+					Filter applied:
 				</div>
 
-				<div class="d-flex align-center flex-wrap">
-					<v-chip
-						v-for="chip in activeFilterChips"
-						:key="chip.key"
-						small
-						class="mr-1"
-						color="#EAF1F7"
+				<template v-for="(group, gIndex) in activeFilterGroups">
+					<!-- AND between different categories -->
+					<span
+						v-if="gIndex > 0"
+						:key="`and-${group.category}`"
+						class="and-connector primary--text mx-2"
 					>
-						<span class="primary--text font-weight-medium">
-							{{ chip.label }}
-						</span>
-					</v-chip>
-				</div>
+						AND
+					</span>
+
+					<span
+						:key="group.category"
+						class="d-inline-flex align-center flex-wrap my-1"
+					>
+						<span v-if="group.chips.length > 1" class="grey--text mr-1">(</span>
+
+						<template v-for="(chip, cIndex) in group.chips">
+							<!-- or between chips of the same category -->
+							<span
+								v-if="cIndex > 0"
+								:key="`${chip.key}-or`"
+								class="or-connector grey--text text--darken-1 mx-1"
+							>
+								OR
+							</span>
+							<v-chip :key="chip.key" small color="#EAF1F7">
+								<span class="primary--text font-weight-medium">
+									{{ chip.label }}
+								</span>
+							</v-chip>
+						</template>
+
+						<span v-if="group.chips.length > 1" class="grey--text ml-1">)</span>
+					</span>
+				</template>
 			</div>
 			<v-divider class="mt-3 mb-0"></v-divider>
 			<v-expansion-panels v-model="expanded" accordion multiple flat>
@@ -90,29 +112,27 @@ export default {
 		...mapState({
 			filters: (state) => state.tool.filters,
 		}),
-		activeFilterChips() {
-			const chips = [];
-			const {
-				source,
-				type,
-				topics,
-				operations,
-				license,
-				tags,
-				inputFormat,
-				outputFormat,
-			} = this.filters;
-
-			source.forEach((v) => chips.push({ key: `source-${v}`, label: v }));
-			type.forEach((v) => chips.push({ key: `type-${v}`, label: v }));
-			topics.forEach((v) => chips.push({ key: `topic-${v}`, label: v }));
-			operations.forEach((v) => chips.push({ key: `op-${v}`, label: v }));
-			license.forEach((v) => chips.push({ key: `license-${v}`, label: v }));
-			tags.forEach((v) => chips.push({ key: `tag-${v}`, label: v }));
-			inputFormat.forEach((v) => chips.push({ key: `in-${v}`, label: v }));
-			outputFormat.forEach((v) => chips.push({ key: `out-${v}`, label: v }));
-
-			return chips;
+		activeFilterGroups() {
+			const f = this.filters;
+			const order = [
+				'source',
+				'type',
+				'topics',
+				'operations',
+				'license',
+				'tags',
+				'inputFormat',
+				'outputFormat',
+			];
+			return order
+				.filter((category) => f[category].length > 0)
+				.map((category) => ({
+					category,
+					chips: f[category].map((v) => ({
+						key: `${category}-${v}`,
+						label: v,
+					})),
+				}));
 		},
 	},
 	created() {
@@ -127,8 +147,19 @@ export default {
 			}
 		},
 		filterRestore() {
-			this.$store.dispatch('tool/restoreFilters');
-			this.$store.dispatch('tool/initialSearch', this.$route.query.q);
+			if (this.$route.path === '/tool/search') {
+				// On the search page the URL is the source of truth: strip the filter
+				// params and let the page's query watcher reset state + re-search.
+				const { q, searchIn } = this.$route.query;
+				const query = { page: 0 };
+				if (q) query.q = q;
+				if (searchIn) query.searchIn = searchIn;
+				this.$router.replace({ path: '/tool/search', query }).catch(() => {});
+			} else {
+				// Landing page (no filter params in the URL): reset state directly.
+				this.$store.dispatch('tool/restoreFilters');
+				this.$store.dispatch('tool/initialSearch', this.$route.query.q);
+			}
 		},
 	},
 };

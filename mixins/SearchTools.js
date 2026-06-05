@@ -1,15 +1,19 @@
 export const SearchTools = {
 	methods: {
 		triggerSearch(value) {
-			this.$store.dispatch('tool/initialSearch', value);
-			this.$router.push({
-				path: '/tool/search',
-				query: {
-					q: value,
-					searchIn: 'name,label,description,topics,operations',
-					page: 0,
-				},
-			});
+			// Just navigate (with no filter params, so a new search starts clean).
+			// The search page's $route.query watcher seeds the facets and runs the
+			// search — this is the single trigger point.
+			this.$router
+				.push({
+					path: '/tool/search',
+					query: {
+						q: value,
+						searchIn: 'name,label,description,topics,operations',
+						page: 0,
+					},
+				})
+				.catch(() => {});
 		},
 		search(q) {
 			this.$store.dispatch('tool/updateSearchedTerm', q);

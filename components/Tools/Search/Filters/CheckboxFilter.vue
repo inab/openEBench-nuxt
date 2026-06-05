@@ -14,6 +14,7 @@
 <script>
 import { mapGetters } from 'vuex';
 import StripeStats from './StripeStats.vue';
+import { filtersToQuery } from '~/utils/toolFilters';
 
 export default {
 	name: 'CheckboxFilter',
@@ -60,8 +61,24 @@ export default {
 				values: this.active.map((i) => this.items[i].value),
 			};
 
+			// Update state for an immediate, snappy checkbox UI, then push the
+			// full filter set into the URL. The search page's $route.query watcher
+			// is the single place that re-runs the search, so we don't dispatch
+			// searchTools here (that would double-fetch).
 			this.$store.dispatch('tool/updateFilters', payload);
-			this.$store.dispatch('tool/searchTools');
+
+			const { q, searchIn } = this.$route.query;
+			this.$router
+				.replace({
+					path: '/tool/search',
+					query: {
+						q,
+						searchIn,
+						page: 0,
+						...filtersToQuery(this.filters),
+					},
+				})
+				.catch(() => {});
 		},
 	},
 };

@@ -1,12 +1,12 @@
 <template>
 	<v-card elevation="0" class="pr-5 mb-4 pl-3">
 		<v-row justify="space-between" class="mb-1">
-			<v-col cols="6">
+			<v-col cols="4">
 				<span class="text-h4 font-weight-bold">
 					{{ name }}
 				</span>
 			</v-col>
-			<v-col ref="Intro" cols="6" class="d-flex justify-end align-end">
+			<v-col ref="Intro" cols="8" class="d-flex justify-end align-end">
 				<ChipType
 					v-for="item in type"
 					:key="item"
@@ -16,12 +16,12 @@
 				/>
 			</v-col>
 		</v-row>
-		<v-row class="mt-0 pt-0">
+		<v-row v-if="cleanVersions.length" class="mt-0 pt-0">
 			<v-col>
 				<v-chip
 					v-for="(item, i) in visibleVersions"
 					:key="i"
-					color="primary lighten-2"
+					color="primary"
 					small
 					outlined
 					class="pa-2 mt-0 mr-1"
@@ -30,8 +30,9 @@
 				</v-chip>
 				<v-chip
 					v-if="hiddenVersionCount > 0"
-					color="primary lighten-2"
+					color="primary"
 					small
+					outlined
 					class="pa-2 mt-0 mr-1"
 					@click="showAllVersions = true"
 				>
@@ -41,8 +42,9 @@
 				</v-chip>
 				<v-chip
 					v-else-if="showAllVersions && isVersionsCollapsible"
-					color="primary lighten-2"
+					color="primary"
 					small
+					outlined
 					class="pa-2 mt-0 mr-1"
 					@click="showAllVersions = false"
 				>
@@ -127,8 +129,10 @@ export default {
 	},
 	computed: {
 		cleanVersions() {
-			// remove null in version array
-			return this.version.filter((item) => item);
+			// remove null and "None" entries from the version array
+			return this.version.filter(
+				(item) => item && String(item).trim().toLowerCase() !== 'none'
+			);
 		},
 		visibleVersions() {
 			if (this.showAllVersions) {

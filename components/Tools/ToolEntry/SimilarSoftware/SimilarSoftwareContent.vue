@@ -1,8 +1,8 @@
 <template>
 	<v-container class="mt-0 pt-0 pl-6">
 		<div>
-			<v-row class="mt-2 pt-0 mb-2">
-				<v-col cols="12" class="mt-0 pt-0 pl-1 ml-1">
+			<v-row class="mt-2 pt-0 mb-0">
+				<v-col cols="12" class="mt-0 pt-0 pl-1 ml-1 pb-0">
 					<!-- Loading -->
 					<v-skeleton-loader
 						v-if="loadingSimilar"
@@ -134,32 +134,45 @@
 							</div>
 						</div>
 
-						<!-- Arrows, bottom right -->
-						<div
-							v-if="pageCount > 1"
-							class="d-flex align-center justify-end mt-2"
-						>
-							<span class="text-caption text--secondary mr-2">
-								{{ page }} / {{ pageCount }}
+						<!-- Count + dots in one tight row -->
+						<div class="carousel-footer">
+							<span v-if="similarTools.length" class="similar-count">
+								Showing {{ similarTools.length }} most similar tools
 							</span>
-							<v-btn
-								icon
-								small
-								:disabled="page === 1"
-								aria-label="Previous"
-								@click="prevPage"
+
+							<div
+								v-if="pageCount > 1"
+								class="d-flex align-center"
+								style="gap: 4px"
 							>
-								<v-icon>mdi-chevron-left</v-icon>
-							</v-btn>
-							<v-btn
-								icon
-								small
-								:disabled="page === pageCount"
-								aria-label="Next"
-								@click="nextPage"
-							>
-								<v-icon>mdi-chevron-right</v-icon>
-							</v-btn>
+								<v-btn
+									icon
+									x-small
+									:disabled="page === 1"
+									aria-label="Previous"
+									@click="prevPage"
+								>
+									<v-icon size="16">mdi-chevron-left</v-icon>
+								</v-btn>
+
+								<span
+									v-for="p in pageCount"
+									:key="p"
+									class="page-dot"
+									:class="{ 'page-dot--active': p === page }"
+									@click="page = p"
+								/>
+
+								<v-btn
+									icon
+									x-small
+									:disabled="page === pageCount"
+									aria-label="Next"
+									@click="nextPage"
+								>
+									<v-icon size="16">mdi-chevron-right</v-icon>
+								</v-btn>
+							</div>
 						</div>
 					</template>
 				</v-col>
@@ -366,6 +379,13 @@ export default {
 	width: 100%;
 }
 
+.carousel-footer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 6px; /* ← snug under cards */
+}
+
 .similar-card {
 	padding: 12px;
 	border: 1px solid rgba(0, 0, 0, 8%);
@@ -403,7 +423,7 @@ export default {
 }
 
 .similar-title:hover {
-	color: #1976d2;
+	color: #0b579f;
 	text-decoration: underline;
 }
 
@@ -413,11 +433,11 @@ export default {
 
 /* pale blue background for the source icon chips */
 .similar-sources ::v-deep .v-chip {
-	background-color: #e3f2fd !important;
+	background-color: #e0eaf3 !important;
 }
 
 .similar-sources ::v-deep .v-chip:hover {
-	background-color: #bbdefb !important;
+	background-color: #cbdcec !important;
 }
 
 .pub-dot {
@@ -456,5 +476,33 @@ export default {
 
 .dot-teal {
 	background-color: #009688;
+}
+
+.similar-count {
+	font-size: 0.75rem;
+	color: rgba(0, 0, 0, 38%);
+	font-weight: 400;
+	font-style: italic;
+	margin: 0;
+	line-height: 1;
+}
+
+.page-dot {
+	width: 7px;
+	height: 7px;
+	border-radius: 50%;
+	background: rgba(0, 0, 0, 18%);
+	cursor: pointer;
+	transition: background 0.2s, transform 0.2s;
+	flex-shrink: 0;
+}
+
+.page-dot--active {
+	background: #0b579f;
+	transform: scale(1.25);
+}
+
+.page-dot:hover:not(.page-dot--active) {
+	background: rgba(0, 0, 0, 35%);
 }
 </style>
