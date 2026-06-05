@@ -90,6 +90,7 @@ export default {
 			tools: [],
 			counts: {},
 			visibleCategories: ['name', 'description', 'topics', 'operations'],
+			searchOptionsOpen: false,
 			EDAMTerms: [],
 			filters: {
 				source: [],
@@ -213,6 +214,10 @@ export default {
 			commit('updateVisibleCategories', value);
 		},
 
+		updateSearchOptionsOpen({ commit }, value) {
+			commit('updateSearchOptionsOpen', value);
+		},
+
 		async loadMoreTools({ commit, state }, page) {
 			if (state.loading.loadMore) return;
 			commit('updateLoadingLoadMore', true);
@@ -319,6 +324,9 @@ export default {
 		updateVisibleCategories(state, value) {
 			state.visibleCategories = value;
 		},
+		updateSearchOptionsOpen(state, value) {
+			state.searchOptionsOpen = value;
+		},
 		updateEDAMTerms(state, value) {
 			state.EDAMTerms = value;
 		},
@@ -335,6 +343,7 @@ export default {
 		totalToolsGlobal: (state) => state.totalToolsGlobal,
 		filters: (state) => state.filters,
 		visibleCategories: (state) => state.visibleCategories,
+		searchOptionsOpen: (state) => state.searchOptionsOpen,
 		EDAMFormats: (state) => state.EDAMTerms.format,
 		EDAMOperations: (state) => state.EDAMTerms.operation,
 		EDAMTopics: (state) => state.EDAMTerms.topic,
