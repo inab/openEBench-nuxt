@@ -140,7 +140,7 @@ export default {
 			return { background: bg };
 		},
 		color() {
-			return { color: 'black' };
+			return { color: 'white' };
 		},
 		close() {
 			this.expand = false;
@@ -211,6 +211,7 @@ export default {
 	height: 18px !important;
 	background-color: #d0d0d0;
 	position: absolute;
+	font-weight: bold !important;
 	right: 8px;
 }
 </style>

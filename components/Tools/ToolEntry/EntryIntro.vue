@@ -1,12 +1,12 @@
 <template>
 	<v-card elevation="0" class="pr-5 mb-4 pl-3">
 		<v-row justify="space-between" class="mb-1">
-			<v-col cols="6">
+			<v-col cols="4">
 				<span class="text-h4 font-weight-bold">
 					{{ name }}
 				</span>
 			</v-col>
-			<v-col ref="Intro" cols="6" class="d-flex justify-end align-end">
+			<v-col ref="Intro" cols="8" class="d-flex justify-end align-end">
 				<ChipType
 					v-for="item in type"
 					:key="item"

@@ -35,6 +35,15 @@
 						>mdi-chart-timeline-variant-shimmer</v-icon
 					>
 					No uptime data recorded for this URL yet.
+					<a
+						:href="selectedUrl"
+						target="_blank"
+						rel="noopener noreferrer"
+						class="nodata-link"
+					>
+						Visit site
+						<v-icon size="11">mdi-open-in-new</v-icon>
+					</a>
 				</div>
 				<template v-else>
 					<upTimeStatus
@@ -268,9 +277,9 @@ export default {
 }
 
 .url-chip.active {
-	background: #e8eaf6;
-	border-color: #5c6bc0;
-	color: #283593;
+	background: #e2eefc;
+	border-color: #d7e3f1;
+	color: #0b579f;
 }
 
 .dot {
