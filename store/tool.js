@@ -23,10 +23,10 @@ function buildQuery(state) {
 		query += '&tags=' + state.filters.tags.join(',');
 	}
 	if (state.filters.topics.length > 0) {
-		query += '&topics=' + state.filters.topics.join(',');
+		query += '&topic=' + state.filters.topics.join(',');
 	}
 	if (state.filters.operations.length > 0) {
-		query += '&operations=' + state.filters.operations.join(',');
+		query += '&operation=' + state.filters.operations.join(',');
 	}
 	if (state.filters.inputFormat.length > 0) {
 		query += '&input_format=' + state.filters.inputFormat.join(',');
@@ -129,7 +129,7 @@ export default {
 			commit('restoreFilters');
 		},
 
-		async initialSearch({ commit }, q) {
+		async initialSearch({ commit, state }, q) {
 			commit('updateLoadingInitialSearch', true);
 			commit('updateTools', []);
 			commit('updatePage', 0);
@@ -139,8 +139,11 @@ export default {
 				if (!q) {
 					result = await this.$observatory.$get('/initial-search', API_HEADERS);
 				} else {
+					// Honor the selected search scope (and any active filters)
+					// on the first search, same as subsequent searches.
+					const query = buildQuery(state);
 					result = await this.$observatory.$get(
-						`/search?page=0&q=${q}&searchIn=name,label,description,topics,operations,publication_title,publication_abstract`,
+						`/search?page=0&q=${q}${query}`,
 						API_HEADERS
 					);
 				}

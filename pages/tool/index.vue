@@ -48,6 +48,7 @@ export default {
 		}),
 	},
 	async mounted() {
+		this.$store.dispatch('tool/restoreFilters');
 		await this.loadLanding();
 		this.$store.dispatch('tool/fetchTotalTools');
 	},

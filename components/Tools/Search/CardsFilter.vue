@@ -19,7 +19,7 @@
 				class="ml-4 mb-2 mt-1 d-flex align-center flex-wrap"
 			>
 				<div
-					class="filters-label text-caption grey--text text--darken-1 mr-2 ml-2"
+					class="filters-label text-body-2 grey--text text--darken-1 mr-2 ml-2"
 				>
 					Filters selected:
 				</div>
@@ -28,7 +28,7 @@
 					<v-chip
 						v-for="chip in activeFilterChips"
 						:key="chip.key"
-						x-small
+						small
 						class="mr-1"
 						color="#EAF1F7"
 					>
@@ -117,16 +117,6 @@ export default {
 	},
 	created() {
 		this.$store.dispatch('tool/getEDAMTerms');
-	},
-	watch: {
-		'$route.path'(newPath, oldPath) {
-			console.log('Route changed, restoring filters');
-			console.log('New path:', newPath);
-			console.log('Old path:', oldPath);
-			if (newPath !== oldPath) {
-				this.filterRestore();
-			}
-		},
 	},
 	methods: {
 		onFilterActive(index, isActive) {

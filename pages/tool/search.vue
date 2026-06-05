@@ -55,6 +55,7 @@ export default {
 	watch: {
 		q: {
 			handler(newVal, _oldVal) {
+				this.$store.dispatch('tool/restoreFilters');
 				this.search(newVal);
 			},
 			immediate: true,
