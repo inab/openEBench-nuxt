@@ -129,6 +129,13 @@ export default {
 			commit('restoreFilters');
 		},
 
+		// Generic cached GET — vuex-cache keys on the URL, so repeating the same
+		// request (same q + filters + page) returns the cached response instead
+		// of re-fetching. Mirrors the pattern in store/observatory/*.
+		async GET_URL(_ctx, url) {
+			return await this.$observatory.$get(url, API_HEADERS);
+		},
+
 		async initialSearch({ commit, state }, q) {
 			commit('updateLoadingInitialSearch', true);
 			commit('updateTools', []);
@@ -137,14 +144,14 @@ export default {
 			try {
 				let result;
 				if (!q) {
-					result = await this.$observatory.$get('/initial-search', API_HEADERS);
+					result = await this.cache.dispatch('tool/GET_URL', '/initial-search');
 				} else {
 					// Honor the selected search scope (and any active filters)
 					// on the first search, same as subsequent searches.
 					const query = buildQuery(state);
-					result = await this.$observatory.$get(
-						`/search?page=0&q=${q}${query}`,
-						API_HEADERS
+					result = await this.cache.dispatch(
+						'tool/GET_URL',
+						`/search?page=0&q=${q}${query}`
 					);
 				}
 
@@ -185,9 +192,9 @@ export default {
 				const query = buildQuery(state);
 				commit('updateQuery', query);
 
-				const result = await this.$observatory.$get(
-					`/search?page=0&q=${state.searchedTerm}${query}`,
-					API_HEADERS
+				const result = await this.cache.dispatch(
+					'tool/GET_URL',
+					`/search?page=0&q=${state.searchedTerm}${query}`
 				);
 
 				const normalized = (result.tools || []).map(normalizeTool);
@@ -217,7 +224,7 @@ export default {
 					? `/search?page=${nextPage}&q=${state.searchedTerm}${state.query}`
 					: `/initial-search?page=${nextPage}`;
 
-				const result = await this.$observatory.$get(url, API_HEADERS);
+				const result = await this.cache.dispatch('tool/GET_URL', url);
 
 				const tools = result.tools || result.data || [];
 				const normalized = tools.map(normalizeTool);
@@ -234,7 +241,10 @@ export default {
 
 		async getEDAMTerms({ commit }) {
 			try {
-				const response = await this.$observatory.$get('edam/EDAMTerms');
+				const response = await this.cache.dispatch(
+					'tool/GET_URL',
+					'edam/EDAMTerms'
+				);
 				commit('updateEDAMTerms', response);
 			} catch (error) {
 				console.error('❌ getEDAMTerms error:', error);
@@ -282,7 +292,9 @@ export default {
 			state.tools = value || [];
 		},
 		updateStats(state, value) {
-			state.stats = value;
+			// Clone so the in-place mutations in updateStatsAfterFilter never touch
+			// the (now cached) response object that this value may reference.
+			state.stats = value ? JSON.parse(JSON.stringify(value)) : value;
 		},
 		updateStatsAfterFilter(state, value) {
 			for (const key in state.stats) {

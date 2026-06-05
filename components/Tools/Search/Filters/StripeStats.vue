@@ -76,8 +76,13 @@ export default {
 		},
 	},
 	watch: {
-		active() {
-			this.checkbox = this.active;
+		// immediate so a checkbox that is already active on first render (e.g.
+		// when filters are hydrated from the URL) shows as checked.
+		active: {
+			immediate: true,
+			handler(value) {
+				this.checkbox = value;
+			},
 		},
 	},
 	methods: {

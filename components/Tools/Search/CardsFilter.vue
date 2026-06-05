@@ -147,8 +147,19 @@ export default {
 			}
 		},
 		filterRestore() {
-			this.$store.dispatch('tool/restoreFilters');
-			this.$store.dispatch('tool/initialSearch', this.$route.query.q);
+			if (this.$route.path === '/tool/search') {
+				// On the search page the URL is the source of truth: strip the filter
+				// params and let the page's query watcher reset state + re-search.
+				const { q, searchIn } = this.$route.query;
+				const query = { page: 0 };
+				if (q) query.q = q;
+				if (searchIn) query.searchIn = searchIn;
+				this.$router.replace({ path: '/tool/search', query }).catch(() => {});
+			} else {
+				// Landing page (no filter params in the URL): reset state directly.
+				this.$store.dispatch('tool/restoreFilters');
+				this.$store.dispatch('tool/initialSearch', this.$route.query.q);
+			}
 		},
 	},
 };

@@ -35,6 +35,7 @@ import MainCard from '~/components/Tools/MainCard.vue';
 import CardsFilter from '~/components/Tools/Search/CardsFilter.vue';
 import ResultCards from '~/components/Tools/Search/ResultCards.vue';
 import { SearchTools } from '~/mixins/SearchTools.js';
+import { queryToFilters } from '~/utils/toolFilters';
 
 export default {
 	name: 'SearchResultPage',
@@ -64,12 +65,39 @@ export default {
 		}),
 	},
 	watch: {
-		q: {
-			handler(newVal, _oldVal) {
-				this.$store.dispatch('tool/restoreFilters');
-				this.search(newVal);
+		// The URL is the source of truth: any change to the query (search term or
+		// filters) re-hydrates the filter state and re-runs the search. This is the
+		// only place a search is triggered, so applying a filter never double-fetches.
+		'$route.query': {
+			handler(newQuery, oldQuery) {
+				// Seed the facet list on first load / when the search term changes;
+				// a plain filter toggle only needs to refine the existing facets.
+				const needsSeed = !oldQuery || newQuery.q !== oldQuery.q;
+				this.applyFromUrl(needsSeed);
 			},
 			immediate: true,
+			deep: true,
+		},
+	},
+	methods: {
+		async applyFromUrl(needsSeed) {
+			const q = this.$route.query.q || '';
+
+			// The filter sidebar options come from `stats`, which only gets its full
+			// (unfiltered) option list from an initialSearch. Without this seed, a
+			// fresh tab on a filtered URL would show an empty filter sidebar because
+			// the filtered response only contains the matching options.
+			if (needsSeed) {
+				this.$store.dispatch('tool/restoreFilters');
+				await this.$store.dispatch('tool/initialSearch', q);
+			}
+
+			// Apply the filters from the URL, then run the (filtered) search.
+			const filters = queryToFilters(this.$route.query);
+			Object.entries(filters).forEach(([property, values]) => {
+				this.$store.dispatch('tool/updateFilters', { property, values });
+			});
+			this.search(q);
 		},
 	},
 };
