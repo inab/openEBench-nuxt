@@ -220,9 +220,14 @@ export default {
 		hasSimilarSoftware() {
 			return this.loadingSimilar || this.similarTools.length > 0;
 		},
+		// Whether the documentation section should be shown
+		hasDocumentation() {
+			return (this.tool?.documentation || []).length > 0;
+		},
 		// Sections to render, hiding cards that have no information
 		items() {
 			return this.sections.filter((section) => {
+				if (section.id === 'documentation') return this.hasDocumentation;
 				if (section.id === 'licensing') {
 					return this.hasLicenseInfo;
 				}
