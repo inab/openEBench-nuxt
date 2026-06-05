@@ -45,28 +45,59 @@
 					<!-- TOPICS -->
 					<div v-if="topics.length > 0" justify="center" class="mt-1">
 						<LinkChipTopicOperation
-							v-for="(item, i) in topics"
+							v-for="(item, i) in visibleTopics"
 							:key="i"
 							:uri="item.uri"
 							:text="cleanString(item.term)"
 							icon="mdi-label-multiple"
 						/>
+						<v-chip
+							v-if="topics.length > MAX_CHIPS"
+							small
+							label
+							light
+							outlined
+							class="mr-1 mt-1"
+							@click="toggleSection('topics')"
+						>
+							{{
+								expandedSections.topics
+									? 'show less'
+									: `+${topics.length - MAX_CHIPS} more`
+							}}
+						</v-chip>
 					</div>
 
 					<!-- OPERATIONS -->
 					<div v-if="operations.length > 0" justify="center" class="mt-1">
 						<LinkChipTopicOperation
-							v-for="(item, i) in operations"
+							v-for="(item, i) in visibleOperations"
 							:key="i"
 							:uri="item.uri"
 							:text="cleanString(item.term)"
 							icon="mdi-cog"
 						/>
+						<v-chip
+							v-if="operations.length > MAX_CHIPS"
+							small
+							label
+							light
+							outlined
+							class="mr-1 mt-1"
+							@click="toggleSection('operations')"
+						>
+							{{
+								expandedSections.operations
+									? 'show less'
+									: `+${operations.length - MAX_CHIPS} more`
+							}}
+						</v-chip>
 					</div>
+
 					<!-- LICENSE -->
 					<div v-if="license.length > 0" justify="center" class="mt-2">
 						<LinkChipWIcon
-							v-for="[key, value] in Object.entries(license)"
+							v-for="[key, value] in Object.entries(visibleLicense)"
 							:key="key"
 							:link="value.url || ''"
 							icon="mdi-scale-balance"
@@ -77,6 +108,21 @@
 							:disabled="value.url === ''"
 							class="mr-1"
 						/>
+						<v-chip
+							v-if="license.length > MAX_CHIPS"
+							small
+							label
+							light
+							outlined
+							class="mr-1 mt-1"
+							@click="toggleSection('license')"
+						>
+							{{
+								expandedSections.license
+									? 'show less'
+									: `+${license.length - MAX_CHIPS} more`
+							}}
+						</v-chip>
 					</div>
 
 					<div justify="center" class="mt-2">
@@ -251,7 +297,12 @@ export default {
 				},
 			],
 			descriptionCollapsed: true,
-			expand: false,
+			MAX_CHIPS: 6, // Change this number as you see fit
+			expandedSections: {
+				topics: false,
+				operations: false,
+				license: false,
+			},
 		};
 	},
 	computed: {
@@ -279,6 +330,21 @@ export default {
 			)?.content;
 			if (!help) return '';
 			return marked(this.extractFirstLine(help));
+		},
+		visibleTopics() {
+			return this.expandedSections.topics
+				? this.topics
+				: this.topics.slice(0, this.MAX_CHIPS);
+		},
+		visibleOperations() {
+			return this.expandedSections.operations
+				? this.operations
+				: this.operations.slice(0, this.MAX_CHIPS);
+		},
+		visibleLicense() {
+			return this.expandedSections.license
+				? this.license
+				: this.license.slice(0, this.MAX_CHIPS);
 		},
 	},
 	methods: {
@@ -333,6 +399,9 @@ export default {
 							!l.startsWith('---')
 					) || ''
 			);
+		},
+		toggleSection(section) {
+			this.expandedSections[section] = !this.expandedSections[section];
 		},
 	},
 };
