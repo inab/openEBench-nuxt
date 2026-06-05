@@ -118,16 +118,6 @@ export default {
 	created() {
 		this.$store.dispatch('tool/getEDAMTerms');
 	},
-	watch: {
-		'$route.path'(newPath, oldPath) {
-			console.log('Route changed, restoring filters');
-			console.log('New path:', newPath);
-			console.log('Old path:', oldPath);
-			if (newPath !== oldPath) {
-				this.filterRestore();
-			}
-		},
-	},
 	methods: {
 		onFilterActive(index, isActive) {
 			if (isActive && !this.expanded.includes(index)) {
