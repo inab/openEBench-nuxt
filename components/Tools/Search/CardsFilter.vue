@@ -1,6 +1,7 @@
 <template>
-	<v-row justify="start" class="ml-5 mt-2">
+	<v-row justify="start" class="ml-5 mt-3">
 		<v-col cols="12">
+			<v-divider class="mt-4 mb-4"></v-divider>
 			<v-btn
 				small
 				color="grey"
@@ -12,6 +13,31 @@
 				<v-icon small class="mr-1">mdi-restore</v-icon>
 				Reset filters
 			</v-btn>
+			<!-- Active filters display -->
+			<div
+				v-if="activeFilterChips.length > 0"
+				class="ml-4 mb-2 mt-1 d-flex align-center flex-wrap"
+			>
+				<div
+					class="filters-label text-caption grey--text text--darken-1 mr-2 ml-2"
+				>
+					Filters selected:
+				</div>
+
+				<div class="d-flex align-center flex-wrap">
+					<v-chip
+						v-for="chip in activeFilterChips"
+						:key="chip.key"
+						x-small
+						class="mr-1"
+						color="#EAF1F7"
+					>
+						<span class="primary--text font-weight-medium">
+							{{ chip.label }}
+						</span>
+					</v-chip>
+				</div>
+			</div>
 			<v-divider class="mt-3 mb-0"></v-divider>
 			<v-expansion-panels v-model="expanded" accordion multiple flat>
 				<!--ViewSelector /-->
@@ -33,6 +59,7 @@
 	</v-row>
 </template>
 <script>
+import { mapState } from 'vuex';
 import SourcesFilter from '~/components/Tools/Search/Filters/SourcesFilter.vue';
 import TypeFilter from '~/components/Tools/Search/Filters/TypeFilter.vue';
 import TopicsFilter from '~/components/Tools/Search/Filters/TopicsFilter.vue';
@@ -59,23 +86,55 @@ export default {
 			expanded: [],
 		};
 	},
+	computed: {
+		...mapState({
+			filters: (state) => state.tool.filters,
+		}),
+		activeFilterChips() {
+			const chips = [];
+			const {
+				source,
+				type,
+				topics,
+				operations,
+				license,
+				tags,
+				inputFormat,
+				outputFormat,
+			} = this.filters;
+
+			source.forEach((v) => chips.push({ key: `source-${v}`, label: v }));
+			type.forEach((v) => chips.push({ key: `type-${v}`, label: v }));
+			topics.forEach((v) => chips.push({ key: `topic-${v}`, label: v }));
+			operations.forEach((v) => chips.push({ key: `op-${v}`, label: v }));
+			license.forEach((v) => chips.push({ key: `license-${v}`, label: v }));
+			tags.forEach((v) => chips.push({ key: `tag-${v}`, label: v }));
+			inputFormat.forEach((v) => chips.push({ key: `in-${v}`, label: v }));
+			outputFormat.forEach((v) => chips.push({ key: `out-${v}`, label: v }));
+
+			return chips;
+		},
+	},
 	created() {
 		this.$store.dispatch('tool/getEDAMTerms');
 	},
+	watch: {
+		'$route.path'(newPath, oldPath) {
+			console.log('Route changed, restoring filters');
+			console.log('New path:', newPath);
+			console.log('Old path:', oldPath);
+			if (newPath !== oldPath) {
+				this.filterRestore();
+			}
+		},
+	},
 	methods: {
 		onFilterActive(index, isActive) {
-			// console.log(
-			// 	'[CardsFilter] onFilterActive called, index:',
-			// 	index,
-			// 	'isActive:',
-			// 	isActive
-			// );
 			if (isActive && !this.expanded.includes(index)) {
 				this.expanded.push(index);
 			} else if (!isActive) {
 				this.expanded = this.expanded.filter((i) => i !== index);
 			}
-			// console.log('[CardsFilter] expanded is now:', this.expanded);
 		},
 		filterRestore() {
 			this.$store.dispatch('tool/restoreFilters');
@@ -84,3 +143,9 @@ export default {
 	},
 };
 </script>
+<style scoped>
+.text-caption {
+	display: flex;
+	align-items: center;
+}
+</style>
