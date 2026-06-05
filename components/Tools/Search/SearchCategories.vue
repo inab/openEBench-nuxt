@@ -37,7 +37,7 @@ export default {
 	},
 	computed: {
 		...mapGetters('tool', {
-			searchedTerm: 'searchedTerm',
+			visibleCategories: 'visibleCategories',
 		}),
 	},
 	watch: {
@@ -52,16 +52,18 @@ export default {
 
 			this.$emit('selection-change', this.searchingInLabels(newVal));
 
-			if (!this.searchedTerm) return;
-
+			// Only update the stored selection — the new scope is applied on the
+			// next explicit search (Enter / Search button), not on toggle.
 			this.$store.dispatch(
 				'tool/updateVisibleCategories',
 				this.searchingInCategories(newVal)
 			);
-			this.$store.dispatch('tool/searchTools');
 		},
 	},
 	mounted() {
+		// Keep the chips in sync with the stored scope across navigation.
+		const stored = this.categoriesToIndices(this.visibleCategories);
+		if (stored.length > 0) this.searchingIn = stored;
 		this.$emit('selection-change', this.searchingInLabels(this.searchingIn));
 	},
 	methods: {
@@ -72,6 +74,11 @@ export default {
 		},
 		searchingInLabels(newVal) {
 			return this.categories.filter((_, index) => newVal.includes(index));
+		},
+		categoriesToIndices(categories) {
+			return Object.entries(this.equivalencies)
+				.filter(([, val]) => categories.includes(val))
+				.map(([key]) => parseInt(key));
 		},
 	},
 };
