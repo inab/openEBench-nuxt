@@ -27,7 +27,7 @@
 			<h3 class="text-h5 mt-4">Explore Software in OpenEBench</h3>
 		</v-col>
 
-		<v-col cols="12" md="6" lg="5" class="mt-0 mb-2 pt-0">
+		<v-col cols="12" md="8" lg="6" class="mt-0 mb-2 pt-0">
 			<!-- Search row -->
 			<div class="search-wrapper mb-1">
 				<v-icon color="white" class="search-icon-outside">mdi-magnify</v-icon>

@@ -6,8 +6,7 @@ export const SearchTools = {
 				path: '/tool/search',
 				query: {
 					q: value,
-					searchIn:
-						'name,label,description,topics,operations,publication_title,publication_abstract',
+					searchIn: 'name,label,description,topics,operations',
 					page: 0,
 				},
 			});
