@@ -240,8 +240,8 @@ export default {
 
 .license-table__license {
 	justify-content: flex-start;
-	background-color: #eef4fb;
-	color: #005aa8;
+	background-color: #e0eaf3;
+	color: #0b579f;
 	width: auto;
 	max-width: 100%;
 	min-width: 0;
@@ -278,7 +278,7 @@ export default {
 }
 
 .license-table__license:hover {
-	background-color: #e3edf8;
+	background-color: #cbdcec;
 }
 
 .license-table__license--grey {

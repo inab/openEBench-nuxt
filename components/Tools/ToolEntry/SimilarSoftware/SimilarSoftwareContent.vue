@@ -423,7 +423,7 @@ export default {
 }
 
 .similar-title:hover {
-	color: #1976d2;
+	color: #0b579f;
 	text-decoration: underline;
 }
 
@@ -433,11 +433,11 @@ export default {
 
 /* pale blue background for the source icon chips */
 .similar-sources ::v-deep .v-chip {
-	background-color: #e3f2fd !important;
+	background-color: #e0eaf3 !important;
 }
 
 .similar-sources ::v-deep .v-chip:hover {
-	background-color: #bbdefb !important;
+	background-color: #cbdcec !important;
 }
 
 .pub-dot {

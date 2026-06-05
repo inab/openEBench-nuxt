@@ -21,7 +21,7 @@
 				<v-chip
 					v-for="(item, i) in visibleVersions"
 					:key="i"
-					color="primary lighten-2"
+					color="primary"
 					small
 					outlined
 					class="pa-2 mt-0 mr-1"
@@ -30,8 +30,9 @@
 				</v-chip>
 				<v-chip
 					v-if="hiddenVersionCount > 0"
-					color="primary lighten-2"
+					color="primary"
 					small
+					outlined
 					class="pa-2 mt-0 mr-1"
 					@click="showAllVersions = true"
 				>
@@ -41,8 +42,9 @@
 				</v-chip>
 				<v-chip
 					v-else-if="showAllVersions && isVersionsCollapsible"
-					color="primary lighten-2"
+					color="primary"
 					small
+					outlined
 					class="pa-2 mt-0 mr-1"
 					@click="showAllVersions = false"
 				>

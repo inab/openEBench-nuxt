@@ -187,7 +187,6 @@ export default {
 	gap: 8px;
 	padding: 10px 12px;
 	background: #fafafa;
-	border: 1px solid #e0e0e0;
 	border-radius: 8px;
 	min-width: 0;
 	transition: background-color 0.2s ease;
