@@ -46,7 +46,10 @@
 							:active="activeItem === i"
 							@click="$vuetify.goTo('#' + item.id, { offset: 60 })"
 						>
-							<v-list-item-title class="text-subtitle-1" v-text="item.title">
+							<v-list-item-title
+								class="text-subtitle-1 pb-1"
+								v-text="item.title"
+							>
 							</v-list-item-title>
 						</v-list-item-content>
 					</v-list-item>
