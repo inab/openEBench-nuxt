@@ -242,19 +242,40 @@ export default {
 		},
 		// Breadcrumbs: Home > Tools > Search (clickable) > Tool Name
 		breadcrumbs() {
-			const searchedTerm = this.$store.getters['tool/searchedTerm'];
-			const crumbs = [
-				{ text: 'Home', disabled: false, exact: true, to: '/' },
-				{ text: 'Tools', disabled: false, exact: true, to: '/tool' },
-			];
-			if (searchedTerm) {
+			const referrerFilters = this.$store.state.tool?.referrerFilters || {};
+			const hasReferrerFilters = Object.keys(referrerFilters).length > 0;
+			const searchTerm =
+				typeof referrerFilters.q === 'string' && referrerFilters.q.trim()
+					? referrerFilters.q.trim()
+					: '';
+			const crumbs = [{ text: 'Home', disabled: false, exact: true, to: '/' }];
+
+			if (hasReferrerFilters) {
 				crumbs.push({
-					text: `Search: ${searchedTerm}`,
+					text: 'Tools',
 					disabled: false,
 					exact: true,
-					to: `/tool/search?q=${searchedTerm}`,
+					to: {
+						path: '/tool/search',
+						query: referrerFilters,
+					},
+				});
+			} else {
+				crumbs.push({
+					text: 'Tools',
+					disabled: false,
+					exact: true,
+					to: '/tool',
 				});
 			}
+
+			if (searchTerm) {
+				crumbs.push({
+					text: `Search: ${searchTerm}`,
+					disabled: true,
+				});
+			}
+
 			crumbs.push({
 				text: this.loading
 					? '...'

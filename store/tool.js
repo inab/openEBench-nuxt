@@ -82,6 +82,7 @@ export default {
 			query: '',
 			page: 0,
 			toolsDisplayCards: false,
+			referrerFilters: {},
 			loading: {
 				initialSearch: false,
 				search: false,
@@ -125,6 +126,9 @@ export default {
 		},
 		updateFilters({ commit }, payload) {
 			commit('updateFilters', payload);
+		},
+		updateReferrerFilters({ commit }, filters) {
+			commit('updateReferrerFilters', filters);
 		},
 		restoreFilters({ commit }) {
 			commit('restoreFilters');
@@ -271,6 +275,9 @@ export default {
 		},
 		updateFilters(state, payload) {
 			state.filters[payload.property] = payload.values;
+		},
+		updateReferrerFilters(state, filters) {
+			state.referrerFilters = filters;
 		},
 		updateToolsDisplayCards(state, value) {
 			state.toolsDisplayCards = value;

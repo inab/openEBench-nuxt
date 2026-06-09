@@ -42,12 +42,17 @@ export default {
 		},
 		// Dynamic breadcrumbs: Home > Tools > <search term>
 		breadcrumbs() {
-			return [
+			const searchTerm = typeof this.q === 'string' ? this.q.trim() : '';
+			const crumbs = [
 				{ text: 'Home', disabled: false, exact: true, to: '/' },
 				{ text: 'Tools', disabled: false, exact: true, to: '/tool' },
-				// Search term is the last crumb — clickable to re-run same search
-				{ text: `Search: ${this.q || ''}`, disabled: true },
 			];
+
+			if (searchTerm) {
+				crumbs.push({ text: `Search: ${searchTerm}`, disabled: true });
+			}
+
+			return crumbs;
 		},
 		...mapGetters({
 			loading: 'tool/loading',
