@@ -1,5 +1,5 @@
 <template>
-	<div v-if="filteredWebpageTerms.length" class="mb-8">
+	<div v-if="filteredWebpageTerms.length && hasAllowedType" class="mb-8">
 		<p class="urls-label">Monitored URLs</p>
 
 		<!-- Chips -->
@@ -115,6 +115,13 @@ export default {
 			webAvailabilityError: 'webAvailabilityError',
 			webAvailabilityNoData: 'webAvailabilityNoData',
 		}),
+		allowedTypesForUptime() {
+			return ['web', 'rest', 'sparql', 'soap', 'workbench', 'suite'];
+		},
+		hasAllowedType() {
+			const toolTypes = this.tool?.type || [];
+			return toolTypes.some((t) => this.allowedTypesForUptime.includes(t));
+		},
 		webpageTerms() {
 			return this.tool.webpage?.map((w) => w?.term).filter(Boolean) || [];
 		},
