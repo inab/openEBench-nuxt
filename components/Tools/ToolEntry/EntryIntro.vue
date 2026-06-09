@@ -1,18 +1,26 @@
 <template>
 	<v-card elevation="0" class="pr-5 mb-4 pl-3">
-		<v-row justify="space-between" class="mb-1">
-			<v-col cols="4">
-				<span class="text-h4 font-weight-bold">
+		<v-row justify="space-between" class="mb-1" align="end">
+			<v-col cols="12" sm="auto" class="flex-grow-1 flex-shrink-1 pr-2">
+				<span
+					class="text-h4 font-weight-bold"
+					style="word-break: break-word; overflow-wrap: break-word"
+				>
 					{{ name }}
 				</span>
 			</v-col>
-			<v-col ref="Intro" cols="8" class="d-flex justify-end align-end">
+			<v-col
+				ref="Intro"
+				cols="12"
+				sm="auto"
+				class="flex-grow-0 flex-shrink-0 d-flex justify-end align-end flex-wrap"
+			>
 				<ChipType
 					v-for="item in type"
 					:key="item"
 					:type="item"
 					big
-					class="font-weight-bold ml-3"
+					class="font-weight-bold ml-2 mb-1"
 				/>
 			</v-col>
 		</v-row>
