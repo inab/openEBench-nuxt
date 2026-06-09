@@ -46,7 +46,8 @@ export default {
 		groupedDownloads() {
 			if (!this.hasDownloads) return {};
 
-			const matchesHost = (host, domain) => host === domain || host.endsWith(`.${domain}`);
+			const matchesHost = (host, domain) =>
+				host === domain || host.endsWith(`.${domain}`);
 
 			return this.packages.reduce((acc, url) => {
 				let group = 'Other';
@@ -56,7 +57,8 @@ export default {
 
 					if (matchesHost(host, 'bioconductor.org')) group = 'Bioconductor';
 					else if (matchesHost(host, 'github.com')) group = 'GitHub';
-					else if (matchesHost(host, 'galaxyproject.org')) group = 'Galaxy Project';
+					else if (matchesHost(host, 'galaxyproject.org'))
+						group = 'Galaxy Project';
 					else if (matchesHost(host, 'drive5.com')) group = 'Drive5';
 					else group = host.replace('www.', '');
 				} catch (e) {
