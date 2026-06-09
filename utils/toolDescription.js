@@ -203,3 +203,18 @@ export function pickDescription(description) {
 	const firstNonEmpty = texts.find((text) => text) || '';
 	return stripMarkdown(firstNonEmpty);
 }
+
+// Reduce a single description string to readable plain text: returned untouched
+// when it has no markup, otherwise the "Introduction"/"Overview" paragraph if
+// present, else the whole thing with its markup stripped. Use this for
+// descriptions that arrive as a plain string rather than the `description`
+// array (e.g. similar-software cards).
+export function plainDescription(text) {
+	if (!text || typeof text !== 'string') {
+		return '';
+	}
+	if (!isMarkdownText(text)) {
+		return text.trim();
+	}
+	return extractSectionParagraph(text, INTRO_HEADING) || stripMarkdown(text);
+}
