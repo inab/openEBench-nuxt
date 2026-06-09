@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div :class="{ 'is-loading': loading }">
 		<!-- Breadcrumbs inside tool -->
 		<div v-if="breadcrumbs.length > 0" class="pb-0 breadcrumbs">
 			<v-breadcrumbs :items="breadcrumbs" dark class="v-breadcrumbs">
@@ -550,5 +550,9 @@ export default {
 		left: calc(50% - 704px); /* mismo que .fixed-card en wide */
 		width: calc(100% - (50% - 704px));
 	}
+}
+
+.is-loading {
+	cursor: wait;
 }
 </style>
