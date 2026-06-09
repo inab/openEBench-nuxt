@@ -64,7 +64,7 @@
 					<v-tabs-items v-model="tabUptime">
 						<v-tab-item v-for="range in availableRanges" :key="range.key">
 							<UptimePlot
-								style="width: 100%"
+								class="uptime-plot"
 								:data-items="availabilityItemsByRange(range.key)"
 								:dtick="rangeDtick(range.key)"
 							/>
@@ -333,6 +333,17 @@ export default {
 	border: 1px solid rgba(0, 0, 0, 10%);
 	border-radius: 12px;
 	padding: 16px 20px;
+}
+
+.uptime-plot {
+	display: block;
+
+	/* Keep the plot (almost) full width but nudge it to the right: the left
+	   margin shifts it over and the width shrinks by the same amount so the
+	   right edge stays flush with the panel (no overflow). Increase both
+	   `30px` values together to push it further right / decrease to push less. */
+	width: calc(100% - 30px);
+	margin-left: 30px;
 }
 
 .no-data-notice {
