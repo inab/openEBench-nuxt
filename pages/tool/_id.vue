@@ -118,6 +118,7 @@ import AvailabilityContent from '~/components/Tools/ToolEntry/Availability/Avail
 import LicenseContent from '~/components/Tools/ToolEntry/License/LicenseContent.vue';
 import SimilarSoftwareContent from '~/components/Tools/ToolEntry/SimilarSoftware/SimilarSoftwareContent.vue';
 import FAIRScores from '~/components/Tools/ToolEntry/FAIR/FAIRScores.vue';
+import { pickDescription } from '~/utils/toolDescription';
 
 export default {
 	name: 'ToolEntry',
@@ -289,8 +290,8 @@ export default {
 		},
 		// Get other description in documentation Help.
 		toolDescription() {
-			// Caso normal
-			const description = this.tool?.description?.[0]?.term;
+			// Caso normal — prefer the first non-markdown description entry.
+			const description = pickDescription(this.tool?.description);
 
 			if (description) {
 				return description;
