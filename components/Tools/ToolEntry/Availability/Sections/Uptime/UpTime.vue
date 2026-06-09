@@ -65,7 +65,7 @@
 						<v-tab-item v-for="range in availableRanges" :key="range.key">
 							<UptimePlot
 								class="uptime-plot"
-								:data-items="availabilityItemsByRange(range.key)"
+								:data-items="plotItems(range.key)"
 								:dtick="rangeDtick(range.key)"
 							/>
 						</v-tab-item>
@@ -233,6 +233,20 @@ export default {
 				payload?.availability ||
 				payload;
 			return Array.isArray(items) ? items : [];
+		},
+		plotItems(range) {
+			return this.availabilityItemsByRange(range).map((item) => {
+				if (item == null || typeof item !== 'object') return item;
+				const plain = JSON.parse(JSON.stringify(item));
+
+				if (plain.date) {
+					const parsed = new Date(plain.date);
+					plain.date = Number.isNaN(parsed.getTime())
+						? String(plain.date)
+						: parsed.toISOString();
+				}
+				return plain;
+			});
 		},
 		rangeDtick(range) {
 			const day = 86400000;
