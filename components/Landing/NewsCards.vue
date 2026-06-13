@@ -13,7 +13,7 @@
 				<news-card
 					:title="item.title"
 					:desc="item.desc"
-					img="https://source.unsplash.com/random"
+					img="https://picsum.photos/800/600"
 				/>
 			</v-col>
 		</v-row>
