@@ -77,7 +77,10 @@
 											"
 											style="cursor: pointer"
 										>
-											{{ getCitationCount(item).toLocaleString() }} citations
+											{{ getCitationCount(item).toLocaleString() }}
+											{{
+												getCitationCount(item) === 1 ? 'citation' : 'citations'
+											}}
 
 											<span class="mx-2 text--disabled"></span>
 
