@@ -37,11 +37,13 @@
 									:href="'https://doi.org/' + item.term.doi"
 									target="_blank"
 									class="publication-title"
-									>{{ item.term.title }}</a
-								>
-								<span v-else class="publication-title">{{
-									item.term.title
-								}}</span>
+									v-html="item.term.title"
+								></a>
+								<span
+									v-else
+									class="publication-title"
+									v-html="item.term.title"
+								></span>
 
 								<!-- Authors -->
 								<div class="text-body-2 text--secondary mt-1">
@@ -75,7 +77,10 @@
 											"
 											style="cursor: pointer"
 										>
-											{{ getCitationCount(item).toLocaleString() }} citations
+											{{ getCitationCount(item).toLocaleString() }}
+											{{
+												getCitationCount(item) === 1 ? 'citation' : 'citations'
+											}}
 
 											<span class="mx-2 text--disabled"></span>
 

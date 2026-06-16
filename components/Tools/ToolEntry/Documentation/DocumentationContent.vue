@@ -11,12 +11,17 @@
 			</v-col>
 			<v-col cols="9" class="pt-3 pb-3 d-flex flex-wrap" style="gap: 14px">
 				<v-chip
-					v-for="(item, i) in tool.documentation"
+					v-for="(item, i) in tool.documentation.filter(
+						(d) => d.term && d.term.url
+					)"
 					:key="i"
 					label
 					color="grey lighten-3"
 					text-color="grey darken-3"
 					class="font-weight-medium"
+					:href="item.term.url"
+					target="_blank"
+					rel="noopener"
 				>
 					{{ item.term.type.charAt(0).toUpperCase() + item.term.type.slice(1) }}
 				</v-chip>
@@ -37,7 +42,7 @@
 			</v-col>
 			<v-col cols="9" class="pt-3 pb-3 d-flex flex-wrap" style="gap: 14px">
 				<ItemChipMenu
-					v-for="item in tool.topics"
+					v-for="item in tool.topics.filter((t) => t.term && t.term.term)"
 					:key="item.id"
 					:text="item.term.term"
 					:edam-id="item.term.uri"
