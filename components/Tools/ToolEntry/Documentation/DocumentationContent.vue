@@ -37,7 +37,7 @@
 			</v-col>
 			<v-col cols="9" class="pt-3 pb-3 d-flex flex-wrap" style="gap: 14px">
 				<ItemChipMenu
-					v-for="item in tool.topics"
+					v-for="item in tool.topics.filter((t) => t.term && t.term.term)"
 					:key="item.id"
 					:text="item.term.term"
 					:edam-id="item.term.uri"
