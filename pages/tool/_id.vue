@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div :class="{ 'is-loading': loading }">
 		<!-- Breadcrumbs inside tool -->
 		<div v-if="breadcrumbs.length > 0" class="pb-0 breadcrumbs">
 			<v-breadcrumbs :items="breadcrumbs" dark class="v-breadcrumbs">
@@ -46,7 +46,10 @@
 							:active="activeItem === i"
 							@click="$vuetify.goTo('#' + item.id, { offset: 60 })"
 						>
-							<v-list-item-title class="text-subtitle-1" v-text="item.title">
+							<v-list-item-title
+								class="text-subtitle-1 pb-1"
+								v-text="item.title"
+							>
 							</v-list-item-title>
 						</v-list-item-content>
 					</v-list-item>
@@ -115,6 +118,7 @@ import AvailabilityContent from '~/components/Tools/ToolEntry/Availability/Avail
 import LicenseContent from '~/components/Tools/ToolEntry/License/LicenseContent.vue';
 import SimilarSoftwareContent from '~/components/Tools/ToolEntry/SimilarSoftware/SimilarSoftwareContent.vue';
 import FAIRScores from '~/components/Tools/ToolEntry/FAIR/FAIRScores.vue';
+import { pickDescription } from '~/utils/toolDescription';
 
 export default {
 	name: 'ToolEntry',
@@ -242,19 +246,40 @@ export default {
 		},
 		// Breadcrumbs: Home > Tools > Search (clickable) > Tool Name
 		breadcrumbs() {
-			const searchedTerm = this.$store.getters['tool/searchedTerm'];
-			const crumbs = [
-				{ text: 'Home', disabled: false, exact: true, to: '/' },
-				{ text: 'Tools', disabled: false, exact: true, to: '/tool' },
-			];
-			if (searchedTerm) {
+			const referrerFilters = this.$store.state.tool?.referrerFilters || {};
+			const hasReferrerFilters = Object.keys(referrerFilters).length > 0;
+			const searchTerm =
+				typeof referrerFilters.q === 'string' && referrerFilters.q.trim()
+					? referrerFilters.q.trim()
+					: '';
+			const crumbs = [{ text: 'Home', disabled: false, exact: true, to: '/' }];
+
+			if (hasReferrerFilters) {
 				crumbs.push({
-					text: `Search: ${searchedTerm}`,
+					text: 'Tools',
 					disabled: false,
 					exact: true,
-					to: `/tool/search?q=${searchedTerm}`,
+					to: {
+						path: '/tool/search',
+						query: referrerFilters,
+					},
+				});
+			} else {
+				crumbs.push({
+					text: 'Tools',
+					disabled: false,
+					exact: true,
+					to: '/tool',
 				});
 			}
+
+			if (searchTerm) {
+				crumbs.push({
+					text: `Search: ${searchTerm}`,
+					disabled: true,
+				});
+			}
+
 			crumbs.push({
 				text: this.loading
 					? '...'
@@ -265,8 +290,8 @@ export default {
 		},
 		// Get other description in documentation Help.
 		toolDescription() {
-			// Caso normal
-			const description = this.tool?.description?.[0]?.term;
+			// Caso normal — prefer the first non-markdown description entry.
+			const description = pickDescription(this.tool?.description);
 
 			if (description) {
 				return description;
@@ -529,5 +554,9 @@ export default {
 		left: calc(50% - 704px); /* mismo que .fixed-card en wide */
 		width: calc(100% - (50% - 704px));
 	}
+}
+
+.is-loading {
+	cursor: wait;
 }
 </style>

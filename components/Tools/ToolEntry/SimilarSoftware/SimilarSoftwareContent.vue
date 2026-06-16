@@ -187,6 +187,7 @@ import { marked } from 'marked';
 import DOMPurify from 'dompurify';
 import LinkChipWImage from '~/components/Tools/Search/Card/LinkChipWImage.vue';
 import LinkChipTopicOperation from '~/components/Tools/Search/Card/LinkChipTopicOperation.vue';
+import { plainDescription } from '~/utils/toolDescription';
 
 const HIGH_MATCH_THRESHOLD = 0.85;
 const MAX_VISIBLE_TAGS = 3;
@@ -242,8 +243,11 @@ export default {
 		displayDescription(item) {
 			const text =
 				item.description || this.fallbackDescriptions[item.tool_id] || '';
+			// Reduce markdown / RST READMEs to plain prose (prefers the
+			// Introduction/Overview paragraph), matching the search cards.
+			const clean = plainDescription(text);
 			// Drop a leading "What it does" heading (optionally bold / colon).
-			return text
+			return clean
 				.replace(/^\s*(\*\*)?\s*what it does\s*(\*\*)?\s*:?\s*/i, '')
 				.trimStart();
 		},
@@ -423,7 +427,7 @@ export default {
 }
 
 .similar-title:hover {
-	color: #1976d2;
+	color: #0b579f;
 	text-decoration: underline;
 }
 
@@ -433,11 +437,11 @@ export default {
 
 /* pale blue background for the source icon chips */
 .similar-sources ::v-deep .v-chip {
-	background-color: #e3f2fd !important;
+	background-color: #e0eaf3 !important;
 }
 
 .similar-sources ::v-deep .v-chip:hover {
-	background-color: #bbdefb !important;
+	background-color: #cbdcec !important;
 }
 
 .pub-dot {

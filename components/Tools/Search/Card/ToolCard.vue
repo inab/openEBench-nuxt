@@ -349,6 +349,11 @@ export default {
 	},
 	methods: {
 		goToTool() {
+			const query = { ...this.$route.query };
+			if (query.q !== undefined && String(query.q).trim() === '') {
+				delete query.q;
+			}
+			this.$store.commit('tool/updateReferrerFilters', query);
 			this.$router.push({ path: `/tool/${this.subname}-${this.id}` });
 		},
 		extendDescription() {

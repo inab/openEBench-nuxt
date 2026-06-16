@@ -88,7 +88,7 @@ export default {
 	align-items: center;
 	font-size: 13px;
 	font-weight: 500;
-	color: #1565c0;
+	color: #0b579f;
 	text-decoration: none;
 	margin-top: 4px;
 	word-break: break-all;

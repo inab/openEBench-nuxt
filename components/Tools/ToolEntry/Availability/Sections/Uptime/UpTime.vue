@@ -1,5 +1,5 @@
 <template>
-	<div v-if="filteredWebpageTerms.length" class="mb-8">
+	<div v-if="filteredWebpageTerms.length && hasAllowedType" class="mb-8">
 		<p class="urls-label">Monitored URLs</p>
 
 		<!-- Chips -->
@@ -64,8 +64,8 @@
 					<v-tabs-items v-model="tabUptime">
 						<v-tab-item v-for="range in availableRanges" :key="range.key">
 							<UptimePlot
-								style="width: 100%"
-								:data-items="availabilityItemsByRange(range.key)"
+								class="uptime-plot"
+								:data-items="plotItems(range.key)"
 								:dtick="rangeDtick(range.key)"
 							/>
 						</v-tab-item>
@@ -115,6 +115,13 @@ export default {
 			webAvailabilityError: 'webAvailabilityError',
 			webAvailabilityNoData: 'webAvailabilityNoData',
 		}),
+		allowedTypesForUptime() {
+			return ['web', 'rest', 'sparql', 'soap', 'workbench', 'suite'];
+		},
+		hasAllowedType() {
+			const toolTypes = this.tool?.type || [];
+			return toolTypes.some((t) => this.allowedTypesForUptime.includes(t));
+		},
 		webpageTerms() {
 			return this.tool.webpage?.map((w) => w?.term).filter(Boolean) || [];
 		},
@@ -227,6 +234,20 @@ export default {
 				payload;
 			return Array.isArray(items) ? items : [];
 		},
+		plotItems(range) {
+			return this.availabilityItemsByRange(range).map((item) => {
+				if (item == null || typeof item !== 'object') return item;
+				const plain = JSON.parse(JSON.stringify(item));
+
+				if (plain.date) {
+					const parsed = new Date(plain.date);
+					plain.date = Number.isNaN(parsed.getTime())
+						? String(plain.date)
+						: parsed.toISOString();
+				}
+				return plain;
+			});
+		},
 		rangeDtick(range) {
 			const day = 86400000;
 			if (range === 'sixMonths') return String(day * 15);
@@ -262,7 +283,6 @@ export default {
 	gap: 7px;
 	padding: 5px 13px;
 	border-radius: 999px;
-	border: 1px solid rgba(0, 0, 0, 15%);
 	background: #f5f5f5;
 	cursor: pointer;
 	font-size: 13px;
@@ -272,13 +292,11 @@ export default {
 }
 
 .url-chip:hover {
-	border-color: rgba(0, 0, 0, 30%);
 	color: #222;
 }
 
 .url-chip.active {
-	background: #e2eefc;
-	border-color: #d7e3f1;
+	background: #e0eaf3;
 	color: #0b579f;
 }
 
@@ -329,6 +347,17 @@ export default {
 	border: 1px solid rgba(0, 0, 0, 10%);
 	border-radius: 12px;
 	padding: 16px 20px;
+}
+
+.uptime-plot {
+	display: block;
+
+	/* Keep the plot (almost) full width but nudge it to the right: the left
+	   margin shifts it over and the width shrinks by the same amount so the
+	   right edge stays flush with the panel (no overflow). Increase both
+	   `30px` values together to push it further right / decrease to push less. */
+	width: calc(100% - 30px);
+	margin-left: 30px;
 }
 
 .no-data-notice {

@@ -103,8 +103,12 @@ export default {
 			required: true,
 		},
 		summary: {
-			type: String,
-			required: true,
+			type: [String, Object],
+			required: false,
+			default: '',
+			validator(value) {
+				return value == null || typeof value === 'string';
+			},
 		},
 		to: {
 			type: String,

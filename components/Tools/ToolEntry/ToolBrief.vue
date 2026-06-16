@@ -83,7 +83,9 @@ export default {
 	},
 	methods: {
 		cleanVersion(version) {
-			return version.filter((item) => item);
+			return version.filter(
+				(item) => item && String(item).trim().toLowerCase() !== 'none'
+			);
 		},
 	},
 };

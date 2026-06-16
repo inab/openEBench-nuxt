@@ -90,10 +90,10 @@ export default {
 	},
 	data() {
 		return {
-			colorTopic: '#396FBA26',
-			textColorTopic: '#0B579F',
-			colorOperation: '#396FBA26',
-			textColorOperation: '#0B579F',
+			colorTopic: '#e0eaf3',
+			textColorTopic: '#0b579f',
+			colorOperation: '#e0eaf3',
+			textColorOperation: '#0b579f',
 		};
 	},
 	computed: {

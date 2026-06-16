@@ -325,7 +325,7 @@ export default {
 }
 
 .publication-title:hover {
-	color: #1976d2;
+	color: #0b579f;
 	text-decoration: underline;
 }
 

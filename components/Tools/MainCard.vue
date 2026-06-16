@@ -106,7 +106,6 @@ export default {
 	data() {
 		return {
 			value: '',
-			searchOptionsOpen: false,
 			selectedSearchCategoryLabels: [],
 			exampleValues: [
 				{ name: 'trimAl' },
@@ -117,6 +116,14 @@ export default {
 		};
 	},
 	computed: {
+		searchOptionsOpen: {
+			get() {
+				return this.$store.getters['tool/searchOptionsOpen'];
+			},
+			set(value) {
+				this.$store.dispatch('tool/updateSearchOptionsOpen', value);
+			},
+		},
 		totalToolsGlobal() {
 			return this.$store.getters['tool/totalToolsGlobal'];
 		},

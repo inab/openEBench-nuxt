@@ -3,7 +3,9 @@ import ErrorPage from './error.vue';
 
 const factory = (ErrorObject) => {
 	return shallowMount(ErrorPage, {
-		...createComponentMocks({}),
+		...createComponentMocks({
+			mocks: { $route: { path: '/' } },
+		}),
 		propsData: { error: ErrorObject },
 	});
 };
