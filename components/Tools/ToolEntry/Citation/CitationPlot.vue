@@ -6,6 +6,7 @@
 			<div class="d-flex align-center justify-space-between mb-2 mt-5 mx-5">
 				<div class="d-flex" style="gap: 30px">
 					<v-btn
+						v-if="showCumulativeButton"
 						small
 						rounded
 						tonal
@@ -86,6 +87,11 @@ export default {
 		};
 	},
 	computed: {
+		showCumulativeButton() {
+			return !(
+				this.dataTraces.length === 1 && this.dataTraces[0].data.length === 1
+			);
+		},
 		computedTraces() {
 			if (this.mode === 'cumulative') return this.buildCumulative();
 			if (this.mode === 'merge') return this.buildMerge();
