@@ -2,6 +2,11 @@
 
 const subMenuEntriesAbout = [
 	{
+		title: 'Software',
+		title_hide: 'Software About',
+		to: '/software',
+	},
+	{
 		title: 'Publications',
 		title_hide: 'Publications About',
 		to: '/publications',

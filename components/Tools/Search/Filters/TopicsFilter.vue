@@ -40,9 +40,6 @@ export default {
 			return newItems;
 		},
 	},
-	mounted() {
-		this.$emit('has-active-filters', this.items.length > 0);
-	},
 	watch: {
 		'stats.topics': {
 			deep: true,
@@ -51,6 +48,9 @@ export default {
 				this.$emit('has-active-filters', hasItems);
 			},
 		},
+	},
+	mounted() {
+		this.$emit('has-active-filters', this.items.length > 0);
 	},
 	methods: {
 		percentage(count) {

@@ -8,7 +8,7 @@
 	>
 		<span class="text-body-2 font-weight-medium">{{ text }}</span>
 
-		<v-menu offset-x offset-y right v-if="vocabulary === 'EDAM'">
+		<v-menu v-if="vocabulary === 'EDAM'" offset-x offset-y right>
 			<template #activator="{ on, attrs }">
 				<v-btn :color="textColor" icon v-bind="attrs" v-on="on">
 					<v-icon small>mdi-dots-vertical</v-icon>

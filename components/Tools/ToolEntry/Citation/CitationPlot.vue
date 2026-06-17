@@ -46,7 +46,7 @@
 			<!-- Plot -->
 			<citationsPlot
 				:key="mode"
-				:dataTraces="computedTraces"
+				:data-traces="computedTraces"
 				:colors="computedColors"
 				:showlegend="mode === 'merge' ? false : showlegend"
 			/>

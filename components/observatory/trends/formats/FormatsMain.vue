@@ -75,13 +75,13 @@
 
 					<p class="mt-2 text-center mb-2 ml-8">
 						<span
-							class="text-sm highlight"
 							v-if="currentCollection === 'tools'"
+							class="text-sm highlight"
 						>
 							Input formats most frequently supported by tools in the Life
 							Sciences, showing common standards
 						</span>
-						<span class="text-sm highlight" v-else>
+						<span v-else class="text-sm highlight">
 							Input formats most frequently supported by tools in
 							{{ currentCollection }}, showing common standards
 						</span>
@@ -106,13 +106,13 @@
 
 					<p class="mt-2 text-center mb-2 ml-8">
 						<span
-							class="text-sm highlight"
 							v-if="currentCollection === 'tools'"
+							class="text-sm highlight"
 						>
 							Output formats most frequently supported by tools in the Life
 							Sciences, showing common standards
 						</span>
-						<span class="text-sm highlight" v-else>
+						<span v-else class="text-sm highlight">
 							Output formats most frequently supported by tools in
 							{{ currentCollection }}, showing common standards
 						</span>

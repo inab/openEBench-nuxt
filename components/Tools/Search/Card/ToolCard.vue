@@ -21,8 +21,8 @@
 					<v-spacer></v-spacer>
 					<ChipType
 						v-for="item in type"
-						:type="item"
 						:key="item"
+						:type="item"
 						class="ml-1"
 					/>
 				</v-card-title>
