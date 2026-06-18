@@ -556,6 +556,35 @@ export default {
 	}
 }
 
+/* Medium-wide (e.g. 14" laptops ~1512px): not enough room to center the 960px
+   card AND hug the FAIR panel to its right edge (that needs 1600px). Instead,
+   stop centering: keep the nav in the left gutter, pin the FAIR panel to the
+   right gutter, and let the content reflow between them so the scores stay
+   visible. Placed after the 1450/1600 rules so it overrides them in this band. */
+@media (min-width: 1400px) and (max-width: 1599.98px) {
+	#main-container {
+		padding-left: 300px; /* clear the fixed left nav (64 + 200 + gap) */
+		padding-right: 320px; /* reserve the right gutter for the FAIR panel */
+	}
+
+	.fixed-card {
+		left: auto;
+		margin-left: 64px !important;
+	}
+
+	.tool-brief-wrapper {
+		left: 0;
+		width: 100%;
+	}
+
+	.fair-fixed {
+		display: flex;
+		left: auto;
+		right: 24px;
+		width: 280px;
+	}
+}
+
 .is-loading {
 	cursor: wait;
 }
