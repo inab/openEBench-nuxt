@@ -69,9 +69,9 @@
 
 		<!-- Footer -->
 		<div class="fair-footer">
-			Based on available metadata (a low score may mean information is missing,
-			not that the software is lacking). <br />
-			Indicator A2 (Software history trackability) is not currently measured.
+			Based on available metadata (a low score may mean information is missing).
+			<br />
+			Indicator A2 is not currently measured.
 			<br />
 			<a
 				href="https://inab.github.io/FAIRsoft_indicators/"

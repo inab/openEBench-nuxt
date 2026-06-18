@@ -50,7 +50,7 @@ export default {
 <style scoped>
 .back-to-top {
 	position: fixed;
-	bottom: 410px;
+	bottom: 350px;
 	right: 80px;
 	z-index: 100;
 }
