@@ -19,9 +19,6 @@ describe('Index.vue', () => {
 				resourcesCount: () => {
 					return 999;
 				},
-				toolsCount: () => {
-					return 555;
-				},
 				communitiesCount: () => {
 					return 10;
 				},
@@ -32,7 +29,6 @@ describe('Index.vue', () => {
 			actions: {
 				getCommunitiesCount: jest.fn(),
 				getResourcesCount: jest.fn(),
-				getToolsCount: jest.fn(),
 			},
 		},
 	};
@@ -47,6 +43,5 @@ describe('Index.vue', () => {
 
 		expect(mockStore.dashboard.actions.getCommunitiesCount).toHaveBeenCalled();
 		expect(mockStore.dashboard.actions.getResourcesCount).toHaveBeenCalled();
-		expect(mockStore.dashboard.actions.getToolsCount).toHaveBeenCalled();
 	});
 });
