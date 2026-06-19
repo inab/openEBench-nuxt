@@ -226,9 +226,22 @@ export default {
 		hasSimilarSoftware() {
 			return this.loadingSimilar || this.similarTools.length > 0;
 		},
-		// Whether the documentation section should be shown
+		// Whether the documentation section should be shown. The card renders
+		// Documents (documentation entries with a URL), Related topics and
+		// Function (operations); a documentation entry that only carries inline
+		// `content` (no URL) renders nothing, so it must not, on its own, show
+		// the card.
 		hasDocumentation() {
-			return (this.tool?.documentation || []).length > 0;
+			const hasDocuments = (this.tool?.documentation || []).some(
+				(doc) => doc.term?.url
+			);
+			const hasTopics = (this.tool?.topics || []).some(
+				(topic) => topic.term?.term
+			);
+			const hasOperations = (this.tool?.operations || []).some(
+				(operation) => operation.term?.term
+			);
+			return hasDocuments || hasTopics || hasOperations;
 		},
 		// Sections to render, hiding cards that have no information
 		items() {

@@ -19,24 +19,11 @@
 					<div class="hero-numbers__item">
 						<span class="hero-numbers__icon ion-ios-lightbulb-outline" />
 						<div class="hero-numbers__text">
-							<h4 class="hero-numbers__count text-h3">
+							<h4 class="hero-numbers__count text-h3 font-weight-normal">
 								<animated-number :value="toolsCount" />
 							</h4>
 							<h6 class="hero-numbers__title">
 								{{ 'Tool' | pluralize(toolsCount) }}
-							</h6>
-						</div>
-					</div>
-				</v-col>
-				<v-col align="center" cols="12" sm="3">
-					<div class="hero-numbers__item">
-						<span class="hero-numbers__icon ion-ios-world-outline" />
-						<div class="hero-numbers__text">
-							<h4 class="hero-numbers__count text-h3 font-weight-normal">
-								<animated-number :value="resourcesCount" />
-							</h4>
-							<h6 class="hero-numbers__title">
-								{{ 'Resource' | pluralize(resourcesCount) }}
 							</h6>
 						</div>
 					</div>
@@ -74,10 +61,6 @@ export default {
 			required: true,
 		},
 		toolsCount: {
-			type: Number,
-			required: true,
-		},
-		resourcesCount: {
 			type: Number,
 			required: true,
 		},
