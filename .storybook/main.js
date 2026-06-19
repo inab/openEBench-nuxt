@@ -5,6 +5,7 @@ module.exports = {
 		'../stories/**/*.stories.mdx',
 		'../stories/**/*.stories.@(js|jsx|ts|tsx)',
 	],
+	staticDirs: ['../static', '../static/icons'],
 	addons: ['@storybook/addon-links', '@storybook/addon-essentials'],
 	framework: '@storybook/vue',
 	webpackFinal: async (config) => {

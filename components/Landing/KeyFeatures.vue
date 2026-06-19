@@ -31,7 +31,7 @@
 
 <script>
 export default {
-	name: 'WelcomeSection',
+	name: 'KeyFeatures',
 	data() {
 		return {
 			illustration: require('~/static/images/illustrations/404.svg'),

@@ -1,37 +1,56 @@
 <template>
-	<iframe
-		:src="hostName + `tool?search=` + query"
-		width="100%"
-		height="100%"
-		frameborder="0"
-	>
-	</iframe>
+	<div class="pa-0">
+		<MainCard :breadcrumbs="breadcrumbs" />
+		<div class="px-12 px-xl-16">
+			<v-row>
+				<v-col cols="12" md="4" lg="3" xl="3" style="position: relative">
+					<div>
+						<CardsFilter />
+					</div>
+				</v-col>
+				<v-col cols="12" md="8" lg="9" xl="9">
+					<v-row ref="scrollBox" class="mt-1">
+						<v-col cols="12">
+							<ResultCards />
+						</v-col>
+					</v-row>
+				</v-col>
+			</v-row>
+		</div>
+	</div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+import MainCard from '~/components/Tools/MainCard.vue';
+import CardsFilter from '~/components/Tools/Search/CardsFilter.vue';
+import ResultCards from '~/components/Tools/Search/ResultCards.vue';
+import { SearchTools } from '~/mixins/SearchTools.js';
+
 export default {
-	name: 'ToolsMonitoringPage',
-	layout: 'embedIframeFullWidth',
+	name: 'ToolsLandingPage',
+	components: { MainCard, CardsFilter, ResultCards },
+	mixins: [SearchTools],
+	layout: 'SearchTools',
 	data() {
 		return {
-			hostName: this.$config.OEB_LEGACY_ANGULAR_URI,
-			query: this.$route.query.search ? this.$route.query.search : '',
 			breadcrumbs: [
-				{
-					text: 'Home',
-					disabled: false,
-					exact: true,
-					to: '/',
-				},
-				{
-					text: 'Tools',
-					disabled: true,
-				},
+				{ text: 'Home', disabled: false, exact: true, to: '/' },
+				{ text: 'Tools', disabled: true },
 			],
+			attrs: { class: 'mb-6', boilerplate: true, elevation: 2 },
 		};
 	},
-	mounted() {
-		this.$parent.$emit('emitBreadcrumbs', this.breadcrumbs);
+	computed: {
+		...mapGetters({
+			loading: 'tool/loading',
+			searchedTerm: 'tool/searchedTerm',
+		}),
+	},
+	async mounted() {
+		this.$store.dispatch('tool/restoreFilters');
+		await this.loadLanding();
+		this.$store.dispatch('tool/fetchTotalTools');
 	},
 };
 </script>
