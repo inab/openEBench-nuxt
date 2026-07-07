@@ -98,7 +98,7 @@ export default {
 			return this.dataTraces;
 		},
 		computedColors() {
-			if (this.mode === 'merge') return ['#2196f3'];
+			if (this.mode === 'merge') return ['#37474F'];
 			return this.colors;
 		},
 	},
