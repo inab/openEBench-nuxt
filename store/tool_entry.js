@@ -64,6 +64,18 @@ export default {
 			}
 		},
 
+		async resolveToolId(_ctx, { name, source = 'biotools' }) {
+			try {
+				const { data } = await this.$observatory.get(
+					`/tool/id?name=${encodeURIComponent(name)}&source=${source}`
+				);
+				return data?.id || null;
+			} catch (e) {
+				// Not found / network error → caller falls back to 404.
+				return null;
+			}
+		},
+
 		async retrieveSimilarTools({ commit }, toolId) {
 			if (!toolId) {
 				commit('updateSimilarTools', []);
