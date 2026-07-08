@@ -9,13 +9,13 @@
 					box-shadow: 0 0 10px rgba(18, 121, 219, 60%);
 					transition: box-shadow 0.3s ease;
 				"
-				@mouseover="hover = true"
-				@mouseleave="hover = false"
 				:style="
 					hover
 						? 'background-color: #001752f8; border-radius: 10px; box-shadow: 0 0 20px rgba(18, 121, 219, 80%);'
 						: 'background-color: #001752f8; border-radius: 10px; box-shadow: 0 0 10px rgba(18, 121, 219, 60%);'
 				"
+				@mouseover="hover = true"
+				@mouseleave="hover = false"
 			>
 				<div
 					class="text-center number-text d-flex flex-column align-center justify-center"

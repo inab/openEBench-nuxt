@@ -16,6 +16,13 @@ export default {
 			required: true,
 		},
 	},
+	computed: {
+		markup() {
+			const processed = this.convertAnchors(this.markdown);
+			const html = marked(processed);
+			return DOMPurify.sanitize(html);
+		},
+	},
 	methods: {
 		// Replace (#item1) → <a id="item1"></a>
 		convertAnchors(md) {
@@ -25,13 +32,6 @@ export default {
 				/(?<!\[.*?)\(#([\w-]+)\)(?!\))/g,
 				(_match, id) => `<a id="${id}"></a>`
 			);
-		},
-	},
-	computed: {
-		markup() {
-			const processed = this.convertAnchors(this.markdown);
-			const html = marked(processed);
-			return DOMPurify.sanitize(html);
 		},
 	},
 };

@@ -77,6 +77,17 @@ export default {
 		async applyFromUrl(needsSeed) {
 			const q = this.$route.query.q || '';
 
+			// Keep the search-in scope in sync with the URL: the categories live in
+			// the store (and drive the API's `searchIn`), but the URL is the source
+			// of truth, so a reload / deep link / narrowed selection is honoured.
+			const searchIn = this.$route.query.searchIn;
+			if (searchIn) {
+				this.$store.dispatch(
+					'tool/updateVisibleCategories',
+					String(searchIn).split(',').filter(Boolean)
+				);
+			}
+
 			// The filter sidebar options come from `stats`, which only gets its full
 			// (unfiltered) option list from an initialSearch. Without this seed, a
 			// fresh tab on a filtered URL would show an empty filter sidebar because

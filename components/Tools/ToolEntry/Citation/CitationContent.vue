@@ -70,12 +70,12 @@
 											small
 											outlined
 											class="citation-chip px-3 py-3"
+											style="cursor: pointer"
 											@click="
 												openLink(
 													'https://europepmc.org/article/MED/' + item.term.pmid
 												)
 											"
-											style="cursor: pointer"
 										>
 											{{ getCitationCount(item).toLocaleString() }}
 											{{
@@ -142,7 +142,7 @@
 					<CitationPlot
 						v-else-if="citationPlotData.length > 0"
 						:key="citationPlotData.length"
-						:dataTraces="citationPlotData"
+						:data-traces="citationPlotData"
 						:colors="citationPlotColors"
 						:message="plotMessage"
 					/>

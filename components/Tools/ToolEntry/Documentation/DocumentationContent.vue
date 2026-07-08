@@ -2,7 +2,7 @@
 	<v-container class="mt-0 pt-0 pl-8">
 		<!-- Documents -->
 		<v-row
-			v-if="tool.documentation && tool.documentation.length"
+			v-if="documents.length"
 			class="mt-0 pt-0 mb-0 section-row"
 			align="center"
 		>
@@ -11,9 +11,7 @@
 			</v-col>
 			<v-col cols="9" class="pt-3 pb-3 d-flex flex-wrap" style="gap: 14px">
 				<v-chip
-					v-for="(item, i) in tool.documentation.filter(
-						(d) => d.term && d.term.url
-					)"
+					v-for="(item, i) in documents"
 					:key="i"
 					label
 					color="grey lighten-3"
@@ -28,12 +26,12 @@
 			</v-col>
 		</v-row>
 
-		<v-divider v-if="tool.documentation && tool.documentation.length" />
+		<v-divider v-if="documents.length" />
 
 		<!-- Related topics -->
 		<!-- Vocabulary EDAM si lleva los 3 puntitos sino no. -->
 		<v-row
-			v-if="tool.topics && tool.topics.length"
+			v-if="topics.length"
 			class="mt-0 pt-0 mb-0 section-row"
 			align="center"
 		>
@@ -42,7 +40,7 @@
 			</v-col>
 			<v-col cols="9" class="pt-3 pb-3 d-flex flex-wrap" style="gap: 14px">
 				<ItemChipMenu
-					v-for="item in tool.topics.filter((t) => t.term && t.term.term)"
+					v-for="item in topics"
 					:key="item.id"
 					:text="item.term.term"
 					:edam-id="item.term.uri"
@@ -53,11 +51,11 @@
 			</v-col>
 		</v-row>
 
-		<v-divider v-if="tool.topics && tool.topics.length" />
+		<v-divider v-if="topics.length" />
 
 		<!-- Operations -->
 		<v-row
-			v-if="tool.operations && tool.operations.length"
+			v-if="operations.length"
 			class="mt-0 pt-0 mb-0 section-row"
 			align="center"
 		>
@@ -66,7 +64,7 @@
 			</v-col>
 			<v-col cols="9" class="pt-3 pb-3 d-flex flex-wrap" style="gap: 14px">
 				<ItemChipMenu
-					v-for="item in tool.operations"
+					v-for="item in operations"
 					:key="item.id"
 					:text="item.term.term"
 					:edam-id="item.term.uri"
@@ -101,6 +99,19 @@ export default {
 			tool: 'tool',
 			loading: 'loading',
 		}),
+		// Documentation entries that carry a link; entries with only inline
+		// `content` (no URL) render no chip, so they are excluded here.
+		documents() {
+			return (this.tool?.documentation || []).filter(
+				(d) => d.term && d.term.url
+			);
+		},
+		topics() {
+			return (this.tool?.topics || []).filter((t) => t.term && t.term.term);
+		},
+		operations() {
+			return (this.tool?.operations || []).filter((o) => o.term && o.term.term);
+		},
 	},
 };
 </script>

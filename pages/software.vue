@@ -2,15 +2,18 @@
 	<div>
 		<v-container class="about-wrap">
 			<!-- Header -->
-			<div class="text-h4 title-about mb-2">About the Software Observatory</div>
+			<div class="text-h4 title-about mb-2">About OpenEBench Software</div>
 
 			<p class="text-body-1 mb-6">
-				The Software Observatory aggregates and analyses research software
-				metadata across the Life Sciences. It integrates records from multiple
+				OpenEBench aggregates and analyses research software metadata across the
+				Life Sciences. A single pipeline integrates records from multiple
 				registries and repositories, resolves duplicates, enriches metadata
 				where possible, and computes
-				<span class="font-weight-bold">FAIRsoft</span> indicators to support
-				trends analysis and software FAIRness assessment.
+				<span class="font-weight-bold">FAIRsoft</span> indicators. This
+				consolidated dataset powers both the
+				<nuxt-link to="/tool">Tools catalogue</nuxt-link> and the
+				<nuxt-link to="/observatory">Software Observatory</nuxt-link>,
+				supporting software discovery, trends analysis, and FAIRness assessment.
 			</p>
 
 			<!-- Quick navigation -->
@@ -32,10 +35,12 @@
 				<div class="section-title">Methodology</div>
 
 				<p class="text-body-2 mb-4">
-					The Software Observatory builds an analysis-ready dataset by ingesting
-					software metadata from multiple sources, harmonising and enriching it,
-					resolving duplicates, and computing FAIRsoft indicators used across
-					dashboards and evaluations.
+					OpenEBench builds an analysis-ready dataset by ingesting software
+					metadata from multiple sources, harmonising and enriching it,
+					resolving duplicates, and computing FAIRsoft indicators. The same
+					dataset feeds both the Tools catalogue and the Software Observatory,
+					so the catalogue entries, dashboards, and evaluations all draw on a
+					single consolidated source.
 				</p>
 
 				<v-img
@@ -47,8 +52,8 @@
 				/>
 				<div class="text-body-2 grey--text">
 					Overview of the main and auxiliary pipelines that consolidate and
-					enrich software metadata into the dataset used by the Software
-					Observatory.
+					enrich software metadata into the single dataset shared by the Tools
+					catalogue and the Software Observatory.
 				</div>
 
 				<ul class="mt-4 mb-4 text-body-2">
@@ -93,10 +98,11 @@
 				<div class="section-title">FAIRsoft indicators</div>
 
 				<p class="text-body-2 mb-3">
-					The Observatory uses <span class="font-weight-bold">FAIRsoft</span> as
-					a practical implementation of the FAIR principles for research
-					software. Indicators are computed from available metadata and
-					presented both as aggregated views (dashboards) and tool-level
+					OpenEBench uses <span class="font-weight-bold">FAIRsoft</span> as a
+					practical implementation of the FAIR principles for research software.
+					Indicators are computed from available metadata and surfaced on
+					individual entries in the Tools catalogue, as aggregated views
+					(dashboards) in the Software Observatory, and as tool-level
 					assessments through the FAIRsoft Evaluator.
 				</p>
 
@@ -129,10 +135,10 @@
 				<div class="section-title">For developers</div>
 
 				<p class="text-body-2 mb-4">
-					If you want to integrate the Observatory into your own workflows, you
-					can access metadata and evaluation results via the REST APIs and
-					follow the programmatic evaluation documentation for computing
-					FAIRsoft indicators.
+					If you want to integrate this software metadata into your own
+					workflows, you can access the records and evaluation results via the
+					REST APIs and follow the programmatic evaluation documentation for
+					computing FAIRsoft indicators.
 				</p>
 
 				<v-row dense class="mb-4">
@@ -204,9 +210,16 @@
 								</div>
 							</div>
 							<div class="text-body-2 mb-3">
-								Learn how to compute FAIRsoft indicators programmatically using
-								the Observatory APIs. Includes guides for evaluating GitHub
-								repositories and existing metadata.
+								Learn how to compute FAIRsoft indicators programmatically,
+								either through the Observatory APIs or with the
+								<a
+									href="https://github.com/inab/fairsoft-core"
+									target="_blank"
+									rel="noopener noreferrer"
+									>fairsoft-core</a
+								>
+								library. Includes guides for evaluating GitHub repositories and
+								existing metadata.
 							</div>
 							<div class="text-body-2 dev-card-link">
 								<a
@@ -276,8 +289,7 @@
 
 <script>
 export default {
-	name: 'About',
-	layout: 'observatory',
+	name: 'SoftwarePage',
 	data() {
 		return {
 			pipelineIllustration: require('~/static/images/observatory/pipeline.png'),
@@ -286,24 +298,20 @@ export default {
 					text: 'Home',
 					disabled: false,
 					exact: true,
-					to: 'https://openebench.bsc.es/',
-				},
-				{
-					text: 'Observatory',
-					disabled: false,
-					exact: true,
-					to: '/observatory',
+					to: '/',
 				},
 				{
 					text: 'About',
 					disabled: true,
-					exact: true,
-					to: '/observatory/About',
+				},
+				{
+					text: 'Software',
+					disabled: true,
 				},
 			],
 		};
 	},
-	mounted() {
+	beforeMount() {
 		this.$parent.$emit('emitBreadcrumbs', this.breadcrumbs);
 	},
 };

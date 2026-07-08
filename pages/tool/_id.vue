@@ -226,9 +226,22 @@ export default {
 		hasSimilarSoftware() {
 			return this.loadingSimilar || this.similarTools.length > 0;
 		},
-		// Whether the documentation section should be shown
+		// Whether the documentation section should be shown. The card renders
+		// Documents (documentation entries with a URL), Related topics and
+		// Function (operations); a documentation entry that only carries inline
+		// `content` (no URL) renders nothing, so it must not, on its own, show
+		// the card.
 		hasDocumentation() {
-			return (this.tool?.documentation || []).length > 0;
+			const hasDocuments = (this.tool?.documentation || []).some(
+				(doc) => doc.term?.url
+			);
+			const hasTopics = (this.tool?.topics || []).some(
+				(topic) => topic.term?.term
+			);
+			const hasOperations = (this.tool?.operations || []).some(
+				(operation) => operation.term?.term
+			);
+			return hasDocuments || hasTopics || hasOperations;
 		},
 		// Sections to render, hiding cards that have no information
 		items() {
@@ -345,12 +358,29 @@ export default {
 		...mapActions('tool_entry', ['retrieveSimilarTools']),
 
 		async loadTool(toolParam) {
-			// Split "name-id" → extract the id (last segment after final dash)
+			// Canonical slug is "name-id" where id is a 24-char Mongo ObjectId.
+			const OBJECT_ID_RE = /^[a-f\d]{24}$/i;
 			const lastDash = toolParam.lastIndexOf('-');
-			const toolId =
-				lastDash !== -1 ? toolParam.slice(lastDash + 1) : toolParam;
-			const toolName =
-				lastDash !== -1 ? toolParam.slice(0, lastDash) : toolParam;
+			const tail = lastDash !== -1 ? toolParam.slice(lastDash + 1) : '';
+
+			// Name-only URL (no ObjectId suffix, e.g. legacy /tool/<biotools-name>):
+			// resolve the id, then redirect to the canonical /tool/<name>-<id> slug.
+			if (!OBJECT_ID_RE.test(tail)) {
+				const id = await this.$store.dispatch('tool_entry/resolveToolId', {
+					name: toolParam,
+					source: 'biotools',
+				});
+				if (id) {
+					this.$router.replace(`/tool/${toolParam}-${id}`);
+				} else {
+					this.$nuxt.error({ statusCode: 404, message: 'Tool not found' });
+				}
+				return;
+			}
+
+			// Canonical slug "name-id": load directly by id.
+			const toolId = tail;
+			const toolName = toolParam.slice(0, lastDash);
 
 			try {
 				const found = await this.$store.dispatch('tool_entry/retrieveTool', {
@@ -553,6 +583,35 @@ export default {
 	.tool-brief-wrapper {
 		left: calc(50% - 704px); /* mismo que .fixed-card en wide */
 		width: calc(100% - (50% - 704px));
+	}
+}
+
+/* Medium-wide (e.g. 14" laptops ~1512px): not enough room to center the 960px
+   card AND hug the FAIR panel to its right edge (that needs 1600px). Instead,
+   stop centering: keep the nav in the left gutter, pin the FAIR panel to the
+   right gutter, and let the content reflow between them so the scores stay
+   visible. Placed after the 1450/1600 rules so it overrides them in this band. */
+@media (min-width: 1400px) and (max-width: 1599.98px) {
+	#main-container {
+		padding-left: 300px; /* clear the fixed left nav (64 + 200 + gap) */
+		padding-right: 320px; /* reserve the right gutter for the FAIR panel */
+	}
+
+	.fixed-card {
+		left: auto;
+		margin-left: 64px !important;
+	}
+
+	.tool-brief-wrapper {
+		left: 0;
+		width: 100%;
+	}
+
+	.fair-fixed {
+		display: flex;
+		left: auto;
+		right: 24px;
+		width: 280px;
 	}
 }
 

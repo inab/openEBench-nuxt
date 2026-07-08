@@ -32,12 +32,6 @@ const subMenuEntriesObservatory = [
 		to: '/observatory/Data',
 		icon: 'mdi-database-outline',
 	},
-	{
-		title: 'About',
-		title_hide: 'Observatory About',
-		to: '/observatory/About',
-		icon: 'mdi-information-outline',
-	},
 ];
 
 export default subMenuEntriesObservatory;

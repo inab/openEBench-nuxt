@@ -158,9 +158,7 @@
 				Learn more about the Observatory methodology, data sources, FAIRsoft
 				indicators, and developer resources on the
 
-				<router-link to="/observatory/About" class="linkish">
-					About page </router-link
-				>.
+				<router-link to="/software" class="linkish"> About page </router-link>.
 			</div>
 		</v-container>
 	</div>

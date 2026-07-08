@@ -67,6 +67,13 @@ export default {
 				'It seems you are trying to reach a software entry that does not exist.',
 		};
 	},
+	head() {
+		const title =
+			this.error.statusCode === 404 ? this.pageNotFound : this.otherError;
+		return {
+			title,
+		};
+	},
 	computed: {
 		// Show the catalogue shortcut only for tool routes (e.g. /tool/<unknown-id>).
 		isToolRoute() {
@@ -76,13 +83,6 @@ export default {
 		notFoundMessage() {
 			return this.isToolRoute ? this.toolNotFound : this.pageNotFound;
 		},
-	},
-	head() {
-		const title =
-			this.error.statusCode === 404 ? this.pageNotFound : this.otherError;
-		return {
-			title,
-		};
 	},
 };
 </script>

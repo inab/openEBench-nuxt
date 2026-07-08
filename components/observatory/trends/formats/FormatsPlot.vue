@@ -21,10 +21,6 @@ export default {
 		},
 	},
 
-	mounted() {
-		this.drawPlot();
-	},
-
 	watch: {
 		data: {
 			handler() {
@@ -35,6 +31,10 @@ export default {
 		color() {
 			this.drawPlot();
 		},
+	},
+
+	mounted() {
+		this.drawPlot();
 	},
 
 	beforeDestroy() {

@@ -34,3 +34,11 @@ export default {
 	},
 };
 </script>
+
+<style scoped>
+::v-deep .back-to-top {
+	right: auto;
+	left: 24px;
+	bottom: 56px;
+}
+</style>

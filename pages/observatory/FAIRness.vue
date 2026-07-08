@@ -74,8 +74,8 @@
 			<v-col md="9" sm="9" cols="9" lg="9" xl="9">
 				<v-row justify="center" class="my-4 mt-0 mb-0">
 					<v-chip-group
-						class="mb-0 mt-0 pb-0 pt-0"
 						v-model="selected"
+						class="mb-0 mt-0 pb-0 pt-0"
 						active-class="primary--text"
 						mandatory
 						column
