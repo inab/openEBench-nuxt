@@ -49,6 +49,7 @@
 				:data-traces="computedTraces"
 				:colors="computedColors"
 				:showlegend="mode === 'merge' ? false : showlegend"
+				:line="computedLine"
 			/>
 		</template>
 	</div>
@@ -101,6 +102,10 @@ export default {
 			if (this.mode === 'merge') return ['#37474F'];
 			return this.colors;
 		},
+		computedLine() {
+			if (this.mode === 'merge') return { dash: 'dot', width: 2 };
+			return { dash: 'solid', width: 1.8 }; // o el estilo normal que uses
+		},
 	},
 	methods: {
 		buildCumulative() {
@@ -132,6 +137,7 @@ export default {
 					label: 'All publications',
 					title: 'All publications',
 					data: mergedData,
+					line: { dash: 'dot', width: 2 },
 				},
 			];
 		},
