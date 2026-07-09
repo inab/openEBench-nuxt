@@ -358,12 +358,29 @@ export default {
 		...mapActions('tool_entry', ['retrieveSimilarTools']),
 
 		async loadTool(toolParam) {
-			// Split "name-id" → extract the id (last segment after final dash)
+			// Canonical slug is "name-id" where id is a 24-char Mongo ObjectId.
+			const OBJECT_ID_RE = /^[a-f\d]{24}$/i;
 			const lastDash = toolParam.lastIndexOf('-');
-			const toolId =
-				lastDash !== -1 ? toolParam.slice(lastDash + 1) : toolParam;
-			const toolName =
-				lastDash !== -1 ? toolParam.slice(0, lastDash) : toolParam;
+			const tail = lastDash !== -1 ? toolParam.slice(lastDash + 1) : '';
+
+			// Name-only URL (no ObjectId suffix, e.g. legacy /tool/<biotools-name>):
+			// resolve the id, then redirect to the canonical /tool/<name>-<id> slug.
+			if (!OBJECT_ID_RE.test(tail)) {
+				const id = await this.$store.dispatch('tool_entry/resolveToolId', {
+					name: toolParam,
+					source: 'biotools',
+				});
+				if (id) {
+					this.$router.replace(`/tool/${toolParam}-${id}`);
+				} else {
+					this.$nuxt.error({ statusCode: 404, message: 'Tool not found' });
+				}
+				return;
+			}
+
+			// Canonical slug "name-id": load directly by id.
+			const toolId = tail;
+			const toolName = toolParam.slice(0, lastDash);
 
 			try {
 				const found = await this.$store.dispatch('tool_entry/retrieveTool', {
