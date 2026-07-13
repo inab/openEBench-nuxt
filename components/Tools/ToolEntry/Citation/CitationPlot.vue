@@ -1,30 +1,64 @@
 <template>
 	<div style="border-top: 1px solid rgba(0, 0, 0, 8%); padding-top: 12px">
 		<template>
-			<!-- Botones -->
 			<!-- Botones + Mensaje -->
-			<div class="d-flex align-center justify-space-between mb-2 mt-5 mx-5">
-				<div class="d-flex" style="gap: 30px">
-					<v-btn
-						v-if="showCumulativeButton"
-						small
-						rounded
-						tonal
-						:color="mode === 'cumulative' ? 'primary' : ''"
-						@click="mode = mode === 'cumulative' ? 'normal' : 'cumulative'"
-					>
-						Cumulative
-					</v-btn>
-					<v-btn
-						v-if="dataTraces.length > 1"
-						small
-						rounded
-						tonal
-						:color="mode === 'merge' ? 'primary' : ''"
-						@click="mode = mode === 'merge' ? 'normal' : 'merge'"
-					>
-						Merge all publication counts
-					</v-btn>
+			<div class="d-flex align-center justify-space-between mb-2 mt-5 mx-3">
+				<div class="d-flex" style="gap: 20px">
+					<v-tooltip v-if="showCumulativeButton" bottom>
+						<template #activator="{ on, attrs }">
+							<v-btn
+								v-bind="attrs"
+								v-on="on"
+								small
+								rounded
+								tonal
+								:color="cumulativeActive ? 'primary' : ''"
+								:aria-pressed="cumulativeActive"
+								@click="cumulativeActive = !cumulativeActive"
+							>
+								<span
+									v-if="cumulativeActive"
+									class="mdi mdi-radiobox-marked"
+									style="font-size: 15px; font-weight: 800; margin-right: 3px"
+								></span>
+								<span
+									v-if="!cumulativeActive"
+									class="mdi mdi-radiobox-blank"
+									style="font-size: 15px; margin-right: 3px"
+								></span>
+								Cumulative
+							</v-btn>
+						</template>
+						<span>{{ cumulativeTooltip }}</span>
+					</v-tooltip>
+
+					<v-tooltip v-if="dataTraces.length > 1" bottom>
+						<template #activator="{ on, attrs }">
+							<v-btn
+								v-bind="attrs"
+								v-on="on"
+								small
+								rounded
+								tonal
+								:color="mergeActive ? 'primary' : ''"
+								:aria-pressed="mergeActive"
+								@click="mergeActive = !mergeActive"
+							>
+								<span
+									v-if="mergeActive"
+									class="mdi mdi-radiobox-marked"
+									style="font-size: 15px; font-weight: 800; margin-right: 3px"
+								></span>
+								<span
+									v-if="!mergeActive"
+									class="mdi mdi-radiobox-blank"
+									style="font-size: 15px; margin-right: 3px"
+								></span>
+								Merge all publication counts
+							</v-btn>
+						</template>
+						<span>{{ mergeTooltip }}</span>
+					</v-tooltip>
 				</div>
 
 				<div
@@ -34,8 +68,7 @@
 						gap: 6px;
 						font-size: 0.9rem;
 						color: rgba(0, 0, 0, 45%);
-						margin-top: 8px;
-						margin-right: 35px;
+						margin-top: 4px;
 					"
 				>
 					<i class="fas fa-info-circle" style="font-size: 12px"></i>
@@ -45,10 +78,10 @@
 
 			<!-- Plot -->
 			<citationsPlot
-				:key="mode"
+				:key="plotKey"
 				:data-traces="computedTraces"
 				:colors="computedColors"
-				:showlegend="mode === 'merge' ? false : showlegend"
+				:showlegend="mergeActive ? false : showlegend"
 				:line="computedLine"
 			/>
 		</template>
@@ -84,32 +117,60 @@ export default {
 	},
 	data() {
 		return {
-			mode: 'normal',
+			cumulativeActive: false,
+			mergeActive: false,
 		};
 	},
 	computed: {
+		plotKey() {
+			return `${this.cumulativeActive}-${this.mergeActive}`;
+		},
 		showCumulativeButton() {
 			return !(
 				this.dataTraces.length === 1 && this.dataTraces[0].data.length === 1
 			);
 		},
 		computedTraces() {
-			if (this.mode === 'cumulative') return this.buildCumulative();
-			if (this.mode === 'merge') return this.buildMerge();
-			return this.dataTraces;
+			let traces = this.mergeActive ? this.buildMerge() : this.dataTraces;
+
+			if (this.cumulativeActive) {
+				traces = this.buildCumulative(traces);
+			}
+
+			return traces;
 		},
 		computedColors() {
-			if (this.mode === 'merge') return ['#37474F'];
+			if (this.mergeActive) return ['#37474F'];
 			return this.colors;
 		},
 		computedLine() {
-			if (this.mode === 'merge') return { dash: 'dot', width: 2 };
-			return { dash: 'solid', width: 1.8 }; // o el estilo normal que uses
+			if (this.mergeActive) return { dash: 'dot', width: 2 };
+			return { dash: 'solid', width: 1.8 };
+		},
+		cumulativeTooltip() {
+			if (this.cumulativeActive) {
+				return this.mergeActive
+					? 'Show combined total, not accumulated'
+					: 'Show yearly values, not accumulated';
+			}
+			return this.mergeActive
+				? 'Accumulate the combined total'
+				: 'Accumulate each series over time';
+		},
+		mergeTooltip() {
+			if (this.mergeActive) {
+				return this.cumulativeActive
+					? 'Split into separate accumulated series'
+					: 'Split into separate series';
+			}
+			return this.cumulativeActive
+				? 'Combine into one cumulative line'
+				: 'Combine all series into one line';
 		},
 	},
 	methods: {
-		buildCumulative() {
-			return this.dataTraces.map((trace) => {
+		buildCumulative(traces) {
+			return traces.map((trace) => {
 				let acc = 0;
 				const cumulativeData = trace.data.map((d) => {
 					acc += d.citations;
