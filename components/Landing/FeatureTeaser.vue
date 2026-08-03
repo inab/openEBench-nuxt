@@ -31,7 +31,7 @@
 					<template #icon>
 						<v-icon dark>$vuetify.icons.values.observatory</v-icon>
 					</template>
-					<template #title> Tools Observatory </template>
+					<template #title> SW Observatory </template>
 					<template #description>
 						Quantitative monitoring of the technical quality of software in Life
 						Sciences</template
