@@ -27,5 +27,5 @@ jobs:
         uses: actions/add-to-project@v2
         continue-on-error: true
         with:
-          project-url: 'https://github.com/orgs/inab/projects/9'
+          project-url: 'https://github.com/orgs/inab/projects/3'
           github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
