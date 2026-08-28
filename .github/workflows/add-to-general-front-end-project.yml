@@ -1,9 +1,8 @@
-
 name: Auto Add to Org Projects
 
 on:
   issues:
-    types: 
+    types:
       - opened
       - assigned
       - reopened
@@ -14,7 +13,7 @@ on:
 
 permissions:
   issues: read
-  
+
 jobs:
   add-to-project:
     runs-on: ubuntu-latest
@@ -23,12 +22,12 @@ jobs:
         uses: actions/add-to-project@v2
         continue-on-error: true
         with:
-          project-url: 'https://github.com/orgs/inab/projects/6'
+          project-url: "https://github.com/orgs/inab/projects/6"
           github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
 
       - name: Add Issue to Specific Project Board
         uses: actions/add-to-project@v2
         continue-on-error: true
         with:
-          project-url: 'https://github.com/orgs/inab/projects/3'
+          project-url: "https://github.com/orgs/inab/projects/3"
           github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
