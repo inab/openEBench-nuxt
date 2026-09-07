@@ -28,7 +28,7 @@ ENV OBSERVATORY_API_URL $OBSERVATORY_API_URL
 ENV GITHUBAPP_API_URL $GITHUBAPP_API_URL
 ENV NODE_OPTIONS --openssl-legacy-provider
 COPY . .
-RUN npm ci
+RUN npm ci --ignore-scripts
 RUN npm run build
 RUN npm run generate
 #stage 2

@@ -246,11 +246,6 @@ export default {
 				component: resolve(__dirname, 'pages/tool/search'),
 			});
 			routes.push({
-				name: 'tool-entry',
-				path: '/tool/:name',
-				component: resolve(__dirname, 'pages/tool/_id.vue'),
-			});
-			routes.push({
 				name: 'post-github-app-install',
 				path: '/post-github-app-install',
 				component: resolve(
