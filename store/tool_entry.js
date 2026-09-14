@@ -38,10 +38,12 @@ export default {
 			commit('resetWebAvailability');
 			commit('updateSimilarTools', []);
 			try {
-				// Prefer fetching by id if available, fall back to name
+				// Prefer fetching by id if available, fall back to name.
+				// `documentation_status` adds URL availability to documentation
+				// items so the entry page can hide broken links.
 				const query = payload.id
-					? `/tools?id=${payload.id}`
-					: `/tools?name=${payload.name}`;
+					? `/tools?id=${payload.id}&documentation_status=true`
+					: `/tools?name=${payload.name}&documentation_status=true`;
 				const { data } = await this.$observatory.get(query);
 				// Treat an empty array / missing payload / object lacking a label
 				// (the field the entry page relies on) as "tool not found".

@@ -119,6 +119,7 @@ import LicenseContent from '~/components/Tools/ToolEntry/License/LicenseContent.
 import SimilarSoftwareContent from '~/components/Tools/ToolEntry/SimilarSoftware/SimilarSoftwareContent.vue';
 import FAIRScores from '~/components/Tools/ToolEntry/FAIR/FAIRScores.vue';
 import { pickDescription } from '~/utils/toolDescription';
+import { buildDocumentationChips } from '~/static/dictionaries/documentationTypes';
 
 // Tool ids are 24-char Mongo ObjectIds; the canonical URL is /tool/<id>.
 const OBJECT_ID_RE = /^[a-f\d]{24}$/i;
@@ -235,9 +236,8 @@ export default {
 		// `content` (no URL) renders nothing, so it must not, on its own, show
 		// the card.
 		hasDocumentation() {
-			const hasDocuments = (this.tool?.documentation || []).some(
-				(doc) => doc.term?.url
-			);
+			const hasDocuments =
+				buildDocumentationChips(this.tool?.documentation).length > 0;
 			const hasTopics = (this.tool?.topics || []).some(
 				(topic) => topic.term?.term
 			);
