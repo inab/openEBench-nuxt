@@ -354,7 +354,7 @@ export default {
 				delete query.q;
 			}
 			this.$store.commit('tool/updateReferrerFilters', query);
-			this.$router.push({ path: `/tool/${this.subname}-${this.id}` });
+			this.$router.push({ path: `/tool/${this.id}` });
 		},
 		extendDescription() {
 			this.descriptionCollapsed = !this.descriptionCollapsed;

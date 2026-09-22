@@ -5,7 +5,7 @@
 		<!-- Chips -->
 		<div class="chip-row">
 			<button
-				v-for="url in filteredWebpageTerms"
+				v-for="url in sortedWebpageTerms"
 				:key="url"
 				class="url-chip"
 				:class="{ active: selectedUrl === url }"
@@ -19,7 +19,7 @@
 		<!-- Panel — always visible -->
 		<div class="uptime-panel">
 			<v-skeleton-loader
-				v-if="webAvailabilityLoading"
+				v-if="statusesLoading || webAvailabilityLoading"
 				type="list-item-two-line, image"
 			/>
 			<template v-else>
@@ -104,6 +104,8 @@ export default {
 		return {
 			tabUptime: 0,
 			selectedUrl: null,
+			urlStatuses: {},
+			statusesLoading: false,
 		};
 	},
 	computed: {
@@ -134,6 +136,15 @@ export default {
 					return false;
 				}
 			});
+		},
+		// Available (UP) URLs first, then DOWN, no data and errors; stable otherwise
+		sortedWebpageTerms() {
+			const rank = { UP: 0, DOWN: 1, NODATA: 2, ERROR: 3 };
+			const rankOf = (url) => rank[this.urlStatuses[url]] ?? 4;
+			return this.filteredWebpageTerms
+				.map((url, index) => ({ url, index }))
+				.sort((a, b) => rankOf(a.url) - rankOf(b.url) || a.index - b.index)
+				.map(({ url }) => url);
 		},
 		ranges() {
 			return [
@@ -183,15 +194,32 @@ export default {
 	watch: {
 		filteredWebpageTerms: {
 			immediate: true,
-			handler(urls) {
-				if (urls.length) {
-					this.selectedUrl = urls[0];
-					this.$store.dispatch('tool_entry/retrieveWebAvailability', [
-						this.selectedUrl,
-					]);
-				} else {
+			async handler(urls) {
+				this.selectedUrl = null;
+				this.urlStatuses = {};
+				if (!urls.length) {
 					this.$store.commit('tool_entry/resetWebAvailability');
+					return;
 				}
+				this.statusesLoading = true;
+				try {
+					const statuses = await this.$store.dispatch(
+						'tool_entry/retrieveWebAvailabilityStatuses',
+						urls
+					);
+					// Ignore stale responses if the URL list changed meanwhile
+					if (urls !== this.filteredWebpageTerms) return;
+					this.urlStatuses = statuses || {};
+				} catch {
+					this.urlStatuses = {};
+				} finally {
+					if (urls === this.filteredWebpageTerms) this.statusesLoading = false;
+				}
+				if (urls !== this.filteredWebpageTerms || this.selectedUrl) return;
+				this.selectedUrl = this.sortedWebpageTerms[0];
+				this.$store.dispatch('tool_entry/retrieveWebAvailability', [
+					this.selectedUrl,
+				]);
 			},
 		},
 		availableRanges() {
@@ -214,7 +242,17 @@ export default {
 			this.$store.dispatch('tool_entry/retrieveWebAvailability', [url]);
 		},
 		dotClass(url) {
-			if (this.selectedUrl !== url) return 'dot-unknown';
+			if (this.selectedUrl !== url) {
+				if (this.statusesLoading) return 'dot-loading';
+				return (
+					{
+						UP: 'dot-up',
+						DOWN: 'dot-down',
+						NODATA: 'dot-nodata',
+						ERROR: 'dot-error',
+					}[this.urlStatuses[url]] || 'dot-unknown'
+				);
+			}
 			if (this.webAvailabilityLoading) return 'dot-loading';
 			if (this.webAvailabilityError) return 'dot-error';
 			if (this.webAvailabilityNoData) return 'dot-nodata';

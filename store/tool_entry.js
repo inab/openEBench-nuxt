@@ -9,6 +9,44 @@ function availabilityItems(payload) {
 	return Array.isArray(items) ? items : [];
 }
 
+const LEGACY_GALAXY_FREIBURG_HOST = 'galaxy.bi.uni-freiburg.de';
+
+// The Freiburg Galaxy server moved to usegalaxy.eu. Rewrite legacy links such as
+// https://galaxy.bi.uni-freiburg.de/tool_runner?tool_id=toolshed.g2.bx.psu.edu/repos/rnateam/intarna/intarna/2.2.0
+// to https://usegalaxy.eu/root?tool_id=intarna
+function fixGalaxyFreiburgUrl(url) {
+	let parsed;
+	try {
+		parsed = new URL(url);
+	} catch {
+		return url;
+	}
+	if (parsed.hostname.toLowerCase() !== LEGACY_GALAXY_FREIBURG_HOST) return url;
+
+	const toolId = parsed.searchParams.get('tool_id');
+	if (!toolId) return 'https://usegalaxy.eu/';
+
+	// Toolshed ids look like <toolshed>/repos/<owner>/<repo>/<tool_id>/<version>
+	const segments = toolId.split('/').filter(Boolean);
+	const reposIndex = segments.indexOf('repos');
+	const shortId =
+		reposIndex !== -1 && segments.length > reposIndex + 3
+			? segments[reposIndex + 3]
+			: toolId;
+
+	return `https://usegalaxy.eu/root?tool_id=${encodeURIComponent(shortId)}`;
+}
+
+function normalizeTool(tool) {
+	if (!tool || !Array.isArray(tool.webpage)) return tool;
+	return {
+		...tool,
+		webpage: tool.webpage.map((w) =>
+			w?.term ? { ...w, term: fixGalaxyFreiburgUrl(w.term) } : w
+		),
+	};
+}
+
 export default {
 	namespaced: true,
 	state: () => {
@@ -38,10 +76,12 @@ export default {
 			commit('resetWebAvailability');
 			commit('updateSimilarTools', []);
 			try {
-				// Prefer fetching by id if available, fall back to name
+				// Prefer fetching by id if available, fall back to name.
+				// `documentation_status` adds URL availability to documentation
+				// items so the entry page can hide broken links.
 				const query = payload.id
-					? `/tools?id=${payload.id}`
-					: `/tools?name=${payload.name}`;
+					? `/tools?id=${payload.id}&documentation_status=true`
+					: `/tools?name=${payload.name}&documentation_status=true`;
 				const { data } = await this.$observatory.get(query);
 				// Treat an empty array / missing payload / object lacking a label
 				// (the field the entry page relies on) as "tool not found".
@@ -50,7 +90,10 @@ export default {
 					commit('updateTool', {});
 					return false;
 				}
-				commit('updateTool', data);
+				commit(
+					'updateTool',
+					Array.isArray(data) ? data.map(normalizeTool) : normalizeTool(data)
+				);
 				return true;
 			} catch (error) {
 				commit('updateTool', {});
@@ -190,6 +233,33 @@ export default {
 					commit('updateWebAvailabilityLoading', false);
 				}
 			}
+		},
+
+		// Resolve the latest uptime status of each webpage using the week range.
+		// Returns a map { [url]: 'UP' | 'DOWN' | 'NODATA' | 'ERROR' }.
+		async retrieveWebAvailabilityStatuses(_, webpages) {
+			const entries = await Promise.all(
+				(webpages || []).filter(Boolean).map(async (webpage) => {
+					try {
+						const { data } = await this.$observatory.post(
+							'/web-availability/week',
+							{ url: webpage }
+						);
+						const items = availabilityItems(data);
+						if (!items.length) return [webpage, 'NODATA'];
+						const latest = items.reduce((a, b) =>
+							new Date(b.date) > new Date(a.date) ? b : a
+						);
+						if (latest?.code == null) return [webpage, 'NODATA'];
+						const up = latest.code >= 200 && latest.code < 400;
+						return [webpage, up ? 'UP' : 'DOWN'];
+					} catch (error) {
+						const is404 = error?.response?.status === 404;
+						return [webpage, is404 ? 'NODATA' : 'ERROR'];
+					}
+				})
+			);
+			return Object.fromEntries(entries);
 		},
 
 		updateEdamDialog({ commit }, payload) {

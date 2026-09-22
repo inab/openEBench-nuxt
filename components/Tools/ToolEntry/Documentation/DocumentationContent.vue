@@ -11,17 +11,31 @@
 			</v-col>
 			<v-col cols="9" class="pt-3 pb-3 d-flex flex-wrap" style="gap: 14px">
 				<v-chip
-					v-for="(item, i) in documents"
-					:key="i"
+					v-for="item in visibleDocuments"
+					:key="item.url"
 					label
 					color="grey lighten-3"
 					text-color="grey darken-3"
 					class="font-weight-medium"
-					:href="item.term.url"
+					:href="item.url"
 					target="_blank"
 					rel="noopener"
 				>
-					{{ item.term.type.charAt(0).toUpperCase() + item.term.type.slice(1) }}
+					{{ item.label }}
+				</v-chip>
+				<v-chip
+					v-if="documents.length > MAX_CHIPS"
+					label
+					color="grey lighten-3"
+					text-color="grey darken-3"
+					class="font-weight-medium"
+					@click="documentsExpanded = !documentsExpanded"
+				>
+					{{
+						documentsExpanded
+							? 'show less'
+							: `+${documents.length - MAX_CHIPS} more`
+					}}
 				</v-chip>
 			</v-col>
 		</v-row>
@@ -80,6 +94,7 @@
 <script>
 import { mapGetters } from 'vuex';
 import ItemChipMenu from './ItemChipMenu.vue';
+import { buildDocumentationChips } from '~/static/dictionaries/documentationTypes';
 
 export default {
 	name: 'DocumentationContent',
@@ -88,6 +103,8 @@ export default {
 	},
 	data() {
 		return {
+			MAX_CHIPS: 6,
+			documentsExpanded: false,
 			colorTopic: '#e0eaf3',
 			textColorTopic: '#0b579f',
 			colorOperation: '#e0eaf3',
@@ -99,18 +116,29 @@ export default {
 			tool: 'tool',
 			loading: 'loading',
 		}),
-		// Documentation entries that carry a link; entries with only inline
-		// `content` (no URL) render no chip, so they are excluded here.
+		// Linkable documentation entries, with their raw types folded onto a
+		// small set of display labels and duplicate URLs collapsed. Entries with
+		// only inline `content` (no URL) render no chip, so they are dropped.
 		documents() {
-			return (this.tool?.documentation || []).filter(
-				(d) => d.term && d.term.url
-			);
+			return buildDocumentationChips(this.tool?.documentation);
+		},
+		visibleDocuments() {
+			return this.documentsExpanded
+				? this.documents
+				: this.documents.slice(0, this.MAX_CHIPS);
 		},
 		topics() {
 			return (this.tool?.topics || []).filter((t) => t.term && t.term.term);
 		},
 		operations() {
 			return (this.tool?.operations || []).filter((o) => o.term && o.term.term);
+		},
+	},
+	watch: {
+		// The entry page keeps this component mounted across tool navigations,
+		// so an expanded row must not carry over to the next tool.
+		documents() {
+			this.documentsExpanded = false;
 		},
 	},
 };

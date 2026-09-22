@@ -30,7 +30,7 @@ ENV NODE_OPTIONS --openssl-legacy-provider
 
 COPY . .
 
-RUN npm ci
+RUN npm ci --ignore-scripts
 
 EXPOSE 3000
 

@@ -22,7 +22,7 @@
 		<div class="tool-brief-wrapper">
 			<ToolBrief
 				v-if="!introVisible && hasToolData"
-				:name="tool.label[0]"
+				:name="toolName"
 				:type="tool.type"
 				:version="tool.version"
 				:sources-labels="tool.sources_labels"
@@ -71,7 +71,7 @@
 					<v-card elevation="1" class="mt-0 mb-6 pa-5 content-cards">
 						<EntryIntro
 							ref="Intro"
-							:name="tool.label[0]"
+							:name="toolName"
 							:description="toolDescription"
 							:type="tool.type"
 							:version="tool.version"
@@ -118,7 +118,11 @@ import AvailabilityContent from '~/components/Tools/ToolEntry/Availability/Avail
 import LicenseContent from '~/components/Tools/ToolEntry/License/LicenseContent.vue';
 import SimilarSoftwareContent from '~/components/Tools/ToolEntry/SimilarSoftware/SimilarSoftwareContent.vue';
 import FAIRScores from '~/components/Tools/ToolEntry/FAIR/FAIRScores.vue';
-import { pickDescription } from '~/utils/toolDescription';
+import { pickToolName, pickToolDescription } from '~/utils/toolDescription';
+import { buildDocumentationChips } from '~/static/dictionaries/documentationTypes';
+
+// Tool ids are 24-char Mongo ObjectIds; the canonical URL is /tool/<id>.
+const OBJECT_ID_RE = /^[a-f\d]{24}$/i;
 
 export default {
 	name: 'ToolEntry',
@@ -185,6 +189,11 @@ export default {
 			similarTools: 'similarTools',
 			loadingSimilar: 'loadingSimilar',
 		}),
+		// Name shown in the header, brief and breadcrumb: the API's curated
+		// `preferred_label`, falling back to the first `label` entry.
+		toolName() {
+			return pickToolName(this.tool);
+		},
 		// Whether the tool has loaded with renderable data. The template reads
 		// tool.label[0] / tool.description[0].term directly, so we must not render
 		// the content (or flip out of the skeleton) until those fields exist —
@@ -232,9 +241,8 @@ export default {
 		// `content` (no URL) renders nothing, so it must not, on its own, show
 		// the card.
 		hasDocumentation() {
-			const hasDocuments = (this.tool?.documentation || []).some(
-				(doc) => doc.term?.url
-			);
+			const hasDocuments =
+				buildDocumentationChips(this.tool?.documentation).length > 0;
 			const hasTopics = (this.tool?.topics || []).some(
 				(topic) => topic.term?.term
 			);
@@ -294,17 +302,16 @@ export default {
 			}
 
 			crumbs.push({
-				text: this.loading
-					? '...'
-					: this.tool.label?.[0] || this.$route.params.id,
+				text: this.loading ? '...' : this.toolName || 'Tool',
 				disabled: true,
 			});
 			return crumbs;
 		},
 		// Get other description in documentation Help.
 		toolDescription() {
-			// Caso normal — prefer the first non-markdown description entry.
-			const description = pickDescription(this.tool?.description);
+			// Caso normal — the API's curated `preferred_description`, or else the
+			// first non-markdown entry of the description array.
+			const description = pickToolDescription(this.tool);
 
 			if (description) {
 				return description;
@@ -341,8 +348,6 @@ export default {
 	},
 
 	beforeMount() {
-		// Get name and type from URL
-		// this.$store.dispatch('tool/setToolName', this.$route.params.name)
 		this.loadTool(this.$route.params.id);
 	},
 
@@ -358,34 +363,37 @@ export default {
 		...mapActions('tool_entry', ['retrieveSimilarTools']),
 
 		async loadTool(toolParam) {
-			// Canonical slug is "name-id" where id is a 24-char Mongo ObjectId.
-			const OBJECT_ID_RE = /^[a-f\d]{24}$/i;
-			const lastDash = toolParam.lastIndexOf('-');
-			const tail = lastDash !== -1 ? toolParam.slice(lastDash + 1) : '';
+			if (!toolParam) {
+				this.$nuxt.error({ statusCode: 404, message: 'Tool not found' });
+				return;
+			}
 
-			// Name-only URL (no ObjectId suffix, e.g. legacy /tool/<biotools-name>):
-			// resolve the id, then redirect to the canonical /tool/<name>-<id> slug.
-			if (!OBJECT_ID_RE.test(tail)) {
+			// Legacy URLs are redirected to the canonical /tool/<id>.
+			if (!OBJECT_ID_RE.test(toolParam)) {
+				// Legacy "<name>-<id>" slug: keep the id, drop the name.
+				const lastDash = toolParam.lastIndexOf('-');
+				const tail = lastDash !== -1 ? toolParam.slice(lastDash + 1) : '';
+				if (OBJECT_ID_RE.test(tail)) {
+					this.$router.replace(`/tool/${tail}`);
+					return;
+				}
+
+				// Name-only URL (e.g. legacy /tool/<biotools-name>): resolve the id.
 				const id = await this.$store.dispatch('tool_entry/resolveToolId', {
 					name: toolParam,
 					source: 'biotools',
 				});
 				if (id) {
-					this.$router.replace(`/tool/${toolParam}-${id}`);
+					this.$router.replace(`/tool/${id}`);
 				} else {
 					this.$nuxt.error({ statusCode: 404, message: 'Tool not found' });
 				}
 				return;
 			}
 
-			// Canonical slug "name-id": load directly by id.
-			const toolId = tail;
-			const toolName = toolParam.slice(0, lastDash);
-
 			try {
 				const found = await this.$store.dispatch('tool_entry/retrieveTool', {
-					name: toolName,
-					id: toolId,
+					id: toolParam,
 				});
 				if (found === false) {
 					this.$nuxt.error({ statusCode: 404, message: 'Tool not found' });

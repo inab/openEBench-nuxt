@@ -26,7 +26,7 @@ ENV KEYCLOAK_CLIENT_ID $KEYCLOAK_CLIENT_ID
 ENV OBSERVATORY_API_URL $OBSERVATORY_API_URL
 ENV NODE_OPTIONS --openssl-legacy-provider
 COPY . .
-RUN npm ci
+RUN npm ci --ignore-scripts
 RUN npm run build
 RUN npm run generate
 #stage 2
