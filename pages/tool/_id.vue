@@ -22,7 +22,7 @@
 		<div class="tool-brief-wrapper">
 			<ToolBrief
 				v-if="!introVisible && hasToolData"
-				:name="tool.label[0]"
+				:name="toolName"
 				:type="tool.type"
 				:version="tool.version"
 				:sources-labels="tool.sources_labels"
@@ -71,7 +71,7 @@
 					<v-card elevation="1" class="mt-0 mb-6 pa-5 content-cards">
 						<EntryIntro
 							ref="Intro"
-							:name="tool.label[0]"
+							:name="toolName"
 							:description="toolDescription"
 							:type="tool.type"
 							:version="tool.version"
@@ -118,7 +118,7 @@ import AvailabilityContent from '~/components/Tools/ToolEntry/Availability/Avail
 import LicenseContent from '~/components/Tools/ToolEntry/License/LicenseContent.vue';
 import SimilarSoftwareContent from '~/components/Tools/ToolEntry/SimilarSoftware/SimilarSoftwareContent.vue';
 import FAIRScores from '~/components/Tools/ToolEntry/FAIR/FAIRScores.vue';
-import { pickDescription } from '~/utils/toolDescription';
+import { pickToolName, pickToolDescription } from '~/utils/toolDescription';
 import { buildDocumentationChips } from '~/static/dictionaries/documentationTypes';
 
 // Tool ids are 24-char Mongo ObjectIds; the canonical URL is /tool/<id>.
@@ -189,6 +189,11 @@ export default {
 			similarTools: 'similarTools',
 			loadingSimilar: 'loadingSimilar',
 		}),
+		// Name shown in the header, brief and breadcrumb: the API's curated
+		// `preferred_label`, falling back to the first `label` entry.
+		toolName() {
+			return pickToolName(this.tool);
+		},
 		// Whether the tool has loaded with renderable data. The template reads
 		// tool.label[0] / tool.description[0].term directly, so we must not render
 		// the content (or flip out of the skeleton) until those fields exist —
@@ -297,15 +302,16 @@ export default {
 			}
 
 			crumbs.push({
-				text: this.loading ? '...' : this.tool.label?.[0] || 'Tool',
+				text: this.loading ? '...' : this.toolName || 'Tool',
 				disabled: true,
 			});
 			return crumbs;
 		},
 		// Get other description in documentation Help.
 		toolDescription() {
-			// Caso normal — prefer the first non-markdown description entry.
-			const description = pickDescription(this.tool?.description);
+			// Caso normal — the API's curated `preferred_description`, or else the
+			// first non-markdown entry of the description array.
+			const description = pickToolDescription(this.tool);
 
 			if (description) {
 				return description;
