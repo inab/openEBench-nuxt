@@ -42,6 +42,8 @@
 						label="YAML Content"
 						rows="15"
 						outlined
+						:error-messages="parseError"
+						@input="parseError = ''"
 						style="line-height: 0.9; font-size: 0.75rem; font-family: monospace"
 					></v-textarea>
 				</v-card-text>
@@ -65,7 +67,7 @@ import yaml from 'js-yaml';
 export default {
 	name: 'ViewCitation',
 	props: {
-		citation: Object,
+		citation: String, // YAML text
 	},
 	data() {
 		return {
@@ -79,6 +81,7 @@ export default {
 				iconText: 'Preview',
 			},
 			yamlContent: '',
+			parseError: '',
 		};
 	},
 	created() {
@@ -91,12 +94,21 @@ export default {
 		},
 		discardChanges() {
 			this.yamlContent = this.citation;
+			this.parseError = '';
 			this.dialog = false;
 		},
 		saveYaml() {
+			try {
+				yaml.load(this.yamlContent);
+			} catch (error) {
+				// keep the dialog open so the user can fix it
+				this.parseError = `Invalid YAML: ${error.message}`;
+				return;
+			}
+			// store the text: the download and the pull request use it as is
 			this.$store.dispatch(
 				'observatory/evaluation/metadata/updateToolMetadataCFF',
-				yaml.load(this.yamlContent)
+				this.yamlContent
 			);
 			this.dialog = false;
 		},

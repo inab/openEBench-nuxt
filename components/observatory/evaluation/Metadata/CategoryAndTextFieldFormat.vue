@@ -74,7 +74,14 @@ import { EDAMreversed } from './EDAM_forFE_reversed.js';
 
 export default {
 	name: 'CategoryAndTextFieldFormat',
-	props: ['item', 'index', 'field', 'vocabularyLabel', 'acceptedVocabularies'],
+	props: [
+		'id',
+		'item',
+		'index',
+		'field',
+		'vocabularyLabel',
+		'acceptedVocabularies',
+	],
 	data() {
 		return {
 			model: '',
@@ -130,7 +137,7 @@ export default {
 				field: this.field,
 				index: this.index,
 				value: {
-					id: this.index,
+					id: this.id,
 					term: {
 						term: this.model,
 						uri: this.modelURI,

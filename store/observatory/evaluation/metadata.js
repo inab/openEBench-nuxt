@@ -32,7 +32,10 @@
 export const state = () => ({
 	_toolMetadata: {},
 	_toolMetadataJSONLD: {},
-	_toolMetadataCFF: {},
+	_toolMetadataCFF: '', // YAML text
+	// messages shown in the results step when the transformations fail
+	_JSONLDError: '',
+	_CFFError: '',
 	_LoadedMetadata: false,
 	_SPDXLicenses: [],
 	_VocabulariesItems: {
@@ -68,7 +71,18 @@ export const getters = {
 	getToolMetadataCFF(state) {
 		return state._toolMetadataCFF;
 	},
+	getJSONLDError(state) {
+		return state._JSONLDError;
+	},
+	getCFFError(state) {
+		return state._CFFError;
+	},
 };
+
+function requestErrorMessage(error) {
+	// the API sends the reason in `detail`
+	return error.response?.data?.detail || error.message;
+}
 
 // actions
 
@@ -76,29 +90,39 @@ export const actions = {
 	async fetchSPDXLicenses({ commit, _state }) {
 		const URL = 'spdx/SPDXLicenses';
 
-		const SPDXLicenses = await this.cache.dispatch(
-			'observatory/evaluation/metadata/GET_URL',
-			URL
-		);
+		// on failure the license field still accepts free text
+		try {
+			const SPDXLicenses = await this.cache.dispatch(
+				'observatory/evaluation/metadata/GET_URL',
+				URL
+			);
 
-		commit('setSPDXLicenses', SPDXLicenses);
+			commit('setSPDXLicenses', SPDXLicenses);
+		} catch (error) {
+			console.error('Error fetching SPDX licenses:', error);
+		}
 	},
 
 	// better generate once and read from json file or js file
 	async getVocabulariesItems({ commit, _state }) {
 		const URL = 'edam/EDAMTerms';
 
-		const EDAMTerms = await this.cache.dispatch(
-			'observatory/evaluation/metadata/GET_URL',
-			URL
-		);
+		// on failure the term fields still accept free text
+		try {
+			const EDAMTerms = await this.cache.dispatch(
+				'observatory/evaluation/metadata/GET_URL',
+				URL
+			);
 
-		const payload = {
-			key: 'EDAM', // type of term
-			items: EDAMTerms, // list of terms
-		};
+			const payload = {
+				key: 'EDAM', // type of term
+				items: EDAMTerms, // list of terms
+			};
 
-		commit('setVocabulariesItems', payload);
+			commit('setVocabulariesItems', payload);
+		} catch (error) {
+			console.error('Error fetching EDAM terms:', error);
+		}
 	},
 
 	async GET_URL({ _commit, _state }, URL) {
@@ -169,12 +193,24 @@ export const actions = {
 			url: '/tools/jsonld',
 		};
 
-		const result = await this.dispatch(
-			'observatory/evaluation/metadata/POST_URL',
-			payload
-		);
+		// clear the previous tool's JSON-LD so it can't be exported by mistake
+		commit('setMetadataJSONLD', {});
+		commit('setJSONLDError', '');
 
-		commit('setMetadataJSONLD', result);
+		try {
+			const result = await this.dispatch(
+				'observatory/evaluation/metadata/POST_URL',
+				payload
+			);
+
+			commit('setMetadataJSONLD', result);
+		} catch (error) {
+			console.error('Error transforming metadata to JSON-LD:', error);
+			commit(
+				'setJSONLDError',
+				`The JSON-LD file could not be generated: ${requestErrorMessage(error)}`
+			);
+		}
 	},
 
 	async transformToCFF({ commit, state }) {
@@ -185,12 +221,26 @@ export const actions = {
 			url: '/tools/cff',
 		};
 
-		const result = await this.dispatch(
-			'observatory/evaluation/metadata/POST_URL',
-			payload
-		);
+		// clear the previous tool's CFF so it can't be exported by mistake
+		commit('setMetadataCFF', '');
+		commit('setCFFError', '');
 
-		commit('setMetadataCFF', result);
+		try {
+			const result = await this.dispatch(
+				'observatory/evaluation/metadata/POST_URL',
+				payload
+			);
+
+			commit('setMetadataCFF', result);
+		} catch (error) {
+			console.error('Error transforming metadata to CFF:', error);
+			commit(
+				'setCFFError',
+				`The citation file could not be generated: ${requestErrorMessage(
+					error
+				)}`
+			);
+		}
 	},
 
 	async POST_URL({ _commit, _state }, payload) {
@@ -249,6 +299,14 @@ export const mutations = {
 		state._toolMetadataCFF = payload;
 	},
 
+	setJSONLDError(state, message) {
+		state._JSONLDError = message;
+	},
+
+	setCFFError(state, message) {
+		state._CFFError = message;
+	},
+
 	addField(state, payload) {
 		state._toolMetadata[payload.field] = payload.value;
 	},
@@ -260,11 +318,8 @@ export const mutations = {
 	},
 
 	changeEntry(state, payload) {
-		// remove item to force update of reactive properties depending on it
-		// state._toolMetadata[payload.field].splice(payload.index, 1);
-		// add the new value
-
-		state._toolMetadata[payload.field][payload.index] = payload.value;
+		// splice instead of index assignment so Vue 2 detects the change
+		state._toolMetadata[payload.field].splice(payload.index, 1, payload.value);
 	},
 	changeSelectorEntry(state, payload) {
 		// remove item to force update of reactive properties depending on it

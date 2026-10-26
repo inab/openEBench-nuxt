@@ -49,7 +49,16 @@ export const actions = {
 			title: payload.title,
 			message: payload.message,
 		};
-		const response = await this.$githubapp.$post(URL, parameters);
+		let response;
+		try {
+			response = await this.$githubapp.$post(URL, parameters);
+		} catch (error) {
+			// $post throws on non-2xx responses
+			console.error('Error creating pull request:', error);
+			response = {
+				message: error.response?.data?.message || error.message,
+			};
+		}
 		console.debug(response);
 		if (response.code === 200) {
 			commit('setOkURL', response.url);

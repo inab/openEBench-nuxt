@@ -542,6 +542,7 @@ export default {
 	data() {
 		return {
 			versionControl: false,
+			version: [],
 			open_panels: [],
 			selectedType: '',
 			selectedVersion: '',
@@ -645,6 +646,10 @@ export default {
 			);
 		},
 	},
+	created() {
+		// set before children mount: MetaVersionCombo reads `selected` only once
+		this.version = this.initialVersion();
+	},
 	mounted() {
 		// populate vocabularies.
 		this.$store.dispatch(
@@ -656,8 +661,6 @@ export default {
 
 		// set version control
 		this.versionControl = this.initialVersionControl();
-
-		this.version = this.initialVersion();
 	},
 	methods: {
 		visibleTicks(i) {

@@ -5,6 +5,8 @@ export const state = () => ({
 	_FAIRIndicatorsFeedback: null,
 	_FAIRIndicatorsControl: null,
 	_LoadingEvaluation: false,
+	// message shown in the results step when the evaluation request fails
+	_evaluationError: '',
 });
 
 // getters
@@ -24,6 +26,9 @@ export const getters = {
 	getLoadingEvaluation(state) {
 		return state._LoadingEvaluation;
 	},
+	getEvaluationError(state) {
+		return state._evaluationError;
+	},
 };
 
 // actions
@@ -32,16 +37,26 @@ export const actions = {
 		const URL = '/fair/evaluateId';
 
 		commit('setLoading', { evaluation: true });
+		commit('setEvaluationError', '');
 
 		const data = { id: tooId };
 
-		const result = await this.dispatch(
-			'observatory/evaluation/results/POST_EV_ID',
-			{ url: URL, data }
-		);
+		try {
+			const result = await this.dispatch(
+				'observatory/evaluation/results/POST_EV_ID',
+				{ url: URL, data }
+			);
 
-		commit('setFAIRIndicatorsToolResult', result);
-		console.debug(result);
+			commit('setFAIRIndicatorsToolResult', result);
+			console.debug(result);
+		} catch (error) {
+			console.error('Error evaluating tool:', error);
+			commit('setFAIRIndicatorsToolResult', {});
+			commit(
+				'setEvaluationError',
+				`The evaluation could not be completed: ${error.message}`
+			);
+		}
 		commit('setLoading', { evaluation: false });
 	},
 
@@ -49,6 +64,7 @@ export const actions = {
 		const URL = '/fair/evaluate';
 
 		commit('setLoading', { evaluation: true });
+		commit('setEvaluationError', '');
 
 		const payload = {
 			request_url: URL,
@@ -72,6 +88,10 @@ export const actions = {
 			commit('setFAIRIndicatorsToolResult', emptyResult);
 
 			console.error('Error evaluating tool:', error);
+			commit(
+				'setEvaluationError',
+				`The evaluation could not be completed: ${error.message}`
+			);
 			commit('setLoading', { evaluation: false });
 		}
 	},
@@ -133,5 +153,8 @@ export const mutations = {
 	},
 	setLoading(state, payload) {
 		state._LoadingEvaluation = payload.evaluation;
+	},
+	setEvaluationError(state, message) {
+		state._evaluationError = message;
 	},
 };

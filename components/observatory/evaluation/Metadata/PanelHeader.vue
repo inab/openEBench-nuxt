@@ -1,6 +1,6 @@
 <template>
 	<v-row class="ml-1 mt-1 mb-1" justify="space-between">
-		<span class="text-h5 title"> {{ title }}</span>
+		<span class="text-h5 panel-title"> {{ title }}</span>
 		<div v-if="visible_ticks" class="align-self-center text-right mr-6">
 			<HeaderAvatar
 				v-for="(item, index) in fields"
@@ -28,7 +28,7 @@ export default {
 };
 </script>
 <style scoped>
-.title {
+.panel-title {
 	font-weight: 500;
 	font-size: 1rem !important;
 }
