@@ -3,6 +3,7 @@ import colors from 'vuetify/es5/util/colors';
 
 const SITE_TITLE =
 	'OpenEBench - The ELIXIR gateway to benchmarking communities, software monitoring, and quality metrics';
+const SHARE_TITLE = 'OpenEBench - ELIXIR benchmarking gateway';
 const SITE_DESCRIPTION =
 	'OpenEBench is the ELIXIR gateway to benchmarking communities, software monitoring, and quality metrics for life sciences tools and workflows.';
 // Social crawlers need an absolute URL and do not run JS
@@ -60,7 +61,7 @@ export default {
 			{ name: 'format-detection', content: 'telephone=no' },
 			{ hid: 'og:site_name', property: 'og:site_name', content: 'OpenEBench' },
 			{ hid: 'og:type', property: 'og:type', content: 'website' },
-			{ hid: 'og:title', property: 'og:title', content: SITE_TITLE },
+			{ hid: 'og:title', property: 'og:title', content: SHARE_TITLE },
 			{
 				hid: 'og:description',
 				property: 'og:description',
@@ -79,7 +80,7 @@ export default {
 				name: 'twitter:card',
 				content: 'summary',
 			},
-			{ hid: 'twitter:title', name: 'twitter:title', content: SITE_TITLE },
+			{ hid: 'twitter:title', name: 'twitter:title', content: SHARE_TITLE },
 			{
 				hid: 'twitter:description',
 				name: 'twitter:description',
