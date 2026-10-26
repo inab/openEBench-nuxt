@@ -63,8 +63,6 @@ export default {
 <style scoped>
 #layout-container {
 	padding-top: 0 !important;
-	overflow: auto;
-	height: 100vh;
 }
 
 #layout-container.is-loading {
