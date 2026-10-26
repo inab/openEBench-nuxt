@@ -61,7 +61,7 @@ export default {
 			},
 			layout: {
 				yaxis: {
-					title: 'Number of instances',
+					title: 'Number of software',
 				},
 				xaxis: {
 					title: 'License Family/Type',
@@ -91,19 +91,18 @@ export default {
 				this.licenses_copyleft,
 				this.counts_copyleft,
 				'Copyleft',
-				'#eb9b34',
+				'#233757',
 				'#ffffff',
 				this.labs
 			);
 			return trace1;
 		},
-
 		trace2() {
 			const trace2 = this.build_trace(
 				this.licenses_permissive,
 				this.counts_permissive,
 				'Permissive',
-				'#ffd299',
+				'#568bdb',
 				'#ffffff',
 				this.labs
 			);
@@ -115,7 +114,7 @@ export default {
 				this.licenses_data,
 				this.counts_data,
 				'Data',
-				'#bfbfbf',
+				'#a2c3f5',
 				'#ffffff',
 				this.labs
 			);
@@ -158,7 +157,7 @@ export default {
 					return (c = (c / y.reduce((a, b) => a + b)) * 100);
 				}),
 				hovertemplate:
-					'%{x} <br> %{y:,d} instances <br> %{customdata:.1f}% of OpenSource <extra></extra>',
+					'%{x} <br> %{y:,d} software <br> %{customdata:.1f}% of OpenSource <extra></extra>',
 				marker: {
 					color,
 					opacity: 0.9,

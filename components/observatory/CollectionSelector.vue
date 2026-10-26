@@ -2,12 +2,8 @@
 	<v-sheet class="mx-auto mb-4" elevation="0" max-width="900">
 		<v-card outlined class="pa-2">
 			<h6 class="overline text-center collections-header mt-4 mb-2">
-				collections
+				Filter by Project or Community
 			</h6>
-			<p class="mb-1 text-body-2 text-center">
-				Select a collection below to view the trends of the software associated
-				to a specific project/organization
-			</p>
 			<v-slide-group
 				v-model="model"
 				class="pa-4 mb-4"
@@ -40,20 +36,25 @@
 						justify="center"
 						align="center"
 					>
-						<v-col cols="10">
+						<v-col cols="9">
 							<h6 class="text-subtitle mb-0 pb-0 text-left collection-title">
-								{{ collections[model].title }}
+								<a
+									class="link"
+									:href="collections[model].homepage"
+									target="_blank"
+									>{{ collections[model].title }}</a
+								>
 							</h6>
 							<p class="text-subtitle-2 mt-0 pt-0 mb-2 text-left">
 								{{ collections[model].subtitle }}
 							</p>
 							<p
-								class="text--secondary text-left collection-description mb-0 mt-0"
+								class="text--secondary text-left collection-description mb-2 mt-0"
 							>
 								{{ collections[model].description }}
 							</p>
 						</v-col>
-						<v-col cols="2">
+						<v-col cols="3">
 							<div class="container">
 								<img
 									class="responsive-image"
@@ -131,6 +132,12 @@ export default {
 			this.$store.dispatch('observatory/trends/getVersionControlCount');
 			this.$store.dispatch('observatory/trends/getVersionControlRepositories');
 			this.$store.dispatch('observatory/trends/getPublications');
+			this.$store.dispatch('observatory/trends/getDependencies');
+			this.$store.dispatch('observatory/trends/getDependenciesCount');
+			this.$store.dispatch('observatory/trends/getDocumentation');
+			this.$store.dispatch('observatory/trends/getDocumentationCount');
+			this.$store.dispatch('observatory/trends/getInputFormats');
+			this.$store.dispatch('observatory/trends/getOutputFormats');
 
 			// data for data page <- data store
 			this.$store.dispatch('observatory/data/getCountsPerSource');
@@ -149,8 +156,7 @@ export default {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: 110px;
-	height: 130px;
+	width: 90%;
 }
 
 .responsive-image {
@@ -167,6 +173,10 @@ export default {
 	color: #0b579f;
 	font-size: 1.8rem;
 	font-weight: 500;
+}
+
+.link {
+	text-decoration: none;
 }
 
 .collection-description {

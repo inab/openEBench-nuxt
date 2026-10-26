@@ -214,48 +214,86 @@ export default {
 			};
 		},
 		breadcrumbs() {
-			return [
-				{
-					text: 'Home',
-					disabled: false,
-					exact: true,
-					to: '/',
-				},
-				{
-					text: 'Benchmarking Communities',
-					disabled: false,
-					exact: true,
-					to: '/benchmarking',
-				},
-				{
-					text:
-						(this.community.acronym
-							? this.community.acronym
-							: this.$route.params.community) + ' Events',
-					disabled: false,
-					exact: true,
-					to: '../events',
-				},
-				{
-					text: this.currentEvent
-						? this.currentEvent.name
-						: this.$route.params.community + ' Results',
-					disabled: false,
-					exact: true,
-					to: '../?event=' + this.$route.params.id,
-				},
-				{
-					text: this.challenge ? this.challenge.challenge_label : '',
-					disabled: false,
-					exact: true,
-					to: '../' + this.$route.params.id,
-				},
-				{
-					text: 'participants',
-					disabled: true,
-					to: 'participants',
-				},
-			];
+			// Check if user came from projects page
+			const fromProjects = this.$route.query.from === 'projects';
+			const projectId = this.$route.params.community;
+
+			if (fromProjects) {
+				// Breadcrumbs when coming from projects
+				return [
+					{
+						text: 'Home',
+						disabled: false,
+						exact: true,
+						to: '/',
+					},
+					{
+						text: 'Project Spaces',
+						disabled: false,
+						exact: true,
+						to: '/projects',
+					},
+					{
+						text: this.community.acronym,
+						disabled: false,
+						exact: true,
+						to: `/projects/${projectId}`,
+					},
+					{
+						text: this.challenge ? this.challenge.challenge_label : 'Challenge',
+						disabled: true,
+						exact: true,
+						to: `../${this.$route.params.id}?from=projects`,
+					},
+					{
+						text: 'Participants',
+						disabled: true,
+					},
+				];
+			} else {
+				// Original breadcrumbs when coming from benchmarking
+				return [
+					{
+						text: 'Home',
+						disabled: false,
+						exact: true,
+						to: '/',
+					},
+					{
+						text: 'Benchmarking Communities',
+						disabled: false,
+						exact: true,
+						to: '/benchmarking',
+					},
+					{
+						text:
+							(this.community.acronym
+								? this.community.acronym
+								: this.$route.params.community) + ' Events',
+						disabled: false,
+						exact: true,
+						to: '../events',
+					},
+					{
+						text: this.currentEvent
+							? this.currentEvent.name
+							: this.$route.params.community + ' Results',
+						disabled: false,
+						exact: true,
+						to: '../?event=' + this.$route.params.id,
+					},
+					{
+						text: this.challenge ? this.challenge.challenge_label : '',
+						disabled: true,
+						exact: true,
+						to: '../' + this.$route.params.id,
+					},
+					{
+						text: 'Participants',
+						disabled: true,
+					},
+				];
+			}
 		},
 	},
 	watch: {

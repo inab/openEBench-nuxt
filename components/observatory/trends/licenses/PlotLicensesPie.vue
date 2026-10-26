@@ -87,16 +87,16 @@ export default {
 					colors: [
 						'#ffffff',
 						'#e0e0e0',
-						'#273e6e',
+						'#649e64',
 						'#f5971b',
 						'#faebbe',
-						'#3a5ba1',
+						'#87c787',
 					],
 				},
 				text: this.text,
 				hovertemplate:
 					'<b>%{label}</b><br>' +
-					'%{value:,d} instances<br>' +
+					'%{value:,d} software<br>' +
 					'%{percentParent:.1%} of %{text}<extra></extra>',
 			};
 			Plotly.newPlot('plot_1', [trace], this.layout, this.config);

@@ -4,6 +4,7 @@
 		<v-main>
 			<breadcrumbs-bar v-if="breadcrumbs.length > 0" :items="breadcrumbs" />
 			<Nuxt @emitBreadcrumbs="handleBreadcrumbs" />
+			<back-to-top />
 			<Footer />
 		</v-main>
 		<v-footer class="justify-center" app>
@@ -17,6 +18,7 @@
 import HeaderMenu from '~/components/Header/HeaderMenu.vue';
 import BreadcrumbsBar from '~/components/Molecules/BreadcrumbsBar';
 import Footer from '~/components/TheFooter';
+import BackToTop from '~/components/Molecules/BackToTop.vue';
 
 export default {
 	name: 'EmbedIframeFullWidth',
@@ -24,6 +26,7 @@ export default {
 		'main-header': HeaderMenu,
 		BreadcrumbsBar,
 		Footer,
+		'back-to-top': BackToTop,
 	},
 	data() {
 		return {

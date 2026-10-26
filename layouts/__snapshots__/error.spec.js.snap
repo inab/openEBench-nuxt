@@ -18,6 +18,7 @@ exports[`ErrorPage should match snapshot 1`] = `
               <v-btn-stub color=\\"primary\\" tag=\\"button\\" activeclass=\\"\\" to=\\"/\\" type=\\"button\\" class=\\"mt-5\\">
                 Go back home
               </v-btn-stub>
+              <!---->
             </div>
           </v-col-stub>
           <v-col-stub cols=\\"7\\" tag=\\"div\\">

@@ -1,5 +1,7 @@
 <template>
-	<div :id="label"></div>
+	<div>
+		<div :id="label"></div>
+	</div>
 </template>
 <script>
 import Plotly from 'plotly.js-dist';
@@ -62,12 +64,27 @@ export default {
 	methods: {
 		buildTraces() {
 			const traces = [];
-			const data = [this.data_control.data, this.data_tool];
-			const names = ['Average of all tools', this.toolName];
-			const colors = ['#b8b8b8', this.colorFill];
+
+			// Check if data_control.data is an empty object
+			const data =
+				Object.keys(this.data_control.data).length === 0
+					? [this.data_tool]
+					: [this.data_control.data, this.data_tool];
+
+			const names =
+				Object.keys(this.data_control.data).length === 0
+					? [this.toolName]
+					: ['Average of all tools', this.toolName];
+
+			const colors =
+				Object.keys(this.data_control.data).length === 0
+					? [this.colorFill]
+					: ['#b8b8b8', this.colorFill];
+
 			for (let i = 0; i < data.length; i++) {
 				const theta = this.indicatorsLabels;
 				const r = [];
+
 				for (let j = 0; j < theta.length; j++) {
 					r.push(data[i][theta[j]]);
 				}

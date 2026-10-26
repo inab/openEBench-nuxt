@@ -80,7 +80,7 @@
 		<br />
 		<v-row>
 			<v-col
-				v-for="(alumni, index) in sortedByName(alumnis)"
+				v-for="(alumni, index) in sortedByYear(alumnis, 'desc')"
 				:key="index"
 				cols="12"
 				sm="6"
@@ -202,6 +202,16 @@ export default {
 		},
 		sortedByName(persons) {
 			return [...persons].sort((a, b) => a.name.localeCompare(b.name));
+		},
+		sortedByYear(persons, order = 'desc') {
+			return [...persons].sort((a, b) => {
+				// Sort by start year (most recent first by default)
+				if (order === 'desc') {
+					return b.startYear - a.startYear;
+				} else {
+					return a.startYear - b.startYear;
+				}
+			});
 		},
 	},
 };

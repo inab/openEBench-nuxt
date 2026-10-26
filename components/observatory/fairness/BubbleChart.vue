@@ -58,10 +58,13 @@ export default {
 	},
 	mounted() {
 		const traces = this.build_control_colllection_traces();
+		const reversedLabels = Object.values(this.indicatorsLabels).reverse();
 		const layout = {
 			yaxis: {
-				title: 'Indicator',
+				title: '',
 				showline: false,
+				categoryorder: 'array',
+				categoryarray: reversedLabels,
 			},
 			xaxis: {
 				title: 'Score',

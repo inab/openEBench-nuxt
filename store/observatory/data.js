@@ -3,6 +3,8 @@ export const state = () => ({
 	_countsPerSource: {},
 	_totalCount: null,
 	_features: {},
+	_featuresControl: {},
+	_featuresLabels: [],
 	_coverageSources: {
 		counts: {},
 		counts_cummulative: {},
@@ -11,7 +13,12 @@ export const state = () => ({
 		cummulative_features: {},
 		distribution_features: {},
 	},
+	_completenessControl: {
+		cummulative_features: {},
+		distribution_features: {},
+	},
 	_types: {},
+	_typesControl: {},
 	_unLoaded: {
 		countsPerSource: true,
 		totalCount: true,
@@ -33,14 +40,26 @@ export const getters = {
 	Features(state) {
 		return state._features;
 	},
+	FeaturesControl(state) {
+		return state._featuresControl;
+	},
+	FeaturesLabels(state) {
+		return state._featuresLabels;
+	},
 	CoverageSources(state) {
 		return state._coverageSources;
 	},
 	Completeness(state) {
 		return state._completeness;
 	},
+	CompletenessControl(state) {
+		return state._completenessControl;
+	},
 	Types(state) {
 		return state._types;
+	},
+	TypesControl(state) {
+		return state._typesControl;
 	},
 };
 
@@ -88,11 +107,26 @@ export const actions = {
 			'features?collection=' +
 			rootState.observatory._currentCollection;
 
+		const URLLabels = BASE_URL + 'features_dots';
+
+		const URLControl = BASE_URL + 'features?collection=tools';
+
 		commit('setLoaded', { features: true });
 
+		const resultLabels = await this.cache.dispatch(
+			'observatory/trends/GET_URL',
+			URLLabels
+		);
 		const result = await this.cache.dispatch('observatory/trends/GET_URL', URL);
 
+		const resultControl = await this.cache.dispatch(
+			'observatory/trends/GET_URL',
+			URLControl
+		);
+
 		commit('setFeatures', result);
+		commit('setFeaturesLabels', resultLabels);
+		commit('setFeaturesControl', resultControl);
 		commit('setLoaded', { features: false });
 	},
 
@@ -110,12 +144,37 @@ export const actions = {
 		commit('setLoaded', { coverageSources: false });
 	},
 
-	async getCompleteness({ commit, _state }) {
+	async getCompleteness({ commit, _state, rootState }) {
 		// This plot uses two serires of data, one for the histogram and one for the line (cummulative distribution)
-		const URLCummulativeFeatures = BASE_URL + 'features_cummulative';
-		const URLDistributionFeatures = BASE_URL + 'distribution_features';
+		const URLCummulativeFeatures =
+			BASE_URL +
+			'features_cummulative?collection=' +
+			rootState.observatory._currentCollection;
+		const URLDistributionFeatures =
+			BASE_URL +
+			'distribution_features?collection=' +
+			rootState.observatory._currentCollection;
+
+		const URLCummulativeFeaturesControl =
+			BASE_URL + 'features_cummulative?collection=tools';
+		const URLDistributionFeaturesControl =
+			BASE_URL + 'distribution_features?collection=tools';
 
 		commit('setLoaded', { completeness: true });
+
+		const resultCummulativeFeaturesControl = await this.cache.dispatch(
+			'observatory/trends/GET_URL',
+			URLCummulativeFeaturesControl
+		);
+		const resultDistributionFeaturesControl = await this.cache.dispatch(
+			'observatory/trends/GET_URL',
+			URLDistributionFeaturesControl
+		);
+
+		commit('setCompletenessControl', {
+			cummulative_features: resultCummulativeFeaturesControl,
+			distribution_features: resultDistributionFeaturesControl,
+		});
 
 		const resultCummulativeFeatures = await this.cache.dispatch(
 			'observatory/trends/GET_URL',
@@ -140,7 +199,16 @@ export const actions = {
 			'types_count?collection=' +
 			rootState.observatory._currentCollection;
 
+		const URLControl = BASE_URL + 'types_count?collection=tools';
+
 		commit('setLoaded', { types: true });
+
+		const resultControl = await this.cache.dispatch(
+			'observatory/trends/GET_URL',
+			URLControl
+		);
+
+		commit('setTypesControl', resultControl);
 
 		const result = await this.cache.dispatch('observatory/trends/GET_URL', URL);
 
@@ -165,13 +233,25 @@ export const mutations = {
 	setFeatures(state, features) {
 		state._features = features;
 	},
+	setFeaturesControl(state, features) {
+		state._featuresControl = features;
+	},
+	setFeaturesLabels(state, features) {
+		state._featuresLabels = features;
+	},
 	setCoverageSources(state, sources) {
 		state._coverageSources = sources;
 	},
 	setCompleteness(state, completeness) {
 		state._completeness = completeness;
 	},
+	setCompletenessControl(state, completeness) {
+		state._completenessControl = completeness;
+	},
 	setTypes(state, types) {
 		state._types = types;
+	},
+	setTypesControl(state, types) {
+		state._typesControl = types;
 	},
 };

@@ -49,8 +49,12 @@
 			</template>
 			<!-- eslint-disable -->
 			<template #item.acronym="{ item }">
-				<nuxt-link :to="item._id" append>{{ item.acronym }}</nuxt-link>
-				(<nuxt-link :to="item._id + '/participants'" append class="smaller-text"
+				<nuxt-link :to="getChallengeLink(item._id)">{{
+					item.acronym
+				}}</nuxt-link>
+				(<nuxt-link
+					:to="getChallengeLink(item._id + '/participants')"
+					class="smaller-text"
 					>participants</nuxt-link
 				>)
 			</template>
@@ -84,12 +88,29 @@ export default {
 			return Ids;
 		},
 	},
+	methods: {
+		getChallengeLink(challengePath) {
+			const currentPath = this.$route.path.replace(
+				'/projects/',
+				'/scientific/'
+			);
+
+			// Only add the query parameter if we're actually in the projects section
+			const fromProjects = this.$route.path.includes('/projects/');
+
+			if (fromProjects) {
+				return `${currentPath}/${challengePath}?from=projects`;
+			} else {
+				return `${currentPath}/${challengePath}`;
+			}
+		},
+	},
 };
 </script>
 
 <style scoped>
 .smaller-text {
-	font-size: 12px !important; /* Adjust the font size as needed */
+	font-size: 12px !important;
 }
 
 .v-data-table .v-data-table__wrapper {

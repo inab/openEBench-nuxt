@@ -1,6 +1,6 @@
 <template>
 	<v-card
-		class="pt-6 pb-4 d-flex flex-column justify-space-between"
+		class="pt-6 pb-4 d-flex flex-column"
 		min-height="320"
 		max-height="320"
 		min-width="230"
@@ -9,31 +9,27 @@
 		outlined
 		elevation="1"
 	>
-		<v-row justify="center" class="mt-5">
+		<v-row justify="center" class="mt-5 flex-grow-0">
 			<v-avatar color="grey" size="42">
 				<v-icon color="white">{{ icon }}</v-icon>
 			</v-avatar>
 		</v-row>
-		<v-row justify="center">
-			<v-col cols="10" class="text-center">
+
+		<v-row justify="center" class="flex-grow-1">
+			<v-col cols="10" class="text-center d-flex flex-column">
 				<div class="font-weight-medium text-subtitle-1">
 					{{ title }}
 				</div>
-				<p class="mt-3" v-html="description"></p>
+				<p class="mt-3 mb-0" v-html="description"></p>
 			</v-col>
 		</v-row>
-		<v-row justify="center" class="mb-4">
-			<v-btn color="primary" @click="selectSource"> select </v-btn>
+
+		<v-row justify="center" class="mb-4 mt-auto flex-grow-0">
+			<v-btn color="primary" @click="selectSource">select</v-btn>
 		</v-row>
-		<!--v-row justify="center">
-			<v-col cols="10" class="text-center">
-				<p class="mt-2 text-caption grey--text">
-					<slot name="note"></slot>
-				</p>
-			</v-col>
-		</v-row-->
 	</v-card>
 </template>
+
 <script>
 export default {
 	name: 'EvaluationSourceCard',

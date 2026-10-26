@@ -1,0 +1,184 @@
+<template>
+	<v-card elevation="0" class="pr-5 mb-4 pl-3">
+		<v-row justify="space-between" class="mb-1" align="end">
+			<v-col cols="12" sm="auto" class="flex-grow-1 flex-shrink-1 pr-2">
+				<span
+					class="text-h4 font-weight-bold"
+					style="word-break: break-word; overflow-wrap: break-word"
+				>
+					{{ name }}
+				</span>
+			</v-col>
+			<v-col
+				ref="Intro"
+				cols="12"
+				sm="auto"
+				class="flex-grow-0 flex-shrink-0 d-flex justify-end align-end flex-wrap"
+			>
+				<ChipType
+					v-for="item in type"
+					:key="item"
+					:type="item"
+					big
+					class="font-weight-bold ml-2 mb-1"
+				/>
+			</v-col>
+		</v-row>
+		<v-row v-if="cleanVersions.length" class="mt-0 pt-0">
+			<v-col>
+				<v-chip
+					v-for="(item, i) in visibleVersions"
+					:key="i"
+					color="primary"
+					small
+					outlined
+					class="pa-2 mt-0 mr-1"
+				>
+					<span class="font-weight-bold text-body-2">{{ item }}</span>
+				</v-chip>
+				<v-chip
+					v-if="hiddenVersionCount > 0"
+					color="primary"
+					small
+					outlined
+					class="pa-2 mt-0 mr-1"
+					@click="showAllVersions = true"
+				>
+					<span class="font-weight-bold text-body-2">
+						+{{ hiddenVersionCount }} more
+					</span>
+				</v-chip>
+				<v-chip
+					v-else-if="showAllVersions && isVersionsCollapsible"
+					color="primary"
+					small
+					outlined
+					class="pa-2 mt-0 mr-1"
+					@click="showAllVersions = false"
+				>
+					<span class="font-weight-bold text-body-2">show less</span>
+				</v-chip>
+			</v-col>
+		</v-row>
+		<v-row>
+			<v-col>
+				<p class="text-body-1" v-html="renderedDescription"></p>
+
+				<div class="d-flex justify-center">
+					<LinkChipWIcon
+						v-if="webpage && webpage.length > 0 && webpage[0].term"
+						:link="webpage[0].term"
+						text="Homepage"
+						icon="mdi-web"
+						class="ml-1 mr-2"
+						big
+					/>
+					<LinkChipWImage
+						v-for="[key, value] in Object.entries(sourcesLabels)"
+						:key="key"
+						:link="value"
+						:type="key"
+						:text="key"
+						light
+						class="ml-2 mr-2"
+						big
+					/>
+				</div>
+			</v-col>
+		</v-row>
+	</v-card>
+</template>
+<script>
+import { marked } from 'marked';
+import LinkChipWImage from '../Search/Card/LinkChipWImage.vue';
+import LinkChipWIcon from '../Search/Card/LinkChipWIcon.vue';
+import ChipType from '~/components/Tools/Search/Card/ChipType.vue';
+import { getSoftwareTypeDescription } from '~/static/dictionaries/softwareTypes';
+
+export default {
+	name: 'EntryIntro',
+	components: {
+		ChipType,
+		LinkChipWImage,
+		LinkChipWIcon,
+	},
+	props: {
+		name: {
+			type: String,
+			required: true,
+		},
+		description: {
+			type: String,
+			required: true,
+		},
+		type: {
+			type: [String, Array],
+			required: true,
+		},
+		version: {
+			type: Array,
+			required: true,
+		},
+		webpage: {
+			type: Array,
+			required: true,
+		},
+		sourcesLabels: {
+			type: Object,
+			required: true,
+		},
+	},
+	data() {
+		return {
+			typeText: getSoftwareTypeDescription(this.type),
+			showAllVersions: false,
+			maxVisibleVersions: 3,
+		};
+	},
+	computed: {
+		cleanVersions() {
+			// remove null and "None" entries from the version array
+			return this.version.filter(
+				(item) => item && String(item).trim().toLowerCase() !== 'none'
+			);
+		},
+		visibleVersions() {
+			if (this.showAllVersions) {
+				return this.cleanVersions;
+			}
+			return this.cleanVersions.slice(0, this.maxVisibleVersions);
+		},
+		hiddenVersionCount() {
+			if (this.showAllVersions) {
+				return 0;
+			}
+			return Math.max(this.cleanVersions.length - this.maxVisibleVersions, 0);
+		},
+		isVersionsCollapsible() {
+			return this.cleanVersions.length > this.maxVisibleVersions;
+		},
+		renderedDescription() {
+			if (!this.description) return '';
+			return marked(this.description);
+		},
+	},
+
+	methods: {
+		cleanString(str) {
+			if (!str) {
+				return '';
+			} else {
+				// remove " at the beginning of the string
+				if (str.charAt(0) === '"') {
+					str = str.substr(1);
+				}
+				// remove " at the end of the string
+				if (str.charAt(str.length - 1) === '"') {
+					str = str.substr(0, str.length - 1);
+				}
+				return str;
+			}
+		},
+	},
+};
+</script>

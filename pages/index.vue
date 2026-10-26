@@ -15,8 +15,7 @@
 		</section>
 		<hero-numbers
 			:community-count="communitiesCount"
-			:tools-count="toolsCount"
-			:resources-count="resourcesCount"
+			:tools-count="resourcesCount"
 			:projects-count="projectsCount"
 		/>
 		<logo-slider class="landing-mt landing-mb" />
@@ -47,13 +46,13 @@ export default {
 	computed: {
 		...mapGetters('dashboard', {
 			communitiesCount: 'communitiesCount',
-			toolsCount: 'toolsCount',
+			// resourcesCount is the total tools count (/stats/tools/count_total)
+			// and is displayed under the "Tools" label in the hero numbers.
 			resourcesCount: 'resourcesCount',
 			projectsCount: 'projectsCount',
 		}),
 	},
 	mounted() {
-		this.$store.dispatch('dashboard/getToolsCount');
 		this.$store.dispatch('dashboard/getResourcesCount');
 		this.$store.dispatch('dashboard/getCommunitiesCount');
 	},

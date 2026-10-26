@@ -20,10 +20,10 @@
 		<!-- Iterate through the entries and pass them to URLForm component -->
 		<URLForm
 			v-for="(entry, index) in localValue"
+			:id="entry.id"
 			:key="entry.id"
 			:value="entry.term"
 			:index="index"
-			:id="entry.id"
 			:field="field"
 			:label="label"
 			@update="updateEntry"

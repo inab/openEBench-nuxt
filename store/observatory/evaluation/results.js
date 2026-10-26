@@ -2,6 +2,7 @@
 export const state = () => ({
 	_FAIRIndicatorsTool: null,
 	_FAIRIndicatorsLogs: null,
+	_FAIRIndicatorsFeedback: null,
 	_FAIRIndicatorsControl: null,
 	_LoadingEvaluation: false,
 });
@@ -13,6 +14,9 @@ export const getters = {
 	},
 	getFAIRIndicatorsLogs(state) {
 		return state._FAIRIndicatorsLogs;
+	},
+	getFAIRIndicatorsFeedback(state) {
+		return state._FAIRIndicatorsFeedback;
 	},
 	getFAIRIndicatorsControl(state) {
 		return state._FAIRIndicatorsControl;
@@ -53,26 +57,45 @@ export const actions = {
 			},
 		};
 
-		const result = await this.dispatch(
-			'observatory/evaluation/results/POST_DATA',
-			payload
-		);
+		try {
+			const result = await this.dispatch(
+				'observatory/evaluation/results/POST_DATA',
+				payload
+			);
 
-		console.debug(result);
+			console.debug(result);
 
-		commit('setFAIRIndicatorsToolResult', result);
-		commit('setLoading', { evaluation: false });
+			commit('setFAIRIndicatorsToolResult', result);
+			commit('setLoading', { evaluation: false });
+		} catch (error) {
+			const emptyResult = {};
+			commit('setFAIRIndicatorsToolResult', emptyResult);
+
+			console.error('Error evaluating tool:', error);
+			commit('setLoading', { evaluation: false });
+		}
 	},
 
 	async getFAIRIndicatorsControl({ commit, _state }) {
 		const URL = '/stats/tools/fair_scores_means';
 
-		const result = await this.cache.dispatch(
-			'observatory/evaluation/results/GET_URL',
-			URL
-		);
+		try {
+			// Attempt to fetch data from the server
+			const result = await this.cache.dispatch(
+				'observatory/evaluation/results/GET_URL',
+				URL
+			);
 
-		commit('setFAIRIndicatorsControl', result);
+			// If the request is successful, commit the result
+			commit('setFAIRIndicatorsControl', result);
+		} catch (error) {
+			// If an error occurs (e.g., server down), return an empty object
+			console.error('Error fetching FAIR indicators:', error);
+
+			// Commit an empty scores object to the store
+			const emptyScores = { data: {} };
+			commit('setFAIRIndicatorsControl', emptyScores);
+		}
 	},
 
 	async GET_URL({ _commit, _state }, URL) {
@@ -99,9 +122,11 @@ export const mutations = {
 	setFAIRIndicatorsToolResult(state, payload) {
 		const result = payload.result;
 		const logs = payload.logs;
+		const feedback = payload.feedback;
 
 		state._FAIRIndicatorsTool = result;
 		state._FAIRIndicatorsLogs = logs;
+		state._FAIRIndicatorsFeedback = feedback;
 	},
 	setFAIRIndicatorsControl(state, result) {
 		state._FAIRIndicatorsControl = result;

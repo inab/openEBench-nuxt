@@ -1,5 +1,5 @@
 <template>
-	<v-main tag="footer" class="footer primary white--text">
+	<footer class="site-footer footer primary white--text">
 		<v-row>
 			<v-col class="pa-4" md="3" cols="12" align="center">
 				<v-img :src="logo" alt="logo" max-width="150" contain />
@@ -13,7 +13,7 @@
 						class="accordion-content"
 					>
 						<v-expansion-panel-header>
-							<h6 class="title mb-4">{{ footer.headline }}</h6>
+							<h6 class="footer-title mb-4">{{ footer.headline }}</h6>
 						</v-expansion-panel-header>
 						<v-expansion-panel-content>
 							<ul class="no-bullets aligned-list">
@@ -47,7 +47,7 @@
 						:key="index"
 						class="pa-4 site-map-item"
 					>
-						<h6 class="title mb-4">{{ footer.headline }}</h6>
+						<h6 class="footer-title mb-4">{{ footer.headline }}</h6>
 						<ul class="no-bullets aligned-list">
 							<li v-for="(link, m) in footer.links" :key="m" class="list-item">
 								<nuxt-link
@@ -124,7 +124,7 @@
 				</v-row>
 			</v-col>
 		</v-row>
-	</v-main>
+	</footer>
 </template>
 
 <script>
@@ -167,10 +167,11 @@ export default {
 };
 </script>
 
-<style lang="scss">
-.primary {
-	background-color: #1976d2; // Example background color
+<style lang="scss" scoped>
+.site-footer {
 	color: white;
+	overflow: hidden;
+	padding: 52px 0 54px;
 }
 
 .no-bullets {
@@ -193,11 +194,17 @@ export default {
 	text-decoration: underline;
 }
 
-.link-hover:hover {
-	text-decoration: underline;
+.aligned-list {
+	padding-left: 0;
 }
 
-.aligned-list {
+.footer-title {
+	font-size: 1.25rem;
+	font-weight: 500;
+	line-height: 2rem;
+	letter-spacing: 0;
+	color: white;
+	margin-left: 0;
 	padding-left: 0;
 }
 
@@ -208,20 +215,28 @@ export default {
 	align-items: center;
 }
 
-.site-map-item .title {
-	margin-left: 0;
-	padding-left: 0;
-}
-
 .site-map-item ul {
 	margin-top: 0;
 	padding-left: 0;
 }
 
+.accordion-content .footer-title {
+	color: #0b579f;
+	margin-bottom: 0 !important;
+}
+
+.accordion-content .link-hover {
+	color: #0b579f !important;
+}
+
+.accordion-content .v-icon {
+	color: #0b579f;
+}
+
 @media (max-width: 1024px) and (orientation: portrait),
 	(max-width: 1366px) and (orientation: landscape) {
-	.link-hover {
-		color: black !important;
+	.accordion-content .link-hover {
+		color: #0b579f !important;
 	}
 }
 </style>

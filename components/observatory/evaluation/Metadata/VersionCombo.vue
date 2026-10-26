@@ -18,7 +18,9 @@ export default {
 	props: ['initialSelectedVersion', 'versions', 'field'],
 	data() {
 		return {
-			selectedVersion: this.initialSelectedVersion,
+			selectedVersions: this.initialSelectedVersion
+				? [this.initialSelectedVersion]
+				: [],
 		};
 	},
 	watch: {

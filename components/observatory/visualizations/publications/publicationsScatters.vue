@@ -2,11 +2,9 @@
 	<CommonTemplate :is-loading="isLoading">
 		<PublicationsPlot
 			v-if="!isLoading"
-			:x-values="xValues"
-			:y-percentage-values="yPercentageValues"
-			:y-i-f-values="yIFValues"
-			:text-percentage-tools="textPercentageTools"
-			:text-percentage-journals="textPercentageJournals"
+			:tools="data_plot.tools"
+			:publications="data_plot.publications"
+			:citations="data_plot.citations"
 			:height="plotHeight"
 		/>
 	</CommonTemplate>
@@ -25,11 +23,11 @@ export default {
 	mixins: [plotMixin],
 	data() {
 		return {
-			xValues: [],
-			yPercentageValues: [],
-			yIFValues: [],
-			textPercentageTools: [],
-			textPercentageJournals: [],
+			data_plot: {
+				tools: { x: [], y: [] },
+				publications: { x: [], y: [] },
+				citations: { x: [], y: [] },
+			},
 			isLoading: true,
 			collection: this.$route.params.collection,
 		};
@@ -47,12 +45,7 @@ export default {
 			try {
 				const response = await this.$observatory.get(URL);
 				const data = response.data.data;
-
-				this.xValues = data.IF_tools.x;
-				this.yPercentageValues = data.percentages.y;
-				this.yIFValues = data.IF_tools.y;
-				this.textPercentageTools = data.percentages.text_tools;
-				this.textPercentageJournals = data.percentages.text_journals;
+				this.data_plot = data;
 				this.isLoading = false;
 			} catch (error) {
 				console.error('Error fetching publications scatters data:', error);

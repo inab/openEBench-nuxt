@@ -1,0 +1,64 @@
+<template>
+	<v-tooltip
+		bottom
+		:attach="attach"
+		color="#EAF1F7"
+		max-width="450px"
+		allow-overflow
+	>
+		<template #activator="{ on, attrs }">
+			<v-chip
+				label
+				:small="!big"
+				light
+				color="grey lighten-4"
+				class="mr-1 mt-1"
+				link
+				:href="uri"
+				target="_blank"
+				v-bind="attrs"
+				v-on="on"
+			>
+				<v-icon small class="mr-1">{{ icon }}</v-icon>
+				{{ text }}
+			</v-chip>
+		</template>
+		<span class="black--text text-caption font-weight-light">
+			{{ uri }}
+		</span>
+	</v-tooltip>
+</template>
+<script>
+export default {
+	name: 'LinkChipTopic',
+	props: {
+		uri: {
+			type: String,
+			required: true,
+		},
+		text: {
+			type: String,
+			required: true,
+		},
+		icon: {
+			type: String,
+			required: false,
+			default: 'mdi-label-multiple',
+		},
+		big: {
+			type: Boolean,
+			required: false,
+			default: false,
+		},
+		// Render the tooltip attached to the activator's parent (true) or in the
+		// document body (false). Detach it when the chip lives inside a container
+		// that clips overflow (e.g. the similar-software carousel), so the
+		// tooltip isn't hidden behind neighbouring content.
+		attach: {
+			type: Boolean,
+			required: false,
+			default: true,
+		},
+	},
+};
+</script>

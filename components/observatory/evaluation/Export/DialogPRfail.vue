@@ -1,6 +1,6 @@
 <template>
 	<v-dialog v-model="dialogPRfail" max-width="600">
-		<v-card class="pa-0">
+		<v-card class="pa-0 pb-3 pl-2 pr-2">
 			<v-card-title class="mt-0 pt-0 text-h6">
 				Making Pull Request
 			</v-card-title>

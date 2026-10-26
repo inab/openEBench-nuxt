@@ -7,7 +7,7 @@ export const embedCodes = {
 	},
 	licensesBar: {
 		title: 'Open Source Licenses Bar Chart',
-		url: `${BASE_URL}/visualizations/license/LicensesBar`,
+		url: `${BASE_URL}/visualizations/licenses/LicensesBars`,
 	},
 	versionControl: {
 		title: 'Version Control Repositories Bars Chart',
@@ -20,6 +20,22 @@ export const embedCodes = {
 	versioningPie: {
 		title: 'Versioning Pie Chart',
 		url: `${BASE_URL}/visualizations/versioning/VersioningPie`,
+	},
+	dependencies: {
+		title: 'Dependencies Plot',
+		url: `${BASE_URL}/visualizations/dependencies/DependenciesLollipop`,
+	},
+	documentation: {
+		title: 'Documentation Plot',
+		url: `${BASE_URL}/visualizations/documentation/DocumentationBars`,
+	},
+	inputFormats: {
+		title: 'Input Formats Plot',
+		url: `${BASE_URL}/visualizations/formats/FormatsInput`,
+	},
+	outputFormats: {
+		title: 'Output Formats Plot',
+		url: `${BASE_URL}/visualizations/formats/FormatsOutput`,
 	},
 	findabilityBubble: {
 		title: 'Findability Bubble Chart',

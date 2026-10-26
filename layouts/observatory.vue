@@ -19,8 +19,12 @@
 									:key="i"
 									link
 									:to="item.to"
+									:exact="item.exact || false"
 								>
-									<v-list-item-icon class="mr-1">
+									<v-list-item-icon
+										v-if="$vuetify.breakpoint.lgAndUp"
+										class="mr-1"
+									>
 										<v-icon>{{ item.icon }}</v-icon>
 									</v-list-item-icon>
 									<v-list-item-title class="ml-1">{{
@@ -35,7 +39,7 @@
 					</v-col>
 				</v-row>
 			</v-container>
-
+			<back-to-top />
 			<Footer class="mt-16" />
 		</v-main>
 		<v-footer class="justify-center" app>
@@ -51,6 +55,7 @@ import HeaderMenu from '~/components/Header/HeaderMenu.vue';
 import Footer from '~/components/TheFooter';
 import subMenuEntriesObservatory from '~/components/Header/subMenuEntriesObservatory.js';
 import BreadcrumbsBar from '~/components/Molecules/BreadcrumbsBar';
+import BackToTop from '~/components/Molecules/BackToTop.vue';
 
 export default {
 	name: 'Observatory',
@@ -58,6 +63,7 @@ export default {
 		'main-header': HeaderMenu,
 		Footer,
 		BreadcrumbsBar,
+		'back-to-top': BackToTop,
 	},
 	data() {
 		return {

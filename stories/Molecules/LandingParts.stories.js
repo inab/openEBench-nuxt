@@ -3,9 +3,7 @@ import HeroSearchbar from '~/components/Landing/HeroSearchbar';
 import KeyFeatures from '~/components/Landing/KeyFeatures';
 import FeatureTeaser from '~/components/Landing/FeatureTeaser';
 import HeroNumbers from '~/components/Landing/HeroNumbers';
-import NewsCards from '~/components/Landing/NewsCards';
 import LogoSlider from '~/components/Landing/LogoSlider';
-import TwitterCard from '~/components/Landing/TwitterCard';
 
 export default {
 	title: 'Molecules/Landing Page',
@@ -44,17 +42,7 @@ export const NumbersSection = () => ({
 		`,
 });
 
-export const News = () => ({
-	components: { NewsCards },
-	template: '<news-cards />',
-});
-
 export const Logos = () => ({
 	components: { LogoSlider },
 	template: '<logo-slider />',
-});
-
-export const TwitterNewsCard = () => ({
-	components: { TwitterCard },
-	template: '<twitter-card />',
 });

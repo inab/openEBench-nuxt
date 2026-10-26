@@ -18,7 +18,20 @@ export default {
 	},
 	computed: {
 		markup() {
-			return DOMPurify.sanitize(marked(this.markdown));
+			const processed = this.convertAnchors(this.markdown);
+			const html = marked(processed);
+			return DOMPurify.sanitize(html);
+		},
+	},
+	methods: {
+		// Replace (#item1) → <a id="item1"></a>
+		convertAnchors(md) {
+			// Match all (#something) patterns that are *not part of a markdown link*
+			// Negative lookbehind avoids touching [text](#itemX)
+			return md.replace(
+				/(?<!\[.*?)\(#([\w-]+)\)(?!\))/g,
+				(_match, id) => `<a id="${id}"></a>`
+			);
 		},
 	},
 };

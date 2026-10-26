@@ -25,19 +25,16 @@
 				/>
 				<PublicationsPlot
 					v-else
-					:x-values="xValues"
-					:y-percentage-values="yPercentageValues"
-					:y-i-f-values="yIFValues"
-					:text-percentage-tools="textPercentageTools"
-					:text-percentage-journals="textPercentageJournals"
+					:tools="data_plot.tools"
+					:publications="data_plot.publications"
+					:citations="data_plot.citations"
 				/>
 			</v-col>
 			<v-col xl="10" lg="10" md="10" sm="12" align-self="start">
 				<p class="mt-0 mb-2 ml-8">
 					<span class="highlight"
-						>Percentage (top) and impact factor (bottom) of publications devoted
-						to software in the top publishers of software in the Life
-						Sciences.</span
+						>Number of associated software tools, publications, and citations by
+						journal (citations counted over the last 3 years)</span
 					>
 				</p>
 			</v-col>
@@ -65,27 +62,6 @@ export default {
 		...mapGetters('observatory/trends', {
 			data_plot: 'Publications',
 		}),
-
-		// Journal can be taken either from data_plot.IF_tools.x or data_plot.percentages.x, they are the same
-		xValues() {
-			return this.data_plot.IF_tools.x;
-		},
-
-		yPercentageValues() {
-			return this.data_plot.percentages.y;
-		},
-
-		yIFValues() {
-			return this.data_plot.IF_tools.y;
-		},
-
-		textPercentageTools() {
-			return this.data_plot.percentages.text_tools;
-		},
-
-		textPercentageJournals() {
-			return this.data_plot.percentages.text_journals;
-		},
 	},
 };
 </script>

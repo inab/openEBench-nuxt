@@ -8,6 +8,15 @@ export const state = () => ({
 	_uniqueCollection: null,
 	_collections: [
 		{
+			id: 'Proteomics',
+			title: 'Proteomics',
+			subtitle: 'ELIXIR Proteomics Community',
+			description:
+				'The goal of the ELIXIR Proteomics Community is to develop and maintain sustainable proteomics tools and data resources. An essential part of the development will also be the ‘FAIRification’ of the resources (i.e. making the resources FAIR - Findable, Accessible, Interoperable, and Reusable).',
+			homepage: 'https://elixir-europe.org/communities/proteomics',
+			image: 'proteomics_logo.png',
+		},
+		{
 			id: 'RIS3CAT VEIS',
 			title: 'VEIS',
 			subtitle: 'Value of the EGA for Industry and Society',
@@ -33,7 +42,7 @@ export const state = () => ({
 			description:
 				'The Spanish Precision Medicine Infrastructure associated with Science and Technology (IMPaCT), aims to impulse precision medicine within the Spanish National Health System. IMPaCT-Data, the Data Science pillar of this infrastructure, has been tasked to design, deploy and extend a Biomedical Cloud taking as reference similar efforts across Europe.',
 			homepage: 'https://impact-data.bsc.es/',
-			image: 'Logo_IMPaCT-Data-Vertical.png',
+			image: 'Logo_IMPaCT-Data.png',
 		},
 		{
 			id: 'PerMedCoE',
@@ -64,7 +73,7 @@ export const state = () => ({
 			image: 'Logo_3D-Bioinfo.png',
 		},
 		{
-			id: 'eucaim',
+			id: 'EUCAIM',
 			title: 'EUCAIM',
 			subtitle: 'EUropean Federation for CAncer IMages',
 			description:

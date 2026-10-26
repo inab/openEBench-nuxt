@@ -10,15 +10,12 @@
 		</v-row>
 
 		<v-form v-else>
-			<v-row justify="space-around">
-				<v-col cols="10">
-					<p class="text-body-2">
-						Select a tool from the Software's Observatory Database:
-					</p>
-				</v-col>
-			</v-row>
+			<p class="text-body-2">
+				Select a tool from the Software's Observatory Database:
+			</p>
+
 			<v-row class="mt-2 d-flex align-center" justify="space-around">
-				<v-col cols="10">
+				<v-col cols="12">
 					<v-autocomplete
 						v-model="value"
 						:items="observatoryTools"

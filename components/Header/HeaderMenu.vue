@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div style="z-index: 9999">
 		<v-navigation-drawer
 			v-if="$vuetify.breakpoint.smAndDown"
 			v-model="openNavMobile"
@@ -18,24 +18,7 @@
 						<v-list-item-title v-text="item.title" />
 					</v-list-item-content>
 				</v-list-item>
-				<v-list-item
-					v-for="(item, index) in subMenuEntriesObservatory"
-					:key="`sub${index}`"
-					:to="item.to"
-					:href="item.href"
-					:target="item.external ? '_blank' : ''"
-				>
-					<v-list-item-title>{{ item.title_hide }}</v-list-item-title>
-					<v-icon v-if="item.external" right small>mdi-open-in-new</v-icon>
-				</v-list-item>
-				<v-list-item :href="subMenuEntriesDocs[1].href" target="_blank">
-					<v-list-item-title>{{
-						subMenuEntriesDocs[1].title_hide
-					}}</v-list-item-title>
-					<v-icon v-if="subMenuEntriesDocs[1].external" right small
-						>mdi-open-in-new</v-icon
-					>
-				</v-list-item>
+
 				<v-list-item
 					v-for="(item, index) in subMenuEntriesAbout"
 					:key="`sub${index}`"
@@ -83,29 +66,6 @@
 				</v-btn>
 			</div>
 
-			<v-menu v-if="$vuetify.breakpoint.mdAndUp" left offset-y>
-				<template #activator="{ on, attrs }">
-					<v-btn v-bind="attrs" text v-on="on">
-						<v-icon>mdi-chevron-down</v-icon>
-						Observatory
-					</v-btn>
-				</template>
-				<v-list>
-					<v-list-item
-						v-for="(item, index) in subMenuEntriesObservatory"
-						:key="`sub${index}`"
-						:to="item.to"
-						:href="item.href"
-						:target="item.external ? '_blank' : ''"
-					>
-						<v-list-item-title class="text-subtitle-2">{{
-							item.title
-						}}</v-list-item-title>
-						<v-icon v-if="item.external" right small>mdi-open-in-new</v-icon>
-					</v-list-item>
-				</v-list>
-			</v-menu>
-
 			<v-btn
 				v-if="$vuetify.breakpoint.mdAndUp"
 				:href="subMenuEntriesDocs[1].href"
@@ -119,7 +79,12 @@
 			</v-btn>
 
 			<!-- About Menu -->
-			<v-menu v-if="$vuetify.breakpoint.mdAndUp" left offset-y>
+			<v-menu
+				v-if="$vuetify.breakpoint.mdAndUp"
+				left
+				offset-y
+				content-class="about-menu-content"
+			>
 				<template #activator="{ on, attrs }">
 					<v-btn v-bind="attrs" text v-on="on">
 						<v-icon>mdi-chevron-down</v-icon>
@@ -232,3 +197,8 @@ export default {
 	},
 };
 </script>
+<style>
+.about-menu-content {
+	z-index: 9998 !important;
+}
+</style>

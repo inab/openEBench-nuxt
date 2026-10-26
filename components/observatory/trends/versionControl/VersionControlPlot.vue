@@ -43,7 +43,7 @@ export default {
 					automargin: true,
 				},
 				xaxis: {
-					title: 'Number of instances',
+					title: 'Number of software',
 				},
 				margin: {
 					autoexpand: true,
@@ -85,10 +85,10 @@ export default {
 				x,
 				orientation: 'h',
 				marker: {
-					color: '#4f71b8',
+					color: '#6fad6f',
 				},
 				hoverinfo: 'x',
-				hovertemplate: '%{x:,d} instances <extra></extra>',
+				hovertemplate: '%{x:,d} software <extra></extra>',
 			};
 			return trace;
 		},

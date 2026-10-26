@@ -100,14 +100,24 @@ export default {
 				label: 'OEB',
 			},
 		},
-		mainCardCaption:
-			"Count of metadata instances collected from various sources. 'Total' refers to the cumulative number of sources included in the Software Observatory's integrated collection.",
+		defaultCaption:
+			'Each number represents the amount of metadata from that source included in the final integrated collection ("Total"), after processing through the full pipeline.',
+		scopedCaption:
+			'Each number shows the contribution of that source to this community’s integrated collection ("Total") after processing through the full pipeline.',
 	}),
 	computed: {
 		...mapGetters('observatory/data', {
 			cardsC: 'CountsPerSource',
 			totalC: 'TotalCount',
 		}),
+		...mapGetters('observatory', {
+			currentCollection: 'getCurrentCollection',
+		}),
+		mainCardCaption() {
+			return this.currentCollection !== 'tools'
+				? this.scopedCaption
+				: this.defaultCaption;
+		},
 	},
 };
 </script>

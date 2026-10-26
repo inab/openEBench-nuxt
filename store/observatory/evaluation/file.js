@@ -170,61 +170,45 @@ function buildFeHelp(help) {
 	}
 }
 
-/*
 function buildFePublication(publication) {
 	console.debug('building publication');
 	const newPublications = [];
 
 	if (publication) {
-		for (const item of publication) {
-			console.debug(item);
+		for (const pub of publication) {
+			const newPub = {};
 
-			for (const pub of item) {
-				const newPub = {};
+			if (typeof pub === 'object') {
+				if (pub['@type'] === 'https://schema.org/CreativeWork') {
+					try {
+						newPub.url = pub['@id'];
+						newPub.title = pub['schema:name'];
 
-				if (typeof pub === 'string') {
-					if (pub.includes('pmcid:')) {
-						newPub.pmcid = pub.split(':')[1];
-					} else if (pub.includes('pmid:')) {
-						newPub.pmid = pub.split(':')[1];
-					}
-				} else if (typeof pub === 'object') {
-					if (pub['@type'] === 'https://schema.org/CreativeWork') {
-						try {
-							newPub.doi = pub['@id'].split(':')[1];
-							newPub.title = pub['schema:name'];
-							newPub.year = pub['schema:datePublished'];
-
-							if (pub.pmid && pub.pmid.includes('pmid:')) {
-								newPub.pmid = pub.pmid.split(':')[1];
-							}
-							if (pub.pmcid && pub.pmcid.includes('pmcid:')) {
-								newPub.pmcid = pub.pmcid.split(':')[1];
-							}
-						} catch {
-							console.debug(
-								`Publication ${pub} could not be parsed, skipping publication`
-							);
+						if (pub['@id']) {
+							// @id is https://doi.org/{DOI}
+							newPub.doi = pub['@id'].split('https://doi.org/')[1];
 						}
-					} else if (pub['@id']) {
-						newPub.doi = pub['@id'];
+					} catch {
+						console.debug(
+							`Publication ${pub} could not be parsed, skipping publication`
+						);
 					}
-				} else {
-					console.debug(
-						`Publication ${pub} could not be parsed. Unknown type. Skipping publication`
-					);
 				}
+			} else {
+				console.debug(
+					`Publication ${pub} could not be parsed. Unknown type. Skipping publication`
+				);
+			}
 
-				if (Object.keys(newPub).length > 0) {
-					newPublications.push(removeEmptyValues(newPub));
-				}
+			if (Object.keys(newPub).length > 0) {
+				newPublications.push(removeEmptyValues(newPub));
 			}
 		}
 	}
 
 	return newPublications;
 }
-*/
+
 function buildFeEdamTopicsOperations(topics) {
 	console.debug('building edam topics operations');
 	console.debug(topics);
@@ -509,8 +493,11 @@ export const actions = {
 			label: [parsedContent?.['schema:name']] || [],
 			src: parsedContent?.['schema:codeRepository'] || [],
 			links: buildFeLinks(parsedContent || {}),
+			publication: buildFePublication(
+				parsedContent?.['codemeta:referencePublication'] || []
+			),
 			api_lib: false,
-			type: '',
+			type: parsedContent?.['schema:applicationCategory'] || '',
 			test: [],
 			source: [],
 			registries: [],

@@ -5,7 +5,6 @@ export default {
 	state: () => {
 		return {
 			resourcesCount: 0,
-			toolsCount: 0,
 			communitiesCount: 0,
 			projectsCount: 0,
 		};
@@ -30,25 +29,11 @@ export default {
 			const response = await this.$observatory.$get('/stats/tools/count_total');
 			commit('setResourcesCount', response[0]);
 		},
-		async getToolsCount({ commit }) {
-			const response = await this.$axios.head('/aggregate', {
-				params: {
-					limit: 1,
-				},
-			});
-			commit('setToolsCount', response);
-		},
 	},
 
 	mutations: {
 		setResourcesCount(state, payload) {
 			state.resourcesCount = payload.data;
-		},
-		setToolsCount(state, payload) {
-			const matches = payload.headers['content-range'].match(
-				/(\d+)-(\d+|\*)\/(\d+|\*)/
-			);
-			state.toolsCount = parseInt(matches[3]);
 		},
 		setCommunitiesCount(state, payload) {
 			const communities = payload.getCommunities.map((community) => {
@@ -80,7 +65,6 @@ export default {
 
 	getters: {
 		resourcesCount: (state) => state.resourcesCount,
-		toolsCount: (state) => state.toolsCount,
 		communitiesCount: (state) => state.communitiesCount,
 		projectsCount: (state) => state.projectsCount,
 	},

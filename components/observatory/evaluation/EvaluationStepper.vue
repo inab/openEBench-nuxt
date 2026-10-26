@@ -3,9 +3,10 @@
 	<v-stepper v-model="step" elevation="0" vertical class="ml-0 pl-0 mb-4">
 		<!----------------- STEP 1 ------------------->
 		<v-stepper-step :complete="step > 1" step="1">
-			Select the source of the software's metadata
+			<div class="text-h6">Choose a metadata source</div>
 		</v-stepper-step>
 		<v-stepper-content step="1">
+			<p class="text-body-2">Select how you want to start the evaluation.</p>
 			<v-row
 				justify="space-around"
 				class="mb-4 mt-4 mr-0 ml-0 d-flex align-center"
@@ -28,7 +29,7 @@
 				<v-col cols="3" md="3" sm="7">
 					<EvaluationSourceCard
 						title="GitHub repository"
-						description="Enter the URL of the software's GitHub repository"
+						description="Provide the URL of the software's GitHub repository"
 						source="github"
 						icon="mdi-github"
 					>
@@ -55,7 +56,7 @@
 
 		<!----------------- STEP 2 ------------------->
 		<v-stepper-step :complete="step > 2" step="2">
-			Introduce software to evaluate
+			<div class="text-h6">Introduce software to evaluate</div>
 		</v-stepper-step>
 		<v-stepper-content v-if="source === 'github'" step="2">
 			<GitHubInput />
@@ -73,7 +74,7 @@
 
 		<!---------------- STEP 3 -------------------->
 		<v-stepper-step :complete="step > 3" step="3">
-			Edit the metadata if needed
+			<div class="text-h6">Edit the metadata if needed</div>
 		</v-stepper-step>
 
 		<v-stepper-content step="3">
@@ -82,7 +83,11 @@
 		<!-------------------------------------------->
 
 		<!---------------- STEP 4 -------------------->
-		<v-stepper-step step="4"> Results </v-stepper-step>
+		<v-stepper-step step="4">
+			<div class="text-h6">
+				Results: FAIRsoft scores, metadata, citation file
+			</div>
+		</v-stepper-step>
 		<v-stepper-content step="4">
 			<ResultsTabs />
 		</v-stepper-content>

@@ -25,8 +25,8 @@ export default {
 	methods: {
 		handleSubmit() {
 			this.$router.push({
-				path: '/tool',
-				query: { search: this.input },
+				path: '/tool/search',
+				query: { q: this.input },
 			});
 		},
 	},

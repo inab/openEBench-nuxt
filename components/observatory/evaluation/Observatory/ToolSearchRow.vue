@@ -2,6 +2,8 @@
 	<v-chip label color="blue lighten-5">
 		<span class="font-weight-medium text-body-2">{{ data.item.label }}</span>
 		<v-chip
+			v-for="(type, i) in data.item.types || []"
+			:key="`${data.item.label}-type-${i}-${type}`"
 			label
 			dense
 			small
@@ -9,7 +11,7 @@
 			text-color="grey darken-3"
 			class="text-caption ml-3"
 		>
-			{{ data.item.type.toUpperCase() }}
+			{{ String(type).toUpperCase() }}
 		</v-chip>
 	</v-chip>
 
