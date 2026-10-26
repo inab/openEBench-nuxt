@@ -138,7 +138,7 @@ export default {
 		DialogPRfail,
 	},
 	props: {
-		content: Object,
+		content: [Object, String], // JSON-LD object or CFF text
 		type: {
 			type: String,
 			default: 'metadata',

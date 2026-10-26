@@ -40,21 +40,53 @@ function removeEmptyValues(d) {
 	return result;
 }
 
-function buildFeTopicsOperations(topics) {
-	if (topics) {
-		const items = [];
-		for (let i = 0; i < topics.length; i++) {
-			const topic = topics[i];
-			const label = topic.split(':').slice(-1)[0];
-			const uri = `https://edamontology.org/${label}`;
-			const newTopic = {
-				term: EDAMDict[uri],
-				uri,
-				vocabulary: 'EDAM',
-			};
-			items.push(removeEmptyValues(newTopic));
+function escapeHtml(text) {
+	// error texts are rendered with v-html and parse errors can quote the file content
+	return String(text)
+		.replace(/&/g, '&amp;')
+		.replace(/</g, '&lt;')
+		.replace(/>/g, '&gt;')
+		.replace(/"/g, '&quot;')
+		.replace(/'/g, '&#39;');
+}
+
+// EDAMDict and the Observatory API use http:// EDAM URIs
+const EDAM_BASE_URI = 'http://edamontology.org/';
+
+function parseTerm(value) {
+	/*
+	Exported terms are 'edam:<id>' (EDAM terms), a URI (other vocabularies)
+	or a plain term. EDAM URIs are also accepted.
+	*/
+	if (typeof value !== 'string' || value === '') {
+		return null;
+	}
+	let edamId = null;
+	if (value.startsWith('edam:')) {
+		edamId = value.slice('edam:'.length);
+	} else {
+		const match = value.match(/^https?:\/\/edamontology\.org\/(.+)$/);
+		if (match) {
+			edamId = match[1];
 		}
-		return items;
+	}
+	if (edamId) {
+		const uri = EDAM_BASE_URI + edamId;
+		return removeEmptyValues({
+			term: EDAMDict[uri],
+			uri,
+			vocabulary: 'EDAM',
+		});
+	}
+	if (/^https?:\/\//.test(value)) {
+		return { term: value, uri: value };
+	}
+	return { term: value };
+}
+
+function buildFeTopicsOperations(topics) {
+	if (Array.isArray(topics)) {
+		return topics.map(parseTerm).filter((topic) => topic !== null);
 	} else {
 		return [];
 	}
@@ -80,7 +112,7 @@ function buildFeLicense(licenses) {
 			const license = licenses[i];
 			const newLicense = {
 				name: license['schema:name'],
-				url: '',
+				url: license['schema:url'] || '',
 			};
 			newLicenses.push(newLicense);
 		}
@@ -97,7 +129,8 @@ function buildFeAuthors(authors) {
 			const author = authors[i];
 			let type = null;
 			try {
-				type = author['@type'].split('/').slice(-1)[0].toLowerCase();
+				// @type is 'schema:Person' or, in older files, 'https://schema.org/Person'
+				type = author['@type'].split(/[/:]/).slice(-1)[0].toLowerCase();
 				const newAuthor = {
 					type,
 					name: author['schema:name'],
@@ -115,10 +148,24 @@ function buildFeAuthors(authors) {
 
 function buildFeVersion(version) {
 	console.debug('building version');
-	if (version) {
+	// the UI expects a list of versions, as in Observatory metadata
+	if (Array.isArray(version)) {
 		return version;
+	} else if (version) {
+		return [version];
 	} else {
-		return '';
+		return [];
+	}
+}
+
+function buildFeType(type) {
+	// the types selector holds a list of types, as in Observatory metadata
+	if (Array.isArray(type)) {
+		return type;
+	} else if (type) {
+		return [type];
+	} else {
+		return [];
 	}
 }
 
@@ -128,17 +175,21 @@ function buildFeInputOutput(inputOutput) {
 		const items = [];
 		for (let i = 0; i < inputOutput.length; i++) {
 			const io = inputOutput[i];
-			const label = io['biochemas:encodingFormat'].split(':').slice(-1)[0];
-			const uri = `https://edamontology.org/${label}`;
+			// files exported before July 2024 use the misspelled key
+			const format =
+				io['bioschemas:encodingFormat'] || io['biochemas:encodingFormat'];
+			const parsedFormat = parseTerm(format);
+			if (!parsedFormat) {
+				console.debug('Input/output format not found, skipping item');
+				continue;
+			}
 			const newIO = {
 				datatype: {
 					term: '',
 					uri: '',
 					vocabulary: '',
 				},
-				term: EDAMDict[uri],
-				uri,
-				vocabulary: 'EDAM',
+				...parsedFormat,
 			};
 			items.push(removeEmptyValues(newIO));
 		}
@@ -179,14 +230,19 @@ function buildFePublication(publication) {
 			const newPub = {};
 
 			if (typeof pub === 'object') {
-				if (pub['@type'] === 'https://schema.org/CreativeWork') {
+				// @type is 'schema:CreativeWork' or, in older files, the full URI
+				if (
+					pub['@type'] === 'schema:CreativeWork' ||
+					pub['@type'] === 'https://schema.org/CreativeWork'
+				) {
 					try {
-						newPub.url = pub['@id'];
+						const url = pub['@id'] || pub['schema:url'];
+						newPub.url = url;
 						newPub.title = pub['schema:name'];
 
-						if (pub['@id']) {
-							// @id is https://doi.org/{DOI}
-							newPub.doi = pub['@id'].split('https://doi.org/')[1];
+						if (url) {
+							// url is https://doi.org/{DOI}
+							newPub.doi = url.split('https://doi.org/')[1];
 						}
 					} catch {
 						console.debug(
@@ -212,18 +268,10 @@ function buildFePublication(publication) {
 function buildFeEdamTopicsOperations(topics) {
 	console.debug('building edam topics operations');
 	console.debug(topics);
-	if (topics) {
-		const items = [];
-		for (let i = 0; i < topics.length; i++) {
-			const topic = topics[i];
-			const label = topic.split(':').slice(-1)[0];
-			const uri = `https://edamontology.org/${label}`;
-			items.push(uri);
-		}
-		return items;
-	} else {
-		return [];
-	}
+	// URIs of the EDAM terms only
+	return buildFeTopicsOperations(topics)
+		.filter((topic) => topic.vocabulary === 'EDAM')
+		.map((topic) => topic.uri);
 }
 
 function buildFeLinks(meta) {
@@ -232,8 +280,9 @@ function buildFeLinks(meta) {
 	if (meta['schema:codeRepository']) {
 		newLinks = newLinks.concat(meta['schema:codeRepository']);
 	}
-	if (meta['schema:downloadUrl']) {
-		newLinks = newLinks.concat(meta['schema:downloadUrl']);
+	const downloads = meta['schema:downloadUrl'] || meta['schema:downloadURL'];
+	if (downloads) {
+		newLinks = newLinks.concat(downloads);
 	}
 
 	return newLinks;
@@ -408,10 +457,11 @@ export const actions = {
 			console.debug('Downloaded file content:', fileContent);
 		} catch (error) {
 			console.error('Error fetching or parsing file from URL:', error);
+			commit('setDialogParseMetadata', false);
 			commit('setErrorDialogParseMetadata', true);
 			commit(
 				'setErrorProgressText',
-				`Error fetching file from URL: ${error.message}`
+				`Error fetching file from URL: ${escapeHtml(error.message)}`
 			);
 		}
 	},
@@ -428,7 +478,7 @@ export const actions = {
 			const errorMessage =
 				'Error importing text from file:' +
 				'<br><br><pre>' +
-				error.message +
+				escapeHtml(error.message) +
 				'</pre>';
 			commit('setDialogParseMetadata', false);
 			commit('setErrorDialogParseMetadata', true);
@@ -451,7 +501,7 @@ export const actions = {
 			const errorMessage =
 				'Error parsing metadata file content:' +
 				'<pre>' +
-				error.message +
+				escapeHtml(error.message) +
 				'</pre>';
 			commit('setErrorProgressText', errorMessage);
 			dispatch('observatory/evaluation/changeStep', 2, { root: true });
@@ -479,11 +529,16 @@ export const actions = {
 			),
 			input: buildFeInputOutput(parsedContent?.['bioschemas:input'] || []),
 			output: buildFeInputOutput(parsedContent?.['bioschemas:output'] || []),
-			download: parsedContent?.['schema:downloadURL'] || [],
+			download:
+				parsedContent?.['schema:downloadUrl'] ||
+				parsedContent?.['schema:downloadURL'] ||
+				[],
 			documentation: buildFeHelp(parsedContent?.['schema:softwareHelp'] || []),
 			dependencies: parsedContent?.['schema:requirements'] || [],
+			// accept both a JSON boolean and the string 'true'
 			registration_not_mandatory:
-				parsedContent?.['schema:isAccessibleForFree'] === 'true' || false,
+				parsedContent?.['schema:isAccessibleForFree'] === true ||
+				parsedContent?.['schema:isAccessibleForFree'] === 'true',
 			edam_topics: buildFeEdamTopicsOperations(
 				parsedContent?.['schema:applicationSubcategory'] || []
 			),
@@ -497,7 +552,7 @@ export const actions = {
 				parsedContent?.['codemeta:referencePublication'] || []
 			),
 			api_lib: false,
-			type: parsedContent?.['schema:applicationCategory'] || '',
+			type: buildFeType(parsedContent?.['schema:applicationCategory']),
 			test: [],
 			source: [],
 			registries: [],

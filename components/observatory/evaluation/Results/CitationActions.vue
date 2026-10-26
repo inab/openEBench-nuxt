@@ -27,9 +27,14 @@
 			</v-row>
 		</v-container>
 
-		<ViewCitation :key="citation" :citation="citation" />
-		<ExportCitationCardDownload />
-		<ExportContentCardPull :content="citation" type="citation" />
+		<v-alert v-if="error" text type="error" class="mx-auto" width="90%">
+			{{ error }}
+		</v-alert>
+		<template v-else>
+			<ViewCitation :key="citation" :citation="citation" />
+			<ExportCitationCardDownload />
+			<ExportContentCardPull :content="citation" type="citation" />
+		</template>
 	</div>
 </template>
 <script>
@@ -48,6 +53,7 @@ export default {
 	computed: {
 		...mapGetters({
 			citation: 'observatory/evaluation/metadata/getToolMetadataCFF',
+			error: 'observatory/evaluation/metadata/getCFFError',
 		}),
 	},
 };

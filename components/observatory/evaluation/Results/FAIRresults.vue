@@ -1,7 +1,12 @@
 <template>
 	<v-container class="my-0 pa-1 pt-3">
+		<!-- Error -->
+		<v-alert v-if="evaluationError" text type="error" class="ma-4">
+			{{ evaluationError }}
+		</v-alert>
+
 		<!-- Loading -->
-		<v-container v-if="!hasData">
+		<v-container v-else-if="!hasData">
 			<v-row class="d-flex flex-wrap" justify="space-around">
 				<v-col cols="12" md="6" class="py-3 px-4">
 					<v-skeleton-loader type="card" height="260" />
@@ -118,6 +123,7 @@ export default {
 			// ✅ You likely need to add this getter in Vuex if it doesn't exist yet:
 			FAIRIndicatorsFeedback:
 				'observatory/evaluation/results/getFAIRIndicatorsFeedback',
+			evaluationError: 'observatory/evaluation/results/getEvaluationError',
 		}),
 
 		t() {
