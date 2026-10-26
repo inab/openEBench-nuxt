@@ -1,6 +1,17 @@
 import path from 'path';
 import colors from 'vuetify/es5/util/colors';
 
+const SITE_TITLE =
+	'OpenEBench - The ELIXIR gateway to benchmarking communities, software monitoring, and quality metrics';
+const SITE_DESCRIPTION =
+	'OpenEBench is the ELIXIR gateway to benchmarking communities, software monitoring, and quality metrics for life sciences tools and workflows.';
+// Social crawlers need an absolute URL and do not run JS
+const SITE_URL = (process.env.SITE_URL || 'https://openebench.bsc.es').replace(
+	/\/$/,
+	''
+);
+const OG_IMAGE = `${SITE_URL}/icon.png`;
+
 const routerBase =
 	process.env.DEPLOY_ENV === 'GH_PAGES'
 		? {
@@ -29,8 +40,12 @@ export default {
 
 	// Global page headers: https://go.nuxtjs.dev/config-head
 	head: {
-		titleTemplate: '%s - openEBench-nuxt',
-		title: 'openEBench-nuxt',
+		// Serialized to the client: must not reference module-level constants
+		titleTemplate: (chunk) =>
+			!chunk || chunk.startsWith('OpenEBench')
+				? chunk
+				: `${chunk} - OpenEBench`,
+		title: SITE_TITLE,
 		htmlAttrs: {
 			lang: 'en',
 		},
@@ -40,10 +55,37 @@ export default {
 			{
 				hid: 'description',
 				name: 'description',
-				content:
-					'OpenEBench is the ELIXIR gateway to benchmarking communities, software monitoring, and quality metrics for life sciences tools and workflows.',
+				content: SITE_DESCRIPTION,
 			},
 			{ name: 'format-detection', content: 'telephone=no' },
+			{ hid: 'og:site_name', property: 'og:site_name', content: 'OpenEBench' },
+			{ hid: 'og:type', property: 'og:type', content: 'website' },
+			{ hid: 'og:title', property: 'og:title', content: SITE_TITLE },
+			{
+				hid: 'og:description',
+				property: 'og:description',
+				content: SITE_DESCRIPTION,
+			},
+			{ hid: 'og:image', property: 'og:image', content: OG_IMAGE },
+			{ hid: 'og:image:width', property: 'og:image:width', content: '512' },
+			{ hid: 'og:image:height', property: 'og:image:height', content: '512' },
+			{
+				hid: 'og:image:alt',
+				property: 'og:image:alt',
+				content: 'OpenEBench logo',
+			},
+			{
+				hid: 'twitter:card',
+				name: 'twitter:card',
+				content: 'summary',
+			},
+			{ hid: 'twitter:title', name: 'twitter:title', content: SITE_TITLE },
+			{
+				hid: 'twitter:description',
+				name: 'twitter:description',
+				content: SITE_DESCRIPTION,
+			},
+			{ hid: 'twitter:image', name: 'twitter:image', content: OG_IMAGE },
 		],
 		link: [
 			{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
