@@ -11,16 +11,17 @@
 </template>
 
 <script>
+export const MAINTENANCE_RANGE = {
+	start: new Date('2026-04-21T10:00:00+02:00'),
+	end: new Date('2026-04-26T22:00:00+02:00'),
+};
+
 export default {
 	name: 'MaintenanceNotice',
 	computed: {
 		isMessageVisible() {
-			const dateRange = {
-				start: new Date('2026-04-21T10:00:00+02:00'),
-				end: new Date('2026-04-26T22:00:00+02:00'),
-			};
-
-			if (new Date() >= dateRange.start && new Date() <= dateRange.end) {
+			const now = new Date();
+			if (now >= MAINTENANCE_RANGE.start && now <= MAINTENANCE_RANGE.end) {
 				return true;
 			}
 			return false;
