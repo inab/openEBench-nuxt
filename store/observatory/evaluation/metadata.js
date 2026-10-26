@@ -84,6 +84,26 @@ function requestErrorMessage(error) {
 	return error.response?.data?.detail || error.message;
 }
 
+function cleanPublications(publications) {
+	// Observatory DOIs can be wrapped in newlines and indentation, which end up in the exported URLs
+	if (!Array.isArray(publications)) {
+		return publications;
+	}
+	return publications.map((item) => {
+		const pub = { ...item.term };
+		for (const field of ['doi', 'pmid', 'pmcid', 'url']) {
+			// identifiers and URLs never contain whitespace
+			if (typeof pub[field] === 'string') {
+				pub[field] = pub[field].replace(/\s+/g, '');
+			}
+		}
+		if (typeof pub.title === 'string') {
+			pub.title = pub.title.trim();
+		}
+		return { ...item, term: pub };
+	});
+}
+
 // actions
 
 export const actions = {
@@ -231,7 +251,15 @@ export const actions = {
 				payload
 			);
 
-			commit('setMetadataCFF', result);
+			// without authors the API answers with an empty file instead of an error
+			if (result) {
+				commit('setMetadataCFF', result);
+			} else {
+				commit(
+					'setCFFError',
+					'The citation file could not be generated: at least one author is required.'
+				);
+			}
 		} catch (error) {
 			console.error('Error transforming metadata to CFF:', error);
 			commit(
@@ -277,7 +305,10 @@ export const actions = {
 	},
 
 	updateToolsMetadata({ commit, _state }, payload) {
-		commit('setToolMetadata', payload);
+		commit('setToolMetadata', {
+			...payload,
+			publication: cleanPublications(payload.publication),
+		});
 	},
 
 	updateSelectorEntry({ commit }, payload) {
