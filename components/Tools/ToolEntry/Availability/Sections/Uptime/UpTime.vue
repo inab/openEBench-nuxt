@@ -181,14 +181,21 @@ export default {
 		},
 		statusDays() {
 			if (!this.latestAvailabilityItem) return 0;
-			let days = 0;
 			const latestStatus = this.statusForItem(this.latestAvailabilityItem);
+			const day = 86400000;
+			let oldestDayUp = this.latestAvailabilityItem;
+			const epochDay = (item) =>
+				Math.floor(new Date(item.date).getTime() / day);
+			const latestDay = epochDay(this.latestAvailabilityItem);
+			// Only look back 6 × 30 days, so the count never goes above 180
+			const firstDay = epochDay(this.latestAvailabilityItem) - 179;
 			for (let i = this.sortedAvailabilityItems.length - 1; i >= 0; i--) {
 				const status = this.statusForItem(this.sortedAvailabilityItems[i]);
+				if (epochDay(this.sortedAvailabilityItems[i]) < firstDay) break;
 				if (status !== latestStatus && status !== 'UNKNOWN') break;
-				days += 1;
+				oldestDayUp = this.sortedAvailabilityItems[i];
 			}
-			return days;
+			return latestDay - epochDay(oldestDayUp) + 1;
 		},
 	},
 	watch: {
