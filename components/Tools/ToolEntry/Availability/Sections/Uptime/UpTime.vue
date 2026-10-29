@@ -158,11 +158,13 @@ export default {
 				({ key }) => this.availabilityItemsByRange(key).length > 0
 			);
 		},
-		activeRange() {
-			return this.availableRanges[this.tabUptime]?.key || '';
+		// The status and its day count use the longest range with data, so they
+		// don't change with the selected tab
+		statusRange() {
+			return this.availableRanges[this.availableRanges.length - 1]?.key || '';
 		},
 		sortedAvailabilityItems() {
-			return [...this.availabilityItemsByRange(this.activeRange)].sort(
+			return [...this.availabilityItemsByRange(this.statusRange)].sort(
 				(a, b) => new Date(a.date) - new Date(b.date)
 			);
 		},
