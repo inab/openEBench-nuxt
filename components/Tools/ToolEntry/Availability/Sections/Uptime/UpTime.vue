@@ -184,10 +184,8 @@ export default {
 			let days = 0;
 			const latestStatus = this.statusForItem(this.latestAvailabilityItem);
 			for (let i = this.sortedAvailabilityItems.length - 1; i >= 0; i--) {
-				if (
-					this.statusForItem(this.sortedAvailabilityItems[i]) !== latestStatus
-				)
-					break;
+				const status = this.statusForItem(this.sortedAvailabilityItems[i]);
+				if (status !== latestStatus && status !== 'UNKNOWN') break;
 				days += 1;
 			}
 			return days;
