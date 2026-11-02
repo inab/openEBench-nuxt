@@ -6,7 +6,7 @@
 				:field_name="title"
 				:disabled_tooltip="true"
 			/>
-			<span class="text-body title"> {{ title }}</span>
+			<span class="text-body field-title"> {{ title }}</span>
 			<v-btn icon @click="addEntry">
 				<v-icon small color="grey lighten-1"> mdi-plus-circle </v-icon>
 			</v-btn>
@@ -22,6 +22,7 @@
 			hide-details
 			clear-icon="mdi-close-circle"
 			class="text-body-2 mt-3"
+			@input="(text) => changeEntry(index, item.id, text)"
 		>
 			<template #append-outer>
 				<v-btn icon @click="closeEntry(index)">
@@ -47,20 +48,38 @@ export default {
 				field: this.field,
 				index,
 			};
-			this.$store.dispatch('evaluation/metadata/removeEntry', payload);
+			this.$store.dispatch(
+				'observatory/evaluation/metadata/removeEntry',
+				payload
+			);
 		},
 		addEntry() {
 			const payload = {
 				field: this.field,
 				value: '',
 			};
-			this.$store.dispatch('evaluation/metadata/addEntry', payload);
+			this.$store.dispatch('observatory/evaluation/metadata/addEntry', payload);
+		},
+		changeEntry(index, id, text) {
+			// the clear icon emits null
+			const payload = {
+				field: this.field,
+				index,
+				value: {
+					id,
+					term: text || '',
+				},
+			};
+			this.$store.dispatch(
+				'observatory/evaluation/metadata/changeEntry',
+				payload
+			);
 		},
 	},
 };
 </script>
 <style scoped>
-.title {
+.field-title {
 	font-size: 1rem !important;
 	color: #0b579f;
 	font-weight: 400;

@@ -42,6 +42,8 @@
 						label="JSON Content"
 						rows="15"
 						outlined
+						:error-messages="parseError"
+						@input="parseError = ''"
 						style="line-height: 0.9; font-size: 0.75rem; font-family: monospace"
 					></v-textarea>
 				</v-card-text>
@@ -76,6 +78,7 @@ export default {
 				iconText: 'Preview',
 			},
 			jsonContent: '',
+			parseError: '',
 		};
 	},
 	created() {
@@ -88,12 +91,21 @@ export default {
 		},
 		discardChanges() {
 			this.jsonContent = JSON.stringify(this.metadata, null, 2);
+			this.parseError = '';
 			this.dialog = false;
 		},
 		saveJson() {
+			let metadata;
+			try {
+				metadata = JSON.parse(this.jsonContent);
+			} catch (error) {
+				// keep the dialog open so the user can fix it
+				this.parseError = `Invalid JSON: ${error.message}`;
+				return;
+			}
 			this.$store.dispatch(
 				'observatory/evaluation/metadata/updateToolMetadataJSONLD',
-				JSON.parse(this.jsonContent)
+				metadata
 			);
 			this.dialog = false;
 		},

@@ -109,7 +109,7 @@ export default {
 				index,
 				value,
 			};
-			this.localValue[index].term = value; // Update local value
+			this.localValue[index].term = value.term; // Update local value
 			this.$store.dispatch(
 				'observatory/evaluation/metadata/changeEntry',
 				payload

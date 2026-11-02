@@ -4,7 +4,11 @@
 			<v-row class="mt-0 pt-0 mb-2">
 				<v-col cols="12" class="pt-0 mt-0 mb-0 pb-1">
 					<span class="section-label d-flex align-center">
-						Associated publications
+						{{
+							uniquePublications.length === 1
+								? 'Peer-reviewed Publication'
+								: 'Peer-reviewed Publications'
+						}}
 						<!-- Añadir journal a las publicaciones, y si no tiene citas en europe PMC poner no citas available. poner un banner para dar explicacion de que sino sale una publicacion es porque no hay en PMC -->
 					</span>
 				</v-col>

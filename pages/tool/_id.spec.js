@@ -59,7 +59,7 @@ const factory = ({ params, router, actions } = {}) => {
 		localVue,
 		store: createStore(actions),
 		mocks: {
-			$route: { params: params || { id: `test-tool-${VALID_ID}` } },
+			$route: { params: params || { id: VALID_ID } },
 			$router: router || { replace: jest.fn() },
 			$nuxt: { error: jest.fn() },
 			$vuetify: { goTo: jest.fn() },
@@ -104,7 +104,7 @@ describe('Tool (_id.vue)', () => {
 		expect(wrapper.vm.$store.state.tool_entry).toBeDefined();
 	});
 
-	it('redirects a name-only URL to the canonical name-id slug', async () => {
+	it('redirects a name-only URL to the canonical id-only URL', async () => {
 		const replace = jest.fn();
 		const resolveToolId = jest.fn().mockResolvedValue(VALID_ID);
 		const wrapper = factory({
@@ -119,7 +119,39 @@ describe('Tool (_id.vue)', () => {
 			name: 'bwa',
 			source: 'biotools',
 		});
-		expect(replace).toHaveBeenCalledWith(`/tool/bwa-${VALID_ID}`);
+		expect(replace).toHaveBeenCalledWith(`/tool/${VALID_ID}`);
+	});
+
+	it('redirects a legacy name-id slug to the id-only URL', async () => {
+		const replace = jest.fn();
+		const resolveToolId = jest.fn();
+		const wrapper = factory({
+			params: { id: `noodle-${VALID_ID}` },
+			router: { replace },
+			actions: { resolveToolId },
+		});
+
+		await wrapper.vm.loadTool(`noodle-${VALID_ID}`);
+
+		expect(replace).toHaveBeenCalledWith(`/tool/${VALID_ID}`);
+		expect(resolveToolId).not.toHaveBeenCalled();
+	});
+
+	it('loads a bare id without redirecting', async () => {
+		const replace = jest.fn();
+		const retrieveTool = jest.fn().mockResolvedValue(true);
+		const wrapper = factory({
+			params: { id: VALID_ID },
+			router: { replace },
+			actions: { retrieveTool },
+		});
+
+		await wrapper.vm.loadTool(VALID_ID);
+
+		expect(retrieveTool).toHaveBeenCalledWith(expect.anything(), {
+			id: VALID_ID,
+		});
+		expect(replace).not.toHaveBeenCalled();
 	});
 
 	it('404s a name-only URL that cannot be resolved', async () => {

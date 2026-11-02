@@ -201,4 +201,9 @@ export default {
 .about-menu-content {
 	z-index: 9998 !important;
 }
+
+.Cookie {
+	z-index: 10000 !important;
+	bottom: 36px !important;
+}
 </style>

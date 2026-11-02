@@ -30,9 +30,14 @@
 			</v-row>
 		</v-container>
 
-		<ViewMetadata :key="metadata" :metadata="metadata" />
-		<ExportMetadataCardDownload />
-		<ExportContentCardPull :content="metadata" type="metadata" />
+		<v-alert v-if="error" text type="error" class="mx-auto" width="90%">
+			{{ error }}
+		</v-alert>
+		<template v-else>
+			<ViewMetadata :key="metadata" :metadata="metadata" />
+			<ExportMetadataCardDownload />
+			<ExportContentCardPull :content="metadata" type="metadata" />
+		</template>
 	</div>
 </template>
 <script>
@@ -51,6 +56,7 @@ export default {
 	computed: {
 		...mapGetters({
 			metadata: 'observatory/evaluation/metadata/getToolMetadataJSONLD',
+			error: 'observatory/evaluation/metadata/getJSONLDError',
 		}),
 	},
 };

@@ -59,6 +59,9 @@
 					class="mt-3 ml-6 mr-6"
 				></v-progress-linear>
 			</v-row>
+			<v-alert v-if="error" text dense type="error" class="mt-3">
+				{{ error }}
+			</v-alert>
 		</v-form>
 	</v-container>
 </template>
@@ -85,7 +88,7 @@ export default {
 				'observatory/evaluation/observatory/getObservatoryToolsNameTypeSources',
 			loading: 'observatory/evaluation/observatory/getLoading',
 			loadingStep: 'observatory/evaluation/observatory/getLoadingAutocomplete',
-			step: 'observatory/evaluation/index/getStep',
+			error: 'observatory/evaluation/observatory/getError',
 		}),
 		invalid() {
 			return this.value === null;
@@ -109,16 +112,19 @@ export default {
 			);
 		},
 		async sumbitObservatoryTool() {
+			// Enter can submit before a tool is selected
+			if (this.invalid) {
+				return;
+			}
 			const payload = {
 				name: this.value.name,
 				type: this.value.type,
 			};
+			// moves to step 3 only if the metadata was imported
 			await this.$store.dispatch(
 				'observatory/evaluation/observatory/fetchToolMetadata',
 				payload
 			);
-
-			this.$store.dispatch('observatory/evaluation/changeStep', 3);
 		},
 		getValue(item) {
 			return item;

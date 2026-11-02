@@ -27,7 +27,7 @@
 							I want to see how to develop sustainable research tools
 						</p>
 						<v-btn color="accent" class="mt-10" large block to="/observatory">
-							Tools Observatory
+							SW Observatory
 						</v-btn>
 					</v-col>
 				</v-row>

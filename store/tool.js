@@ -1,6 +1,6 @@
 // store/tool/index.js
 
-import { pickDescription } from '~/utils/toolDescription';
+import { pickToolName, pickToolDescription } from '~/utils/toolDescription';
 
 const API_HEADERS = {
 	headers: { 'ngrok-skip-browser-warning': '69420' },
@@ -59,9 +59,9 @@ function normalizeTool(tool) {
 		id: tool.id || '',
 		name: pick(tool.name) || '',
 		subname: pick(tool.name) || '',
-		label: pick(tool.label) || pick(tool.name) || '',
+		label: pickToolName(tool),
 		type: tool.type || [],
-		description: pickDescription(tool.description),
+		description: pickToolDescription(tool),
 		topics: tool.topics || [],
 		operations: tool.operations || [],
 		sourcesLabels: tool.sources_labels || {},

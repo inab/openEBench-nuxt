@@ -119,6 +119,8 @@ export const actions = {
 			commit('setUpdaterInstallationID', installationID);
 		} catch (error) {
 			console.debug('Error while getting installation ID: ' + error);
+			// don't keep the ID of a previously checked repository
+			commit('setUpdaterInstallationID', null);
 			commit(
 				'setImportProgressText',
 				"error while fetching the repositorie's installation ID for app Metadata Updater for FAIRsoft"
